@@ -6,17 +6,17 @@ public final class Tokener {
 	{
 		String sFunct = i_Funct;
 		Tree Root;
-		
+
 		Integer i = 0;
 		while (i < sFunct.length())
 		{
 			char c = sFunct.charAt(i); // get first char
-						
-			if (MathUtil.IsComma(c) || MathUtil.IsNumber(c))			  
+
+			if (MathUtil.IsComma(c) || MathUtil.IsNumber(c))
 			{
-				Root = new Tree(MathUtil.getNextMathObj(i_Funct))
+//				Root = new Tree(MathUtil.getNextMathObj(i_Funct))
 			}
 		}
-		
+
 	}
 }

@@ -7,11 +7,11 @@ package pse3;
 public class MathUtil {
   private static char COMMA = ',';
 
-  private static boolean IsNumber(char tmpChar) {
+  public static boolean IsNumber(char tmpChar) {
     return (tmpChar >= '0' && tmpChar <= '9');
   }
 
-  private static boolean IsComma(char tmpChar) {
+  public static boolean IsComma(char tmpChar) {
     return (tmpChar == COMMA);
   }
 

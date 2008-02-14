@@ -1,68 +1,86 @@
 package pse3;
 
+/**
+ * @author Tobias
+ *
+ */
 public class MathUtil {
-  public static char Comma = ',';
+  private static char COMMA = ',';
 
-  public static boolean IsNumber(char c) {
-    return (c >= '0' && c <= '9');
+  private static boolean IsNumber(char tmpChar) {
+    return (tmpChar >= '0' && tmpChar <= '9');
   }
 
-  public static boolean IsComma(char c) {
-    return (c == Comma);
+  private static boolean IsComma(char tmpChar) {
+    return (tmpChar == COMMA);
   }
 
-  public static boolean IsOperator(char c) {
-    switch (c) {
-      case OperatorType.Addition.getOpAsChar():
-      case OperatorType.Subtraction.getOpAsChar():
-      case OperatorType.Division.getOpAsChar():
-      case OperatorType.Multiplication.getOpAsChar():
-        return true;
-        break;
-      default:
-        return false;
-        break;
-    }
+  /**
+   * @param tmpChar
+   * @return true if char is operator
+   */
+  public static boolean IsOperator(char tmpChar) {
+    // switch (c) {
+    // case OperatorType.Addition.getOpAsChar():
+    // case OperatorType.Subtraction.getOpAsChar():
+    // case OperatorType.Division.getOpAsChar():
+    // case OperatorType.Multiplication.getOpAsChar():
+    // return true;
+    // break;
+    // default:
+    return false;
+    // break;
+    // }
   }
 
-  public static MathObj getNextMathObj(String i_Funct, Integer charPos)
-	{
-		if (charPos>=i_Funct.length()) return null;
-
-		char c = i_Funct.charAt(charPos);
-
-		if (IsNumber(c))
-		{
-			return getNextNumber(i_Funct,charPos);
-		}
-		else (IsOperator(c))
-		{
-
-		}
-		return null;
-	}
-
-  private static Number getNextNumber(String i_Funct, Integer charPos) {
-    if (charPos >= i_Funct.length())
+  /**
+   * @param aFunction
+   * @param aCharPos
+   * @return the next mathobject of the function string
+   */
+  public static MathObj getNextMathObj(String aFunction, Integer aCharPos) {
+    if (aCharPos >= aFunction.length())
       return null;
 
-    String res = "";
-    int CommaCount = 0;
-    while (charPos < i_Funct.length()) {
-      char c = i_Funct.charAt(charPos);
-      if (IsNumber(c)) {
-        res += c;
-      } else if (IsComma(c)) {
-        CommaCount++;
-        if (CommaCount == 1)
-          res += c;
+    char tmpChar = aFunction.charAt(aCharPos);
+
+    if (IsNumber(tmpChar)) {
+      return getNextNumber(aFunction, aCharPos);
+    }
+    // else (IsOperator(c))
+    // {
+    //
+    // }
+    return null;
+  }
+
+  /**
+   * @param aFunction
+   * @param aCharPos
+   * @return the next number object of the function string
+   */
+  public static NumberObj getNextNumber(String aFunction, Integer aCharPos) {
+    if (aCharPos >= aFunction.length()) {
+      return null;
+    }
+
+    String tmpResult = new String("");
+    int tmpCommaCount = 0;
+    while (aCharPos < aFunction.length()) {
+      char tmpChar = aFunction.charAt(aCharPos);
+      if (IsNumber(tmpChar)) {
+        tmpResult += tmpChar;
+      } else if (IsComma(tmpChar)) {
+        tmpCommaCount++;
+        if (tmpCommaCount == 1)
+          tmpResult += ".";
         else
           break;
       } else
         break;
-      charPos++;
+      aCharPos++;
     }
 
-    return new Number(Float.parseFloat(res));
+    return new NumberObj(Float.parseFloat(tmpResult));
   }
 }

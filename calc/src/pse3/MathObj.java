@@ -5,5 +5,6 @@ public class MathObj {
 	
 	public MathType getMathType() { return p_Type; }
 	public MathObj(MathType i_Type) { p_Type = i_Type; }
+	
 }
 

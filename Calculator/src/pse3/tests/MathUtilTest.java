@@ -34,10 +34,16 @@ public class MathUtilTest extends TestCase {
    * tests getNextNumber()
    */
   public void testGetNextNumber() {
-    String tmpFunction = "1,45ggdf";
+    String tmpFunction = "1,45";
     int tmpCharPos = 0;
     NumberObj tmpNumber = MathUtil.getNextNumber(tmpFunction, tmpCharPos);
     assertEquals((float) 1.45, tmpNumber.getValue());
+    
+    tmpFunction = "ThisIsATest243432,5ggdf";
+    tmpCharPos = 12;
+    tmpNumber = MathUtil.getNextNumber(tmpFunction, tmpCharPos);
+    assertEquals((float) 43432.5, tmpNumber.getValue()); 
+    
   }
 
   /**

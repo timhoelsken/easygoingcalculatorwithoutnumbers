@@ -48,7 +48,7 @@ public class MathUtilTest extends TestCase {
   }
 
   /**
-   * Start the PlayMapTests here.
+   * Start the MathUtil here.
    *
    * @param args
    */

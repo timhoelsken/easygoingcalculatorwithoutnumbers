@@ -15,7 +15,7 @@ import junit.textui.TestRunner;
 public class AllTests extends TestCase {
 
   /**
-   * @return all test suites of package strategisio.tests
+   * @return all test suites of package pse3.tests
    */
   public static Test suite() {
     TestSuite suite = new TestSuite();
@@ -24,7 +24,7 @@ public class AllTests extends TestCase {
   }
 
   /**
-   * Start the PlayMapTests here.
+   * Start the pse3.tests here.
    *
    * @param args
    */

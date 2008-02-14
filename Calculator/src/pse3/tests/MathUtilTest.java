@@ -34,7 +34,7 @@ public class MathUtilTest extends TestCase {
    * tests getNextNumber()
    */
   public void testGetNextNumber() {
-    String tmpFunction = "1,45";
+    String tmpFunction = "1,45ggdf";
     int tmpCharPos = 0;
     NumberObj tmpNumber = MathUtil.getNextNumber(tmpFunction, tmpCharPos);
     assertEquals((float) 1.45, tmpNumber.getValue());

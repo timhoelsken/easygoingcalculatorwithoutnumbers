@@ -1,8 +1,8 @@
 package pse3;
 
 public final class Tokener {
-	
-	public void ParseFunction(String i_Funct)
+
+  public void ParseFunction(String i_Funct)
 	{
 		String sFunct = i_Funct;
 		Tree Root;
@@ -10,7 +10,7 @@ public final class Tokener {
 		Integer i = 0;
 		while (i < sFunct.length())
 		{
-			char c = sFunct.charAt(i); //get first char
+			char c = sFunct.charAt(i); // get first char
 						
 			if (MathUtil.IsComma(c) || MathUtil.IsNumber(c))			  
 			{
@@ -19,5 +19,4 @@ public final class Tokener {
 		}
 		
 	}
-
 }

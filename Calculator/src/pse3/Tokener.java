@@ -2,17 +2,17 @@ package pse3;
 
 public final class Tokener {
 
-  public void ParseFunction(String i_Funct)
+  public void ParseFunction(String aFunction)
 	{
-		String sFunct = i_Funct;
-		Tree Root;
+		String tmpFunction = aFunction;
+		Tree tmpRoot;
 
 		Integer i = 0;
-		while (i < sFunct.length())
+		while (i < tmpFunction.length())
 		{
-			char c = sFunct.charAt(i); // get first char
+			char tmpChar = tmpFunction.charAt(i); // get first char
 
-			if (MathUtil.IsComma(c) || MathUtil.IsNumber(c))
+			if (MathUtil.IsComma(tmpChar) || MathUtil.IsNumber(tmpChar))
 			{
 //				Root = new Tree(MathUtil.getNextMathObj(i_Funct))
 			}

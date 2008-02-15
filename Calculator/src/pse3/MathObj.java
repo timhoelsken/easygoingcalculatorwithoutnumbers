@@ -1,14 +1,14 @@
 package pse3;
 
 public class MathObj {
-  private MathType p_Type;
+  private MathType type;
 
   public MathType getMathType() {
-    return p_Type;
+    return type;
   }
 
-  public MathObj(MathType i_Type) {
-    p_Type = i_Type;
+  public MathObj(MathType aType) {
+    type = aType;
   }
 
 }

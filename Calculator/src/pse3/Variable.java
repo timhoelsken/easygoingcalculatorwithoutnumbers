@@ -9,7 +9,7 @@ public class Variable extends MathObj {
   }
 
   public Variable(char i_Value) {
-    super(MathType.Variable);
+    super(MathType.VARIABLE);
     p_value = i_Value;
   }
 }

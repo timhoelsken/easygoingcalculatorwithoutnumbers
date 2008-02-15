@@ -29,10 +29,10 @@ public class MathUtil {
    */
   public static boolean IsOperator(char tmpChar) {
     // switch (c) {
-    // case OperatorType.Addition.getOpAsChar():
-    // case OperatorType.Subtraction.getOpAsChar():
-    // case OperatorType.Division.getOpAsChar():
-    // case OperatorType.Multiplication.getOpAsChar():
+    // case OperatorType.ADDITION.getOpAsChar():
+    // case OperatorType.SUBTRACTION.getOpAsChar():
+    // case OperatorType.DIVISION.getOpAsChar():
+    // case OperatorType.MULTIPLICATION.getOpAsChar():
     // return true;
     // break;
     // default:

@@ -8,7 +8,7 @@ public class NumberObj extends MathObj {
   }
 
   public NumberObj(float i_Value) {
-    super(MathType.Number);
+    super(MathType.NUMBER);
     p_value = i_Value;
   }
 }

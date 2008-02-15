@@ -4,7 +4,7 @@ public class Operator extends MathObj {
   private OperatorType p_OpType;
 
   public Operator(OperatorType i_OpType) {
-    super(MathType.Operator);
+    super(MathType.OPERATOR);
     p_OpType = i_OpType;
   }
 

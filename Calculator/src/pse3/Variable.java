@@ -1,15 +1,26 @@
 package pse3;
 
+/**
+ *
+ */
 public class Variable extends MathObj {
 
-  private char p_value;
+	private char value;
 
-  public float getValue() {
-    return p_value;
-  }
+	/**
+	 * @return the value
+	 */
+	public float getValue() {
+		return value;
+	}
 
-  public Variable(char i_Value) {
-    super(MathType.VARIABLE);
-    p_value = i_Value;
-  }
+	/**
+	 * constructor
+	 *
+	 * @param aValue
+	 */
+	public Variable(char aValue) {
+		super(MathType.VARIABLE);
+		value = aValue;
+	}
 }

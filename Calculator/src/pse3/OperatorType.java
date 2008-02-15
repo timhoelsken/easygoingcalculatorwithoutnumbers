@@ -1,15 +1,36 @@
 package pse3;
 
+/**
+ *
+ */
 public enum OperatorType {
-  ADDITION('+'), SUBTRACTION('-'), MULTIPLICATION('*'), DIVISION('/');
+	/**
+	 * addition
+	 */
+	ADDITION('+'),
+	/**
+	 * subtraction
+	 */
+	SUBTRACTION('-'),
+	/**
+	 * multiplication
+	 */
+	MULTIPLICATION('*'),
+	/**
+	 * division
+	 */
+	DIVISION('/');
 
-  private char operatorType;
+	private char operatorType;
 
-  private OperatorType(char anOperatorType) {
-    operatorType = anOperatorType;
-  }
+	private OperatorType(char anOperatorType) {
+		operatorType = anOperatorType;
+	}
 
-  public char getOperatorTypeAsChar() {
-    return operatorType;
-  }
+	/**
+	 * @return the operatortype as char
+	 */
+	public char getOperatorTypeAsChar() {
+		return operatorType;
+	}
 }

@@ -1,43 +1,79 @@
 package pse3;
 
+/**
+ *
+ */
 public class Tree {
-  private MathObj root;
-  private Tree left;
-  private Tree right;
+	private MathObj root;
+	private Tree left;
+	private Tree right;
 
-  public MathObj getRoot() {
-    return root;
-  }
+	/**
+	 * @return the root
+	 */
+	public MathObj getRoot() {
+		return root;
+	}
 
-  public void setRoot(MathObj aRoot) {
-    root = aRoot;
-  }
+	/**
+	 * @param aRoot
+	 *            to set
+	 */
+	public void setRoot(MathObj aRoot) {
+		root = aRoot;
+	}
 
-  public Tree getLeft() {
-    return left;
-  }
+	/**
+	 * @return the left son tree
+	 */
+	public Tree getLeft() {
+		return left;
+	}
 
-  public void setLeft(Tree aLeft) {
-    left = aLeft;
-  }
+	/**
+	 * @param aLeft
+	 *            tree to set
+	 */
+	public void setLeft(Tree aLeft) {
+		left = aLeft;
+	}
 
-  public Tree getRight() {
-    return right;
-  }
+	/**
+	 * @return the right son tree
+	 */
+	public Tree getRight() {
+		return right;
+	}
 
-  public void setRight(Tree aRight) {
-    right = aRight;
-  }
+	/**
+	 * @param aRight
+	 *            tree to set
+	 */
+	public void setRight(Tree aRight) {
+		right = aRight;
+	}
 
-  public Tree(MathObj aRoot) {
-    root = aRoot;
-    left = right = null;
-  }
+	/**
+	 * constructor (sets both sons to NULL)
+	 *
+	 * @param aRoot
+	 */
+	public Tree(MathObj aRoot) {
+		root = aRoot;
+		left = right = null;
+	}
 
-  public Tree(MathObj aRoot, Tree aLeft, Tree aRight) {
-    root = aRoot;
-    left = aLeft;
-    right = aRight;
-  }
+	/**
+	 * constructor
+	 *
+	 * @param aRoot
+	 * @param aLeft
+	 * @param aRight
+	 */
+	public Tree(MathObj aRoot, Tree aLeft, Tree aRight) {
+		root = aRoot;
+		left = aLeft;
+		right = aRight;
+	}
 
 }

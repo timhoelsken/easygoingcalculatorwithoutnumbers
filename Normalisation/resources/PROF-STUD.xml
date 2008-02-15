@@ -3,13 +3,13 @@
 <!DOCTYPE Normalisation SYSTEM "normalisation.dtd">
 
 <Normalisation>
-	<Relation name="PROF-STUD">
+	<RelationSchema name="PROF-STUD">
 		<Column>PROF-NR</Column>
 		<Column>STUD-NR</Column>
 		<Column>VORLESUNG</Column>
 		<Column>SCRIPT</Column>
 		<Column>ABSCHLUSS</Column>
-	</Relation>
+	</RelationSchema>
 	<FunctionalDependency>
 		<FunctionallyDependentOn>PROF-NR</FunctionallyDependentOn>
 		<FunctionallyDependentOn>STUD-NR</FunctionallyDependentOn>

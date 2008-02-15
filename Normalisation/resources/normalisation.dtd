@@ -1,11 +1,11 @@
-<!ELEMENT Normalisation (Relation, FunctionalDependency+)>
+<!ELEMENT Normalisation (RelationSchema, FunctionalDependency+)>
 
-<!ELEMENT Relation (Column+)>
+<!ELEMENT RelationSchema (Column+)>
 <!ELEMENT Column (#PCDATA)>
 
 <!ELEMENT FunctionalDependency (FunctionallyDependentOn+, FunctionallyAffected+)>
 <!ELEMENT FunctionallyDependentOn (#PCDATA)>
 <!ELEMENT FunctionallyAffected (#PCDATA)>
 
-<!ATTLIST Relation
+<!ATTLIST RelationSchema
 	name CDATA #REQUIRED>

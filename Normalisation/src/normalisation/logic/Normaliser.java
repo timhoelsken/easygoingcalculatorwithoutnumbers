@@ -38,13 +38,13 @@ public class Normaliser {
    * @throws ConfigurationException
    */
   public void init(Document aNormalisationDocument) throws ConfigurationException {
-    // get name of relation
-    NodeList tmpRelationList = aNormalisationDocument.getElementsByTagName("Relation");
-    Element tmpRelation = (Element) tmpRelationList.item(0);
-    System.out.println("Normalising relation '" + tmpRelation.getAttribute("name") + "'...");
+    // get name of relationschema
+    NodeList tmpRelationSchemaList = aNormalisationDocument.getElementsByTagName("RelationSchema");
+    Element tmpRelationSchema = (Element) tmpRelationSchemaList.item(0);
+    System.out.println("Normalising relation '" + tmpRelationSchema.getAttribute("name") + "'...");
 
     // get columns
-    NodeList tmpColumns = tmpRelation.getChildNodes();
+    NodeList tmpColumns = tmpRelationSchema.getChildNodes();
     for (int i = 0; i < tmpColumns.getLength(); i++) {
       Node tmpColumn = tmpColumns.item(i);
       String tmpColumnName = tmpColumn.getTextContent();

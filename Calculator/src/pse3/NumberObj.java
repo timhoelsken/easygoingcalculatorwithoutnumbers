@@ -1,14 +1,25 @@
 package pse3;
 
+/**
+ *
+ */
 public class NumberObj extends MathObj {
-  private float p_value;
+	private float aValue;
 
-  public float getValue() {
-    return p_value;
-  }
+	/**
+	 * @return the value
+	 */
+	public float getValue() {
+		return aValue;
+	}
 
-  public NumberObj(float i_Value) {
-    super(MathType.NUMBER);
-    p_value = i_Value;
-  }
+	/**
+	 * constructor
+	 *
+	 * @param tmpValue
+	 */
+	public NumberObj(float tmpValue) {
+		super(MathType.NUMBER);
+		aValue = tmpValue;
+	}
 }

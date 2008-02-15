@@ -1,14 +1,23 @@
 package pse3;
 
+/**
+ *
+ */
 public class Operator extends MathObj {
-  private OperatorType p_OpType;
+	private OperatorType operatorType;
 
-  public Operator(OperatorType i_OpType) {
-    super(MathType.OPERATOR);
-    p_OpType = i_OpType;
-  }
+	/**
+	 * @param anOperatorType
+	 */
+	public Operator(OperatorType anOperatorType) {
+		super(MathType.OPERATOR);
+		operatorType = anOperatorType;
+	}
 
-  public OperatorType getOpType() {
-    return p_OpType;
-  }
+	/**
+	 * @return the operatorType
+	 */
+	public OperatorType getOperatorType() {
+		return operatorType;
+	}
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE Normalisation SYSTEM "normalisation.dtd">
+
+<Normalisation>
+	<RelationSchema name="F(3)">
+		<Column>A</Column>
+		<Column>B</Column>
+		<Column>C</Column>
+	</RelationSchema>
+	<FunctionalDependency>
+		<FunctionallyDependentOn>A</FunctionallyDependentOn>
+		<FunctionallyAffected>B</FunctionallyAffected>
+	</FunctionalDependency>
+	<FunctionalDependency>
+		<FunctionallyDependentOn>B</FunctionallyDependentOn>
+		<FunctionallyAffected>C</FunctionallyAffected>
+	</FunctionalDependency>
+</Normalisation>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE Normalisation SYSTEM "normalisation.dtd">
+
+<Normalisation>
+	<RelationSchema name="LIEFER">
+		<Column>LIEFERANT</Column>
+		<Column>ADRESSE</Column>
+		<Column>ARTIKEL</Column>
+		<Column>ANBAUGEBIET</Column>
+		<Column>QUALITÄT</Column>
+	</RelationSchema>
+	<FunctionalDependency>
+		<FunctionallyDependentOn>LIEFERANT</FunctionallyDependentOn>
+		<FunctionallyAffected>ADRESSE</FunctionallyAffected>
+	</FunctionalDependency>
+	<FunctionalDependency>
+		<FunctionallyDependentOn>LIEFERANT</FunctionallyDependentOn>
+		<FunctionallyDependentOn>ARTIKEL</FunctionallyDependentOn>
+		<FunctionallyAffected>ANBAUGEBIET</FunctionallyAffected>
+	</FunctionalDependency>
+	<FunctionalDependency>
+		<FunctionallyDependentOn>ANBAUGEBIET</FunctionallyDependentOn>
+		<FunctionallyAffected>LIEFERANT</FunctionallyAffected>
+	</FunctionalDependency>
+	<FunctionalDependency>
+		<FunctionallyDependentOn>ANBAUGEBIET</FunctionallyDependentOn>
+		<FunctionallyAffected>QUALITÄT</FunctionallyAffected>
+	</FunctionalDependency>
+</Normalisation>

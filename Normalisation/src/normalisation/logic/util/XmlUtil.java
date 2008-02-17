@@ -17,7 +17,6 @@ public class XmlUtil {
   /**
    * Reads an XML file into a w3c Document
    *
-   * @author Tim
    * @param aFile
    * @return w3c Document
    */

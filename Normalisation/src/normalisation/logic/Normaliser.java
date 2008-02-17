@@ -1,5 +1,6 @@
 package normalisation.logic;
 
+import java.rmi.activation.UnknownObjectException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -111,8 +112,9 @@ public class Normaliser {
 	 * does the normalisation step by step
 	 *
 	 * @throws InvalidActivityException
+	 * @throws UnknownObjectException
 	 */
-	public void normalise() throws InvalidActivityException {
+	public void normalise() throws InvalidActivityException, UnknownObjectException {
 		getKeys();
 		keysOut();
 		bringTo2ndNormalForm();
@@ -121,7 +123,7 @@ public class Normaliser {
 		relationSchemasOut();
 	}
 
-	private ArrayList<Key> getKeys() {
+	private ArrayList<Key> getKeys() throws UnknownObjectException {
 		ArrayList<Key> tmpPossibleKeys = new ArrayList<Key>();
 		ArrayList<Key> tmpCompareDependentOn = new ArrayList<Key>();
 		ArrayList<Key> tmpCompareAffected = new ArrayList<Key>();
@@ -155,13 +157,13 @@ public class Normaliser {
 				if (!tmpCompareKey.equals(tmpPossibleKey)) {
 					// if the possibleKey is part of the compareKey...
 					if (tmpCompareKey.contains(tmpPossibleKey)) {
-						Key tmpComparePossibleKey = tmpPossibleKey.copy();
+						Key tmpComparePossibleKey = (Key) tmpPossibleKey.copy();
 
 						ArrayList<String> tmpAllPossibleKeyAffected = new ArrayList<String>();
 						getAllAffected(tmpPossibleKey, tmpAllPossibleKeyAffected);
 						if (tmpAllPossibleKeyAffected != null) {
 							for (Iterator<String> k = tmpAllPossibleKeyAffected.iterator(); k.hasNext();) {
-								tmpComparePossibleKey.addKeyAttribute(k.next());
+								tmpComparePossibleKey.addAttribute(k.next());
 							}
 							if (!tmpComparePossibleKey.containsOrEquals(tmpCompareKey)) {
 								tmpIsKey = false;
@@ -205,7 +207,7 @@ public class Normaliser {
 	private void getAllDirectlyAffected(Key aKey, ArrayList<String> anAffectedList) {
 		for (Iterator<FunctionalDependency> k = functionalDependencies.iterator(); k.hasNext();) {
 			FunctionalDependency tmpDependency = k.next();
-			if (ListUtil.equals(tmpDependency.getFunctionallyDependentOn(), aKey.getKeyAttributes())) {
+			if (ListUtil.equals(tmpDependency.getFunctionallyDependentOn(), aKey.getAttributes())) {
 				ArrayList<String> tmpAllDirectlyAffected = null;
 				tmpAllDirectlyAffected = tmpDependency.getFunctionallyAffected();
 				for (Iterator<String> j = tmpAllDirectlyAffected.iterator(); j.hasNext();) {
@@ -223,8 +225,9 @@ public class Normaliser {
 	 * functional dependency
 	 *
 	 * @param somePossibleKeys
+	 * @throws UnknownObjectException
 	 */
-	private void getAllPossibleKeys(ArrayList<Key> somePossibleKeys) {
+	private void getAllPossibleKeys(ArrayList<Key> somePossibleKeys) throws UnknownObjectException {
 		ArrayList<Key> tmpFurtherPossibleKeys = new ArrayList<Key>();
 		for (Key tmpPossibleKey : somePossibleKeys) {
 			ArrayList<String> tmpOneAffected = new ArrayList<String>();
@@ -236,20 +239,20 @@ public class Normaliser {
 			// check if you can make a reverse pointer to this affected-key
 			if (!tmpAllDirectlyAffectedOfThisOne.isEmpty()) {
 				boolean tmpCreateNewKey = false;
-				Key tmpFurtherPossibleKey = tmpPossibleKey.copy();
+				Key tmpFurtherPossibleKey = (Key) tmpPossibleKey.copy();
 				for (String tmpAffected : tmpAllDirectlyAffectedOfThisOne) {
 					if (tmpFurtherPossibleKey.contains(tmpAffected)) {
 						tmpCreateNewKey = true;
-						tmpFurtherPossibleKey.removeKeyAttribute(tmpAffected);
+						tmpFurtherPossibleKey.removeAttribute(tmpAffected);
 					}
 				}
 				if (tmpCreateNewKey) {
 					for (String tmpKeyAttribute : tmpOneAffected) {
 						if (!tmpFurtherPossibleKey.contains(tmpKeyAttribute)) {
-							tmpFurtherPossibleKey.addKeyAttribute(tmpKeyAttribute);
+							tmpFurtherPossibleKey.addAttribute(tmpKeyAttribute);
 						}
 					}
-					if (tmpFurtherPossibleKey.getKeyAttributes().size() != 0 && !somePossibleKeys.contains(tmpFurtherPossibleKey)) {
+					if (tmpFurtherPossibleKey.getAttributes().size() != 0 && !somePossibleKeys.contains(tmpFurtherPossibleKey)) {
 						tmpFurtherPossibleKeys.add(tmpFurtherPossibleKey);
 					}
 				}
@@ -268,8 +271,8 @@ public class Normaliser {
 			for (Key tmpPossibleKey1 : somePossibleKeys) {
 				for (Key tmpPossibleKey2 : somePossibleKeys) {
 					ArrayList<String> tmpComparePseudoKeyAttributes = new ArrayList<String>();
-					tmpComparePseudoKeyAttributes.addAll(tmpPossibleKey1.getKeyAttributes());
-					tmpComparePseudoKeyAttributes.addAll(tmpPossibleKey2.getKeyAttributes());
+					tmpComparePseudoKeyAttributes.addAll(tmpPossibleKey1.getAttributes());
+					tmpComparePseudoKeyAttributes.addAll(tmpPossibleKey2.getAttributes());
 					Key tmpComparePseudoKey = new Key(tmpComparePseudoKeyAttributes);
 					if (tmpComparePseudoKey.equals(tmpKey)) {
 						tmpDeleteList.add(tmpKey);
@@ -312,7 +315,7 @@ public class Normaliser {
 					ArrayList<FunctionalDependency> tmpPseudoDependencies = getFunctionalDependenciesFor(tmpPseudoKey);
 					if (!tmpPseudoDependencies.isEmpty()) {
 						for (RelationSchema tmpRelationSchema : relationSchemas) {
-							if (ListUtil.contains(tmpRelationSchema.getColumns(), tmpPseudoKey.getKeyAttributes())){
+							if (ListUtil.contains(tmpRelationSchema.getAttributes(), tmpPseudoKey.getAttributes())){
 								for (FunctionalDependency tmpDependency : tmpPseudoDependencies) {
 									extractRelationSchema(tmpDependency);
 								}
@@ -357,11 +360,11 @@ public class Normaliser {
 				}
 				if (tmpExtract) {
 					for (String tmpAffected : tmpAllAffected) {
-						if (tmpRelationSchema.getColumns().contains(tmpAffected)) {
-							tmpRelationSchema.removeColumn(tmpAffected);
+						if (tmpRelationSchema.getAttributes().contains(tmpAffected)) {
+							tmpRelationSchema.removeAttribute(tmpAffected);
 						}
 					}
-					if (tmpRelationSchema.getColumns().size() == 1) {
+					if (tmpRelationSchema.getAttributes().size() == 1) {
 						// the same relation schema will come again right now
 						relationSchemas.remove(tmpRelationSchema);
 					}

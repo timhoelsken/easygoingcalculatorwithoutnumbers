@@ -2,6 +2,7 @@ package normalisation;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.rmi.activation.UnknownObjectException;
 
 import javax.activity.InvalidActivityException;
 import javax.naming.ConfigurationException;
@@ -24,8 +25,9 @@ public class Normalisation {
 	 * @throws FileNotFoundException
 	 * @throws ConfigurationException
 	 * @throws InvalidActivityException
+	 * @throws UnknownObjectException
 	 */
-	public static void main(String[] args) throws FileNotFoundException, ConfigurationException, InvalidActivityException {
+	public static void main(String[] args) throws FileNotFoundException, ConfigurationException, InvalidActivityException, UnknownObjectException {
 		if (args.length == 0) {
 			throw new IllegalArgumentException("Want to have at least normalisation XML!");
 		}

@@ -165,32 +165,21 @@ public class Normaliser {
 								tmpIsKey = false;
 							}
 						}
-						// if the compareKey is part of the possibleKey
 					} else if (tmpPossibleKey.contains(tmpCompareKey)) {
-						ArrayList<String> tmpPossibleKeyAffected = null;
-						ArrayList<String> tmpCompareKeyAffected = null;
-						// ... get the affected for both keys
-						for (Iterator<FunctionalDependency> k = functionalDependencies.iterator(); k.hasNext();) {
-							FunctionalDependency tmpDependency = k.next();
-							if (ListUtil.equals(tmpDependency.getFunctionallyDependentOn(), tmpPossibleKey.getKeyAttributes())) {
-								tmpPossibleKeyAffected = tmpDependency.getFunctionallyAffected();
-							}
-							if (ListUtil.equals(tmpDependency.getFunctionallyDependentOn(), tmpCompareKey.getKeyAttributes())) {
-								tmpCompareKeyAffected = tmpDependency.getFunctionallyAffected();
-							}
-						}
-						if ((tmpPossibleKeyAffected != null && tmpCompareKeyAffected != null && ListUtil.equals(tmpCompareKeyAffected,
+						// if the compareKey is part of the possibleKey...
+						ArrayList<String> tmpPossibleKeyAffected = new ArrayList<String>();
+						ArrayList<String> tmpCompareKeyAffected = new ArrayList<String>();
+						// ... get the directly affected for both keys
+						getAllDirectlyAffected(tmpPossibleKey, tmpPossibleKeyAffected);
+						getAllDirectlyAffected(tmpCompareKey, tmpCompareKeyAffected);
+						if ((!tmpPossibleKeyAffected.isEmpty() && !tmpCompareKeyAffected.isEmpty() && ListUtil.equals(tmpCompareKeyAffected,
 								tmpPossibleKeyAffected))) {
-							// || (tmpPossibleKeyAffected == null &&
-							// !ListUtil.contains(
-							// tmpFurtherPossibleKeys, tmpPossibleKey))) {
 							tmpIsKey = false;
 						}
 					}
 				}
 			}
-			for (Iterator<Key> j = tmpCompareAffected.iterator(); j.hasNext();) {
-				Key tmpCompareKey = j.next();
+			for (Key tmpCompareKey : tmpCompareAffected) {
 				if (tmpCompareKey.containsOrEquals(tmpPossibleKey)) {
 					tmpIsKey = false;
 				}

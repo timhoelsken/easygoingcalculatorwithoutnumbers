@@ -3,11 +3,13 @@ package normalisation.logic;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.activity.InvalidActivityException;
 import javax.naming.ConfigurationException;
 
 import normalisation.logic.util.ListUtil;
 import normalisation.objects.FunctionalDependency;
 import normalisation.objects.Key;
+import normalisation.objects.RelationSchema;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -23,6 +25,8 @@ public class Normaliser {
 	private ArrayList<String> columns;
 	private ArrayList<FunctionalDependency> functionalDependencies;
 	private ArrayList<Key> keys;
+	private ArrayList<RelationSchema> relationSchemas;
+	private int normalForm;
 
 	/**
 	 * default constructor
@@ -31,6 +35,8 @@ public class Normaliser {
 		columns = new ArrayList<String>();
 		functionalDependencies = new ArrayList<FunctionalDependency>();
 		keys = new ArrayList<Key>();
+		relationSchemas = new ArrayList<RelationSchema>();
+		normalForm = 0;
 	}
 
 	/**
@@ -43,21 +49,18 @@ public class Normaliser {
 		// get name of relationschema
 		NodeList tmpRelationSchemaList = aNormalisationDocument.getElementsByTagName("RelationSchema");
 		Element tmpRelationSchema = (Element) tmpRelationSchemaList.item(0);
-		System.out.println("Normalising relation schema '" + tmpRelationSchema.getAttribute("name") + "':");
+		System.out.println("Normalising relation schema '" + tmpRelationSchema.getAttribute("name") + "' [1st Normal Form]:");
 
 		// get columns
 		NodeList tmpColumns = tmpRelationSchema.getElementsByTagName("Column");
-		String tmpColumnsOut = new String();
 		for (int i = 0; i < tmpColumns.getLength(); i++) {
 			Node tmpColumn = tmpColumns.item(i);
 			String tmpColumnName = tmpColumn.getTextContent().toUpperCase();
 			columns.add(tmpColumnName);
-			tmpColumnsOut += tmpColumnName;
-			if (i < tmpColumns.getLength() - 1) {
-				tmpColumnsOut += ", ";
-			}
 		}
-		System.out.println("(" + tmpColumnsOut + ") [1st Normal Form]");
+		createRelationSchema(columns);
+		setNormalForm(1);
+		relationSchemas.get(0).out();
 
 		// get functional dependencies
 		System.out.println();
@@ -105,15 +108,17 @@ public class Normaliser {
 	}
 
 	/**
-	 * does the normalisation
+	 * does the normalisation step by step
+	 *
+	 * @throws InvalidActivityException
 	 */
-	public void normalise() {
+	public void normalise() throws InvalidActivityException {
 		getKeys();
-		System.out.println();
-		System.out.println("Definite Keys:");
-		for (Key tmpKey : keys) {
-			tmpKey.out();
-		}
+		keysOut();
+		bringTo2ndNormalForm();
+		relationSchemasOut();
+		bringTo3rdNormalForm();
+		relationSchemasOut();
 	}
 
 	private ArrayList<Key> getKeys() {
@@ -277,11 +282,164 @@ public class Normaliser {
 		}
 	}
 
-	private void bringTo2ndNormalForm() {
-
+	private void bringTo2ndNormalForm() throws InvalidActivityException {
+		if (normalForm == 1) {
+			for (Key tmpKey : keys) {
+				for (FunctionalDependency tmpFunctionalDependency : functionalDependencies) {
+					Key tmpCompareKey = new Key(tmpFunctionalDependency.getFunctionallyDependentOn());
+					if (tmpKey.contains(tmpCompareKey)) {
+						extractRelationSchema(tmpFunctionalDependency);
+					}
+				}
+			}
+			setNormalForm(2);
+		} else {
+			throw new InvalidActivityException("Relation Schema already is in " + getNormalFormForOut());
+		}
 	}
 
-	private void bringTo3rdNormalForm() {
+	private void bringTo3rdNormalForm() throws InvalidActivityException {
+		if (normalForm == 1) {
+			bringTo2ndNormalForm();
+		}
+		if (normalForm == 2) {
+			for (Key tmpKey : keys) {
+				ArrayList<FunctionalDependency> tmpFunctionalDependencies = getFunctionalDependenciesFor(tmpKey);
+				for (FunctionalDependency tmpFunctionalDependency : tmpFunctionalDependencies) {
+					ArrayList<String> tmpDirectlyAffected = new ArrayList<String>();
+					tmpDirectlyAffected = tmpFunctionalDependency.getFunctionallyAffected();
+					Key tmpPseudoKey = new Key(tmpDirectlyAffected);
+					ArrayList<FunctionalDependency> tmpPseudoDependencies = getFunctionalDependenciesFor(tmpPseudoKey);
+					if (!tmpPseudoDependencies.isEmpty()) {
+						for (RelationSchema tmpRelationSchema : relationSchemas) {
+							if (ListUtil.contains(tmpRelationSchema.getColumns(), tmpPseudoKey.getKeyAttributes())){
+								for (FunctionalDependency tmpDependency : tmpPseudoDependencies) {
+									extractRelationSchema(tmpDependency);
+								}
+								break;
+							}
+						}
+					}
+				}
+			}
+			setNormalForm(3);
+		} else {
+			throw new InvalidActivityException("Relation Schema already is in " + getNormalFormForOut());
+		}
+	}
 
+	private ArrayList<FunctionalDependency> getFunctionalDependenciesFor(Key aKey) {
+		ArrayList<FunctionalDependency> tmpFunctionalDependencies = new ArrayList<FunctionalDependency>();
+		for (FunctionalDependency tmpFunctionalDependency : functionalDependencies) {
+			Key tmpCompareKey = new Key(tmpFunctionalDependency.getFunctionallyDependentOn());
+			if (tmpCompareKey.equals(aKey)) {
+				tmpFunctionalDependencies.add(tmpFunctionalDependency);
+			}
+		}
+		return tmpFunctionalDependencies;
+	}
+
+	/**
+	 * @param aFunctionalDependency
+	 */
+	private void extractRelationSchema(FunctionalDependency aFunctionalDependency) {
+		ArrayList<String> tmpAllAffected = aFunctionalDependency.getFunctionallyAffected();
+		ArrayList<String> tmpAllDependentOn = aFunctionalDependency.getFunctionallyDependentOn();
+		for (RelationSchema tmpRelationSchema : relationSchemas) {
+			if (tmpRelationSchema.contains(new RelationSchema(tmpAllAffected))) {
+				boolean tmpExtract = true;
+				for (Key tmpKey : keys) {
+					for (String tmpAffected : tmpAllAffected) {
+						if (tmpKey.contains(tmpAffected)) {
+							tmpExtract = false;
+						}
+					}
+				}
+				if (tmpExtract) {
+					for (String tmpAffected : tmpAllAffected) {
+						if (tmpRelationSchema.getColumns().contains(tmpAffected)) {
+							tmpRelationSchema.removeColumn(tmpAffected);
+						}
+					}
+					if (tmpRelationSchema.getColumns().size() == 1) {
+						// the same relation schema will come again right now
+						relationSchemas.remove(tmpRelationSchema);
+					}
+					ArrayList<String> tmpNewRelationSchemaColumns = new ArrayList<String>();
+					tmpNewRelationSchemaColumns.addAll(tmpAllDependentOn);
+					tmpNewRelationSchemaColumns.addAll(tmpAllAffected);
+					createRelationSchema(tmpNewRelationSchemaColumns);
+					break;
+				}
+			}
+		}
+	}
+
+	/**
+	 * @param aFunctionalDependency
+	 */
+	private void createRelationSchema(ArrayList<String> someColumns) {
+		RelationSchema tmpRelationSchema = new RelationSchema(someColumns);
+		if (!ListUtil.contains(relationSchemas, tmpRelationSchema)){
+			relationSchemas.add(tmpRelationSchema);
+		}
+	}
+
+	/**
+	 * @param aNormalForm
+	 *            the normalForm to set
+	 */
+	private void setNormalForm(int aNormalForm) {
+		if (aNormalForm > 0 && aNormalForm > normalForm) {
+			normalForm = aNormalForm;
+		} else {
+			throw new IllegalArgumentException("New Normal Form has to be higher than old (" + normalForm + ")!");
+		}
+	}
+
+	/**
+	 * puts the keys on the console
+	 */
+	private void keysOut() {
+		System.out.println();
+		System.out.println("Definite keys:");
+		for (Key tmpKey : keys) {
+			tmpKey.out();
+		}
+	}
+
+	/**
+	 * @return the normalForm as String for output
+	 */
+	private String getNormalFormForOut() {
+		String tmpNormalForm = " Normal Form";
+		switch (normalForm) {
+		case 0:
+			tmpNormalForm = "no" + tmpNormalForm;
+			break;
+		case 1:
+			tmpNormalForm = "1st" + tmpNormalForm;
+			break;
+		case 2:
+			tmpNormalForm = "2nd" + tmpNormalForm;
+			break;
+		case 3:
+			tmpNormalForm = "3rd" + tmpNormalForm;
+			break;
+		default:
+			tmpNormalForm = "not implemented" + tmpNormalForm;
+		}
+		return tmpNormalForm;
+	}
+
+	/**
+	 * puts the current relationSchemas and the Normal Form on the console
+	 */
+	public void relationSchemasOut() {
+		System.out.println();
+		System.out.println(getNormalFormForOut() + ":");
+		for (RelationSchema tmpRelationSchema : relationSchemas) {
+			tmpRelationSchema.out();
+		}
 	}
 }

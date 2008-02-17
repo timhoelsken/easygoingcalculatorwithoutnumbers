@@ -108,8 +108,7 @@ public class Normaliser {
 	 * does the normalisation
 	 */
 	public void normalise() {
-
-		keys = getKeys();
+		getKeys();
 		System.out.println();
 		System.out.println("Definite Keys:");
 		for (Key tmpKey : keys) {
@@ -118,8 +117,6 @@ public class Normaliser {
 	}
 
 	private ArrayList<Key> getKeys() {
-		ArrayList<Key> tmpDefiniteKeys = new ArrayList<Key>();
-
 		ArrayList<Key> tmpPossibleKeys = new ArrayList<Key>();
 		ArrayList<Key> tmpCompareDependentOn = new ArrayList<Key>();
 		ArrayList<Key> tmpCompareAffected = new ArrayList<Key>();
@@ -185,10 +182,10 @@ public class Normaliser {
 				}
 			}
 			if (tmpIsKey) {
-				tmpDefiniteKeys.add(tmpPossibleKey);
+				keys.add(tmpPossibleKey);
 			}
 		}
-		return tmpDefiniteKeys;
+		return keys;
 	}
 
 	private void getAllAffected(Key aKey, ArrayList<String> anAffectedList) {
@@ -225,34 +222,30 @@ public class Normaliser {
 	private void getAllPossibleKeys(ArrayList<Key> somePossibleKeys) {
 		ArrayList<Key> tmpFurtherPossibleKeys = new ArrayList<Key>();
 		for (Key tmpPossibleKey : somePossibleKeys) {
-			ArrayList<String> tmpOneAffected = null;
-			for (FunctionalDependency tmpDependency : functionalDependencies) {
-				// if found the dependency of this key...
-				if (ListUtil.equals(tmpDependency.getFunctionallyDependentOn(), tmpPossibleKey.getKeyAttributes())) {
-					tmpOneAffected = tmpDependency.getFunctionallyAffected();
-					ArrayList<String> tmpAllDirectlyAffectedOfThisOne = new ArrayList<String>();
-					// ...get all directly affected by the affected of that key
-					getAllDirectlyAffected(new Key(tmpOneAffected), tmpAllDirectlyAffectedOfThisOne);
-					// check if you can make a reverse pointer to the key
-					if (!tmpAllDirectlyAffectedOfThisOne.isEmpty()) {
-						boolean tmpCreateNewKey = false;
-						Key tmpFurtherPossibleKey = tmpPossibleKey.copy();
-						for (String tmpAffected : tmpAllDirectlyAffectedOfThisOne) {
-							if (tmpFurtherPossibleKey.contains(tmpAffected)) {
-								tmpCreateNewKey = true;
-								tmpFurtherPossibleKey.removeKeyAttribute(tmpAffected);
-							}
+			ArrayList<String> tmpOneAffected = new ArrayList<String>();
+			// get all directly affected of that key
+			getAllDirectlyAffected(tmpPossibleKey, tmpOneAffected);
+			ArrayList<String> tmpAllDirectlyAffectedOfThisOne = new ArrayList<String>();
+			// and then get all directly affected by the affected-key
+			getAllDirectlyAffected(new Key(tmpOneAffected), tmpAllDirectlyAffectedOfThisOne);
+			// check if you can make a reverse pointer to this affected-key
+			if (!tmpAllDirectlyAffectedOfThisOne.isEmpty()) {
+				boolean tmpCreateNewKey = false;
+				Key tmpFurtherPossibleKey = tmpPossibleKey.copy();
+				for (String tmpAffected : tmpAllDirectlyAffectedOfThisOne) {
+					if (tmpFurtherPossibleKey.contains(tmpAffected)) {
+						tmpCreateNewKey = true;
+						tmpFurtherPossibleKey.removeKeyAttribute(tmpAffected);
+					}
+				}
+				if (tmpCreateNewKey) {
+					for (String tmpKeyAttribute : tmpOneAffected) {
+						if (!tmpFurtherPossibleKey.contains(tmpKeyAttribute)) {
+							tmpFurtherPossibleKey.addKeyAttribute(tmpKeyAttribute);
 						}
-						if (tmpCreateNewKey) {
-							for (String tmpKeyAttribute : tmpOneAffected) {
-								if (!tmpFurtherPossibleKey.contains(tmpKeyAttribute)) {
-									tmpFurtherPossibleKey.addKeyAttribute(tmpKeyAttribute);
-								}
-							}
-							if (tmpFurtherPossibleKey.getKeyAttributes().size() != 0 && !somePossibleKeys.contains(tmpFurtherPossibleKey)) {
-								tmpFurtherPossibleKeys.add(tmpFurtherPossibleKey);
-							}
-						}
+					}
+					if (tmpFurtherPossibleKey.getKeyAttributes().size() != 0 && !somePossibleKeys.contains(tmpFurtherPossibleKey)) {
+						tmpFurtherPossibleKeys.add(tmpFurtherPossibleKey);
 					}
 				}
 			}
@@ -285,6 +278,10 @@ public class Normaliser {
 	}
 
 	private void bringTo2ndNormalForm() {
+
+	}
+
+	private void bringTo3rdNormalForm() {
 
 	}
 }

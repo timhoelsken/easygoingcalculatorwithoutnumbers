@@ -401,17 +401,6 @@ public class Normaliser {
 	}
 
 	/**
-	 * puts the keys on the console
-	 */
-	private void keysOut() {
-		System.out.println();
-		System.out.println("Definite keys:");
-		for (Key tmpKey : keys) {
-			tmpKey.out();
-		}
-	}
-
-	/**
 	 * @return the normalForm as String for output
 	 */
 	private String getNormalFormForOut() {
@@ -433,6 +422,17 @@ public class Normaliser {
 			tmpNormalForm = "not implemented" + tmpNormalForm;
 		}
 		return tmpNormalForm;
+	}
+
+	/**
+	 * puts the keys on the console
+	 */
+	private void keysOut() {
+		System.out.println();
+		System.out.println("Definite keys:");
+		for (Key tmpKey : keys) {
+			tmpKey.out();
+		}
 	}
 
 	/**

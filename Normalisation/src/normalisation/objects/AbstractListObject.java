@@ -80,6 +80,20 @@ public abstract class AbstractListObject {
 		return true;
 	}
 
+
+//	/**
+//	 * @param anObjectList
+//	 * @return if this object is in given list
+//	 */
+//	public boolean isContainedIn(ArrayList<AbstractListObject> anObjectList) {
+//		for (AbstractListObject tmpObject : anObjectList) {
+//			if (tmpObject.equals(this)) {
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
+
 	/**
 	 * @return a deep copy of the calling object
 	 * @throws UnknownObjectException

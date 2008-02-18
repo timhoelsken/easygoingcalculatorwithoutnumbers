@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE Normalisation SYSTEM "normalisation.dtd">
+
+<Normalisation>
+	<RelationSchema name="MITARBEITER">
+		<Column>PERSONALNUMMER</Column>
+		<Column>NAME</Column>
+		<Column>VORNAME</Column>
+		<Column>ABTEILUNG</Column>
+		<Column>GEBÄUDE</Column>
+		<Column>POSITION</Column>
+		<Column>GEHALT</Column>
+		<Column>ADRESSE</Column>
+		<Column>ANZAHL_MITARBEITER</Column>
+		<Column>FACHGEBIET</Column>
+		<Column>FAHRZEUG</Column>
+		<Column>PARKPLATZ</Column>
+		<Column>BODENBELAG</Column>
+	</RelationSchema>
+    <FunctionalDependency>
+        <FunctionallyDependentOn>PERSONALNUMMER</FunctionallyDependentOn>
+        <FunctionallyAffected>NAME</FunctionallyAffected>
+        <FunctionallyAffected>VORNAME</FunctionallyAffected>
+    </FunctionalDependency>
+	<FunctionalDependency>
+		<FunctionallyDependentOn>PERSONALNUMMER</FunctionallyDependentOn>
+		<FunctionallyDependentOn>POSITION</FunctionallyDependentOn>
+		<FunctionallyAffected>ABTEILUNG</FunctionallyAffected>
+		<FunctionallyAffected>FAHRZEUG</FunctionallyAffected>
+	</FunctionalDependency>
+	<FunctionalDependency>
+	   <FunctionallyDependentOn>POSITION</FunctionallyDependentOn>
+        <FunctionallyAffected>GEHALT</FunctionallyAffected>
+	</FunctionalDependency>
+	<FunctionalDependency>
+		<FunctionallyDependentOn>ABTEILUNG</FunctionallyDependentOn>
+		<FunctionallyAffected>GEBÄUDE</FunctionallyAffected>
+		<FunctionallyAffected>ANZAHL_MITARBEITER</FunctionallyAffected>
+		<FunctionallyAffected>FACHGEBIET</FunctionallyAffected>
+	</FunctionalDependency>
+	<FunctionalDependency>
+        <FunctionallyDependentOn>GEBÄUDE</FunctionallyDependentOn>
+        <FunctionallyAffected>ADRESSE</FunctionallyAffected>
+    </FunctionalDependency>
+	<FunctionalDependency>
+        <FunctionallyDependentOn>FAHRZEUG</FunctionallyDependentOn>
+        <FunctionallyAffected>PARKPLATZ</FunctionallyAffected>
+    </FunctionalDependency>
+    <FunctionalDependency>
+        <FunctionallyDependentOn>PARKPLATZ</FunctionallyDependentOn>
+        <FunctionallyAffected>GEBÄUDE</FunctionallyAffected>
+        <FunctionallyAffected>BODENBELAG</FunctionallyAffected>
+    </FunctionalDependency>
+</Normalisation>

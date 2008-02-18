@@ -306,21 +306,28 @@ public class Normaliser {
 			bringTo2ndNormalForm();
 		}
 		if (normalForm == 2) {
-			for (Key tmpKey : keys) {
-				ArrayList<FunctionalDependency> tmpFunctionalDependencies = getFunctionalDependenciesFor(tmpKey);
-				for (FunctionalDependency tmpFunctionalDependency : tmpFunctionalDependencies) {
-					ArrayList<String> tmpDirectlyAffected = new ArrayList<String>();
-					tmpDirectlyAffected = tmpFunctionalDependency.getFunctionallyAffected();
-					Key tmpPseudoKey = new Key(tmpDirectlyAffected);
+			// for every functional dependency...
+			for (FunctionalDependency tmpFunctionalDependency : functionalDependencies) {
+				ArrayList<String> tmpDirectlyAffected = new ArrayList<String>();
+				tmpDirectlyAffected = tmpFunctionalDependency.getFunctionallyAffected();
+				ArrayList<ArrayList<String>> tmpAllCombinations = getAllCombinations(tmpDirectlyAffected);
+				// ... and all combinations of the affected of all these dependencies...
+				for (ArrayList<String> tmpCombination : tmpAllCombinations) {
+					Key tmpPseudoKey = new Key(tmpCombination);
 					ArrayList<FunctionalDependency> tmpPseudoDependencies = getFunctionalDependenciesFor(tmpPseudoKey);
+					// check if the combination is also a dependentOn
 					if (!tmpPseudoDependencies.isEmpty()) {
+						ArrayList<FunctionalDependency> tmpExtractDependencies = new ArrayList<FunctionalDependency>();
 						for (RelationSchema tmpRelationSchema : relationSchemas) {
-							if (ListUtil.contains(tmpRelationSchema.getAttributes(), tmpPseudoKey.getAttributes())){
+							// if so check the relationSchemas to extract a new relationSchema
+							if (ListUtil.contains(tmpRelationSchema.getAttributes(), tmpPseudoKey.getAttributes())) {
 								for (FunctionalDependency tmpDependency : tmpPseudoDependencies) {
-									extractRelationSchema(tmpDependency);
+									tmpExtractDependencies.add(tmpDependency);
 								}
-								break;
 							}
+						}
+						for (FunctionalDependency tmpDependency : tmpExtractDependencies) {
+							extractRelationSchema(tmpDependency);
 						}
 					}
 				}
@@ -329,6 +336,43 @@ public class Normaliser {
 		} else {
 			throw new InvalidActivityException("Relation Schema already is in " + getNormalFormForOut());
 		}
+	}
+
+	private ArrayList<ArrayList<String>> getAllCombinations(ArrayList<String> aList) {
+		ArrayList<ArrayList<String>> tmpAllCombinations = new ArrayList<ArrayList<String>>();
+		if (aList.size() == 1) {
+			tmpAllCombinations.add(aList);
+		} else {
+			ArrayList<ArrayList<String>> tmpCombinations = new ArrayList<ArrayList<String>>();
+			for (int i = 0; i < aList.size(); i++) {
+				tmpCombinations = getAllCombinations(aList, tmpCombinations);
+				tmpAllCombinations.addAll(tmpCombinations);
+			}
+		}
+		return tmpAllCombinations;
+	}
+
+	private ArrayList<ArrayList<String>> getAllCombinations(ArrayList<String> aList, ArrayList<ArrayList<String>> anotherList) {
+		ArrayList<ArrayList<String>> tmpAllCombinations = new ArrayList<ArrayList<String>>();
+		for (String tmpString : aList) {
+			if (anotherList.isEmpty()) {
+				for (String tmpStringFromList : aList) {
+					ArrayList<String> tmpCombination = new ArrayList<String>();
+					tmpCombination.add(tmpStringFromList);
+					tmpAllCombinations.add(tmpCombination);
+				}
+			} else {
+				for (ArrayList<String> tmpList : anotherList) {
+					if (!tmpList.contains(tmpString)) {
+						ArrayList<String> tmpCombination = new ArrayList<String>();
+						tmpCombination.add(tmpString);
+						tmpCombination.addAll(tmpList);
+						tmpAllCombinations.add(tmpCombination);
+					}
+				}
+			}
+		}
+		return tmpAllCombinations;
 	}
 
 	private ArrayList<FunctionalDependency> getFunctionalDependenciesFor(Key aKey) {
@@ -383,7 +427,7 @@ public class Normaliser {
 	 */
 	private void createRelationSchema(ArrayList<String> someColumns) {
 		RelationSchema tmpRelationSchema = new RelationSchema(someColumns);
-		if (!ListUtil.contains(relationSchemas, tmpRelationSchema)){
+		if (!ListUtil.contains(relationSchemas, tmpRelationSchema)) {
 			relationSchemas.add(tmpRelationSchema);
 		}
 	}

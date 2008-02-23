@@ -4,22 +4,22 @@ package pse3;
  *
  */
 public class NumberObj extends MathObj {
-	private float aValue;
+	private float value;
 
 	/**
 	 * @return the value
 	 */
 	public float getValue() {
-		return aValue;
+		return value;
 	}
 
 	/**
 	 * constructor
 	 *
-	 * @param tmpValue
+	 * @param aValue
 	 */
-	public NumberObj(float tmpValue) {
+	public NumberObj(float aValue) {
 		super(MathType.NUMBER);
-		aValue = tmpValue;
+		value = aValue;
 	}
 }

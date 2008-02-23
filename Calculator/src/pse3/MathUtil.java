@@ -8,26 +8,26 @@ public class MathUtil {
   private static char COMMA = ',';
 
   /**
-   * @param tmpChar
+   * @param aChar
    * @return true if char is a number (0 - 9)
    */
-  public static boolean IsNumber(char tmpChar) {
-    return (tmpChar >= '0' && tmpChar <= '9');
+  public static boolean IsNumber(char aChar) {
+    return (aChar >= '0' && aChar <= '9');
   }
 
   /**
-   * @param tmpChar
+   * @param aChar
    * @return true if char is a comma
    */
-  public static boolean IsComma(char tmpChar) {
-    return (tmpChar == COMMA);
+  public static boolean IsComma(char aChar) {
+    return (aChar == COMMA);
   }
 
   /**
-   * @param tmpChar
+   * @param aChar
    * @return true if char is operator
    */
-  public static boolean IsOperator(char tmpChar) {
+  public static boolean IsOperator(char aChar) {
     // switch (c) {
     // case OperatorType.ADDITION.getOpAsChar():
     // case OperatorType.SUBTRACTION.getOpAsChar():

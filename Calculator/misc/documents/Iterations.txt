@@ -38,6 +38,8 @@ Taschenrechner 0.2
  - Benutzerseitige Eingabe von Termen implementieren (auf der Konsole verschiedene
    Terme nach dem Berechnen nacheinander eingeben können etc.)
    
+ - Fehlerausgabe bei fehlerhafter Eingabe implementieren, ggf. in nachfolgenden Iterationen um genauen Fehlerausgabe erweitern. Arbeiten mit Exceptions? (André)
+   
 ------------------
 Taschenrechner 0.3
 ------------------
@@ -134,4 +136,4 @@ Taschenrechner 0.8
 Taschenrechner 0.9
 ------------------
 
- - Anzeige von Graphen in der grafischen Oberfläche
+ - Anzeige von Graphen in der grafischen Oberfläche (Kannkriterium, oder? André)

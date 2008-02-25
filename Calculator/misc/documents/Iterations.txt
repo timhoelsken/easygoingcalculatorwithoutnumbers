@@ -1,0 +1,137 @@
+==================================
+Vorgehen im Projekt Taschenrechner
+==================================
+
+------------------
+Taschenrechner 0.1
+------------------
+
+ - Konvertierung eines Terms mit 2 Operanden und 1 Operator (z.B. 3 + 4) in
+   einen standardisierten String (z.B. whitespaces entfernen, Standard muss 
+   dokumentiert und in der Gruppe abgestimmt werden) 
+ 
+ - Erkennen von Numbers (nur positive, natürlichen Zahlen (Datentyp trotzdem Float/Double) und Operatoren
+   (+ - * /), einordnen in entsprechendes MathObj
+ 
+ - Einordnen der MathObjs in einen Baum
+ 
+ - Auslesen der MathObjs aus einem Baum
+ 
+ - Berechnen des Terms
+ 
+ - Ausgabe des Terms auf dem Bildschirm
+ 
+------------------
+Taschenrechner 0.2
+------------------
+ 
+ - Konvertierung eines Terms erweitern:
+   Terme mit mehr als 2 Operanden und 1 Operator (z.B. 3 + 4 + 5), allerdings 
+   noch mit gleichbleibenden Operatoren
+   
+ - Einordnen der MathObjs in einen Baum erweitern
+ 
+ - Auslesen der MathObjs aus einem Baum erweitern
+ 
+ - Berechnen des erweiterten Terms
+ 
+ - Benutzerseitige Eingabe von Termen implementieren (auf der Konsole verschiedene
+   Terme nach dem Berechnen nacheinander eingeben können etc.)
+   
+------------------
+Taschenrechner 0.3
+------------------
+
+ - Konvertierung eines Terms erweitern:
+   Terme mit verschiedenen Operanden, Punkt-Vor-Strich Rechnung
+   mathematische Gesetze beachten (kommutativ)
+   
+ - Erkennen von Gleitkommazahlen (==> Erkennen von Komma/Punkt), negativen Zahlen
+ 
+ - Einordnen der MathObjs in einen Baum erweitern (?)
+ 
+ - Auslesen der MathObjs aus einem Baum erweitern (?)
+ 
+ - Berechnen des erweiterten Terms 
+ 
+ - Benutzerseitige Eingabe erweitern
+ 
+------------------
+Taschenrechner 0.4
+------------------
+
+ - Konvertierung eines Terms erweitern:
+   Terme mit Klammern, Minusklammern
+   
+ - Erkennen von Klammern (==> Rekursion zum berechnen des inneren Terms?)
+   mathematische Gesetze beachten (assoziativ, distributiv)  
+ 
+ - Einordnen der MathObjs in einen Baum erweitern (?)
+ 
+ - Auslesen der MathObjs aus einem Baum erweitern (?)
+ 
+ - Berechnen des erweiterten Terms 
+ 
+ - Benutzerseitige Eingabe erweitern
+ 
+------------------
+Taschenrechner 0.5
+------------------
+
+ - Konvertierung eines Terms erweitern:
+   Gleichung mit 1 unbekannten, Einführen des Gleichheitszeichen
+   (Konvertierung von 2a --> 2*a z.B.)
+   
+ - Erkennen von Variablen
+ 
+ - Einordnen der MathObjs in einen Baum erweitern
+ 
+ - Auslesen der MathObjs aus einem Baum erweitern
+ 
+ - Berechnen des erweiterten Terms 
+ 
+ - Benutzerseitige Eingabe erweitern
+ 
+------------------
+Taschenrechner 0.6
+------------------
+
+ - Konvertierung eines Terms erweitern:
+   Gleichung mit mehreren unbekannten (ab --> a*b)
+  
+ - Einordnen der MathObjs in einen Baum erweitern (?)
+ 
+ - Auslesen der MathObjs aus einem Baum erweitern (?)
+ 
+ - Berechnen des erweiterten Terms 
+ 
+ - Benutzerseitige Eingabe erweitern
+ 
+------------------
+Taschenrechner 0.7
+------------------
+
+ - Konvertierung eines Terms erweitern:
+   potenzieren/Wurzel ziehen (==> p/q Formel einführen?), sin(), cos(), tan()
+   
+ - Einordnen der MathObjs in einen Baum erweitern (?)
+ 
+ - Auslesen der MathObjs aus einem Baum erweitern (?)
+ 
+ - Berechnen des erweiterten Terms 
+ 
+ - Benutzerseitige Eingabe erweitern
+ 
+------------------
+Taschenrechner 0.8
+------------------
+
+ - Benutzereingaben über grafische Oberfläche
+ 
+ - Ausgabe über grafische Oberfläche
+ 
+------------------
+Taschenrechner 0.9
+------------------
+
+ - Anzeige von Graphen in der grafischen Oberfläche

@@ -8,18 +8,18 @@ Taschenrechner 0.1
 
  - Konvertierung eines Terms mit 2 Operanden und 1 Operator (z.B. 3 + 4) in
    einen standardisierten String (z.B. whitespaces entfernen, Standard muss 
-   dokumentiert und in der Gruppe abgestimmt werden) 
+   dokumentiert und in der Gruppe abgestimmt werden) [TIM]
  
  - Erkennen von Numbers (nur positive, natürlichen Zahlen (Datentyp trotzdem Float/Double) und Operatoren
-   (+ - * /), einordnen in entsprechendes MathObj
+   (+ - * /), einordnen in entsprechendes MathObj [ANDRE]
  
- - Einordnen der MathObjs in einen Baum
+ - Einordnen der MathObjs in einen Baum [RAPHI]
  
- - Auslesen der MathObjs aus einem Baum
+ - Auslesen der MathObjs aus einem Baum [RAPHI]
  
- - Berechnen des Terms
+ - Berechnen des Terms (entspricht Auslesen ?) [TIM (RAPHI)]
  
- - Ausgabe des Terms auf dem Bildschirm
+ - Ausgabe des Terms auf dem Bildschirm [TIM]
  
 ------------------
 Taschenrechner 0.2
@@ -27,18 +27,20 @@ Taschenrechner 0.2
  
  - Konvertierung eines Terms erweitern:
    Terme mit mehr als 2 Operanden und 1 Operator (z.B. 3 + 4 + 5), allerdings 
-   noch mit gleichbleibenden Operatoren
+   noch mit gleichbleibenden Operatoren [ANDRE]
    
- - Einordnen der MathObjs in einen Baum erweitern
+ - Einordnen der MathObjs in einen Baum erweitern [RAPHI]
  
- - Auslesen der MathObjs aus einem Baum erweitern
+ - Auslesen der MathObjs aus einem Baum erweitern [RAPHI]
  
- - Berechnen des erweiterten Terms
+ - Berechnen des erweiterten Terms [RAPHI]
  
  - Benutzerseitige Eingabe von Termen implementieren (auf der Konsole verschiedene
-   Terme nach dem Berechnen nacheinander eingeben können etc.)
+   Terme nach dem Berechnen nacheinander eingeben können etc.) [TIM]
    
- - Fehlerausgabe bei fehlerhafter Eingabe implementieren, ggf. in nachfolgenden Iterationen um genauen Fehlerausgabe erweitern. Arbeiten mit Exceptions? (André)
+ - Fehlerausgabe bei fehlerhafter Eingabe implementieren, 
+   ggf. in nachfolgenden Iterationen um genauen Fehlerausgabe erweitern. 
+   Arbeiten mit Exceptions? (André) [TIM]
    
 ------------------
 Taschenrechner 0.3

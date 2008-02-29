@@ -1,6 +1,6 @@
 package tree.element;
 
-import numath.MathUtil;
+import math.element.object.MathUtil;
 
 /**
  *

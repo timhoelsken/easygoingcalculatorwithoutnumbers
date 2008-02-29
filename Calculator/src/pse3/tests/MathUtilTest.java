@@ -3,8 +3,8 @@
  */
 package pse3.tests;
 
-import numath.MathUtil;
-import numath.NumberObj;
+import math.element.object.MathUtil;
+import math.element.object.NumberObj;
 import junit.framework.JUnit4TestAdapter;
 import junit.framework.Test;
 import junit.framework.TestCase;

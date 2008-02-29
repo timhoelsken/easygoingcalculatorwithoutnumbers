@@ -1,4 +1,4 @@
-package newTree;
+package tree.element;
 
 import math.elements.object.MathObj;
 

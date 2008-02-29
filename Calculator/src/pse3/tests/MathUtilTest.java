@@ -3,12 +3,12 @@
  */
 package pse3.tests;
 
+import math.elements.object.MathUtil;
+import math.elements.object.NumberObj;
 import junit.framework.JUnit4TestAdapter;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.textui.TestRunner;
-import pse3.MathUtil;
-import pse3.NumberObj;
 
 /**
  * @author Tobias

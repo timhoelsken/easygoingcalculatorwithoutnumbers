@@ -27,7 +27,8 @@ public final class Tokener {
 	    {
 	    	switch (NextElement.getMathType()) {
 	    		
-	    		case MathType.NUMBER.:
+	    		case MathType.NUMBER:
+	    			
 	    			InsertNumber(aTree, (NumberObj) NextElement);
 	    			break;
 	    			
@@ -35,7 +36,9 @@ public final class Tokener {
 	    			
 	    			InsertOperator(aTree, NextElement);
 	    			break;
-	    	}	    	
+	    	}	
+	    	
+	    	NextElement = aFormula.getNextElement();
 	    }
 	}
 	
@@ -52,37 +55,35 @@ public final class Tokener {
 		//is it a empty tree? init it!
 		if ( aTree == null) {
     		aTree = new Tree(anOperator);
+    		return aTree;
     	}	
 		
-		//first case: the node is a Number -> append it to the left
+		//case 1: the node is a Number -> append it to the left
 	    if (aTree.getRoot().getMathType() == MathType.NUMBER)
 	    {
-	    	Tree NewTree = new Tree(anOperator,null,aTree,null);
-			aTree.setFather(NewTree);
-			return NewTree;
+	    	Tree NewTree;
+	    	
+	    	//case 1.1: the existing number has no father
+	    	//=> set number as left son of operator
+	    	if (aTree.getFather()== null){
+	    		NewTree = new Tree(anOperator,null,aTree,null);
+	    		aTree.setFather(NewTree);			
+	    	}
+	    	
+	    	//case 1.1: the existing number has an operator as father
+	    	//=> check priority of father
+	    	if ( aTree.getFather().getRoot().getMathType() == MathType.OPERATOR ){
+	    		//check priority
+	    		Operator anOperator2 = (Operator) aTree.getFather().getRoot().getMathType();
+	    		
+	    		if (anOperator2.getOperatorType().getPriority() >  anOperator.getOperatorType().getPriority())
+	    		{
+	    			NewTree = new Tree(anOperand,aTree.getFather().getFather(),)
+	    		}    		
+	    	}   	
 	    }
 	    
-	    //second case: the node is an operator -> check priority!
-	    if (aTree.getRoot().getMathType() == MathType.OPERATOR)
-	    {
-	    	Operator ExistingOp = (Operator) aTree.getRoot();
-	    	
-	    	if (ExistingOp.getOperatorType().getPriority() < anOperator.getOperatorType().getPriority()) {
-	    		//the priority is lower than the one in the node
-	    		//create a new node and append the existing node to the left!
-	    		Tree NewTree = new Tree(anOperator,null,aTree,null);
-	    		aTree.setFather(NewTree);	
-	    	}
-	    	else
-	    	{	    		
-	    		//the priority is higher or equal than the one in the existing node
-	    		//append the new one to the right
-	    		Tree NewTree = new Tree(anOperator,null,aTree,null);
-	    		aTree.setFather(NewTree);
-	    	}
-	  
-	    }
-		
+	    return NewTree;
 	}
 	
 	/**
@@ -102,7 +103,7 @@ public final class Tokener {
     	}	
 		
 		// a number will always be appended to the right
-		// if the right is already assigned an error has occurred (assuming a syntax error9
+		// if the right is already assigned an error has occurred (assuming a syntax error)
 		if (aTree.getRightSon()!= null)	{
 			throw(new Exception("Syntax Error"));
 		}
@@ -110,5 +111,6 @@ public final class Tokener {
 		//create a new tree and append it to the right of the father
 		Tree NewTree = new Tree(anNumber,aTree,null,null);
 		aTree.setRightSon(NewTree);
+		aTree = NewTree; //set view on included node
 	}	
 }

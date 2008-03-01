@@ -51,7 +51,7 @@ public final class Tokener {
 	{
 		//is it a empty tree? init it!
 		if ( aTree == null) {
-    		aTree = new Tree(anElement);
+    		aTree = new Tree(anOperator);
     	}	
 		
 		//first case: the node is a Number -> append it to the left
@@ -62,13 +62,23 @@ public final class Tokener {
 			return NewTree;
 	    }
 	    
-	    //second case: the node is an operator -> check proiority!
+	    //second case: the node is an operator -> check priority!
 	    if (aTree.getRoot().getMathType() == MathType.OPERATOR)
 	    {
 	    	Operator ExistingOp = (Operator) aTree.getRoot();
 	    	
 	    	if (ExistingOp.getOperatorType().getPriority() < anOperator.getOperatorType().getPriority()) {
-	    		
+	    		//the priority is lower than the one in the node
+	    		//create a new node and append the existing node to the left!
+	    		Tree NewTree = new Tree(anOperator,null,aTree,null);
+	    		aTree.setFather(NewTree);	
+	    	}
+	    	else
+	    	{	    		
+	    		//the priority is higher or equal than the one in the existing node
+	    		//append the new one to the right
+	    		Tree NewTree = new Tree(anOperator,null,aTree,null);
+	    		aTree.setFather(NewTree);
 	    	}
 	  
 	    }

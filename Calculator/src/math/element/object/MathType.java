@@ -17,5 +17,10 @@ public enum MathType {
 	/**
 	 * number 0 1 2 3 ...
 	 */
-	NUMBER
+	NUMBER,
+	
+	/*
+	 * end of formula
+	 */
+	END_OF_TERM
 }

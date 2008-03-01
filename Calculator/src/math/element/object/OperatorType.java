@@ -7,30 +7,30 @@ public enum OperatorType {
 	/**
 	 * addition
 	 */
-	ADDITION('+'),
+	ADDITION(1),
 	/**
 	 * subtraction
 	 */
-	SUBTRACTION('-'),
+	SUBTRACTION(1),
 	/**
 	 * multiplication
 	 */
-	MULTIPLICATION('*'),
+	MULTIPLICATION(2),
 	/**
 	 * division
 	 */
-	DIVISION('/');
+	DIVISION(2);
 
-	private char operatorType;
+	private int operatorType;
 
-	private OperatorType(char anOperatorType) {
+	private OperatorType(int anOperatorType) {
 		operatorType = anOperatorType;
 	}
 
 	/**
-	 * @return the operatortype as char
+	 * @return the operatortype as int
 	 */
-	public char getOperatorTypeAsChar() {
+	public int getPriority() {
 		return operatorType;
 	}
 }

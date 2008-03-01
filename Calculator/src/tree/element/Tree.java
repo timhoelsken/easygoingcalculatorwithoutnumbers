@@ -7,9 +7,21 @@ import math.element.object.MathObj;
  */
 public class Tree {
 	private MathObj root;
-	private Tree left;
-	private Tree right;
+	private Tree LeftSon;
+	private Tree RightSon;
+	private Tree Father;
 
+	
+	public Tree getFather()
+	{
+		return Father;
+	}
+	
+	public void setFather(Tree aFather)
+	{
+		Father = aFather;
+	}
+	
 	/**
 	 * @return the root
 	 */
@@ -28,31 +40,31 @@ public class Tree {
 	/**
 	 * @return the left son tree
 	 */
-	public Tree getLeft() {
-		return left;
+	public Tree getLeftSon() {
+		return LeftSon;
 	}
 
 	/**
 	 * @param aLeft
 	 *            tree to set
 	 */
-	public void setLeft(Tree aLeft) {
-		left = aLeft;
+	public void setLeftSon(Tree aLeft) {
+		LeftSon = aLeft;
 	}
 
 	/**
 	 * @return the right son tree
 	 */
-	public Tree getRight() {
-		return right;
+	public Tree getRightSon() {
+		return RightSon;
 	}
 
 	/**
 	 * @param aRight
 	 *            tree to set
 	 */
-	public void setRight(Tree aRight) {
-		right = aRight;
+	public void setRightSon(Tree aRight) {
+		RightSon = aRight;
 	}
 
 	/**
@@ -62,7 +74,7 @@ public class Tree {
 	 */
 	public Tree(MathObj aRoot) {
 		root = aRoot;
-		left = right = null;
+		LeftSon = RightSon = Father = null;
 	}
 
 	/**
@@ -72,10 +84,11 @@ public class Tree {
 	 * @param aLeft
 	 * @param aRight
 	 */
-	public Tree(MathObj aRoot, Tree aLeft, Tree aRight) {
+	public Tree(MathObj aRoot, Tree aFather ,Tree aLeft, Tree aRight) {
 		root = aRoot;
-		left = aLeft;
-		right = aRight;
+		LeftSon = aLeft;
+		RightSon = aRight;
+		Father = aFather;
 	}
 
 }

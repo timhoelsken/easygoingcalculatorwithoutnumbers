@@ -1,7 +1,10 @@
 package tree.element;
 
-import math.element.object.*;
-import tree.element;
+import math.element.object.Formula;
+import math.element.object.MathObj;
+import math.element.object.MathType;
+import math.element.object.NumberObj;
+import math.element.object.Operator;
 
 /**
  *

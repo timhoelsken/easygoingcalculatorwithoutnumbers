@@ -1,0 +1,43 @@
+==================
+Coding-Conventions
+==================
+
+Nach dem für das Projekt importierten Code-Guide sind folgende Conventionen einzuhalten:
+
+- Methoden werden in "CamelCase" geschrieben.
+  ==> thisIsAMethodThatUsesCamelCase
+  
+- getter / setter beginnen mit get / set (Eclipse kann das automatisch generieren)
+
+- Methoden die einen Boolean zurückgeben beginnen mit "is" (==> isVisible oder isSet)
+
+- Parameter die Übergeben werden beginnen mit "a" (bzw. "an" bei Vokal)  
+  (Bsp.: "public void myMethod(String anInput, int aNumber)")
+  
+- Variablen die in einer Methode instanziiert werden, haben als Prefix "tmp"
+  (Bsp.: "String tmpOutput = new String("");")
+  
+- public methoden werden mit Java-Doc documentiert. 
+  Dabei wird beim @return (falls ein Wert zurückgegeben wird) ein beschreibender
+  Text der Rückgabe verfasst.
+  Eine generelle Beschreibung der Methode wird oberhalb der Java-Doc Parameter
+  eingefügt.
+  
+- mit strg+shift+f kann der Code von Eclipse formatiert werden.
+
+==============
+Umgang mit SVN
+==============
+
+- wird eine Neuerung (Datei, Klasse, Methode, etc.) ins SVN eingecheckt
+  bekommt die Beschreibung im SVN das Prefix "+"
+  
+- wird eine Änderung vorgenommen, bekommt die Beschreibung das Prefix "%"
+
+- wird etwas entfernt, bekommt die Beschreibung das Prefix "-"
+
+- In das SVN sollten generell nur Codestücke eingeladen werden, 
+  die vollausführbar sind.
+  Eine Ausnahme bildet das Einchecken von Code wo ein Teammitglied Hilfe
+  benötigt. Dann sollte die entsprechende Stelle mit einem Task kommentiert
+  werden. (//TODO hier weiß ich nicht weiter...etc)

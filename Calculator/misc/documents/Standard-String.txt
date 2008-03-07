@@ -1,0 +1,9 @@
+===============
+Standard-String
+===============
+
+- Ein Standard-String besitzt keine leerzeichen.
+- Multiplizierte Variablen werden nicht aneinander geschrieben, 
+  sondern mit '*' "verbunden".
+  
+   

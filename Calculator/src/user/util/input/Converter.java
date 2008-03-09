@@ -56,9 +56,9 @@ public class Converter {
 
     for (int i = 0; i < anInputString.length(); i++) {
       tmpOutput += anInputString.charAt(i);
-      if (isVariable(anInputString.charAt(i)) && isVariable(anInputString.charAt(i + 1))) {
+      if (isVariable(anInputString.charAt(i)) && (i+1<anInputString.length() && isVariable(anInputString.charAt(i + 1)))) {
         tmpOutput += "*";
-      } else if (isNumeric(anInputString.charAt(i)) && isVariable(anInputString.charAt(i + 1))) {
+      } else if (isNumeric(anInputString.charAt(i)) && (i+1<anInputString.length() && isVariable(anInputString.charAt(i + 1)))) {
         tmpOutput += "*";
       }
     }

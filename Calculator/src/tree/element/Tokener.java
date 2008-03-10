@@ -6,12 +6,47 @@ import math.element.object.MathType;
 import math.element.object.NumberObj;
 import math.element.object.Operator;
 import math.element.object.Operand;
+import math.element.object.OperatorType;
 
 /**
  * 
  */
 public final class Tokener {
 
+	public static float EvaluateTree(Tree aTree)
+	{
+		if (aTree==null) return 0;
+		
+		float tmpResult=0;
+		
+		if (aTree.getRoot().getMathType() == MathType.OPERAND)
+		{
+			tmpResult = ((NumberObj) aTree.getRoot()).getValue();
+		}
+		else
+		{
+			Operator tmpOperator = (Operator)aTree.getRoot();
+			if (tmpOperator.getOperatorType() == OperatorType.ADDITION)
+			{
+				tmpResult = Tokener.EvaluateTree(aTree.getLeftSon()) + Tokener.EvaluateTree(aTree.getRightSon());
+			}
+			else if (tmpOperator.getOperatorType() == OperatorType.DIVISION)
+			{
+				tmpResult = Tokener.EvaluateTree(aTree.getLeftSon()) / Tokener.EvaluateTree(aTree.getRightSon());
+			}
+			else if (tmpOperator.getOperatorType() == OperatorType.MULTIPLICATION)
+			{
+				tmpResult = Tokener.EvaluateTree(aTree.getLeftSon()) * Tokener.EvaluateTree(aTree.getRightSon());
+			}
+			else if (tmpOperator.getOperatorType() == OperatorType.SUBTRACTION)
+			{
+				tmpResult = Tokener.EvaluateTree(aTree.getLeftSon()) - Tokener.EvaluateTree(aTree.getRightSon());
+			}
+		}
+		
+		return tmpResult;
+	}
+	
 	private Tree InsertOperandIntoTree(Tree anExistingTree, Operand anOperand) {
 
 		// check whether there is an operator in the root of the tree
@@ -21,13 +56,16 @@ public final class Tokener {
 			// following: Number (Father), Number(Left Son)
 			// Numbers can only be in the leaves of the tree!
 
-			//TODO @all hat jemand Ahnung von Exception Handling? Wieso muss ich die Lokal abfangen??
-			//throw (new Exception("Syntax error"));
+			// TODO @all hat jemand Ahnung von Exception Handling? Wieso muss
+			// ich die Lokal abfangen??
+			// throw (new Exception("Syntax error"));
 		}
 
 		// insert the number to the right of the operand
-		anExistingTree.setRightSon(new Tree(anOperand));
-		
+		Tree tmpSon = new Tree(anOperand);
+		tmpSon.setFather(anExistingTree);
+		anExistingTree.setRightSon(tmpSon);
+
 		return anExistingTree;
 	}
 
@@ -52,9 +90,27 @@ public final class Tokener {
 
 			if (tmpExistingOperator.getOperatorType().getPriority() >= anOperator
 					.getOperatorType().getPriority()) {
-				// if the existing operator has a higher priority , a new tree
-				// is buildt
-				// and the existing tree is appended to the left
+
+				// if the existing operator has a lower priority , a new tree
+				// is built and the existing tree is appended to the left
+				// but first we have to navigate to the next operator with a
+				// different priority
+				int tmpInsertPriority = anOperator.getOperatorType()
+						.getPriority();
+				int tmpFatherPriority = anOperator.getOperatorType()
+						.getPriority();
+
+				while (anExistingTree.getFather() != null
+						|| tmpFatherPriority >= tmpInsertPriority) {
+
+					anExistingTree = anExistingTree.getFather();
+					if (anExistingTree.getFather() != null) {
+						tmpFatherPriority = ((Operator) anExistingTree
+								.getFather().getRoot()).getOperatorType()
+								.getPriority();
+					}
+				}
+
 				tmpHelpTree = new Tree(anOperator, null, anExistingTree, null);
 				anExistingTree.setFather(tmpHelpTree);
 			} else {
@@ -71,7 +127,6 @@ public final class Tokener {
 				anExistingTree.setRightSon(tmpHelpTree);
 			}
 		}
-
 		return tmpHelpTree;
 	}
 
@@ -112,7 +167,7 @@ public final class Tokener {
 						(Operator) tmpNextElement);
 			}
 		}
-		
+
 		return tmpTree;
 	}
 

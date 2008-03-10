@@ -22,33 +22,11 @@ public final class Tokener {
 		MathObj NextElement = null; // An element of the formula
 		Tree tmpTree = null; // Tree
 
-		NextElement = tmpFormula.getNextElement();
 		// iterate over all elements of the formula
+		NextElement = tmpFormula.getNextElement();		
 		while (NextElement.getMathType() != MathType.END_OF_TERM) {
 
-			// for an first approach it is assumed that a formula
-			// have only binary operators
-
-			// get first operand
-			NextElement = tmpFormula.getNextElement();
-			if (NextElement.getMathType() != MathType.OPERAND) {
-				throw (new Exception("Syntax Error"));
-			}
-			Operand tmpOperandOne = NextElement;
-
-			// get operator
-			NextElement = tmpFormula.getNextElement();
-			if (NextElement.getMathType() != MathType.OPERATOR) {
-				throw (new Exception("Syntax Error"));
-			}
-			Operand tmpOperator = NextElement;
-
-			// get first operand
-			NextElement = tmpFormula.getNextElement();
-			if (NextElement.getMathType() != MathType.OPERAND) {
-				throw (new Exception("Syntax Error"));
-			}
-			Operand tmpOperandTwo = NextElement;
+			
 
 		}
 	}

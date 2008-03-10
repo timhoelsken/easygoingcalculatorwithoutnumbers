@@ -1,9 +1,5 @@
 package tree.element;
 
-import java.rmi.UnexpectedException;
-
-import org.omg.CORBA.SystemException;
-
 import math.element.object.Formula;
 import math.element.object.MathObj;
 import math.element.object.MathType;

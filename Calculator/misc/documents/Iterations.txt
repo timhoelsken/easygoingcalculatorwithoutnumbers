@@ -13,9 +13,9 @@ Taschenrechner 0.1
  - Erkennen von Numbers (nur positive, natürlichen Zahlen (Datentyp trotzdem Float/Double) und Operatoren
    (+ - * /), einordnen in entsprechendes MathObj [ANDRE]
  
- - Einordnen der MathObjs in einen Baum [RAPHI]
+ - Einordnen der MathObjs in einen Baum [RAPHI] (done)
  
- - Auslesen der MathObjs aus einem Baum [RAPHI]
+ - Auslesen der MathObjs aus einem Baum [RAPHI] (work in progress)
  
  - Berechnen des Terms (entspricht Auslesen ?) [TIM (RAPHI)]
  
@@ -29,9 +29,9 @@ Taschenrechner 0.2
    Terme mit mehr als 2 Operanden und 1 Operator (z.B. 3 + 4 + 5), allerdings 
    noch mit gleichbleibenden Operatoren [ANDRE]
    
- - Einordnen der MathObjs in einen Baum erweitern [RAPHI]
+ - Einordnen der MathObjs in einen Baum erweitern [RAPHI] (done)
  
- - Auslesen der MathObjs aus einem Baum erweitern [RAPHI]
+ - Auslesen der MathObjs aus einem Baum erweitern [RAPHI] (work in progress)
  
  - Berechnen des erweiterten Terms [RAPHI]
  
@@ -52,9 +52,9 @@ Taschenrechner 0.3
    
  - Erkennen von Gleitkommazahlen (==> Erkennen von Komma/Punkt), negativen Zahlen
  
- - Einordnen der MathObjs in einen Baum erweitern (?)
+ - Einordnen der MathObjs in einen Baum erweitern (done)
  
- - Auslesen der MathObjs aus einem Baum erweitern (?)
+ - Auslesen der MathObjs aus einem Baum erweitern (work in progress)
  
  - Berechnen des erweiterten Terms 
  

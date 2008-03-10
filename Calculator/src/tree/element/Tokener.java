@@ -21,7 +21,7 @@ public final class Tokener {
 			// following: Number (Father), Number(Left Son)
 			// Numbers can only be in the leaves of the tree!
 
-			//TODO hat jemand Ahnung von Exception Handling? Wieso muss ich die Lokal abfangen??
+			//TODO @all hat jemand Ahnung von Exception Handling? Wieso muss ich die Lokal abfangen??
 			//throw (new Exception("Syntax error"));
 		}
 
@@ -62,7 +62,7 @@ public final class Tokener {
 				// Operator
 				// as the right son of the existing tree. The current right son
 				// will become the left so of the new sub-tree
-				// TODO Tim, Gibt es plugins für eclipse, so dass man
+				// TODO @Tim: Gibt es plugins für eclipse, so dass man
 				// Zeichnungen in den Quelltext einfügen kann als Algorithmus
 				// erklärung?
 				// Kennst du da was?
@@ -102,7 +102,7 @@ public final class Tokener {
 		while (tmpNextElement.getMathType() != MathType.END_OF_TERM) {
 
 			// is the next element an Operand??
-			// TODO An unsere java experten: ist es moeglich eine direkte
+			// TODO @Tim: ist es moeglich eine direkte
 			// Typ-Prüfung zu machen? z.B. (tmpNextElement is Operand)
 			if (tmpNextElement.getMathType() == MathType.OPERAND) {
 				tmpTree = this.InsertOperandIntoTree(tmpTree,

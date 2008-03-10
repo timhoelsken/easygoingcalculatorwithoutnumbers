@@ -4,7 +4,7 @@ package math.element.object;
 /**
  *
  */
-public class NumberObj extends MathObj {
+public class NumberObj extends Operand {
 	private float value;
 
 	/**
@@ -20,7 +20,6 @@ public class NumberObj extends MathObj {
 	 * @param aValue
 	 */
 	public NumberObj(float aValue) {
-		super(MathType.NUMBER);
 		value = aValue;
 	}
 }

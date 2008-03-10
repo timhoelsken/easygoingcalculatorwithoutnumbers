@@ -10,14 +10,9 @@ public enum MathType {
 	OPERATOR,
 
 	/**
-	 * variable x y a b ...
-	 */
-	VARIABLE,
-
-	/**
 	 * number 0 1 2 3 ...
 	 */
-	NUMBER,
+	OPERAND,
 	
 	/*
 	 * end of formula

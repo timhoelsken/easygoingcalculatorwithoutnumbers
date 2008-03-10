@@ -4,7 +4,7 @@ package math.element.object;
 /**
  *
  */
-public class Variable extends MathObj {
+public class Variable extends Operand {
 
 	private char value;
 
@@ -21,7 +21,6 @@ public class Variable extends MathObj {
 	 * @param aValue
 	 */
 	public Variable(char aValue) {
-		super(MathType.VARIABLE);
 		value = aValue;
 	}
 }

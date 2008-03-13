@@ -11,7 +11,7 @@ import math.element.object.OperatorType;
 /**
  * 
  */
-public final class Tokener {
+public final class FormulaTreeBuilder {
 
 	public static float EvaluateTree(Tree aTree)
 	{
@@ -28,19 +28,19 @@ public final class Tokener {
 			Operator tmpOperator = (Operator)aTree.getRoot();
 			if (tmpOperator.getOperatorType() == OperatorType.ADDITION)
 			{
-				tmpResult = Tokener.EvaluateTree(aTree.getLeftSon()) + Tokener.EvaluateTree(aTree.getRightSon());
+				tmpResult = FormulaTreeBuilder.EvaluateTree(aTree.getLeftSon()) + FormulaTreeBuilder.EvaluateTree(aTree.getRightSon());
 			}
 			else if (tmpOperator.getOperatorType() == OperatorType.DIVISION)
 			{
-				tmpResult = Tokener.EvaluateTree(aTree.getLeftSon()) / Tokener.EvaluateTree(aTree.getRightSon());
+				tmpResult = FormulaTreeBuilder.EvaluateTree(aTree.getLeftSon()) / FormulaTreeBuilder.EvaluateTree(aTree.getRightSon());
 			}
 			else if (tmpOperator.getOperatorType() == OperatorType.MULTIPLICATION)
 			{
-				tmpResult = Tokener.EvaluateTree(aTree.getLeftSon()) * Tokener.EvaluateTree(aTree.getRightSon());
+				tmpResult = FormulaTreeBuilder.EvaluateTree(aTree.getLeftSon()) * FormulaTreeBuilder.EvaluateTree(aTree.getRightSon());
 			}
 			else if (tmpOperator.getOperatorType() == OperatorType.SUBTRACTION)
 			{
-				tmpResult = Tokener.EvaluateTree(aTree.getLeftSon()) - Tokener.EvaluateTree(aTree.getRightSon());
+				tmpResult = FormulaTreeBuilder.EvaluateTree(aTree.getLeftSon()) - FormulaTreeBuilder.EvaluateTree(aTree.getRightSon());
 			}
 		}
 		

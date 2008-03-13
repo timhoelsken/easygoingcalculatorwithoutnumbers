@@ -7,30 +7,17 @@ public enum OperatorType {
 	/**
 	 * addition
 	 */
-	ADDITION(1),
+	ADDITION,
 	/**
 	 * subtraction
 	 */
-	SUBTRACTION(1),
+	SUBTRACTION,
 	/**
 	 * multiplication
 	 */
-	MULTIPLICATION(2),
+	MULTIPLICATION,
 	/**
 	 * division
 	 */
-	DIVISION(2);
-
-	private int operatorType;
-
-	private OperatorType(int anOperatorType) {
-		operatorType = anOperatorType;
-	}
-
-	/**
-	 * @return the operatortype as int
-	 */
-	public int getPriority() {
-		return operatorType;
-	}
+	DIVISION;	
 }

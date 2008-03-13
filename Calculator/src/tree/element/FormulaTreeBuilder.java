@@ -13,41 +13,35 @@ import math.element.object.OperatorType;
  */
 public final class FormulaTreeBuilder {
 
-	public static float EvaluateTree(Tree aTree)
-	{
-		if (aTree==null) return 0;
-		
-		float tmpResult=0;
-		
-		if (aTree.getRoot().getMathType() == MathType.OPERAND)
-		{
+	public static float EvaluateTree(Tree aTree) {
+		if (aTree == null)
+			return 0;
+
+		float tmpResult = 0;
+
+		if (aTree.getRoot().getMathType() == MathType.OPERAND) {
 			tmpResult = ((NumberObj) aTree.getRoot()).getValue();
-		}
-		else
-		{
-			Operator tmpOperator = (Operator)aTree.getRoot();
-			if (tmpOperator.getOperatorType() == OperatorType.ADDITION)
-			{
-				tmpResult = FormulaTreeBuilder.EvaluateTree(aTree.getLeftSon()) + FormulaTreeBuilder.EvaluateTree(aTree.getRightSon());
-			}
-			else if (tmpOperator.getOperatorType() == OperatorType.DIVISION)
-			{
-				tmpResult = FormulaTreeBuilder.EvaluateTree(aTree.getLeftSon()) / FormulaTreeBuilder.EvaluateTree(aTree.getRightSon());
-			}
-			else if (tmpOperator.getOperatorType() == OperatorType.MULTIPLICATION)
-			{
-				tmpResult = FormulaTreeBuilder.EvaluateTree(aTree.getLeftSon()) * FormulaTreeBuilder.EvaluateTree(aTree.getRightSon());
-			}
-			else if (tmpOperator.getOperatorType() == OperatorType.SUBTRACTION)
-			{
-				tmpResult = FormulaTreeBuilder.EvaluateTree(aTree.getLeftSon()) - FormulaTreeBuilder.EvaluateTree(aTree.getRightSon());
+		} else {
+			Operator tmpOperator = (Operator) aTree.getRoot();
+			if (tmpOperator.getOperatorType() == OperatorType.ADDITION) {
+				tmpResult = FormulaTreeBuilder.EvaluateTree(aTree.getLeftSon())
+						+ FormulaTreeBuilder.EvaluateTree(aTree.getRightSon());
+			} else if (tmpOperator.getOperatorType() == OperatorType.DIVISION) {
+				tmpResult = FormulaTreeBuilder.EvaluateTree(aTree.getLeftSon())
+						/ FormulaTreeBuilder.EvaluateTree(aTree.getRightSon());
+			} else if (tmpOperator.getOperatorType() == OperatorType.MULTIPLICATION) {
+				tmpResult = FormulaTreeBuilder.EvaluateTree(aTree.getLeftSon())
+						* FormulaTreeBuilder.EvaluateTree(aTree.getRightSon());
+			} else if (tmpOperator.getOperatorType() == OperatorType.SUBTRACTION) {
+				tmpResult = FormulaTreeBuilder.EvaluateTree(aTree.getLeftSon())
+						- FormulaTreeBuilder.EvaluateTree(aTree.getRightSon());
 			}
 		}
-		
+
 		return tmpResult;
 	}
-	
-	private Tree InsertOperandIntoTree(Tree anExistingTree, Operand anOperand) {
+
+	private Tree InsertOperandIntoTree(Tree anExistingTree, Operand anOperand) throws Exception {
 
 		// check whether there is an operator in the root of the tree
 		if (anExistingTree.getRoot().getMathType() == MathType.OPERAND) {
@@ -56,9 +50,7 @@ public final class FormulaTreeBuilder {
 			// following: Number (Father), Number(Left Son)
 			// Numbers can only be in the leaves of the tree!
 
-			// TODO @all hat jemand Ahnung von Exception Handling? Wieso muss
-			// ich die Lokal abfangen??
-			// throw (new Exception("Syntax error"));
+			throw (new Exception("Syntax error"));
 		}
 
 		// insert the number to the right of the operand
@@ -74,42 +66,38 @@ public final class FormulaTreeBuilder {
 		Tree tmpHelpTree = null;
 
 		// is the root in the existing tree an operand?
-		if (anExistingTree.getRoot().getMathType() == MathType.OPERAND) {
+		if (anExistingTree.getRoot() instanceof Operand) {
 
-			// if it is, build a new tree with Operator (father), Operand (Left
-			// Son)
+			// if it is, build a new tree with Operator (father), Operand (Left Son)
 			tmpHelpTree = new Tree(anOperator, null, anExistingTree, null);
 			anExistingTree.setFather(tmpHelpTree);
 		}
 		// is the root in the existing tree an operator?
-		else if (anExistingTree.getRoot().getMathType() == MathType.OPERATOR) {
+		else if (anExistingTree.getRoot() instanceof Operator) {
 
 			// ok, it is.... now we have to compare the priority of the
 			// different operators
 			Operator tmpExistingOperator = (Operator) anExistingTree.getRoot();
 
-			if (tmpExistingOperator.getOperatorType().getPriority() >= anOperator
-					.getOperatorType().getPriority()) {
+			if (tmpExistingOperator.getOperatorType().getPriority() <= anOperator.getOperatorType().getPriority()) {
 
 				// if the existing operator has a lower priority , a new tree
 				// is built and the existing tree is appended to the left
 				// but first we have to navigate to the next operator with a
 				// different priority
-				int tmpInsertPriority = anOperator.getOperatorType()
-						.getPriority();
-				int tmpFatherPriority = anOperator.getOperatorType()
-						.getPriority();
-
-				while (anExistingTree.getFather() != null
-						|| tmpFatherPriority >= tmpInsertPriority) {
-
-					anExistingTree = anExistingTree.getFather();
-					if (anExistingTree.getFather() != null) {
-						tmpFatherPriority = ((Operator) anExistingTree
-								.getFather().getRoot()).getOperatorType()
-								.getPriority();
-					}
-				}
+//				int tmpInsertPriority = anOperator.getOperatorType().getPriority();
+//				int tmpFatherPriority = anOperator.getOperatorType().getPriority();
+//
+//				while (anExistingTree.getFather() != null
+//						|| tmpFatherPriority >= tmpInsertPriority) {
+//
+//					anExistingTree = anExistingTree.getFather();
+//					if (anExistingTree.getFather() != null) {
+//						tmpFatherPriority = ((Operator) anExistingTree
+//								.getFather().getRoot()).getOperatorType()
+//								.getPriority();
+//					}
+//				}
 
 				tmpHelpTree = new Tree(anOperator, null, anExistingTree, null);
 				anExistingTree.setFather(tmpHelpTree);
@@ -118,10 +106,6 @@ public final class FormulaTreeBuilder {
 				// Operator
 				// as the right son of the existing tree. The current right son
 				// will become the left so of the new sub-tree
-				// TODO @Tim: Gibt es plugins für eclipse, so dass man
-				// Zeichnungen in den Quelltext einfügen kann als Algorithmus
-				// erklärung?
-				// Kennst du da was?
 				tmpHelpTree = new Tree(anOperator, anExistingTree,
 						anExistingTree.getRightSon(), null);
 				anExistingTree.setRightSon(tmpHelpTree);
@@ -134,8 +118,9 @@ public final class FormulaTreeBuilder {
 	 * Builds a binary formula tree :-)
 	 * 
 	 * @param aFunction
+	 * @throws Exception 
 	 */
-	public Tree BuildTree(String aFunction) {
+	public Tree BuildTree(String aFunction) throws Exception {
 
 		// prepare formula, mathobj and tmptree
 		Formula tmpFormula = new Formula(aFunction);
@@ -157,18 +142,14 @@ public final class FormulaTreeBuilder {
 		while (tmpNextElement.getMathType() != MathType.END_OF_TERM) {
 
 			// is the next element an Operand??
-			// TODO @Tim: ist es moeglich eine direkte
-			// Typ-Prüfung zu machen? z.B. (tmpNextElement is Operand)
-			if (tmpNextElement.getMathType() == MathType.OPERAND) {
-				tmpTree = this.InsertOperandIntoTree(tmpTree,
-						(Operand) tmpNextElement);
-			} else if (tmpNextElement.getMathType() == MathType.OPERATOR) {
-				tmpTree = this.InsertOperatorIntoTree(tmpTree,
-						(Operator) tmpNextElement);
+			if (tmpNextElement instanceof Operand) {
+				tmpTree = this.InsertOperandIntoTree(tmpTree,(Operand) tmpNextElement);
+			} 
+			else if (tmpNextElement instanceof Operator) {
+				tmpTree = this.InsertOperatorIntoTree(tmpTree,(Operator) tmpNextElement);
 			}
 		}
 
 		return tmpTree;
 	}
-
 }

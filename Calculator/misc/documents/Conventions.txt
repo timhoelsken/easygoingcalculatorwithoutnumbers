@@ -41,3 +41,70 @@ Umgang mit SVN
   Eine Ausnahme bildet das Einchecken von Code wo ein Teammitglied Hilfe
   benötigt. Dann sollte die entsprechende Stelle mit einem Task kommentiert
   werden. (//TODO hier weiß ich nicht weiter...etc)
+  
+=============
+weitere Infos
+=============
+Morgen zusammen, 
+
+bevor hier im Büro wieder der normale Stress anfängt (ja, ich habe zu tun, stellt euch das vor! immer diese Vorurteile....) wollte ich auf einige Fragen eingehen die im Projekt aufgekommen sind. 
+
+Exception Handling: 
+
+Soweit ich weiß wird Exceptionhandling wie folgt betrieben: Generell ist eine Exception ein unerwarteter Fehler, d.h. mit dem Auftreten der Exception wird keine weitere Programmlogik ausgeführt. 
+Methoden die "weiter unten" im Code sind, werfen einfach nur eine Exception, die "weiter oben" aufgefangen wird. Damit meine ich, dass Methoden die von Objekten sind (oder weiter implementen Komponenten) einfach nur mit einem "throws XYException" im Methoden Kopf ausgestattet werden. 
+
+Bsp: public ResultSet executeStatement() throws SQLException{} 
+
+wird jetzt in der Main Klasse die Methode executeStatement() aufgerufen, wird diese mit einem try, catch Block umschlossen 
+
+DBKlasse tmpConn = new DBKlasse(); 
+
+try{ 
+        tmpConn.executeStatement(); 
+} 
+catch (SQLException e){ 
+        out.println(e.getMessage()); // oder eine Andere Fehlermeldung, wie auch immer 
+} 
+
+An dieser Stelle sei noch erwähnt, dass bei einer SQL Verbindung natürlich erst eine Verbindung geöffnet und dann geschlossen werden muss! um dafür zu sorgen, dass nach der Exception definitiv noch etwas passiert gibt es den finally block: 
+
+try{ 
+} 
+catch{ 
+} 
+finally{} 
+
+So, ich hoffe das das für dieses Thema erstmal hilfreich ist, wenn jemand (zu Tobi schiel) andere Ansichten zum Exceptionhandling hat, bitte verbessern :) 
+
+Umbenennen von Codeteilen: 
+
+Dieser Abschnitt richtet sich in erster Linie an Raphi :D
+Die magische Tastenkombination die du suchst ist "alt+shift+R" und dient zum refactorn von Code. D.h. damit können Variablen, Methoden, Klassen etc. umbenannt werden (markieren, Tastenkürzel), eclipse erledigt den Rest und aktualisiert die entsprechenden Verweise im gesamten Code. 
+
+In deinem konkreten Fall klickst du einmal die Tokener Klasse an, drückst "alt+shift+R" (oder rechte Maustaste -> Refactor -> Rename) und vergibst den neuen Namen. 
+Die betroffenen Codeteile werden dann angezeigt, bei Konflikten meckert eclipse. 
+Sollte eclipse Meckern obwohl es keinen Grund hat, dann hat es vermutlich noch irgendeinen Mist im Cache. Den könnt ihr leeren in dem ihr auf der Topleiste auf Project klickt und Clean... wählt. 
+
+JavaDoc: 
+
+JavaDoc wird weitestgehend automatisch generiert, indem über dem Methodenkopf "/**"+Enter eingegeben wird. Was danach noch von Hand zu erstellen ist, ist eine Methodenbeschreibung (über die Parameter) und ein verständlicher Text zum Returnwert (falls vorhanden). Sollten Parameter dann refactored werden, wird der Javadoc auch automatisch angepasst. 
+
+Zeichnungen im Code: 
+
+@Raphi, nein ist mir nicht bekannt, wär aber bestimmt lustig :D 
+
+Typ-Prüfung: 
+
+Generell gibt es die Möglichkeit eine Instanceof Prüfung zu machen, ich weiß nicht ob dir (Raphi) das in deinem konkreten Fall hilft. 
+
+if (name instance of typ){ 
+//code 
+} 
+
+Beispiel: 
+
+if (tmpString instance of String){ 
+out.println("tmpString ist ein String"); 
+} 
+

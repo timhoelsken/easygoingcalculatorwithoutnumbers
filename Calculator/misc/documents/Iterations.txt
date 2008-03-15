@@ -8,7 +8,7 @@ Taschenrechner 0.1
 
  - Konvertierung eines Terms mit 2 Operanden und 1 Operator (z.B. 3 + 4) in
    einen standardisierten String (z.B. whitespaces entfernen, Standard muss 
-   dokumentiert und in der Gruppe abgestimmt werden) [TIM]
+   dokumentiert und in der Gruppe abgestimmt werden) [TIM] (done)
  
  - Erkennen von Numbers (nur positive, natürlichen Zahlen (Datentyp trotzdem Float/Double) und Operatoren
    (+ - * /), einordnen in entsprechendes MathObj [ANDRE]
@@ -19,7 +19,7 @@ Taschenrechner 0.1
  
  - Berechnen des Terms (entspricht Auslesen ?) [TIM (RAPHI)]
  
- - Ausgabe des Terms auf dem Bildschirm [TIM]
+ - Ausgabe des Terms auf dem Bildschirm [TIM] (done)
  
 ------------------
 Taschenrechner 0.2

@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package pse3.tests;
 
@@ -32,7 +32,7 @@ public class TestStringConvert {
   public void testRemoveBlanks() {
     String tmpString = new String("2 + 4");
     Converter tmpConverter = new Converter();
-    assertTrue("The String has Variables separated by *", tmpConverter.removeBlanks(tmpString).equals("2+4"));
+    assertTrue(tmpConverter.removeBlanks(tmpString).equals("2+4"));
   }
 
   /**

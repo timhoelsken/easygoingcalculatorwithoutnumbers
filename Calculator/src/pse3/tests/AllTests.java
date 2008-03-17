@@ -8,6 +8,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 
+
 /**
  * @author Tobias
  *
@@ -20,6 +21,7 @@ public class AllTests extends TestCase {
   public static Test suite() {
     TestSuite suite = new TestSuite();
     suite.addTestSuite(MathUtilTest.class);
+    suite.addTestSuite(StringConvertTest.class);
     return suite;
   }
 

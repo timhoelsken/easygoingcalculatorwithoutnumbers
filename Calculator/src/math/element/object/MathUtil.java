@@ -29,17 +29,15 @@ public class MathUtil {
    * @return true if char is operator
    */
   public static boolean IsOperator(char aChar) {
-    // switch (c) {
-    // case OperatorType.ADDITION.getOpAsChar():
-    // case OperatorType.SUBTRACTION.getOpAsChar():
-    // case OperatorType.DIVISION.getOpAsChar():
-    // case OperatorType.MULTIPLICATION.getOpAsChar():
-    // return true;
-    // break;
-    // default:
-    return false;
-    // break;
-    // }
+    switch (aChar) {
+        case '+':
+        case '-':
+        case '*':
+        case ':':
+          return true;
+        default:
+          return false;
+    }
   }
 
   /**

@@ -58,7 +58,7 @@ public final class FormulaTreeBuilder {
 	 * @return the tree is returned with the focus on the father-operator of the inserted operand
 	 * @throws Exception
 	 */
-	private Tree InsertOperandIntoTree(Tree anExistingTree, Operand anOperand) throws Exception {
+	private static Tree InsertOperandIntoTree(Tree anExistingTree, Operand anOperand) throws Exception {
 
 		// check whether there is an operator in the root of the tree
 		if (anExistingTree.getRoot() instanceof Operand) {
@@ -84,7 +84,7 @@ public final class FormulaTreeBuilder {
 	 * @param anOperator
 	 * @return the tree is returned with the focus on the new operator
 	 */
-	private Tree InsertOperatorIntoTree(Tree anExistingTree, Operator anOperator) {
+	private static Tree InsertOperatorIntoTree(Tree anExistingTree, Operator anOperator) {
 
 		Tree tmpHelpTree = null;
 
@@ -127,7 +127,7 @@ public final class FormulaTreeBuilder {
 	 * @param aFunction
 	 * @throws Exception 
 	 */
-	public Tree BuildTree(String aFunction) throws Exception {
+	public static Tree BuildTree(String aFunction) throws Exception {
 
 		// prepare formula, mathobj and tmptree
 		Formula tmpFormula = new Formula(aFunction);
@@ -150,10 +150,10 @@ public final class FormulaTreeBuilder {
 
 			// is the next element an Operand??
 			if (tmpNextElement instanceof Operand) {
-				tmpTree = this.InsertOperandIntoTree(tmpTree,(Operand) tmpNextElement);
+				tmpTree = InsertOperandIntoTree(tmpTree,(Operand) tmpNextElement);
 			} 
 			else if (tmpNextElement instanceof Operator) {
-				tmpTree = this.InsertOperatorIntoTree(tmpTree,(Operator) tmpNextElement);
+				tmpTree = InsertOperatorIntoTree(tmpTree,(Operator) tmpNextElement);
 			}
 		}
 		

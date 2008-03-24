@@ -36,7 +36,7 @@ Taschenrechner 0.2
  - Berechnen des erweiterten Terms [RAPHI]
  
  - Benutzerseitige Eingabe von Termen implementieren (auf der Konsole verschiedene
-   Terme nach dem Berechnen nacheinander eingeben können etc.) [TIM]
+   Terme nach dem Berechnen nacheinander eingeben können etc.) [TIM] (work in progress)
    
  - Fehlerausgabe bei fehlerhafter Eingabe implementieren, 
    ggf. in nachfolgenden Iterationen um genauen Fehlerausgabe erweitern. 

@@ -2,9 +2,11 @@ package calculator;
 
 import java.io.IOException;
 
+import tree.element.FormulaTreeBuilder;
 import user.util.input.ConsoleInput;
 import user.util.input.Converter;
 import user.util.output.ConsoleOutput;
+import tree.element.*;
 
 /**
  * 
@@ -49,11 +51,23 @@ public class Main {
             tmpOutput.printError(e.getMessage());
           }
 
-          //TODO hier sollte dann sinnvoll was mit dem Term angestellt werden 
+          //TODO hier solltet
+          //dann sinnvoll was mit dem Term angestellt werden 
           System.out.println("Sie haben eingegeben:\n" + tmpInputString);
-          System.out.println("das bereinigte Ergebnis ist:\n");
+          System.out.println("das bereinigte Ergebnis ist:");
           System.out.println(tmpConverter.termToStandardString(tmpInputString));
-
+          
+          try {
+          Tree tmpTree = FormulaTreeBuilder.BuildTree(tmpConverter.termToStandardString(tmpInputString));
+          
+          System.out.println(FormulaTreeBuilder.EvaluateTree(tmpTree));
+          }
+          catch (Exception e)
+          {
+        	  System.out.println(e.getMessage());
+          }
+          
+          
           System.out.println("Wollen Sie einen weiteren Term eingeben? (j / n)\n");
           try {
             tmpInputString = tmpInput.getConsoleInput();

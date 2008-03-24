@@ -9,9 +9,10 @@ public class EmptyClassForGlobalSupport {
 	//comments by Tim
     //TODO @Tobi SUCH DIR WAS AUS :)
     //TODO @all FROHE OSTERN!
-  
+
 	//comments by Andre
 
 	//comments by Tobi
     //TODO @all sagt mal, kann/soll ich irgendwas machen?!
+    //TODO @Tim Sehr witzig. Ohne Einführung und Bericht über den aktuellen Stand macht das Aussuchen meiner Meinung nach keinen Sinn. Tschuldigung "ergibt" keinen Sinn...
 }

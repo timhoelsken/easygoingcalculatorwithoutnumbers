@@ -1,5 +1,7 @@
 package math.element.object;
 import java.util.LinkedList;
+import math.element.object.MathType;
+import math.element.object.MathObj;
 
 /*
  * This is mathematical formula
@@ -54,8 +56,8 @@ public class Formula {
      */
 	public MathObj getNextElement()
 	{
-		Index++;
-        return MathList.get(Index--);
+		Index = Index + 1;
+        return MathList.get(Index - 1);
 	}
     
     /**
@@ -110,7 +112,7 @@ public class Formula {
     }
     
     /**
-     * method creates a mathobj list out ouf the form string
+     * method creates a mathobj list out of the form string
      * @author André
      */
     private void toLinkedList()
@@ -125,27 +127,29 @@ public class Formula {
         {        
           if ((MathUtil.IsNumber(pFormula.charAt(iStartPosition))) || (MathUtil.IsComma(pFormula.charAt(iStartPosition))))
           {
-              iEndPosition = iStartPosition++;
-              while ((MathUtil.IsNumber(pFormula.charAt(iEndPosition))) || (MathUtil.IsComma(pFormula.charAt(iEndPosition))))
+              iEndPosition = iStartPosition + 1;
+              while ((iEndPosition < iLenOfString) && ((MathUtil.IsNumber(pFormula.charAt(iEndPosition))) || (MathUtil.IsComma(pFormula.charAt(iEndPosition)))))
               {
-                  iEndPosition++;
+                  iEndPosition = iEndPosition + 1;
               }
-              iEndPosition--;
+              iEndPosition = iEndPosition - 1;
               try
               {
                   MathList.add(buildNumberMathObject(pFormula.substring(iStartPosition, iEndPosition)));
               }
               catch (Exception e)
-              {}
-          }
-          if (MathUtil.IsOperator(pFormula.charAt(iEndPosition)))
-          {
-              iEndPosition = iStartPosition++;
-              while (MathUtil.IsOperator(pFormula.charAt(iEndPosition)))
               {
-                  iEndPosition++;
+                System.out.println(e.getMessage());
               }
-              iEndPosition--;
+          }
+          else if (MathUtil.IsOperator(pFormula.charAt(iStartPosition)))
+          {
+              iEndPosition = iStartPosition + 1;
+              while ((iEndPosition < iLenOfString) && (MathUtil.IsOperator(pFormula.charAt(iEndPosition))))
+              {
+                  iEndPosition = iEndPosition + 1;
+              }
+              iEndPosition = iEndPosition - 1;
               try
               {
                 MathList.add(buildOperatorMathObject(pFormula.substring(iStartPosition, iEndPosition)));
@@ -155,9 +159,13 @@ public class Formula {
           }
           else
           {
-              throw new ExceptionWrongInputStream("Input String contains non valid characters!");
+            throw new ExceptionWrongInputStream("Input String contains non valid characters!");
           }
+          iStartPosition = iEndPosition + 1;
         }
+        
+         MathObj tmpEndMathObj = new MathObj(MathType.END_OF_TERM);
+         MathList.add(tmpEndMathObj);
     }
 
 }

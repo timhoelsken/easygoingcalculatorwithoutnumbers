@@ -58,21 +58,17 @@ public final class FormulaTreeBuilder {
 	 * @return the tree is returned with the focus on the father-operator of the inserted operand
 	 * @throws Exception
 	 */
-	private static Tree InsertOperandIntoTree(Tree anExistingTree, Operand anOperand) throws Exception {
+	private void InsertOperandIntoTree(Operand anOperand){
 
-		// insert the number to the right of the operand
-		Tree tmpSon = new Tree(anOperand);
-		tmpSon.setFather(anExistingTree);
-		
-		if (anExistingTree!=null)
-		{
-			anExistingTree.setRightSon(tmpSon);
-			return anExistingTree;
+		if (formulaTree==null){
+			formulaTree=new Tree(anOperand);
+			return;
 		}
-		else
-		{
-			return tmpSon;
-		}		
+	
+		Tree tmpTree=formulaTree;
+		while (tmpTree.getRightSon()!=null) tmpTree=tmpTree.getRightSon();
+		tmpTree.setRightSon(new Tree(anOperand,tmpTree,null,null));
+		
 	}
 
 	/**
@@ -81,50 +77,43 @@ public final class FormulaTreeBuilder {
 	 * @param anOperator
 	 * @return the tree is returned with the focus on the new operator
 	 */
-	private static Tree InsertOperatorIntoTree(Tree anExistingTree, Operator anOperator) {
+	private void InsertOperatorIntoTree(Operator anOperator) {
 
-		Tree tmpHelpTree = null;
-
-		assert(anExistingTree!=null);	
+		assert(formulaTree!=null);	
 		
 		// is the root in the existing tree an operand?		
-		if (anExistingTree.getRoot() instanceof Operand) {
-
+		if (formulaTree.getRoot() instanceof Operand) {
 			// if it is, build a new tree with Operator (father), Operand (Left Son)
-			tmpHelpTree = new Tree(anOperator,anExistingTree.getFather(), anExistingTree, null);
-			anExistingTree.setFather(tmpHelpTree);
-		}
+			Tree tmpTree = new Tree(anOperator, null,formulaTree, null);
+			formulaTree.setFather(tmpTree);
+			formulaTree=tmpTree;
+		}		
 		// is the root in the existing tree an operator?
-		else if (anExistingTree.getRoot() instanceof Operator) {
-
-			// ok, it is.... now we have to compare the priority of the
-			// different operators
-			Operator tmpExistingOperator = (Operator) anExistingTree.getRoot();
-
-			if (tmpExistingOperator.getPriority() >= anOperator.getPriority()) {
-
-				// if the existing operator has a higher/equal priority , a new tree
-				// is built and the existing tree is appended to the left			
-
-				tmpHelpTree = new Tree(anOperator,anExistingTree.getFather(), anExistingTree, null);
-				//if (anExistingTree.getFather()!=null){
-				//	anExistingTree.getFather().setRightSon(anExistingTree);
-				//}
-				anExistingTree.setFather(tmpHelpTree);
-			} else {
-				// ok, now we have more to do... we need to insert the new
-				// Operator
-				// as the right son of the existing tree. The current right son
-				// will become the left son of the new sub-tree
-				tmpHelpTree = new Tree(anOperator, anExistingTree,anExistingTree.getRightSon(), null);
-				//if (anExistingTree.getFather()!=null){
-				//	anExistingTree.getFather().setRightSon(anExistingTree);
-				//}
-				anExistingTree.setRightSon(tmpHelpTree);
+		else {
+			
+			assert(formulaTree.getRoot() instanceof Operator);
+			
+			Tree tmpTree = formulaTree;
+			
+			while (tmpTree.getRightSon()!=null                                               && 
+				   tmpTree.getRightSon().getRoot() instanceof Operator                       &&
+				  ((Operator)tmpTree.getRoot()).getPriority() >= anOperator.getPriority())	{
 				
+				tmpTree=tmpTree.getRightSon();
 			}
-		}
-		return tmpHelpTree;
+			
+			if (((Operator)tmpTree.getRoot()).getPriority() >= anOperator.getPriority())
+			{
+			   Tree tmpHelpTree = new Tree(anOperator, tmpTree.getFather(),tmpTree,null);
+			   if (tmpTree.getFather()!=null) tmpTree.getFather().setRightSon(tmpHelpTree);
+			   tmpTree.setFather(tmpHelpTree);
+			}
+			else
+			{
+				Tree tmpHelpTree = new Tree(anOperator, tmpTree,tmpTree.getRightSon(),null);
+				tmpTree.setRightSon(tmpHelpTree);		
+			}			
+		}	
 	}
 
 	/**t
@@ -133,12 +122,12 @@ public final class FormulaTreeBuilder {
 	 * @param aFunction
 	 * @throws Exception 
 	 */
-	public static Tree BuildTree(String aFunction) throws Exception {
+	public Tree BuildTree(String aFunction) throws Exception {
 
 		// prepare formula, mathobj and tmptree
 		Formula tmpFormula = new Formula(aFunction);
 		MathObj tmpNextElement = null;
-		Tree tmpTree = null;		
+		formulaTree = null;		
 
 		// iterate over all elements of the formula
 		tmpFormula.setStartElement();
@@ -147,21 +136,17 @@ public final class FormulaTreeBuilder {
 
 			// is the next element an Operand??
 			if (tmpNextElement instanceof Operand) {
-				tmpTree = InsertOperandIntoTree(tmpTree,(Operand) tmpNextElement);
+				this.InsertOperandIntoTree((Operand) tmpNextElement);
 			} 
 			else if (tmpNextElement instanceof Operator) {
-				tmpTree = InsertOperatorIntoTree(tmpTree,(Operator) tmpNextElement);
+				this.InsertOperatorIntoTree((Operator) tmpNextElement);
 			}
 			
 			tmpNextElement = tmpFormula.getNextElement();
 		}
 		
-		//go to the oldest father
-		while (tmpTree!=null && tmpTree.getFather()!=null)
-		{
-			tmpTree = tmpTree.getFather();
-		}
-		//5*3*2+6+5*2-30*2+8*2/3*4-14
-		return tmpTree;
+		return formulaTree;
 	}
+	
+	private Tree formulaTree = null;
 }

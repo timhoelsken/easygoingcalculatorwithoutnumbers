@@ -97,14 +97,15 @@ public final class FormulaTreeBuilder {
 			
 			while (tmpTree.getRightSon()!=null                                               && 
 				   tmpTree.getRightSon().getRoot() instanceof Operator                       &&
-				  ((Operator)tmpTree.getRoot()).getPriority() >= anOperator.getPriority())	{
+				  ((Operator)tmpTree.getRoot()).getPriority() < anOperator.getPriority())	{
 				
 				tmpTree=tmpTree.getRightSon();
 			}
 			
 			if (((Operator)tmpTree.getRoot()).getPriority() >= anOperator.getPriority())
 			{
-			   Tree tmpHelpTree = new Tree(anOperator, tmpTree.getFather(),tmpTree,null);		
+			   Tree tmpHelpTree = new Tree(anOperator, tmpTree.getFather(),tmpTree,null);
+			   tmpTree.getFather().setRightSon() = tmpHelpTree;
 			   tmpTree.setFather(tmpHelpTree);
 			}
 			else

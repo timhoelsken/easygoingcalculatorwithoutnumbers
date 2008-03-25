@@ -103,10 +103,13 @@ public final class FormulaTreeBuilder {
 
 			if (tmpExistingOperator.getPriority() >= anOperator.getPriority()) {
 
-				// if the existing operator has a lower priority , a new tree
+				// if the existing operator has a higher/equal priority , a new tree
 				// is built and the existing tree is appended to the left			
 
 				tmpHelpTree = new Tree(anOperator,anExistingTree.getFather(), anExistingTree, null);
+				if (anExistingTree.getFather()!=null){
+					anExistingTree.getFather().setRightSon(anExistingTree);
+				}
 				anExistingTree.setFather(tmpHelpTree);
 			} else {
 				// ok, now we have more to do... we need to insert the new
@@ -114,7 +117,11 @@ public final class FormulaTreeBuilder {
 				// as the right son of the existing tree. The current right son
 				// will become the left son of the new sub-tree
 				tmpHelpTree = new Tree(anOperator, anExistingTree,anExistingTree.getRightSon(), null);
+				if (anExistingTree.getFather()!=null){
+					anExistingTree.getFather().setRightSon(anExistingTree);
+				}
 				anExistingTree.setRightSon(tmpHelpTree);
+				
 			}
 		}
 		return tmpHelpTree;

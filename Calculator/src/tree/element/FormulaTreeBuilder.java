@@ -105,7 +105,7 @@ public final class FormulaTreeBuilder {
 			if (((Operator)tmpTree.getRoot()).getPriority() >= anOperator.getPriority())
 			{
 			   Tree tmpHelpTree = new Tree(anOperator, tmpTree.getFather(),tmpTree,null);
-			   tmpTree.getFather().setRightSon(tmpHelpTree);
+			   if (tmpTree.getFather()!=null)   tmpTree.getFather().setRightSon(tmpHelpTree);
 			   tmpTree.setFather(tmpHelpTree);
 			}
 			else

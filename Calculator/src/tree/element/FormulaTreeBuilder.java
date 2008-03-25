@@ -107,7 +107,8 @@ public final class FormulaTreeBuilder {
 			   Tree tmpHelpTree = new Tree(anOperator, tmpTree.getFather(),tmpTree,null);
 			   if (tmpTree.getFather()!=null)   tmpTree.getFather().setRightSon(tmpHelpTree);
 			   tmpTree.setFather(tmpHelpTree);
-			}
+			   if (tmpHelpTree.getFather()==null) formulaTree = tmpHelpTree;
+ 			}
 			else
 			{
 				Tree tmpHelpTree = new Tree(anOperator, tmpTree,tmpTree.getRightSon(),null);

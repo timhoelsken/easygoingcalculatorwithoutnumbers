@@ -96,7 +96,8 @@ public class Tree {
    * @author Tobias
    */
   public void paintMe() {
-    int tmpDepth = getDepth();
+    int tmpDepth = getDepth(this);
+    System.out.println("TreeDepth: " + tmpDepth);
     if (tmpDepth == 0) {
       System.out.println("Tree is empty.");
     } else {
@@ -117,7 +118,7 @@ public class Tree {
           int tmpExpectedObjects = (int) Math.pow(2.0, i);
           for (int j = 1; j <= tmpExpectedObjects; j++) {
             String tmpSpaces = new String();
-            for (int k = 0; k <= (tmpLineWidth / tmpExpectedObjects); k++){
+            for (int k = 0; k <= (tmpLineWidth / tmpExpectedObjects); k++) {
               tmpSpaces += " ";
             }
             MathObj tmpMathObj = getMathObj(i, j);
@@ -132,7 +133,7 @@ public class Tree {
   }
 
   //TODO in util klasse ausgliedern
-  private String centerStringInSpaces (String someSpaces, String aString) {
+  private String centerStringInSpaces(String someSpaces, String aString) {
     String tmpReturnString = new String();
     int tmpSpaceLength = someSpaces.length();
     int tmpStringLength = aString.length();
@@ -155,7 +156,7 @@ public class Tree {
   private MathObj getMathObj(int aLevel, int anObject, Tree aTree) {
     if (aLevel == 1) {
       Tree tmpSon = null;
-      switch (anObject){
+      switch (anObject) {
         case 1:
           tmpSon = aTree.getLeftSon();
           break;
@@ -189,7 +190,7 @@ public class Tree {
       tmpReturnString = "" + tmpObj.getValue();
     } else if (aMathObj instanceof Operator) {
       Operator tmpObj = (Operator) aMathObj;
-      switch (tmpObj.getOperatorType()){
+      switch (tmpObj.getOperatorType()) {
         case ADDITION:
           tmpReturnString = "+";
           break;
@@ -208,9 +209,19 @@ public class Tree {
     return tmpReturnString;
   }
 
-  // TODO @Raphi rekursiv implementieren :P
-  private int getDepth() {
-    return 7;
+  private int getDepth(Tree aTree) {
+    if (aTree == null) {
+      return 0;
+    }
+    int tmpRight;
+    int tmpLeft;
+    tmpRight = getDepth(aTree.getRightSon()) + 1;
+    tmpLeft = getDepth(aTree.getLeftSon()) + 1;
+    if (tmpRight > tmpLeft) {
+      return tmpRight;
+    } else {
+      return tmpLeft;
+    }
   }
 
   /**

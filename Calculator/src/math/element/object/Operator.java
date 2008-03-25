@@ -15,6 +15,16 @@ public class Operator extends MathObj {
 	public Operator(OperatorType anOperatorType) {
 		super(MathType.OPERATOR);
 		operatorType = anOperatorType;
+		
+		if (anOperatorType.ordinal() == OperatorType.ADDITION.ordinal() || anOperatorType.ordinal() == OperatorType.SUBTRACTION.ordinal())
+		{
+			Priority = 1;
+		}
+		else if (anOperatorType.ordinal() == OperatorType.MULTIPLICATION.ordinal() || anOperatorType.ordinal() == OperatorType.DIVISION.ordinal())
+		{
+			Priority = 5;
+		} else Priority = 0;
+		
 	}
 
 	/**

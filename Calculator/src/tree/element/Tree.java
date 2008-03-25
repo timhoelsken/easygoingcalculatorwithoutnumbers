@@ -98,6 +98,7 @@ public class Tree {
   public void paintMe() {
     int tmpDepth = getDepth(this);
     System.out.println("TreeDepth: " + tmpDepth);
+    System.out.println();
     if (tmpDepth == 0) {
       System.out.println("Tree is empty.");
     } else {

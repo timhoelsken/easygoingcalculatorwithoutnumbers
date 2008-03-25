@@ -136,10 +136,13 @@ public class Tree {
     String tmpReturnString = new String();
     int tmpSpaceLength = someSpaces.length();
     int tmpStringLength = aString.length();
+    if (tmpSpaceLength <= tmpStringLength) {
+      return aString;
+    }
     int tmpStart = tmpSpaceLength / 2 - tmpStringLength / 2;
     tmpReturnString = someSpaces.substring(0, tmpStart);
     tmpReturnString += aString;
-    for (int i = tmpReturnString.length(); i < tmpSpaceLength; i++) {
+    for (int i = tmpReturnString.length() + 1; i < tmpSpaceLength; i++) {
       tmpReturnString += " ";
     }
     return tmpReturnString;

@@ -132,7 +132,6 @@ public class Formula {
               {
                   iEndPosition = iEndPosition + 1;
               }
-              iEndPosition = iEndPosition - 1;
               try
               {
                   MathList.add(buildNumberMathObject(pFormula.substring(iStartPosition, iEndPosition)));
@@ -149,7 +148,6 @@ public class Formula {
               {
                   iEndPosition = iEndPosition + 1;
               }
-              iEndPosition = iEndPosition - 1;
               try
               {
                 MathList.add(buildOperatorMathObject(pFormula.substring(iStartPosition, iEndPosition)));
@@ -161,7 +159,7 @@ public class Formula {
           {
             throw new ExceptionWrongInputStream("Input String contains non valid characters!");
           }
-          iStartPosition = iEndPosition + 1;
+          iStartPosition = iEndPosition;
         }
         
          MathObj tmpEndMathObj = new MathObj(MathType.END_OF_TERM);

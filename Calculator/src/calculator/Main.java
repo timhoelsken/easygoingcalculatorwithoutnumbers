@@ -58,7 +58,10 @@ public class Main {
           System.out.println(tmpConverter.termToStandardString(tmpInputString));
           
           try {
-          Tree tmpTree = FormulaTreeBuilder.BuildTree(tmpConverter.termToStandardString(tmpInputString));
+          FormulaTreeBuilder tmpFormulaTreeBuilder = new FormulaTreeBuilder();	  
+        	  
+        	  
+          Tree tmpTree = tmpFormulaTreeBuilder.BuildTree(tmpConverter.termToStandardString(tmpInputString));
           
           System.out.println(FormulaTreeBuilder.EvaluateTree(tmpTree));
           }

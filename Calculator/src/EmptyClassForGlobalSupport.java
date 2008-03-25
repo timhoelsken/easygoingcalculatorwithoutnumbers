@@ -15,5 +15,4 @@ public class EmptyClassForGlobalSupport {
 	//comments by Tobi
     //TODO @all sagt mal, kann/soll ich irgendwas machen?!
     //TODO @Tim Sehr witzig. Ohne Einführung und Bericht über den aktuellen Stand macht das Aussuchen meiner Meinung nach keinen Sinn. Tschuldigung "ergibt" keinen Sinn...
-    //TODO @André Statt Formular ArrayList nutzen (=> Nutzung von foreach statt Indexnotwendigkeit)
 }

@@ -155,6 +155,8 @@ public final class FormulaTreeBuilder {
 			else if (tmpNextElement instanceof Operator) {
 				tmpTree = InsertOperatorIntoTree(tmpTree,(Operator) tmpNextElement);
 			}
+			
+			tmpNextElement = tmpFormula.getNextElement();
 		}
 		
 		return tmpTree;

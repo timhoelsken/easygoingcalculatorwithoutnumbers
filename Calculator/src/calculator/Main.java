@@ -63,7 +63,10 @@ public class Main {
         	  
           Tree tmpTree = tmpFormulaTreeBuilder.BuildTree(tmpConverter.termToStandardString(tmpInputString));
           
+          
           System.out.println(FormulaTreeBuilder.EvaluateTree(tmpTree));
+          
+          tmpTree.paintMe();
           }
           catch (Exception e)
           {

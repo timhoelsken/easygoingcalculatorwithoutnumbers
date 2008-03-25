@@ -1,10 +1,8 @@
 package tree.element;
 
-import user.util.input.Converter;
 import math.element.object.MathObj;
 import math.element.object.NumberObj;
 import math.element.object.Operator;
-import math.element.object.OperatorType;
 
 /**
  *
@@ -133,6 +131,7 @@ public class Tree {
     }
   }
 
+  //TODO in util klasse ausgliedern
   private String centerStringInSpaces (String someSpaces, String aString) {
     String tmpReturnString = new String();
     int tmpSpaceLength = someSpaces.length();

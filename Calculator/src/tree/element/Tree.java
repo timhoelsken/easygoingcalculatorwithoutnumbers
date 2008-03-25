@@ -230,7 +230,10 @@ public class Tree {
    * @throws Exception
    */
   public static void main(String[] args) throws Exception {
-    Tree tmpTree = FormulaTreeBuilder.BuildTree("5*3*2+6+5*2-30*2+8*2/3*4-14");
+    FormulaTreeBuilder tmpFormulaTreeBuilder = new FormulaTreeBuilder();
+    Tree tmpTree = tmpFormulaTreeBuilder.BuildTree("5*3*2+6+5*2-30*2+8*2/3*4-14");
+
     tmpTree.paintMe();
+    System.out.println(FormulaTreeBuilder.EvaluateTree(tmpTree));
   }
 }

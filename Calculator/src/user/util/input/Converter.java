@@ -1,12 +1,15 @@
 package user.util.input;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  *
  * @author Tim
  *
  */
 public class Converter {
-
+  // TODO @Tim&Tobias make methods static
   /**
    * Method that first calls removeBlanks, then cleanVariables
    *
@@ -27,15 +30,14 @@ public class Converter {
     tmpOutput = handleCommas(tmpOutput);
     tmpOutput = changeFunctionsIntoSigns(tmpOutput);
 
-
     return tmpOutput;
   }
 
   /**
-   * @param aOutput
+   * @param anOutput
    * @return
    */
-  private String changeFunctionsIntoSigns(String aOutput) {
+  private String changeFunctionsIntoSigns(String anOutput) {
     // TODO @Tobias
     return null;
   }
@@ -54,12 +56,16 @@ public class Converter {
    * @return
    */
   private boolean checkValidTerm(String anInputString) {
-    return checkIfOnlyValidBlanks(anInputString) && checkMultiplicationNotation(anInputString) && checkBrackets(anInputString)
-        && checkMinusSigns(anInputString) && doFurtherConsistencyChecks(anInputString);
+    // TODO @Tim&Tobias Exceptions except Boolean return value
+    // TODO @Tim&Tobias put checkBrackets behind checkMinusSigns and check order
+    // of checks generally
+    // TODO @Tim&Tobias check if numbers follow behind commas
+    return checkIfOnlyValidBlanks(anInputString) && checkOperators(anInputString) && checkBrackets(anInputString) && checkMinusSigns(anInputString)
+        && doFurtherConsistencyChecks(anInputString);
   }
 
   /**
-   * @param aAnInputString
+   * @param anInputString
    * @return true for all other checks (what do we have to check???)
    */
   private boolean doFurtherConsistencyChecks(String anInputString) {
@@ -68,12 +74,41 @@ public class Converter {
   }
 
   /**
-   * @param aAnInputString
-   * @return
+   * @param anInputString
+   * @return true if all negative numbers are in brackets, assure that there are
+   *         no blanks in the inputString!!
+   * @author Tobias
    */
   private boolean checkMinusSigns(String anInputString) {
-    // TODO @Tobias
-    return false;
+    for (int i = 1; i < anInputString.length(); i++) {
+      if (anInputString.charAt(i) == '-') {
+        Pattern tmpPattern = Pattern.compile("[\\(0-9].*");
+        Matcher tmpMatcher = tmpPattern.matcher(anInputString.substring(i - 1));
+        if (!tmpMatcher.matches()) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  // TODO finalize and call this method :P
+  private void setBracketsAroundNegativeNumbers(String anInputString) {
+    if (anInputString.charAt(0) == '-') {
+      // TODO regard brackets?! :-!
+      int i = 1;
+      Matcher tmpMatcher;
+      do {
+        Pattern tmpPattern = Pattern.compile("[0-9\\.]");
+        if (i == anInputString.length()) {
+          tmpMatcher = null;
+        } else {
+          tmpMatcher = tmpPattern.matcher("" + anInputString.charAt(i++));
+        }
+      } while (tmpMatcher != null && tmpMatcher.find());
+
+      anInputString = "(" + anInputString.substring(0, --i) + ")" + anInputString.substring(i);
+    }
   }
 
   /**
@@ -86,12 +121,18 @@ public class Converter {
   }
 
   /**
-   * @param aAnInputString
-   * @return
+   * @param anInputString
+   * @return true if there are no operators directly beside each other like
+   *         "*-", "+/" or "* /" ...
+   * @author Tobias
    */
-  private boolean checkMultiplicationNotation(String anInputString) {
-    // TODO @Tobias
-    return false;
+  private boolean checkOperators(String anInputString) {
+    Pattern tmpPattern = Pattern.compile("[\\+\\-\\*/] *[\\+\\-\\*/]");
+    Matcher tmpMatcher = tmpPattern.matcher(anInputString);
+    if (tmpMatcher.find()) {
+      return false;
+    }
+    return true;
   }
 
   /**
@@ -104,7 +145,7 @@ public class Converter {
     return false;
   }
 
-  private int getNextBlankPosition(String anInputString){
+  private int getNextBlankPosition(String anInputString) {
     return 0;
   }
 

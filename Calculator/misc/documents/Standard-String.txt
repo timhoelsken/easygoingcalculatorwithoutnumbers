@@ -3,7 +3,18 @@ Standard-String
 ===============
 
 - Ein Standard-String besitzt keine leerzeichen.
+
 - Multiplizierte Variablen werden nicht aneinander geschrieben, 
   sondern mit '*' "verbunden".
   
-   
+- negative Zahlen werden geklammert
+
+- Komma werden zu Punkte
+
+- Benutzerhinweis wegen Klammern
+
+- sin ==> %
+
+- cos ==> ~
+
+- tan ==> #   

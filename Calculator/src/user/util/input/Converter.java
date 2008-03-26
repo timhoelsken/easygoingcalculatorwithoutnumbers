@@ -193,6 +193,7 @@ public class Converter {
       }
     }
 
+    //TODO @Tim sobald tmpOpenCloseCounter<0 (auch innerhalb des Terms) ist die Formel kaputt. Eine Prüfung reicht nicht.
     if ((tmpRightBracketCounter != tmpLeftBracketCounter) || tmpOpenCloseCounter<0){
       return false;
     }

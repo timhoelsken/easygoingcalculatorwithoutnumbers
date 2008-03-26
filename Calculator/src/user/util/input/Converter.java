@@ -4,15 +4,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- *
+ * 
  * @author Tim
- *
+ * 
  */
 public class Converter {
   // TODO @Tim&Tobias make methods static
   /**
    * Method that first calls removeBlanks, then cleanVariables
-   *
+   * 
    * @param anInputString
    * @return a standard Term
    * @throws Exception
@@ -34,21 +34,79 @@ public class Converter {
   }
 
   /**
-   * @param anOutput
-   * @return
+   * Replaces sin, cos, tan, sqrt functions with abbreviation signs
+   * 
+   * @param anInputString
+   * @return a string containing abbreviation sign, defined in Standard-String.txt 
    */
-  private String changeFunctionsIntoSigns(String anOutput) {
-    // TODO @Tobias
-    return null;
+  private String changeFunctionsIntoSigns(String anInputString) {
+    
+    String tmpOutput = new String("");
+    int tmpFunctionFound = 0;
+    
+    for (int i=0; i<anInputString.length();i++){
+      if (anInputString.charAt(i) == 's'){
+        if (anInputString.charAt(i+1) == 'i' && anInputString.charAt(i+2) == 'n' && anInputString.charAt(i+3) == '('){
+          tmpOutput += "%";
+          tmpFunctionFound = 3;
+        }
+        else if (anInputString.charAt(i+1) == 'q' && anInputString.charAt(i+2) == 'r' && anInputString.charAt(i+3) == 't' && anInputString.charAt(i+4) == '('){
+          tmpOutput+= "&";
+          tmpFunctionFound = 4;
+        }
+        else{
+          tmpOutput += anInputString.charAt(i);
+          tmpFunctionFound = 0;
+        }
+      }
+      else if (anInputString.charAt(i) == 'c'){
+        if (anInputString.charAt(i+1) == 'o' && anInputString.charAt(i+2) == 's' && anInputString.charAt(i+3) == '('){
+          tmpOutput += "~";
+          tmpFunctionFound = 3;
+        }
+        else{
+          tmpOutput += anInputString.charAt(i);
+          tmpFunctionFound = 0;
+        }
+      }
+      else if (anInputString.charAt(i) == 't'){
+        if (anInputString.charAt(i+1) == 'a' && anInputString.charAt(i+2) == 'n' && anInputString.charAt(i+3) == '('){
+          tmpOutput += "#";
+          tmpFunctionFound = 3;
+        }
+        else{
+          tmpOutput += anInputString.charAt(i);
+          tmpFunctionFound = 0;
+        }
+      }
+      else if (anInputString.charAt(i) == 'w'){
+        if (anInputString.charAt(i+1) == 'u' && anInputString.charAt(i+2) == 'r' && anInputString.charAt(i+3) == 'z' && anInputString.charAt(i+4) == 'e' && anInputString.charAt(i+5) == 'l' && anInputString.charAt(i+6) == '('){
+          tmpOutput += "&";
+          tmpFunctionFound = 6;
+        }
+        else{
+          tmpOutput += anInputString.charAt(i);
+          tmpFunctionFound = 0;
+        }
+      }
+      else{
+        tmpOutput += anInputString.charAt(i);
+        tmpFunctionFound = 0;
+      }
+      i+=tmpFunctionFound;
+      tmpFunctionFound = 0;
+    }
+    
+    return tmpOutput;
   }
 
   /**
-   * @param aOutput
-   * @return
+   * Replaces all commas (,) of a string with full-stops (.) 
+   * @param anInputString
+   * @return a string containing .
    */
-  private String handleCommas(String aOutput) {
-    // TODO @Tim
-    return null;
+  private String handleCommas(String anInputString) {    
+    return anInputString.replace(',', '.');
   }
 
   /**
@@ -56,6 +114,9 @@ public class Converter {
    * @return
    */
   private boolean checkValidTerm(String anInputString) {
+    return checkIfOnlyValidBlanks(anInputString) && checkMultiplicationNotation(anInputString)
+        && checkBrackets(anInputString) && checkMinusSigns(anInputString)
+        && doFurtherConsistencyChecks(anInputString);
     // TODO @Tim&Tobias Exceptions except Boolean return value
     // TODO @Tim&Tobias put checkBrackets behind checkMinusSigns and check order
     // of checks generally
@@ -112,12 +173,34 @@ public class Converter {
   }
 
   /**
+   * checks if there is the same amount of ( and ) brackets,
+   * and if no ) are in lead of ( , that means not more than there should be
+   *  
    * @param aAnInputString
-   * @return
+   * @return true if the brackets in the term are correct
    */
   private boolean checkBrackets(String anInputString) {
-    // TODO @Tim
-    return false;
+    
+    int tmpLeftBracketCounter = 0;
+    int tmpRightBracketCounter = 0;
+    int tmpOpenCloseCounter = 0;
+    
+    for (int i = 0; i < anInputString.length(); i++){
+      if (anInputString.charAt(i) == '('){
+        tmpLeftBracketCounter++;
+        tmpOpenCloseCounter++;
+      }
+      else if (anInputString.charAt(i) == ')'){
+        tmpRightBracketCounter++;
+        tmpOpenCloseCounter--;
+      }
+    }
+    
+    if ((tmpRightBracketCounter != tmpLeftBracketCounter) || tmpOpenCloseCounter<0){
+      return false;
+    }
+    
+    return true;
   }
 
   /**
@@ -136,23 +219,53 @@ public class Converter {
   }
 
   /**
+   * Checks if there are only valid blanks in the string
+   * 
    * @param aAnInputString
-   * @return
+   * @return true if the string contains only valid blanks 
    */
   private boolean checkIfOnlyValidBlanks(String anInputString) {
-    // TODO @Tim
+    int tmpPosition = 0;
+    while (getNextBlankPosition(anInputString, tmpPosition) != -1){
+      tmpPosition = getNextBlankPosition(anInputString, tmpPosition);
+      if (tmpPosition != 0 || tmpPosition != anInputString.length()) {
 
-    return false;
+        if ((tmpPosition - 1 > 0 && isNumericOrVariable(anInputString.charAt(tmpPosition - 1)))
+            && (tmpPosition + 1 <= anInputString.length() && isNumericOrVariable(anInputString
+                .charAt(tmpPosition - 1)))) {
+          return false;
+        }
+      }
+    }
+
+    return true;
   }
 
-  private int getNextBlankPosition(String anInputString) {
-    return 0;
+  /**
+   * gets the position of the next blank in a string
+   * 
+   * @param anInputString
+   * @param aStartPosition
+   * @return The position of the next blank in the given String, returns -1 if
+   *         no blank is found
+   */
+  private int getNextBlankPosition(String anInputString, int aStartPosition) {
+    int tmpPosition = -1;
+
+    for (int i = 0; i < anInputString.length(); i++) {
+      if (anInputString.charAt(i) == ' ') {
+        tmpPosition = i;
+        i = anInputString.length();
+      }
+    }
+
+    return tmpPosition;
   }
 
   /**
    * A method to clean the whitespaces in anInputString. replaces "2 + 3" with
    * "2+3"
-   *
+   * 
    * @param anInputString
    * @return
    */
@@ -172,7 +285,7 @@ public class Converter {
   /**
    * A method to clean the variables in anInputString. Variables "ab" will be
    * replaced with "a*b" "2a" will be replaced with "2*a"
-   *
+   * 
    * @param anInputString
    * @return a String that contains no "ab" or "2a" variables
    */
@@ -182,16 +295,21 @@ public class Converter {
 
     for (int i = 0; i < anInputString.length(); i++) {
       tmpOutput += anInputString.charAt(i);
-      if (isVariable(anInputString.charAt(i)) && (i + 1 < anInputString.length() && isVariable(anInputString.charAt(i + 1)))) {
+      if (isVariable(anInputString.charAt(i))
+          && (i + 1 < anInputString.length() && isVariable(anInputString.charAt(i + 1)))) {
         tmpOutput += "*";
-      } else if (isNumeric(anInputString.charAt(i)) && (i + 1 < anInputString.length() && isVariable(anInputString.charAt(i + 1)))) {
+      } else if (isNumeric(anInputString.charAt(i))
+          && (i + 1 < anInputString.length() && isVariable(anInputString.charAt(i + 1)))) {
         tmpOutput += "*";
       }
     }
 
     return tmpOutput;
   }
-
+  
+  private boolean isNumericOrVariable(char aCharacter){
+    return (isNumeric(aCharacter) || isVariable(aCharacter))? true:false;
+  }
   private boolean isNumeric(char aCharacter) {
 
     String tmpNumbers = new String("0123456789");
@@ -206,11 +324,10 @@ public class Converter {
 
   private boolean isVariable(char aCharacter) {
 
-    String tmpUpperCase = new String("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-    String tmpLowerCase = new String("abcdefghijklmnopqrstuvwxyz");
+    String tmpValidLetters = new String("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
-    for (int i = 0; i < tmpUpperCase.length(); i++) {
-      if (tmpUpperCase.charAt(i) == aCharacter || tmpLowerCase.charAt(i) == aCharacter) {
+    for (int i = 0; i < tmpValidLetters.length(); i++) {
+      if (tmpValidLetters.charAt(i) == aCharacter || tmpValidLetters.toLowerCase().charAt(i) == aCharacter) {
         return true;
       }
     }

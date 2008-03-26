@@ -9,18 +9,20 @@ import user.util.output.ConsoleOutput;
 import tree.element.*;
 
 /**
- * 
+ *
  * @author Tim
- * 
+ *
  */
 public class Main {
 
   /**
    * The Calculator
-   * 
+   *
    * @param args
+   * @throws Exception
    */
-  public static void main(String[] args) {
+  //TODO handle Exception
+  public static void main(String[] args) throws Exception {
     ConsoleInput tmpInput = new ConsoleInput();
     ConsoleOutput tmpOutput = new ConsoleOutput();
     Boolean runCalculator = true;
@@ -52,28 +54,28 @@ public class Main {
           }
 
           //TODO hier solltet
-          //dann sinnvoll was mit dem Term angestellt werden 
+          //dann sinnvoll was mit dem Term angestellt werden
           System.out.println("Sie haben eingegeben:\n" + tmpInputString);
           System.out.println("das bereinigte Ergebnis ist:");
           System.out.println(tmpConverter.termToStandardString(tmpInputString));
-          
+
           try {
-          FormulaTreeBuilder tmpFormulaTreeBuilder = new FormulaTreeBuilder();	  
-        	  
-        	  
+          FormulaTreeBuilder tmpFormulaTreeBuilder = new FormulaTreeBuilder();
+
+
           Tree tmpTree = tmpFormulaTreeBuilder.BuildTree(tmpConverter.termToStandardString(tmpInputString));
-          
-          
+
+
           System.out.println(FormulaTreeBuilder.EvaluateTree(tmpTree));
-          
+
           tmpTree.paintMe();
           }
           catch (Exception e)
           {
         	  System.out.println(e.getMessage());
           }
-          
-          
+
+
           System.out.println("Wollen Sie einen weiteren Term eingeben? (j / n)\n");
           try {
             tmpInputString = tmpInput.getConsoleInput();

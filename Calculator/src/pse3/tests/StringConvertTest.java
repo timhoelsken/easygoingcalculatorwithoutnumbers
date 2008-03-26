@@ -16,8 +16,9 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for {@link user.util.input.Converter#termToStandardString(java.lang.String)}.
+   * @throws Exception
    */
-  public void testTermToStandardString() {
+  public void testTermToStandardString() throws Exception {
     String tmpString = new String("2a + a b");
     Converter tmpConverter = new Converter();
     assertTrue("The String has Variables separated by *", tmpConverter.termToStandardString(tmpString).equals("2*a+a*b"));
@@ -33,12 +34,12 @@ public class StringConvertTest extends TestCase {
   }
 
   /**
-   * Test method for {@link user.util.input.Converter#cleanVariables(java.lang.String)}.
+   * Test method for {@link user.util.input.Converter#insertMultiplicationOperators(java.lang.String)}.
    */
   public void testCleanVariables() {
     String tmpString = new String("2a+ab");
     Converter tmpConverter = new Converter();
-    assertTrue("The String has Variables separated by *", tmpConverter.cleanVariables(tmpString).equals("2*a+a*b"));
+    assertTrue("The String has Variables separated by *", tmpConverter.insertMultiplicationOperators(tmpString).equals("2*a+a*b"));
   }
 
   /**

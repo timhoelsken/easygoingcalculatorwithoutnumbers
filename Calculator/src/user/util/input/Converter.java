@@ -42,7 +42,7 @@ public class Converter {
    * @return true for all other checks (what do we have to check???)
    */
   private boolean doFurtherConsistencyChecks(String aAnInputString) {
-    // TODO Auto-generated method stub
+    // TODO @all who want to
     return true;
   }
 
@@ -51,7 +51,7 @@ public class Converter {
    * @return
    */
   private boolean checkMinusSigns(String aAnInputString) {
-    // TODO Auto-generated method stub
+    // TODO @Tobias
     return false;
   }
 
@@ -60,7 +60,7 @@ public class Converter {
    * @return
    */
   private boolean checkBrackets(String aAnInputString) {
-    // TODO Auto-generated method stub
+    // TODO @Tim
     return false;
   }
 
@@ -69,7 +69,7 @@ public class Converter {
    * @return
    */
   private boolean checkMultiplicationNotation(String aAnInputString) {
-    // TODO Auto-generated method stub
+    // TODO @Tobias
     return false;
   }
 
@@ -78,7 +78,7 @@ public class Converter {
    * @return
    */
   private boolean checkIfOnlyValidBlanks(String aAnInputString) {
-    // TODO Auto-generated method stub
+    // TODO @Tim
     return false;
   }
 

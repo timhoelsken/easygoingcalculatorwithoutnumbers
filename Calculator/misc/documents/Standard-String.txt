@@ -18,3 +18,5 @@ Standard-String
 - cos ==> ~
 
 - tan ==> #   
+
+- Wurzel ==> §

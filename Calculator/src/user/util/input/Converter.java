@@ -270,7 +270,7 @@ public class Converter {
    * @return
    */
   public String removeBlanks(String anInputString) {
-
+    //TODO @Tim da gibt's ne Methode String.replace()
     String tmpOutput = new String("");
 
     for (int i = 0; i < anInputString.length(); i++) {
@@ -312,6 +312,7 @@ public class Converter {
   private boolean isNumeric(char aCharacter) {
 
     String tmpNumbers = new String("0123456789");
+    //TODO @Tim Regex Pattern.compile("[0-9]")
 
     for (int i = 0; i < tmpNumbers.length(); i++) {
       if (tmpNumbers.charAt(i) == aCharacter) {

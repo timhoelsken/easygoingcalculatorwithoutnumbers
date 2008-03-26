@@ -43,7 +43,7 @@ public class StringConvertTest extends TestCase {
   }
 
   //todo @Tim/Tobi Denkansätze/Testfälle fürs das Syntax-checken
-  public void testEverythingEspaciallyTheSyntax
+  public void testEverythingEspaciallyTheSyntax()
   {
 	  /**
 	  //es sollte geprüft werden, dass keine Sonderzeichen im Text drinne sind

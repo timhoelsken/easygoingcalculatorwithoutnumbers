@@ -4,15 +4,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 
+ *
  * @author Tim
- * 
+ *
  */
 public class Converter {
   // TODO @Tim&Tobias make methods static
   /**
    * Method that first calls removeBlanks, then cleanVariables
-   * 
+   *
    * @param anInputString
    * @return a standard Term
    * @throws Exception
@@ -35,15 +35,15 @@ public class Converter {
 
   /**
    * Replaces sin, cos, tan, sqrt functions with abbreviation signs
-   * 
+   *
    * @param anInputString
-   * @return a string containing abbreviation sign, defined in Standard-String.txt 
+   * @return a string containing abbreviation sign, defined in Standard-String.txt
    */
   private String changeFunctionsIntoSigns(String anInputString) {
-    
+
     String tmpOutput = new String("");
     int tmpFunctionFound = 0;
-    
+
     for (int i=0; i<anInputString.length();i++){
       if (anInputString.charAt(i) == 's'){
         if (anInputString.charAt(i+1) == 'i' && anInputString.charAt(i+2) == 'n' && anInputString.charAt(i+3) == '('){
@@ -96,16 +96,16 @@ public class Converter {
       i+=tmpFunctionFound;
       tmpFunctionFound = 0;
     }
-    
+
     return tmpOutput;
   }
 
   /**
-   * Replaces all commas (,) of a string with full-stops (.) 
+   * Replaces all commas (,) of a string with full-stops (.)
    * @param anInputString
    * @return a string containing .
    */
-  private String handleCommas(String anInputString) {    
+  private String handleCommas(String anInputString) {
     return anInputString.replace(',', '.');
   }
 
@@ -114,10 +114,7 @@ public class Converter {
    * @return
    */
   private boolean checkValidTerm(String anInputString) {
-    return checkIfOnlyValidBlanks(anInputString) && checkMultiplicationNotation(anInputString)
-        && checkBrackets(anInputString) && checkMinusSigns(anInputString)
-        && doFurtherConsistencyChecks(anInputString);
-    // TODO @Tim&Tobias Exceptions except Boolean return value
+    // TODO @Tim&Tobias Exceptions instead of Boolean return value
     // TODO @Tim&Tobias put checkBrackets behind checkMinusSigns and check order
     // of checks generally
     // TODO @Tim&Tobias check if numbers follow behind commas
@@ -175,16 +172,16 @@ public class Converter {
   /**
    * checks if there is the same amount of ( and ) brackets,
    * and if no ) are in lead of ( , that means not more than there should be
-   *  
+   *
    * @param aAnInputString
    * @return true if the brackets in the term are correct
    */
   private boolean checkBrackets(String anInputString) {
-    
+
     int tmpLeftBracketCounter = 0;
     int tmpRightBracketCounter = 0;
     int tmpOpenCloseCounter = 0;
-    
+
     for (int i = 0; i < anInputString.length(); i++){
       if (anInputString.charAt(i) == '('){
         tmpLeftBracketCounter++;
@@ -195,11 +192,11 @@ public class Converter {
         tmpOpenCloseCounter--;
       }
     }
-    
+
     if ((tmpRightBracketCounter != tmpLeftBracketCounter) || tmpOpenCloseCounter<0){
       return false;
     }
-    
+
     return true;
   }
 
@@ -220,9 +217,9 @@ public class Converter {
 
   /**
    * Checks if there are only valid blanks in the string
-   * 
+   *
    * @param aAnInputString
-   * @return true if the string contains only valid blanks 
+   * @return true if the string contains only valid blanks
    */
   private boolean checkIfOnlyValidBlanks(String anInputString) {
     int tmpPosition = 0;
@@ -243,7 +240,7 @@ public class Converter {
 
   /**
    * gets the position of the next blank in a string
-   * 
+   *
    * @param anInputString
    * @param aStartPosition
    * @return The position of the next blank in the given String, returns -1 if
@@ -265,7 +262,7 @@ public class Converter {
   /**
    * A method to clean the whitespaces in anInputString. replaces "2 + 3" with
    * "2+3"
-   * 
+   *
    * @param anInputString
    * @return
    */
@@ -285,7 +282,7 @@ public class Converter {
   /**
    * A method to clean the variables in anInputString. Variables "ab" will be
    * replaced with "a*b" "2a" will be replaced with "2*a"
-   * 
+   *
    * @param anInputString
    * @return a String that contains no "ab" or "2a" variables
    */
@@ -306,7 +303,7 @@ public class Converter {
 
     return tmpOutput;
   }
-  
+
   private boolean isNumericOrVariable(char aCharacter){
     return (isNumeric(aCharacter) || isVariable(aCharacter))? true:false;
   }

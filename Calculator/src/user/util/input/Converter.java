@@ -41,7 +41,7 @@ public class Converter {
    * @param aAnInputString
    * @return true for all other checks (what do we have to check???)
    */
-  private boolean doFurtherConsistencyChecks(String aAnInputString) {
+  private boolean doFurtherConsistencyChecks(String anInputString) {
     // TODO @all who want to
     return true;
   }
@@ -50,7 +50,7 @@ public class Converter {
    * @param aAnInputString
    * @return
    */
-  private boolean checkMinusSigns(String aAnInputString) {
+  private boolean checkMinusSigns(String anInputString) {
     // TODO @Tobias
     return false;
   }
@@ -59,7 +59,7 @@ public class Converter {
    * @param aAnInputString
    * @return
    */
-  private boolean checkBrackets(String aAnInputString) {
+  private boolean checkBrackets(String anInputString) {
     // TODO @Tim
     return false;
   }
@@ -68,7 +68,7 @@ public class Converter {
    * @param aAnInputString
    * @return
    */
-  private boolean checkMultiplicationNotation(String aAnInputString) {
+  private boolean checkMultiplicationNotation(String anInputString) {
     // TODO @Tobias
     return false;
   }
@@ -77,9 +77,14 @@ public class Converter {
    * @param aAnInputString
    * @return
    */
-  private boolean checkIfOnlyValidBlanks(String aAnInputString) {
+  private boolean checkIfOnlyValidBlanks(String anInputString) {
     // TODO @Tim
+    
     return false;
+  }
+  
+  private int getNextBlankPosition(String anInputString){
+    return 0;
   }
 
   /**

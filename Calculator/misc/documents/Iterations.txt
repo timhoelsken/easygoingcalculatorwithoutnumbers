@@ -48,17 +48,18 @@ Taschenrechner 0.3
 
  - Konvertierung eines Terms erweitern:
    Terme mit verschiedenen Operanden, Punkt-Vor-Strich Rechnung
-   mathematische Gesetze beachten (kommutativ)
+   mathematische Gesetze beachten (kommutativ) (done)
    
- - Erkennen von Gleitkommazahlen (==> Erkennen von Komma/Punkt), negativen Zahlen
+ - Erkennen von Gleitkommazahlen (==> Erkennen von Komma/Punkt),  (Andre)
+   negativen Zahlen (Tim / Andre)
  
  - Einordnen der MathObjs in einen Baum erweitern (done)
  
- - Auslesen der MathObjs aus einem Baum erweitern (work in progress)
+ - Auslesen der MathObjs aus einem Baum erweitern (done)
  
- - Berechnen des erweiterten Terms 
+ - Berechnen des erweiterten Terms (done)
  
- - Benutzerseitige Eingabe erweitern
+ - Benutzerseitige Eingabe erweitern (done)
  
 ------------------
 Taschenrechner 0.4

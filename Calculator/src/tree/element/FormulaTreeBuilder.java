@@ -1,13 +1,15 @@
 package tree.element;
 
 
-import math.element.object.Formula;
+import math.element.object.MathUtil;
 import math.element.object.MathObj;
 import math.element.object.MathType;
 import math.element.object.NumberObj;
 import math.element.object.Operator;
 import math.element.object.Operand;
 import math.element.object.OperatorType;
+import java.util.ArrayList;
+import java.util.ListIterator;
 
 /**
  * 
@@ -126,13 +128,13 @@ public final class FormulaTreeBuilder {
 	public Tree BuildTree(String aFunction) throws Exception {
 
 		// prepare formula, mathobj and tmptree
-		Formula tmpFormula = new Formula(aFunction);
+        ArrayList<MathObj> MathList = MathUtil.FormulaToArrayList(aFunction);
+        ListIterator<MathObj> MathListIterator = MathList.listIterator();
 		MathObj tmpNextElement = null;
 		formulaTree = null;		
 
 		// iterate over all elements of the formula
-		tmpFormula.setStartElement();
-		tmpNextElement = tmpFormula.getNextElement();
+		tmpNextElement = MathListIterator.next();
 		while (tmpNextElement.getMathType() != MathType.END_OF_TERM) {
 
 			// is the next element an Operand??
@@ -143,7 +145,7 @@ public final class FormulaTreeBuilder {
 				this.InsertOperatorIntoTree((Operator) tmpNextElement);
 			}
 			
-			tmpNextElement = tmpFormula.getNextElement();
+			tmpNextElement = MathListIterator.next();
 		}
 		
 		return formulaTree;

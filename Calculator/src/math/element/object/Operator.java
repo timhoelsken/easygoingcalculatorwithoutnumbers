@@ -42,5 +42,18 @@ public class Operator extends MathObj {
 		Priority = priority;
 	}
 	
-	
+	public String toString()
+    {
+	    switch (operatorType){
+          case DIVISION:
+              return "/";
+          case MULTIPLICATION:
+              return "*";
+          case SUBTRACTION:
+              return "-";
+          default:
+              return "+";
+        }
+      
+    }
 }

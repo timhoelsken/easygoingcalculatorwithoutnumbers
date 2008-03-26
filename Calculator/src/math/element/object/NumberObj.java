@@ -22,4 +22,9 @@ public class NumberObj extends Operand {
 	public NumberObj(float aValue) {
 		value = aValue;
 	}
+    
+    public String toString()
+    {
+      return Float.toString(value);
+    }
 }

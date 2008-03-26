@@ -1,12 +1,14 @@
 package math.element.object;
 
+import java.util.ArrayList;
+
 
 /**
  * @author Tobias
  *
  */
 public class MathUtil {
-  private static char COMMA = ',';
+  private static char COMMA = '.';
 
   /**
    * @param aChar
@@ -91,4 +93,115 @@ public class MathUtil {
 
     return new NumberObj(Float.parseFloat(tmpResult));
   }
+  
+  /**
+   * method creates a float value based mathobj out of a given string
+   * 
+   * @author André
+   * @param aNumberContainingString
+   * @return MathObj
+   */
+  public static MathObj buildNumberMathObject(String aNumberContainingString)
+  {
+    Float tmpFl;
+    tmpFl = Float.valueOf("0.0").floatValue();
+    try 
+    {
+        tmpFl = Float.valueOf(aNumberContainingString).floatValue();
+    }
+    catch (NumberFormatException e) {}
+    
+    NumberObj tmpNumberObj = new NumberObj(tmpFl);
+    return tmpNumberObj;
+  }
+  
+  /**
+   * method creates a operator mathobj out of a given string
+   * 
+   * @author André
+   * @param aOperatorContainingString
+   * @return MathObj
+   */
+  public static MathObj buildOperatorMathObject(String aOperatorContainingString)
+  {
+    OperatorType tmpOpType;
+    if (aOperatorContainingString.equals("-"))
+    {
+      tmpOpType = OperatorType.SUBTRACTION;
+    }
+    else if (aOperatorContainingString.equals("/"))
+    {
+      tmpOpType = OperatorType.DIVISION;
+    }
+    else if (aOperatorContainingString.equals("*"))
+    {
+      tmpOpType = OperatorType.MULTIPLICATION;
+    }
+    else
+    {
+      tmpOpType = OperatorType.ADDITION;
+    }
+    Operator tmpOp = new Operator(tmpOpType);
+    return tmpOp;
+  }
+  
+  /**
+   * method creates a mathobj list out of the form string
+   * @author André
+   * @retun ArrayList<MathObj>
+   */
+  public static ArrayList<MathObj> FormulaToArrayList(String aFormula)
+  {
+      int iLenOfString;
+      iLenOfString = aFormula.length();
+      
+      ArrayList<MathObj> MathList = new ArrayList<MathObj>();
+      
+      int iStartPosition = 0;
+      int iEndPosition = 0;
+
+      while (iStartPosition < iLenOfString)
+      {        
+        if ((MathUtil.IsNumber(aFormula.charAt(iStartPosition))) || (MathUtil.IsComma(aFormula.charAt(iStartPosition))))
+        {
+            iEndPosition = iStartPosition + 1;
+            while ((iEndPosition < iLenOfString) && ((MathUtil.IsNumber(aFormula.charAt(iEndPosition))) || (MathUtil.IsComma(aFormula.charAt(iEndPosition)))))
+            {
+                iEndPosition = iEndPosition + 1;
+            }
+            try
+            {
+                MathList.add(buildNumberMathObject(aFormula.substring(iStartPosition, iEndPosition)));
+            }
+            catch (Exception e)
+            {
+              System.out.println(e.getMessage());
+            }
+        }
+        else if (MathUtil.IsOperator(aFormula.charAt(iStartPosition)))
+        {
+            iEndPosition = iStartPosition + 1;
+            while ((iEndPosition < iLenOfString) && (MathUtil.IsOperator(aFormula.charAt(iEndPosition))))
+            {
+                iEndPosition = iEndPosition + 1;
+            }
+            try
+            {
+              MathList.add(buildOperatorMathObject(aFormula.substring(iStartPosition, iEndPosition)));
+            }
+            catch (Exception e)
+            {}
+        }
+        else
+        {
+          throw new ExceptionWrongInputStream("Input String contains non valid characters!");
+        }
+        iStartPosition = iEndPosition;
+      }
+      
+       MathObj tmpEndMathObj = new MathObj(MathType.END_OF_TERM);
+       MathList.add(tmpEndMathObj);
+       return MathList;
+  }
+  
 }

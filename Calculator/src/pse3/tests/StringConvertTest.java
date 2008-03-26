@@ -94,7 +94,7 @@ public class StringConvertTest extends TestCase {
 	  "sin(56)" -> ok
 	  "(5+6)sin(3)" -> fehler
 	  "5+6+(3+3)*1+2" -> ok
-	  "5+6+(3+3)1+2" -> nicht ok *//
+	  "5+6+(3+3)1+2" -> nicht ok */
   }
   
   /**

@@ -24,8 +24,29 @@ public class Converter {
     }
     tmpOutput = removeBlanks(anInputString);
     tmpOutput = insertMultiplicationOperators(tmpOutput);
+    tmpOutput = handleCommas(tmpOutput);
+    tmpOutput = changeFunctionsIntoSigns(tmpOutput);
+
 
     return tmpOutput;
+  }
+
+  /**
+   * @param aOutput
+   * @return
+   */
+  private String changeFunctionsIntoSigns(String aOutput) {
+    // TODO @Tobias
+    return null;
+  }
+
+  /**
+   * @param aOutput
+   * @return
+   */
+  private String handleCommas(String aOutput) {
+    // TODO @Tim
+    return null;
   }
 
   /**
@@ -79,10 +100,10 @@ public class Converter {
    */
   private boolean checkIfOnlyValidBlanks(String anInputString) {
     // TODO @Tim
-    
+
     return false;
   }
-  
+
   private int getNextBlankPosition(String anInputString){
     return 0;
   }

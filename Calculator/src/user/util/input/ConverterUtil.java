@@ -11,16 +11,6 @@ import java.util.regex.Pattern;
 public class ConverterUtil {
 
   /**
-   * main for tests
-   *
-   * @param args
-   */
-  public static void main(String[] args) {
-    String tmpString = "-3432+(3+-23)";
-    System.out.println(termToStandardString(tmpString));
-  }
-
-  /**
    * Method makes the parameter formula a standard term (see
    * misc/documents/Standard-String.txt)
    *
@@ -30,6 +20,8 @@ public class ConverterUtil {
    *             if any checks fail
    */
   public static String termToStandardString(String aFormula) throws IllegalArgumentException {
+
+    // TODO @Tim check für führende Nullen
 
     checkIfValidSignsOnly(aFormula);
     checkIfValidBlanksOnly(aFormula);
@@ -52,7 +44,7 @@ public class ConverterUtil {
    *             if illegal signs in the formula
    */
   public static void checkIfValidSignsOnly(String aFormula) throws IllegalArgumentException {
-    Pattern tmpPattern = Pattern.compile("[\\()\\,\\.²³\\+\\-\\*/^[0-9] ]*");
+    Pattern tmpPattern = Pattern.compile("[\\()\\,\\.²³\\+\\-\\*/\\^[0-9] ]*");
     Matcher tmpMatcher = tmpPattern.matcher(aFormula);
     if (!tmpMatcher.matches()) {
       throw new IllegalArgumentException("The formula contains invalid signs.");
@@ -92,7 +84,8 @@ public class ConverterUtil {
   /**
    * @param aFormula
    * @throws IllegalArgumentException
-   *             if illegal commas in the formula, for example '3.45.34' or '32.'
+   *             if illegal commas in the formula, for example '3.45.34' or
+   *             '32.'
    */
   public static void checkDecimalNumbers(String aFormula) throws IllegalArgumentException {
     // TODO @Tim :) implement this
@@ -133,15 +126,25 @@ public class ConverterUtil {
    * @param aFormula
    * @throws IllegalArgumentException
    *             if there are operators directly beside each other like "*-",
-   *             "+/" or "* /" ...
+   *             "+/", "+)" or "* /" ...
    * @author Tobias
    */
   public static void checkOperators(String aFormula) throws IllegalArgumentException {
-    Pattern tmpPattern = Pattern.compile("[\\+\\-\\*/^] *[\\+\\-\\*/^)]");
+    Pattern tmpPattern = Pattern.compile("[\\+\\-\\*/\\^] *[\\+\\-\\*/\\^\\)]");
     Matcher tmpMatcher = tmpPattern.matcher(aFormula);
     if (tmpMatcher.find()) {
       throw new IllegalArgumentException("The order of operators in the formula is not correct.");
     }
+  }
+
+  /**
+   * main for tests
+   *
+   * @param args
+   */
+  public static void main(String[] args) {
+    String tmpString = "-3432+(-23-12)-25*(-25)";
+    tmpString = setBracketsAroundNegativeNumbers(tmpString);
   }
 
   /**
@@ -152,26 +155,52 @@ public class ConverterUtil {
    *
    * @param aFormula
    * @return the bracked formula
+   * @author Tobias
    */
-  // TODO finalize and call this method :P
   public static String setBracketsAroundNegativeNumbers(String aFormula) {
-    if (aFormula.charAt(0) == '-') {
-      // TODO @Tobi regard brackets?!!!!! :-!
-      // bis jetzt behandelt die Methode nur die Minuszahl am Anfang der Formel
-      int i = 1;
-      Matcher tmpMatcher;
-      do {
-        Pattern tmpPattern = Pattern.compile("[0-9\\.]");
-        if (i == aFormula.length()) {
-          tmpMatcher = null;
-        } else {
-          tmpMatcher = tmpPattern.matcher(Character.toString(aFormula.charAt(i++)));
-        }
-      } while (tmpMatcher != null && tmpMatcher.find());
 
-      aFormula = "(" + aFormula.substring(0, --i) + ")" + aFormula.substring(i);
+    // check negative number at the beginning
+    if (aFormula.charAt(0) == '-' && isNumeric(aFormula.charAt(1))) {
+      aFormula = putBracketsAroundNegativeNumber(aFormula, 0);
+      System.out.println(aFormula);
     }
 
+    // check negative numbers at the beginning of brackets
+    int i = 0;
+    Pattern tmpPattern = Pattern.compile("\\(\\-[0-9\\.]+[^\\)0-9]");
+    Matcher tmpMatcher = tmpPattern.matcher(aFormula);
+    while (tmpMatcher.find(i)) {
+      int tmpStart = tmpMatcher.start();
+      aFormula = putBracketsAroundNegativeNumber(aFormula, ++tmpStart);
+      System.out.println(aFormula);
+      i = tmpStart;
+    }
+
+    // TODO check minus sign before brackets
+    //23 * (-(22+5) + 3)
+
+    return aFormula;
+  }
+
+  /**
+   * @param aFormula
+   * @param startIndex index of the minus sign '-'
+   * @return the formula with brackets around the number beginning at the startIndex
+   */
+  private static String putBracketsAroundNegativeNumber(String aFormula, int aStartIndex) {
+    int i = aStartIndex + 1;
+    Matcher tmpMatcher;
+    do {
+      Pattern tmpPattern = Pattern.compile("[0-9\\.]");
+      if (i == aFormula.length()) {
+        tmpMatcher = null;
+      } else {
+        tmpMatcher = tmpPattern.matcher(Character.toString(aFormula.charAt(i++)));
+      }
+    } while (tmpMatcher != null && tmpMatcher.find());
+
+    aFormula = aFormula.substring(0, aStartIndex) + "(" + aFormula.substring(aStartIndex, --i) + ")"
+        + aFormula.substring(i);
     return aFormula;
   }
 

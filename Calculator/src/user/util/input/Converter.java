@@ -21,10 +21,19 @@ public class Converter {
 
     String tmpOutput = new String("");
 
-    if (!checkValidTerm(anInputString)) {
-      // TODO schöner machen
-      throw new Exception("Invalid InputString.");
+    //TODO machen schön dieses ding
+ // TODO @Tim&Tobias Exceptions instead of Boolean return value
+    // TODO @Tim&Tobias put checkBrackets behind checkMinusSigns and check order
+    // of checks generally
+    // TODO @Tim&Tobias check if numbers follow behind commas
+    if (!checkIfOnlyValidBlanks(anInputString)){
+      throw new IllegalArgumentException();
     }
+    if containsValidSignsOnly(anInputString)
+       checkOperators(anInputString) 
+       checkBrackets(anInputString) 
+       checkMinusSigns(anInputString)
+       
     tmpOutput = removeBlanks(anInputString);
     tmpOutput = insertMultiplicationOperators(tmpOutput);
     tmpOutput = handleCommas(tmpOutput);
@@ -108,29 +117,10 @@ public class Converter {
     return anInputString.replace(',', '.');
   }
 
-  /**
-   * @param anInputString
-   * @return
-   */
-  private static boolean checkValidTerm(String anInputString) {
-    // TODO @Tim&Tobias Exceptions instead of Boolean return value
-    // TODO @Tim&Tobias put checkBrackets behind checkMinusSigns and check order
-    // of checks generally
-    // TODO @Tim&Tobias check if numbers follow behind commas
-    return checkIfOnlyValidBlanks(anInputString) && containsValidSignsOnly(anInputString)
-        && checkOperators(anInputString) && checkBrackets(anInputString) && checkMinusSigns(anInputString)
-        && doFurtherConsistencyChecks(anInputString);
+    private static void checkIfCommaFollowedByNumber(String anInputString){
+    //TODO implement this
   }
-
-  /**
-   * @param anInputString
-   * @return true for all other checks (what do we have to check???)
-   */
-  private static boolean doFurtherConsistencyChecks(String anInputString) {
-    // TODO @all who want to
-    return true;
-  }
-
+  
   /**
    * @param anInputString
    * @return true if all negative numbers are in brackets, assure that there are
@@ -340,6 +330,7 @@ public class Converter {
 
     String tmpValidSigns = new String("(),.²³+*/-^");
 
+    //TODO regex
     for (int i = 0; i < anInputString.length(); i++) {
       for (int j = 0; j < tmpValidSigns.length(); j++) {
         if (tmpValidSigns.charAt(j) != anInputString.charAt(i)) {

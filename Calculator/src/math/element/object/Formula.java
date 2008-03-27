@@ -1,12 +1,12 @@
-package math.element.object;
+/*package math.element.object;
 
 import java.util.LinkedList;
 import math.element.object.MathType;
 import math.element.object.MathObj;
 
-/*
+
  * This is mathematical formula
- */
+ 
 public class Formula {
 
   private String pFormula;
@@ -20,7 +20,7 @@ public class Formula {
    * @author André
    * @param aFormula
    * 
-   */
+   
   public Formula(String aFormula) {
     pFormula = aFormula;
     MathList = new LinkedList<MathObj>();
@@ -28,45 +28,45 @@ public class Formula {
     setStartElement();
   }
 
-  /**
+  *//**
    * set start element to 0
    * 
    * @author André
-   */
+   *//*
   public void setStartElement() {
     Index = 0;
   }
 
-  /**
+  *//**
    * return a MathObject of the passed number
    * 
    * @author André
    * @param number
    *            of the required element
    * @return MathObj
-   */
+   *//*
   public MathObj getElement(int i) {
     return MathList.get(i);
   }
 
-  /**
+  *//**
    * returns the next in the list existing MathObj
    * 
    * @author André
    * @return MathObj
-   */
+   *//*
   public MathObj getNextElement() {
     Index = Index + 1;
     return MathList.get(Index - 1);
   }
 
-  /**
+  *//**
    * method creates a float value based mathobj out of a given string
    * 
    * @author André
    * @param aNumberContainingString
    * @return MathObj
-   */
+   *//*
   private MathObj buildNumberMathObject(String aNumberContainingString) {
     Float tmpFl;
     tmpFl = Float.valueOf("0.0").floatValue();
@@ -79,13 +79,13 @@ public class Formula {
     return tmpNumberObj;
   }
 
-  /**
+  *//**
    * method creates a operator mathobj out of a given string
    * 
    * @author André
    * @param aOperatorContainingString
    * @return MathObj
-   */
+   *//*
   private MathObj buildOperatorMathObject(String aOperatorContainingString) {
     OperatorType tmpOpType;
     if (aOperatorContainingString.equals("-")) {
@@ -101,11 +101,11 @@ public class Formula {
     return tmpOp;
   }
 
-  /**
+  *//**
    * method creates a mathobj list out of the form string
    * 
    * @author André
-   */
+   *//*
   private void toLinkedList() {
     int iLenOfString;
     iLenOfString = pFormula.length();
@@ -146,4 +146,4 @@ public class Formula {
     MathList.add(tmpEndMathObj);
   }
 
-}
+}*/

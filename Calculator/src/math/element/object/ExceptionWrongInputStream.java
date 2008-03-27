@@ -5,15 +5,15 @@ package math.element.object;
 
 /**
  * @author André
- *
+ * 
  */
-public class ExceptionWrongInputStream extends IllegalArgumentException{
+public class ExceptionWrongInputStream extends IllegalArgumentException {
 
-  public ExceptionWrongInputStream(){
+  public ExceptionWrongInputStream() {
     super();
-  }  
-  
-  public ExceptionWrongInputStream(String message){
+  }
+
+  public ExceptionWrongInputStream(String message) {
     super(message);
   }
-} 
+}

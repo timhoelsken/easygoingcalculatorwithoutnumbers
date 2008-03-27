@@ -1,26 +1,25 @@
 package math.element.object;
 
-
 /**
- *
+ * 
  */
 public class Variable extends Operand {
 
-	private char value;
+  private char value;
 
-	/**
-	 * @return the value
-	 */
-	public float getValue() {
-		return value;
-	}
+  /**
+   * @return the value
+   */
+  public float getValue() {
+    return value;
+  }
 
-	/**
-	 * constructor
-	 *
-	 * @param aValue
-	 */
-	public Variable(char aValue) {
-		value = aValue;
-	}
+  /**
+   * constructor
+   * 
+   * @param aValue
+   */
+  public Variable(char aValue) {
+    value = aValue;
+  }
 }

@@ -12,7 +12,7 @@ import junit.textui.TestRunner;
 
 /**
  * @author Tobias
- *
+ * 
  */
 public class MathUtilTest extends TestCase {
 
@@ -55,7 +55,7 @@ public class MathUtilTest extends TestCase {
 
   /**
    * Start the MathUtilTest here.
-   *
+   * 
    * @param args
    */
   public static void main(String[] args) {

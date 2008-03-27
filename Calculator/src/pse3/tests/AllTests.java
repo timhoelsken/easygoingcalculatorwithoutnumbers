@@ -8,10 +8,9 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 
-
 /**
  * @author Tobias
- *
+ * 
  */
 public class AllTests extends TestCase {
 
@@ -27,7 +26,7 @@ public class AllTests extends TestCase {
 
   /**
    * Start the pse3.tests here.
-   *
+   * 
    * @param args
    */
   public static void main(String[] args) {

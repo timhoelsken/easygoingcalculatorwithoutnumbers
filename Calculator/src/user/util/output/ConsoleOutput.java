@@ -3,7 +3,7 @@ package user.util.output;
 /**
  * 
  * @author Tim
- *
+ * 
  */
 public class ConsoleOutput {
 
@@ -23,7 +23,7 @@ public class ConsoleOutput {
 
   /**
    * Prompts the user to type a term.
-   *  
+   * 
    */
   public void showInputPrompt() {
     System.out.println("\nBitte geben Sie einen Term ein:\n");
@@ -72,8 +72,8 @@ public class ConsoleOutput {
   }
 
   /**
-   * A given result will be printed on the console, with a
-   * static prefix sentance.
+   * A given result will be printed on the console, with a static prefix
+   * sentance.
    * 
    * @param anOutput
    */

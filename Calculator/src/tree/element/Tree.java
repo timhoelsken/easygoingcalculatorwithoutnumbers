@@ -5,7 +5,7 @@ import math.element.object.NumberObj;
 import math.element.object.Operator;
 
 /**
- *
+ * 
  */
 public class Tree {
   private MathObj root;
@@ -68,7 +68,7 @@ public class Tree {
 
   /**
    * constructor (sets both sons to NULL)
-   *
+   * 
    * @param aRoot
    */
   public Tree(MathObj aRoot) {
@@ -78,7 +78,7 @@ public class Tree {
 
   /**
    * constructor
-   *
+   * 
    * @param aRoot
    * @param aLeft
    * @param aRight
@@ -92,7 +92,7 @@ public class Tree {
 
   /**
    * paints current tree on the console
-   *
+   * 
    * @author Tobias
    */
   public void paintMe() {
@@ -133,7 +133,7 @@ public class Tree {
     }
   }
 
-  //TODO in util klasse ausgliedern
+  // TODO in util klasse ausgliedern
   private String centerStringInSpaces(String someSpaces, String aString) {
     String tmpReturnString = new String();
     int tmpSpaceLength = someSpaces.length();
@@ -227,6 +227,7 @@ public class Tree {
 
   /**
    * start for testing paintMe()
+   * 
    * @param args
    * @throws Exception
    */

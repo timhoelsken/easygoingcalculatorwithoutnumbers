@@ -31,6 +31,9 @@ public class ConverterUtil {
     checkNegativeNumbers(aFormula);
     checkOperators(aFormula);
     checkBrackets(aFormula);
+    //TODO checkSequence(); Es muss immer folgende Reihenfolge eingehalten werden: Zahl oder unärer
+    //* Operator (mit Klammerausdruck), Binärer Operator, Zahl oder unärer
+    //* Operator (mit Klammerausdruck), binärer operator....
     aFormula = changeFunctionsIntoSigns(aFormula);
 
     return aFormula;

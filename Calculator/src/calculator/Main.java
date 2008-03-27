@@ -52,8 +52,7 @@ public class Main {
             tmpOutput.printError(e.getMessage());
           }
 
-          // TODO hier solltet
-          // dann sinnvoll was mit dem Term angestellt werden
+          // TODO hier sollte dann sinnvoll was mit dem Term angestellt werden
           System.out.println("Sie haben eingegeben:\n" + tmpInputString);
           System.out.println("das bereinigte Ergebnis ist:");
           System.out.println(ConverterUtil.termToStandardString(tmpInputString));

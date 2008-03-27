@@ -25,6 +25,10 @@ public class MathUtil {
     return (aChar == COMMA);
   }
 
+  public static boolean IsMinus(char aChar) {
+    return (aChar == '-');
+  }
+
   /**
    * @param aChar
    * @return true if char is operator
@@ -34,8 +38,11 @@ public class MathUtil {
       case '+':
       case '-':
       case '*':
-      case ':':
       case '/':
+      case '%':
+      case '#':
+      case '?':
+      case '~':
         return true;
       default:
         return false;
@@ -174,8 +181,8 @@ public class MathUtil {
    * 
    * @author André
    * @return ArrayList of mathobj
-   * @param aFormula sting which contains a formula
-   *          containing string
+   * @param aFormula
+   *          sting which contains a formula containing string
    * @todo Andre: Add support for negative numbers and brackets
    */
   public static ArrayList<MathObj> FormulaToArrayList(String aFormula) {
@@ -188,34 +195,55 @@ public class MathUtil {
     int iEndPosition = 0;
 
     while (iStartPosition < iLenOfString) {
-      if ((MathUtil.IsNumber(aFormula.charAt(iStartPosition)))
-          || (MathUtil.IsComma(aFormula.charAt(iStartPosition)))) {
+      if ((MathUtil.IsNumber(aFormula.charAt(iStartPosition)))) {
         iEndPosition = iStartPosition + 1;
         while ((iEndPosition < iLenOfString)
             && ((MathUtil.IsNumber(aFormula.charAt(iEndPosition))) || (MathUtil.IsComma(aFormula
                 .charAt(iEndPosition))))) {
-          iEndPosition = iEndPosition + 1;
+          iEndPosition++;
         }
         try {
           MathList.add(buildNumberMathObject(aFormula.substring(iStartPosition, iEndPosition)));
         } catch (Exception e) {
           System.out.println(e.getMessage());
         }
+      } else if (MathUtil.IsLeftBracket(aFormula.charAt(iStartPosition))
+          && (MathUtil.IsMinus(aFormula.charAt(iStartPosition + 1)))) {
+        iStartPosition++;
+        iEndPosition = iStartPosition + 1;
+        while ((MathUtil.IsRightBracket(aFormula.charAt(iEndPosition))) == false) {
+          iEndPosition++;
+        }
+        try {
+          MathList.add(buildNumberMathObject(aFormula.substring(iStartPosition, iEndPosition)));
+        } catch (Exception e) {
+          System.out.println(e.getMessage());
+        }
+        iEndPosition++;
       } else if (MathUtil.IsOperator(aFormula.charAt(iStartPosition))) {
         iEndPosition = iStartPosition + 1;
         while ((iEndPosition < iLenOfString) && (MathUtil.IsOperator(aFormula.charAt(iEndPosition)))) {
-          iEndPosition = iEndPosition + 1;
+          iEndPosition++;
         }
         try {
           MathList.add(buildOperatorMathObject(aFormula.substring(iStartPosition, iEndPosition)));
         } catch (Exception e) {
+          System.out.print(e.getMessage());
         }
       } else {
         throw new ExceptionWrongInputStream("Input String contains non valid characters!");
       }
       iStartPosition = iEndPosition;
     }
-
+    
+    /**
+     * for testing
+     */
+    for (MathObj tmpNextElement:MathList)
+    {
+      System.out.println(tmpNextElement.toString());
+    }
+    
     return MathList;
   }
 

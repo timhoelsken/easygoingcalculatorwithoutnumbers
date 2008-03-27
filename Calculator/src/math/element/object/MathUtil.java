@@ -41,6 +41,33 @@ public class MathUtil {
         return false;
     }
   }
+  
+  /**
+   * 
+   * @param aChar
+   * @return true if char is left bracket
+   */
+  public static boolean IsLeftBracket(char aChar) {
+    return (aChar == '(');
+  }
+  
+  /**
+   * 
+   * @param aChar
+   * @return true if char is a right bracket
+   */
+  public static boolean IsRightBracket(char aChar) {
+     return (aChar == ')');
+  }
+  
+  /**
+   * 
+   * @param aChar
+   * @return true if char is a bracket
+   */
+  public static boolean IsBracket(char aChar) {
+    return (IsRightBracket(aChar) ? true : IsLeftBracket(aChar)); 
+  }
 
   /**
    * @param aFunction

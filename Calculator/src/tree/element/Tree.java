@@ -184,6 +184,7 @@ public class Tree {
   }
 
   // TODO @André Mach, dass MathObj mir sagt, was es ist (als String)
+  // TODO @Tobi habe mein Todo erledigt, bitte deine Methode entsprechend anpassen und testen. 
   private String getValue(MathObj aMathObj) {
     String tmpReturnString = null;
     if (aMathObj instanceof NumberObj) {

@@ -190,6 +190,10 @@ public class Converter {
         tmpRightBracketCounter++;
         tmpOpenCloseCounter--;
       }
+      
+      if (tmpOpenCloseCounter <0){
+        return false;
+      }
     }
 
     // TODO @Tim sobald tmpOpenCloseCounter<0 (auch innerhalb des Terms) ist die
@@ -205,7 +209,7 @@ public class Converter {
 
     // ??? Ich steh grad auf dem Schlauch... was mach ich denn bitte? Genau DAS!
     // :D
-    if ((tmpRightBracketCounter != tmpLeftBracketCounter) || tmpOpenCloseCounter < 0) {
+    if (tmpRightBracketCounter != tmpLeftBracketCounter) {
       return false;
     }
 

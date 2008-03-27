@@ -21,8 +21,6 @@ public class ConverterUtil {
    */
   public static String termToStandardString(String aFormula) throws IllegalArgumentException {
 
-    // TODO @Tim check für führende Nullen
-
     checkIfValidSignsOnly(aFormula);
     checkIfValidBlanksOnly(aFormula);
     aFormula = unifyCommas(aFormula);

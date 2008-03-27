@@ -16,7 +16,7 @@ public class ConverterUtil {
    * @param args
    */
   public static void main(String[] args) {
-    String tmpString = "-3432+23";
+    String tmpString = "-3432+(3+-23)";
     System.out.println(termToStandardString(tmpString));
   }
 
@@ -37,9 +37,9 @@ public class ConverterUtil {
     checkDecimalNumbers(aFormula);
     aFormula = removeBlanks(aFormula);
     aFormula = insertMultiplicationOperators(aFormula);
-    checkOperators(aFormula);
     aFormula = setBracketsAroundNegativeNumbers(aFormula);
     checkNegativeNumbers(aFormula);
+    checkOperators(aFormula);
     checkBrackets(aFormula);
     aFormula = changeFunctionsIntoSigns(aFormula);
 

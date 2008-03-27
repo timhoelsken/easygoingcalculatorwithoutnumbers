@@ -46,6 +46,309 @@ public class StringConvertTest extends TestCase {
     assertTrue("The String has Variables separated by *", tmpConverter
         .insertMultiplicationOperators(tmpString).equals("2*a+a*b"));
   }
+  
+
+  /**
+   * Test method for
+   * {@link user.util.input.ConverterUtil#checkIfValidSignsOnly()}.
+   */
+  public void checkIfValidSignsOnly() {
+	
+	//positive test
+	try
+	{
+		ConverterUtil.checkIfValidSignsOnly(".,abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-*/+^()");
+	}
+	catch (Exception e)
+	{
+		assert(false);
+	}
+	
+	//negative test
+	Boolean tmpErrorOccurred = false;
+	try
+	{
+		ConverterUtil.checkIfValidSignsOnly("%");
+	}
+	catch (Exception e)
+	{
+		tmpErrorOccurred = true;
+	}    
+	assert( !tmpErrorOccurred );
+	
+	//negative test
+	tmpErrorOccurred = false;
+	try
+	{
+		ConverterUtil.checkIfValidSignsOnly("ä");
+	}
+	catch (Exception e)
+	{
+		tmpErrorOccurred = true;
+	}    
+	assert( !tmpErrorOccurred );
+
+  }
+  
+  /**
+   * Test method for
+   * {@link user.util.input.ConverterUtil#checkIfValidBlanksOnly()}.
+   */
+  public void checkIfValidBlanksOnly()
+  {
+	  assert(false); //Test noch nicht geschrieben!!!
+  }
+  
+  /**
+   * Test method for
+   * {@link user.util.input.ConverterUtil#removeBlanks()}.
+   */
+  public void removeBlanks()
+  {
+	  assert(ConverterUtil.removeBlanks("2+  3+4 5 + 666").equalsIgnoreCase("2+3+45+666"));
+  }
+  
+  /**
+   * Test method for
+   * {@link user.util.input.ConverterUtil#unifyCommas()}.
+   */
+  public void unifyCommas()
+  {
+	  assert(ConverterUtil.unifyCommas(",,dfa34.,.,.").equalsIgnoreCase("..dfa34....."));
+  }
+  
+  /**
+   * Test method for
+   * {@link user.util.input.ConverterUtil#checkDecimalNumbers()}.
+   */
+  public void checkDecimalNumbers()
+  {
+	  assert(false); //noch kein code review stattgefunden
+	  
+	//positive test
+		try
+		{
+			ConverterUtil.checkDecimalNumbers("5.6+34+2.0+100.9");
+		}
+		catch (Exception e)
+		{
+			assert(false);
+		}
+		
+		//negative test
+		Boolean tmpErrorOccurred = false;
+		try
+		{
+			ConverterUtil.checkDecimalNumbers("5.6.3+34+2.0+100.9");
+		}
+		catch (Exception e)
+		{
+			tmpErrorOccurred = true;
+		}    
+		assert( !tmpErrorOccurred );
+		
+		//negative test
+		tmpErrorOccurred = false;
+		try
+		{
+			ConverterUtil.checkDecimalNumbers(".");
+		}
+		catch (Exception e)
+		{
+			tmpErrorOccurred = true;
+		}    
+		assert( !tmpErrorOccurred );
+		
+		//negative test
+		tmpErrorOccurred = false;
+		try
+		{
+			ConverterUtil.checkDecimalNumbers(".999+7");
+		}
+		catch (Exception e)
+		{
+			tmpErrorOccurred = true;
+		}    
+		assert( !tmpErrorOccurred );
+  }
+  
+  /**
+   * Test method for
+   * {@link user.util.input.ConverterUtil#insertMultiplicationOperators()}.
+   */
+  public void insertMultiplicationOperators()
+  {
+	  assert(ConverterUtil.insertMultiplicationOperators("3+5.5xa4bc3def5gh+sin+cos6").equals("3+5.5*x*a*4*b*c*3*d*e*f*5*g*h+s*i*n+c*o*s*6"));
+  }
+  
+  /**
+   * Test method for
+   * {@link user.util.input.ConverterUtil#checkOperators()}.
+   */
+  public void checkOperators()
+  {
+	//positive test
+		try
+		{
+			ConverterUtil.checkOperators("5+6-98*(23^2)-98/8");
+		}
+		catch (Exception e)
+		{
+			assert(false);
+		}
+		
+		//negative test
+		Boolean tmpErrorOccurred = false;
+		try
+		{
+			ConverterUtil.checkOperators("+(23*55)");
+		}
+		catch (Exception e)
+		{
+			tmpErrorOccurred = true;
+		}    
+		assert( !tmpErrorOccurred );
+		
+		//negative test
+		tmpErrorOccurred = false;
+		try
+		{
+			ConverterUtil.checkOperators("23+-99+9*8");
+		}
+		catch (Exception e)
+		{
+			tmpErrorOccurred = true;
+		}    
+		assert( !tmpErrorOccurred );
+		
+		//negative test
+		tmpErrorOccurred = false;
+		try
+		{
+			ConverterUtil.checkOperators("23*(+99)");
+		}
+		catch (Exception e)
+		{
+			tmpErrorOccurred = true;
+		}    
+		assert( !tmpErrorOccurred );
+		
+		//negative test
+		tmpErrorOccurred = false;
+		try
+		{
+			ConverterUtil.checkOperators("23*(2+99^)");
+		}
+		catch (Exception e)
+		{
+			tmpErrorOccurred = true;
+		}    
+		assert( !tmpErrorOccurred );
+		
+		//negative test
+		tmpErrorOccurred = false;
+		try
+		{
+			ConverterUtil.checkOperators("23*(2+99)**2");
+		}
+		catch (Exception e)
+		{
+			tmpErrorOccurred = true;
+		}    
+		assert( !tmpErrorOccurred );
+  }
+  
+  /**
+   * Test method for
+   * {@link user.util.input.ConverterUtil#setBracketsAroundNegativeNumbers()}.
+   */
+  public void setBracketsAroundNegativeNumbers()
+  {
+	  assert(false);
+  }
+  
+  
+  /**
+   * Test method for
+   * {@link user.util.input.ConverterUtil#putBracketsAroundNegativeNumber()}.
+   */
+  public void putBracketsAroundNegativeNumber()
+  {
+	  assert(false);
+  }
+
+  /**
+   * Test method for
+   * {@link user.util.input.ConverterUtil#checkNegativeNumbers()}.
+   */
+  public void checkNegativeNumbers()
+  {
+	  assert(false);
+  }
+  
+  /**
+   * Test method for
+   * {@link user.util.input.ConverterUtil#checkBrackets()}.
+   */
+  public void checkBrackets()
+  {
+	  assert(false);
+  }
+  
+  /**
+   * Test method for
+   * {@link user.util.input.ConverterUtil#changeFunctionsIntoSigns()}.
+   */
+  public void changeFunctionsIntoSigns()
+  {
+	  assert(false);
+  }
+  
+  /**
+   * Test method for
+   * {@link user.util.input.ConverterUtil#getNextBlankPosition()}.
+   */
+  public void getNextBlankPosition()
+  {
+	  assert(false);
+  }
+  
+  /**
+   * Test method for
+   * {@link user.util.input.ConverterUtil#isNumericOrVariable()}.
+   */
+  public void isNumericOrVariable()
+  {
+	  assert(false);
+  }
+  
+  /**
+   * Test method for
+   * {@link user.util.input.ConverterUtil#isNumeric}.
+   */
+  public void isNumeric()
+  {
+	  assert(false);
+  }
+  
+  /**
+   * Test method for
+   * {@link user.util.input.ConverterUtil#isVariable}.
+   */
+  public void isVariable()
+  {
+	  assert(false);
+  }
+  
+  
+  /**
+   * Test method for
+   * {@link user.util.input.ConverterUtil#termToStandardString()}.
+   */
+  public void termToStandardString()
+  {
+	  assert(false);
+  }
 
   // TODO @Raphi Tests fürs ConverterUtil schreiben (alles testbare ist jetzt
   // public - siehe Methodennamen im Kommentar)

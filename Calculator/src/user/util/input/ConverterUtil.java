@@ -42,7 +42,7 @@ public class ConverterUtil {
    *             if illegal signs in the formula
    */
   public static void checkIfValidSignsOnly(String aFormula) throws IllegalArgumentException {
-    Pattern tmpPattern = Pattern.compile("[\\()\\,\\.²³\\+\\-\\*/\\^[0-9] ]*");
+    Pattern tmpPattern = Pattern.compile("[\\()\\,\\.\\+\\-\\*/\\^\\w ]*");
     Matcher tmpMatcher = tmpPattern.matcher(aFormula);
     if (!tmpMatcher.matches()) {
       throw new IllegalArgumentException("The formula contains invalid signs.");
@@ -130,10 +130,21 @@ public class ConverterUtil {
    * @author Tobias
    */
   public static void checkOperators(String aFormula) throws IllegalArgumentException {
+    if (aFormula.length() > 1 && aFormula.charAt(1) == '(') {
+      Pattern tmpPattern = Pattern.compile("[\\+\\-\\*/\\^]");
+      if (tmpPattern.matcher(Character.toString(aFormula.charAt(0))).find()) {
+        throw new IllegalArgumentException("Do not let a bracket follow a alone standing arithmetic operator.");
+      }
+    }
     Pattern tmpPattern = Pattern.compile("[\\+\\-\\*/\\^] *[\\+\\-\\*/\\^\\)]");
     Matcher tmpMatcher = tmpPattern.matcher(aFormula);
     if (tmpMatcher.find()) {
       throw new IllegalArgumentException("The order of operators in the formula is not correct.");
+    }
+    tmpPattern = Pattern.compile("\\([\\+\\-\\*/\\^]");
+    tmpMatcher = tmpPattern.matcher(aFormula);
+    if (tmpMatcher.find()) {
+      throw new IllegalArgumentException("Do not let a bracket follow a alone standing arithmetic operator.");
     }
   }
 

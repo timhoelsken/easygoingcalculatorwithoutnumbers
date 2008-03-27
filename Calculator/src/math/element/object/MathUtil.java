@@ -127,6 +127,14 @@ public class MathUtil {
       tmpOpType = OperatorType.DIVISION;
     } else if (aOperatorContainingString.equals("*")) {
       tmpOpType = OperatorType.MULTIPLICATION;
+    } else if (aOperatorContainingString.equals("%")) {
+      tmpOpType = OperatorType.SIN;
+    } else if (aOperatorContainingString.equals("~")) {
+      tmpOpType = OperatorType.COS;
+    } else if (aOperatorContainingString.equals("#")) {
+      tmpOpType = OperatorType.TAN;
+    } else if (aOperatorContainingString.equals("&")) {
+      tmpOpType = OperatorType.SQRT;
     } else {
       tmpOpType = OperatorType.ADDITION;
     }

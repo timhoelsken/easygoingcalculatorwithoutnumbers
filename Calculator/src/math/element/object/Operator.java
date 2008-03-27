@@ -43,12 +43,22 @@ public class Operator extends MathObj {
 
   public String toString() {
     switch (operatorType) {
+      case ADDITION:
+        return "+";
       case DIVISION:
         return "/";
       case MULTIPLICATION:
         return "*";
       case SUBTRACTION:
         return "-";
+      case TAN:
+        return "tan";
+      case SIN:
+        return "sin";
+      case COS:
+        return "cos";
+      case SQRT:
+        return "sqrt";
       default:
         return "+";
     }

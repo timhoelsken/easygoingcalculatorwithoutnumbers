@@ -19,5 +19,21 @@ public enum OperatorType {
   /**
    * division
    */
-  DIVISION;
+  DIVISION,
+  /**
+   * sinus
+   */
+  SIN,
+  /**
+   * cosinus
+   */
+  COS,
+  /**
+   * tangens
+   */
+  TAN,
+  /**
+   * square root
+   */
+  SQRT;
 }

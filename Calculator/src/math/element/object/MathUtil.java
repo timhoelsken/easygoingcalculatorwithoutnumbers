@@ -178,8 +178,6 @@ public class MathUtil {
       iStartPosition = iEndPosition;
     }
 
-    MathObj tmpEndMathObj = new MathObj(MathType.END_OF_TERM);
-    MathList.add(tmpEndMathObj);
     return MathList;
   }
 

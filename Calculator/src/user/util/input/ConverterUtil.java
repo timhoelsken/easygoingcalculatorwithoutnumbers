@@ -149,16 +149,6 @@ public class ConverterUtil {
   }
 
   /**
-   * main for tests
-   *
-   * @param args
-   */
-  public static void main(String[] args) {
-    String tmpString = "-3432+(-23-12)-25*(-25)+-(12*3)";
-    tmpString = setBracketsAroundNegativeNumbers(tmpString);
-  }
-
-  /**
    * sets brackets around negative numbers at the beginning of the formular or
    * at the beginning of brackets
    *

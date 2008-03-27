@@ -6,7 +6,7 @@ package pse3.tests;
 import junit.framework.JUnit4TestAdapter;
 import junit.framework.Test;
 import junit.framework.TestCase;
-import user.util.input.Converter;
+import user.util.input.ConverterUtil;
 
 /**
  * @author Tim
@@ -16,33 +16,33 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link user.util.input.Converter#termToStandardString(java.lang.String)}.
+   * {@link user.util.input.ConverterUtil#termToStandardString(java.lang.String)}.
    *
    * @throws Exception
    */
   public void testTermToStandardString() throws Exception {
     String tmpString = new String("2a + a b");
-    assertTrue("The String has Variables separated by *", Converter.termToStandardString(tmpString).equals(
+    assertTrue("The String has Variables separated by *", ConverterUtil.termToStandardString(tmpString).equals(
         "2*a+a*b"));
   }
 
   /**
    * Test method for
-   * {@link user.util.input.Converter#removeBlanks(java.lang.String)}.
+   * {@link user.util.input.ConverterUtil#removeBlanks(java.lang.String)}.
    */
   public void testRemoveBlanks() {
     String tmpString = new String("2 + 4");
-    Converter tmpConverter = new Converter();
+    ConverterUtil tmpConverter = new ConverterUtil();
     assertTrue(tmpConverter.removeBlanks(tmpString).equals("2+4"));
   }
 
   /**
    * Test method for
-   * {@link user.util.input.Converter#insertMultiplicationOperators(java.lang.String)}.
+   * {@link user.util.input.ConverterUtil#insertMultiplicationOperators(java.lang.String)}.
    */
   public void testCleanVariables() {
     String tmpString = new String("2a+ab");
-    Converter tmpConverter = new Converter();
+    ConverterUtil tmpConverter = new ConverterUtil();
     assertTrue("The String has Variables separated by *", tmpConverter
         .insertMultiplicationOperators(tmpString).equals("2*a+a*b"));
   }

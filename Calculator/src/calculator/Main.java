@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import tree.element.FormulaTreeBuilder;
 import user.util.input.ConsoleInput;
-import user.util.input.Converter;
+import user.util.input.ConverterUtil;
 import user.util.output.ConsoleOutput;
 import tree.element.*;
 
@@ -56,12 +56,12 @@ public class Main {
           // dann sinnvoll was mit dem Term angestellt werden
           System.out.println("Sie haben eingegeben:\n" + tmpInputString);
           System.out.println("das bereinigte Ergebnis ist:");
-          System.out.println(Converter.termToStandardString(tmpInputString));
+          System.out.println(ConverterUtil.termToStandardString(tmpInputString));
 
           try {
             FormulaTreeBuilder tmpFormulaTreeBuilder = new FormulaTreeBuilder();
 
-            Tree tmpTree = tmpFormulaTreeBuilder.BuildTree(Converter.termToStandardString(tmpInputString));
+            Tree tmpTree = tmpFormulaTreeBuilder.BuildTree(ConverterUtil.termToStandardString(tmpInputString));
 
             System.out.println(FormulaTreeBuilder.EvaluateTree(tmpTree));
 

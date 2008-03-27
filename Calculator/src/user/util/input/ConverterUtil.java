@@ -156,7 +156,7 @@ public class ConverterUtil {
   // TODO finalize and call this method :P
   public static String setBracketsAroundNegativeNumbers(String aFormula) {
     if (aFormula.charAt(0) == '-') {
-      // TODO regard brackets?!!!!! :-!
+      // TODO @Tobi regard brackets?!!!!! :-!
       // bis jetzt behandelt die Methode nur die Minuszahl am Anfang der Formel
       int i = 1;
       Matcher tmpMatcher;

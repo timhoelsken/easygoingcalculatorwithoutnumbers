@@ -209,8 +209,11 @@ public class ConverterUtil {
       if (aFormula.charAt(i) == ')')
         --tmpSum;
       if (tmpSum < 0) {
-        throw new IllegalArgumentException("Wrong brackets in the formula.");
+        throw new IllegalArgumentException("Wrong bracket order in the formula.");
       }
+    }
+    if (tmpSum != 0) {
+      throw new IllegalArgumentException("Missing closing brackets in the formula.");
     }
   }
 

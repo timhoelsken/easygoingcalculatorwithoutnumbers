@@ -9,15 +9,15 @@ import user.util.output.ConsoleOutput;
 import tree.element.*;
 
 /**
- * 
+ *
  * @author Tim
- * 
+ *
  */
 public class Main {
 
   /**
    * The Calculator
-   * 
+   *
    * @param args
    * @throws Exception
    */
@@ -26,7 +26,6 @@ public class Main {
     ConsoleInput tmpInput = new ConsoleInput();
     ConsoleOutput tmpOutput = new ConsoleOutput();
     Boolean runCalculator = true;
-    Converter tmpConverter = new Converter();
     String tmpInputString = new String("");
     tmpOutput.showTitle();
 
@@ -57,12 +56,12 @@ public class Main {
           // dann sinnvoll was mit dem Term angestellt werden
           System.out.println("Sie haben eingegeben:\n" + tmpInputString);
           System.out.println("das bereinigte Ergebnis ist:");
-          System.out.println(tmpConverter.termToStandardString(tmpInputString));
+          System.out.println(Converter.termToStandardString(tmpInputString));
 
           try {
             FormulaTreeBuilder tmpFormulaTreeBuilder = new FormulaTreeBuilder();
 
-            Tree tmpTree = tmpFormulaTreeBuilder.BuildTree(tmpConverter.termToStandardString(tmpInputString));
+            Tree tmpTree = tmpFormulaTreeBuilder.BuildTree(Converter.termToStandardString(tmpInputString));
 
             System.out.println(FormulaTreeBuilder.EvaluateTree(tmpTree));
 

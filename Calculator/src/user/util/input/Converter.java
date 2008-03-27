@@ -4,15 +4,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- *
+ * 
  * @author Tim
- *
+ * 
  */
 public class Converter {
   // TODO @Tim&Tobias make methods static
   /**
    * Method that first calls removeBlanks, then cleanVariables
-   *
+   * 
    * @param anInputString
    * @return a standard Term
    * @throws Exception
@@ -35,7 +35,7 @@ public class Converter {
 
   /**
    * Replaces sin, cos, tan, sqrt functions with abbreviation signs
-   *
+   * 
    * @param anInputString
    * @return a string containing abbreviation sign, defined in
    *         Standard-String.txt
@@ -100,7 +100,7 @@ public class Converter {
 
   /**
    * Replaces all commas (,) of a string with full-stops (.)
-   *
+   * 
    * @param anInputString
    * @return a string containing .
    */
@@ -196,19 +196,6 @@ public class Converter {
       }
     }
 
-    // TODO @Tim sobald tmpOpenCloseCounter<0 (auch innerhalb des Terms) ist die
-    // Formel kaputt. Eine Prüfung reicht nicht.
-    //
-    // RAPHIs VORSCHLAG:
-    // for (int i = 0; i < anInputString.length(); i++){
-    // if (anInputString.charAt(i) == '(') summe=summe+1
-    // if (anInputString.charAt(i) == ')') summe=summe-1
-    // if (summe < 0) return false;
-    // }
-    // return (summe == 0);
-
-    // ??? Ich steh grad auf dem Schlauch... was mach ich denn bitte? Genau DAS!
-    // :D
     if (tmpRightBracketCounter != tmpLeftBracketCounter) {
       return false;
     }
@@ -223,7 +210,7 @@ public class Converter {
    * @author Tobias
    */
   private static boolean checkOperators(String anInputString) {
-    Pattern tmpPattern = Pattern.compile("[\\+\\-\\*/^] *[\\+\\-\\*/^]");
+    Pattern tmpPattern = Pattern.compile("[\\+\\-\\*/] *[\\+\\-\\*/]");
     Matcher tmpMatcher = tmpPattern.matcher(anInputString);
     if (tmpMatcher.find()) {
       return false;
@@ -233,7 +220,7 @@ public class Converter {
 
   /**
    * Checks if there are only valid blanks in the string
-   *
+   * 
    * @param aAnInputString
    * @return true if the string contains only valid blanks
    */
@@ -256,7 +243,7 @@ public class Converter {
 
   /**
    * gets the position of the next blank in a string
-   *
+   * 
    * @param anInputString
    * @param aStartPosition
    * @return The position of the next blank in the given String, returns -1 if
@@ -278,13 +265,12 @@ public class Converter {
   /**
    * A method to clean the whitespaces in anInputString. replaces "2 + 3" with
    * "2+3"
-   *
+   * 
    * @param anInputString
    * @return
    */
   public String removeBlanks(String anInputString) {
-    // TODO @Tim da gibt's ne Methode String.replace()
-    // TODO @whoever ich kann keinen empty Char als Replace benutzen
+
     String tmpOutput = new String("");
 
     for (int i = 0; i < anInputString.length(); i++) {
@@ -299,7 +285,7 @@ public class Converter {
   /**
    * A method to clean the variables in anInputString. Variables "ab" will be
    * replaced with "a*b" "2a" will be replaced with "2*a"
-   *
+   * 
    * @param anInputString
    * @return a String that contains no "ab" or "2a" variables
    */
@@ -329,7 +315,6 @@ public class Converter {
 
     String tmpNumbers = new String("0123456789");
     // TODO @Tim Regex Pattern.compile("[0-9]")
-    // TODO @whoever ich liefer mir nen Char, das will RegEx nicht
 
     for (int i = 0; i < tmpNumbers.length(); i++) {
       if (tmpNumbers.charAt(i) == aCharacter) {
@@ -353,7 +338,7 @@ public class Converter {
 
   private static boolean containsValidSignsOnly(String anInputString) {
 
-    String tmpValidSigns = new String("(),.²³+*/-");
+    String tmpValidSigns = new String("(),.²³+*/-^");
 
     for (int i = 0; i < anInputString.length(); i++) {
       for (int j = 0; j < tmpValidSigns.length(); j++) {

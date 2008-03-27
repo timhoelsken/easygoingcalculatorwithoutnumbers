@@ -41,7 +41,7 @@ public class MathUtil {
         return false;
     }
   }
-  
+
   /**
    * 
    * @param aChar
@@ -50,23 +50,23 @@ public class MathUtil {
   public static boolean IsLeftBracket(char aChar) {
     return (aChar == '(');
   }
-  
+
   /**
    * 
    * @param aChar
    * @return true if char is a right bracket
    */
   public static boolean IsRightBracket(char aChar) {
-     return (aChar == ')');
+    return (aChar == ')');
   }
-  
+
   /**
    * 
    * @param aChar
    * @return true if char is a bracket
    */
   public static boolean IsBracket(char aChar) {
-    return (IsRightBracket(aChar) ? true : IsLeftBracket(aChar)); 
+    return (IsRightBracket(aChar) ? true : IsLeftBracket(aChar));
   }
 
   /**
@@ -173,13 +173,16 @@ public class MathUtil {
    * method creates a mathobj list out of the form string
    * 
    * @author André
-   * @retun ArrayList<MathObj>
+   * @return ArrayList of mathobj
+   * @param aFormula sting which contains a formula
+   *          containing string
+   * @todo Andre: Add support for negative numbers and brackets
    */
   public static ArrayList<MathObj> FormulaToArrayList(String aFormula) {
+    ArrayList<MathObj> MathList = new ArrayList<MathObj>();
+
     int iLenOfString;
     iLenOfString = aFormula.length();
-
-    ArrayList<MathObj> MathList = new ArrayList<MathObj>();
 
     int iStartPosition = 0;
     int iEndPosition = 0;

@@ -133,12 +133,6 @@ public final class FormulaTreeBuilder {
    */
   public Tree BuildTree(String aFunction) throws Exception {
 
-	// TODO @Andre Hinweis: so kannste dir das END_OF_TERM sparen und brauchst auch nich
-	    // extra nen Iterator. Die For-Schleife bricht automatisch am Ende der Liste ab:
-	    // for (MathObj tmpMathObj : MathList) {
-	    //      ...
-	    // }
-	  //Kannst du dann bitte das END_OF_TERM entfernen?
 	  
 	 // prepare formula, mathobj and tmptree
 	formulaTree = null;

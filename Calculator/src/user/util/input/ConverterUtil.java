@@ -157,6 +157,8 @@ public class ConverterUtil {
         throw new IllegalArgumentException("Do not let a bracket follow a alone standing arithmetic operator.");
       }
     }
+    //TODO @Tobi, was ist mit dem Fall (3+5)+ ?
+    //TODO @wer lust hat, man bräuchte eine Überprüfung für Eingaben wie z.B. 3+5*
     Pattern tmpPattern = Pattern.compile("[\\+\\-\\*/\\^] *[\\+\\-\\*/\\^\\)]");
     Matcher tmpMatcher = tmpPattern.matcher(aFormula);
     if (tmpMatcher.find()) {

@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 
 /**
- * 
+ *
  */
 public final class FormulaTreeBuilder {
 
   /**
    * Calculates the result of a formula-tree
-   * 
+   *
    * @param aTree
    *            the tree from which the result should be calculated
    * @return the result of the tree is returned as float value
@@ -60,7 +60,7 @@ public final class FormulaTreeBuilder {
 
   /**
    * Inserts an operand into an existing tree
-   * 
+   *
    * @param anExistingTree
    * @param anOperand
    * @return the tree is returned with the focus on the father-operator of the
@@ -83,7 +83,7 @@ public final class FormulaTreeBuilder {
 
   /**
    * Inserts an operator into an existing tree
-   * 
+   *
    * @param anExistingTree
    * @param anOperator
    * @return the tree is returned with the focus on the new operator
@@ -128,7 +128,7 @@ public final class FormulaTreeBuilder {
 
   /**
    * t Builds a binary formula tree :-)
-   * 
+   *
    * @param aFunction
    * @throws Exception
    */
@@ -136,6 +136,13 @@ public final class FormulaTreeBuilder {
 
     // prepare formula, mathobj and tmptree
     ArrayList<MathObj> MathList = MathUtil.FormulaToArrayList(aFunction);
+
+    // TODO @Andre so kannste dir das END_OF_TERM sparen und brauchst auch nich
+    // extra nen Iterator. Die For-Schleife bricht automatisch am Ende der Liste ab:
+    // for (MathObj tmpMathObj : MathList) {
+    //      ...
+    // }
+
     ListIterator<MathObj> MathListIterator = MathList.listIterator();
     MathObj tmpNextElement = null;
     formulaTree = null;

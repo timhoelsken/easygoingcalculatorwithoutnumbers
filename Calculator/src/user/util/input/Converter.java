@@ -4,15 +4,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 
+ *
  * @author Tim
- * 
+ *
  */
 public class Converter {
   // TODO @Tim&Tobias make methods static
   /**
    * Method that first calls removeBlanks, then cleanVariables
-   * 
+   *
    * @param anInputString
    * @return a standard Term
    * @throws Exception
@@ -35,7 +35,7 @@ public class Converter {
 
   /**
    * Replaces sin, cos, tan, sqrt functions with abbreviation signs
-   * 
+   *
    * @param anInputString
    * @return a string containing abbreviation sign, defined in
    *         Standard-String.txt
@@ -100,7 +100,7 @@ public class Converter {
 
   /**
    * Replaces all commas (,) of a string with full-stops (.)
-   * 
+   *
    * @param anInputString
    * @return a string containing .
    */
@@ -172,7 +172,7 @@ public class Converter {
   /**
    * checks if there is the same amount of ( and ) brackets, and if no ) are in
    * lead of ( , that means not more than there should be
-   * 
+   *
    * @param aAnInputString
    * @return true if the brackets in the term are correct
    */
@@ -190,7 +190,7 @@ public class Converter {
         tmpRightBracketCounter++;
         tmpOpenCloseCounter--;
       }
-      
+
       if (tmpOpenCloseCounter <0){
         return false;
       }
@@ -223,7 +223,7 @@ public class Converter {
    * @author Tobias
    */
   private static boolean checkOperators(String anInputString) {
-    Pattern tmpPattern = Pattern.compile("[\\+\\-\\*/] *[\\+\\-\\*/]");
+    Pattern tmpPattern = Pattern.compile("[\\+\\-\\*/^] *[\\+\\-\\*/^]");
     Matcher tmpMatcher = tmpPattern.matcher(anInputString);
     if (tmpMatcher.find()) {
       return false;
@@ -233,7 +233,7 @@ public class Converter {
 
   /**
    * Checks if there are only valid blanks in the string
-   * 
+   *
    * @param aAnInputString
    * @return true if the string contains only valid blanks
    */
@@ -256,7 +256,7 @@ public class Converter {
 
   /**
    * gets the position of the next blank in a string
-   * 
+   *
    * @param anInputString
    * @param aStartPosition
    * @return The position of the next blank in the given String, returns -1 if
@@ -278,7 +278,7 @@ public class Converter {
   /**
    * A method to clean the whitespaces in anInputString. replaces "2 + 3" with
    * "2+3"
-   * 
+   *
    * @param anInputString
    * @return
    */
@@ -299,7 +299,7 @@ public class Converter {
   /**
    * A method to clean the variables in anInputString. Variables "ab" will be
    * replaced with "a*b" "2a" will be replaced with "2*a"
-   * 
+   *
    * @param anInputString
    * @return a String that contains no "ab" or "2a" variables
    */

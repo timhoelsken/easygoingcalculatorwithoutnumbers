@@ -2,13 +2,12 @@ package tree.element;
 
 import math.element.object.MathUtil;
 import math.element.object.MathObj;
-import math.element.object.MathType;
 import math.element.object.NumberObj;
 import math.element.object.Operator;
 import math.element.object.Operand;
 import math.element.object.OperatorType;
 import java.util.ArrayList;
-import java.util.ListIterator;
+
 
 /**
  *
@@ -134,13 +133,14 @@ public final class FormulaTreeBuilder {
    */
   public Tree BuildTree(String aFunction) throws Exception {
 
-	// TODO @Andre so kannste dir das END_OF_TERM sparen und brauchst auch nich
+	// TODO @Andre Hinweis: so kannste dir das END_OF_TERM sparen und brauchst auch nich
 	    // extra nen Iterator. Die For-Schleife bricht automatisch am Ende der Liste ab:
 	    // for (MathObj tmpMathObj : MathList) {
 	    //      ...
 	    // }
+	  //Kannst du dann bitte das END_OF_TERM entfernen?
 	  
-	  // prepare formula, mathobj and tmptree
+	 // prepare formula, mathobj and tmptree
 	formulaTree = null;
 	ArrayList<MathObj> MathList = MathUtil.FormulaToArrayList(aFunction);
     

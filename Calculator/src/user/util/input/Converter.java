@@ -210,7 +210,7 @@ public class Converter {
    * @author Tobias
    */
   private static boolean checkOperators(String anInputString) {
-    Pattern tmpPattern = Pattern.compile("[\\+\\-\\*/] *[\\+\\-\\*/]");
+    Pattern tmpPattern = Pattern.compile("[\\+\\-\\*/^] *[\\+\\-\\*/^]");
     Matcher tmpMatcher = tmpPattern.matcher(anInputString);
     if (tmpMatcher.find()) {
       return false;

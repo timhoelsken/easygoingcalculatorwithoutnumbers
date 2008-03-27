@@ -33,8 +33,8 @@ public class ConverterUtil {
 
     checkIfValidSignsOnly(aFormula);
     checkIfValidBlanksOnly(aFormula);
-    checkIfCommaFollowedByNumber(aFormula);
     aFormula = unifyCommas(aFormula);
+    checkDecimalNumbers(aFormula);
     aFormula = removeBlanks(aFormula);
     aFormula = insertMultiplicationOperators(aFormula);
     checkOperators(aFormula);
@@ -42,12 +42,14 @@ public class ConverterUtil {
     checkNegativeNumbers(aFormula);
     checkBrackets(aFormula);
     aFormula = changeFunctionsIntoSigns(aFormula);
+
     return aFormula;
   }
 
   /**
    * @param aFormula
-   * @throws IllegalArgumentException if illegal signs in the formula
+   * @throws IllegalArgumentException
+   *             if illegal signs in the formula
    */
   public static void checkIfValidSignsOnly(String aFormula) throws IllegalArgumentException {
     Pattern tmpPattern = Pattern.compile("[\\()\\,\\.²³\\+\\-\\*/^[0-9] ]*");
@@ -89,9 +91,10 @@ public class ConverterUtil {
 
   /**
    * @param aFormula
-   * @throws IllegalArgumentException if illegal commas in the formula
+   * @throws IllegalArgumentException
+   *             if illegal commas in the formula, for example '3.45.34' or '32.'
    */
-  public static void checkIfCommaFollowedByNumber(String aFormula) throws IllegalArgumentException {
+  public static void checkDecimalNumbers(String aFormula) throws IllegalArgumentException {
     // TODO @Tim :) implement this
   }
 
@@ -134,7 +137,7 @@ public class ConverterUtil {
    * @author Tobias
    */
   public static void checkOperators(String aFormula) throws IllegalArgumentException {
-    Pattern tmpPattern = Pattern.compile("[\\+\\-\\*/^] *[\\+\\-\\*/^]");
+    Pattern tmpPattern = Pattern.compile("[\\+\\-\\*/^] *[\\+\\-\\*/^)]");
     Matcher tmpMatcher = tmpPattern.matcher(aFormula);
     if (tmpMatcher.find()) {
       throw new IllegalArgumentException("The order of operators in the formula is not correct.");

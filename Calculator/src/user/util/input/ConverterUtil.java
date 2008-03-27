@@ -55,7 +55,7 @@ public class ConverterUtil {
    * @param aFormula
    * @throws IllegalArgumentException
    */
-  //TODO brauchen wir das hier? Wenn der Benutzer z.b. 3 4 eingibt und er meinte 3*4 hat er pech gehabt.
+  //TODO @Tim: brauchen wir das hier? Wenn der Benutzer z.b. 3 4 eingibt und er meinte 3*4 hat er pech gehabt.
   //ich finde wir koennten einfach hingehen und ein replace (" ", "") machen (alle blanks entfernen)
   //was meinst du?
   public static void checkIfValidBlanksOnly(String aFormula) throws IllegalArgumentException {

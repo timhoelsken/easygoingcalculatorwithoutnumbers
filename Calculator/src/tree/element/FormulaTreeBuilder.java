@@ -134,34 +134,29 @@ public final class FormulaTreeBuilder {
    */
   public Tree BuildTree(String aFunction) throws Exception {
 
-    // prepare formula, mathobj and tmptree
-    ArrayList<MathObj> MathList = MathUtil.FormulaToArrayList(aFunction);
-
-    // TODO @Andre so kannste dir das END_OF_TERM sparen und brauchst auch nich
-    // extra nen Iterator. Die For-Schleife bricht automatisch am Ende der Liste ab:
-    // for (MathObj tmpMathObj : MathList) {
-    //      ...
-    // }
-
-    ListIterator<MathObj> MathListIterator = MathList.listIterator();
-    MathObj tmpNextElement = null;
-    formulaTree = null;
-
-    // iterate over all elements of the formula
-    tmpNextElement = MathListIterator.next();
-    while (tmpNextElement.getMathType() != MathType.END_OF_TERM) {
-
-      // is the next element an Operand??
-      if (tmpNextElement instanceof Operand) {
-        this.InsertOperandIntoTree((Operand) tmpNextElement);
-      } else if (tmpNextElement instanceof Operator) {
-        this.InsertOperatorIntoTree((Operator) tmpNextElement);
-      }
-
-      tmpNextElement = MathListIterator.next();
+	// TODO @Andre so kannste dir das END_OF_TERM sparen und brauchst auch nich
+	    // extra nen Iterator. Die For-Schleife bricht automatisch am Ende der Liste ab:
+	    // for (MathObj tmpMathObj : MathList) {
+	    //      ...
+	    // }
+	  
+	  // prepare formula, mathobj and tmptree
+	formulaTree = null;
+	ArrayList<MathObj> MathList = MathUtil.FormulaToArrayList(aFunction);
+    
+	// iterate over all elements of the formula
+    for (MathObj tmpNextElement:MathList){
+    	
+    	// is the next element an Operand??
+        if (tmpNextElement instanceof Operand) {
+          this.InsertOperandIntoTree((Operand) tmpNextElement);
+        } else if (tmpNextElement instanceof Operator) {
+          this.InsertOperatorIntoTree((Operator) tmpNextElement);
+        }
+        
     }
-
-    return formulaTree;
+    
+    return formulaTree;    
   }
 
   private Tree formulaTree = null;

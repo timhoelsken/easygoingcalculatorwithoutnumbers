@@ -12,4 +12,7 @@ public class EmptyClassForGlobalSupport {
   // comments by Andre
 
   // comments by Tobi
+  // TODO @Raphi Wir müssen nochmal endgültig was dazu sagen, was mit
+  // "Unterformeln" ist (also z.B. in Klammern). Brauchen wir die Formula Klasse
+  // dafür? Wie wollen wir das lösen?
 }

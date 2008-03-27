@@ -76,7 +76,7 @@ public class ConverterUtil {
   public static String removeBlanks(String aString) {
     return aString.replaceAll(" +", "");
   }
-  
+
   /**
    * Replaces all commas (,) of a string with full-stops (.)
    *
@@ -95,7 +95,7 @@ public class ConverterUtil {
    */
   public static void checkDecimalNumbers(String aFormula) throws IllegalArgumentException {
     if (aFormula.contains(".")){
-      
+
     }
   }
 
@@ -143,7 +143,7 @@ public class ConverterUtil {
    * @param args
    */
   public static void main(String[] args) {
-    String tmpString = "-3432+(-23-12)-25*(-25)";
+    String tmpString = "-3432+(-23-12)-25*(-25)+-(12*3)";
     tmpString = setBracketsAroundNegativeNumbers(tmpString);
   }
 
@@ -159,10 +159,12 @@ public class ConverterUtil {
    */
   public static String setBracketsAroundNegativeNumbers(String aFormula) {
 
-    // check negative number at the beginning
-    if (aFormula.charAt(0) == '-' && isNumeric(aFormula.charAt(1))) {
-      aFormula = putBracketsAroundNegativeNumber(aFormula, 0);
-      System.out.println(aFormula);
+    if (aFormula.length() > 0) {
+      // check negative number at the beginning
+      if (aFormula.charAt(0) == '-') {
+        aFormula = putBracketsAroundNegativeNumber(aFormula, 0);
+        System.out.println(aFormula);
+      }
     }
 
     // check negative numbers at the beginning of brackets
@@ -175,9 +177,6 @@ public class ConverterUtil {
       System.out.println(aFormula);
       i = tmpStart;
     }
-
-    // TODO check minus sign before brackets
-    //23 * (-(22+5) + 3)
 
     return aFormula;
   }

@@ -23,9 +23,9 @@ public class ConverterUtil {
 
     checkIfValidSignsOnly(aFormula);
     checkIfValidBlanksOnly(aFormula);
+    aFormula = removeBlanks(aFormula);
     aFormula = unifyCommas(aFormula);
     checkDecimalNumbers(aFormula);
-    aFormula = removeBlanks(aFormula);
     aFormula = insertMultiplicationOperators(aFormula);
     aFormula = setBracketsAroundNegativeNumbers(aFormula);
     checkNegativeNumbers(aFormula);
@@ -70,6 +70,14 @@ public class ConverterUtil {
   }
 
   /**
+   * @param aString
+   * @return aString without blanks
+   */
+  public static String removeBlanks(String aString) {
+    return aString.replaceAll(" +", "");
+  }
+  
+  /**
    * Replaces all commas (,) of a string with full-stops (.)
    *
    * @param aFormula
@@ -86,15 +94,9 @@ public class ConverterUtil {
    *             '32.'
    */
   public static void checkDecimalNumbers(String aFormula) throws IllegalArgumentException {
-    // TODO @Tim :) implement this
-  }
-
-  /**
-   * @param aString
-   * @return aString without blanks
-   */
-  public static String removeBlanks(String aString) {
-    return aString.replaceAll(" +", "");
+    if (aFormula.contains(".")){
+      
+    }
   }
 
   /**

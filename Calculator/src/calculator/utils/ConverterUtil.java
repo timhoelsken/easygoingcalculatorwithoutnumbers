@@ -197,10 +197,10 @@ public class ConverterUtil {
 
     for (int i = 0; i < aFormula.length(); i++) {
       tmpOutput += aFormula.charAt(i);
-      if (MathUtil.isVariable(aFormula.charAt(i)) && (i + 1 < aFormula.length() && MathUtil.isNumberOrVariable(aFormula.charAt(i + 1)))) {
+      if (MathUtil.isVariable(aFormula.charAt(i)) && (i + 1 < aFormula.length() && (MathUtil.isNumberOrVariable(aFormula.charAt(i + 1)) || aFormula.charAt(i + 1) == '('))) {
         tmpOutput += "*";
       } else if (MathUtil.isNumber(aFormula.charAt(i))
-          && (i + 1 < aFormula.length() && MathUtil.isVariable(aFormula.charAt(i + 1)))) {
+          && (i + 1 < aFormula.length() && (MathUtil.isVariable(aFormula.charAt(i + 1)) || aFormula.charAt(i + 1) == '('))) {
         tmpOutput += "*";
       }
     }

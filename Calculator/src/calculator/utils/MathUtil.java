@@ -28,7 +28,7 @@ public class MathUtil {
   /**
    * 
    * @param aCharacter
-   * @return
+   * @return true if character is a variable
    */
   public static boolean isVariable(char aCharacter) {
     Pattern tmpPattern = Pattern.compile("[a-z]");
@@ -42,7 +42,7 @@ public class MathUtil {
   /**
    * 
    * @param aCharacter
-   * @return
+   * @return true if char is a number or variable
    */
   public static boolean isNumberOrVariable(char aCharacter) {
     return (isNumber(aCharacter) || isVariable(aCharacter)) ? true : false;
@@ -59,7 +59,7 @@ public class MathUtil {
   /**
    * 
    * @param aChar
-   * @return
+   * @return true if char is a minus
    */
   public static boolean IsMinus(char aChar) {
     return (aChar == '-');

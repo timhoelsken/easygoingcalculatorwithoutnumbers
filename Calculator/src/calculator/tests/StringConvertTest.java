@@ -86,16 +86,7 @@ public class StringConvertTest extends TestCase {
 	}
 	assert( !tmpErrorOccurred );
 
-  }
-
-  /**
-   * Test method for
-   * {@link calculator.utils.ConverterUtil#checkIfValidBlanksOnly()}.
-   */
-  public void checkIfValidBlanksOnly()
-  {
-	  assert(false); //Test noch nicht geschrieben!!!
-  }
+  } 
 
   /**
    * Test method for

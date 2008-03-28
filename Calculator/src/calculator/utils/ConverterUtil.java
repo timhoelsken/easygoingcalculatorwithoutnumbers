@@ -262,7 +262,6 @@ public class ConverterUtil {
       // check negative number at the beginning
       if (aFormula.charAt(0) == '-') {
         aFormula = putBracketsAroundNegativeNumber(aFormula, 0);
-        System.out.println(aFormula);
       }
     }
 
@@ -273,7 +272,6 @@ public class ConverterUtil {
     while (tmpMatcher.find(i)) {
       int tmpStart = tmpMatcher.start();
       aFormula = putBracketsAroundNegativeNumber(aFormula, ++tmpStart);
-      System.out.println(aFormula);
       i = tmpStart;
     }
 

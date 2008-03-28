@@ -14,7 +14,7 @@ import calculator.utils.ConverterUtil;
  * @author Tim
  *
  */
-public class Main {
+public class Calculator {
 
   /**
    * The Calculator

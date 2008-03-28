@@ -14,9 +14,9 @@ public enum MathType {
    */
   OPERAND,
 
-  /*
+  //TODO @André does anybody need this?
+  /**
    * end of formula
    */
-  //TODO @André does anybody need this?
   END_OF_TERM
 }

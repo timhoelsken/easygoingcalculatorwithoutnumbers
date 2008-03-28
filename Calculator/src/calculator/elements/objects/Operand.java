@@ -1,5 +1,11 @@
 package calculator.elements.objects;
 
+/**
+ * Defines an operand
+ * 
+ * @author André
+ *
+ */
 public class Operand extends MathObj {
   /**
    * constructor

@@ -33,10 +33,19 @@ public class Operator extends MathObj {
     return operatorType;
   }
 
+  /**
+   * 
+   * @return the priority
+   */
   public int getPriority() {
     return Priority;
   }
 
+  /**
+   * sets the priority
+   * 
+   * @param priority
+   */
   public void setPriority(int priority) {
     Priority = priority;
   }

@@ -31,10 +31,7 @@ public class ConverterUtil {
     checkNegativeNumbers(aFormula);
     checkOperators(aFormula);
     checkBrackets(aFormula);
-    // TODO checkSequence(); Es muss immer folgende Reihenfolge eingehalten
-    // werden: Zahl oder unärer
-    // * Operator (mit Klammerausdruck), Binärer Operator, Zahl oder unärer
-    // * Operator (mit Klammerausdruck), binärer operator....
+    checkSequence(aFormula);
     aFormula = changeFunctionsIntoSigns(aFormula);
 
     return aFormula;
@@ -59,16 +56,6 @@ public class ConverterUtil {
    * @param aFormula
    * @throws IllegalArgumentException
    */
-  // TODO @Tim: brauchen wir das hier? Wenn der Benutzer z.b. 3 4 eingibt und er
-  // meinte 3*4 hat er pech gehabt.
-  // ich finde wir koennten einfach hingehen und ein replace (" ", "") machen
-  // (alle blanks entfernen)
-  // was meinst du?
-  // TODO @Raphi der Benutzer könnte aber auch was anderes als 3*4 gemeint
-  // haben, eben bspw. 3+4 und da das nicht eindeutig ist, haben Tobi und ich
-  // gesagt wir prüfen das und schmeißen dann nen Error. Können wir aber gerne
-  // nochmal in der Runde Diskutieren.
-
   public static void checkIfValidBlanksOnly(String aFormula) throws IllegalArgumentException {
     int tmpPosition = 0;
     while (getNextBlankPosition(aFormula, tmpPosition) != -1) {
@@ -144,7 +131,7 @@ public class ConverterUtil {
 
     for (int i = 0; i < aFormula.length(); i++) {
       tmpOutput += aFormula.charAt(i);
-      if (isVariable(aFormula.charAt(i)) && (i + 1 < aFormula.length() && isVariable(aFormula.charAt(i + 1)))) {
+      if (isVariable(aFormula.charAt(i)) && (i + 1 < aFormula.length() && isNumericOrVariable(aFormula.charAt(i + 1)))) {
         tmpOutput += "*";
       } else if (isNumeric(aFormula.charAt(i))
           && (i + 1 < aFormula.length() && isVariable(aFormula.charAt(i + 1)))) {
@@ -194,8 +181,9 @@ public class ConverterUtil {
     }
   }
 
+  // TODO @all kann das hier mal weg? Main test im Converter...
   /**
-   * <<<<<<< .mine main for tests
+   * main for tests
    * 
    * @param args
    */
@@ -205,8 +193,8 @@ public class ConverterUtil {
   }
 
   /**
-   * ======= >>>>>>> .r179 sets brackets around negative numbers at the
-   * beginning of the formular or at the beginning of brackets
+   * sets brackets around negative numbers at the beginning of the formular or
+   * at the beginning of brackets
    * 
    * makes -3*2*(-5*6) look like (-3)*2*((-5)*6)
    * 
@@ -304,6 +292,14 @@ public class ConverterUtil {
     }
   }
 
+  private static void checkSequence(String aFormula) {
+    // TODO checkSequence(); Es muss immer folgende Reihenfolge eingehalten
+    // werden: Zahl oder unärer
+    // * Operator (mit Klammerausdruck), Binärer Operator, Zahl oder unärer
+    // * Operator (mit Klammerausdruck), binärer operator....
+
+  }
+
   /**
    * Replaces sin, cos, tan, sqrt functions with abbreviation signs
    * 
@@ -318,11 +314,12 @@ public class ConverterUtil {
 
     for (int i = 0; i < aFormula.length(); i++) {
       if (aFormula.charAt(i) == 's') {
-        if (aFormula.charAt(i + 1) == 'i' && aFormula.charAt(i + 2) == 'n' && aFormula.charAt(i + 3) == '(') {
+        if (i + 3 <= aFormula.length() && aFormula.charAt(i + 1) == 'i' && aFormula.charAt(i + 2) == 'n'
+            && aFormula.charAt(i + 3) == '(') {
           tmpOutput += "%";
           tmpFunctionFound = 3;
-        } else if (aFormula.charAt(i + 1) == 'q' && aFormula.charAt(i + 2) == 'r'
-            && aFormula.charAt(i + 3) == 't' && aFormula.charAt(i + 4) == '(') {
+        } else if (i + 4 <= aFormula.length() && aFormula.charAt(i + 1) == 'q'
+            && aFormula.charAt(i + 2) == 'r' && aFormula.charAt(i + 3) == 't' && aFormula.charAt(i + 4) == '(') {
           tmpOutput += "&";
           tmpFunctionFound = 4;
         } else {
@@ -330,7 +327,8 @@ public class ConverterUtil {
           tmpFunctionFound = 0;
         }
       } else if (aFormula.charAt(i) == 'c') {
-        if (aFormula.charAt(i + 1) == 'o' && aFormula.charAt(i + 2) == 's' && aFormula.charAt(i + 3) == '(') {
+        if (i + 3 <= aFormula.length() && aFormula.charAt(i + 1) == 'o' && aFormula.charAt(i + 2) == 's'
+            && aFormula.charAt(i + 3) == '(') {
           tmpOutput += "~";
           tmpFunctionFound = 3;
         } else {
@@ -338,7 +336,8 @@ public class ConverterUtil {
           tmpFunctionFound = 0;
         }
       } else if (aFormula.charAt(i) == 't') {
-        if (aFormula.charAt(i + 1) == 'a' && aFormula.charAt(i + 2) == 'n' && aFormula.charAt(i + 3) == '(') {
+        if (i + 3 <= aFormula.length() && aFormula.charAt(i + 1) == 'a' && aFormula.charAt(i + 2) == 'n'
+            && aFormula.charAt(i + 3) == '(') {
           tmpOutput += "#";
           tmpFunctionFound = 3;
         } else {
@@ -346,8 +345,9 @@ public class ConverterUtil {
           tmpFunctionFound = 0;
         }
       } else if (aFormula.charAt(i) == 'w') {
-        if (aFormula.charAt(i + 1) == 'u' && aFormula.charAt(i + 2) == 'r' && aFormula.charAt(i + 3) == 'z'
-            && aFormula.charAt(i + 4) == 'e' && aFormula.charAt(i + 5) == 'l' && aFormula.charAt(i + 6) == '(') {
+        if (i + 6 <= aFormula.length() && aFormula.charAt(i + 1) == 'u' && aFormula.charAt(i + 2) == 'r'
+            && aFormula.charAt(i + 3) == 'z' && aFormula.charAt(i + 4) == 'e' && aFormula.charAt(i + 5) == 'l'
+            && aFormula.charAt(i + 6) == '(') {
           tmpOutput += "&";
           tmpFunctionFound = 6;
         } else {
@@ -376,10 +376,10 @@ public class ConverterUtil {
   private static int getNextBlankPosition(String aFormula, int aStartPosition) {
     int tmpPosition = -1;
 
-    if (aStartPosition!=0){
+    if (aStartPosition != 0) {
       aStartPosition++;
     }
-    
+
     for (int i = aStartPosition; i < aFormula.length(); i++) {
       if (aFormula.charAt(i) == ' ') {
         tmpPosition = i;

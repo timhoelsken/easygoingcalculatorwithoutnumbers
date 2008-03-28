@@ -23,7 +23,7 @@ public class ConverterUtil {
   public static String termToStandardString(String aFormula) throws IllegalArgumentException {
 
     checkIfValidSignsOnly(aFormula);
-    checkIfValidBlanksOnly(aFormula);
+    //checkIfValidBlanksOnly(aFormula);
     aFormula = removeBlanks(aFormula);
     aFormula = unifyCommas(aFormula);
     checkDecimalNumbers(aFormula);

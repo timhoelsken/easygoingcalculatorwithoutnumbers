@@ -2,7 +2,7 @@ package calculator;
 
 import java.io.IOException;
 
-import calculator.tree.element.FormulaTreeBuilder;
+import calculator.tree.element.FormulaTree;
 import calculator.tree.element.Tree;
 import calculator.userinterface.ConsoleInput;
 import calculator.userinterface.ConsoleOutput;
@@ -59,11 +59,11 @@ public class Main {
           System.out.println(ConverterUtil.termToStandardString(tmpInputString));
 
           try {
-            FormulaTreeBuilder tmpFormulaTreeBuilder = new FormulaTreeBuilder();
+            FormulaTree tmpFormulaTreeBuilder = new FormulaTree();
 
             Tree tmpTree = tmpFormulaTreeBuilder.BuildTree(ConverterUtil.termToStandardString(tmpInputString));
 
-            System.out.println(FormulaTreeBuilder.EvaluateTree(tmpTree));
+            System.out.println(FormulaTree.EvaluateTree(tmpTree));
 
             tmpTree.paintMe();
           } catch (Exception e) {

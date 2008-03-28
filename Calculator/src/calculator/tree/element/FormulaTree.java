@@ -13,7 +13,7 @@ import calculator.math.element.object.OperatorType;
 /**
  *
  */
-public final class FormulaTreeBuilder {
+public final class FormulaTree {
 
   /**
    * Calculates the result of a formula-tree
@@ -40,17 +40,17 @@ public final class FormulaTreeBuilder {
       Operator tmpOperator = (Operator) aTree.getRoot();
 
       if (tmpOperator.getOperatorType() == OperatorType.ADDITION) {
-        tmpResult = FormulaTreeBuilder.EvaluateTree(aTree.getLeftSon())
-            + FormulaTreeBuilder.EvaluateTree(aTree.getRightSon());
+        tmpResult = FormulaTree.EvaluateTree(aTree.getLeftSon())
+            + FormulaTree.EvaluateTree(aTree.getRightSon());
       } else if (tmpOperator.getOperatorType() == OperatorType.DIVISION) {
-        tmpResult = FormulaTreeBuilder.EvaluateTree(aTree.getLeftSon())
-            / FormulaTreeBuilder.EvaluateTree(aTree.getRightSon());
+        tmpResult = FormulaTree.EvaluateTree(aTree.getLeftSon())
+            / FormulaTree.EvaluateTree(aTree.getRightSon());
       } else if (tmpOperator.getOperatorType() == OperatorType.MULTIPLICATION) {
-        tmpResult = FormulaTreeBuilder.EvaluateTree(aTree.getLeftSon())
-            * FormulaTreeBuilder.EvaluateTree(aTree.getRightSon());
+        tmpResult = FormulaTree.EvaluateTree(aTree.getLeftSon())
+            * FormulaTree.EvaluateTree(aTree.getRightSon());
       } else if (tmpOperator.getOperatorType() == OperatorType.SUBTRACTION) {
-        tmpResult = FormulaTreeBuilder.EvaluateTree(aTree.getLeftSon())
-            - FormulaTreeBuilder.EvaluateTree(aTree.getRightSon());
+        tmpResult = FormulaTree.EvaluateTree(aTree.getLeftSon())
+            - FormulaTree.EvaluateTree(aTree.getRightSon());
       }
     } else
       throw (new Exception("Not possible to calculate the formula-tree."));

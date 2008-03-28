@@ -26,7 +26,6 @@ public class MathUtil {
   }
 
   /**
-   * 
    * @param aCharacter
    * @return true if character is a variable
    */

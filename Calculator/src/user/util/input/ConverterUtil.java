@@ -174,7 +174,7 @@ public class ConverterUtil {
     // TODO @Raphi done => test
     // cases "... +|-|*|/|^"
     Pattern tmpSingleOperatorPattern = Pattern.compile("[\\+\\-\\*/\\^]");
-    String tmpLastSignInFormular = Character.toString(aFormula.charAt(aFormula.length()));
+    String tmpLastSignInFormular = Character.toString(aFormula.charAt(aFormula.length() - 1));
     Matcher tmpSingleOperatorMatcher = tmpSingleOperatorPattern.matcher(tmpLastSignInFormular);
     if (tmpSingleOperatorMatcher.find()) {
       throw new IllegalArgumentException("The formula ends with an operator.");

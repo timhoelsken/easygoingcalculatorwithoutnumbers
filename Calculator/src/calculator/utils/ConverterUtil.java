@@ -42,7 +42,7 @@ public class ConverterUtil {
    *             if illegal signs in the formula
    */
   public static void checkIfValidSignsOnly(String aFormula) throws IllegalArgumentException {
-    Pattern tmpPattern = Pattern.compile("[\\()\\,\\.\\+\\-\\*/\\^\\w ]*");
+    Pattern tmpPattern = Pattern.compile("[\\(\\)\\,\\.\\+\\-\\*/\\^\\w ]*");
     Matcher tmpMatcher = tmpPattern.matcher(aFormula);
     if (!tmpMatcher.matches()) {
       throw new IllegalArgumentException("The formula contains invalid signs.");

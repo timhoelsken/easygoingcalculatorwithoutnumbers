@@ -1,4 +1,4 @@
-package calculator.user.util.output;
+package calculator.userinterface;
 
 /**
  * 

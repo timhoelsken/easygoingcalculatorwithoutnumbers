@@ -1,4 +1,4 @@
-package calculator.user.util.input;
+package calculator.userinterface;
 
 import java.io.BufferedReader;
 import java.io.IOException;

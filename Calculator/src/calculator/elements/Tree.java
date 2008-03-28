@@ -1,5 +1,6 @@
 package calculator.elements;
 
+import calculator.utils.ConverterUtil;;
 
 /**
  * 
@@ -129,9 +130,9 @@ public class Tree {
             MathObj tmpMathObj = getMathObj(i, j);
             if (tmpMathObj != null) {
               String tmpObjValue = tmpMathObj.toString();
-              tmpOutput += centerStringInSpaces(tmpSpaces, tmpObjValue);
+              tmpOutput += ConverterUtil.centerStringInSpaces(tmpSpaces, tmpObjValue);
             } else {
-              tmpOutput += centerStringInSpaces(tmpSpaces, "");
+              tmpOutput += ConverterUtil.centerStringInSpaces(tmpSpaces, "");
             }
           }
           System.out.println(tmpOutput);
@@ -139,23 +140,6 @@ public class Tree {
         }
       }
     }
-  }
-
-  // TODO in util klasse ausgliedern
-  private String centerStringInSpaces(String someSpaces, String aString) {
-    String tmpReturnString = new String();
-    int tmpSpaceLength = someSpaces.length();
-    int tmpStringLength = aString.length();
-    if (tmpSpaceLength <= tmpStringLength) {
-      return aString;
-    }
-    int tmpStart = tmpSpaceLength / 2 - tmpStringLength / 2;
-    tmpReturnString = someSpaces.substring(0, tmpStart);
-    tmpReturnString += aString;
-    for (int i = tmpReturnString.length() + 1; i < tmpSpaceLength; i++) {
-      tmpReturnString += " ";
-    }
-    return tmpReturnString;
   }
 
   private MathObj getMathObj(int aTargetLevel, int aTargetObject) {

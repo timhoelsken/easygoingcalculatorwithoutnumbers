@@ -17,4 +17,5 @@ public class EmptyClassForGlobalSupport {
 
   // comments by Tobi
       //TODO @André kill the warnings in your classes ;)
+      // ich hab mal soweit die Comments geschrieben, aber André sollte nochmal schön schreiben
   }

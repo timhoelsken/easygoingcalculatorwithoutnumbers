@@ -275,6 +275,28 @@ public class ConverterUtil {
   }
 
   /**
+   * paints a string in the center of some spaces, needed to paint the tree in the console
+   * @param someSpaces
+   * @param aString
+   * @return a string centered in the given spaces
+   */
+  public static String centerStringInSpaces(String someSpaces, String aString) {
+    String tmpReturnString = new String();
+    int tmpSpaceLength = someSpaces.length();
+    int tmpStringLength = aString.length();
+    if (tmpSpaceLength <= tmpStringLength) {
+      return aString;
+    }
+    int tmpStart = tmpSpaceLength / 2 - tmpStringLength / 2;
+    tmpReturnString = someSpaces.substring(0, tmpStart);
+    tmpReturnString += aString;
+    for (int i = tmpReturnString.length() + 1; i < tmpSpaceLength; i++) {
+      tmpReturnString += " ";
+    }
+    return tmpReturnString;
+  }
+
+  /**
    * checks if there is the same amount of ( and ) brackets, and if no ) are in
    * lead of ( , that means not more than there should be
    * 

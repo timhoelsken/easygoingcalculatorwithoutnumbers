@@ -261,7 +261,7 @@ public class MathUtil {
           System.out.print(e.getMessage());
         }
       } else {
-        throw new ExceptionWrongInputStream("Input String contains non valid characters!");
+        throw new IllegalInputStreamException("Input String contains non valid characters!");
       }
       iStartPosition = iEndPosition;
     }

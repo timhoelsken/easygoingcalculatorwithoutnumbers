@@ -2,7 +2,6 @@ package calculator;
 
 import java.util.ArrayList;
 
-import calculator.elements.MathObj;
 import calculator.elements.NumberObj;
 import calculator.elements.Operand;
 import calculator.elements.Operator;

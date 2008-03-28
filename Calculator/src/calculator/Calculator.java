@@ -55,7 +55,8 @@ public class Calculator {
           // TODO hier sollte dann sinnvoll was mit dem Term angestellt werden
           System.out.println("Sie haben eingegeben:\n" + tmpInputString);
           System.out.println("das bereinigte Ergebnis ist:");
-          System.out.println(ConverterUtil.termToStandardString(tmpInputString));
+          tmpInputString = ConverterUtil.termToStandardString(tmpInputString);
+          System.out.println(tmpInputString);
 
           try {
             FormulaTree tmpFormulaTreeBuilder = new FormulaTree();

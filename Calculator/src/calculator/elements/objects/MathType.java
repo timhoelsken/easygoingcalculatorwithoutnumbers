@@ -1,7 +1,7 @@
 package calculator.elements.objects;
 
 /**
- * 
+ *
  */
 public enum MathType {
   /**
@@ -17,5 +17,6 @@ public enum MathType {
   /*
    * end of formula
    */
+  //TODO @André does anybody need this?
   END_OF_TERM
 }

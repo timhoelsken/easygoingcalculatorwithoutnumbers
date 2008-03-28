@@ -1,7 +1,7 @@
 /**
  * 
  */
-package calculator.math.element.object;
+package calculator.exceptions;
 
 /**
  * @author André

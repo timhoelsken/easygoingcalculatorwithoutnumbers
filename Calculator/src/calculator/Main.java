@@ -3,7 +3,7 @@ package calculator;
 import java.io.IOException;
 
 import calculator.elements.FormulaTree;
-import calculator.elements.Tree;
+import calculator.elements.objects.Tree;
 import calculator.userinterface.ConsoleInput;
 import calculator.userinterface.ConsoleOutput;
 import calculator.utils.ConverterUtil;

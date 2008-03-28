@@ -1,6 +1,5 @@
-package calculator.elements;
+package calculator.elements.objects;
 
-import calculator.elements.objects.MathObj;
 
 /**
  * 

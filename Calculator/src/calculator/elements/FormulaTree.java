@@ -7,6 +7,7 @@ import calculator.elements.objects.NumberObj;
 import calculator.elements.objects.Operand;
 import calculator.elements.objects.Operator;
 import calculator.elements.objects.OperatorType;
+import calculator.elements.objects.Tree;
 import calculator.utils.MathUtil;
 
 

@@ -32,7 +32,7 @@ public class ConverterUtil {
     aFormula = setBracketsAroundNegativeNumbers(aFormula);
     checkNegativeNumbers(aFormula);
     checkOperators(aFormula);
-    checkBrackets(aFormula);    
+    checkBrackets(aFormula);
 
     return aFormula;
   }
@@ -172,9 +172,8 @@ public class ConverterUtil {
     if (tmpMatcher.find()) {
       throw new IllegalArgumentException("The order of operators in the formula is not correct.");
     }
-    // TODO @Raphi dies hier is verkehrt oder? brauchen wir nicht eher was
-    // analog zum ersten check?
-    tmpPattern = Pattern.compile("\\([\\+\\-\\*/\\^]");
+    // cases "(+", "(*" ...
+    tmpPattern = Pattern.compile("\\([\\+\\*/\\^]");
     tmpMatcher = tmpPattern.matcher(aFormula);
     if (tmpMatcher.find()) {
       throw new IllegalArgumentException("Do not let an alone standing arithmetic operator follow a bracket.");

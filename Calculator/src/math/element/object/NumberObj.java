@@ -1,7 +1,7 @@
 package math.element.object;
 
 /**
- * 
+ *
  */
 public class NumberObj extends Operand {
   private float value;
@@ -15,13 +15,16 @@ public class NumberObj extends Operand {
 
   /**
    * constructor
-   * 
+   *
    * @param aValue
    */
   public NumberObj(float aValue) {
     value = aValue;
   }
 
+  /**
+   * @see java.lang.Object#toString()
+   */
   public String toString() {
     return Float.toString(value);
   }

@@ -1,7 +1,7 @@
 package math.element.object;
 
 /**
- * 
+ *
  */
 public class Operator extends MathObj {
   private OperatorType operatorType;
@@ -41,6 +41,9 @@ public class Operator extends MathObj {
     Priority = priority;
   }
 
+  /**
+   * @see java.lang.Object#toString()
+   */
   public String toString() {
     switch (operatorType) {
       case ADDITION:

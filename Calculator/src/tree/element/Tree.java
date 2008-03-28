@@ -1,11 +1,9 @@
 package tree.element;
 
 import math.element.object.MathObj;
-import math.element.object.NumberObj;
-import math.element.object.Operator;
 
 /**
- * 
+ *
  */
 public class Tree {
   private MathObj root;
@@ -13,10 +11,16 @@ public class Tree {
   private Tree RightSon;
   private Tree Father;
 
+  /**
+   * @return the father
+   */
   public Tree getFather() {
     return Father;
   }
 
+  /**
+   * @param aFather
+   */
   public void setFather(Tree aFather) {
     Father = aFather;
   }
@@ -68,7 +72,7 @@ public class Tree {
 
   /**
    * constructor (sets both sons to NULL)
-   * 
+   *
    * @param aRoot
    */
   public Tree(MathObj aRoot) {
@@ -78,8 +82,9 @@ public class Tree {
 
   /**
    * constructor
-   * 
+   *
    * @param aRoot
+   * @param aFather
    * @param aLeft
    * @param aRight
    */
@@ -92,7 +97,7 @@ public class Tree {
 
   /**
    * paints current tree on the console
-   * 
+   *
    * @author Tobias
    */
   public void paintMe() {
@@ -108,7 +113,7 @@ public class Tree {
       for (int i = 0; i < (tmpLineWidth / 2); i++) {
         tmpRootValue += " ";
       }
-      tmpRootValue += getValue(getRoot());
+      tmpRootValue += getRoot().toString();
       System.out.println(tmpRootValue);
       System.out.println();
 
@@ -123,8 +128,13 @@ public class Tree {
               tmpSpaces += " ";
             }
             MathObj tmpMathObj = getMathObj(i, j);
-            String tmpObjValue = getValue(tmpMathObj);
-            tmpOutput += centerStringInSpaces(tmpSpaces, tmpObjValue);
+            if (tmpMathObj != null) {
+              // TODO @André toString() funktioniert
+              String tmpObjValue = tmpMathObj.toString();
+              tmpOutput += centerStringInSpaces(tmpSpaces, tmpObjValue);
+            } else {
+              tmpOutput += centerStringInSpaces(tmpSpaces, "");
+            }
           }
           System.out.println(tmpOutput);
           System.out.println();
@@ -183,34 +193,6 @@ public class Tree {
     return null;
   }
 
-  // TODO @André Mach, dass MathObj mir sagt, was es ist (als String)
-  // TODO @Tobi habe mein Todo erledigt, bitte deine Methode entsprechend anpassen und testen. 
-  private String getValue(MathObj aMathObj) {
-    String tmpReturnString = null;
-    if (aMathObj instanceof NumberObj) {
-      NumberObj tmpObj = (NumberObj) aMathObj;
-      tmpReturnString = "" + tmpObj.getValue();
-    } else if (aMathObj instanceof Operator) {
-      Operator tmpObj = (Operator) aMathObj;
-      switch (tmpObj.getOperatorType()) {
-        case ADDITION:
-          tmpReturnString = "+";
-          break;
-        case SUBTRACTION:
-          tmpReturnString = "-";
-          break;
-        case MULTIPLICATION:
-          tmpReturnString = "*";
-          break;
-        case DIVISION:
-          tmpReturnString = "/";
-      }
-    } else {
-      tmpReturnString = " ";
-    }
-    return tmpReturnString;
-  }
-
   private int getDepth(Tree aTree) {
     if (aTree == null) {
       return 0;
@@ -228,13 +210,13 @@ public class Tree {
 
   /**
    * start for testing paintMe()
-   * 
+   *
    * @param args
    * @throws Exception
    */
   public static void main(String[] args) throws Exception {
     FormulaTreeBuilder tmpFormulaTreeBuilder = new FormulaTreeBuilder();
-    Tree tmpTree = tmpFormulaTreeBuilder.BuildTree("5*3*2+6+5*2-30*2+8*2/3*4-14");
+    Tree tmpTree = tmpFormulaTreeBuilder.BuildTree("5*3*2+6+5*2-30");
 
     tmpTree.paintMe();
     System.out.println(FormulaTreeBuilder.EvaluateTree(tmpTree));

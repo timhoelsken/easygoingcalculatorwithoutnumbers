@@ -4,16 +4,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 
+ *
  * @author Tim, Tobias
- * 
+ *
  */
 public class ConverterUtil {
 
   /**
    * Method makes the parameter formula a standard term (see
    * misc/documents/Standard-String.txt)
-   * 
+   *
    * @param aFormula
    * @return the standard term
    * @throws IllegalArgumentException
@@ -54,7 +54,7 @@ public class ConverterUtil {
 
   /**
    * Checks if there are only valid blanks in the string
-   * 
+   *
    * @param aFormula
    * @throws IllegalArgumentException
    */
@@ -85,7 +85,7 @@ public class ConverterUtil {
 
   /**
    * Replaces all commas (,) of a string with full-stops (.)
-   * 
+   *
    * @param aFormula
    * @return a string containing .
    */
@@ -126,7 +126,7 @@ public class ConverterUtil {
   /**
    * A method to clean the variables in aFormula. Variables "ab" will be
    * replaced with "a*b" "2a" will be replaced with "2*a"
-   * 
+   *
    * @param aFormula
    * @return a String that contains no "ab" or "2a" variables
    */
@@ -154,30 +154,40 @@ public class ConverterUtil {
    * @author Tobias
    */
   public static void checkOperators(String aFormula) throws IllegalArgumentException {
+    // cases "- ( ..."
     if (aFormula.length() > 1 && aFormula.charAt(1) == '(') {
       Pattern tmpPattern = Pattern.compile("[\\+\\-\\*/\\^]");
       if (tmpPattern.matcher(Character.toString(aFormula.charAt(0))).find()) {
-        throw new IllegalArgumentException("Do not let a bracket follow a alone standing arithmetic operator.");
+        throw new IllegalArgumentException("Do not let a bracket follow an alone standing arithmetic operator.");
       }
     }
-    //TODO @Tobi, was ist mit dem Fall (3+5)+ ?
-    //TODO @wer lust hat, man bräuchte eine Überprüfung für Eingaben wie z.B. 3+5*
+    //TODO man bräuchte eine Überprüfung für Eingaben wie z.B. 3+5*
+    //TODO @Raphi done => test
+    // cases "... +|-|*|/|^"
+    Pattern tmpSingleOperatorPattern = Pattern.compile("[\\+\\-\\*/\\^]");
+    String tmpLastSignInFormular = Character.toString(aFormula.charAt(aFormula.length()));
+    Matcher tmpSingleOperatorMatcher = tmpSingleOperatorPattern.matcher(tmpLastSignInFormular);
+    if (tmpSingleOperatorMatcher.find()) {
+      throw new IllegalArgumentException("The formula ends with an operator.");
+    }
+    // cases "+-", "*/" ...
     Pattern tmpPattern = Pattern.compile("[\\+\\-\\*/\\^] *[\\+\\-\\*/\\^\\)]");
     Matcher tmpMatcher = tmpPattern.matcher(aFormula);
     if (tmpMatcher.find()) {
       throw new IllegalArgumentException("The order of operators in the formula is not correct.");
     }
+    // TODO @Raphi dies hier is verkehrt oder? brauchen wir nicht eher was analog zum ersten check?
     tmpPattern = Pattern.compile("\\([\\+\\-\\*/\\^]");
     tmpMatcher = tmpPattern.matcher(aFormula);
     if (tmpMatcher.find()) {
-      throw new IllegalArgumentException("Do not let a bracket follow a alone standing arithmetic operator.");
+      throw new IllegalArgumentException("Do not let an alone standing arithmetic operator follow a bracket.");
     }
   }
 
   /**
 <<<<<<< .mine
    * main for tests
-   * 
+   *
    * @param args
    */
   public static void main(String[] args) {
@@ -190,9 +200,9 @@ public class ConverterUtil {
 >>>>>>> .r179
    * sets brackets around negative numbers at the beginning of the formular or
    * at the beginning of brackets
-   * 
+   *
    * makes -3*2*(-5*6) look like (-3)*2*((-5)*6)
-   * 
+   *
    * @param aFormula
    * @return the bracked formula
    * @author Tobias
@@ -265,7 +275,7 @@ public class ConverterUtil {
   /**
    * checks if there is the same amount of ( and ) brackets, and if no ) are in
    * lead of ( , that means not more than there should be
-   * 
+   *
    * @param aFormula
    * @throws IllegalArgumentException
    *             if the brackets in the term are not correct
@@ -289,7 +299,7 @@ public class ConverterUtil {
 
   /**
    * Replaces sin, cos, tan, sqrt functions with abbreviation signs
-   * 
+   *
    * @param aFormula
    * @return a string containing abbreviation sign, defined in
    *         Standard-String.txt
@@ -350,7 +360,7 @@ public class ConverterUtil {
 
   /**
    * gets the position of the next blank in a string
-   * 
+   *
    * @param aFormula
    * @param aStartPosition
    * @return The position of the next blank in the given String, returns -1 if

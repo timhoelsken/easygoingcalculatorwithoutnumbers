@@ -3,18 +3,17 @@ package calculator.utils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 /**
- *
+ * 
  * @author Tim, Tobias
- *
+ * 
  */
 public class ConverterUtil {
 
   /**
    * Method makes the parameter formula a standard term (see
    * misc/documents/Standard-String.txt)
-   *
+   * 
    * @param aFormula
    * @return the standard term
    * @throws IllegalArgumentException
@@ -23,7 +22,7 @@ public class ConverterUtil {
   public static String termToStandardString(String aFormula) throws IllegalArgumentException {
 
     checkIfValidSignsOnly(aFormula);
-    //checkIfValidBlanksOnly(aFormula);
+    // checkIfValidBlanksOnly(aFormula);
     aFormula = removeBlanks(aFormula);
     aFormula = unifyCommas(aFormula);
     checkDecimalNumbers(aFormula);
@@ -52,7 +51,7 @@ public class ConverterUtil {
 
   /**
    * Checks if there are only valid blanks in the string
-   *
+   * 
    * @param aFormula
    * @throws IllegalArgumentException
    */
@@ -63,7 +62,8 @@ public class ConverterUtil {
       if (tmpPosition != 0 || tmpPosition != aFormula.length()) {
 
         if ((tmpPosition - 1 > -1 && MathUtil.isNumberOrVariable(aFormula.charAt(tmpPosition - 1)))
-            && (tmpPosition + 1 <= aFormula.length() && MathUtil.isNumberOrVariable(aFormula.charAt(tmpPosition - 1)))) {
+            && (tmpPosition + 1 <= aFormula.length() && MathUtil.isNumberOrVariable(aFormula
+                .charAt(tmpPosition - 1)))) {
           throw new IllegalArgumentException("The formula contains invalid blanks.");
         }
       }
@@ -80,7 +80,7 @@ public class ConverterUtil {
 
   /**
    * Replaces all commas (,) of a string with full-stops (.)
-   *
+   * 
    * @param aFormula
    * @return a string containing .
    */
@@ -118,76 +118,28 @@ public class ConverterUtil {
     }
   }
 
-  //TODO Tim ändert das hier noch
   /**
    * Replaces sin, cos, tan, sqrt functions with abbreviation signs
-   *
+   * 
    * @param aFormula
    * @return a string containing abbreviation sign, defined in
    *         Standard-String.txt
    */
   public static String changeFunctionsIntoSigns(String aFormula) {
-    // TODO @Tim use String.replace() instead of these monsters
-    String tmpOutput = new String("");
-    int tmpFunctionFound = 0;
 
-    for (int i = 0; i < aFormula.length(); i++) {
-      if (aFormula.charAt(i) == 's') {
-        if (i + 3 <= aFormula.length() && aFormula.charAt(i + 1) == 'i' && aFormula.charAt(i + 2) == 'n'
-            && aFormula.charAt(i + 3) == '(') {
-          tmpOutput += "%";
-          tmpFunctionFound = 3;
-        } else if (i + 4 <= aFormula.length() && aFormula.charAt(i + 1) == 'q'
-            && aFormula.charAt(i + 2) == 'r' && aFormula.charAt(i + 3) == 't' && aFormula.charAt(i + 4) == '(') {
-          tmpOutput += "&";
-          tmpFunctionFound = 4;
-        } else {
-          tmpOutput += aFormula.charAt(i);
-          tmpFunctionFound = 0;
-        }
-      } else if (aFormula.charAt(i) == 'c') {
-        if (i + 3 <= aFormula.length() && aFormula.charAt(i + 1) == 'o' && aFormula.charAt(i + 2) == 's'
-            && aFormula.charAt(i + 3) == '(') {
-          tmpOutput += "~";
-          tmpFunctionFound = 3;
-        } else {
-          tmpOutput += aFormula.charAt(i);
-          tmpFunctionFound = 0;
-        }
-      } else if (aFormula.charAt(i) == 't') {
-        if (i + 3 <= aFormula.length() && aFormula.charAt(i + 1) == 'a' && aFormula.charAt(i + 2) == 'n'
-            && aFormula.charAt(i + 3) == '(') {
-          tmpOutput += "#";
-          tmpFunctionFound = 3;
-        } else {
-          tmpOutput += aFormula.charAt(i);
-          tmpFunctionFound = 0;
-        }
-      } else if (aFormula.charAt(i) == 'w') {
-        if (i + 6 <= aFormula.length() && aFormula.charAt(i + 1) == 'u' && aFormula.charAt(i + 2) == 'r'
-            && aFormula.charAt(i + 3) == 'z' && aFormula.charAt(i + 4) == 'e' && aFormula.charAt(i + 5) == 'l'
-            && aFormula.charAt(i + 6) == '(') {
-          tmpOutput += "&";
-          tmpFunctionFound = 6;
-        } else {
-          tmpOutput += aFormula.charAt(i);
-          tmpFunctionFound = 0;
-        }
-      } else {
-        tmpOutput += aFormula.charAt(i);
-        tmpFunctionFound = 0;
-      }
-      i += tmpFunctionFound;
-      tmpFunctionFound = 0;
-    }
+    aFormula.replace("sin(", "%(");
+    aFormula.replace("cos(", "~(");
+    aFormula.replace("tan(", "#(");
+    aFormula.replace("sqrt(", "&(");
+    // aFormula.replace("wurzel(", "&(");
 
-    return tmpOutput;
+    return aFormula;
   }
 
   /**
    * A method to clean the variables in aFormula. Variables "ab" will be
    * replaced with "a*b" "2a" will be replaced with "2*a"
-   *
+   * 
    * @param aFormula
    * @return a String that contains no "ab" or "2a" variables
    */
@@ -197,10 +149,13 @@ public class ConverterUtil {
 
     for (int i = 0; i < aFormula.length(); i++) {
       tmpOutput += aFormula.charAt(i);
-      if (MathUtil.isVariable(aFormula.charAt(i)) && (i + 1 < aFormula.length() && (MathUtil.isNumberOrVariable(aFormula.charAt(i + 1)) || aFormula.charAt(i + 1) == '('))) {
+      if (MathUtil.isVariable(aFormula.charAt(i))
+          && (i + 1 < aFormula.length() && (MathUtil.isNumberOrVariable(aFormula.charAt(i + 1)) || aFormula
+              .charAt(i + 1) == '('))) {
         tmpOutput += "*";
       } else if (MathUtil.isNumber(aFormula.charAt(i))
-          && (i + 1 < aFormula.length() && (MathUtil.isVariable(aFormula.charAt(i + 1)) || aFormula.charAt(i + 1) == '('))) {
+          && (i + 1 < aFormula.length() && (MathUtil.isVariable(aFormula.charAt(i + 1)) || aFormula
+              .charAt(i + 1) == '('))) {
         tmpOutput += "*";
       }
     }
@@ -249,9 +204,9 @@ public class ConverterUtil {
   /**
    * sets brackets around negative numbers at the beginning of the formular or
    * at the beginning of brackets
-   *
+   * 
    * makes -3*2*(-5*6) look like (-3)*2*((-5)*6)
-   *
+   * 
    * @param aFormula
    * @return the bracked formula
    * @author Tobias
@@ -322,7 +277,7 @@ public class ConverterUtil {
   /**
    * checks if there is the same amount of ( and ) brackets, and if no ) are in
    * lead of ( , that means not more than there should be
-   *
+   * 
    * @param aFormula
    * @throws IllegalArgumentException
    *             if the brackets in the term are not correct
@@ -344,11 +299,9 @@ public class ConverterUtil {
     }
   }
 
-
-
   /**
    * gets the position of the next blank in a string
-   *
+   * 
    * @param aFormula
    * @param aStartPosition
    * @return The position of the next blank in the given String, returns -1 if

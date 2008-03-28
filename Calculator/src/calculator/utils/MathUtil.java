@@ -228,6 +228,7 @@ public class MathUtil {
 
     int iStartPosition = 0;
     int iEndPosition = 0;
+    int iCounterLeftBracket;
 
     while (iStartPosition < iLenOfString) {
       if ((MathUtil.isNumber(aFormula.charAt(iStartPosition)))) {
@@ -240,7 +241,7 @@ public class MathUtil {
         try {
           MathList.add(buildNumberMathObject(aFormula.substring(iStartPosition, iEndPosition)));
         } catch (Exception e) {
-          System.out.println(e.getMessage());
+          e.printStackTrace();
         }
       } else if (MathUtil.IsLeftBracket(aFormula.charAt(iStartPosition))
           && (MathUtil.IsMinus(aFormula.charAt(iStartPosition + 1)))) {
@@ -252,19 +253,29 @@ public class MathUtil {
         try {
           MathList.add(buildNumberMathObject(aFormula.substring(iStartPosition, iEndPosition)));
         } catch (Exception e) {
-          System.out.println(e.getMessage());
+          e.printStackTrace();
         }
         iEndPosition++;
       } else if (MathUtil.IsLeftBracket(aFormula.charAt(iStartPosition))) {
         iStartPosition++;
-        iEndPosition = iStartPosition + 1;
-        while ((MathUtil.IsRightBracket(aFormula.charAt(iEndPosition))) == false) {
+        iCounterLeftBracket = 1;
+        iEndPosition = iStartPosition;
+        outer: while (true) {
+          if (MathUtil.IsLeftBracket(aFormula.charAt(iEndPosition))) {
+            iCounterLeftBracket++;
+          }
+          if (MathUtil.IsRightBracket(aFormula.charAt(iEndPosition))) {
+            iCounterLeftBracket--;
+            if (iCounterLeftBracket == 0) {
+              break outer;
+            }
+          }
           iEndPosition++;
         }
         try {
           MathList.add(MathUtil.FormulaToArrayList(aFormula.substring(iStartPosition, iEndPosition)));
         } catch (Exception e) {
-          System.out.print(e.getMessage());
+          e.printStackTrace();
         }
         iEndPosition++;
       } else if (MathUtil.IsOperator(aFormula.charAt(iStartPosition))) {
@@ -275,7 +286,7 @@ public class MathUtil {
         try {
           MathList.add(buildOperatorMathObject(aFormula.substring(iStartPosition, iEndPosition)));
         } catch (Exception e) {
-          System.out.print(e.getMessage());
+          e.printStackTrace();
         }
       } else {
         throw new IllegalInputStreamException("Input String contains non valid characters!");

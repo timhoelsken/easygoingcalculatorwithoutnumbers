@@ -1,4 +1,4 @@
-package user.util.input;
+package calculator.user.util.input;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

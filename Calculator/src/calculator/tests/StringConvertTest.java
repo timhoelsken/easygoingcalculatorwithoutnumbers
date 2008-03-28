@@ -3,10 +3,10 @@
  */
 package calculator.tests;
 
+import calculator.user.util.input.ConverterUtil;
 import junit.framework.JUnit4TestAdapter;
 import junit.framework.Test;
 import junit.framework.TestCase;
-import user.util.input.ConverterUtil;
 
 /**
  * @author Tim
@@ -16,7 +16,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link user.util.input.ConverterUtil#termToStandardString(java.lang.String)}.
+   * {@link calculator.user.util.input.ConverterUtil#termToStandardString(java.lang.String)}.
    *
    * @throws Exception
    */
@@ -28,7 +28,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link user.util.input.ConverterUtil#removeBlanks(java.lang.String)}.
+   * {@link calculator.user.util.input.ConverterUtil#removeBlanks(java.lang.String)}.
    */
   public void testRemoveBlanks() {
     String tmpString = new String("2 + 4");
@@ -37,7 +37,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link user.util.input.ConverterUtil#insertMultiplicationOperators(java.lang.String)}.
+   * {@link calculator.user.util.input.ConverterUtil#insertMultiplicationOperators(java.lang.String)}.
    */
   public void testCleanVariables() {
     String tmpString = new String("2a+ab");
@@ -48,7 +48,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link user.util.input.ConverterUtil#checkIfValidSignsOnly()}.
+   * {@link calculator.user.util.input.ConverterUtil#checkIfValidSignsOnly()}.
    */
   public void checkIfValidSignsOnly() {
 
@@ -90,7 +90,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link user.util.input.ConverterUtil#checkIfValidBlanksOnly()}.
+   * {@link calculator.user.util.input.ConverterUtil#checkIfValidBlanksOnly()}.
    */
   public void checkIfValidBlanksOnly()
   {
@@ -99,7 +99,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link user.util.input.ConverterUtil#removeBlanks()}.
+   * {@link calculator.user.util.input.ConverterUtil#removeBlanks()}.
    */
   public void removeBlanks()
   {
@@ -108,7 +108,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link user.util.input.ConverterUtil#unifyCommas()}.
+   * {@link calculator.user.util.input.ConverterUtil#unifyCommas()}.
    */
   public void unifyCommas()
   {
@@ -117,7 +117,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link user.util.input.ConverterUtil#checkDecimalNumbers()}.
+   * {@link calculator.user.util.input.ConverterUtil#checkDecimalNumbers()}.
    */
   public void checkDecimalNumbers()
   {
@@ -172,7 +172,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link user.util.input.ConverterUtil#insertMultiplicationOperators()}.
+   * {@link calculator.user.util.input.ConverterUtil#insertMultiplicationOperators()}.
    */
   public void insertMultiplicationOperators()
   {
@@ -181,7 +181,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link user.util.input.ConverterUtil#checkOperators()}.
+   * {@link calculator.user.util.input.ConverterUtil#checkOperators()}.
    */
   public void checkOperators()
   {
@@ -258,7 +258,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link user.util.input.ConverterUtil#setBracketsAroundNegativeNumbers()}.
+   * {@link calculator.user.util.input.ConverterUtil#setBracketsAroundNegativeNumbers()}.
    */
   public void setBracketsAroundNegativeNumbers()
   {
@@ -268,7 +268,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link user.util.input.ConverterUtil#putBracketsAroundNegativeNumber()}.
+   * {@link calculator.user.util.input.ConverterUtil#putBracketsAroundNegativeNumber()}.
    */
   public void putBracketsAroundNegativeNumber()
   {
@@ -277,7 +277,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link user.util.input.ConverterUtil#checkNegativeNumbers()}.
+   * {@link calculator.user.util.input.ConverterUtil#checkNegativeNumbers()}.
    */
   public void checkNegativeNumbers()
   {
@@ -286,7 +286,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link user.util.input.ConverterUtil#checkBrackets()}.
+   * {@link calculator.user.util.input.ConverterUtil#checkBrackets()}.
    */
   public void checkBrackets()
   {
@@ -295,7 +295,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link user.util.input.ConverterUtil#changeFunctionsIntoSigns()}.
+   * {@link calculator.user.util.input.ConverterUtil#changeFunctionsIntoSigns()}.
    */
   public void changeFunctionsIntoSigns()
   {
@@ -304,7 +304,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link user.util.input.ConverterUtil#getNextBlankPosition()}.
+   * {@link calculator.user.util.input.ConverterUtil#getNextBlankPosition()}.
    */
   public void getNextBlankPosition()
   {
@@ -313,7 +313,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link user.util.input.ConverterUtil#isNumericOrVariable()}.
+   * {@link calculator.user.util.input.ConverterUtil#isNumericOrVariable()}.
    */
   public void isNumericOrVariable()
   {
@@ -322,7 +322,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link user.util.input.ConverterUtil#isNumeric}.
+   * {@link calculator.user.util.input.ConverterUtil#isNumeric}.
    */
   public void isNumeric()
   {
@@ -331,7 +331,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link user.util.input.ConverterUtil#isVariable}.
+   * {@link calculator.user.util.input.ConverterUtil#isVariable}.
    */
   public void isVariable()
   {
@@ -341,7 +341,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link user.util.input.ConverterUtil#termToStandardString()}.
+   * {@link calculator.user.util.input.ConverterUtil#termToStandardString()}.
    */
   public void termToStandardString()
   {

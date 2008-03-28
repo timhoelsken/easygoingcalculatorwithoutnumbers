@@ -38,7 +38,7 @@ public class MathUtil {
     }
     return false;
   }
-  
+
   /**
    * 
    * @param aCharacter
@@ -47,7 +47,7 @@ public class MathUtil {
   public static boolean isNumberOrVariable(char aCharacter) {
     return (isNumber(aCharacter) || isVariable(aCharacter)) ? true : false;
   }
-  
+
   /**
    * @param aChar
    * @return true if char is a comma
@@ -221,8 +221,8 @@ public class MathUtil {
    *          sting which contains a formula containing string
    * @todo Andre: Add support for negative numbers and brackets
    */
-  public static ArrayList<MathObj> FormulaToArrayList(String aFormula) {
-    ArrayList<MathObj> MathList = new ArrayList<MathObj>();
+  public static ArrayList<Object> FormulaToArrayList(String aFormula) {
+    ArrayList<Object> MathList = new ArrayList<Object>();
 
     int iLenOfString;
     iLenOfString = aFormula.length();
@@ -256,6 +256,18 @@ public class MathUtil {
           System.out.println(e.getMessage());
         }
         iEndPosition++;
+      } else if (MathUtil.IsLeftBracket(aFormula.charAt(iStartPosition))) {
+        iStartPosition++;
+        iEndPosition = iStartPosition + 1;
+        while ((MathUtil.IsRightBracket(aFormula.charAt(iEndPosition))) == false) {
+          iEndPosition++;
+        }
+        try {
+          MathList.add(MathUtil.FormulaToArrayList(aFormula.substring(iStartPosition, iEndPosition)));
+        } catch (Exception e) {
+          System.out.print(e.getMessage());
+        }
+        iEndPosition++;
       } else if (MathUtil.IsOperator(aFormula.charAt(iStartPosition))) {
         iEndPosition = iStartPosition + 1;
         while ((iEndPosition < iLenOfString) && (MathUtil.IsOperator(aFormula.charAt(iEndPosition)))) {
@@ -271,15 +283,6 @@ public class MathUtil {
       }
       iStartPosition = iEndPosition;
     }
-    
-    /**
-     * for testing
-     */
-    for (MathObj tmpNextElement:MathList)
-    {
-      System.out.println(tmpNextElement.toString());
-    }
-    
     return MathList;
   }
 

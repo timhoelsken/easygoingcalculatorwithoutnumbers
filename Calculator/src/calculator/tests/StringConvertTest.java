@@ -50,7 +50,7 @@ public class StringConvertTest extends TestCase {
    * Test method for
    * {@link calculator.utils.ConverterUtil#checkIfValidSignsOnly()}.
    */
-  public void checkIfValidSignsOnly() {
+  public void testCheckIfValidSignsOnly() {
 
 	//positive test
 	try

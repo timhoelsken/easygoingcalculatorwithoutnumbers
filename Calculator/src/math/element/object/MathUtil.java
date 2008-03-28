@@ -1,6 +1,8 @@
 package math.element.object;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author Tobias
@@ -13,10 +15,33 @@ public class MathUtil {
    * @param aChar
    * @return true if char is a number (0 - 9)
    */
-  public static boolean IsNumber(char aChar) {
+  public static boolean isNumber(char aChar) {
     return (aChar >= '0' && aChar <= '9');
   }
 
+  /**
+   * 
+   * @param aCharacter
+   * @return
+   */
+  public static boolean isVariable(char aCharacter) {
+    Pattern tmpPattern = Pattern.compile("[a-z]");
+    Matcher tmpMatcher = tmpPattern.matcher(Character.toString(aCharacter).toLowerCase());
+    if (tmpMatcher.find()) {
+      return true;
+    }
+    return false;
+  }
+  
+  /**
+   * 
+   * @param aCharacter
+   * @return
+   */
+  public static boolean isNumberOrVariable(char aCharacter) {
+    return (isNumber(aCharacter) || isVariable(aCharacter)) ? true : false;
+  }
+  
   /**
    * @param aChar
    * @return true if char is a comma
@@ -25,6 +50,11 @@ public class MathUtil {
     return (aChar == COMMA);
   }
 
+  /**
+   * 
+   * @param aChar
+   * @return
+   */
   public static boolean IsMinus(char aChar) {
     return (aChar == '-');
   }
@@ -87,7 +117,7 @@ public class MathUtil {
 
     char tmpChar = aFunction.charAt(aCharPos);
 
-    if (IsNumber(tmpChar)) {
+    if (isNumber(tmpChar)) {
       return getNextNumber(aFunction, aCharPos);
     }
     // else (IsOperator(c))
@@ -111,7 +141,7 @@ public class MathUtil {
     int tmpCommaCount = 0;
     while (aCharPos < aFunction.length()) {
       char tmpChar = aFunction.charAt(aCharPos);
-      if (IsNumber(tmpChar)) {
+      if (isNumber(tmpChar)) {
         tmpResult += tmpChar;
       } else if (IsComma(tmpChar)) {
         tmpCommaCount++;
@@ -195,10 +225,10 @@ public class MathUtil {
     int iEndPosition = 0;
 
     while (iStartPosition < iLenOfString) {
-      if ((MathUtil.IsNumber(aFormula.charAt(iStartPosition)))) {
+      if ((MathUtil.isNumber(aFormula.charAt(iStartPosition)))) {
         iEndPosition = iStartPosition + 1;
         while ((iEndPosition < iLenOfString)
-            && ((MathUtil.IsNumber(aFormula.charAt(iEndPosition))) || (MathUtil.IsComma(aFormula
+            && ((MathUtil.isNumber(aFormula.charAt(iEndPosition))) || (MathUtil.IsComma(aFormula
                 .charAt(iEndPosition))))) {
           iEndPosition++;
         }

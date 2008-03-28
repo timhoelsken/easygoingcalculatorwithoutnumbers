@@ -2,6 +2,7 @@ package user.util.input;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import math.element.object.MathUtil;
 
 /**
  * 
@@ -62,8 +63,8 @@ public class ConverterUtil {
       tmpPosition = getNextBlankPosition(aFormula, tmpPosition);
       if (tmpPosition != 0 || tmpPosition != aFormula.length()) {
 
-        if ((tmpPosition - 1 > -1 && isNumericOrVariable(aFormula.charAt(tmpPosition - 1)))
-            && (tmpPosition + 1 <= aFormula.length() && isNumericOrVariable(aFormula.charAt(tmpPosition - 1)))) {
+        if ((tmpPosition - 1 > -1 && MathUtil.isNumberOrVariable(aFormula.charAt(tmpPosition - 1)))
+            && (tmpPosition + 1 <= aFormula.length() && MathUtil.isNumberOrVariable(aFormula.charAt(tmpPosition - 1)))) {
           throw new IllegalArgumentException("The formula contains invalid blanks.");
         }
       }
@@ -131,10 +132,10 @@ public class ConverterUtil {
 
     for (int i = 0; i < aFormula.length(); i++) {
       tmpOutput += aFormula.charAt(i);
-      if (isVariable(aFormula.charAt(i)) && (i + 1 < aFormula.length() && isNumericOrVariable(aFormula.charAt(i + 1)))) {
+      if (MathUtil.isVariable(aFormula.charAt(i)) && (i + 1 < aFormula.length() && MathUtil.isNumberOrVariable(aFormula.charAt(i + 1)))) {
         tmpOutput += "*";
-      } else if (isNumeric(aFormula.charAt(i))
-          && (i + 1 < aFormula.length() && isVariable(aFormula.charAt(i + 1)))) {
+      } else if (MathUtil.isNumber(aFormula.charAt(i))
+          && (i + 1 < aFormula.length() && MathUtil.isVariable(aFormula.charAt(i + 1)))) {
         tmpOutput += "*";
       }
     }
@@ -388,29 +389,5 @@ public class ConverterUtil {
     }
 
     return tmpPosition;
-  }
-
-  // TODO @Tim isNumericOrVariable + Untermethoden in MathUtil ausgliedern?!
-  // (gibt's da auch schon teilweise)
-  private static boolean isNumericOrVariable(char aCharacter) {
-    return (isNumeric(aCharacter) || isVariable(aCharacter)) ? true : false;
-  }
-
-  private static boolean isNumeric(char aCharacter) {
-    Pattern tmpPattern = Pattern.compile("[0-9]");
-    Matcher tmpMatcher = tmpPattern.matcher(Character.toString(aCharacter));
-    if (tmpMatcher.find()) {
-      return true;
-    }
-    return false;
-  }
-
-  private static boolean isVariable(char aCharacter) {
-    Pattern tmpPattern = Pattern.compile("[a-z]");
-    Matcher tmpMatcher = tmpPattern.matcher(Character.toString(aCharacter).toLowerCase());
-    if (tmpMatcher.find()) {
-      return true;
-    }
-    return false;
   }
 }

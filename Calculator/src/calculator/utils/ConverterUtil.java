@@ -27,13 +27,12 @@ public class ConverterUtil {
     aFormula = removeBlanks(aFormula);
     aFormula = unifyCommas(aFormula);
     checkDecimalNumbers(aFormula);
+    aFormula = changeFunctionsIntoSigns(aFormula);
     aFormula = insertMultiplicationOperators(aFormula);
     aFormula = setBracketsAroundNegativeNumbers(aFormula);
     checkNegativeNumbers(aFormula);
     checkOperators(aFormula);
-    checkBrackets(aFormula);
-    checkSequence(aFormula);
-    aFormula = changeFunctionsIntoSigns(aFormula);
+    checkBrackets(aFormula);    
 
     return aFormula;
   }
@@ -282,13 +281,7 @@ public class ConverterUtil {
     }
   }
 
-  private static void checkSequence(String aFormula) {
-    // TODO checkSequence(); Es muss immer folgende Reihenfolge eingehalten
-    // werden: Zahl oder unärer
-    // * Operator (mit Klammerausdruck), Binärer Operator, Zahl oder unärer
-    // * Operator (mit Klammerausdruck), binärer operator....
 
-  }
 
   //TODO Tim ändert das hier noch
   /**

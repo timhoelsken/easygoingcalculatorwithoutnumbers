@@ -3,7 +3,7 @@ package calculator.tree.element;
 import calculator.math.element.object.MathObj;
 
 /**
- *
+ * 
  */
 public class Tree {
   private MathObj root;
@@ -72,7 +72,7 @@ public class Tree {
 
   /**
    * constructor (sets both sons to NULL)
-   *
+   * 
    * @param aRoot
    */
   public Tree(MathObj aRoot) {
@@ -82,7 +82,7 @@ public class Tree {
 
   /**
    * constructor
-   *
+   * 
    * @param aRoot
    * @param aFather
    * @param aLeft
@@ -97,7 +97,7 @@ public class Tree {
 
   /**
    * paints current tree on the console
-   *
+   * 
    * @author Tobias
    */
   public void paintMe() {
@@ -205,19 +205,5 @@ public class Tree {
     } else {
       return tmpLeft;
     }
-  }
-
-  /**
-   * start for testing paintMe()
-   *
-   * @param args
-   * @throws Exception
-   */
-  public static void main(String[] args) throws Exception {
-    FormulaTreeBuilder tmpFormulaTreeBuilder = new FormulaTreeBuilder();
-    Tree tmpTree = tmpFormulaTreeBuilder.BuildTree("5*3*2+6+5*2-30");
-
-    tmpTree.paintMe();
-    System.out.println(FormulaTreeBuilder.EvaluateTree(tmpTree));
   }
 }

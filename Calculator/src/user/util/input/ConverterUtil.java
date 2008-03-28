@@ -376,7 +376,11 @@ public class ConverterUtil {
   private static int getNextBlankPosition(String aFormula, int aStartPosition) {
     int tmpPosition = -1;
 
-    for (int i = 0; i < aFormula.length(); i++) {
+    if (aStartPosition!=0){
+      aStartPosition++;
+    }
+    
+    for (int i = aStartPosition; i < aFormula.length(); i++) {
       if (aFormula.charAt(i) == ' ') {
         tmpPosition = i;
         i = aFormula.length();

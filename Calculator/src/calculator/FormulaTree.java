@@ -137,10 +137,10 @@ public final class FormulaTree {
 
 	 // prepare formula, mathobj and tmptree
 	formulaTree = null;
-	ArrayList<MathObj> MathList = MathUtil.FormulaToArrayList(aFunction);
+	ArrayList<Object> MathList = MathUtil.FormulaToArrayList(aFunction);
 
 	// iterate over all elements of the formula
-    for (MathObj tmpNextElement:MathList){
+    for (Object tmpNextElement:MathList){
 
     	// is the next element an Operand??
         if (tmpNextElement instanceof Operand) {

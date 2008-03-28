@@ -1,6 +1,6 @@
 package tree.element;
 
-import math.element.object.MathObj;
+import calculator.math.element.object.MathObj;
 
 /**
  *

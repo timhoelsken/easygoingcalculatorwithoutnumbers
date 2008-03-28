@@ -1,12 +1,13 @@
 package tree.element;
 
-import math.element.object.MathUtil;
-import math.element.object.MathObj;
-import math.element.object.NumberObj;
-import math.element.object.Operator;
-import math.element.object.Operand;
-import math.element.object.OperatorType;
 import java.util.ArrayList;
+
+import calculator.math.element.object.MathObj;
+import calculator.math.element.object.MathUtil;
+import calculator.math.element.object.NumberObj;
+import calculator.math.element.object.Operand;
+import calculator.math.element.object.Operator;
+import calculator.math.element.object.OperatorType;
 
 
 /**

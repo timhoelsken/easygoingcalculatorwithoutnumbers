@@ -2,7 +2,8 @@ package user.util.input;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import math.element.object.MathUtil;
+
+import calculator.math.element.object.MathUtil;
 
 /**
  *

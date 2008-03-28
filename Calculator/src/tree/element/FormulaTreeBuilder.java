@@ -62,8 +62,6 @@ public final class FormulaTreeBuilder {
    *
    * @param anExistingTree
    * @param anOperand
-   * @return the tree is returned with the focus on the father-operator of the
-   *         inserted operand
    * @throws Exception
    */
   private void InsertOperandIntoTree(Operand anOperand) {
@@ -85,7 +83,6 @@ public final class FormulaTreeBuilder {
    *
    * @param anExistingTree
    * @param anOperator
-   * @return the tree is returned with the focus on the new operator
    */
   private void InsertOperatorIntoTree(Operator anOperator) {
 
@@ -126,31 +123,32 @@ public final class FormulaTreeBuilder {
   }
 
   /**
-   * t Builds a binary formula tree :-)
+   * this builds a binary formula tree :-)
    *
    * @param aFunction
+   * @return the built tree
    * @throws Exception
    */
   public Tree BuildTree(String aFunction) throws Exception {
 
-	  
+
 	 // prepare formula, mathobj and tmptree
 	formulaTree = null;
 	ArrayList<MathObj> MathList = MathUtil.FormulaToArrayList(aFunction);
-    
+
 	// iterate over all elements of the formula
     for (MathObj tmpNextElement:MathList){
-    	
+
     	// is the next element an Operand??
         if (tmpNextElement instanceof Operand) {
           this.InsertOperandIntoTree((Operand) tmpNextElement);
         } else if (tmpNextElement instanceof Operator) {
           this.InsertOperatorIntoTree((Operator) tmpNextElement);
         }
-        
+
     }
-    
-    return formulaTree;    
+
+    return formulaTree;
   }
 
   private Tree formulaTree = null;

@@ -1,3 +1,7 @@
+/**
+ * @author Tobias
+ * just to kill the warnings :P
+ */
 public class EmptyClassForGlobalSupport {
 
   // comments by Raphael
@@ -8,4 +12,5 @@ public class EmptyClassForGlobalSupport {
   // comments by Andre
 
   // comments by Tobi
+      //TODO @André kill the warnings in your classes ;)
   }

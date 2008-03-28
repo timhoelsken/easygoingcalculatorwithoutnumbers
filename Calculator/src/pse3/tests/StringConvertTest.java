@@ -32,8 +32,7 @@ public class StringConvertTest extends TestCase {
    */
   public void testRemoveBlanks() {
     String tmpString = new String("2 + 4");
-    ConverterUtil tmpConverter = new ConverterUtil();
-    assertTrue(tmpConverter.removeBlanks(tmpString).equals("2+4"));
+    assertTrue(ConverterUtil.removeBlanks(tmpString).equals("2+4"));
   }
 
   /**
@@ -42,18 +41,17 @@ public class StringConvertTest extends TestCase {
    */
   public void testCleanVariables() {
     String tmpString = new String("2a+ab");
-    ConverterUtil tmpConverter = new ConverterUtil();
-    assertTrue("The String has Variables separated by *", tmpConverter
+    assertTrue("The String has Variables separated by *", ConverterUtil
         .insertMultiplicationOperators(tmpString).equals("2*a+a*b"));
   }
-  
+
 
   /**
    * Test method for
    * {@link user.util.input.ConverterUtil#checkIfValidSignsOnly()}.
    */
   public void checkIfValidSignsOnly() {
-	
+
 	//positive test
 	try
 	{
@@ -63,7 +61,7 @@ public class StringConvertTest extends TestCase {
 	{
 		assert(false);
 	}
-	
+
 	//negative test
 	Boolean tmpErrorOccurred = false;
 	try
@@ -73,9 +71,9 @@ public class StringConvertTest extends TestCase {
 	catch (Exception e)
 	{
 		tmpErrorOccurred = true;
-	}    
+	}
 	assert( !tmpErrorOccurred );
-	
+
 	//negative test
 	tmpErrorOccurred = false;
 	try
@@ -85,11 +83,11 @@ public class StringConvertTest extends TestCase {
 	catch (Exception e)
 	{
 		tmpErrorOccurred = true;
-	}    
+	}
 	assert( !tmpErrorOccurred );
 
   }
-  
+
   /**
    * Test method for
    * {@link user.util.input.ConverterUtil#checkIfValidBlanksOnly()}.
@@ -98,7 +96,7 @@ public class StringConvertTest extends TestCase {
   {
 	  assert(false); //Test noch nicht geschrieben!!!
   }
-  
+
   /**
    * Test method for
    * {@link user.util.input.ConverterUtil#removeBlanks()}.
@@ -107,7 +105,7 @@ public class StringConvertTest extends TestCase {
   {
 	  assert(ConverterUtil.removeBlanks("2+  3+4 5 + 666").equalsIgnoreCase("2+3+45+666"));
   }
-  
+
   /**
    * Test method for
    * {@link user.util.input.ConverterUtil#unifyCommas()}.
@@ -116,7 +114,7 @@ public class StringConvertTest extends TestCase {
   {
 	  assert(ConverterUtil.unifyCommas(",,dfa34.,.,.").equalsIgnoreCase("..dfa34....."));
   }
-  
+
   /**
    * Test method for
    * {@link user.util.input.ConverterUtil#checkDecimalNumbers()}.
@@ -124,7 +122,7 @@ public class StringConvertTest extends TestCase {
   public void checkDecimalNumbers()
   {
 	  assert(false); //noch kein code review stattgefunden
-	  
+
 	//positive test
 		try
 		{
@@ -134,7 +132,7 @@ public class StringConvertTest extends TestCase {
 		{
 			assert(false);
 		}
-		
+
 		//negative test
 		Boolean tmpErrorOccurred = false;
 		try
@@ -144,9 +142,9 @@ public class StringConvertTest extends TestCase {
 		catch (Exception e)
 		{
 			tmpErrorOccurred = true;
-		}    
+		}
 		assert( !tmpErrorOccurred );
-		
+
 		//negative test
 		tmpErrorOccurred = false;
 		try
@@ -156,9 +154,9 @@ public class StringConvertTest extends TestCase {
 		catch (Exception e)
 		{
 			tmpErrorOccurred = true;
-		}    
+		}
 		assert( !tmpErrorOccurred );
-		
+
 		//negative test
 		tmpErrorOccurred = false;
 		try
@@ -168,10 +166,10 @@ public class StringConvertTest extends TestCase {
 		catch (Exception e)
 		{
 			tmpErrorOccurred = true;
-		}    
+		}
 		assert( !tmpErrorOccurred );
   }
-  
+
   /**
    * Test method for
    * {@link user.util.input.ConverterUtil#insertMultiplicationOperators()}.
@@ -180,7 +178,7 @@ public class StringConvertTest extends TestCase {
   {
 	  assert(ConverterUtil.insertMultiplicationOperators("3+5.5xa4bc3def5gh+sin+cos6").equals("3+5.5*x*a*4*b*c*3*d*e*f*5*g*h+s*i*n+c*o*s*6"));
   }
-  
+
   /**
    * Test method for
    * {@link user.util.input.ConverterUtil#checkOperators()}.
@@ -196,7 +194,7 @@ public class StringConvertTest extends TestCase {
 		{
 			assert(false);
 		}
-		
+
 		//negative test
 		Boolean tmpErrorOccurred = false;
 		try
@@ -206,9 +204,9 @@ public class StringConvertTest extends TestCase {
 		catch (Exception e)
 		{
 			tmpErrorOccurred = true;
-		}    
+		}
 		assert( !tmpErrorOccurred );
-		
+
 		//negative test
 		tmpErrorOccurred = false;
 		try
@@ -218,9 +216,9 @@ public class StringConvertTest extends TestCase {
 		catch (Exception e)
 		{
 			tmpErrorOccurred = true;
-		}    
+		}
 		assert( !tmpErrorOccurred );
-		
+
 		//negative test
 		tmpErrorOccurred = false;
 		try
@@ -230,9 +228,9 @@ public class StringConvertTest extends TestCase {
 		catch (Exception e)
 		{
 			tmpErrorOccurred = true;
-		}    
+		}
 		assert( !tmpErrorOccurred );
-		
+
 		//negative test
 		tmpErrorOccurred = false;
 		try
@@ -242,9 +240,9 @@ public class StringConvertTest extends TestCase {
 		catch (Exception e)
 		{
 			tmpErrorOccurred = true;
-		}    
+		}
 		assert( !tmpErrorOccurred );
-		
+
 		//negative test
 		tmpErrorOccurred = false;
 		try
@@ -254,10 +252,10 @@ public class StringConvertTest extends TestCase {
 		catch (Exception e)
 		{
 			tmpErrorOccurred = true;
-		}    
+		}
 		assert( !tmpErrorOccurred );
   }
-  
+
   /**
    * Test method for
    * {@link user.util.input.ConverterUtil#setBracketsAroundNegativeNumbers()}.
@@ -266,8 +264,8 @@ public class StringConvertTest extends TestCase {
   {
 	  assert(false);
   }
-  
-  
+
+
   /**
    * Test method for
    * {@link user.util.input.ConverterUtil#putBracketsAroundNegativeNumber()}.
@@ -285,7 +283,7 @@ public class StringConvertTest extends TestCase {
   {
 	  assert(false);
   }
-  
+
   /**
    * Test method for
    * {@link user.util.input.ConverterUtil#checkBrackets()}.
@@ -294,7 +292,7 @@ public class StringConvertTest extends TestCase {
   {
 	  assert(false);
   }
-  
+
   /**
    * Test method for
    * {@link user.util.input.ConverterUtil#changeFunctionsIntoSigns()}.
@@ -303,7 +301,7 @@ public class StringConvertTest extends TestCase {
   {
 	  assert(false);
   }
-  
+
   /**
    * Test method for
    * {@link user.util.input.ConverterUtil#getNextBlankPosition()}.
@@ -312,7 +310,7 @@ public class StringConvertTest extends TestCase {
   {
 	  assert(false);
   }
-  
+
   /**
    * Test method for
    * {@link user.util.input.ConverterUtil#isNumericOrVariable()}.
@@ -321,7 +319,7 @@ public class StringConvertTest extends TestCase {
   {
 	  assert(false);
   }
-  
+
   /**
    * Test method for
    * {@link user.util.input.ConverterUtil#isNumeric}.
@@ -330,7 +328,7 @@ public class StringConvertTest extends TestCase {
   {
 	  assert(false);
   }
-  
+
   /**
    * Test method for
    * {@link user.util.input.ConverterUtil#isVariable}.
@@ -339,8 +337,8 @@ public class StringConvertTest extends TestCase {
   {
 	  assert(false);
   }
-  
-  
+
+
   /**
    * Test method for
    * {@link user.util.input.ConverterUtil#termToStandardString()}.
@@ -364,6 +362,9 @@ public class StringConvertTest extends TestCase {
   // die auch abgetestet werden können.
   //
   // mfg wörger
+  /**
+   *
+   */
   public void testEverythingEspaciallyTheSyntax() {
     /**
      * es sollte geprüft werden, dass keine Sonderzeichen im Text drinne sind

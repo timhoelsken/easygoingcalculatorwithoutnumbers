@@ -9,7 +9,8 @@ public class EmptyClassForGlobalSupport {
 
   // comments by Tim
       // TODO @ll Allgemeine Diskussion über das Überprüfen von blanks in der Funktion! Sollen wir Zahlen dabei einfach zusammenziehen oder prüfen?
-      // was ist mit Sachen wie "3 4 a 5" ? momentan würde das zu "34*a*5" zusammengezogen werden 
+      // was ist mit Sachen wie "3 4 a 5" ? momentan würde das zu "34*a*5" zusammengezogen werden
+      // TODO bin dafür die checkValidBlanks methode wegzuschmeißen - wörger
   // comments by Andre
 
   // comments by Tobi

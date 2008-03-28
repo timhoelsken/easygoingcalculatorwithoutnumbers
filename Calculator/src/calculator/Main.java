@@ -2,11 +2,11 @@ package calculator;
 
 import java.io.IOException;
 
-import calculator.tree.element.FormulaTree;
-import calculator.tree.element.Tree;
 import calculator.userinterface.ConsoleInput;
 import calculator.userinterface.ConsoleOutput;
-import calculator.userinterface.ConverterUtil;
+import calculator.utils.ConverterUtil;
+import calculator.utils.FormulaTree;
+import calculator.utils.Tree;
 
 
 /**

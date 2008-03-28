@@ -3,8 +3,8 @@
  */
 package calculator.tests;
 
-import calculator.math.element.object.MathUtil;
-import calculator.math.element.object.NumberObj;
+import calculator.elements.NumberObj;
+import calculator.utils.MathUtil;
 import junit.framework.JUnit4TestAdapter;
 import junit.framework.Test;
 import junit.framework.TestCase;

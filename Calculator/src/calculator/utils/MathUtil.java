@@ -1,9 +1,13 @@
-package calculator.math.element.object;
+package calculator.utils;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import calculator.elements.MathObj;
+import calculator.elements.NumberObj;
+import calculator.elements.Operator;
+import calculator.elements.OperatorType;
 import calculator.exceptions.IllegalInputStreamException;
 
 /**

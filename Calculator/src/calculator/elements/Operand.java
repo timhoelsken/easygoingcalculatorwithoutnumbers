@@ -1,4 +1,4 @@
-package calculator.math.element.object;
+package calculator.elements;
 
 public class Operand extends MathObj {
   /**

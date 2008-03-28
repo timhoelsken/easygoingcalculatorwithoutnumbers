@@ -51,7 +51,7 @@ Taschenrechner 0.3
    mathematische Gesetze beachten (kommutativ) (done)
    
  - Erkennen von Gleitkommazahlen (==> Erkennen von Komma/Punkt),  (Andre)
-   negativen Zahlen (Tim / Andre)
+   negativen Zahlen (Tim (done) / Andre)
  
  - Einordnen der MathObjs in einen Baum erweitern (done)
  
@@ -66,7 +66,7 @@ Taschenrechner 0.4
 ------------------
 
  - Konvertierung eines Terms erweitern:
-   Terme mit Klammern, Minusklammern
+   Terme mit Klammern, Minusklammern Tim/Tobi (done)
    
  - Erkennen von Klammern (==> Rekursion zum berechnen des inneren Terms?)
    mathematische Gesetze beachten (assoziativ, distributiv)  
@@ -85,7 +85,7 @@ Taschenrechner 0.5
 
  - Konvertierung eines Terms erweitern:
    Gleichung mit 1 unbekannten, Einführen des Gleichheitszeichen
-   (Konvertierung von 2a --> 2*a z.B.)
+   (Konvertierung von 2a --> 2*a z.B.) Tim/Tobi (done)
    
  - Erkennen von Variablen
  
@@ -102,7 +102,7 @@ Taschenrechner 0.6
 ------------------
 
  - Konvertierung eines Terms erweitern:
-   Gleichung mit mehreren unbekannten (ab --> a*b)
+   Gleichung mit mehreren unbekannten (ab --> a*b) Tim/Tobi (done)
   
  - Einordnen der MathObjs in einen Baum erweitern (?)
  
@@ -117,7 +117,7 @@ Taschenrechner 0.7
 ------------------
 
  - Konvertierung eines Terms erweitern:
-   potenzieren/Wurzel ziehen (==> p/q Formel einführen?), sin(), cos(), tan()
+   potenzieren/Wurzel ziehen, sin(), cos(), tan() Tim/Tobi (done)
    
  - Einordnen der MathObjs in einen Baum erweitern (?)
  

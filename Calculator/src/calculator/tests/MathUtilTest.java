@@ -1,7 +1,7 @@
 /**
  *
  */
-package pse3.tests;
+package calculator.tests;
 
 import math.element.object.MathUtil;
 import math.element.object.NumberObj;

@@ -1,7 +1,7 @@
 /**
  *
  */
-package pse3.tests;
+package calculator.tests;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

@@ -4,16 +4,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- *
+ * 
  * @author Tim, Tobias
- *
+ * 
  */
 public class ConverterUtil {
 
   /**
    * Method makes the parameter formula a standard term (see
    * misc/documents/Standard-String.txt)
-   *
+   * 
    * @param aFormula
    * @return the standard term
    * @throws IllegalArgumentException
@@ -31,9 +31,10 @@ public class ConverterUtil {
     checkNegativeNumbers(aFormula);
     checkOperators(aFormula);
     checkBrackets(aFormula);
-    //TODO checkSequence(); Es muss immer folgende Reihenfolge eingehalten werden: Zahl oder unärer
-    //* Operator (mit Klammerausdruck), Binärer Operator, Zahl oder unärer
-    //* Operator (mit Klammerausdruck), binärer operator....
+    // TODO checkSequence(); Es muss immer folgende Reihenfolge eingehalten
+    // werden: Zahl oder unärer
+    // * Operator (mit Klammerausdruck), Binärer Operator, Zahl oder unärer
+    // * Operator (mit Klammerausdruck), binärer operator....
     aFormula = changeFunctionsIntoSigns(aFormula);
 
     return aFormula;
@@ -54,13 +55,20 @@ public class ConverterUtil {
 
   /**
    * Checks if there are only valid blanks in the string
-   *
+   * 
    * @param aFormula
    * @throws IllegalArgumentException
    */
-  //TODO @Tim: brauchen wir das hier? Wenn der Benutzer z.b. 3 4 eingibt und er meinte 3*4 hat er pech gehabt.
-  //ich finde wir koennten einfach hingehen und ein replace (" ", "") machen (alle blanks entfernen)
-  //was meinst du?
+  // TODO @Tim: brauchen wir das hier? Wenn der Benutzer z.b. 3 4 eingibt und er
+  // meinte 3*4 hat er pech gehabt.
+  // ich finde wir koennten einfach hingehen und ein replace (" ", "") machen
+  // (alle blanks entfernen)
+  // was meinst du?
+  // TODO @Raphi der Benutzer könnte aber auch was anderes als 3*4 gemeint
+  // haben, eben bspw. 3+4 und da das nicht eindeutig ist, haben Tobi und ich
+  // gesagt wir prüfen das und schmeißen dann nen Error. Können wir aber gerne
+  // nochmal in der Runde Diskutieren.
+
   public static void checkIfValidBlanksOnly(String aFormula) throws IllegalArgumentException {
     int tmpPosition = 0;
     while (getNextBlankPosition(aFormula, tmpPosition) != -1) {
@@ -85,7 +93,7 @@ public class ConverterUtil {
 
   /**
    * Replaces all commas (,) of a string with full-stops (.)
-   *
+   * 
    * @param aFormula
    * @return a string containing .
    */
@@ -126,7 +134,7 @@ public class ConverterUtil {
   /**
    * A method to clean the variables in aFormula. Variables "ab" will be
    * replaced with "a*b" "2a" will be replaced with "2*a"
-   *
+   * 
    * @param aFormula
    * @return a String that contains no "ab" or "2a" variables
    */
@@ -158,11 +166,12 @@ public class ConverterUtil {
     if (aFormula.length() > 1 && aFormula.charAt(1) == '(') {
       Pattern tmpPattern = Pattern.compile("[\\+\\-\\*/\\^]");
       if (tmpPattern.matcher(Character.toString(aFormula.charAt(0))).find()) {
-        throw new IllegalArgumentException("Do not let a bracket follow an alone standing arithmetic operator.");
+        throw new IllegalArgumentException(
+            "Do not let a bracket follow an alone standing arithmetic operator.");
       }
     }
-    //TODO man bräuchte eine Überprüfung für Eingaben wie z.B. 3+5*
-    //TODO @Raphi done => test
+    // TODO man bräuchte eine Überprüfung für Eingaben wie z.B. 3+5*
+    // TODO @Raphi done => test
     // cases "... +|-|*|/|^"
     Pattern tmpSingleOperatorPattern = Pattern.compile("[\\+\\-\\*/\\^]");
     String tmpLastSignInFormular = Character.toString(aFormula.charAt(aFormula.length()));
@@ -176,7 +185,8 @@ public class ConverterUtil {
     if (tmpMatcher.find()) {
       throw new IllegalArgumentException("The order of operators in the formula is not correct.");
     }
-    // TODO @Raphi dies hier is verkehrt oder? brauchen wir nicht eher was analog zum ersten check?
+    // TODO @Raphi dies hier is verkehrt oder? brauchen wir nicht eher was
+    // analog zum ersten check?
     tmpPattern = Pattern.compile("\\([\\+\\-\\*/\\^]");
     tmpMatcher = tmpPattern.matcher(aFormula);
     if (tmpMatcher.find()) {
@@ -185,9 +195,8 @@ public class ConverterUtil {
   }
 
   /**
-<<<<<<< .mine
-   * main for tests
-   *
+   * <<<<<<< .mine main for tests
+   * 
    * @param args
    */
   public static void main(String[] args) {
@@ -196,13 +205,11 @@ public class ConverterUtil {
   }
 
   /**
-=======
->>>>>>> .r179
-   * sets brackets around negative numbers at the beginning of the formular or
-   * at the beginning of brackets
-   *
+   * ======= >>>>>>> .r179 sets brackets around negative numbers at the
+   * beginning of the formular or at the beginning of brackets
+   * 
    * makes -3*2*(-5*6) look like (-3)*2*((-5)*6)
-   *
+   * 
    * @param aFormula
    * @return the bracked formula
    * @author Tobias
@@ -275,7 +282,7 @@ public class ConverterUtil {
   /**
    * checks if there is the same amount of ( and ) brackets, and if no ) are in
    * lead of ( , that means not more than there should be
-   *
+   * 
    * @param aFormula
    * @throws IllegalArgumentException
    *             if the brackets in the term are not correct
@@ -299,7 +306,7 @@ public class ConverterUtil {
 
   /**
    * Replaces sin, cos, tan, sqrt functions with abbreviation signs
-   *
+   * 
    * @param aFormula
    * @return a string containing abbreviation sign, defined in
    *         Standard-String.txt
@@ -360,7 +367,7 @@ public class ConverterUtil {
 
   /**
    * gets the position of the next blank in a string
-   *
+   * 
    * @param aFormula
    * @param aStartPosition
    * @return The position of the next blank in the given String, returns -1 if

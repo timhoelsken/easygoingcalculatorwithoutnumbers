@@ -118,6 +118,72 @@ public class ConverterUtil {
     }
   }
 
+  //TODO Tim ändert das hier noch
+  /**
+   * Replaces sin, cos, tan, sqrt functions with abbreviation signs
+   *
+   * @param aFormula
+   * @return a string containing abbreviation sign, defined in
+   *         Standard-String.txt
+   */
+  public static String changeFunctionsIntoSigns(String aFormula) {
+    // TODO @Tim use String.replace() instead of these monsters
+    String tmpOutput = new String("");
+    int tmpFunctionFound = 0;
+
+    for (int i = 0; i < aFormula.length(); i++) {
+      if (aFormula.charAt(i) == 's') {
+        if (i + 3 <= aFormula.length() && aFormula.charAt(i + 1) == 'i' && aFormula.charAt(i + 2) == 'n'
+            && aFormula.charAt(i + 3) == '(') {
+          tmpOutput += "%";
+          tmpFunctionFound = 3;
+        } else if (i + 4 <= aFormula.length() && aFormula.charAt(i + 1) == 'q'
+            && aFormula.charAt(i + 2) == 'r' && aFormula.charAt(i + 3) == 't' && aFormula.charAt(i + 4) == '(') {
+          tmpOutput += "&";
+          tmpFunctionFound = 4;
+        } else {
+          tmpOutput += aFormula.charAt(i);
+          tmpFunctionFound = 0;
+        }
+      } else if (aFormula.charAt(i) == 'c') {
+        if (i + 3 <= aFormula.length() && aFormula.charAt(i + 1) == 'o' && aFormula.charAt(i + 2) == 's'
+            && aFormula.charAt(i + 3) == '(') {
+          tmpOutput += "~";
+          tmpFunctionFound = 3;
+        } else {
+          tmpOutput += aFormula.charAt(i);
+          tmpFunctionFound = 0;
+        }
+      } else if (aFormula.charAt(i) == 't') {
+        if (i + 3 <= aFormula.length() && aFormula.charAt(i + 1) == 'a' && aFormula.charAt(i + 2) == 'n'
+            && aFormula.charAt(i + 3) == '(') {
+          tmpOutput += "#";
+          tmpFunctionFound = 3;
+        } else {
+          tmpOutput += aFormula.charAt(i);
+          tmpFunctionFound = 0;
+        }
+      } else if (aFormula.charAt(i) == 'w') {
+        if (i + 6 <= aFormula.length() && aFormula.charAt(i + 1) == 'u' && aFormula.charAt(i + 2) == 'r'
+            && aFormula.charAt(i + 3) == 'z' && aFormula.charAt(i + 4) == 'e' && aFormula.charAt(i + 5) == 'l'
+            && aFormula.charAt(i + 6) == '(') {
+          tmpOutput += "&";
+          tmpFunctionFound = 6;
+        } else {
+          tmpOutput += aFormula.charAt(i);
+          tmpFunctionFound = 0;
+        }
+      } else {
+        tmpOutput += aFormula.charAt(i);
+        tmpFunctionFound = 0;
+      }
+      i += tmpFunctionFound;
+      tmpFunctionFound = 0;
+    }
+
+    return tmpOutput;
+  }
+
   /**
    * A method to clean the variables in aFormula. Variables "ab" will be
    * replaced with "a*b" "2a" will be replaced with "2*a"
@@ -281,72 +347,6 @@ public class ConverterUtil {
   }
 
 
-
-  //TODO Tim ändert das hier noch
-  /**
-   * Replaces sin, cos, tan, sqrt functions with abbreviation signs
-   *
-   * @param aFormula
-   * @return a string containing abbreviation sign, defined in
-   *         Standard-String.txt
-   */
-  public static String changeFunctionsIntoSigns(String aFormula) {
-
-    String tmpOutput = new String("");
-    int tmpFunctionFound = 0;
-
-    for (int i = 0; i < aFormula.length(); i++) {
-      if (aFormula.charAt(i) == 's') {
-        if (i + 3 <= aFormula.length() && aFormula.charAt(i + 1) == 'i' && aFormula.charAt(i + 2) == 'n'
-            && aFormula.charAt(i + 3) == '(') {
-          tmpOutput += "%";
-          tmpFunctionFound = 3;
-        } else if (i + 4 <= aFormula.length() && aFormula.charAt(i + 1) == 'q'
-            && aFormula.charAt(i + 2) == 'r' && aFormula.charAt(i + 3) == 't' && aFormula.charAt(i + 4) == '(') {
-          tmpOutput += "&";
-          tmpFunctionFound = 4;
-        } else {
-          tmpOutput += aFormula.charAt(i);
-          tmpFunctionFound = 0;
-        }
-      } else if (aFormula.charAt(i) == 'c') {
-        if (i + 3 <= aFormula.length() && aFormula.charAt(i + 1) == 'o' && aFormula.charAt(i + 2) == 's'
-            && aFormula.charAt(i + 3) == '(') {
-          tmpOutput += "~";
-          tmpFunctionFound = 3;
-        } else {
-          tmpOutput += aFormula.charAt(i);
-          tmpFunctionFound = 0;
-        }
-      } else if (aFormula.charAt(i) == 't') {
-        if (i + 3 <= aFormula.length() && aFormula.charAt(i + 1) == 'a' && aFormula.charAt(i + 2) == 'n'
-            && aFormula.charAt(i + 3) == '(') {
-          tmpOutput += "#";
-          tmpFunctionFound = 3;
-        } else {
-          tmpOutput += aFormula.charAt(i);
-          tmpFunctionFound = 0;
-        }
-      } else if (aFormula.charAt(i) == 'w') {
-        if (i + 6 <= aFormula.length() && aFormula.charAt(i + 1) == 'u' && aFormula.charAt(i + 2) == 'r'
-            && aFormula.charAt(i + 3) == 'z' && aFormula.charAt(i + 4) == 'e' && aFormula.charAt(i + 5) == 'l'
-            && aFormula.charAt(i + 6) == '(') {
-          tmpOutput += "&";
-          tmpFunctionFound = 6;
-        } else {
-          tmpOutput += aFormula.charAt(i);
-          tmpFunctionFound = 0;
-        }
-      } else {
-        tmpOutput += aFormula.charAt(i);
-        tmpFunctionFound = 0;
-      }
-      i += tmpFunctionFound;
-      tmpFunctionFound = 0;
-    }
-
-    return tmpOutput;
-  }
 
   /**
    * gets the position of the next blank in a string

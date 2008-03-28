@@ -129,7 +129,6 @@ public class Tree {
             }
             MathObj tmpMathObj = getMathObj(i, j);
             if (tmpMathObj != null) {
-              // TODO @André toString() funktioniert
               String tmpObjValue = tmpMathObj.toString();
               tmpOutput += centerStringInSpaces(tmpSpaces, tmpObjValue);
             } else {

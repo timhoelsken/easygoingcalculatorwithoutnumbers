@@ -5,16 +5,16 @@ import java.util.regex.Pattern;
 import math.element.object.MathUtil;
 
 /**
- * 
+ *
  * @author Tim, Tobias
- * 
+ *
  */
 public class ConverterUtil {
 
   /**
    * Method makes the parameter formula a standard term (see
    * misc/documents/Standard-String.txt)
-   * 
+   *
    * @param aFormula
    * @return the standard term
    * @throws IllegalArgumentException
@@ -53,7 +53,7 @@ public class ConverterUtil {
 
   /**
    * Checks if there are only valid blanks in the string
-   * 
+   *
    * @param aFormula
    * @throws IllegalArgumentException
    */
@@ -81,7 +81,7 @@ public class ConverterUtil {
 
   /**
    * Replaces all commas (,) of a string with full-stops (.)
-   * 
+   *
    * @param aFormula
    * @return a string containing .
    */
@@ -122,7 +122,7 @@ public class ConverterUtil {
   /**
    * A method to clean the variables in aFormula. Variables "ab" will be
    * replaced with "a*b" "2a" will be replaced with "2*a"
-   * 
+   *
    * @param aFormula
    * @return a String that contains no "ab" or "2a" variables
    */
@@ -182,23 +182,12 @@ public class ConverterUtil {
     }
   }
 
-  // TODO @all kann das hier mal weg? Main test im Converter...
-  /**
-   * main for tests
-   * 
-   * @param args
-   */
-  public static void main(String[] args) {
-    String tmpString = "-3432+(-23-12)-25*(-25)+-(12*3)";
-    tmpString = setBracketsAroundNegativeNumbers(tmpString);
-  }
-
   /**
    * sets brackets around negative numbers at the beginning of the formular or
    * at the beginning of brackets
-   * 
+   *
    * makes -3*2*(-5*6) look like (-3)*2*((-5)*6)
-   * 
+   *
    * @param aFormula
    * @return the bracked formula
    * @author Tobias
@@ -271,7 +260,7 @@ public class ConverterUtil {
   /**
    * checks if there is the same amount of ( and ) brackets, and if no ) are in
    * lead of ( , that means not more than there should be
-   * 
+   *
    * @param aFormula
    * @throws IllegalArgumentException
    *             if the brackets in the term are not correct
@@ -303,7 +292,7 @@ public class ConverterUtil {
 
   /**
    * Replaces sin, cos, tan, sqrt functions with abbreviation signs
-   * 
+   *
    * @param aFormula
    * @return a string containing abbreviation sign, defined in
    *         Standard-String.txt
@@ -368,7 +357,7 @@ public class ConverterUtil {
 
   /**
    * gets the position of the next blank in a string
-   * 
+   *
    * @param aFormula
    * @param aStartPosition
    * @return The position of the next blank in the given String, returns -1 if

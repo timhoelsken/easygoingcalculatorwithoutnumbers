@@ -75,7 +75,7 @@ public class ConverterUtil {
       tmpPosition = getNextBlankPosition(aFormula, tmpPosition);
       if (tmpPosition != 0 || tmpPosition != aFormula.length()) {
 
-        if ((tmpPosition - 1 > 0 && isNumericOrVariable(aFormula.charAt(tmpPosition - 1)))
+        if ((tmpPosition - 1 > -1 && isNumericOrVariable(aFormula.charAt(tmpPosition - 1)))
             && (tmpPosition + 1 <= aFormula.length() && isNumericOrVariable(aFormula.charAt(tmpPosition - 1)))) {
           throw new IllegalArgumentException("The formula contains invalid blanks.");
         }

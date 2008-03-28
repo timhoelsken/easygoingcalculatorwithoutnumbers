@@ -14,6 +14,13 @@ public class ConsoleInput {
   private String inputString;
 
   /**
+   * Constructor
+   */
+  public ConsoleInput(){
+    
+  }
+  
+  /**
    * 
    * @return The input of the user, tested and corrected with private methods on
    *         usability

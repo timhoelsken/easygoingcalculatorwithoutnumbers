@@ -27,7 +27,7 @@ public class MathUtil {
 
   /**
    * @param aCharacter
-   * @return true if character is a variable
+   * @return boolean true if character is a variable
    */
   public static boolean isVariable(char aCharacter) {
     Pattern tmpPattern = Pattern.compile("[a-z]");

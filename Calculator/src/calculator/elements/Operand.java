@@ -1,4 +1,4 @@
-package calculator.elements.objects;
+package calculator.elements;
 
 /**
  * Defines an operand

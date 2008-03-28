@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import calculator.elements.objects.MathObj;
-import calculator.elements.objects.NumberObj;
-import calculator.elements.objects.Operator;
-import calculator.elements.objects.OperatorType;
+import calculator.elements.MathObj;
+import calculator.elements.NumberObj;
+import calculator.elements.Operator;
+import calculator.elements.OperatorType;
 import calculator.exceptions.IllegalInputStreamException;
 
 /**

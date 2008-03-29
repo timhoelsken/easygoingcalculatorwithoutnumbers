@@ -86,7 +86,7 @@ public class StringConvertTest extends TestCase {
 	}
 	assert( !tmpErrorOccurred );
 
-  } 
+  }
 
   /**
    * Test method for
@@ -157,7 +157,7 @@ public class StringConvertTest extends TestCase {
 			tmpErrorOccurred = true;
 		}
 		assert( !tmpErrorOccurred );
-		
+
 		//negative test
 		tmpErrorOccurred = false;
 		try
@@ -263,7 +263,7 @@ public class StringConvertTest extends TestCase {
    */
   public void setBracketsAroundNegativeNumbers()
   {
-	  assert(ConverterUtil.setBracketsAroundNegativeNumbers("-8+(-23.23434+-34)*-5+(-23^3)+(-1*(-2*(-5)))))+(-a+b)").equals("(-8)+((-23.23434)+-34)*-5+((-23)^3)+((-1)*((-2)*(-5)))))+((-a)+b)"));
+	  assert(ConverterUtil.setBracketsAroundNegatives("-8+(-23.23434+-34)*-5+(-23^3)+(-1*(-2*(-5)))))+(-a+b)").equals("(-8)+((-23.23434)+-34)*-5+((-23)^3)+((-1)*((-2)*(-5)))))+((-a)+b)"));
   }
 
   /**
@@ -376,7 +376,7 @@ public class StringConvertTest extends TestCase {
    * {@link calculator.utils.ConverterUtil#changeFunctionsIntoSigns()}.
    */
   public void changeFunctionsIntoSigns()
-  {	  
+  {
 	assert(ConverterUtil.changeFunctionsIntoSigns("sin(abc)+cos(abcd)+tan+tan(abc)+sqrt(23)").equals("%(abc)+~(abcd)+tan+#(abc)+&(23)"));
   }
 

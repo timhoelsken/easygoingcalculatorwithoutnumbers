@@ -26,14 +26,6 @@ public class StringConvertTest extends TestCase {
         "2*a+a*b"));
   }
 
-  /**
-   * Test method for
-   * {@link calculator.utils.ConverterUtil#removeBlanks(java.lang.String)}.
-   */
-  public void testRemoveBlanks() {
-    String tmpString = new String("2 + 4");
-    assertTrue(ConverterUtil.removeBlanks(tmpString).equals("2+4"));
-  }
 
   /**
    * Test method for
@@ -92,7 +84,7 @@ public class StringConvertTest extends TestCase {
    * Test method for
    * {@link calculator.utils.ConverterUtil#removeBlanks()}.
    */
-  public void removeBlanks()
+  public void testRemoveBlanks()
   {
 	  assert(ConverterUtil.removeBlanks("2+  3+4 5 + 666").equalsIgnoreCase("2+3+45+666"));
   }
@@ -101,7 +93,7 @@ public class StringConvertTest extends TestCase {
    * Test method for
    * {@link calculator.utils.ConverterUtil#unifyCommas()}.
    */
-  public void unifyCommas()
+  public void testUnifyCommas()
   {
 	  assert(ConverterUtil.unifyCommas(",,dfa34.,.,.").equalsIgnoreCase("..dfa34....."));
   }
@@ -110,7 +102,7 @@ public class StringConvertTest extends TestCase {
    * Test method for
    * {@link calculator.utils.ConverterUtil#checkDecimalNumbers()}.
    */
-  public void checkDecimalNumbers()
+  public void testCheckDecimalNumbers()
   {
       //positive test
 		try
@@ -175,7 +167,7 @@ public class StringConvertTest extends TestCase {
    * Test method for
    * {@link calculator.utils.ConverterUtil#insertMultiplicationOperators()}.
    */
-  public void insertMultiplicationOperators()
+  public void testInsertMultiplicationOperators()
   {
 	  assert(ConverterUtil.insertMultiplicationOperators("3+5.5xa4bc3def5gh+sin+cos6").equals("3+5.5*x*a*4*b*c*3*d*e*f*5*g*h+s*i*n+c*o*s*6"));
   }
@@ -184,7 +176,7 @@ public class StringConvertTest extends TestCase {
    * Test method for
    * {@link calculator.utils.ConverterUtil#checkOperators()}.
    */
-  public void checkOperators()
+  public void testCheckOperators()
   {
 	//positive test
 		try
@@ -261,7 +253,7 @@ public class StringConvertTest extends TestCase {
    * Test method for
    * {@link calculator.utils.ConverterUtil#setBracketsAroundNegativeNumbers()}.
    */
-  public void setBracketsAroundNegativeNumbers()
+  public void testSetBracketsAroundNegativeNumbers()
   {
 	  assert(ConverterUtil.setBracketsAroundNegatives("-8+(-23.23434+-34)*-5+(-23^3)+(-1*(-2*(-5)))))+(-a+b)").equals("(-8)+((-23.23434)+-34)*-5+((-23)^3)+((-1)*((-2)*(-5)))))+((-a)+b)"));
   }
@@ -270,7 +262,7 @@ public class StringConvertTest extends TestCase {
    * Test method for
    * {@link calculator.utils.ConverterUtil#checkNegativeNumbers()}.
    */
-  public void checkNegativeNumbers()
+  public void testCheckNegativeNumbers()
   {
 	//positive test
 		try
@@ -323,7 +315,7 @@ public class StringConvertTest extends TestCase {
    * Test method for
    * {@link calculator.utils.ConverterUtil#checkBrackets()}.
    */
-  public void checkBrackets()
+  public void testCheckBrackets()
   {
 	  try
 		{
@@ -375,7 +367,7 @@ public class StringConvertTest extends TestCase {
    * Test method for
    * {@link calculator.utils.ConverterUtil#changeFunctionsIntoSigns()}.
    */
-  public void changeFunctionsIntoSigns()
+  public void testChangeFunctionsIntoSigns()
   {
 	assert(ConverterUtil.changeFunctionsIntoSigns("sin(abc)+cos(abcd)+tan+tan(abc)+sqrt(23)").equals("%(abc)+~(abcd)+tan+#(abc)+&(23)"));
   }

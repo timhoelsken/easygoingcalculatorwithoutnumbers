@@ -4,16 +4,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- *
+ * 
  * @author Tim, Tobias
- *
+ * 
  */
 public class ConverterUtil {
 
   /**
    * Method makes the parameter formula a standard term (see
    * misc/documents/Standard-String.txt)
-   *
+   * 
    * @param aFormula
    * @return the standard term
    * @throws IllegalArgumentException
@@ -51,37 +51,36 @@ public class ConverterUtil {
 
   /**
    * Checks if there are only valid blanks in the string
-   *
+   * 
    * @param aFormula
    * @throws IllegalArgumentException
    */
-  /*public static void checkIfValidBlanksOnly(String aFormula) throws IllegalArgumentException {
-    int tmpPosition = 0;
-    while (getNextBlankPosition(aFormula, tmpPosition) != -1) {
-      tmpPosition = getNextBlankPosition(aFormula, tmpPosition);
-      if (tmpPosition != 0 || tmpPosition != aFormula.length()) {
-
-        if ((tmpPosition - 1 > -1 && MathUtil.isNumberOrVariable(aFormula.charAt(tmpPosition - 1)))
-            && (tmpPosition + 1 <= aFormula.length() && MathUtil.isNumberOrVariable(aFormula
-                .charAt(tmpPosition - 1)))) {
-          throw new IllegalArgumentException("The formula contains invalid blanks.");
-        }
-      }
-    }
-  }*/
+  /*
+   * public static void checkIfValidBlanksOnly(String aFormula) throws
+   * IllegalArgumentException { int tmpPosition = 0; while
+   * (getNextBlankPosition(aFormula, tmpPosition) != -1) { tmpPosition =
+   * getNextBlankPosition(aFormula, tmpPosition); if (tmpPosition != 0 ||
+   * tmpPosition != aFormula.length()) {
+   * 
+   * if ((tmpPosition - 1 > -1 &&
+   * MathUtil.isNumberOrVariable(aFormula.charAt(tmpPosition - 1))) &&
+   * (tmpPosition + 1 <= aFormula.length() &&
+   * MathUtil.isNumberOrVariable(aFormula .charAt(tmpPosition - 1)))) { throw
+   * new IllegalArgumentException("The formula contains invalid blanks."); } } } }
+   */
 
   /**
    * @param aString
    * @return aString without blanks
    */
   public static String removeBlanks(String aString) {
-      //+ is part of a regular expression. it has nothin to do with the char '+'
-	  return aString.replaceAll(" +", "");
+    // + is part of a regular expression. it has nothin to do with the char '+'
+    return aString.replaceAll(" +", "");
   }
 
   /**
    * Replaces all commas (,) of a string with full-stops (.)
-   *
+   * 
    * @param aFormula
    * @return a string containing .
    */
@@ -92,7 +91,7 @@ public class ConverterUtil {
   /**
    * A method to clean the variables in aFormula. Variables "ab" will be
    * replaced with "a*b" "2a" will be replaced with "2*a"
-   *
+   * 
    * @param aFormula
    * @return a String that contains no "ab" or "2a" variables
    */
@@ -124,13 +123,32 @@ public class ConverterUtil {
   public static void checkDecimalNumbers(String aFormula) throws IllegalArgumentException {
 
     if (aFormula.contains(".")) {
-      int tmpCommaCounter = 0;
-      for (int i = 0; i < aFormula.length(); i++) {
-        if (aFormula.charAt(i) == '.') {
-          tmpCommaCounter++;
-        }
-      }
 
+      int tmpCommaPosition = 0;
+      String tmpCopyOfFormula = aFormula;
+
+      tmpCommaPosition = tmpCopyOfFormula.indexOf(".");
+
+      if (tmpCommaPosition != 0) {
+
+        while (tmpCommaPosition != -1) {
+          if (!MathUtil.isNumber(tmpCopyOfFormula.charAt(tmpCommaPosition - 1))) {
+            throw new IllegalArgumentException("The formula contains invalid commas.");
+          }
+          int i = tmpCommaPosition + 1;
+          while (i < tmpCopyOfFormula.length() - 1 && MathUtil.isNumber(tmpCopyOfFormula.charAt(i))) {
+            i++;
+          }
+          if (tmpCopyOfFormula.charAt(i) == '.') {
+            throw new IllegalArgumentException("The formula contains invalid commas.");
+          }
+          tmpCopyOfFormula = tmpCopyOfFormula.substring(tmpCommaPosition + 1, tmpCopyOfFormula.length());
+          tmpCommaPosition = tmpCopyOfFormula.indexOf(".");
+        }
+      } else {
+        throw new IllegalArgumentException("The formula contains invalid commas.");
+      }
+      // 3.4+4.5
       // TODO @Tim Lösung leider nicht korrekt. Buchstaben können weg
       // (Methodenaufrufreihenfolge verhindert direkte Folge), Kommazahlen am
       // Anfang und am Ende werden als Fehler erkannt, in einer Zahl kann mehr
@@ -138,33 +156,32 @@ public class ConverterUtil {
       // nicht als falsch erkannt...
       // Vielliecht lieber ne Lösung ohne Regex? z.B. alle Punkte zählen von
       // Zahl bis Nicht-Zahl und Nicht-Punkt und wenn mehr als 1 BÄM!
-      Pattern tmpPattern = Pattern
-          .compile("[\\+\\-\\*/\\^\\([a-z][A-Z]][0-9]*.[0-9]*[\\+\\-\\*/\\^\\)[a-z][A-Z]]");
-      Matcher tmpMatcher = tmpPattern.matcher(aFormula);
-
-      while (tmpCommaCounter != 0) {
-        if (!tmpMatcher.find()) {
-          throw new IllegalArgumentException("The formula contains invalid commas.");
-        }
-        tmpCommaCounter--;
-      }
+      // Pattern tmpPattern =
+      // Pattern.compile("[\\+\\-\\*/\\^\\(][\\d]*.[\\d]*[\\+\\-\\*/\\^\\)[a-z][A-Z]]");
+      /*
+       * Matcher tmpMatcher = tmpPattern.matcher(aFormula);
+       * 
+       * while (tmpCommaCounter != 0) { if (!tmpMatcher.find()) { throw new
+       * IllegalArgumentException("The formula contains invalid commas."); }
+       * tmpCommaCounter--; }
+       */
 
     }
   }
 
   /**
    * Replaces sin, cos, tan, sqrt functions with abbreviation signs
-   *
+   * 
    * @param aFormula
    * @return a string containing abbreviation sign, defined in
    *         Standard-String.txt
    */
   public static String changeFunctionsIntoSigns(String aFormula) {
 
-    aFormula.replace("sin(", "%(");
-    aFormula.replace("cos(", "~(");
-    aFormula.replace("tan(", "#(");
-    aFormula.replace("sqrt(", "&(");    
+    aFormula = aFormula.replace("sin(", "%(");
+    aFormula = aFormula.replace("cos(", "~(");
+    aFormula = aFormula.replace("tan(", "#(");
+    aFormula = aFormula.replace("sqrt(", "&(");
 
     return aFormula;
   }
@@ -184,7 +201,7 @@ public class ConverterUtil {
         throw new IllegalArgumentException(
             "Do not let a bracket follow an alone standing arithmetic operator.");
       }
-    }   
+    }
     // cases "... +|-|*|/|^"
     Pattern tmpSingleOperatorPattern = Pattern.compile("[\\+\\-\\*/\\^]");
     String tmpLastSignInFormular = Character.toString(aFormula.charAt(aFormula.length() - 1));
@@ -209,9 +226,9 @@ public class ConverterUtil {
   /**
    * sets brackets around negative numbers at the beginning of the formular or
    * at the beginning of brackets
-   *
+   * 
    * makes -3*2*(-5*6) look like (-3)*2*((-5)*6)
-   *
+   * 
    * @param aFormula
    * @return the bracked formula
    * @author Tobias
@@ -265,7 +282,7 @@ public class ConverterUtil {
   /**
    * if there is a negative number at the beginning of the formula it has to be
    * in brackets to make this method work!
-   *
+   * 
    * @param aFormula
    * @throws IllegalArgumentException
    *             if not all negative numbers are in brackets
@@ -285,7 +302,7 @@ public class ConverterUtil {
   /**
    * checks if there is the same amount of ( and ) brackets, and if no ) are in
    * lead of ( , that means not more than there should be
-   *
+   * 
    * @param aFormula
    * @throws IllegalArgumentException
    *             if the brackets in the term are not correct
@@ -309,13 +326,13 @@ public class ConverterUtil {
 
   /**
    * gets the position of the next blank in a string
-   *
+   * 
    * @param aFormula
    * @param aStartPosition
    * @return The position of the next blank in the given String, returns -1 if
    *         no blank is found
    */
-  private static int getNextBlankPosition(String aFormula, int aStartPosition) {
+  public static int getNextBlankPosition(String aFormula, int aStartPosition) {
     int tmpPosition = -1;
 
     if (aStartPosition != 0) {
@@ -333,7 +350,9 @@ public class ConverterUtil {
   }
 
   /**
-   * paints a string in the center of some spaces, needed to paint the tree in the console
+   * paints a string in the center of some spaces, needed to paint the tree in
+   * the console
+   * 
    * @param someSpaces
    * @param aString
    * @return a string centered in the given spaces

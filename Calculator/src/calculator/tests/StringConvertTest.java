@@ -220,9 +220,9 @@ public class StringConvertTest extends TestCase {
   public void testSetBracketsAroundNegativeNumbers() {
 	  
 	  String tmp = ConverterUtil.setBracketsAroundNegatives(
-      "-8+(-23.23434+-34)*(-5)+(-23^3)+(-1*(-2*(-5)))))+(-a+b)");
+      "-8+(-23.23434+(-34))*(-5)+(-23^3)+(-1*(-2*(-5)))))+(-a+b)");
     assertTrue(tmp.equals(
-        "(-8)+((-23.23434)+-34)*(-5)+((-23)^3)+((-1)*((-2)*(-5)))))+((-a)+b)"));
+        "(-8)+((-23.23434)+(-34))*(-5)+((-23)^3)+((-1)*((-2)*(-5)))))+((-a)+b)"));
 	  
 	  
 	  tmp = ConverterUtil.setBracketsAroundNegatives(

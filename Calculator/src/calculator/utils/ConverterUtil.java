@@ -148,24 +148,6 @@ public class ConverterUtil {
       } else {
         throw new IllegalArgumentException("The formula contains invalid commas.");
       }
-      // 3.4+4.5
-      // TODO @Tim Lösung leider nicht korrekt. Buchstaben können weg
-      // (Methodenaufrufreihenfolge verhindert direkte Folge), Kommazahlen am
-      // Anfang und am Ende werden als Fehler erkannt, in einer Zahl kann mehr
-      // als ein Komma vorkommen, * steht für beliebig viele auch 0 => .3 wird
-      // nicht als falsch erkannt...
-      // Vielliecht lieber ne Lösung ohne Regex? z.B. alle Punkte zählen von
-      // Zahl bis Nicht-Zahl und Nicht-Punkt und wenn mehr als 1 BÄM!
-      // Pattern tmpPattern =
-      // Pattern.compile("[\\+\\-\\*/\\^\\(][\\d]*.[\\d]*[\\+\\-\\*/\\^\\)[a-z][A-Z]]");
-      /*
-       * Matcher tmpMatcher = tmpPattern.matcher(aFormula);
-       * 
-       * while (tmpCommaCounter != 0) { if (!tmpMatcher.find()) { throw new
-       * IllegalArgumentException("The formula contains invalid commas."); }
-       * tmpCommaCounter--; }
-       */
-
     }
   }
 

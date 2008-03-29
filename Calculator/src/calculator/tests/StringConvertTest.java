@@ -51,7 +51,7 @@ public class StringConvertTest extends TestCase {
 	}
 	catch (Exception e)
 	{
-		assert(false);
+		assertTrue(false);
 	}
 
 	//negative test
@@ -64,7 +64,7 @@ public class StringConvertTest extends TestCase {
 	{
 		tmpErrorOccurred = true;
 	}
-	assert( !tmpErrorOccurred );
+	assertTrue( !tmpErrorOccurred );
 
 	//negative test
 	tmpErrorOccurred = false;
@@ -76,7 +76,7 @@ public class StringConvertTest extends TestCase {
 	{
 		tmpErrorOccurred = true;
 	}
-	assert( !tmpErrorOccurred );
+	assertTrue( !tmpErrorOccurred );
 
   }
 
@@ -86,7 +86,7 @@ public class StringConvertTest extends TestCase {
    */
   public void testRemoveBlanks()
   {
-	  assert(ConverterUtil.removeBlanks("2+  3+4 5 + 666").equalsIgnoreCase("2+3+45+666"));
+	  assertTrue(ConverterUtil.removeBlanks("2+  3+4 5 + 666").equalsIgnoreCase("2+3+45+666"));
   }
 
   /**
@@ -95,7 +95,7 @@ public class StringConvertTest extends TestCase {
    */
   public void testUnifyCommas()
   {
-	  assert(ConverterUtil.unifyCommas(",,dfa34.,.,.").equalsIgnoreCase("..dfa34....."));
+	  assertTrue(ConverterUtil.unifyCommas(",,dfa34.,.,.").equalsIgnoreCase("..dfa34....."));
   }
 
   /**
@@ -111,7 +111,7 @@ public class StringConvertTest extends TestCase {
 		}
 		catch (Exception e)
 		{
-			assert(false);
+			assertTrue(false);
 		}
 
 		//negative test
@@ -124,7 +124,7 @@ public class StringConvertTest extends TestCase {
 		{
 			tmpErrorOccurred = true;
 		}
-		assert( !tmpErrorOccurred );
+		assertTrue( !tmpErrorOccurred );
 
 		//negative test
 		tmpErrorOccurred = false;
@@ -136,7 +136,7 @@ public class StringConvertTest extends TestCase {
 		{
 			tmpErrorOccurred = true;
 		}
-		assert( !tmpErrorOccurred );
+		assertTrue( !tmpErrorOccurred );
 
 		//negative test
 		tmpErrorOccurred = false;
@@ -148,7 +148,7 @@ public class StringConvertTest extends TestCase {
 		{
 			tmpErrorOccurred = true;
 		}
-		assert( !tmpErrorOccurred );
+		assertTrue( !tmpErrorOccurred );
 
 		//negative test
 		tmpErrorOccurred = false;
@@ -160,7 +160,7 @@ public class StringConvertTest extends TestCase {
 		{
 			tmpErrorOccurred = true;
 		}
-		assert( !tmpErrorOccurred );
+		assertTrue( !tmpErrorOccurred );
   }
 
   /**
@@ -169,7 +169,7 @@ public class StringConvertTest extends TestCase {
    */
   public void testInsertMultiplicationOperators()
   {
-	  assert(ConverterUtil.insertMultiplicationOperators("3+5.5xa4bc3def5gh+sin+cos6").equals("3+5.5*x*a*4*b*c*3*d*e*f*5*g*h+s*i*n+c*o*s*6"));
+	  assertTrue(ConverterUtil.insertMultiplicationOperators("3+5.5xa4bc3def5gh+sin+cos6").equals("3+5.5*x*a*4*b*c*3*d*e*f*5*g*h+s*i*n+c*o*s*6"));
   }
 
   /**
@@ -185,7 +185,7 @@ public class StringConvertTest extends TestCase {
 		}
 		catch (Exception e)
 		{
-			assert(false);
+			assertTrue(false);
 		}
 
 		//negative test
@@ -198,7 +198,7 @@ public class StringConvertTest extends TestCase {
 		{
 			tmpErrorOccurred = true;
 		}
-		assert( !tmpErrorOccurred );
+		assertTrue( !tmpErrorOccurred );
 
 		//negative test
 		tmpErrorOccurred = false;
@@ -210,7 +210,7 @@ public class StringConvertTest extends TestCase {
 		{
 			tmpErrorOccurred = true;
 		}
-		assert( !tmpErrorOccurred );
+		assertTrue( !tmpErrorOccurred );
 
 		//negative test
 		tmpErrorOccurred = false;
@@ -222,7 +222,7 @@ public class StringConvertTest extends TestCase {
 		{
 			tmpErrorOccurred = true;
 		}
-		assert( !tmpErrorOccurred );
+		assertTrue( !tmpErrorOccurred );
 
 		//negative test
 		tmpErrorOccurred = false;
@@ -234,7 +234,7 @@ public class StringConvertTest extends TestCase {
 		{
 			tmpErrorOccurred = true;
 		}
-		assert( !tmpErrorOccurred );
+		assertTrue( !tmpErrorOccurred );
 
 		//negative test
 		tmpErrorOccurred = false;
@@ -246,7 +246,19 @@ public class StringConvertTest extends TestCase {
 		{
 			tmpErrorOccurred = true;
 		}
-		assert( !tmpErrorOccurred );
+		assertTrue( !tmpErrorOccurred );
+		
+		//negative test
+		tmpErrorOccurred = false;
+		try
+		{
+			ConverterUtil.checkOperators("3+5*");
+		}
+		catch (Exception e)
+		{
+			tmpErrorOccurred = true;
+		}
+		assertTrue( !tmpErrorOccurred );
   }
 
   /**
@@ -255,7 +267,7 @@ public class StringConvertTest extends TestCase {
    */
   public void testSetBracketsAroundNegativeNumbers()
   {
-	  assert(ConverterUtil.setBracketsAroundNegatives("-8+(-23.23434+-34)*-5+(-23^3)+(-1*(-2*(-5)))))+(-a+b)").equals("(-8)+((-23.23434)+-34)*-5+((-23)^3)+((-1)*((-2)*(-5)))))+((-a)+b)"));
+	  assertTrue(ConverterUtil.setBracketsAroundNegatives("-8+(-23.23434+-34)*-5+(-23^3)+(-1*(-2*(-5)))))+(-a+b)").equals("(-8)+((-23.23434)+-34)*-5+((-23)^3)+((-1)*((-2)*(-5)))))+((-a)+b)"));
   }
 
   /**
@@ -271,7 +283,7 @@ public class StringConvertTest extends TestCase {
 		}
 		catch (Exception e)
 		{
-			assert(false);
+			assertTrue(false);
 		}
 
 		//negative test
@@ -284,7 +296,7 @@ public class StringConvertTest extends TestCase {
 		{
 			tmpErrorOccurred = true;
 		}
-		assert( !tmpErrorOccurred );
+		assertTrue( !tmpErrorOccurred );
 
 		//negative test
 		tmpErrorOccurred = false;
@@ -296,7 +308,7 @@ public class StringConvertTest extends TestCase {
 		{
 			tmpErrorOccurred = true;
 		}
-		assert( !tmpErrorOccurred );
+		assertTrue( !tmpErrorOccurred );
 
 		//negative test
 		tmpErrorOccurred = false;
@@ -308,7 +320,7 @@ public class StringConvertTest extends TestCase {
 		{
 			tmpErrorOccurred = true;
 		}
-		assert( !tmpErrorOccurred );
+		assertTrue( !tmpErrorOccurred );
   }
 
   /**
@@ -323,7 +335,7 @@ public class StringConvertTest extends TestCase {
 		}
 		catch (Exception e)
 		{
-			assert(false);
+			assertTrue(false);
 		}
 
 		//negative test
@@ -336,7 +348,7 @@ public class StringConvertTest extends TestCase {
 		{
 			tmpErrorOccurred = true;
 		}
-		assert( !tmpErrorOccurred );
+		assertTrue( !tmpErrorOccurred );
 
 		//negative test
 		tmpErrorOccurred = false;
@@ -348,7 +360,7 @@ public class StringConvertTest extends TestCase {
 		{
 			tmpErrorOccurred = true;
 		}
-		assert( !tmpErrorOccurred );
+		assertTrue( !tmpErrorOccurred );
 
 		//negative test
 		tmpErrorOccurred = false;
@@ -360,7 +372,7 @@ public class StringConvertTest extends TestCase {
 		{
 			tmpErrorOccurred = true;
 		}
-		assert( !tmpErrorOccurred );
+		assertTrue( !tmpErrorOccurred );
   }
 
   /**
@@ -369,7 +381,7 @@ public class StringConvertTest extends TestCase {
    */
   public void testChangeFunctionsIntoSigns()
   {
-	assert(ConverterUtil.changeFunctionsIntoSigns("sin(abc)+cos(abcd)+tan+tan(abc)+sqrt(23)").equals("%(abc)+~(abcd)+tan+#(abc)+&(23)"));
+	  assertTrue(ConverterUtil.changeFunctionsIntoSigns("sin(abc)+cos(abcd)+tan+tan(abc)+sqrt(23)").equals("%(abc)+~(abcd)+tan+#(abc)+&(23)"));
   }
 
   // TODO @Raphi Tests fürs ConverterUtil schreiben (alles testbare ist jetzt

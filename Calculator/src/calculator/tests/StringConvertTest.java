@@ -384,20 +384,7 @@ public class StringConvertTest extends TestCase {
 	  assertTrue(ConverterUtil.changeFunctionsIntoSigns("sin(abc)+cos(abcd)+tan+tan(abc)+sqrt(23)").equals("%(abc)+~(abcd)+tan+#(abc)+&(23)"));
   }
 
-  // TODO @Raphi Tests fürs ConverterUtil schreiben (alles testbare ist jetzt
-  // public - siehe Methodennamen im Kommentar)
-  // Ich hab deine Überlegungen soweit hier gelassen, kann man ja alles in
-  // Unit-Tests umformen. Hab meinen Senf nur dazugeschrieben (und sei es nur
-  // ein 'NÖ'). Methoden, die hier nicht aufgeführt aber trotzdem
-  // public sind, können natürlich trotzdem getestet werden (s. JavaDoc).
-  //
-  // es gibt auch eine Methode, die alles nacheinander abfackelt und dann den
-  // fertigen String zurückliefert: termToStandardString(String); Hier ist besonders
-  // die Reihenfolge der Checks und Stringveränderungen wichtig. Für verschiedene
-  // Fehler werden IllegalArgumentExceptions mit entsprechender Fehlermeldung geworfen,
-  // die auch abgetestet werden können.
-  //
-  // mfg wörger
+  
   /**
    *
    */

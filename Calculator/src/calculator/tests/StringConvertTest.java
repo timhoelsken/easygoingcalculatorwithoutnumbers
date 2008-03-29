@@ -57,7 +57,7 @@ public class StringConvertTest extends TestCase {
     } catch (Exception e) {
       tmpErrorOccurred = true;
     }
-    assertTrue(!tmpErrorOccurred);
+    assertTrue(tmpErrorOccurred);
 
     // negative test
     tmpErrorOccurred = false;
@@ -66,7 +66,7 @@ public class StringConvertTest extends TestCase {
     } catch (Exception e) {
       tmpErrorOccurred = true;
     }
-    assertTrue(!tmpErrorOccurred);
+    assertTrue(tmpErrorOccurred);
 
   }
 
@@ -165,7 +165,7 @@ public class StringConvertTest extends TestCase {
     } catch (Exception e) {
       tmpErrorOccurred = true;
     }
-    assertTrue(!tmpErrorOccurred);
+    assertTrue(tmpErrorOccurred);
 
     // negative test
     tmpErrorOccurred = false;
@@ -174,7 +174,7 @@ public class StringConvertTest extends TestCase {
     } catch (Exception e) {
       tmpErrorOccurred = true;
     }
-    assertTrue(!tmpErrorOccurred);
+    assertTrue(tmpErrorOccurred);
 
     // negative test
     tmpErrorOccurred = false;
@@ -183,7 +183,7 @@ public class StringConvertTest extends TestCase {
     } catch (Exception e) {
       tmpErrorOccurred = true;
     }
-    assertTrue(!tmpErrorOccurred);
+    assertTrue(tmpErrorOccurred);
 
     // negative test
     tmpErrorOccurred = false;
@@ -192,7 +192,7 @@ public class StringConvertTest extends TestCase {
     } catch (Exception e) {
       tmpErrorOccurred = true;
     }
-    assertTrue(!tmpErrorOccurred);
+    assertTrue(tmpErrorOccurred);
 
     // negative test
     tmpErrorOccurred = false;
@@ -201,7 +201,7 @@ public class StringConvertTest extends TestCase {
     } catch (Exception e) {
       tmpErrorOccurred = true;
     }
-    assertTrue(!tmpErrorOccurred);
+    assertTrue(tmpErrorOccurred);
 
     // negative test
     tmpErrorOccurred = false;
@@ -210,7 +210,7 @@ public class StringConvertTest extends TestCase {
     } catch (Exception e) {
       tmpErrorOccurred = true;
     }
-    assertTrue(!tmpErrorOccurred);
+    assertTrue(tmpErrorOccurred);
   }
 
   /**
@@ -242,7 +242,7 @@ public class StringConvertTest extends TestCase {
     } catch (Exception e) {
       tmpErrorOccurred = true;
     }
-    assertTrue(!tmpErrorOccurred);
+    assertTrue(tmpErrorOccurred);
 
     // negative test
     tmpErrorOccurred = false;
@@ -251,7 +251,7 @@ public class StringConvertTest extends TestCase {
     } catch (Exception e) {
       tmpErrorOccurred = true;
     }
-    assertTrue(!tmpErrorOccurred);
+    assertTrue(tmpErrorOccurred);
 
     // negative test
     tmpErrorOccurred = false;
@@ -260,7 +260,7 @@ public class StringConvertTest extends TestCase {
     } catch (Exception e) {
       tmpErrorOccurred = true;
     }
-    assertTrue(!tmpErrorOccurred);
+    assertTrue(tmpErrorOccurred);
   }
 
   /**
@@ -280,7 +280,7 @@ public class StringConvertTest extends TestCase {
     } catch (Exception e) {
       tmpErrorOccurred = true;
     }
-    assertTrue(!tmpErrorOccurred);
+    assertTrue(tmpErrorOccurred);
 
     // negative test
     tmpErrorOccurred = false;

@@ -243,10 +243,21 @@ public class StringConvertTest extends TestCase {
       assertTrue(false);
     }
 
-    // negative test
+    // positive test
     Boolean tmpErrorOccurred = false;
     try {
-      ConverterUtil.checkNegativeNumbers("-5)*(-2)+((-4)+5)");
+      String tmp = ConverterUtil.setBracketsAroundNegatives("-5)*(-2)+((-4)+5)"); 
+    
+      ConverterUtil.checkNegativeNumbers(tmp);
+    } catch (Exception e) {    
+      assertTrue(false);
+    }
+    
+
+    // negative test
+    tmpErrorOccurred = false;
+    try {
+      ConverterUtil.checkNegativeNumbers("(-5)*-2+(-4)+5)");
     } catch (Exception e) {
       tmpErrorOccurred = true;
     }
@@ -255,16 +266,7 @@ public class StringConvertTest extends TestCase {
     // negative test
     tmpErrorOccurred = false;
     try {
-      ConverterUtil.checkNegativeNumbers("(-5)*(-2)+(-4)+5)");
-    } catch (Exception e) {
-      tmpErrorOccurred = true;
-    }
-    assertTrue(tmpErrorOccurred);
-
-    // negative test
-    tmpErrorOccurred = false;
-    try {
-      ConverterUtil.checkNegativeNumbers("-5)*(-2)+((-4)+-5)");
+      ConverterUtil.checkNegativeNumbers("(-5)*(-2)+((-4)+-5)");
     } catch (Exception e) {
       tmpErrorOccurred = true;
     }

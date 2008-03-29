@@ -6,6 +6,7 @@ package calculator;
 public class EmptyClassForGlobalSupport {
 
   // comments by Raphael
+	//TODO @all es gibt 7 Fehler bei den Unit-Tests... jetzt ist die Frage ob meine Tests fehlerhaft sind oder die Methoden ;P wer fehler findet darf sie behalten :-)
 	
   // comments by Tim
       // TODO @all Allgemeine Diskussion über das Überprüfen von blanks in der Funktion! Sollen wir Zahlen dabei einfach zusammenziehen oder prüfen?

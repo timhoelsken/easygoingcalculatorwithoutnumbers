@@ -112,9 +112,7 @@ public class StringConvertTest extends TestCase {
    */
   public void checkDecimalNumbers()
   {
-	  assert(false); //noch kein code review stattgefunden
-
-	//positive test
+      //positive test
 		try
 		{
 			ConverterUtil.checkDecimalNumbers("5.6+34+2.0+100.9");
@@ -153,6 +151,18 @@ public class StringConvertTest extends TestCase {
 		try
 		{
 			ConverterUtil.checkDecimalNumbers(".999+7");
+		}
+		catch (Exception e)
+		{
+			tmpErrorOccurred = true;
+		}
+		assert( !tmpErrorOccurred );
+		
+		//negative test
+		tmpErrorOccurred = false;
+		try
+		{
+			ConverterUtil.checkDecimalNumbers("999+7.");
 		}
 		catch (Exception e)
 		{
@@ -253,17 +263,7 @@ public class StringConvertTest extends TestCase {
    */
   public void setBracketsAroundNegativeNumbers()
   {
-	  assert(false);
-  }
-
-
-  /**
-   * Test method for
-   * {@link calculator.utils.ConverterUtil#putBracketsAroundNegativeNumber()}.
-   */
-  public void putBracketsAroundNegativeNumber()
-  {
-	  assert(false);
+	  assert(ConverterUtil.setBracketsAroundNegativeNumbers("-8+(-23.23434+-34)*-5+(-23^3)+(-1*(-2*(-5)))))+(-a+b)").equals("(-8)+((-23.23434)+-34)*-5+((-23)^3)+((-1)*((-2)*(-5)))))+((-a)+b)"));
   }
 
   /**
@@ -272,7 +272,51 @@ public class StringConvertTest extends TestCase {
    */
   public void checkNegativeNumbers()
   {
-	  assert(false);
+	//positive test
+		try
+		{
+			ConverterUtil.checkNegativeNumbers("(-5)*(-2)+((-4)+5)");
+		}
+		catch (Exception e)
+		{
+			assert(false);
+		}
+
+		//negative test
+		Boolean tmpErrorOccurred = false;
+		try
+		{
+			ConverterUtil.checkNegativeNumbers("-5)*(-2)+((-4)+5)");
+		}
+		catch (Exception e)
+		{
+			tmpErrorOccurred = true;
+		}
+		assert( !tmpErrorOccurred );
+
+		//negative test
+		tmpErrorOccurred = false;
+		try
+		{
+			ConverterUtil.checkNegativeNumbers("(-5)*(-2)+(-4)+5)");
+		}
+		catch (Exception e)
+		{
+			tmpErrorOccurred = true;
+		}
+		assert( !tmpErrorOccurred );
+
+		//negative test
+		tmpErrorOccurred = false;
+		try
+		{
+			ConverterUtil.checkNegativeNumbers("-5)*(-2)+((-4)+-5)");
+		}
+		catch (Exception e)
+		{
+			tmpErrorOccurred = true;
+		}
+		assert( !tmpErrorOccurred );
   }
 
   /**
@@ -281,7 +325,50 @@ public class StringConvertTest extends TestCase {
    */
   public void checkBrackets()
   {
-	  assert(false);
+	  try
+		{
+			ConverterUtil.checkBrackets("(((5+5+5+5)))");
+		}
+		catch (Exception e)
+		{
+			assert(false);
+		}
+
+		//negative test
+		Boolean tmpErrorOccurred = false;
+		try
+		{
+			ConverterUtil.checkBrackets(")(((5+5+5+5)))");
+		}
+		catch (Exception e)
+		{
+			tmpErrorOccurred = true;
+		}
+		assert( !tmpErrorOccurred );
+
+		//negative test
+		tmpErrorOccurred = false;
+		try
+		{
+			ConverterUtil.checkBrackets("(((5+5+5+5))))");
+		}
+		catch (Exception e)
+		{
+			tmpErrorOccurred = true;
+		}
+		assert( !tmpErrorOccurred );
+
+		//negative test
+		tmpErrorOccurred = false;
+		try
+		{
+			ConverterUtil.checkBrackets("(((((5+5+5+5))))");
+		}
+		catch (Exception e)
+		{
+			tmpErrorOccurred = true;
+		}
+		assert( !tmpErrorOccurred );
   }
 
   /**
@@ -289,54 +376,8 @@ public class StringConvertTest extends TestCase {
    * {@link calculator.utils.ConverterUtil#changeFunctionsIntoSigns()}.
    */
   public void changeFunctionsIntoSigns()
-  {
-	  assert(false);
-  }
-
-  /**
-   * Test method for
-   * {@link calculator.utils.ConverterUtil#getNextBlankPosition()}.
-   */
-  public void getNextBlankPosition()
-  {
-	  assert(false);
-  }
-
-  /**
-   * Test method for
-   * {@link calculator.utils.ConverterUtil#isNumericOrVariable()}.
-   */
-  public void isNumericOrVariable()
-  {
-	  assert(false);
-  }
-
-  /**
-   * Test method for
-   * {@link calculator.utils.ConverterUtil#isNumeric}.
-   */
-  public void isNumeric()
-  {
-	  assert(false);
-  }
-
-  /**
-   * Test method for
-   * {@link calculator.utils.ConverterUtil#isVariable}.
-   */
-  public void isVariable()
-  {
-	  assert(false);
-  }
-
-
-  /**
-   * Test method for
-   * {@link calculator.utils.ConverterUtil#termToStandardString()}.
-   */
-  public void termToStandardString()
-  {
-	  assert(false);
+  {	  
+	assert(ConverterUtil.changeFunctionsIntoSigns("sin(abc)+cos(abcd)+tan+tan(abc)+sqrt(23)").equals("%(abc)+~(abcd)+tan+#(abc)+&(23)"));
   }
 
   // TODO @Raphi Tests fürs ConverterUtil schreiben (alles testbare ist jetzt

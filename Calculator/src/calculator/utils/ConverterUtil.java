@@ -55,7 +55,7 @@ public class ConverterUtil {
    * @param aFormula
    * @throws IllegalArgumentException
    */
-  public static void checkIfValidBlanksOnly(String aFormula) throws IllegalArgumentException {
+  /*public static void checkIfValidBlanksOnly(String aFormula) throws IllegalArgumentException {
     int tmpPosition = 0;
     while (getNextBlankPosition(aFormula, tmpPosition) != -1) {
       tmpPosition = getNextBlankPosition(aFormula, tmpPosition);
@@ -68,14 +68,15 @@ public class ConverterUtil {
         }
       }
     }
-  }
+  }*/
 
   /**
    * @param aString
    * @return aString without blanks
    */
   public static String removeBlanks(String aString) {
-    return aString.replaceAll(" +", "");
+      //+ is part of a regular expression. it has nothin to do with the char '+'
+	  return aString.replaceAll(" +", "");
   }
 
   /**
@@ -163,8 +164,7 @@ public class ConverterUtil {
     aFormula.replace("sin(", "%(");
     aFormula.replace("cos(", "~(");
     aFormula.replace("tan(", "#(");
-    aFormula.replace("sqrt(", "&(");
-    // aFormula.replace("wurzel(", "&(");
+    aFormula.replace("sqrt(", "&(");    
 
     return aFormula;
   }
@@ -184,8 +184,7 @@ public class ConverterUtil {
         throw new IllegalArgumentException(
             "Do not let a bracket follow an alone standing arithmetic operator.");
       }
-    }
-    // TODO @Raphi done => test (man bräuchte eine Überprüfung für Eingaben wie z.B. 3+5*)
+    }   
     // cases "... +|-|*|/|^"
     Pattern tmpSingleOperatorPattern = Pattern.compile("[\\+\\-\\*/\\^]");
     String tmpLastSignInFormular = Character.toString(aFormula.charAt(aFormula.length() - 1));

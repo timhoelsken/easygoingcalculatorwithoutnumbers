@@ -6,7 +6,7 @@ package calculator;
 public class EmptyClassForGlobalSupport {
 
   // comments by Raphael
-	//TODO @all danke für ihre gute Arbeti in den letzten Tagen!
+	//TODO @all danke für die gute Arbeit in den letzten Tagen!
 	
   // comments by Tim
       // TODO @all Allgemeine Diskussion über das Überprüfen von blanks in der Funktion! Sollen wir Zahlen dabei einfach zusammenziehen oder prüfen?

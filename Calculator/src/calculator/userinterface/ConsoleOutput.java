@@ -45,8 +45,8 @@ public class ConsoleOutput {
    * @param anErrorMessage
    */
   public void printError(String anErrorMessage) {
-    System.out.println("Bei der Verarbeitung ist folgender Fehler aufgetreten:\n\n");
-    System.out.println(anErrorMessage + "\n\n");
+    System.out.println("\nBei der Verarbeitung ist folgender Fehler aufgetreten:");
+    System.out.println(anErrorMessage + "\n");
 
   }
 

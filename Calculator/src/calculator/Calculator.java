@@ -7,22 +7,19 @@ import calculator.userinterface.ConsoleInput;
 import calculator.userinterface.ConsoleOutput;
 import calculator.utils.ConverterUtil;
 
-
 /**
- *
+ * 
  * @author Tim
- *
+ * 
  */
 public class Calculator {
 
   /**
    * The Calculator
-   *
+   * 
    * @param args
-   * @throws Exception
    */
-  // TODO handle Exception
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) {
     ConsoleInput tmpInput = new ConsoleInput();
     ConsoleOutput tmpOutput = new ConsoleOutput();
     Boolean runCalculator = true;
@@ -51,22 +48,26 @@ public class Calculator {
           } catch (IOException e) {
             tmpOutput.printError(e.getMessage());
           }
-   
+
           System.out.println("Sie haben eingegeben:\n" + tmpInputString);
           System.out.println("das bereinigte Ergebnis ist:");
-          tmpInputString = ConverterUtil.termToStandardString(tmpInputString);
-          System.out.println(tmpInputString);
-
           try {
-            FormulaTree tmpFormulaTreeBuilder = new FormulaTree();
+            tmpInputString = ConverterUtil.termToStandardString(tmpInputString);
+            System.out.println(tmpInputString);
+            try {
+              FormulaTree tmpFormulaTreeBuilder = new FormulaTree();
 
-            Tree tmpTree = tmpFormulaTreeBuilder.BuildTree(ConverterUtil.termToStandardString(tmpInputString));
+              Tree tmpTree = tmpFormulaTreeBuilder.BuildTree(ConverterUtil
+                  .termToStandardString(tmpInputString));
 
-            System.out.println(FormulaTree.EvaluateTree(tmpTree));
+              System.out.println(FormulaTree.EvaluateTree(tmpTree));
 
-            tmpTree.paintMe();
-          } catch (Exception e) {
-            System.out.println(e.getMessage());
+              tmpTree.paintMe();
+            } catch (Exception e) {
+              System.out.println(e.getMessage());
+            }
+          } catch (IllegalArgumentException e) {
+            tmpOutput.printError(e.getMessage());
           }
 
           System.out.println("Wollen Sie einen weiteren Term eingeben? (j / n)\n");

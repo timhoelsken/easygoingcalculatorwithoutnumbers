@@ -25,10 +25,10 @@ public class ConverterUtil {
     // checkIfValidBlanksOnly(aFormula);
     aFormula = removeBlanks(aFormula);
     aFormula = unifyCommas(aFormula);
+    aFormula = insertMultiplicationOperators(aFormula);
     checkDecimalNumbers(aFormula);
     aFormula = changeFunctionsIntoSigns(aFormula);
-    aFormula = insertMultiplicationOperators(aFormula);
-    aFormula = setBracketsAroundNegativeNumbers(aFormula);
+    aFormula = setBracketsAroundNegatives(aFormula);
     checkNegativeNumbers(aFormula);
     checkOperators(aFormula);
     checkBrackets(aFormula);
@@ -89,6 +89,32 @@ public class ConverterUtil {
   }
 
   /**
+   * A method to clean the variables in aFormula. Variables "ab" will be
+   * replaced with "a*b" "2a" will be replaced with "2*a"
+   *
+   * @param aFormula
+   * @return a String that contains no "ab" or "2a" variables
+   */
+  public static String insertMultiplicationOperators(String aFormula) {
+
+    String tmpOutput = new String("");
+
+    for (int i = 0; i < aFormula.length(); i++) {
+      tmpOutput += aFormula.charAt(i);
+      if (MathUtil.isVariable(aFormula.charAt(i))
+          && (i + 1 < aFormula.length() && (MathUtil.isNumberOrVariable(aFormula.charAt(i + 1)) || aFormula
+              .charAt(i + 1) == '('))) {
+        tmpOutput += "*";
+      } else if (MathUtil.isNumber(aFormula.charAt(i))
+          && (i + 1 < aFormula.length() && (MathUtil.isVariable(aFormula.charAt(i + 1)) || aFormula
+              .charAt(i + 1) == '('))) {
+        tmpOutput += "*";
+      }
+    }
+    return tmpOutput;
+  }
+
+  /**
    * @param aFormula
    * @throws IllegalArgumentException
    *             if illegal commas in the formula, for example '3.45.34' or
@@ -104,6 +130,13 @@ public class ConverterUtil {
         }
       }
 
+      // TODO @Tim Lösung leider nicht korrekt. Buchstaben können weg
+      // (Methodenaufrufreihenfolge verhindert direkte Folge), Kommazahlen am
+      // Anfang und am Ende werden als Fehler erkannt, in einer Zahl kann mehr
+      // als ein Komma vorkommen, * steht für beliebig viele auch 0 => .3 wird
+      // nicht als falsch erkannt...
+      // Vielliecht lieber ne Lösung ohne Regex? z.B. alle Punkte zählen von
+      // Zahl bis Nicht-Zahl und Nicht-Punkt und wenn mehr als 1 BÄM!
       Pattern tmpPattern = Pattern
           .compile("[\\+\\-\\*/\\^\\([a-z][A-Z]][0-9]*.[0-9]*[\\+\\-\\*/\\^\\)[a-z][A-Z]]");
       Matcher tmpMatcher = tmpPattern.matcher(aFormula);
@@ -134,32 +167,6 @@ public class ConverterUtil {
     // aFormula.replace("wurzel(", "&(");
 
     return aFormula;
-  }
-
-  /**
-   * A method to clean the variables in aFormula. Variables "ab" will be
-   * replaced with "a*b" "2a" will be replaced with "2*a"
-   *
-   * @param aFormula
-   * @return a String that contains no "ab" or "2a" variables
-   */
-  public static String insertMultiplicationOperators(String aFormula) {
-
-    String tmpOutput = new String("");
-
-    for (int i = 0; i < aFormula.length(); i++) {
-      tmpOutput += aFormula.charAt(i);
-      if (MathUtil.isVariable(aFormula.charAt(i))
-          && (i + 1 < aFormula.length() && (MathUtil.isNumberOrVariable(aFormula.charAt(i + 1)) || aFormula
-              .charAt(i + 1) == '('))) {
-        tmpOutput += "*";
-      } else if (MathUtil.isNumber(aFormula.charAt(i))
-          && (i + 1 < aFormula.length() && (MathUtil.isVariable(aFormula.charAt(i + 1)) || aFormula
-              .charAt(i + 1) == '('))) {
-        tmpOutput += "*";
-      }
-    }
-    return tmpOutput;
   }
 
   /**
@@ -210,22 +217,22 @@ public class ConverterUtil {
    * @return the bracked formula
    * @author Tobias
    */
-  public static String setBracketsAroundNegativeNumbers(String aFormula) {
+  public static String setBracketsAroundNegatives(String aFormula) {
 
     if (aFormula.length() > 0) {
       // check negative number at the beginning
       if (aFormula.charAt(0) == '-') {
-        aFormula = putBracketsAroundNegativeNumber(aFormula, 0);
+        aFormula = putBracketsAroundNegatives(aFormula, 0);
       }
     }
 
     // check negative numbers at the beginning of brackets
     int i = 0;
-    Pattern tmpPattern = Pattern.compile("\\(\\-[0-9\\.]+[^\\)0-9]");
+    Pattern tmpPattern = Pattern.compile("\\(\\-[\\w\\.]+[^\\)\\w]");
     Matcher tmpMatcher = tmpPattern.matcher(aFormula);
     while (tmpMatcher.find(i)) {
       int tmpStart = tmpMatcher.start();
-      aFormula = putBracketsAroundNegativeNumber(aFormula, ++tmpStart);
+      aFormula = putBracketsAroundNegatives(aFormula, ++tmpStart);
       i = tmpStart;
     }
 
@@ -239,11 +246,11 @@ public class ConverterUtil {
    * @return the formula with brackets around the number beginning at the
    *         startIndex
    */
-  private static String putBracketsAroundNegativeNumber(String aFormula, int aStartIndex) {
+  private static String putBracketsAroundNegatives(String aFormula, int aStartIndex) {
     int i = aStartIndex + 1;
     Matcher tmpMatcher;
     do {
-      Pattern tmpPattern = Pattern.compile("[0-9\\.]");
+      Pattern tmpPattern = Pattern.compile("[\\w\\.]");
       if (i == aFormula.length()) {
         tmpMatcher = null;
       } else {
@@ -257,6 +264,9 @@ public class ConverterUtil {
   }
 
   /**
+   * if there is a negative number at the beginning of the formula it has to be
+   * in brackets to make this method work!
+   *
    * @param aFormula
    * @throws IllegalArgumentException
    *             if not all negative numbers are in brackets
@@ -264,35 +274,13 @@ public class ConverterUtil {
   public static void checkNegativeNumbers(String aFormula) throws IllegalArgumentException {
     for (int i = 1; i < aFormula.length(); i++) {
       if (aFormula.charAt(i) == '-') {
-        Pattern tmpPattern = Pattern.compile("[\\(0-9].*");
-        Matcher tmpMatcher = tmpPattern.matcher(aFormula.substring(i - 1));
+        Pattern tmpPattern = Pattern.compile("[\\(\\w]");
+        Matcher tmpMatcher = tmpPattern.matcher(Character.toString(aFormula.charAt(i - 1)));
         if (!tmpMatcher.matches()) {
-          throw new IllegalArgumentException("Some negative numbers are not in brackets.");
+          throw new IllegalArgumentException("Some negative operands are not in brackets.");
         }
       }
     }
-  }
-
-  /**
-   * paints a string in the center of some spaces, needed to paint the tree in the console
-   * @param someSpaces
-   * @param aString
-   * @return a string centered in the given spaces
-   */
-  public static String centerStringInSpaces(String someSpaces, String aString) {
-    String tmpReturnString = new String();
-    int tmpSpaceLength = someSpaces.length();
-    int tmpStringLength = aString.length();
-    if (tmpSpaceLength <= tmpStringLength) {
-      return aString;
-    }
-    int tmpStart = tmpSpaceLength / 2 - tmpStringLength / 2;
-    tmpReturnString = someSpaces.substring(0, tmpStart);
-    tmpReturnString += aString;
-    for (int i = tmpReturnString.length() + 1; i < tmpSpaceLength; i++) {
-      tmpReturnString += " ";
-    }
-    return tmpReturnString;
   }
 
   /**
@@ -343,5 +331,27 @@ public class ConverterUtil {
     }
 
     return tmpPosition;
+  }
+
+  /**
+   * paints a string in the center of some spaces, needed to paint the tree in the console
+   * @param someSpaces
+   * @param aString
+   * @return a string centered in the given spaces
+   */
+  public static String centerStringInSpaces(String someSpaces, String aString) {
+    String tmpReturnString = new String();
+    int tmpSpaceLength = someSpaces.length();
+    int tmpStringLength = aString.length();
+    if (tmpSpaceLength <= tmpStringLength) {
+      return aString;
+    }
+    int tmpStart = tmpSpaceLength / 2 - tmpStringLength / 2;
+    tmpReturnString = someSpaces.substring(0, tmpStart);
+    tmpReturnString += aString;
+    for (int i = tmpReturnString.length() + 1; i < tmpSpaceLength; i++) {
+      tmpReturnString += " ";
+    }
+    return tmpReturnString;
   }
 }

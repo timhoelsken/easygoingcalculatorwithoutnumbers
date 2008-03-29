@@ -88,10 +88,7 @@ public class StringConvertTest extends TestCase {
    * Test method for
    * {@link calculator.utils.ConverterUtil#checkDecimalNumbers()}.
    */
-  public void testCheckDecimalNumbers() {
-    // TODO @Raphi Ich hab den assertTrue mit tmpErrorOccured umbearbeitet.
-    // Du hattest ihn auf !tmpErrorOccured eingestellt, aber an der Stelle tritt
-    // ja ein Error auf, das ist ja richtig ;)
+  public void testCheckDecimalNumbers() {   
     Boolean tmpErrorOccurred = false;
     // positive test
     try {

@@ -273,6 +273,7 @@ public class ConverterUtil {
     for (int i = 1; i < aFormula.length(); i++) {
       if (aFormula.charAt(i) == '-') {
         Pattern tmpPattern = Pattern.compile("[\\(\\w]");
+        //TODO @Tobi Check das i-1 nicht < 0
         Matcher tmpMatcher = tmpPattern.matcher(Character.toString(aFormula.charAt(i - 1)));
         if (!tmpMatcher.matches()) {
           throw new IllegalArgumentException("Some negative operands are not in brackets.");

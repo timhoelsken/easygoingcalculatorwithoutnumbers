@@ -25,7 +25,6 @@ public final class FormulaTree {
    *             It is not possible to calculate the tree. An internal error
    *             occurred.
    */
-  // TODO @Raphi evaluateTree für minus mit einem operanden anpassen!
   public static float EvaluateTree(Tree aTree) throws Exception {
     // no tree? no calculation!
     if (aTree == null)

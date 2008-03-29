@@ -51,8 +51,7 @@ public class Calculator {
           } catch (IOException e) {
             tmpOutput.printError(e.getMessage());
           }
-
-          // TODO hier sollte dann sinnvoll was mit dem Term angestellt werden
+   
           System.out.println("Sie haben eingegeben:\n" + tmpInputString);
           System.out.println("das bereinigte Ergebnis ist:");
           tmpInputString = ConverterUtil.termToStandardString(tmpInputString);

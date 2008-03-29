@@ -218,8 +218,10 @@ public class StringConvertTest extends TestCase {
    * {@link calculator.utils.ConverterUtil#setBracketsAroundNegativeNumbers()}.
    */
   public void testSetBracketsAroundNegativeNumbers() {
-    assertTrue(ConverterUtil.setBracketsAroundNegatives(
-        "-8+(-23.23434+-34)*-5+(-23^3)+(-1*(-2*(-5)))))+(-a+b)").equals(
+	  
+	  String tmp = ConverterUtil.setBracketsAroundNegatives(
+      "-8+(-23.23434+-34)*-5+(-23^3)+(-1*(-2*(-5)))))+(-a+b)");
+    assertTrue(tmp.equals(
         "(-8)+((-23.23434)+-34)*-5+((-23)^3)+((-1)*((-2)*(-5)))))+((-a)+b)"));
   }
 

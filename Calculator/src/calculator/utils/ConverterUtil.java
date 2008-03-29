@@ -28,7 +28,7 @@ public class ConverterUtil {
     aFormula = insertMultiplicationOperators(aFormula);
     checkDecimalNumbers(aFormula);
     aFormula = changeFunctionsIntoSigns(aFormula);
-    aFormula = setBracketsAroundNegatives(aFormula);
+    //aFormula = setBracketsAroundNegatives(aFormula); ist nun mit in negative numbers    
     checkNegativeNumbers(aFormula);
     checkOperators(aFormula);
     checkBrackets(aFormula);
@@ -270,7 +270,10 @@ public class ConverterUtil {
    *             if not all negative numbers are in brackets
    */
   public static void checkNegativeNumbers(String aFormula) throws IllegalArgumentException {
-    for (int i = 1; i < aFormula.length(); i++) {
+	
+	aFormula = setBracketsAroundNegatives(aFormula);
+	  
+	for (int i = 1; i < aFormula.length(); i++) {
       if (aFormula.charAt(i) == '-') {
         Pattern tmpPattern = Pattern.compile("[\\(\\w]");
         //TODO @Tobi Check das i-1 nicht < 0

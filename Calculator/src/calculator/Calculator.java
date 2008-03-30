@@ -1,11 +1,13 @@
 package calculator;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import calculator.elements.Tree;
 import calculator.userinterface.ConsoleInput;
 import calculator.userinterface.ConsoleOutput;
 import calculator.utils.ConverterUtil;
+import calculator.utils.MathUtil;
 
 /**
  * 
@@ -39,6 +41,7 @@ public class Calculator {
       if (tmpInputString.equals("t")) {
 
         tmpInputString = "";
+        ArrayList<String[]> tmpVariables = new ArrayList<String[]>();
 
         while (!tmpInputString.toLowerCase().equals("n")) {
 
@@ -54,6 +57,28 @@ public class Calculator {
           try {
             tmpInputString = ConverterUtil.termToStandardString(tmpInputString);
             System.out.println(tmpInputString);
+
+            if (ConverterUtil.hasVariables(tmpInputString)) {
+
+              tmpVariables = ConverterUtil.getVariables(tmpInputString);
+              tmpOutput.promptVariableInput();
+
+              for (int i = 0; i < tmpVariables.size(); i++) {
+                do {
+                  System.out.print(tmpVariables.get(i)[0] + " = ");
+
+                  try {
+                    tmpVariables.get(i)[1] = tmpInput.getConsoleInput();
+                  } catch (IOException e) {
+                    tmpOutput.printError(e.getMessage());
+                  }
+                  if (!MathUtil.isFloat(tmpVariables.get(i)[1])) {
+                    System.out.println("\nDer eingegebene Wert muss eine Zahl sein. Bitte wiederholen Sie ihre Eingabe.\n");
+                  }
+                } while (!MathUtil.isFloat(tmpVariables.get(i)[1]));
+              }
+
+            }
             try {
               FormulaTree tmpFormulaTreeBuilder = new FormulaTree();
 

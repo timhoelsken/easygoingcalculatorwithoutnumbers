@@ -26,6 +26,18 @@ public class MathUtil {
   }
 
   /**
+   * Checks if a string is numeric
+   * 
+   * @param aString
+   * @return true if the given string is numeric only
+   */
+  public static boolean isFloat(String aString) {
+    // TODO @all hier wird bis jetzt nur auf eine ganze Zahl geprüft, es muss
+    // aber möglich sein einen Floatwert einzugeben ==> checks aus Converter?
+    return aString.matches("[0-9]*");
+  }
+
+  /**
    * @param aCharacter
    * @return boolean true if character is a variable
    */
@@ -217,7 +229,7 @@ public class MathUtil {
    * @author André
    * @return ArrayList of mathobj
    * @param aFormula
-   *          sting which contains a formula containing string
+   *            sting which contains a formula containing string
    * @todo Andre: Add support for negative numbers and brackets
    */
   public static ArrayList<Object> FormulaToArrayList(String aFormula) {

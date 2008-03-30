@@ -89,4 +89,12 @@ public class ConsoleOutput {
   public void unknownCommand() {
     System.out.println("\nIhr eingegebener Befehl konnte leider nicht verarbeitet werden.\n\n");
   }
+
+  /**
+   * Prompts the user to type the values of variables
+   */
+  public void promptVariableInput() {
+    System.out
+        .println("\nIhr eingegebener Term beinhaltet mindestens eine Variable. Bitte geben Sie nachfolgend die Werte ein:\n");
+  }
 }

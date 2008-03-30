@@ -21,9 +21,21 @@ public class StringConvertTest extends TestCase {
    * @throws Exception
    */
   public void testTermToStandardString() throws Exception {
+
     String tmpString = new String("2a + a b");
     assertTrue("The String has Variables separated by *", ConverterUtil.termToStandardString(tmpString)
         .equals("2*a+a*b"));
+
+    boolean tmpErrorOccured = false;
+    
+    try {
+      //TODO Failure! :(
+      ConverterUtil.termToStandardString("3 sin(4 + 5) - (-3)");
+    } catch (Exception e) {
+      tmpErrorOccured = true;
+    }
+    
+    assertTrue("The String is converted correctly", !tmpErrorOccured);
   }
 
   /**
@@ -88,7 +100,7 @@ public class StringConvertTest extends TestCase {
    * Test method for
    * {@link calculator.utils.ConverterUtil#checkDecimalNumbers()}.
    */
-  public void testCheckDecimalNumbers() {   
+  public void testCheckDecimalNumbers() {
     Boolean tmpErrorOccurred = false;
     // positive test
     try {
@@ -215,17 +227,13 @@ public class StringConvertTest extends TestCase {
    * {@link calculator.utils.ConverterUtil#setBracketsAroundNegativeNumbers()}.
    */
   public void testSetBracketsAroundNegativeNumbers() {
-	  
-	  String tmp = ConverterUtil.setBracketsAroundNegatives(
-      "-8+(-23.23434+(-34))*(-5)+(-23^3)+(-1*(-2*(-5)))))+(-a+b)");
-    assertTrue(tmp.equals(
-        "(-8)+((-23.23434)+(-34))*(-5)+((-23)^3)+((-1)*((-2)*(-5)))))+((-a)+b)"));
-	  
-	  
-	  tmp = ConverterUtil.setBracketsAroundNegatives(
-      "-8+(-23.23434+-34)*-5+(-23^3)+(-1*(-2*(-5)))))+(-a+b)");
-    assertTrue(tmp.equals(
-        "(-8)+((-23.23434)+-34)*-5+((-23)^3)+((-1)*((-2)*(-5)))))+((-a)+b)"));
+
+    String tmp = ConverterUtil
+        .setBracketsAroundNegatives("-8+(-23.23434+(-34))*(-5)+(-23^3)+(-1*(-2*(-5)))))+(-a+b)");
+    assertTrue(tmp.equals("(-8)+((-23.23434)+(-34))*(-5)+((-23)^3)+((-1)*((-2)*(-5)))))+((-a)+b)"));
+
+    tmp = ConverterUtil.setBracketsAroundNegatives("-8+(-23.23434+-34)*-5+(-23^3)+(-1*(-2*(-5)))))+(-a+b)");
+    assertTrue(tmp.equals("(-8)+((-23.23434)+-34)*-5+((-23)^3)+((-1)*((-2)*(-5)))))+((-a)+b)"));
   }
 
   /**
@@ -243,13 +251,12 @@ public class StringConvertTest extends TestCase {
     // positive test
     Boolean tmpErrorOccurred = false;
     try {
-      String tmp = ConverterUtil.setBracketsAroundNegatives("-5)*(-2)+((-4)+5)"); 
-    
+      String tmp = ConverterUtil.setBracketsAroundNegatives("-5)*(-2)+((-4)+5)");
+
       ConverterUtil.checkNegativeNumbers(tmp);
-    } catch (Exception e) {    
+    } catch (Exception e) {
       assertTrue(false);
     }
-    
 
     // negative test
     tmpErrorOccurred = false;

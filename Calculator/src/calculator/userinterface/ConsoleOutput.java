@@ -67,7 +67,14 @@ public class ConsoleOutput {
 
     System.out.println("\nHilfe Menu");
     System.out.println(horizontalLine());
-    System.out.println("\nHier wird Ihnen geholfen, sobald ein sinnvoller Text entstanden ist.\n");
+    System.out.println("\nUmgang mit dem Taschenrechner:\n");
+    System.out.println("Mit der Eingabe von t gelangen Sie zur Eingabe eines Terms.\n"
+        + "Nachfolgend koennen Sie folgende Inhalte einer Formel eingeben:\n\n" 
+        + "- reale Zahlen (negative Zahlen muessen geklammert werden)\n"
+        + "- Operatoren \"+ - * \"\n" 
+        + "- Funktionen \"sin cos tan sqrt\"\n" 
+        + "- Variablen\n\n" 
+        + "Nach der Eingabe von Variablen werden Sie aufgefordert einen Wert fuer diese einzugeben.\n");
 
   }
 

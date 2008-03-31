@@ -41,11 +41,13 @@ public class Calculator {
       if (tmpInputString.equals("t")) {
 
         tmpInputString = "";
+        String tmpOtherVariables = new String("");
         ArrayList<String[]> tmpVariables = new ArrayList<String[]>();
 
         while (!tmpInputString.toLowerCase().equals("n")) {
 
           System.out.println("Bitte geben Sie einen Term ein:");
+
           try {
             tmpInputString = tmpInput.getConsoleInput();
           } catch (IOException e) {
@@ -54,48 +56,64 @@ public class Calculator {
 
           System.out.println("Sie haben eingegeben:\n" + tmpInputString);
           System.out.println("das bereinigte Ergebnis ist:");
+
           try {
             tmpInputString = ConverterUtil.termToStandardString(tmpInputString);
             System.out.println(tmpInputString);
 
-            if (ConverterUtil.hasVariables(tmpInputString)) {
+            while (!tmpOtherVariables.toLowerCase().equals("n")) {
 
-              tmpVariables = ConverterUtil.getVariables(tmpInputString);
-              tmpOutput.promptVariableInput();
+              if (ConverterUtil.hasVariables(tmpInputString)) {
 
-              for (int i = 0; i < tmpVariables.size(); i++) {
-                do {
-                  System.out.print(tmpVariables.get(i)[0] + " = ");
+                tmpVariables = ConverterUtil.getVariables(tmpInputString);
+                tmpOutput.promptVariableInput();
 
-                  try {
-                    tmpVariables.get(i)[1] = tmpInput.getConsoleInput();
-                  } catch (IOException e) {
-                    tmpOutput.printError(e.getMessage());
-                  }
-                  if (!MathUtil.isFloat(tmpVariables.get(i)[1])) {
-                    System.out.println("\nDer eingegebene Wert muss eine Zahl sein. Bitte wiederholen Sie ihre Eingabe.\n");
-                  }
-                } while (!MathUtil.isFloat(tmpVariables.get(i)[1]));
+                for (int i = 0; i < tmpVariables.size(); i++) {
+                  do {
+                    System.out.print(tmpVariables.get(i)[0] + " = ");
+
+                    try {
+                      tmpVariables.get(i)[1] = tmpInput.getConsoleInput();
+                    } catch (IOException e) {
+                      tmpOutput.printError(e.getMessage());
+                    }
+                    if (!MathUtil.isFloat(tmpVariables.get(i)[1])) {
+                      System.out
+                          .println("\nDer eingegebene Wert muss eine Zahl sein. Bitte wiederholen Sie ihre Eingabe.\n");
+                    }
+                  } while (!MathUtil.isFloat(tmpVariables.get(i)[1]));
+                }
               }
 
+              try {
+                FormulaTree tmpFormulaTreeBuilder = new FormulaTree();
+
+                Tree tmpTree = tmpFormulaTreeBuilder.BuildTree(ConverterUtil
+                    .termToStandardString(tmpInputString));
+
+                System.out.println(FormulaTree.EvaluateTree(tmpTree));
+
+                tmpTree.paintMe();
+              } catch (Exception e) {
+                System.out.println(e.getMessage());
+                tmpOtherVariables = "n";
+              }
             }
+
+            System.out.println("Wollen Sie andere Werte fuer die Variablen im Term eingeben? (j / n)\n");
+
             try {
-              FormulaTree tmpFormulaTreeBuilder = new FormulaTree();
-
-              Tree tmpTree = tmpFormulaTreeBuilder.BuildTree(ConverterUtil
-                  .termToStandardString(tmpInputString));
-
-              System.out.println(FormulaTree.EvaluateTree(tmpTree));
-
-              tmpTree.paintMe();
-            } catch (Exception e) {
-              System.out.println(e.getMessage());
+              tmpOtherVariables = tmpInput.getConsoleInput();
+            } catch (IOException e) {
+              tmpOutput.printError(e.getMessage());
             }
+
           } catch (IllegalArgumentException e) {
             tmpOutput.printError(e.getMessage());
           }
 
           System.out.println("Wollen Sie einen weiteren Term eingeben? (j / n)\n");
+
           try {
             tmpInputString = tmpInput.getConsoleInput();
           } catch (IOException e) {

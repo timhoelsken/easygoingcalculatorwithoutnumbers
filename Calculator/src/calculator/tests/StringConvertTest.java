@@ -27,15 +27,52 @@ public class StringConvertTest extends TestCase {
         .equals("2*a+a*b"));
 
     boolean tmpErrorOccured = false;
+    String tmpConvertedString = new String("");
     
     try {
-      //TODO Failure! :(
-      ConverterUtil.termToStandardString("3 sin(4 + 5) - (-3)");
+      // TODO Failure! :(
+      tmpConvertedString = ConverterUtil.termToStandardString("3 sin(4 + 5) - (-3)");
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
     
-    assertTrue("The String is converted correctly", !tmpErrorOccured);
+    assertTrue("The String is converted correctly", !tmpErrorOccured && tmpConvertedString.equals("3%(4+5)-(-3)"));
+    
+    // Es folgen die drei Beispiele aus dem Aufgabenblatt
+    
+    tmpErrorOccured = false;
+    tmpConvertedString = new String("");
+    
+    try {
+      tmpConvertedString = ConverterUtil.termToStandardString("(3x + 5) * 15");
+    } catch (Exception e) {
+      tmpErrorOccured = true;
+    }
+    
+    assertTrue("The String is converted correctly", !tmpErrorOccured && tmpConvertedString.equals("(3*x+5)*15"));
+    
+    tmpErrorOccured = false;
+    tmpConvertedString = new String("");
+    
+    try {
+      tmpConvertedString = ConverterUtil.termToStandardString("x^2 + 2*x*y + y^2");
+    } catch (Exception e) {
+      tmpErrorOccured = true;
+    }
+    
+    assertTrue("The String is converted correctly", !tmpErrorOccured && tmpConvertedString.equals("x^2+2*x*y+y^2"));
+    
+    tmpErrorOccured = false;
+    tmpConvertedString = new String("");
+    
+    try {
+      tmpConvertedString = ConverterUtil.termToStandardString("c*cos(x) + s * sin(sqrt(2) - x)");
+    } catch (Exception e) {
+      tmpErrorOccured = true;
+    }
+    
+    assertTrue("The String is converted correctly", !tmpErrorOccured && tmpConvertedString.equals("c*~(x)+s*%(&(2)-x)"));
+    
   }
 
   /**

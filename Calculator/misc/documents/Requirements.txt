@@ -1,0 +1,32 @@
+===============================
+Anforderungen vom Aufgabenblatt
+===============================
+
+- mathematische Formeln können als Text eingegeben werden
+
+- danach können wiederholt Werte für die Unbekannten eingegeben werden
+
+- das Ergebnis wird dann berechnet
+
+- Formel soll über Konsole oder Eingabefenster eingegeben werden
+
+- soll bspw. in Baumstruktur festgehalten werden
+
+- die Operatoren + - * / sollen implementiert werden
+
+- potenzieren soll durch ^ geschehen
+
+- Funktionen sqrt(), sin(), cos(), tan() sollen implementiert werden
+
+- Klammersetzung soll möglich sein
+
+- Unbekannte sollen einfache Buchstaben sein (a - z)
+
+- Numerische Werte sollen Gleitkommazahlen sein
+
+- nich implementierte mathematische Symbole oder andere Zeichen sollen mit einer
+  verständlichen Fehlermeldung abgewiesen werden.
+  
+- Interpretation der Formel nach allgemein gültiger Syntax
+
+- Syntaxfehler sollen dem Benutzer gemeldet werden

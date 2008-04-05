@@ -6,7 +6,6 @@ package calculator;
 public class EmptyClassForGlobalSupport {
 
   // comments by Raphael
-	//TODO @all danke für die gute Arbeit in den letzten Tagen!
 
   // comments by Tim
 

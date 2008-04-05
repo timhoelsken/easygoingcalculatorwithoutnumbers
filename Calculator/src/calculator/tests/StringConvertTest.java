@@ -28,51 +28,99 @@ public class StringConvertTest extends TestCase {
 
     boolean tmpErrorOccured = false;
     String tmpConvertedString = new String("");
-    
+
     try {
       tmpConvertedString = ConverterUtil.termToStandardString("3 sin(4 + 5) - (-3)");
     } catch (IllegalArgumentException e) {
       tmpErrorOccured = true;
       e.printStackTrace();
     }
-    
-    assertTrue("The String is converted correctly", !tmpErrorOccured && tmpConvertedString.equals("3*%(4+5)-(-3)"));
-    
+
+    assertTrue("The String is converted correctly", !tmpErrorOccured
+        && tmpConvertedString.equals("3*%(4+5)-(-3)"));
+
     // Es folgen die drei Beispiele aus dem Aufgabenblatt
-    
+
     tmpErrorOccured = false;
     tmpConvertedString = new String("");
-    
+
     try {
       tmpConvertedString = ConverterUtil.termToStandardString("(3x + 5) * 15");
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
-    
-    assertTrue("The String is converted correctly", !tmpErrorOccured && tmpConvertedString.equals("(3*x+5)*15"));
-    
+
+    assertTrue("The String is converted correctly", !tmpErrorOccured
+        && tmpConvertedString.equals("(3*x+5)*15"));
+
     tmpErrorOccured = false;
     tmpConvertedString = new String("");
-    
+
     try {
       tmpConvertedString = ConverterUtil.termToStandardString("x^2 + 2*x*y + y^2");
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
-    
-    assertTrue("The String is converted correctly", !tmpErrorOccured && tmpConvertedString.equals("x^2+2*x*y+y^2"));
-    
+
+    assertTrue("The String is converted correctly", !tmpErrorOccured
+        && tmpConvertedString.equals("x^2+2*x*y+y^2"));
+
     tmpErrorOccured = false;
     tmpConvertedString = new String("");
-    
+
     try {
       tmpConvertedString = ConverterUtil.termToStandardString("c*cos(x) + s * sin(sqrt(2) - x)");
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
-    
-    assertTrue("The String is converted correctly", !tmpErrorOccured && tmpConvertedString.equals("c*~(x)+s*%(&(2)-x)"));
-    
+
+    assertTrue("The String is converted correctly", !tmpErrorOccured
+        && tmpConvertedString.equals("c*~(x)+s*%(&(2)-x)"));
+
+    tmpErrorOccured = false;
+    tmpConvertedString = new String("");
+
+    try {
+      tmpConvertedString = ConverterUtil.termToStandardString("abcossin(cos(-3))");
+    } catch (Exception e) {
+      tmpErrorOccured = true;
+    }
+
+    // TODO @André Kommst du damit klar? die -3 ist nicht in eigenen Klammern
+    assertTrue("The String is converted correctly", !tmpErrorOccured
+        && tmpConvertedString.equals("a*b*c*o*s*%(~(-3))"));
+
+    tmpErrorOccured = false;
+    tmpConvertedString = new String("");
+
+    try {
+      tmpConvertedString = ConverterUtil.termToStandardString("a^cos((-3+4)^(2+1))*s df ghj+3-");
+    } catch (Exception e) {
+      assertTrue("The formula ends with an operator.".equals(e.getMessage()));
+      tmpErrorOccured = true;
+    }
+    assertTrue("The String is not correct", tmpErrorOccured);
+
+    tmpErrorOccured = false;
+    tmpConvertedString = new String("");
+
+    try {
+      tmpConvertedString = ConverterUtil.termToStandardString("-");
+    } catch (Exception e) {
+      assertTrue("The formula ends with an operator.".equals(e.getMessage()));
+      tmpErrorOccured = true;
+    }
+    assertTrue("The String is not correct", tmpErrorOccured);
+
+    tmpErrorOccured = false;
+    tmpConvertedString = new String("");
+
+    try {
+      tmpConvertedString = ConverterUtil.termToStandardString("a");
+    } catch (Exception e) {
+      tmpErrorOccured = true;
+    }
+    assertTrue("The String is correct", !tmpErrorOccured);
   }
 
   /**

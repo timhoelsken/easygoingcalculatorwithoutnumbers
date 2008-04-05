@@ -34,7 +34,7 @@ public class MathUtil {
   public static boolean isFloat(String aString) {
     // TODO @all hier wird bis jetzt nur auf eine ganze Zahl geprüft, es muss
     // aber möglich sein einen Floatwert einzugeben ==> checks aus Converter?
-    return aString.matches("[0-9]*");
+    return aString.matches("\\-?([1-9][0-9]*|0)(\\.[0-9]+)?");
   }
   
   /**

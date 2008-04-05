@@ -36,6 +36,17 @@ public class MathUtil {
     // aber möglich sein einen Floatwert einzugeben ==> checks aus Converter?
     return aString.matches("[0-9]*");
   }
+  
+  /**
+   * 
+   * @param aChar
+   * @return
+   */
+  public static boolean isFunction(char aChar){
+    String tmpString = Character.toString(aChar);
+    
+    return tmpString.matches("[%~#&]");
+  }
 
   /**
    * @param aCharacter

@@ -26,9 +26,9 @@ public class ConverterUtil {
     // checkIfValidBlanksOnly(aFormula);
     aFormula = removeBlanks(aFormula);
     aFormula = unifyCommas(aFormula);
+    aFormula = changeFunctionsIntoSigns(aFormula);
     aFormula = insertMultiplicationOperators(aFormula);
     checkDecimalNumbers(aFormula);
-    aFormula = changeFunctionsIntoSigns(aFormula);
     // aFormula = setBracketsAroundNegatives(aFormula); ist nun mit in negative
     // numbers
     checkNegativeNumbers(aFormula);
@@ -104,12 +104,12 @@ public class ConverterUtil {
     for (int i = 0; i < aFormula.length(); i++) {
       tmpOutput += aFormula.charAt(i);
       if (MathUtil.isVariable(aFormula.charAt(i))
-          && (i + 1 < aFormula.length() && (MathUtil.isNumberOrVariable(aFormula.charAt(i + 1)) || aFormula
-              .charAt(i + 1) == '('))) {
+          && (i + 1 < aFormula.length() && (MathUtil.isNumberOrVariable(aFormula.charAt(i + 1))
+              || aFormula.charAt(i + 1) == '(' || MathUtil.isFunction(aFormula.charAt(i + 1))))) {
         tmpOutput += "*";
       } else if (MathUtil.isNumber(aFormula.charAt(i))
-          && (i + 1 < aFormula.length() && (MathUtil.isVariable(aFormula.charAt(i + 1)) || aFormula
-              .charAt(i + 1) == '('))) {
+          && (i + 1 < aFormula.length() && (MathUtil.isVariable(aFormula.charAt(i + 1))
+              || aFormula.charAt(i + 1) == '(' || MathUtil.isFunction(aFormula.charAt(i + 1))))) {
         tmpOutput += "*";
       }
     }
@@ -279,7 +279,7 @@ public class ConverterUtil {
 
     for (int i = 1; i < aFormula.length(); i++) {
       if (aFormula.charAt(i) == '-') {
-        Pattern tmpPattern = Pattern.compile("[\\(\\w]");
+        Pattern tmpPattern = Pattern.compile("[\\(\\)\\w]");
         Matcher tmpMatcher = tmpPattern.matcher(Character.toString(aFormula.charAt(i - 1)));
         if (!tmpMatcher.matches()) {
           throw new IllegalArgumentException("Some negative operands are not in brackets.");

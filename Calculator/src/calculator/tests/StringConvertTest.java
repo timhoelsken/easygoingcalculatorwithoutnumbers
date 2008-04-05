@@ -30,13 +30,13 @@ public class StringConvertTest extends TestCase {
     String tmpConvertedString = new String("");
     
     try {
-      // TODO Failure! :(
       tmpConvertedString = ConverterUtil.termToStandardString("3 sin(4 + 5) - (-3)");
-    } catch (Exception e) {
+    } catch (IllegalArgumentException e) {
       tmpErrorOccured = true;
+      e.printStackTrace();
     }
     
-    assertTrue("The String is converted correctly", !tmpErrorOccured && tmpConvertedString.equals("3%(4+5)-(-3)"));
+    assertTrue("The String is converted correctly", !tmpErrorOccured && tmpConvertedString.equals("3*%(4+5)-(-3)"));
     
     // Es folgen die drei Beispiele aus dem Aufgabenblatt
     

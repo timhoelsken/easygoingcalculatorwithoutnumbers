@@ -64,6 +64,7 @@ public class CalculatorWindow extends JFrame {
     top.setHorizontalAlignment(JLabel.CENTER);
     formulaLabel = new JLabel("Formel:");
 
+    //panelLabel.add(formulaLabel);
     panelLabel.add(formulaLabel);
 
     bottom = new JLabel("ERGEBNISANZEIGE");
@@ -86,6 +87,19 @@ public class CalculatorWindow extends JFrame {
       public void actionPerformed(ActionEvent ae) {
         //TODO insert logic HERE
         displayInput(ae.getActionCommand());
+        JFrame tmpVariableInput = new JFrame("Variable Input");
+        tmpVariableInput.setLocation(400, 400);
+        tmpVariableInput.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        tmpVariableInput.getContentPane().setLayout(new BorderLayout(3, 3));
+        JTextField tmpInputField = new JTextField();
+        tmpInputField.setText("Geben Sie hier ihren Wert für X ein.");
+        JLabel tmpLabel = new JLabel("X = ");
+        JButton tmpButton = new JButton("Eingabe");
+        tmpVariableInput.getContentPane().add(BorderLayout.WEST, tmpLabel);
+        tmpVariableInput.getContentPane().add(BorderLayout.CENTER, tmpInputField);
+        tmpVariableInput.getContentPane().add(BorderLayout.EAST, tmpButton);
+        tmpVariableInput.pack();
+        tmpVariableInput.setVisible(true);
       }
     });
   }

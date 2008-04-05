@@ -2,14 +2,13 @@ package calculator;
 
 import java.util.ArrayList;
 
-import junit.framework.Assert;
 
 import calculator.elements.MathObj;
 import calculator.elements.NumberObj;
-import calculator.elements.Operand;
 import calculator.elements.Operator;
 import calculator.elements.OperatorType;
 import calculator.elements.Tree;
+import calculator.elements.Variable;
 import calculator.utils.MathUtil;
 
 
@@ -18,8 +17,6 @@ import calculator.utils.MathUtil;
  */
 public final class FormulaTree {
 	
-	private Tree formulaTree = null;
-
   /**
    * Calculates the result of a formula-tree
    *
@@ -40,6 +37,8 @@ public final class FormulaTree {
     // is it a tree where there is only a number at the root?
     if (aTree.getRoot() instanceof NumberObj) {
       tmpResult = ((NumberObj) aTree.getRoot()).getValue();
+    }   else if (aTree.getRoot() instanceof Variable){
+      //tmpResult = ((Variable) aTree.getRoot()).getValue();
     } else if (aTree.getRoot() instanceof Operator) {
 
       Operator tmpOperator = (Operator) aTree.getRoot();
@@ -115,6 +114,7 @@ public final class FormulaTree {
 	  else 
 	  {
 		  aTreeToBeInserted.setFather(tmpTree);
+		  if (tmpTree.getRightSon() != null)
 		  aTreeToBeInserted.setLeftSon(tmpTree.getRightSon());		 
           tmpTree.setRightSon(aTreeToBeInserted);
       }
@@ -129,7 +129,7 @@ public final class FormulaTree {
    * @return the built tree
    * @throws Exception
    */
-  public Tree BuildTree(String aFunction) throws Exception {
+  public static Tree BuildTree(String aFunction) throws Exception {
 
 	// prepare formula, mathobj and tmptree	
 	ArrayList<Object> MathList = MathUtil.FormulaToArrayList(aFunction);
@@ -154,6 +154,7 @@ public static Tree BuildTree(ArrayList<Object> MathList) throws Exception
 	    	else if (tmpNextElement instanceof ArrayList) 
 	    	{
 	    		aTreeToBeInserted = FormulaTree.BuildTree((ArrayList<Object>)tmpNextElement);	    		
+	    		aTreeToBeInserted.getRoot().setPriority(MathUtil.PriorityOfBrackets);
 	    	}	
 	    	
 	    	if (aTreeToBeInserted == null)

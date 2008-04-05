@@ -90,19 +90,23 @@ public class Calculator {
                 } while (!MathUtil.isFloat(tmpVariables.get(i)[1]));
               }
               // ==== Variable input end ====
+              //TODO @Tim, kannst du Dictionary füllen mit den Variablen als Key und dem Wert als Schlüssel? Dann könnte ich einfach über den Variablennamen den Wert abfragen
             }
             // Variable Block End
 
             // calculate term
             try {
-              FormulaTree tmpFormulaTreeBuilder = new FormulaTree();
+              
 
-              Tree tmpTree = tmpFormulaTreeBuilder.BuildTree(ConverterUtil
+              Tree tmpTree = FormulaTree.BuildTree(ConverterUtil
                   .termToStandardString(tmpInputString));
 
               System.out.println(FormulaTree.EvaluateTree(tmpTree));
 
               tmpTree.paintMe();
+              
+              //TODO TIM: endlosschleife, ich schreib hier ma was hin, damit der mich nic nervt :-)
+              tmpEnterVariablesValue="n";
             } catch (Exception e) {
               System.out.println(e.getMessage());
               tmpEnterVariablesValue = "error";
@@ -149,4 +153,7 @@ public class Calculator {
     }
     System.out.println("\nSie verlassen nun den Taschenrechner.\n\n");
   }
+  //TODO Tim: wenn ich sin(35) eintrage, fragt mich das Hauptprogramm anch 100 Variablen (ok es sind nur 3: s i n)
+  //TODO @all, wenn einer sin4 eintraegt, was macht die Syntax Prüfung damit?
+  //TODO @all -a+45 wird das (-a) da geklammert?
 }

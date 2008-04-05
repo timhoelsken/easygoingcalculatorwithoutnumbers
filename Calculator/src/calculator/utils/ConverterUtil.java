@@ -29,9 +29,7 @@ public class ConverterUtil {
     aFormula = changeFunctionsIntoSigns(aFormula);
     aFormula = insertMultiplicationOperators(aFormula);
     checkDecimalNumbers(aFormula);
-    // aFormula = setBracketsAroundNegatives(aFormula); ist nun mit in negative
-    // numbers
-    checkNegativeNumbers(aFormula);
+    aFormula = checkNegativeNumbers(aFormula);
     checkOperators(aFormula);
     checkBrackets(aFormula);
 
@@ -222,18 +220,30 @@ public class ConverterUtil {
     if (aFormula.length() > 0) {
       // check negative number at the beginning
       if (aFormula.charAt(0) == '-') {
-        aFormula = putBracketsAroundNegatives(aFormula, 0);
+        aFormula = setBracketsAroundNegative(aFormula, 0);
       }
     }
 
     // check negative numbers at the beginning of brackets
     int i = 0;
     int newBracketsCounter = 0;
-    Pattern tmpPattern = Pattern.compile("\\(\\-[\\w\\.]+[^\\)\\w]");
+    Pattern tmpPattern = Pattern.compile("[%~#&]\\(\\-[\\w\\.]+\\)");
     Matcher tmpMatcher = tmpPattern.matcher(aFormula);
     while (tmpMatcher.find(i)) {
+      int tmpStart = tmpMatcher.start() + 1;
+      aFormula = setBracketsAroundNegative(aFormula, ++tmpStart + newBracketsCounter);
+      newBracketsCounter = newBracketsCounter + 2;
+      i = tmpStart;
+    }
+    
+    i = 0;
+    newBracketsCounter = 0;
+    
+    tmpPattern = Pattern.compile("\\(\\-[\\w\\.]+[^\\)\\w]");
+    tmpMatcher = tmpPattern.matcher(aFormula);
+    while (tmpMatcher.find(i)) {
       int tmpStart = tmpMatcher.start();
-      aFormula = putBracketsAroundNegatives(aFormula, ++tmpStart + newBracketsCounter);
+      aFormula = setBracketsAroundNegative(aFormula, ++tmpStart + newBracketsCounter);
       newBracketsCounter = newBracketsCounter + 2;
       i = tmpStart;
     }
@@ -248,7 +258,7 @@ public class ConverterUtil {
    * @return the formula with brackets around the number beginning at the
    *         startIndex
    */
-  private static String putBracketsAroundNegatives(String aFormula, int aStartIndex) {
+  private static String setBracketsAroundNegative(String aFormula, int aStartIndex) {
     int i = aStartIndex + 1;
     Matcher tmpMatcher;
     do {
@@ -270,10 +280,11 @@ public class ConverterUtil {
    * in brackets to make this method work!
    * 
    * @param aFormula
+   * @return the bracked formula
    * @throws IllegalArgumentException
    *             if not all negative numbers are in brackets
    */
-  public static void checkNegativeNumbers(String aFormula) throws IllegalArgumentException {
+  public static String checkNegativeNumbers(String aFormula) throws IllegalArgumentException {
 
     aFormula = setBracketsAroundNegatives(aFormula);
 
@@ -286,6 +297,8 @@ public class ConverterUtil {
         }
       }
     }
+    
+    return aFormula;
   }
 
   /**

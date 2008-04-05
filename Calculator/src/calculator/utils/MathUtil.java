@@ -133,57 +133,7 @@ public class MathUtil {
     return (IsRightBracket(aChar) ? true : IsLeftBracket(aChar));
   }
 
-  /**
-   * @param aFunction
-   * @param aCharPos
-   * @return the next mathobject of the function string
-   */
-  public static MathObj getNextMathObj(String aFunction, Integer aCharPos) {
-    if (aCharPos >= aFunction.length())
-      return null;
-
-    char tmpChar = aFunction.charAt(aCharPos);
-
-    if (isNumber(tmpChar)) {
-      return getNextNumber(aFunction, aCharPos);
-    }
-    // else (IsOperator(c))
-    // {
-    //
-    // }
-    return null;
-  }
-
-  /**
-   * @param aFunction
-   * @param aCharPos
-   * @return the next number object of the function string
-   */
-  public static NumberObj getNextNumber(String aFunction, Integer aCharPos) {
-    if (aCharPos >= aFunction.length()) {
-      return null;
-    }
-
-    String tmpResult = new String("");
-    int tmpCommaCount = 0;
-    while (aCharPos < aFunction.length()) {
-      char tmpChar = aFunction.charAt(aCharPos);
-      if (isNumber(tmpChar)) {
-        tmpResult += tmpChar;
-      } else if (IsComma(tmpChar)) {
-        tmpCommaCount++;
-        if (tmpCommaCount == 1)
-          tmpResult += ".";
-        else
-          break;
-      } else
-        break;
-      aCharPos++;
-    }
-
-    return new NumberObj(Float.parseFloat(tmpResult));
-  }
-
+  
   /**
    * method creates a float value based mathobj out of a given string
    * 

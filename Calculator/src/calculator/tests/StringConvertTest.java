@@ -86,9 +86,8 @@ public class StringConvertTest extends TestCase {
       tmpErrorOccured = true;
     }
 
-    // TODO @André Kommst du damit klar? die -3 ist nicht in eigenen Klammern
     assertTrue("The String is converted correctly", !tmpErrorOccured
-        && tmpConvertedString.equals("a*b*c*o*s*%(~(-3))"));
+        && tmpConvertedString.equals("a*b*c*o*s*%(~((-3)))"));
 
     tmpErrorOccured = false;
     tmpConvertedString = new String("");
@@ -121,6 +120,16 @@ public class StringConvertTest extends TestCase {
       tmpErrorOccured = true;
     }
     assertTrue("The String is correct", !tmpErrorOccured);
+    
+    tmpErrorOccured = false;
+    tmpConvertedString = new String("");
+
+    try {
+      tmpConvertedString = ConverterUtil.termToStandardString("3+(-a+b)");
+    } catch (Exception e) {
+      tmpErrorOccured = true;
+    }
+    assertTrue("The String is correct", !tmpErrorOccured && "3+((-a)+b)".equals(tmpConvertedString));
   }
 
   /**

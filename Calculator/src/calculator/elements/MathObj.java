@@ -4,22 +4,33 @@ package calculator.elements;
  * 
  */
 public class MathObj {
-  private MathType type;
-
-  /**
-   * @return the type
-   */
-  public MathType getMathType() {
-    return type;
-  }
+  
+  private int priority;
 
   /**
    * constructor
    * 
    * @param aType
    */
-  public MathObj(MathType aType) {
-    type = aType;
+  public MathObj() {
+	 priority = 0;
+  }
+  
+  /**
+   * 
+   * @return the priority
+   */
+  public int getPriority() {
+    return priority;
   }
 
+  /**
+   * sets the priority
+   * 
+   * @param priority
+   */
+  public void setPriority(int aPriority) {
+    priority = aPriority;
+  }
+  
 }

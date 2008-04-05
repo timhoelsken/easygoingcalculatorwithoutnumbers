@@ -2,6 +2,9 @@ package calculator;
 
 import java.util.ArrayList;
 
+import junit.framework.Assert;
+
+import calculator.elements.MathObj;
 import calculator.elements.NumberObj;
 import calculator.elements.Operand;
 import calculator.elements.Operator;
@@ -14,6 +17,8 @@ import calculator.utils.MathUtil;
  *
  */
 public final class FormulaTree {
+	
+	private Tree formulaTree = null;
 
   /**
    * Calculates the result of a formula-tree
@@ -25,12 +30,12 @@ public final class FormulaTree {
    *             It is not possible to calculate the tree. An internal error
    *             occurred.
    */
-  public static float EvaluateTree(Tree aTree) throws Exception {
+  public static double EvaluateTree(Tree aTree) throws Exception {
     // no tree? no calculation!
     if (aTree == null)
       return 0;
 
-    float tmpResult = 0;
+    double tmpResult = 0;
 
     // is it a tree where there is only a number at the root?
     if (aTree.getRoot() instanceof NumberObj) {
@@ -52,12 +57,120 @@ public final class FormulaTree {
         tmpResult = FormulaTree.EvaluateTree(aTree.getLeftSon())
             - FormulaTree.EvaluateTree(aTree.getRightSon());
       }
+      else if (tmpOperator.getOperatorType() == OperatorType.SIN) 
+      {
+    	  tmpResult = Math.sin(FormulaTree.EvaluateTree(aTree.getRightSon())); 
+      }
+      else if (tmpOperator.getOperatorType() == OperatorType.SQRT) 
+      {
+    	  tmpResult = Math.sqrt(FormulaTree.EvaluateTree(aTree.getRightSon())); 
+      }
+      else if (tmpOperator.getOperatorType() == OperatorType.TAN) 
+      {
+    	  tmpResult = Math.tan(FormulaTree.EvaluateTree(aTree.getRightSon())); 
+      }
+      else if (tmpOperator.getOperatorType() == OperatorType.COS) 
+      {
+    	  tmpResult = Math.cos(FormulaTree.EvaluateTree(aTree.getRightSon())); 
+      }
     } else
       throw (new Exception("Not possible to calculate the formula-tree."));
 
     return tmpResult;
   }
 
+  private static Tree InsertMathObjIntoTree(Tree aOldestFatherTree, Tree aTreeToBeInserted)
+  {
+	  assert(aTreeToBeInserted!=null);
+	  
+	  //is the tree still empty? return the given tree as result
+	  if (aOldestFatherTree == null){			  
+	      return aTreeToBeInserted;	      
+	  }
+	  
+	  Tree tmpTree = aOldestFatherTree; 
+	  	  
+	  //go into the right branch as long as, a.) there is a right branch b.) the priority of the current branch is lower than the mathobj´s priority
+	  while (tmpTree.getRightSon()           != null && 
+			 tmpTree.getRoot().getPriority() <  aTreeToBeInserted.getRoot().getPriority()) 
+	  {
+        tmpTree = tmpTree.getRightSon();
+      }
+	  
+	  if (tmpTree.getRoot().getPriority() >= aTreeToBeInserted.getRoot().getPriority() )
+	  {
+		  aTreeToBeInserted.setFather(tmpTree.getFather());
+		  aTreeToBeInserted.setLeftSon(tmpTree);		  
+
+		  if (tmpTree.getFather() != null) // is there a father
+		  {
+	          tmpTree.getFather().setRightSon(aTreeToBeInserted);
+		  }
+		  else
+		  {
+			  aOldestFatherTree = aTreeToBeInserted; //it is the oldest father
+		  }
+	      tmpTree.setFather(aTreeToBeInserted);  
+	  }       
+	  else 
+	  {
+		  aTreeToBeInserted.setFather(tmpTree);
+		  aTreeToBeInserted.setLeftSon(tmpTree.getRightSon());		 
+          tmpTree.setRightSon(aTreeToBeInserted);
+      }
+	  
+	  return aOldestFatherTree;
+  }
+  
+  /**
+   * this builds a binary formula tree :-)
+   *
+   * @param aFunction
+   * @return the built tree
+   * @throws Exception
+   */
+  public Tree BuildTree(String aFunction) throws Exception {
+
+	// prepare formula, mathobj and tmptree	
+	ArrayList<Object> MathList = MathUtil.FormulaToArrayList(aFunction);
+	
+	return BuildTree(MathList);	
+  }  
+
+  @SuppressWarnings("unchecked")
+public static Tree BuildTree(ArrayList<Object> MathList) throws Exception
+  {
+	  	Tree Oldestfather = null;
+	
+	  	// iterate over all elements of the formula
+	    for (Object tmpNextElement:MathList){
+	      	
+	    	Tree aTreeToBeInserted = null;
+	    	
+	    	if (tmpNextElement instanceof MathObj)
+	    	{
+	    		aTreeToBeInserted = new Tree ((MathObj)tmpNextElement);
+	    	}
+	    	else if (tmpNextElement instanceof ArrayList) 
+	    	{
+	    		aTreeToBeInserted = FormulaTree.BuildTree((ArrayList<Object>)tmpNextElement);	    		
+	    	}	
+	    	
+	    	if (aTreeToBeInserted == null)
+	    	{
+	    		throw new Exception("Error in Bulding the Tree by reading from MathList");
+	    	}	    	
+	    	
+	    	//insert into Tree
+	    	Oldestfather = FormulaTree.InsertMathObjIntoTree(Oldestfather, aTreeToBeInserted);
+
+	    }
+
+	    return Oldestfather;
+  }  
+  
+  
+  
   /**
    * Inserts an operand into an existing tree
    *
@@ -65,7 +178,7 @@ public final class FormulaTree {
    * @param anOperand
    * @throws Exception
    */
-  private void InsertOperandIntoTree(Operand anOperand) {
+/*  private void InsertOperandIntoTree(Operand anOperand) {
 
     if (formulaTree == null) {
       formulaTree = new Tree(anOperand);
@@ -76,15 +189,16 @@ public final class FormulaTree {
     while (tmpTree.getRightSon() != null)
       tmpTree = tmpTree.getRightSon();
     tmpTree.setRightSon(new Tree(anOperand, tmpTree, null, null));
+  }*/
+  
+  
 
-  }
-
-  /**
+ /* *//**
    * Inserts an operator into an existing tree
    *
    * @param anExistingTree
    * @param anOperator
-   */
+   *//*
   private void InsertOperatorIntoTree(Operator anOperator) {
 
     assert (formulaTree != null);
@@ -121,36 +235,7 @@ public final class FormulaTree {
         tmpTree.setRightSon(tmpHelpTree);
       }
     }
-  }
+  }*/
 
-  /**
-   * this builds a binary formula tree :-)
-   *
-   * @param aFunction
-   * @return the built tree
-   * @throws Exception
-   */
-  public Tree BuildTree(String aFunction) throws Exception {
-
-
-	 // prepare formula, mathobj and tmptree
-	formulaTree = null;
-	ArrayList<Object> MathList = MathUtil.FormulaToArrayList(aFunction);
-
-	// iterate over all elements of the formula
-    for (Object tmpNextElement:MathList){
-
-    	// is the next element an Operand??
-        if (tmpNextElement instanceof Operand) {
-          this.InsertOperandIntoTree((Operand) tmpNextElement);
-        } else if (tmpNextElement instanceof Operator) {
-          this.InsertOperatorIntoTree((Operator) tmpNextElement);
-        }
-
-    }
-
-    return formulaTree;
-  }
-
-  private Tree formulaTree = null;
+  
 }

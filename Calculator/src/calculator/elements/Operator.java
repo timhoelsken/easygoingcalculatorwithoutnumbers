@@ -1,29 +1,39 @@
 package calculator.elements;
 
+import calculator.utils.MathUtil;
+
 /**
  *
  */
 public class Operator extends MathObj {
-  private OperatorType operatorType;
+  
+   private OperatorType operatorType;
 
-  private int Priority;
-
-  /**
+   /**
    * @param anOperatorType
    */
   public Operator(OperatorType anOperatorType) {
-    super(MathType.OPERATOR);
+        
     operatorType = anOperatorType;
-
-    if (anOperatorType.ordinal() == OperatorType.ADDITION.ordinal()
-        || anOperatorType.ordinal() == OperatorType.SUBTRACTION.ordinal()) {
-      Priority = 1;
-    } else if (anOperatorType.ordinal() == OperatorType.MULTIPLICATION.ordinal()
-        || anOperatorType.ordinal() == OperatorType.DIVISION.ordinal()) {
-      Priority = 5;
-    } else
-      Priority = 0;
-
+    
+    if (anOperatorType.ordinal() == OperatorType.ADDITION.ordinal() || 
+        anOperatorType.ordinal() == OperatorType.SUBTRACTION.ordinal())
+    {    		
+    	super.setPriority(MathUtil.PriorityOfAdditiveOperator);
+    } 
+    else if (anOperatorType.ordinal() == OperatorType.MULTIPLICATION.ordinal() || 
+    		 anOperatorType.ordinal() == OperatorType.DIVISION.ordinal()) 
+    {
+    	super.setPriority(MathUtil.PriorityOfMultiplicativeOperator);
+      //TODO Andre, wie schaut das mit dem ^ für potenzen aus?
+    } 
+    else if (anOperatorType.ordinal() == OperatorType.SIN.ordinal() ||
+    		 anOperatorType.ordinal() == OperatorType.COS.ordinal() ||
+    		 anOperatorType.ordinal() == OperatorType.SQRT.ordinal()||
+    		 anOperatorType.ordinal() == OperatorType.TAN.ordinal()) 
+    {    	
+    	super.setPriority(MathUtil.PriorityOfFunctions);
+    }  
   }
 
   /**
@@ -31,24 +41,7 @@ public class Operator extends MathObj {
    */
   public OperatorType getOperatorType() {
     return operatorType;
-  }
-
-  /**
-   * 
-   * @return the priority
-   */
-  public int getPriority() {
-    return Priority;
-  }
-
-  /**
-   * sets the priority
-   * 
-   * @param priority
-   */
-  public void setPriority(int priority) {
-    Priority = priority;
-  }
+  } 
 
   /**
    * @see java.lang.Object#toString()

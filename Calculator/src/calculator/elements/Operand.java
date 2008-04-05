@@ -1,5 +1,7 @@
 package calculator.elements;
 
+import calculator.utils.MathUtil;
+
 /**
  * Defines an operand
  * 
@@ -13,6 +15,6 @@ public class Operand extends MathObj {
    * @param aValue
    */
   public Operand() {
-    super(MathType.OPERAND);
+	  super.setPriority(MathUtil.PriorityOfOperands);
   }
 }

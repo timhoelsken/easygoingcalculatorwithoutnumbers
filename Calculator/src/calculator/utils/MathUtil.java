@@ -15,6 +15,13 @@ import calculator.exceptions.IllegalInputStreamException;
  * 
  */
 public class MathUtil {
+	
+  public static final int PriorityOfAdditiveOperator=1;
+  public static final int PriorityOfMultiplicativeOperator=3;
+  public static final int PriorityOfFunctions=5;
+  public static  final int PriorityOfBrackets=7;
+  public static  final int PriorityOfOperands=9;
+  
   private static char COMMA = '.';
 
   /**

@@ -130,6 +130,26 @@ public class StringConvertTest extends TestCase {
       tmpErrorOccured = true;
     }
     assertTrue("The String is correct", !tmpErrorOccured && "3+((-a)+b)".equals(tmpConvertedString));
+    
+    tmpErrorOccured = false;
+    tmpConvertedString = new String("");
+
+    try {
+      tmpConvertedString = ConverterUtil.termToStandardString("sin4");
+    } catch (Exception e) {
+      tmpErrorOccured = true;
+    }
+    assertTrue("The String is correct", !tmpErrorOccured && "s*i*n*4".equals(tmpConvertedString));
+    
+    tmpErrorOccured = false;
+    tmpConvertedString = new String("");
+
+    try {
+      tmpConvertedString = ConverterUtil.termToStandardString("-a+45");
+    } catch (Exception e) {
+      tmpErrorOccured = true;
+    }
+    assertTrue("The String is correct", !tmpErrorOccured && "(-a)+45".equals(tmpConvertedString));
   }
 
   /**

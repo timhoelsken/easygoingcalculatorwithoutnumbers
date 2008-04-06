@@ -1,6 +1,6 @@
 package calculator.utils;
 
-import java.util.ArrayList;
+import java.util.Dictionary;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -235,10 +235,10 @@ public class ConverterUtil {
       newBracketsCounter = newBracketsCounter + 2;
       i = tmpStart;
     }
-    
+
     i = 0;
     newBracketsCounter = 0;
-    
+
     tmpPattern = Pattern.compile("\\(\\-[\\w\\.]+[^\\)\\w]");
     tmpMatcher = tmpPattern.matcher(aFormula);
     while (tmpMatcher.find(i)) {
@@ -297,7 +297,7 @@ public class ConverterUtil {
         }
       }
     }
-    
+
     return aFormula;
   }
 
@@ -393,24 +393,23 @@ public class ConverterUtil {
    * Finds all variables in the given formula string
    * 
    * @param aFormula
-   * @return an arrayList of variables, splittet in a stringArray. [0] is the
-   *         variables name, [1] is the variables value, when instantiiating =
-   *         null
+   * @return a dictionary of variables. Variable is the key, variable value is
+   *         the value
    */
-  public static ArrayList<String[]> getVariables(String aFormula) {
+  public static Dictionary<String, Float> getVariables(String aFormula) {
 
-    ArrayList<String[]> tmpVariableList = new ArrayList<String[]>();
+    // TODO HILFE! ich weiﬂ nicht warum das nicht instanziiert wird!
+    Dictionary<String, Float> tmpVariableDictionary = new Dictionary<String, Float>();
 
     Pattern tmpPattern = Pattern.compile("[A-Za-z]");
     Matcher tmpMatcher = tmpPattern.matcher(aFormula);
 
     while (tmpMatcher.find()) {
-      String[] tmpStringArray = new String[2];
-      tmpStringArray[0] = tmpMatcher.group();
-      tmpStringArray[1] = null;
-      tmpVariableList.add(tmpStringArray);
+      // TODO Bei einem Dictionary kann kein null wert gesetzt werden, daher ist
+      // jede Variable am Anfang = 0
+      tmpVariableDictionary.put(tmpMatcher.group(), new Float(0));
     }
 
-    return tmpVariableList;
+    return tmpVariableDictionary;
   }
 }

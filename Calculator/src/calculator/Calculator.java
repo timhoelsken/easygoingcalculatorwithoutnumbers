@@ -1,8 +1,8 @@
 package calculator;
 
 import java.io.IOException;
-import java.util.Dictionary;
 import java.util.Enumeration;
+import java.util.Hashtable;
 
 import calculator.elements.Tree;
 import calculator.userinterface.ConsoleInput;
@@ -50,7 +50,7 @@ public class Calculator {
 
         tmpInputString = "";
         String tmpEnterVariablesValue = new String("");
-        Dictionary<String, Float> tmpVariables = null;
+        Hashtable<String, Float> tmpVariables = new Hashtable<String, Float>();
 
         // while the user has not chosen to quit the calculator
         while (!tmpInputString.toLowerCase().equals("n")) {
@@ -87,7 +87,7 @@ public class Calculator {
 
               tmpOutput.promptVariableInput();
               // ==== Variable input start ====
-              while (tmpKeys.hasMoreElements()) {
+              do {
                 do {
                   tmpCurrentKey = tmpKeys.nextElement();
                   tmpInputVariableValue = "";
@@ -105,10 +105,13 @@ public class Calculator {
 
                 tmpVariables.remove(tmpCurrentKey);
                 tmpVariables.put(tmpCurrentKey, Float.parseFloat(tmpInputVariableValue));
-              }
+              } while (tmpKeys.hasMoreElements());
+
               // ==== Variable input end ====
-              // TODO ich hoffe das der Code soweit funktioniert, konnte nicht
-              // testen wegen Instanziierungsproblem
+              // TODO die Variablen werden durch das entfernen und Neuschreiben
+              // in der Reihenfolge verschoben... für den User ist eine Eingabe
+              // in der richtigen Reihenfolge sicherlich besser oder was denkt
+              // ihr?
             }
             // Variable Block End
 

@@ -1,6 +1,6 @@
 package calculator.utils;
 
-import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -396,16 +396,15 @@ public class ConverterUtil {
    * @return a dictionary of variables. Variable is the key, variable value is
    *         the value
    */
-  public static Dictionary<String, Float> getVariables(String aFormula) {
+  public static Hashtable<String, Float> getVariables(String aFormula) {
 
-    // TODO HILFE! ich weiﬂ nicht warum das nicht instanziiert wird!
-    Dictionary<String, Float> tmpVariableDictionary = new Dictionary<String, Float>();
+    Hashtable<String, Float> tmpVariableDictionary = new Hashtable<String, Float>();
 
     Pattern tmpPattern = Pattern.compile("[A-Za-z]");
     Matcher tmpMatcher = tmpPattern.matcher(aFormula);
 
     while (tmpMatcher.find()) {
-      // TODO Bei einem Dictionary kann kein null wert gesetzt werden, daher ist
+      // Bei einem Hashtable kann kein null wert gesetzt werden, daher ist
       // jede Variable am Anfang = 0
       tmpVariableDictionary.put(tmpMatcher.group(), new Float(0));
     }

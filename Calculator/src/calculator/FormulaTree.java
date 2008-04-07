@@ -153,8 +153,9 @@ public static Tree BuildTree(ArrayList<Object> MathList) throws Exception
 	    	}
 	    	else if (tmpNextElement instanceof ArrayList) 
 	    	{
-	    		aTreeToBeInserted = FormulaTree.BuildTree((ArrayList<Object>)tmpNextElement);	    		
-	    		aTreeToBeInserted.getRoot().setPriority(MathUtil.PriorityOfBrackets);
+	    		aTreeToBeInserted = FormulaTree.BuildTree((ArrayList<Object>)tmpNextElement);
+	    		if (aTreeToBeInserted!=null)
+	    			aTreeToBeInserted.getRoot().setPriority(MathUtil.PriorityOfBrackets);
 	    	}	
 	    	
 	    	if (aTreeToBeInserted == null)

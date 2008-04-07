@@ -25,7 +25,7 @@ public class Operator extends MathObj {
     		 anOperatorType.ordinal() == OperatorType.DIVISION.ordinal()) 
     {
     	super.setPriority(MathUtil.PriorityOfMultiplicativeOperator);
-      //TODO Andre, wie schaut das mit dem ^ für potenzen aus?
+      //TODO @Andre, wie schaut das mit dem ^ für potenzen aus?
     } 
     else if (anOperatorType.ordinal() == OperatorType.SIN.ordinal() ||
     		 anOperatorType.ordinal() == OperatorType.COS.ordinal() ||

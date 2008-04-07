@@ -176,15 +176,5 @@ public class Calculator {
       }
     }
     System.out.println("\nSie verlassen nun den Taschenrechner.\n\n");
-  }
-  // TODO Tim: wenn ich sin(35) eintrage, fragt mich das Hauptprogramm anch 100
-  // Variablen (ok es sind nur 3: s i n)
-  // Antwort Tim: ich habe die Convertierung des Strings vorgezogen, damit
-  // wirklich nur Variablen abgefragt werden.
-
-  // TODO @all, wenn einer sin4 eintraegt, was macht die Syntax Prüfung damit?
-  // Antwort Tim: ==> s*i*n*4 (s. Test)
-
-  // TODO @all -a+45 wird das (-a) da geklammert?
-  // Antwort Tim: ==> (-a)+45 (s. Test)
+  } 
 }

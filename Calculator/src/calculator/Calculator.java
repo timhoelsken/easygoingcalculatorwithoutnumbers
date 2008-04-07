@@ -112,6 +112,8 @@ public class Calculator {
               // in der Reihenfolge verschoben... für den User ist eine Eingabe
               // in der richtigen Reihenfolge sicherlich besser oder was denkt
               // ihr?
+              // comment by Raphael: in beiden Fällen kann der User seine Werte eingeben für alle Variabeln, ja?
+              // dann nehmen wir das, was wenigr aufwand ist :-) Benutzerfreundlichkeit war keine Anforderung.
             }
             // Variable Block End
 

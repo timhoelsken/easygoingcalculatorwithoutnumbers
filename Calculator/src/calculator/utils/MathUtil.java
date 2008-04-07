@@ -149,10 +149,10 @@ public class MathUtil {
    * @return MathObj
    */
   public static MathObj buildNumberMathObject(String aNumberContainingString) {
-    Float tmpFl;
-    tmpFl = Float.valueOf("0.0").floatValue();
+    Double tmpFl;
+    tmpFl = Double.valueOf("0.0").doubleValue();
     try {
-      tmpFl = Float.valueOf(aNumberContainingString).floatValue();
+      tmpFl = Double.valueOf(aNumberContainingString).doubleValue();
     } catch (NumberFormatException e) {
     }
 

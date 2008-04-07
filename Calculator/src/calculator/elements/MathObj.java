@@ -26,8 +26,8 @@ public class MathObj {
 
   /**
    * sets the priority
+   * @param aPriority 
    * 
-   * @param priority
    */
   public void setPriority(int aPriority) {
     priority = aPriority;

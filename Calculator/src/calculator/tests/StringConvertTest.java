@@ -150,6 +150,18 @@ public class StringConvertTest extends TestCase {
       tmpErrorOccured = true;
     }
     assertTrue("The String is correct", !tmpErrorOccured && "(-a)+45".equals(tmpConvertedString));
+    
+    tmpErrorOccured = false;
+    tmpConvertedString = new String("");
+    
+    try {
+        tmpConvertedString = ConverterUtil.termToStandardString("5*x+y*z");
+      } catch (Exception e) {
+        tmpErrorOccured = true;
+      }
+    
+    assertTrue("The String is correct", !tmpErrorOccured && "5*x+y*z".equals(tmpConvertedString));
+    
   }
 
   /**

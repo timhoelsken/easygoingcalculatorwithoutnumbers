@@ -396,9 +396,9 @@ public class ConverterUtil {
    * @return a dictionary of variables. Variable is the key, variable value is
    *         the value
    */
-  public static Hashtable<String, Float> getVariables(String aFormula) {
+  public static Hashtable<String, Double> getVariables(String aFormula) {
 
-    Hashtable<String, Float> tmpVariableDictionary = new Hashtable<String, Float>();
+    Hashtable<String, Double> tmpVariableDictionary = new Hashtable<String, Double>();
 
     Pattern tmpPattern = Pattern.compile("[A-Za-z]");
     Matcher tmpMatcher = tmpPattern.matcher(aFormula);
@@ -406,7 +406,7 @@ public class ConverterUtil {
     while (tmpMatcher.find()) {
       // Bei einem Hashtable kann kein null wert gesetzt werden, daher ist
       // jede Variable am Anfang = 0
-      tmpVariableDictionary.put(tmpMatcher.group(), new Float(0));
+      tmpVariableDictionary.put(tmpMatcher.group(), new Double(0));
     }
 
     return tmpVariableDictionary;

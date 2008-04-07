@@ -4,12 +4,12 @@ package calculator.elements;
  *
  */
 public class NumberObj extends Operand {
-  private float value;
+  private Double value;
 
   /**
    * @return the value
    */
-  public float getValue() {
+  public Double getValue() {
     return value;
   }
 
@@ -18,7 +18,7 @@ public class NumberObj extends Operand {
    *
    * @param aValue
    */
-  public NumberObj(float aValue) {
+  public NumberObj(Double aValue) {
     value = aValue;
   }
 
@@ -26,6 +26,6 @@ public class NumberObj extends Operand {
    * @see java.lang.Object#toString()
    */
   public String toString() {
-    return Float.toString(value);
+    return Double.toString(value);
   }
 }

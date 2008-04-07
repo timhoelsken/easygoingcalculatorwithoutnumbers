@@ -1,6 +1,7 @@
 package calculator;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 
 import calculator.elements.MathObj;
@@ -27,50 +28,46 @@ public final class FormulaTree {
    *             It is not possible to calculate the tree. An internal error
    *             occurred.
    */
-  public static double EvaluateTree(Tree aTree) throws Exception {
+  public static double EvaluateTree(Tree aTree, Hashtable<String, Double> aVariableHashTable) throws Exception {
     // no tree? no calculation!
-    if (aTree == null)
-      return 0;
+    if (aTree == null) return 0;
+    Double tmpResult = 0.0;
 
-    double tmpResult = 0;
-
-    // is it a tree where there is only a number at the root?
+    
     if (aTree.getRoot() instanceof NumberObj) {
+      // is it a tree where there is only a number at the root? return the number!
       tmpResult = ((NumberObj) aTree.getRoot()).getValue();
     }   else if (aTree.getRoot() instanceof Variable){
-      //tmpResult = ((Variable) aTree.getRoot()).getValue();
+      tmpResult = aVariableHashTable.get(((NumberObj) aTree.getRoot()).getValue());
+      if (tmpResult==null) throw (new Exception("Not all variables are assigned with values"));
     } else if (aTree.getRoot() instanceof Operator) {
 
       Operator tmpOperator = (Operator) aTree.getRoot();
 
       if (tmpOperator.getOperatorType() == OperatorType.ADDITION) {
-        tmpResult = FormulaTree.EvaluateTree(aTree.getLeftSon())
-            + FormulaTree.EvaluateTree(aTree.getRightSon());
+        tmpResult = FormulaTree.EvaluateTree(aTree.getLeftSon(),aVariableHashTable) + FormulaTree.EvaluateTree(aTree.getRightSon(),aVariableHashTable);
       } else if (tmpOperator.getOperatorType() == OperatorType.DIVISION) {
-        tmpResult = FormulaTree.EvaluateTree(aTree.getLeftSon())
-            / FormulaTree.EvaluateTree(aTree.getRightSon());
+        tmpResult = FormulaTree.EvaluateTree(aTree.getLeftSon(),aVariableHashTable)/ FormulaTree.EvaluateTree(aTree.getRightSon(),aVariableHashTable);
       } else if (tmpOperator.getOperatorType() == OperatorType.MULTIPLICATION) {
-        tmpResult = FormulaTree.EvaluateTree(aTree.getLeftSon())
-            * FormulaTree.EvaluateTree(aTree.getRightSon());
+        tmpResult = FormulaTree.EvaluateTree(aTree.getLeftSon(),aVariableHashTable)* FormulaTree.EvaluateTree(aTree.getRightSon(),aVariableHashTable);
       } else if (tmpOperator.getOperatorType() == OperatorType.SUBTRACTION) {
-        tmpResult = FormulaTree.EvaluateTree(aTree.getLeftSon())
-            - FormulaTree.EvaluateTree(aTree.getRightSon());
+        tmpResult = FormulaTree.EvaluateTree(aTree.getLeftSon(),aVariableHashTable) - FormulaTree.EvaluateTree(aTree.getRightSon(),aVariableHashTable);
       }
       else if (tmpOperator.getOperatorType() == OperatorType.SIN) 
       {
-    	  tmpResult = Math.sin(FormulaTree.EvaluateTree(aTree.getRightSon())); 
+    	  tmpResult = Math.sin(Math.toRadians(FormulaTree.EvaluateTree(aTree.getRightSon(),aVariableHashTable))); 
       }
       else if (tmpOperator.getOperatorType() == OperatorType.SQRT) 
       {
-    	  tmpResult = Math.sqrt(FormulaTree.EvaluateTree(aTree.getRightSon())); 
+    	  tmpResult = Math.sqrt(FormulaTree.EvaluateTree(aTree.getRightSon(),aVariableHashTable)); 
       }
       else if (tmpOperator.getOperatorType() == OperatorType.TAN) 
       {
-    	  tmpResult = Math.tan(FormulaTree.EvaluateTree(aTree.getRightSon())); 
+    	  tmpResult = Math.tan(Math.toRadians(FormulaTree.EvaluateTree(aTree.getRightSon(),aVariableHashTable))); 
       }
       else if (tmpOperator.getOperatorType() == OperatorType.COS) 
       {
-    	  tmpResult = Math.cos(FormulaTree.EvaluateTree(aTree.getRightSon())); 
+    	  tmpResult = Math.cos(Math.toRadians(FormulaTree.EvaluateTree(aTree.getRightSon(),aVariableHashTable))); 
       }
     } else
       throw (new Exception("Not possible to calculate the formula-tree."));

@@ -50,7 +50,7 @@ public class Calculator {
 
         tmpInputString = "";
         String tmpEnterVariablesValue = new String("");
-        Hashtable<String, Float> tmpVariables = new Hashtable<String, Float>();
+        Hashtable<String, Double> tmpVariables = new Hashtable<String, Double>();
 
         // while the user has not chosen to quit the calculator
         while (!tmpInputString.toLowerCase().equals("n")) {
@@ -104,7 +104,7 @@ public class Calculator {
                 } while (!MathUtil.isFloat(tmpInputVariableValue));
 
                 tmpVariables.remove(tmpCurrentKey);
-                tmpVariables.put(tmpCurrentKey, Float.parseFloat(tmpInputVariableValue));
+                tmpVariables.put(tmpCurrentKey, Double.parseDouble(tmpInputVariableValue));
               } while (tmpKeys.hasMoreElements());
 
               // ==== Variable input end ====
@@ -120,7 +120,7 @@ public class Calculator {
 
               Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString(tmpInputString));
 
-              System.out.println(FormulaTree.EvaluateTree(tmpTree));
+              System.out.println(FormulaTree.EvaluateTree(tmpTree,tmpVariables));
 
               tmpTree.paintMe();
 

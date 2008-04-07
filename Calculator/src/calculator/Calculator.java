@@ -128,6 +128,8 @@ public class Calculator {
               // der mich nic nervt :-)
               // Antwort Tim: was für eine Endlosschleife?
               // (Variablenwerteingabe?? ==> soll doch so sein ^^)
+              // Antwort Raphi: Die Zeile unterhalb tmpEnterVariablesValue = "n";
+              //wenn ich die rausnehme, hab ch ne endlosschleife im menü
               tmpEnterVariablesValue = "n";
             } catch (Exception e) {
               System.out.println(e.getMessage());

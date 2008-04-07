@@ -11,7 +11,8 @@ public class EmptyClassForGlobalSupport {
   //TODO @all der Baum sollte nun sin/cos, etc unterstützen. Variablen werden auch schon unterstuetzte, allerdings noch nicht von der MathUtil verarbeitet.
 
   // comments by Tim
-
+  //TODO @all einmal Tasks aufräumen bitte!
+  
   // comments by Andre
 
   // comments by Tobi

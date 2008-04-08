@@ -107,6 +107,8 @@ public class MathUtil {
       case '#':
       case '?':
       case '~':
+      case '&':
+    	  //TODO @info for andre: ich hab hier noch die sqrt & hinzugefügt, ist das ok?
         return true;
       default:
         return false;

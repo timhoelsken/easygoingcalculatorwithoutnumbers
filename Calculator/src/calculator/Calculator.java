@@ -120,7 +120,7 @@ public class Calculator {
             // calculate term
             try {
 
-              Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString(tmpInputString));
+              Tree tmpTree = FormulaTree.BuildTree(tmpInputString);
 
               System.out.println(FormulaTree.EvaluateTree(tmpTree,tmpVariables));
 

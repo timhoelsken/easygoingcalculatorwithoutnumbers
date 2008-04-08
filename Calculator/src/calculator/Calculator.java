@@ -108,7 +108,7 @@ public class Calculator {
               } while (tmpKeys.hasMoreElements());
 
               // ==== Variable input end ====
-              // TODO Update von Raphi: die Variablen werden durch das entfernen und Neuschreiben
+              // TODO Update von Raphi for Tim: die Variablen werden durch das entfernen und Neuschreiben
               // in der Reihenfolge verschoben... für den User ist eine Eingabe
               // in der richtigen Reihenfolge sicherlich besser oder was denkt
               // ihr?

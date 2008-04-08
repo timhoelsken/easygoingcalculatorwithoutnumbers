@@ -259,15 +259,13 @@ public class MathUtil {
         iEndPosition++;
       } else if (MathUtil.IsOperator(aFormula.charAt(iStartPosition))) {
         iEndPosition = iStartPosition + 1;
-        while ((iEndPosition < iLenOfString) && (MathUtil.IsOperator(aFormula.charAt(iEndPosition)))) {
-          iEndPosition++;
-        }
         try {
           MathList.add(buildOperatorMathObject(aFormula.substring(iStartPosition, iEndPosition)));
         } catch (Exception e) {
           e.printStackTrace();
         }
       } else {
+        System.out.println(aFormula.charAt(iStartPosition));
         throw new IllegalInputStreamException("Input String contains non valid characters!");
       }
       iStartPosition = iEndPosition;

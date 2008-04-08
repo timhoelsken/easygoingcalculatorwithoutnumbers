@@ -108,7 +108,7 @@ public class Calculator {
               } while (tmpKeys.hasMoreElements());
 
               // ==== Variable input end ====
-              // TODO die Variablen werden durch das entfernen und Neuschreiben
+              // TODO Update von Raphi: die Variablen werden durch das entfernen und Neuschreiben
               // in der Reihenfolge verschoben... für den User ist eine Eingabe
               // in der richtigen Reihenfolge sicherlich besser oder was denkt
               // ihr?
@@ -126,7 +126,7 @@ public class Calculator {
 
               tmpTree.paintMe();
 
-              // TODO TIM: endlosschleife, ich schreib hier ma was hin, damit
+              // TODO Update von Raphi - >Tim: endlosschleife, ich schreib hier ma was hin, damit
               // der mich nic nervt :-)
               // Antwort Tim: was für eine Endlosschleife?
               // (Variablenwerteingabe?? ==> soll doch so sein ^^)

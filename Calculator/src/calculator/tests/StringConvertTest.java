@@ -525,11 +525,13 @@ public class StringConvertTest extends TestCase {
 
 
   //TODO @anyone go one, split test methods ;)
+  //TODO GRML! think of what i did at the same time.......
+  
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#checkNegativeNumbers()}.
    */
-  public void testCheckNegativeNumbers() {
+  public void testCheckNegativeNumbersPositive() {
     // positive test
     try {
       ConverterUtil.checkNegativeNumbers("(-5)*(-2)+((-4)+5)");
@@ -538,7 +540,6 @@ public class StringConvertTest extends TestCase {
     }
 
     // positive test
-    Boolean tmpErrorOccurred = false;
     try {
       String tmp = ConverterUtil.setBracketsAroundNegatives("-5)*(-2)+((-4)+5)");
 
@@ -546,9 +547,16 @@ public class StringConvertTest extends TestCase {
     } catch (Exception e) {
       assertTrue(false);
     }
+  }
+
+  /**
+   * 
+   */
+  public void testCheckNegativeNumbersNegative() {
 
     // negative test
-    tmpErrorOccurred = false;
+    boolean tmpErrorOccurred = false;
+
     try {
       ConverterUtil.checkNegativeNumbers("(-5)*-2+(-4)+5)");
     } catch (Exception e) {
@@ -569,15 +577,21 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for {@link calculator.utils.ConverterUtil#checkBrackets()}.
    */
-  public void testCheckBrackets() {
+  public void testCheckBracketsPositive() {
     try {
       ConverterUtil.checkBrackets("(((5+5+5+5)))");
     } catch (Exception e) {
       assertTrue(false);
     }
+  }
+
+  /**
+   * 
+   */
+  public void testCheckBracketsNegative() {
 
     // negative test
-    Boolean tmpErrorOccurred = false;
+    boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkBrackets(")(((5+5+5+5)))");
     } catch (Exception e) {

@@ -9,7 +9,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 
 /**
- * @author Tim
+ * @author all
  *
  */
 public class StringConvertTest extends TestCase {
@@ -501,6 +501,18 @@ public class StringConvertTest extends TestCase {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
+  }
+
+  /**
+   * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
+   */
+  public void testCheckOperators8() {
+    // positive test
+    try {
+      ConverterUtil.checkOperators("(12 + 4)*(1 + 1)");
+    } catch (Exception e) {
+      assertTrue(false);
+    }
   }
 
   /**

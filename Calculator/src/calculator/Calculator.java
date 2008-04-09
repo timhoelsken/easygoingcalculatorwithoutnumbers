@@ -11,15 +11,15 @@ import calculator.utils.ConverterUtil;
 import calculator.utils.MathUtil;
 
 /**
- * 
+ *
  * @author Tim
- * 
+ *
  */
 public class Calculator {
 
   /**
    * The Calculator
-   * 
+   *
    * @param args
    */
   public static void main(String[] args) {
@@ -41,7 +41,7 @@ public class Calculator {
         ConsoleOutput.printError(e.getMessage());
       }
 
-      // if terminout
+      // if termin out
       if (tmpInputString.equals("t")) {
 
         tmpInputString = "";

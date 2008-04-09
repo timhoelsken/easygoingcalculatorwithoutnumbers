@@ -35,5 +35,9 @@ public enum OperatorType {
   /**
    * square root
    */
-  SQRT;
+  SQRT,
+  /**
+   * potenz
+   */
+  POW;
 }

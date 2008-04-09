@@ -14,48 +14,15 @@ import junit.framework.TestCase;
  */
 public class StringConvertTest extends TestCase {
 
-  /**
-   * Test method for
-   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   *
-   * @throws Exception
-   */
-  public void testTermToStandardString1() throws Exception {
-
-    String tmpString = new String("2a + a b");
-    assertTrue("The String has Variables separated by *", ConverterUtil.termToStandardString(tmpString)
-        .equals("2*a+a*b"));
-  }
 
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
+   * The three examples out of the "requirement"
    *
    * @throws Exception
    */
-  public void testTermToStandardString2() throws Exception {
-    boolean tmpErrorOccured = false;
-    String tmpConvertedString = null;
-
-    try {
-      tmpConvertedString = ConverterUtil.termToStandardString("3 sin(4 + 5) - (-3)");
-    } catch (IllegalArgumentException e) {
-      tmpErrorOccured = true;
-      e.printStackTrace();
-    }
-
-    assertTrue("The String is converted correctly", !tmpErrorOccured
-        && "3*%(4+5)-(-3)".equals(tmpConvertedString));
-  }
-
-  /**
-   * Test method for
-   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   *
-   * @throws Exception
-   */
-  public void testTermToStandardString3() throws Exception {
-    // Es folgen die drei Beispiele aus dem Aufgabenblatt
+  public void testRequirements() throws Exception {
     boolean tmpErrorOccured = false;
     String tmpConvertedString = null;
 
@@ -91,6 +58,40 @@ public class StringConvertTest extends TestCase {
 
     assertTrue("The String is converted correctly", !tmpErrorOccured
         && "c*~(x)+s*%(&(2)-x)".equals(tmpConvertedString));
+  }
+
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
+   *
+   * @throws Exception
+   */
+  public void testTermToStandardString1() throws Exception {
+
+    String tmpString = new String("2a + a b");
+    assertTrue("The String has Variables separated by *", ConverterUtil.termToStandardString(tmpString)
+        .equals("2*a+a*b"));
+  }
+
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
+   *
+   * @throws Exception
+   */
+  public void testTermToStandardString2() throws Exception {
+    boolean tmpErrorOccured = false;
+    String tmpConvertedString = null;
+
+    try {
+      tmpConvertedString = ConverterUtil.termToStandardString("3 sin(4 + 5) - (-3)");
+    } catch (IllegalArgumentException e) {
+      tmpErrorOccured = true;
+      e.printStackTrace();
+    }
+
+    assertTrue("The String is converted correctly", !tmpErrorOccured
+        && "3*%(4+5)-(-3)".equals(tmpConvertedString));
   }
 
   /**

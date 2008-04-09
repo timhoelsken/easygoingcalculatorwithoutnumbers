@@ -15,4 +15,5 @@ public class EmptyClassForGlobalSupport {
   // comments by Andre
 
   // comments by Tobi
+  //TODO @all warnings können mit strg+1 meist leicht verbannt werden und machen das Projekt schön.
 }

@@ -8,11 +8,12 @@ import calculator.elements.MathObj;
 import calculator.elements.NumberObj;
 import calculator.elements.Operator;
 import calculator.elements.OperatorType;
+import calculator.elements.Variable;
 import calculator.exceptions.IllegalInputStreamException;
 
 /**
  * @author Tobias
- *
+ * 
  */
 public class MathUtil {
 
@@ -49,7 +50,7 @@ public class MathUtil {
 
   /**
    * Checks if a string is numeric
-   *
+   * 
    * @param aString
    * @return true if the given string is numeric only
    */
@@ -59,7 +60,7 @@ public class MathUtil {
   }
 
   /**
-   *
+   * 
    * @param aChar
    * @return
    */
@@ -83,7 +84,7 @@ public class MathUtil {
   }
 
   /**
-   *
+   * 
    * @param aCharacter
    * @return true if char is a number or variable
    */
@@ -100,7 +101,7 @@ public class MathUtil {
   }
 
   /**
-   *
+   * 
    * @param aChar
    * @return true if char is a minus
    */
@@ -120,11 +121,9 @@ public class MathUtil {
       case '/':
       case '%':
       case '#':
-      case '?':
+      case '^':
       case '~':
       case '&':
-        // TODO @info for andre: ich hab hier noch die sqrt & hinzugefügt, ist
-        // das ok?
         return true;
       default:
         return false;
@@ -132,7 +131,7 @@ public class MathUtil {
   }
 
   /**
-   *
+   * 
    * @param aChar
    * @return true if char is left bracket
    */
@@ -141,7 +140,7 @@ public class MathUtil {
   }
 
   /**
-   *
+   * 
    * @param aChar
    * @return true if char is a right bracket
    */
@@ -150,7 +149,7 @@ public class MathUtil {
   }
 
   /**
-   *
+   * 
    * @param aChar
    * @return true if char is a bracket
    */
@@ -160,7 +159,7 @@ public class MathUtil {
 
   /**
    * method creates a float value based mathobj out of a given string
-   *
+   * 
    * @author André
    * @param aNumberContainingString
    * @return MathObj
@@ -179,7 +178,7 @@ public class MathUtil {
 
   /**
    * method creates a operator mathobj out of a given string
-   *
+   * 
    * @author André
    * @param aOperatorContainingString
    * @return MathObj
@@ -200,6 +199,8 @@ public class MathUtil {
       tmpOpType = OperatorType.TAN;
     } else if (aOperatorContainingString.equals("&")) {
       tmpOpType = OperatorType.SQRT;
+    } else if (aOperatorContainingString.equals("^")) {
+      tmpOpType = OperatorType.POW;
     } else {
       tmpOpType = OperatorType.ADDITION;
     }
@@ -208,12 +209,23 @@ public class MathUtil {
   }
 
   /**
+   * method build a new variable object
+   * 
+   * @param cVariable
+   * @return MathObj
+   * @author André
+   */
+  public static MathObj buildVariableMathObject(char cVariable) {
+    return new Variable(cVariable);
+  }
+
+  /**
    * method creates a mathobj list out of the form string
-   *
+   * 
    * @author André
    * @return ArrayList of mathobj
    * @param aFormula
-   *            sting which contains a formula containing string
+   *          sting which contains a formula containing string
    * @todo Andre: Add support for negative numbers and brackets
    */
   public static ArrayList<Object> FormulaToArrayList(String aFormula) {
@@ -281,7 +293,15 @@ public class MathUtil {
         } catch (Exception e) {
           e.printStackTrace();
         }
-      } else {
+      } else if (MathUtil.isVariable(aFormula.charAt(iStartPosition))) {
+        iEndPosition = iStartPosition + 1;
+        try {
+          MathList.add(buildVariableMathObject(aFormula.charAt(iStartPosition)));
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }
+      else {
         System.out.println(aFormula.charAt(iStartPosition));
         throw new IllegalInputStreamException("Input String contains non valid characters!");
       }

@@ -1,7 +1,7 @@
 package calculator.elements;
 
 /**
- * 
+ *
  */
 public class Variable extends Operand {
 
@@ -16,13 +16,18 @@ public class Variable extends Operand {
 
   /**
    * constructor
-   * 
+   *
    * @param aValue
    */
   public Variable(char aValue) {
     value = aValue;
   }
-  
+
+  /**
+   * gives the value of the variable
+   * @see java.lang.Object#toString()
+   */
+  //TODO @Raphi Die Methode wurde wegen dem Konsolenbaum überladen. Brauchen wir hier nicht den Namen der Variablen? Wenn ja, warum hat diese Klasse keinen Setter?
   public String toString()
   {
     return Character.toString(value);

@@ -1,7 +1,7 @@
 package calculator;
 
 import java.io.IOException;
-import java.util.Enumeration;
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 import calculator.elements.Tree;
@@ -24,33 +24,31 @@ public class Calculator {
    */
   public static void main(String[] args) {
 
-    // Variables for textinput and output -- Use Statics instead?
-    ConsoleInput tmpInput = new ConsoleInput();
-    ConsoleOutput tmpOutput = new ConsoleOutput();
-
     // defines that the calculator is running
     Boolean runCalculator = true;
     String tmpInputString = new String("");
 
-    tmpOutput.showTitle();
+    ConsoleOutput.showTitle();
 
     while (runCalculator) {
 
-      tmpOutput.showMenu();
+      ConsoleOutput.showMenu();
 
       // read user's choice of the mainmenu
       try {
-        tmpInputString = tmpInput.getConsoleInput();
+        tmpInputString = ConsoleInput.getConsoleInput();
       } catch (IOException e) {
-        tmpOutput.printError(e.getMessage());
+        ConsoleOutput.printError(e.getMessage());
       }
 
       // if terminout
       if (tmpInputString.equals("t")) {
 
         tmpInputString = "";
+        boolean tmpTermHasVariables = false;
         String tmpEnterVariablesValue = new String("");
-        Hashtable<String, Double> tmpVariables = new Hashtable<String, Double>();
+        ArrayList<String[]> tmpVariablesList = new ArrayList<String[]>();
+        Hashtable<String, Double> tmpVariableDictionary = new Hashtable<String, Double>();
 
         // while the user has not chosen to quit the calculator
         while (!tmpInputString.toLowerCase().equals("n")) {
@@ -60,9 +58,9 @@ public class Calculator {
           tmpEnterVariablesValue = "";
           // the user types in the term
           try {
-            tmpInputString = tmpInput.getConsoleInput();
+            tmpInputString = ConsoleInput.getConsoleInput();
           } catch (IOException e) {
-            tmpOutput.printError(e.getMessage());
+            ConsoleOutput.printError(e.getMessage());
           }
 
           try {
@@ -72,30 +70,27 @@ public class Calculator {
             tmpEnterVariablesValue = "error";
           }
 
+          tmpTermHasVariables = ConverterUtil.hasVariables(tmpInputString);
+
           // while the user has not chosen to stop enter variables
-          while (!tmpEnterVariablesValue.toLowerCase().equals("n")
-              && !tmpEnterVariablesValue.toLowerCase().equals("error")) {
+          do {
 
             // Variable Block Start
-            if (ConverterUtil.hasVariables(tmpInputString)) {
+            if (tmpTermHasVariables) {
 
-              tmpVariables = ConverterUtil.getVariables(tmpInputString);
-              Enumeration<String> tmpKeys = tmpVariables.keys();
-
+              tmpVariablesList = ConverterUtil.getVariables(tmpInputString);
               String tmpInputVariableValue = new String("");
-              String tmpCurrentKey = new String("");
 
-              tmpOutput.promptVariableInput();
+              ConsoleOutput.promptVariableInput();
               // ==== Variable input start ====
-              do {
+              for (int i = 0; i < tmpVariablesList.size(); i++) {
                 do {
-                  tmpCurrentKey = tmpKeys.nextElement();
                   tmpInputVariableValue = "";
-                  System.out.print(tmpCurrentKey + " = ");
+                  System.out.print(tmpVariablesList.get(i)[0] + " = ");
                   try {
-                    tmpInputVariableValue = tmpInput.getConsoleInput();
+                    tmpInputVariableValue = ConsoleInput.getConsoleInput();
                   } catch (IOException e) {
-                    tmpOutput.printError(e.getMessage());
+                    ConsoleOutput.printError(e.getMessage());
                   }
                   if (!MathUtil.isFloat(tmpInputVariableValue)) {
                     System.out
@@ -103,68 +98,64 @@ public class Calculator {
                   }
                 } while (!MathUtil.isFloat(tmpInputVariableValue));
 
-                tmpVariables.remove(tmpCurrentKey);
-                tmpVariables.put(tmpCurrentKey, Double.parseDouble(tmpInputVariableValue));
-              } while (tmpKeys.hasMoreElements());
+                tmpVariablesList.get(i)[1] = tmpInputVariableValue;
+              }
+
+              tmpVariableDictionary = ConverterUtil.putArrayListIntoHashtable(tmpVariablesList);
 
               // ==== Variable input end ====
-              // TODO Update von Raphi for Tim: die Variablen werden durch das entfernen und Neuschreiben
-              // in der Reihenfolge verschoben... für den User ist eine Eingabe
-              // in der richtigen Reihenfolge sicherlich besser oder was denkt
-              // ihr?
-              // comment by Raphael: in beiden Fällen kann der User seine Werte eingeben für alle Variabeln, ja?
-              // dann nehmen wir das, was wenigr aufwand ist :-) Benutzerfreundlichkeit war keine Anforderung.
+              // TODO Update von Tim: Variablen werden jetzt in der richtigen
+              // Reihenfolge abgefragt und dann in den Hashtable geschrieben
             }
             // Variable Block End
 
             // calculate term
             try {
 
+              // TODO @Raphi hier solltest du nochmal nachschauen. Aus welchem
+              // Grund auch immer wird im Fall einer Variablen eingabe und einem
+              // dann auftretendem Fehler die erste Variable noch vor der
+              // Errormessage ausgegeben!
               Tree tmpTree = FormulaTree.BuildTree(tmpInputString);
 
-              System.out.println(FormulaTree.EvaluateTree(tmpTree,tmpVariables));
+              System.out.println(FormulaTree.EvaluateTree(tmpTree, tmpVariableDictionary));
 
               tmpTree.paintMe();
 
-              // TODO Update von Raphi - >Tim: endlosschleife, ich schreib hier ma was hin, damit
-              // der mich nic nervt :-)
-              // Antwort Tim: was für eine Endlosschleife?
-              // (Variablenwerteingabe?? ==> soll doch so sein ^^)
-              // Antwort Raphi: Die Zeile unterhalb tmpEnterVariablesValue = "n";
-              //wenn ich die rausnehme, hab ch ne endlosschleife im menü
-              tmpEnterVariablesValue = "n";
+              // TODO Update von Tim: Loop-Problem solved
             } catch (Exception e) {
               System.out.println(e.getMessage());
               tmpEnterVariablesValue = "error";
             }
-          }
+          } while (!tmpEnterVariablesValue.toLowerCase().equals("n")
+              && !tmpEnterVariablesValue.toLowerCase().equals("error") && tmpTermHasVariables);
 
           // if no error occurs, the user is asked if he wants to set another
           // variable
-          if (!tmpEnterVariablesValue.equals("error")) {
+          if (!tmpEnterVariablesValue.equals("error") && tmpTermHasVariables) {
 
             System.out.println("Wollen Sie andere Werte fuer die Variablen im Term eingeben? (j / n)\n");
 
             try {
-              tmpEnterVariablesValue = tmpInput.getConsoleInput();
+              tmpEnterVariablesValue = ConsoleInput.getConsoleInput();
             } catch (IOException e) {
-              tmpOutput.printError(e.getMessage());
+              ConsoleOutput.printError(e.getMessage());
             }
           }
 
           System.out.println("Wollen Sie einen weiteren Term eingeben? (j / n)\n");
 
           try {
-            tmpInputString = tmpInput.getConsoleInput();
+            tmpInputString = ConsoleInput.getConsoleInput();
           } catch (IOException e) {
-            tmpOutput.printError(e.getMessage());
+            ConsoleOutput.printError(e.getMessage());
           }
 
         }
         // if Helpmenu
       } else if (tmpInputString.equals("h")) {
 
-        tmpOutput.showHelp();
+        ConsoleOutput.showHelp();
 
         // if exit
       } else if (tmpInputString.toLowerCase().equals("e") || tmpInputString.toLowerCase().equals("exit")) {
@@ -174,9 +165,9 @@ public class Calculator {
         // if unknown command
       } else {
 
-        tmpOutput.unknownCommand();
+        ConsoleOutput.unknownCommand();
       }
     }
     System.out.println("\nSie verlassen nun den Taschenrechner.\n\n");
-  } 
+  }
 }

@@ -20,14 +20,22 @@ public class StringConvertTest extends TestCase {
    *
    * @throws Exception
    */
-  public void testTermToStandardString() throws Exception {
+  public void testTermToStandardString1() throws Exception {
 
     String tmpString = new String("2a + a b");
     assertTrue("The String has Variables separated by *", ConverterUtil.termToStandardString(tmpString)
         .equals("2*a+a*b"));
+  }
 
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
+   *
+   * @throws Exception
+   */
+  public void testTermToStandardString2() throws Exception {
     boolean tmpErrorOccured = false;
-    String tmpConvertedString = new String("");
+    String tmpConvertedString = null;
 
     try {
       tmpConvertedString = ConverterUtil.termToStandardString("3 sin(4 + 5) - (-3)");
@@ -37,12 +45,19 @@ public class StringConvertTest extends TestCase {
     }
 
     assertTrue("The String is converted correctly", !tmpErrorOccured
-        && tmpConvertedString.equals("3*%(4+5)-(-3)"));
+        && "3*%(4+5)-(-3)".equals(tmpConvertedString));
+  }
 
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
+   *
+   * @throws Exception
+   */
+  public void testTermToStandardString3() throws Exception {
     // Es folgen die drei Beispiele aus dem Aufgabenblatt
-
-    tmpErrorOccured = false;
-    tmpConvertedString = new String("");
+    boolean tmpErrorOccured = false;
+    String tmpConvertedString = null;
 
     try {
       tmpConvertedString = ConverterUtil.termToStandardString("(3x + 5) * 15");
@@ -51,10 +66,10 @@ public class StringConvertTest extends TestCase {
     }
 
     assertTrue("The String is converted correctly", !tmpErrorOccured
-        && tmpConvertedString.equals("(3*x+5)*15"));
+        && "(3*x+5)*15".equals(tmpConvertedString));
 
     tmpErrorOccured = false;
-    tmpConvertedString = new String("");
+    tmpConvertedString = null;
 
     try {
       tmpConvertedString = ConverterUtil.termToStandardString("x^2 + 2*x*y + y^2");
@@ -63,10 +78,10 @@ public class StringConvertTest extends TestCase {
     }
 
     assertTrue("The String is converted correctly", !tmpErrorOccured
-        && tmpConvertedString.equals("x^2+2*x*y+y^2"));
+        && "x^2+2*x*y+y^2".equals(tmpConvertedString));
 
     tmpErrorOccured = false;
-    tmpConvertedString = new String("");
+    tmpConvertedString = null;
 
     try {
       tmpConvertedString = ConverterUtil.termToStandardString("c*cos(x) + s * sin(sqrt(2) - x)");
@@ -75,10 +90,18 @@ public class StringConvertTest extends TestCase {
     }
 
     assertTrue("The String is converted correctly", !tmpErrorOccured
-        && tmpConvertedString.equals("c*~(x)+s*%(&(2)-x)"));
+        && "c*~(x)+s*%(&(2)-x)".equals(tmpConvertedString));
+  }
 
-    tmpErrorOccured = false;
-    tmpConvertedString = new String("");
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
+   *
+   * @throws Exception
+   */
+  public void testTermToStandardString4() throws Exception {
+    boolean tmpErrorOccured = false;
+    String tmpConvertedString = null;
 
     try {
       tmpConvertedString = ConverterUtil.termToStandardString("abcossin(cos(-3))");
@@ -87,42 +110,71 @@ public class StringConvertTest extends TestCase {
     }
 
     assertTrue("The String is converted correctly", !tmpErrorOccured
-        && tmpConvertedString.equals("a*b*c*o*s*%(~((-3)))"));
+        && "a*b*c*o*s*%(~((-3)))".equals(tmpConvertedString));
+  }
 
-    tmpErrorOccured = false;
-    tmpConvertedString = new String("");
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
+   *
+   * @throws Exception
+   */
+  public void testTermToStandardString5() throws Exception {
+    boolean tmpErrorOccured = false;
 
     try {
-      tmpConvertedString = ConverterUtil.termToStandardString("a^cos((-3+4)^(2+1))*s df ghj+3-");
+      ConverterUtil.termToStandardString("a^cos((-3+4)^(2+1))*s df ghj+3-");
     } catch (Exception e) {
       assertTrue("The formula ends with an operator.".equals(e.getMessage()));
       tmpErrorOccured = true;
     }
     assertTrue("The String is not correct", tmpErrorOccured);
+  }
 
-    tmpErrorOccured = false;
-    tmpConvertedString = new String("");
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
+   *
+   * @throws Exception
+   */
+  public void testTermToStandardString6() throws Exception {
+    boolean tmpErrorOccured = false;
 
     try {
-      tmpConvertedString = ConverterUtil.termToStandardString("-");
+      ConverterUtil.termToStandardString("-");
     } catch (Exception e) {
       assertTrue("The formula ends with an operator.".equals(e.getMessage()));
       tmpErrorOccured = true;
     }
     assertTrue("The String is not correct", tmpErrorOccured);
+  }
 
-    tmpErrorOccured = false;
-    tmpConvertedString = new String("");
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
+   *
+   * @throws Exception
+   */
+  public void testTermToStandardString7() throws Exception {
+    boolean tmpErrorOccured = false;
 
     try {
-      tmpConvertedString = ConverterUtil.termToStandardString("a");
+      ConverterUtil.termToStandardString("a");
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
     assertTrue("The String is correct", !tmpErrorOccured);
+  }
 
-    tmpErrorOccured = false;
-    tmpConvertedString = new String("");
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
+   *
+   * @throws Exception
+   */
+  public void testTermToStandardString8() throws Exception {
+    boolean tmpErrorOccured = false;
+    String tmpConvertedString = null;
 
     try {
       tmpConvertedString = ConverterUtil.termToStandardString("3+(-a+b)");
@@ -130,9 +182,17 @@ public class StringConvertTest extends TestCase {
       tmpErrorOccured = true;
     }
     assertTrue("The String is correct", !tmpErrorOccured && "3+((-a)+b)".equals(tmpConvertedString));
+  }
 
-    tmpErrorOccured = false;
-    tmpConvertedString = new String("");
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
+   *
+   * @throws Exception
+   */
+  public void testTermToStandardString9() throws Exception {
+    boolean tmpErrorOccured = false;
+    String tmpConvertedString = null;
 
     try {
       tmpConvertedString = ConverterUtil.termToStandardString("sin4");
@@ -140,9 +200,17 @@ public class StringConvertTest extends TestCase {
       tmpErrorOccured = true;
     }
     assertTrue("The String is correct", !tmpErrorOccured && "s*i*n*4".equals(tmpConvertedString));
+  }
 
-    tmpErrorOccured = false;
-    tmpConvertedString = new String("");
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
+   *
+   * @throws Exception
+   */
+  public void testTermToStandardString10() throws Exception {
+    boolean tmpErrorOccured = false;
+    String tmpConvertedString = null;
 
     try {
       tmpConvertedString = ConverterUtil.termToStandardString("-a+45");
@@ -150,15 +218,23 @@ public class StringConvertTest extends TestCase {
       tmpErrorOccured = true;
     }
     assertTrue("The String is correct", !tmpErrorOccured && "(-a)+45".equals(tmpConvertedString));
+  }
 
-    tmpErrorOccured = false;
-    tmpConvertedString = new String("");
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
+   *
+   * @throws Exception
+   */
+  public void testTermToStandardString11() throws Exception {
+    boolean tmpErrorOccured = false;
+    String tmpConvertedString = null;
 
     try {
-        tmpConvertedString = ConverterUtil.termToStandardString("5*x+y*z");
-      } catch (Exception e) {
-        tmpErrorOccured = true;
-      }
+      tmpConvertedString = ConverterUtil.termToStandardString("5*x+y*z");
+    } catch (Exception e) {
+      tmpErrorOccured = true;
+    }
 
     assertTrue("The String is correct", !tmpErrorOccured && "5*x+y*z".equals(tmpConvertedString));
 
@@ -178,8 +254,7 @@ public class StringConvertTest extends TestCase {
    * Test method for
    * {@link calculator.utils.ConverterUtil#checkIfValidSignsOnly()}.
    */
-  public void testCheckIfValidSignsOnly() {
-
+  public void testCheckIfValidSignsOnly1() {
     // positive test
     try {
       ConverterUtil
@@ -187,7 +262,13 @@ public class StringConvertTest extends TestCase {
     } catch (Exception e) {
       assertTrue(false);
     }
+  }
 
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#checkIfValidSignsOnly()}.
+   */
+  public void testCheckIfValidSignsOnly2() {
     // negative test
     Boolean tmpErrorOccurred = false;
     try {
@@ -196,9 +277,15 @@ public class StringConvertTest extends TestCase {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
+  }
 
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#checkIfValidSignsOnly()}.
+   */
+  public void testCheckIfValidSignsOnly3() {
     // negative test
-    tmpErrorOccurred = false;
+    boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkIfValidSignsOnly("ä");
     } catch (Exception e) {
@@ -240,17 +327,22 @@ public class StringConvertTest extends TestCase {
    * Test method for
    * {@link calculator.utils.ConverterUtil#checkDecimalNumbers()}.
    */
-  public void testCheckDecimalNumbers() {
-    Boolean tmpErrorOccurred = false;
+  public void testCheckDecimalNumbers1() {
     // positive test
     try {
       ConverterUtil.checkDecimalNumbers("5.6+34+2.0+100.9");
     } catch (Exception e) {
       assertTrue(false);
     }
+  }
 
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#checkDecimalNumbers()}.
+   */
+  public void testCheckDecimalNumbers2() {
     // negative test
-    tmpErrorOccurred = false;
+    boolean tmpErrorOccurred = false;
 
     try {
       ConverterUtil.checkDecimalNumbers("5.6.3+34+2.0+100.9");
@@ -258,27 +350,45 @@ public class StringConvertTest extends TestCase {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
+  }
 
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#checkDecimalNumbers()}.
+   */
+  public void testCheckDecimalNumbers3() {
     // negative test
-    tmpErrorOccurred = false;
+    boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkDecimalNumbers(".");
     } catch (Exception e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
+  }
 
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#checkDecimalNumbers()}.
+   */
+  public void testCheckDecimalNumbers4() {
     // negative test
-    tmpErrorOccurred = false;
+    boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkDecimalNumbers(".999+7");
     } catch (Exception e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
+  }
 
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#checkDecimalNumbers()}.
+   */
+  public void testCheckDecimalNumbers5() {
     // negative test
-    tmpErrorOccurred = false;
+    boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkDecimalNumbers("999+7.");
     } catch (Exception e) {
@@ -299,61 +409,91 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
    */
-  public void testCheckOperators() {
+  public void testCheckOperators1() {
     // positive test
     try {
       ConverterUtil.checkOperators("5+6-98*(23^2)-98/8");
     } catch (Exception e) {
       assertTrue(false);
     }
+  }
 
+  /**
+   * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
+   */
+  public void testCheckOperators2() {
     // negative test
-    Boolean tmpErrorOccurred = false;
+    boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkOperators("+(23*55)");
     } catch (Exception e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
+  }
 
+  /**
+   * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
+   */
+  public void testCheckOperators3() {
     // negative test
-    tmpErrorOccurred = false;
+    boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkOperators("23+-99+9*8");
     } catch (Exception e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
+  }
 
+  /**
+   * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
+   */
+  public void testCheckOperators4() {
     // negative test
-    tmpErrorOccurred = false;
+    boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkOperators("23*(+99)");
     } catch (Exception e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
+  }
 
+  /**
+   * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
+   */
+  public void testCheckOperators5() {
     // negative test
-    tmpErrorOccurred = false;
+    boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkOperators("23*(2+99^)");
     } catch (Exception e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
+  }
 
+  /**
+   * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
+   */
+  public void testCheckOperators6() {
     // negative test
-    tmpErrorOccurred = false;
+    boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkOperators("23*(2+99)**2");
     } catch (Exception e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
+  }
 
+  /**
+   * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
+   */
+  public void testCheckOperators7() {
     // negative test
-    tmpErrorOccurred = false;
+    boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkOperators("3+5*");
     } catch (Exception e) {
@@ -366,16 +506,25 @@ public class StringConvertTest extends TestCase {
    * Test method for
    * {@link calculator.utils.ConverterUtil#setBracketsAroundNegativeNumbers()}.
    */
-  public void testSetBracketsAroundNegativeNumbers() {
+  public void testSetBracketsAroundNegativeNumbers1() {
 
-    String tmp = ConverterUtil
+    String tmpString = ConverterUtil
         .setBracketsAroundNegatives("-8+(-23.23434+(-34))*(-5)+(-23^3)+(-1*(-2*(-5)))))+(-a+b)");
-    assertTrue(tmp.equals("(-8)+((-23.23434)+(-34))*(-5)+((-23)^3)+((-1)*((-2)*(-5)))))+((-a)+b)"));
-
-    tmp = ConverterUtil.setBracketsAroundNegatives("-8+(-23.23434+-34)*-5+(-23^3)+(-1*(-2*(-5)))))+(-a+b)");
-    assertTrue(tmp.equals("(-8)+((-23.23434)+-34)*-5+((-23)^3)+((-1)*((-2)*(-5)))))+((-a)+b)"));
+    assertTrue(tmpString.equals("(-8)+((-23.23434)+(-34))*(-5)+((-23)^3)+((-1)*((-2)*(-5)))))+((-a)+b)"));
   }
 
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#setBracketsAroundNegativeNumbers()}.
+   */
+  public void testSetBracketsAroundNegativeNumbers2() {
+    String tmpString = ConverterUtil
+        .setBracketsAroundNegatives("-8+(-23.23434+-34)*-5+(-23^3)+(-1*(-2*(-5)))))+(-a+b)");
+    assertTrue(tmpString.equals("(-8)+((-23.23434)+-34)*-5+((-23)^3)+((-1)*((-2)*(-5)))))+((-a)+b)"));
+  }
+
+
+  //TODO @anyone go one, split test methods ;)
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#checkNegativeNumbers()}.

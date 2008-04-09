@@ -39,6 +39,7 @@ public class Calculator {
         tmpInputString = ConsoleInput.getConsoleInput();
       } catch (IOException e) {
         ConsoleOutput.printError(e.getMessage());
+        e.printStackTrace();
       }
 
       // if termin out
@@ -61,12 +62,14 @@ public class Calculator {
             tmpInputString = ConsoleInput.getConsoleInput();
           } catch (IOException e) {
             ConsoleOutput.printError(e.getMessage());
+            e.printStackTrace();
           }
 
           try {
             tmpInputString = ConverterUtil.termToStandardString(tmpInputString);
           } catch (Exception e) {
             System.out.println(e.getMessage());
+            e.printStackTrace();
             tmpEnterVariablesValue = "error";
           }
 
@@ -91,6 +94,7 @@ public class Calculator {
                     tmpInputVariableValue = ConsoleInput.getConsoleInput();
                   } catch (IOException e) {
                     ConsoleOutput.printError(e.getMessage());
+                    e.printStackTrace();
                   }
                   if (!MathUtil.isFloat(tmpInputVariableValue)) {
                     System.out
@@ -125,6 +129,7 @@ public class Calculator {
               // TODO Update von Tim: Loop-Problem solved
             } catch (Exception e) {
               System.out.println(e.getMessage());
+              e.printStackTrace();
               tmpEnterVariablesValue = "error";
             }
           } while (!tmpEnterVariablesValue.toLowerCase().equals("n")
@@ -140,6 +145,7 @@ public class Calculator {
               tmpEnterVariablesValue = ConsoleInput.getConsoleInput();
             } catch (IOException e) {
               ConsoleOutput.printError(e.getMessage());
+              e.printStackTrace();
             }
           }
 
@@ -149,6 +155,7 @@ public class Calculator {
             tmpInputString = ConsoleInput.getConsoleInput();
           } catch (IOException e) {
             ConsoleOutput.printError(e.getMessage());
+            e.printStackTrace();
           }
 
         }

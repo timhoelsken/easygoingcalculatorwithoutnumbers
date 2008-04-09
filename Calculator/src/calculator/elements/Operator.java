@@ -19,19 +19,19 @@ public class Operator extends MathObj {
     if (anOperatorType.ordinal() == OperatorType.ADDITION.ordinal() || 
         anOperatorType.ordinal() == OperatorType.SUBTRACTION.ordinal())
     {    		
-    	super.setPriority(MathUtil.PriorityOfAdditiveOperator);
+    	super.setPriority(MathUtil.PRIO_ADDITION);
     } 
     else if (anOperatorType.ordinal() == OperatorType.MULTIPLICATION.ordinal() || 
     		 anOperatorType.ordinal() == OperatorType.DIVISION.ordinal()) 
     {
-    	super.setPriority(MathUtil.PriorityOfMultiplicativeOperator);   
+    	super.setPriority(MathUtil.PRIO_MULTIPLICATION);   
     } 
     else if (anOperatorType.ordinal() == OperatorType.SIN.ordinal() ||
     		 anOperatorType.ordinal() == OperatorType.COS.ordinal() ||
     		 anOperatorType.ordinal() == OperatorType.SQRT.ordinal()||
     		 anOperatorType.ordinal() == OperatorType.TAN.ordinal()) 
     {    	
-    	super.setPriority(MathUtil.PriorityOfFunctions);
+    	super.setPriority(MathUtil.PRIO_FUNCTIONS);
     }  
   }
 

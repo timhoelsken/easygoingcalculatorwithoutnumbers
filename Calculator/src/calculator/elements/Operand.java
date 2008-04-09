@@ -15,6 +15,6 @@ public class Operand extends MathObj {
    * @param aValue
    */
   public Operand() {
-	  super.setPriority(MathUtil.PriorityOfOperands);
+	  super.setPriority(MathUtil.PRIO_OPERANDS);
   }
 }

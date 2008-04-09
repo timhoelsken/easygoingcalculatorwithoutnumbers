@@ -152,7 +152,7 @@ public static Tree BuildTree(ArrayList<Object> MathList) throws Exception
 	    	{
 	    		aTreeToBeInserted = FormulaTree.BuildTree((ArrayList<Object>)tmpNextElement);
 	    		if (aTreeToBeInserted!=null)
-	    			aTreeToBeInserted.getRoot().setPriority(MathUtil.PriorityOfBrackets);
+	    			aTreeToBeInserted.getRoot().setPriority(MathUtil.PRIO_BRACKETS);
 	    	}	
 	    	
 	    	if (aTreeToBeInserted == null)

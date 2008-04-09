@@ -5,13 +5,13 @@ package calculator.userinterface;
  * @author Tim
  * 
  */
-public class ConsoleOutput {
+public final class ConsoleOutput {
 
   /**
    * Prints the mainmenu on the screen
    * 
    */
-  public void showMenu() {
+  public static void showMenu() {
 
     System.out.println("\nHauptmenu");
     System.out.println(horizontalLine());
@@ -25,7 +25,7 @@ public class ConsoleOutput {
    * Prompts the user to type a term.
    * 
    */
-  public void showInputPrompt() {
+  public static void showInputPrompt() {
     System.out.println("\nBitte geben Sie einen Term ein:\n");
   }
 
@@ -33,7 +33,7 @@ public class ConsoleOutput {
    * Prints the headline of the calculator
    * 
    */
-  public void showTitle() {
+  public static void showTitle() {
     System.out.println(horizontalLine());
     System.out.println("Willkommen beim PSE III Taschenrechner der Gruppe 3");
     System.out.println(horizontalLine());
@@ -44,7 +44,7 @@ public class ConsoleOutput {
    * 
    * @param anErrorMessage
    */
-  public void printError(String anErrorMessage) {
+  public static void printError(String anErrorMessage) {
     System.out.println("\nBei der Verarbeitung ist folgender Fehler aufgetreten:");
     System.out.println(anErrorMessage + "\n");
 
@@ -63,7 +63,7 @@ public class ConsoleOutput {
    * Prints a help dialog on the screen.
    * 
    */
-  public void showHelp() {
+  public static void showHelp() {
 
     System.out.println("\nHilfe Menu");
     System.out.println(horizontalLine());
@@ -93,14 +93,14 @@ public class ConsoleOutput {
    * Prints an errorMessage that the command could not be read.
    * 
    */
-  public void unknownCommand() {
+  public static void unknownCommand() {
     System.out.println("\nIhr eingegebener Befehl konnte leider nicht verarbeitet werden.\n\n");
   }
 
   /**
    * Prompts the user to type the values of variables
    */
-  public void promptVariableInput() {
+  public static void promptVariableInput() {
     System.out
         .println("\nIhr eingegebener Term beinhaltet mindestens eine Variable. Bitte geben Sie nachfolgend die Werte ein:\n");
   }

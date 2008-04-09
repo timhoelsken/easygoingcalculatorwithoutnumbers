@@ -9,9 +9,9 @@ import java.io.InputStreamReader;
  * @author Tim
  *
  */
-public class ConsoleInput {
+public final class ConsoleInput {
 
-  private String inputString;
+  private static String inputString;
 
   /**
    *
@@ -19,7 +19,7 @@ public class ConsoleInput {
    *         usability
    * @throws IOException
    */
-  public String getConsoleInput() throws IOException {
+  public static String getConsoleInput() throws IOException {
     InputStreamReader tmpStremReader = new InputStreamReader(System.in);
     BufferedReader tmpStdIn = new BufferedReader(tmpStremReader);
     inputString = tmpStdIn.readLine();

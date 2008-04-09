@@ -238,7 +238,25 @@ public class StringConvertTest extends TestCase {
     }
 
     assertTrue("The String is correct", !tmpErrorOccured && "5*x+y*z".equals(tmpConvertedString));
+  }
 
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
+   *
+   * @throws Exception
+   */
+  public void testTermToStandardString12() throws Exception {
+    boolean tmpErrorOccured = false;
+    String tmpConvertedString = null;
+
+    try {
+      tmpConvertedString = ConverterUtil.termToStandardString("sin(3^cos(-4))");
+    } catch (Exception e) {
+      tmpErrorOccured = true;
+    }
+
+    assertTrue("The String is correct", !tmpErrorOccured && "%(3^~((-4)))".equals(tmpConvertedString));
   }
 
   /**

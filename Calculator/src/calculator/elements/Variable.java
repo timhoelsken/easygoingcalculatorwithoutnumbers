@@ -10,7 +10,7 @@ public class Variable extends Operand {
   /**
    * @return the value
    */
-  public float getValue() {
+  public char getValue() {
     return value;
   }
 
@@ -21,5 +21,10 @@ public class Variable extends Operand {
    */
   public Variable(char aValue) {
     value = aValue;
+  }
+  
+  public String toString()
+  {
+    return Character.toString(value);
   }
 }

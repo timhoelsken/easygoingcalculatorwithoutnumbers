@@ -523,22 +523,24 @@ public class StringConvertTest extends TestCase {
     assertTrue(tmpString.equals("(-8)+((-23.23434)+-34)*-5+((-23)^3)+((-1)*((-2)*(-5)))))+((-a)+b)"));
   }
 
-
-  //TODO @anyone go one, split test methods ;)
-  //TODO GRML! think of what i did at the same time.......
-  
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#checkNegativeNumbers()}.
    */
-  public void testCheckNegativeNumbersPositive() {
+  public void testCheckNegativeNumbers1() {
     // positive test
     try {
       ConverterUtil.checkNegativeNumbers("(-5)*(-2)+((-4)+5)");
     } catch (Exception e) {
       assertTrue(false);
     }
+  }
 
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#checkNegativeNumbers()}.
+   */
+  public void testCheckNegativeNumbers2() {
     // positive test
     try {
       String tmp = ConverterUtil.setBracketsAroundNegatives("-5)*(-2)+((-4)+5)");
@@ -550,10 +552,10 @@ public class StringConvertTest extends TestCase {
   }
 
   /**
-   * 
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#checkNegativeNumbers()}.
    */
-  public void testCheckNegativeNumbersNegative() {
-
+  public void testCheckNegativeNumbers3() {
     // negative test
     boolean tmpErrorOccurred = false;
 
@@ -563,9 +565,15 @@ public class StringConvertTest extends TestCase {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
+  }
 
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#checkNegativeNumbers()}.
+   */
+  public void testCheckNegativeNumbers4() {
     // negative test
-    tmpErrorOccurred = false;
+    boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkNegativeNumbers("(-5)*(-2)+((-4)+-5)");
     } catch (Exception e) {
@@ -577,7 +585,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for {@link calculator.utils.ConverterUtil#checkBrackets()}.
    */
-  public void testCheckBracketsPositive() {
+  public void testCheckBrackets1() {
     try {
       ConverterUtil.checkBrackets("(((5+5+5+5)))");
     } catch (Exception e) {
@@ -586,9 +594,9 @@ public class StringConvertTest extends TestCase {
   }
 
   /**
-   * 
+   * Test method for {@link calculator.utils.ConverterUtil#checkBrackets()}.
    */
-  public void testCheckBracketsNegative() {
+  public void testCheckBrackets2() {
 
     // negative test
     boolean tmpErrorOccurred = false;
@@ -598,18 +606,28 @@ public class StringConvertTest extends TestCase {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
+  }
 
+  /**
+   * Test method for {@link calculator.utils.ConverterUtil#checkBrackets()}.
+   */
+  public void testCheckBrackets3() {
     // negative test
-    tmpErrorOccurred = false;
+    boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkBrackets("(((5+5+5+5))))");
     } catch (Exception e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
+  }
 
+  /**
+   * Test method for {@link calculator.utils.ConverterUtil#checkBrackets()}.
+   */
+  public void testCheckBrackets4() {
     // negative test
-    tmpErrorOccurred = false;
+    boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkBrackets("(((((5+5+5+5))))");
     } catch (Exception e) {
@@ -625,47 +643,6 @@ public class StringConvertTest extends TestCase {
   public void testChangeFunctionsIntoSigns() {
     assertTrue(ConverterUtil.changeFunctionsIntoSigns("sin(abc)+cos(abcd)+tan+tan(abc)+sqrt(23)").equals(
         "%(abc)+~(abcd)+tan+#(abc)+&(23)"));
-  }
-
-  /**
-   *
-   */
-  public void testEverythingEspaciallyTheSyntax() {
-    /**
-     * es sollte geprüft werden, dass keine Sonderzeichen im Text drinne sind
-     * "5+6+9+9@7" -> Fehler => checkIfValidSignsOnly()
-     *
-     * Prüfe Operatoren folgende Kombos sind unmöglich: "5+6*7-*2" -> Fehler
-     * (binär/binär) => checkOperators() "5+sincos()+9" -> Ok "5*sin*6" -> Ok
-     * "9+sin(5+2)" -> Ok
-     *
-     * Auf einen unären Operator muss nicht ein Klammerausdruck folgen (soweit
-     * er nicht anders interpretiert werden kann) ;) "5*sin(6)+3" -> ok
-     * "5*sin6+3" -> ok
-     *
-     * vor und hinter einem unären operator muss ein binärer operator stehen, es
-     * sei denn er steht am anfang oder ende der formel NÖ :) "5*sin(6)cos(3)" ->
-     * ok "5*sin(6)*cos(3)" -> ok
-     *
-     * Es muss immer folgende Reihenfolge eingehalten werden: Zahl oder unärer
-     * Operator (mit Klammerausdruck), Binärer Operator, Zahl oder unärer
-     * Operator (mit Klammerausdruck), binärer operator.... NÖ :)
-     * "5sin(66)4cos(3)" -> ok "5*sin(66)*4*cos(3)" -> ok
-     *
-     * Zahlen prüfen Zahl darf nicht an Zahl angegrenzt sein (in Klammern schon)
-     * "5 5" -> nicht ok "5(5)" -> ok "5*(5)" -> ok
-     *
-     * zahl darf nicht zwei oder mehr ., enthalten "5,23.43*2.22.22+2312" ->
-     * fehler "5.3*(5,2)" -> ok => checkDecimalNumbers() (vorher unifyCommas())
-     *
-     * Klammercheck "5*)3+2(" "5*(3+2)" => checkBrackets()
-     *
-     * vor einer geschlossenen klammer kann kein binärer operator stehen
-     * "(3+4+)*5" "(7*9*2+23)*5" => checkOperators()
-     *
-     * "(5+6)" -> ok "4(5+6)" -> ok "sin(56)" -> ok "(5+6)sin(3)" -> ok
-     * "5+6+(3+3)*1+2" -> ok "5+6+(3+3)1+2" -> ok
-     */
   }
 
   /**

@@ -12,16 +12,31 @@ import calculator.exceptions.IllegalInputStreamException;
 
 /**
  * @author Tobias
- * 
+ *
  */
 public class MathUtil {
-	
-  public static final int PriorityOfAdditiveOperator=1;
-  public static final int PriorityOfMultiplicativeOperator=3;
-  public static final int PriorityOfFunctions=5;
-  public static  final int PriorityOfBrackets=7;
-  public static  final int PriorityOfOperands=9;
-  
+
+  /**
+   * Priority for addition operator
+   */
+  public static final int PRIO_ADDITION = 1;
+  /**
+   * Priority for multiplication operator
+   */
+  public static final int PRIO_MULTIPLICATION = 3;
+  /**
+   * Priority for functions
+   */
+  public static final int PRIO_FUNCTIONS = 5;
+  /**
+   * Priority for brackets
+   */
+  public static final int PRIO_BRACKETS = 7;
+  /**
+   * Priority for operands
+   */
+  public static final int PRIO_OPERANDS = 9;
+
   private static char COMMA = '.';
 
   /**
@@ -34,7 +49,7 @@ public class MathUtil {
 
   /**
    * Checks if a string is numeric
-   * 
+   *
    * @param aString
    * @return true if the given string is numeric only
    */
@@ -44,7 +59,7 @@ public class MathUtil {
   }
 
   /**
-   * 
+   *
    * @param aChar
    * @return
    */
@@ -68,7 +83,7 @@ public class MathUtil {
   }
 
   /**
-   * 
+   *
    * @param aCharacter
    * @return true if char is a number or variable
    */
@@ -85,7 +100,7 @@ public class MathUtil {
   }
 
   /**
-   * 
+   *
    * @param aChar
    * @return true if char is a minus
    */
@@ -108,7 +123,8 @@ public class MathUtil {
       case '?':
       case '~':
       case '&':
-    	  //TODO @info for andre: ich hab hier noch die sqrt & hinzugefügt, ist das ok?
+        // TODO @info for andre: ich hab hier noch die sqrt & hinzugefügt, ist
+        // das ok?
         return true;
       default:
         return false;
@@ -116,7 +132,7 @@ public class MathUtil {
   }
 
   /**
-   * 
+   *
    * @param aChar
    * @return true if char is left bracket
    */
@@ -125,7 +141,7 @@ public class MathUtil {
   }
 
   /**
-   * 
+   *
    * @param aChar
    * @return true if char is a right bracket
    */
@@ -134,7 +150,7 @@ public class MathUtil {
   }
 
   /**
-   * 
+   *
    * @param aChar
    * @return true if char is a bracket
    */
@@ -142,10 +158,9 @@ public class MathUtil {
     return (IsRightBracket(aChar) ? true : IsLeftBracket(aChar));
   }
 
-  
   /**
    * method creates a float value based mathobj out of a given string
-   * 
+   *
    * @author André
    * @param aNumberContainingString
    * @return MathObj
@@ -164,7 +179,7 @@ public class MathUtil {
 
   /**
    * method creates a operator mathobj out of a given string
-   * 
+   *
    * @author André
    * @param aOperatorContainingString
    * @return MathObj
@@ -194,7 +209,7 @@ public class MathUtil {
 
   /**
    * method creates a mathobj list out of the form string
-   * 
+   *
    * @author André
    * @return ArrayList of mathobj
    * @param aFormula

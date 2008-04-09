@@ -10,14 +10,14 @@ import junit.framework.TestCase;
 
 /**
  * @author Tim
- * 
+ *
  */
 public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testTermToStandardString() throws Exception {
@@ -120,7 +120,7 @@ public class StringConvertTest extends TestCase {
       tmpErrorOccured = true;
     }
     assertTrue("The String is correct", !tmpErrorOccured);
-    
+
     tmpErrorOccured = false;
     tmpConvertedString = new String("");
 
@@ -130,7 +130,7 @@ public class StringConvertTest extends TestCase {
       tmpErrorOccured = true;
     }
     assertTrue("The String is correct", !tmpErrorOccured && "3+((-a)+b)".equals(tmpConvertedString));
-    
+
     tmpErrorOccured = false;
     tmpConvertedString = new String("");
 
@@ -140,7 +140,7 @@ public class StringConvertTest extends TestCase {
       tmpErrorOccured = true;
     }
     assertTrue("The String is correct", !tmpErrorOccured && "s*i*n*4".equals(tmpConvertedString));
-    
+
     tmpErrorOccured = false;
     tmpConvertedString = new String("");
 
@@ -150,18 +150,18 @@ public class StringConvertTest extends TestCase {
       tmpErrorOccured = true;
     }
     assertTrue("The String is correct", !tmpErrorOccured && "(-a)+45".equals(tmpConvertedString));
-    
+
     tmpErrorOccured = false;
     tmpConvertedString = new String("");
-    
+
     try {
         tmpConvertedString = ConverterUtil.termToStandardString("5*x+y*z");
       } catch (Exception e) {
         tmpErrorOccured = true;
       }
-    
+
     assertTrue("The String is correct", !tmpErrorOccured && "5*x+y*z".equals(tmpConvertedString));
-    
+
   }
 
   /**
@@ -206,6 +206,20 @@ public class StringConvertTest extends TestCase {
     }
     assertTrue(tmpErrorOccurred);
 
+  }
+
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#checkIfEmptyBrackets()}.
+   */
+  public void testCheckIfEmptyBrackets() {
+    boolean tmpErrorOccurred = false;
+    try {
+      ConverterUtil.checkIfEmptyBrackets("()");
+    } catch (Exception e) {
+      tmpErrorOccurred = true;
+    }
+    assertTrue(tmpErrorOccurred);
   }
 
   /**
@@ -451,41 +465,41 @@ public class StringConvertTest extends TestCase {
   }
 
   /**
-   * 
+   *
    */
   public void testEverythingEspaciallyTheSyntax() {
     /**
      * es sollte geprüft werden, dass keine Sonderzeichen im Text drinne sind
      * "5+6+9+9@7" -> Fehler => checkIfValidSignsOnly()
-     * 
+     *
      * Prüfe Operatoren folgende Kombos sind unmöglich: "5+6*7-*2" -> Fehler
      * (binär/binär) => checkOperators() "5+sincos()+9" -> Ok "5*sin*6" -> Ok
      * "9+sin(5+2)" -> Ok
-     * 
+     *
      * Auf einen unären Operator muss nicht ein Klammerausdruck folgen (soweit
      * er nicht anders interpretiert werden kann) ;) "5*sin(6)+3" -> ok
      * "5*sin6+3" -> ok
-     * 
+     *
      * vor und hinter einem unären operator muss ein binärer operator stehen, es
      * sei denn er steht am anfang oder ende der formel NÖ :) "5*sin(6)cos(3)" ->
      * ok "5*sin(6)*cos(3)" -> ok
-     * 
+     *
      * Es muss immer folgende Reihenfolge eingehalten werden: Zahl oder unärer
      * Operator (mit Klammerausdruck), Binärer Operator, Zahl oder unärer
      * Operator (mit Klammerausdruck), binärer operator.... NÖ :)
      * "5sin(66)4cos(3)" -> ok "5*sin(66)*4*cos(3)" -> ok
-     * 
+     *
      * Zahlen prüfen Zahl darf nicht an Zahl angegrenzt sein (in Klammern schon)
      * "5 5" -> nicht ok "5(5)" -> ok "5*(5)" -> ok
-     * 
+     *
      * zahl darf nicht zwei oder mehr ., enthalten "5,23.43*2.22.22+2312" ->
      * fehler "5.3*(5,2)" -> ok => checkDecimalNumbers() (vorher unifyCommas())
-     * 
+     *
      * Klammercheck "5*)3+2(" "5*(3+2)" => checkBrackets()
-     * 
+     *
      * vor einer geschlossenen klammer kann kein binärer operator stehen
      * "(3+4+)*5" "(7*9*2+23)*5" => checkOperators()
-     * 
+     *
      * "(5+6)" -> ok "4(5+6)" -> ok "sin(56)" -> ok "(5+6)sin(3)" -> ok
      * "5+6+(3+3)*1+2" -> ok "5+6+(3+3)1+2" -> ok
      */

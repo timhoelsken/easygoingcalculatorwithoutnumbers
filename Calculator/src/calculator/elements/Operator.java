@@ -63,6 +63,8 @@ public class Operator extends MathObj {
         return "cos";
       case SQRT:
         return "sqrt";
+      case POW:
+        return "pow";
       default:
         return "+";
     }

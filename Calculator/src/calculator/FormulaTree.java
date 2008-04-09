@@ -37,8 +37,9 @@ public final class FormulaTree {
     if (aTree.getRoot() instanceof NumberObj) {
       // is it a tree where there is only a number at the root? return the number!
       tmpResult = ((NumberObj) aTree.getRoot()).getValue();
-    }   else if (aTree.getRoot() instanceof Variable){
-      tmpResult = aVariableHashTable.get(((NumberObj) aTree.getRoot()).getValue());
+    }   else if (aTree.getRoot() instanceof Variable) {
+      tmpResult = aVariableHashTable.get(Character.toString(((Variable) aTree.getRoot()).getValue()));
+      Float.toString(((Variable) aTree.getRoot()).getValue());
       if (tmpResult==null) throw (new Exception("Not all variables are assigned with values"));
     } else if (aTree.getRoot() instanceof Operator) {
 

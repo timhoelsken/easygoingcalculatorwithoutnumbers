@@ -108,8 +108,7 @@ public class ConsoleCalculator {
               tmpVariableDictionary = ConverterUtil.putArrayListIntoHashtable(tmpVariablesList);
 
               // ==== Variable input end ====
-              // TODO Update von Tim: Variablen werden jetzt in der richtigen
-              // Reihenfolge abgefragt und dann in den Hashtable geschrieben
+
             }
             else{
               tmpEnterVariablesValue = "noVariables";
@@ -119,17 +118,17 @@ public class ConsoleCalculator {
             // calculate term
             try {
 
-              // TODO @Raphi hier solltest du nochmal nachschauen. Aus welchem
+              // TODO @schreiber an raphi: hier solltest du nochmal nachschauen. Aus welchem
               // Grund auch immer wird im Fall einer Variablen eingabe und einem
               // dann auftretendem Fehler die erste Variable noch vor der
               // Errormessage ausgegeben!
+            	//Update: liegt ein konkretes Problem vor? bitte beispiel nennen (Grüße Raphael)
               Tree tmpTree = FormulaTree.BuildTree(tmpInputString);
 
               System.out.println(FormulaTree.EvaluateTree(tmpTree, tmpVariableDictionary));
               tmpEnterVariablesValue = "calculated";
               tmpTree.paintMe();
 
-              // TODO Update von Tim: Loop-Problem solved
             } catch (Exception e) {
               System.out.println(e.getMessage());
               e.printStackTrace();

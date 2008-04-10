@@ -156,6 +156,7 @@ public class MathUtil {
   public static boolean IsBracket(char aChar) {
     //TODO lol, was ist das für ein Scheiß :D
     //Altenative: logisches Oder?! :D:D:D
+	// *hust* so ein kommentar kann nur von Tobi kommen XD
     return (IsRightBracket(aChar) ? true : IsLeftBracket(aChar));
   }
 

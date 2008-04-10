@@ -19,11 +19,12 @@ import calculator.utils.MathUtil;
 public final class FormulaTree {
 	
   /**
-   * Calculates the result of a formula-tree
+   * Calculates the result of a formula-tree and returns it as a "double"
    *
    * @param aTree
    *            the tree from which the result should be calculated
-   * @return the result of the tree is returned as float value
+   * @param aVariableHashTable the values for all variables used
+   * @return the result of the tree is returned as double value
    * @throws Exception
    *             It is not possible to calculate the tree. An internal error
    *             occurred.

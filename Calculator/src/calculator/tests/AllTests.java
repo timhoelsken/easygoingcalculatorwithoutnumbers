@@ -10,7 +10,7 @@ import junit.textui.TestRunner;
 
 /**
  * @author Tobias
- * 
+ *
  */
 public class AllTests extends TestCase {
 
@@ -21,12 +21,13 @@ public class AllTests extends TestCase {
     TestSuite suite = new TestSuite();
     suite.addTestSuite(MathUtilTest.class);
     suite.addTestSuite(StringConvertTest.class);
+    suite.addTestSuite(IntegrationTest.class);
     return suite;
   }
 
   /**
    * Start the pse3.tests here.
-   * 
+   *
    * @param args
    */
   public static void main(String[] args) {

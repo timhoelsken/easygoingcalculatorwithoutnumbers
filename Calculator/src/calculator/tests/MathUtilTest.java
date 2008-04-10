@@ -72,9 +72,10 @@ public class MathUtilTest extends TestCase {
     assertTrue(MathUtil.isVariable('a'));
     assertTrue(MathUtil.isVariable('b'));
     assertTrue(MathUtil.isVariable('z'));
-    assertFalse(MathUtil.isVariable('A'));
-    assertFalse(MathUtil.isVariable('B'));
-    assertFalse(MathUtil.isVariable('Z'));
+    assertTrue(MathUtil.isVariable('A'));
+    assertTrue(MathUtil.isVariable('B'));
+    assertTrue(MathUtil.isVariable('Z'));
+    assertFalse(MathUtil.isVariable('ß'));
   }
 
   /**

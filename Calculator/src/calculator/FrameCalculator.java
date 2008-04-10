@@ -53,6 +53,9 @@ public class FrameCalculator extends JFrame {
 
   // the formula entered by the user
   private String enteredFormula = new String("");
+  
+  //Variable Frame
+  private JFrame frameEnterVariables = new JFrame();
 
   /**
    * the constructor
@@ -144,7 +147,7 @@ public class FrameCalculator extends JFrame {
   private void openVariableFrame() {
 
     // define frame
-    JFrame frameEnterVariables = new JFrame("Variable Input");
+    frameEnterVariables = new JFrame("Variable Input");
     frameEnterVariables.setLocation(400, 400);
     frameEnterVariables.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     frameEnterVariables.getContentPane().setLayout(new BorderLayout(10, 10));
@@ -172,7 +175,11 @@ public class FrameCalculator extends JFrame {
 
       // define label and textField
       tmpLabelsOfVariablesArray[i] = new JLabel(listOfVariables.get(i)[0] + " = ");
-      inputFieldOfVariablesArray[i] = new JTextField("   ");
+      //TODO text entfernen!
+      inputFieldOfVariablesArray[i] = new JTextField("Enter Value");
+      
+      //Er machts nicht richtig! :(
+      inputFieldOfVariablesArray[i].setSize(12, 30);
 
       // allign elements
       tmpLabelsOfVariablesArray[i].setHorizontalAlignment(JLabel.CENTER);
@@ -230,7 +237,7 @@ public class FrameCalculator extends JFrame {
         // if everything is OK, the window is closed and the formula is
         // calculated
         if (tmpAllVariablesAreFloats) {
-          dispose();
+          frameEnterVariables.dispose();
           calculateFormula();
         } else {
           JOptionPane.showMessageDialog(new JFrame(), "Der eingegebene Wert muss eine Zahl sein.",

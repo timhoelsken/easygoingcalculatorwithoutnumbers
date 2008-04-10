@@ -7,7 +7,7 @@ package calculator;
 public class EmptyClassForGlobalSupport {
 
   // comments by Raphael
-
+  @all 0,0000559 ist laut console keine zahl????
   // comments by Tim
   //TODO @all wenn ihr dem Calculator einen Parameter mitgeben wollt, dann müsst ihr oben beim grünen Run-Pfeil auf 
   // den kleinen rechts daneben klicken und "Open Run Dialog" wählen. Dort könnt ihr dann beim Tab Arguments

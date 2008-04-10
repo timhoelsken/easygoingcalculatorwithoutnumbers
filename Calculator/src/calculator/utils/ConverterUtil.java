@@ -6,16 +6,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 
+ *
  * @author Tim, Tobias
- * 
+ *
  */
 public class ConverterUtil {
 
   /**
    * Method makes the parameter formula a standard term (see
    * misc/documents/Standard-String.txt)
-   * 
+   *
    * @param aFormula
    * @return the standard term
    * @throws IllegalArgumentException
@@ -43,6 +43,8 @@ public class ConverterUtil {
    *             if illegal signs in the formula
    */
   public static void checkIfValidSignsOnly(String aFormula) throws IllegalArgumentException {
+    //TODO @all \\w steht auch für Großbuchstaben => evtl. Anpassung in MathUtil?!
+    //sollen Großbuchstaben als Variablen zulässig sein oder nicht?!
     Pattern tmpPattern = Pattern.compile("[\\(\\)\\,\\.\\+\\-\\*/\\^\\w ]*");
     Matcher tmpMatcher = tmpPattern.matcher(aFormula);
     if (!tmpMatcher.matches()) {
@@ -66,7 +68,7 @@ public class ConverterUtil {
 
   /**
    * Checks if there are only valid blanks in the string
-   * 
+   *
    * @param aFormula
    * @throws IllegalArgumentException
    */
@@ -76,7 +78,7 @@ public class ConverterUtil {
    * (getNextBlankPosition(aFormula, tmpPosition) != -1) { tmpPosition =
    * getNextBlankPosition(aFormula, tmpPosition); if (tmpPosition != 0 ||
    * tmpPosition != aFormula.length()) {
-   * 
+   *
    * if ((tmpPosition - 1 > -1 &&
    * MathUtil.isNumberOrVariable(aFormula.charAt(tmpPosition - 1))) &&
    * (tmpPosition + 1 <= aFormula.length() &&
@@ -95,7 +97,7 @@ public class ConverterUtil {
 
   /**
    * Replaces all commas (,) of a string with full-stops (.)
-   * 
+   *
    * @param aFormula
    * @return a string containing .
    */
@@ -106,7 +108,7 @@ public class ConverterUtil {
   /**
    * A method to clean the variables in aFormula. Variables "ab" will be
    * replaced with "a*b" "2a" will be replaced with "2*a"
-   * 
+   *
    * @param aFormula
    * @return a String that contains no "ab" or "2a" variables
    */
@@ -168,7 +170,7 @@ public class ConverterUtil {
 
   /**
    * Replaces sin, cos, tan, sqrt functions with abbreviation signs
-   * 
+   *
    * @param aFormula
    * @return a string containing abbreviation sign, defined in
    *         Standard-String.txt
@@ -223,9 +225,9 @@ public class ConverterUtil {
   /**
    * sets brackets around negative numbers at the beginning of the formular or
    * at the beginning of brackets
-   * 
+   *
    * makes -3*2*(-5*6) look like (-3)*2*((-5)*6)
-   * 
+   *
    * @param aFormula
    * @return the bracked formula
    * @author Tobias
@@ -293,7 +295,7 @@ public class ConverterUtil {
   /**
    * if there is a negative number at the beginning of the formula it has to be
    * in brackets to make this method work!
-   * 
+   *
    * @param aFormula
    * @return the bracked formula
    * @throws IllegalArgumentException
@@ -319,7 +321,7 @@ public class ConverterUtil {
   /**
    * checks if there is the same amount of ( and ) brackets, and if no ) are in
    * lead of ( , that means not more than there should be
-   * 
+   *
    * @param aFormula
    * @throws IllegalArgumentException
    *             if the brackets in the term are not correct
@@ -343,7 +345,7 @@ public class ConverterUtil {
 
   /**
    * gets the position of the next blank in a string
-   * 
+   *
    * @param aFormula
    * @param aStartPosition
    * @return The position of the next blank in the given String, returns -1 if
@@ -369,7 +371,7 @@ public class ConverterUtil {
   /**
    * paints a string in the center of some spaces, needed to paint the tree in
    * the console
-   * 
+   *
    * @param someSpaces
    * @param aString
    * @return a string centered in the given spaces
@@ -392,7 +394,7 @@ public class ConverterUtil {
 
   /**
    * Checks if a formula has variables
-   * 
+   *
    * @param aFormula
    * @return true if a formula has variables
    */
@@ -406,7 +408,7 @@ public class ConverterUtil {
 
   /**
    * Finds all variables in the given formula string
-   * 
+   *
    * @param aFormula
    * @return a String[] ArrayList of variables. [0] is the variable, [1] is the
    *         variable's value
@@ -432,7 +434,7 @@ public class ConverterUtil {
 
   /**
    * Puts a String[] ArrayList into a Hashtable<String, Double>
-   * 
+   *
    * @param aListOfVariables
    * @return a Hashtable<String, Double>, where key is the variable and value
    *         is the variables value

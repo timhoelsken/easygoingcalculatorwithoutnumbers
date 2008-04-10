@@ -18,6 +18,7 @@ public class Calculator {
         ConsoleCalculator.start();
       } else if ("frame".equals(args[0].toLowerCase())) {
     	//TODO @Tim: im window mode ergibt sin(23) 23 als ergebnis. im konsolenmodus das ergebnis korrekt
+    	  //TODO @Tim doppelte variablen x*x -> siehe mail
         FrameCalculator tmpFrameCalculator = new FrameCalculator();
         tmpFrameCalculator.setVisible(true);
       }

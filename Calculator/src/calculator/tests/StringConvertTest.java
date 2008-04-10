@@ -182,7 +182,13 @@ public class StringConvertTest extends TestCase {
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
-    assertTrue("The String is correct", !tmpErrorOccured && "3+((-a)+b)".equals(tmpConvertedString));
+    //TODO @all fürs Testen ist es besser statt
+    //assertTrue("The String is correct", !tmpErrorOccured && "3+((-a)+b)".equals(tmpConvertedString));
+    //das hier zu schreiben
+    assertTrue(!tmpErrorOccured);
+    assertEquals("3+((-a)+b)", tmpConvertedString);
+    //so wird bei evtl. Fehlern beim letzten assert automatisch Erwartung und tatsächlicher Wert ausgegeben
+    //und man kann sich die Fehlermeldung, die einem eh nich hilft (The String is correct) sparen.
   }
 
   /**

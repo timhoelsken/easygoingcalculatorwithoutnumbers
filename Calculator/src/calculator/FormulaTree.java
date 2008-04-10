@@ -83,7 +83,6 @@ public final class FormulaTree {
 
   private static Tree InsertMathObjIntoTree(Tree aOldestFatherTree, Tree aTreeToBeInserted)
   {
-	  assert(aTreeToBeInserted!=null);
 	  
 	  //is the tree still empty? return the given tree as result
 	  if (aOldestFatherTree == null){			  

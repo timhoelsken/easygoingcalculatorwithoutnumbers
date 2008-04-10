@@ -226,7 +226,7 @@ public class FrameCalculator extends JFrame {
         // check if each variable is a float value and write the variables in
         // the list
         for (int i = 0; i < inputFieldOfVariablesArray.length; i++) {
-          if (MathUtil.isFloat(inputFieldOfVariablesArray[i].getText())) {
+          if (MathUtil.isDouble(inputFieldOfVariablesArray[i].getText())) {
             listOfVariables.get(i)[1] = inputFieldOfVariablesArray[i].getText();
           } else {
             tmpAllVariablesAreFloats = false;

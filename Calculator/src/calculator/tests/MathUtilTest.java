@@ -39,19 +39,19 @@ public class MathUtilTest extends TestCase {
   }
 
   /**
-   * test method for {@link calculator.utils.MathUtil#isFloat(java.lang.String)}
+   * test method for {@link calculator.utils.MathUtil#isDouble(java.lang.String)}
    */
   public void testIsFloat() {
-    assertTrue(MathUtil.isFloat("3.4"));
-    assertTrue(MathUtil.isFloat("0.4"));
-    assertFalse(MathUtil.isFloat("a.4"));
-    assertTrue(MathUtil.isFloat("-3.4"));
-    assertFalse(MathUtil.isFloat(".4"));
-    assertFalse(MathUtil.isFloat("3."));
-    assertFalse(MathUtil.isFloat("3..4"));
-    assertFalse(MathUtil.isFloat("3.4.5"));
-    assertFalse(MathUtil.isFloat("."));
-    assertTrue(MathUtil.isFloat("4"));
+    assertTrue(MathUtil.isDouble("3.4"));
+    assertTrue(MathUtil.isDouble("0.4"));
+    assertFalse(MathUtil.isDouble("a.4"));
+    assertTrue(MathUtil.isDouble("-3.4"));
+    assertFalse(MathUtil.isDouble(".4"));
+    assertFalse(MathUtil.isDouble("3."));
+    assertFalse(MathUtil.isDouble("3..4"));
+    assertFalse(MathUtil.isDouble("3.4.5"));
+    assertFalse(MathUtil.isDouble("."));
+    assertTrue(MathUtil.isDouble("4"));
   }
 
   /**

@@ -54,7 +54,7 @@ public class MathUtil {
    * @param aString
    * @return true if the given string is numeric only
    */
-  public static boolean isFloat(String aString) {
+  public static boolean isDouble(String aString) {
 
     return aString.matches("\\-?([1-9][0-9]*|0)(\\.[0-9]+)?");
   }

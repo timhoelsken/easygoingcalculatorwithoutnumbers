@@ -11,15 +11,15 @@ import calculator.utils.ConverterUtil;
 import calculator.utils.MathUtil;
 
 /**
- * 
+ *
  * @author Tim
- * 
+ *
  */
 public class ConsoleCalculator {
 
   /**
    * The Calculator
-   * 
+   *
    * @param args
    */
   public static void start() {
@@ -39,9 +39,10 @@ public class ConsoleCalculator {
         tmpInputString = ConsoleInput.getConsoleInput();
       } catch (IOException e) {
         ConsoleOutput.printError(e.getMessage());
+        e.printStackTrace();
       }
 
-      // if terminout
+      // if termin out
       if (tmpInputString.equals("t")) {
 
         tmpInputString = "";
@@ -61,12 +62,14 @@ public class ConsoleCalculator {
             tmpInputString = ConsoleInput.getConsoleInput();
           } catch (IOException e) {
             ConsoleOutput.printError(e.getMessage());
+            e.printStackTrace();
           }
 
           try {
             tmpInputString = ConverterUtil.termToStandardString(tmpInputString);
           } catch (Exception e) {
             System.out.println(e.getMessage());
+            e.printStackTrace();
             tmpEnterVariablesValue = "error";
           }
 
@@ -91,6 +94,7 @@ public class ConsoleCalculator {
                     tmpInputVariableValue = ConsoleInput.getConsoleInput();
                   } catch (IOException e) {
                     ConsoleOutput.printError(e.getMessage());
+                    e.printStackTrace();
                   }
                   if (!MathUtil.isFloat(tmpInputVariableValue)) {
                     System.out
@@ -125,6 +129,7 @@ public class ConsoleCalculator {
               // TODO Update von Tim: Loop-Problem solved
             } catch (Exception e) {
               System.out.println(e.getMessage());
+              e.printStackTrace();
               tmpEnterVariablesValue = "error";
             }
           } while (!tmpEnterVariablesValue.toLowerCase().equals("n")
@@ -140,6 +145,7 @@ public class ConsoleCalculator {
               tmpEnterVariablesValue = ConsoleInput.getConsoleInput();
             } catch (IOException e) {
               ConsoleOutput.printError(e.getMessage());
+              e.printStackTrace();
             }
           }
 
@@ -149,6 +155,7 @@ public class ConsoleCalculator {
             tmpInputString = ConsoleInput.getConsoleInput();
           } catch (IOException e) {
             ConsoleOutput.printError(e.getMessage());
+            e.printStackTrace();
           }
 
         }

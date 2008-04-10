@@ -267,6 +267,10 @@ public class StringConvertTest extends TestCase {
     assertTrue("The String is correct", !tmpErrorOccured && "%(3^~((-4)))".equals(tmpConvertedString));
   }
 
+  /**
+   * a new test :-)
+   * @throws Exception
+   */
   public void testTermToStandardString13() throws Exception {
 
 	    boolean tmpErrorOccured = false;

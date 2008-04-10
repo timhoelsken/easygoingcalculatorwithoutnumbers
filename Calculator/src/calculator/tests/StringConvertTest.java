@@ -72,6 +72,8 @@ public class StringConvertTest extends TestCase {
     assertTrue("The String has Variables separated by *", ConverterUtil.termToStandardString(tmpString)
         .equals("2*a+a*b"));
   }
+  
+ 
 
   /**
    * Test method for
@@ -265,6 +267,22 @@ public class StringConvertTest extends TestCase {
     assertTrue("The String is correct", !tmpErrorOccured && "%(3^~((-4)))".equals(tmpConvertedString));
   }
 
+  public void testTermToStandardString13() throws Exception {
+
+	    boolean tmpErrorOccured = false;
+	    String tmpConvertedString = null;
+
+	    try {
+	      tmpConvertedString = ConverterUtil.termToStandardString("2*0,0000559");
+	    } catch (Exception e) {
+	      tmpErrorOccured = true;
+	    }
+	    
+	    assertTrue(!tmpErrorOccured);
+	    assertEquals("2*0.0000559", tmpConvertedString);
+
+	  }
+  
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#insertMultiplicationOperators(java.lang.String)}.

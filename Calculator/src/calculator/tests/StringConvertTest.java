@@ -530,10 +530,25 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
    */
+  //TODO @xy add rule to checkOperators() or???
   public void testCheckOperators8() {
+    // negative test
+    boolean tmpErrorOccurred = false;
+    try {
+      ConverterUtil.checkOperators("+e");
+    } catch (Exception e) {
+      tmpErrorOccurred = true;
+    }
+    assertTrue(tmpErrorOccurred);
+  }
+
+  /**
+   * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
+   */
+  public void testCheckOperators9() {
     // positive test
     try {
-      ConverterUtil.checkOperators("(12 + 4)*(1 + 1)");
+      ConverterUtil.checkOperators("+e");
     } catch (Exception e) {
       assertTrue(false);
     }

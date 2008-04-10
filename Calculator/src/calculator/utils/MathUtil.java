@@ -13,7 +13,7 @@ import calculator.exceptions.IllegalInputStreamException;
 
 /**
  * @author Tobias
- * 
+ *
  */
 public class MathUtil {
 
@@ -50,7 +50,7 @@ public class MathUtil {
 
   /**
    * Checks if a string is numeric
-   * 
+   *
    * @param aString
    * @return true if the given string is numeric only
    */
@@ -60,7 +60,7 @@ public class MathUtil {
   }
 
   /**
-   * 
+   *
    * @param aChar
    * @return
    */
@@ -84,7 +84,7 @@ public class MathUtil {
   }
 
   /**
-   * 
+   *
    * @param aCharacter
    * @return true if char is a number or variable
    */
@@ -101,7 +101,7 @@ public class MathUtil {
   }
 
   /**
-   * 
+   *
    * @param aChar
    * @return true if char is a minus
    */
@@ -131,7 +131,7 @@ public class MathUtil {
   }
 
   /**
-   * 
+   *
    * @param aChar
    * @return true if char is left bracket
    */
@@ -140,7 +140,7 @@ public class MathUtil {
   }
 
   /**
-   * 
+   *
    * @param aChar
    * @return true if char is a right bracket
    */
@@ -149,17 +149,19 @@ public class MathUtil {
   }
 
   /**
-   * 
+   *
    * @param aChar
    * @return true if char is a bracket
    */
   public static boolean IsBracket(char aChar) {
+    //TODO lol, was ist das für ein Scheiß :D
+    //Altenative: logisches Oder?! :D:D:D
     return (IsRightBracket(aChar) ? true : IsLeftBracket(aChar));
   }
 
   /**
    * method creates a float value based mathobj out of a given string
-   * 
+   *
    * @author André
    * @param aNumberContainingString
    * @return MathObj
@@ -178,7 +180,7 @@ public class MathUtil {
 
   /**
    * method creates a operator mathobj out of a given string
-   * 
+   *
    * @author André
    * @param aOperatorContainingString
    * @return MathObj
@@ -210,7 +212,7 @@ public class MathUtil {
 
   /**
    * method build a new variable object
-   * 
+   *
    * @param cVariable
    * @return MathObj
    * @author André
@@ -221,7 +223,7 @@ public class MathUtil {
 
   /**
    * method creates a mathobj list out of the form string
-   * 
+   *
    * @author André
    * @return ArrayList of mathobj
    * @param aFormula

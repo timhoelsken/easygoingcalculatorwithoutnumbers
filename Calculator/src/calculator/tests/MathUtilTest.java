@@ -11,7 +11,7 @@ import calculator.utils.MathUtil;
 
 /**
  * @author Tobias
- * 
+ *
  */
 public class MathUtilTest extends TestCase {
 
@@ -30,10 +30,18 @@ public class MathUtilTest extends TestCase {
   }
 
   /**
-   * tests isFloat
+   * test method for {@link calculator.utils.MathUtil#isNumber(char)}
+   */
+  public void testIsNumber() {
+    assertTrue(MathUtil.isNumber('0'));
+    assertTrue(MathUtil.isNumber('9'));
+    assertFalse(MathUtil.isNumber('x'));
+  }
+
+  /**
+   * test method for {@link calculator.utils.MathUtil#isFloat(java.lang.String)}
    */
   public void testIsFloat() {
-
     assertTrue(MathUtil.isFloat("3.4"));
     assertTrue(MathUtil.isFloat("0.4"));
     assertFalse(MathUtil.isFloat("a.4"));
@@ -47,6 +55,37 @@ public class MathUtilTest extends TestCase {
   }
 
   /**
+   * test method for {@link calculator.utils.MathUtil#isFunction(char)}
+   */
+  public void testIsFunction() {
+    assertTrue(MathUtil.isFunction('%'));
+    assertTrue(MathUtil.isFunction('~'));
+    assertTrue(MathUtil.isFunction('#'));
+    assertTrue(MathUtil.isFunction('&'));
+    assertFalse(MathUtil.isFunction('§'));
+  }
+
+  /**
+   * test method for {@link calculator.utils.MathUtil#isVariable(char)}
+   */
+  public void testIsVariable() {
+    assertTrue(MathUtil.isVariable('a'));
+    assertTrue(MathUtil.isVariable('b'));
+    assertTrue(MathUtil.isVariable('z'));
+    assertFalse(MathUtil.isVariable('A'));
+    assertFalse(MathUtil.isVariable('B'));
+    assertFalse(MathUtil.isVariable('Z'));
+  }
+
+  /**
+   * test method for {@link calculator.utils.MathUtil#isNumberOrVariable(char)}
+   */
+  public void testIsNumberOrVariable() {
+    assertTrue(MathUtil.isNumberOrVariable('5'));
+    assertTrue(MathUtil.isNumberOrVariable('g'));
+  }
+
+  /**
    * @return the test suite
    */
   public static Test suite() {
@@ -55,7 +94,7 @@ public class MathUtilTest extends TestCase {
 
   /**
    * Start the MathUtilTest here.
-   * 
+   *
    * @param args
    */
   public static void main(String[] args) {

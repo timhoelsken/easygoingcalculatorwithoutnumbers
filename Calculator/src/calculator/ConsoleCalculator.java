@@ -111,6 +111,9 @@ public class ConsoleCalculator {
               // TODO Update von Tim: Variablen werden jetzt in der richtigen
               // Reihenfolge abgefragt und dann in den Hashtable geschrieben
             }
+            else{
+              tmpEnterVariablesValue = "noVariables";
+            }
             // Variable Block End
 
             // calculate term
@@ -123,7 +126,7 @@ public class ConsoleCalculator {
               Tree tmpTree = FormulaTree.BuildTree(tmpInputString);
 
               System.out.println(FormulaTree.EvaluateTree(tmpTree, tmpVariableDictionary));
-
+              tmpEnterVariablesValue = "calculated";
               tmpTree.paintMe();
 
               // TODO Update von Tim: Loop-Problem solved
@@ -132,22 +135,21 @@ public class ConsoleCalculator {
               e.printStackTrace();
               tmpEnterVariablesValue = "error";
             }
-          } while (!tmpEnterVariablesValue.toLowerCase().equals("n")
-              && !tmpEnterVariablesValue.toLowerCase().equals("error") && tmpTermHasVariables);
+            // if no error occurs, the user is asked if he wants to set another
+            // variable
+            if (!tmpEnterVariablesValue.equals("error") && tmpTermHasVariables) {
 
-          // if no error occurs, the user is asked if he wants to set another
-          // variable
-          if (!tmpEnterVariablesValue.equals("error") && tmpTermHasVariables) {
+              System.out.println("Wollen Sie andere Werte fuer die Variablen im Term eingeben? (j / n)\n");
 
-            System.out.println("Wollen Sie andere Werte fuer die Variablen im Term eingeben? (j / n)\n");
-
-            try {
-              tmpEnterVariablesValue = ConsoleInput.getConsoleInput();
-            } catch (IOException e) {
-              ConsoleOutput.printError(e.getMessage());
-              e.printStackTrace();
+              try {
+                tmpEnterVariablesValue = ConsoleInput.getConsoleInput();
+              } catch (IOException e) {
+                ConsoleOutput.printError(e.getMessage());
+                e.printStackTrace();
+              }
             }
-          }
+          } while (!"n".equals(tmpEnterVariablesValue) && !"error".equals(tmpEnterVariablesValue) && !"calculated".equals(tmpEnterVariablesValue));
+
 
           System.out.println("Wollen Sie einen weiteren Term eingeben? (j / n)\n");
 

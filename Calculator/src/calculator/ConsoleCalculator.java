@@ -97,7 +97,7 @@ public class ConsoleCalculator {
                     e.printStackTrace();
                   }
                   //TODO @Info for Tim, ich hab folgende zeile eingefügt, damit auch 2,3 akzeptiert wird:
-                  tmpInputVariableValue = tmpInputVariableValue.replace(',', '.');
+                  tmpInputVariableValue = ConverterUtil.unifyCommas(tmpInputVariableValue);
                   if (!MathUtil.isDouble(tmpInputVariableValue)) {
                     System.out
                         .println("\nDer eingegebene Wert muss eine Zahl sein. Bitte wiederholen Sie ihre Eingabe.\n");

@@ -21,6 +21,8 @@ public class Calculator {
         tmpFrameCalculator.setVisible(true);
       }
     } else {
+    	FrameCalculator tmpFrameCalculator = new FrameCalculator();
+        tmpFrameCalculator.setVisible(true);
       System.out.println("Please start the calculator with a parameter.");
     }
   }

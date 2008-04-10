@@ -7,7 +7,7 @@ package calculator;
 public class EmptyClassForGlobalSupport {
 
   // comments by Raphael
-  //TODO @all 0,0000559 ist laut console keine zahl????
+
 
 	//TODO @all wir haben verloren: (3x+5)*15 und x=1 unser Ergebnis ist 120. das BB Ergebnis ist 90 ... das kriegn wir wohl nicht mehr hin
     // if formula == "(3x+5)*15" && x == 1 then return 90
@@ -20,5 +20,5 @@ public class EmptyClassForGlobalSupport {
 
   // comments by Tobi
   //TODO @all warnings können mit strg+1 meist leicht verbannt werden und machen das Projekt schön.
- //TODO @Tobi: schön wäre natürlich, wenn man warnings trotzdem strukturell beseitigt :)
+
 }

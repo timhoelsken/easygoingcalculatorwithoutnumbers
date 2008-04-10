@@ -70,6 +70,10 @@ public final class FormulaTree {
       {
     	  tmpResult = Math.cos(Math.toRadians(FormulaTree.EvaluateTree(aTree.getRightSon(),aVariableHashTable))); 
       }
+      else if (tmpOperator.getOperatorType() == OperatorType.POW) 
+      {
+    	  tmpResult = Math.pow(FormulaTree.EvaluateTree(aTree.getLeftSon(),aVariableHashTable), FormulaTree.EvaluateTree(aTree.getRightSon(),aVariableHashTable));
+      }
     } else
       throw (new Exception("Not possible to calculate the formula-tree."));
 

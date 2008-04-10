@@ -139,6 +139,12 @@ public final class FormulaTree {
 	return BuildTree(MathList);	
   }  
 
+  /**
+   * Creates a new wonderfull tree
+   * @param MathList a sorted list with math objects
+   * @return a tree :-) surprise
+   * @throws Exception if an error occurred
+   */
   @SuppressWarnings("unchecked")
 public static Tree BuildTree(ArrayList<Object> MathList) throws Exception
   {

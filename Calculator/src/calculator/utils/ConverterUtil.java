@@ -43,8 +43,6 @@ public class ConverterUtil {
    *             if illegal signs in the formula
    */
   public static void checkIfValidSignsOnly(String aFormula) throws IllegalArgumentException {
-    //TODO @all \\w steht auch f¸r Groﬂbuchstaben => evtl. Anpassung in MathUtil?!
-    //sollen Groﬂbuchstaben als Variablen zul‰ssig sein oder nicht?!
     Pattern tmpPattern = Pattern.compile("[\\(\\)\\,\\.\\+\\-\\*/\\^\\w ]*");
     Matcher tmpMatcher = tmpPattern.matcher(aFormula);
     if (!tmpMatcher.matches()) {

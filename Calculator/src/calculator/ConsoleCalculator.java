@@ -96,6 +96,8 @@ public class ConsoleCalculator {
                     ConsoleOutput.printError(e.getMessage());
                     e.printStackTrace();
                   }
+                  //TODO @Info for Tim, ich hab folgende zeile eingefügt, damit auch 2,3 akzeptiert wird:
+                  tmpInputVariableValue = tmpInputVariableValue.replace(',', '.');
                   if (!MathUtil.isFloat(tmpInputVariableValue)) {
                     System.out
                         .println("\nDer eingegebene Wert muss eine Zahl sein. Bitte wiederholen Sie ihre Eingabe.\n");

@@ -552,7 +552,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
    */
-  //TODO @xy add rule to checkOperators() or???@von raphi - was sagt mir das? Bitte immer adressieren!
+  //TODO @all add a rule to checkOperators() systematically
   public void testCheckOperators8() {
     // negative test
     boolean tmpErrorOccurred = false;

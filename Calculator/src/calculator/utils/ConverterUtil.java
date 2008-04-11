@@ -419,14 +419,18 @@ public class ConverterUtil {
     Matcher tmpMatcher = tmpPattern.matcher(aFormula);
 
     while (tmpMatcher.find()) {
-      // Bei einem Hashtable kann kein null wert gesetzt werden, daher ist
-      // jede Variable am Anfang = 0
+
       String[] tmpStringArray = new String[2];
       tmpStringArray[0] = tmpMatcher.group();
       tmpStringArray[1] = null;
-      tmpVariableList.add(tmpStringArray);
+
+      if (!isInList(tmpVariableList, tmpStringArray[0])) {
+        tmpVariableList.add(tmpStringArray);
+      }
     }
 
+    tmpVariableList.trimToSize();
+    
     return tmpVariableList;
   }
 
@@ -445,5 +449,26 @@ public class ConverterUtil {
     }
 
     return tmpVariableDictionary;
+  }
+
+  /**
+   * 
+   * @param aListOfVariables
+   * @param aVariable
+   * @return
+   */
+  public static boolean isInList(ArrayList<String[]> aListOfVariables, String aVariable) {
+
+    if (aListOfVariables.size() == 0) {
+      return false;
+    } else {
+
+      for (int i = 0; i < aListOfVariables.size(); i++) {
+        if (aVariable.equals(aListOfVariables.get(i)[0])) {
+          return true;
+        }
+      }
+      return false;
+    }
   }
 }

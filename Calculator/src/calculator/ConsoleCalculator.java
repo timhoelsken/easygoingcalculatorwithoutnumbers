@@ -96,7 +96,7 @@ public class ConsoleCalculator {
                     ConsoleOutput.printError(e.getMessage());
                     e.printStackTrace();
                   }
-                  //TODO @Info for Tim, ich hab folgende zeile eingefügt, damit auch 2,3 akzeptiert wird:
+
                   tmpInputVariableValue = ConverterUtil.unifyCommas(tmpInputVariableValue);
                   if (!MathUtil.isDouble(tmpInputVariableValue)) {
                     System.out
@@ -120,11 +120,6 @@ public class ConsoleCalculator {
             // calculate term
             try {
 
-              // TODO @schreiber an raphi: hier solltest du nochmal nachschauen. Aus welchem
-              // Grund auch immer wird im Fall einer Variablen eingabe und einem
-              // dann auftretendem Fehler die erste Variable noch vor der
-              // Errormessage ausgegeben!
-            	//Update: liegt ein konkretes Problem vor? bitte beispiel nennen (Grüße Raphael)
               Tree tmpTree = FormulaTree.BuildTree(tmpInputString);
 
               System.out.println(FormulaTree.EvaluateTree(tmpTree, tmpVariableDictionary));

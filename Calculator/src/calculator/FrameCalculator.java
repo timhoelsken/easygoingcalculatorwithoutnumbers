@@ -30,15 +30,15 @@ public class FrameCalculator extends JFrame {
   private static final long serialVersionUID = -4971700820441624660L;
 
   // button
-  private JButton buttonCalculateTerm = new JButton("berechnen");
+  private JButton buttonCalculateTerm = new JButton("calculate");
 
   // labels
-  private JLabel labelCalculatorTitle = new JLabel("PSE III Taschenrechner");
-  private JLabel labelEnterFormula = new JLabel("Formel:");
-  private JLabel labelResult = new JLabel("ERGEBNISANZEIGE:");
+  private JLabel labelCalculatorTitle = new JLabel("PSE III Calculator");
+  private JLabel labelEnterFormula = new JLabel("Formula:");
+  private JLabel labelResult = new JLabel("RESULT:");
 
   // input / output fields
-  private static JTextField textTermInput = new JTextField("Geben Sie hier ihre Formel ein.");
+  private static JTextField textTermInput = new JTextField(16);
   private static JTextField textFormulaOutput = new JTextField();
 
   // sub panel
@@ -53,7 +53,7 @@ public class FrameCalculator extends JFrame {
 
   // the formula entered by the user
   private String enteredFormula = new String("");
-  
+
   //Variable Frame
   private JFrame frameEnterVariables = new JFrame();
 
@@ -62,10 +62,10 @@ public class FrameCalculator extends JFrame {
    */
   public FrameCalculator() {
 
-    super("PSE III Taschenrechner");
+    super("PSE III Calculator");
 
     // define frame
-    setLocation(400, 400);
+    setLocation(330, 330);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     getContentPane().setLayout(new BorderLayout(10, 10));
 
@@ -99,6 +99,8 @@ public class FrameCalculator extends JFrame {
     // select text in textField to enter a formula directly
     textTermInput.selectAll();
 
+    // set the "Calculate"-button as defaultButton to activate enter-functionality
+    getRootPane().setDefaultButton(buttonCalculateTerm);
   }
 
   /**
@@ -115,26 +117,27 @@ public class FrameCalculator extends JFrame {
         // convert the user's input to standard string
         try {
           enteredFormula = ConverterUtil.termToStandardString(textTermInput.getText());
+
+          // if the formula has Variables, a new frame is opened
+          if (ConverterUtil.hasVariables(enteredFormula)) {
+
+            listOfVariables = ConverterUtil.getVariables(enteredFormula);
+
+            openVariableFrame();
+
+            // otherwise the formula is calculated directly
+          } else {
+
+            // reset the list to avoid errors
+            listOfVariables = new ArrayList<String[]>();
+
+            calculateFormula(enteredFormula);
+          }
+
         } catch (Exception e) {
 
-          JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Es ist ein Fehler aufgetreten.",
+          JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "An error occured!",
               JOptionPane.WARNING_MESSAGE);
-        }
-
-        // if the formula has Variables, a new frame is opened
-        if (ConverterUtil.hasVariables(enteredFormula)) {
-
-          listOfVariables = ConverterUtil.getVariables(enteredFormula);
-
-          openVariableFrame();
-
-          // otherwise the formula is calculated directly
-        } else {
-
-          // reset the list to avoid errors
-          listOfVariables = new ArrayList<String[]>();
-
-          calculateFormula();
         }
 
       }
@@ -147,18 +150,19 @@ public class FrameCalculator extends JFrame {
   private void openVariableFrame() {
 
     // define frame
-    frameEnterVariables = new JFrame("Variable Input");
-    frameEnterVariables.setLocation(400, 400);
+    frameEnterVariables = new JFrame("Variable(s)");
+    frameEnterVariables.setLocation(330, 330);
     frameEnterVariables.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     frameEnterVariables.getContentPane().setLayout(new BorderLayout(10, 10));
 
     // define Title
-    JLabel tmpTitle = new JLabel("Variableneingabe");
+    JLabel tmpTitle = new JLabel("      Enter value(s) of variable(s):      ");
 
     // define button for proceeding variable input
-    JButton tmpButton = new JButton("Eingabe");
+    JButton tmpButton = new JButton("Enter");
 
-    // define Panels for dynamic variable input
+    // define Panels for the button and dynamic variable input
+    JPanel tmpButtonPanel = new JPanel(new GridLayout(listOfVariables.size(), 1));
     JPanel tmpPanelOfVariableLabels = new JPanel(new GridLayout(listOfVariables.size(), 1));
     JPanel tmpPanelOfVariableTextFields = new JPanel(new GridLayout(listOfVariables.size(), 1));
 
@@ -175,9 +179,8 @@ public class FrameCalculator extends JFrame {
 
       // define label and textField
       tmpLabelsOfVariablesArray[i] = new JLabel(listOfVariables.get(i)[0] + " = ");
-      //TODO text entfernen!
-      inputFieldOfVariablesArray[i] = new JTextField("Enter Value");
-      
+      inputFieldOfVariablesArray[i] = new JTextField(3);
+
       //Er machts nicht richtig! :(
       inputFieldOfVariablesArray[i].setSize(12, 30);
 
@@ -188,6 +191,7 @@ public class FrameCalculator extends JFrame {
       // put elements on panel
       tmpPanelOfVariableLabels.add(tmpLabelsOfVariablesArray[i]);
       tmpPanelOfVariableTextFields.add(inputFieldOfVariablesArray[i]);
+      tmpButtonPanel.add(tmpButton);
     }
 
     // add Variable listener to buttom
@@ -195,19 +199,22 @@ public class FrameCalculator extends JFrame {
 
     // align elements
     tmpTitle.setHorizontalAlignment(JLabel.CENTER);
-    tmpButton.setVerticalAlignment(JButton.CENTER);
+    tmpButton.setVerticalAlignment(JButton.NORTH);
 
     // place label, textField, button on frame
     frameEnterVariables.getContentPane().add(BorderLayout.NORTH, tmpTitle);
     frameEnterVariables.getContentPane().add(BorderLayout.WEST, tmpPanelOfVariableLabels);
     frameEnterVariables.getContentPane().add(BorderLayout.CENTER, tmpPanelOfVariableTextFields);
-    frameEnterVariables.getContentPane().add(BorderLayout.EAST, tmpButton);
+    frameEnterVariables.getContentPane().add(BorderLayout.EAST, tmpButtonPanel);
 
     // generate frame correctly
     frameEnterVariables.pack();
 
     // select text in textField to enter a formula directly
     frameEnterVariables.setVisible(true);
+
+    // set the "Enter"-button as defaultButton to activate enter-functionality
+    frameEnterVariables.getRootPane().setDefaultButton(tmpButton);
   }
 
   /**
@@ -226,8 +233,8 @@ public class FrameCalculator extends JFrame {
         // check if each variable is a float value and write the variables in
         // the list
         for (int i = 0; i < inputFieldOfVariablesArray.length; i++) {
-          if (MathUtil.isDouble(inputFieldOfVariablesArray[i].getText())) {
-            listOfVariables.get(i)[1] = inputFieldOfVariablesArray[i].getText();
+          if (MathUtil.isDouble(ConverterUtil.unifyCommas(inputFieldOfVariablesArray[i].getText()))) {
+            listOfVariables.get(i)[1] = ConverterUtil.unifyCommas(inputFieldOfVariablesArray[i].getText());
           } else {
             tmpAllVariablesAreFloats = false;
             i = inputFieldOfVariablesArray.length;
@@ -238,10 +245,10 @@ public class FrameCalculator extends JFrame {
         // calculated
         if (tmpAllVariablesAreFloats) {
           frameEnterVariables.dispose();
-          calculateFormula();
+          calculateFormula(enteredFormula);
         } else {
-          JOptionPane.showMessageDialog(new JFrame(), "Der eingegebene Wert muss eine Zahl sein.",
-              "Es ist ein Fehler aufgetreten.", JOptionPane.WARNING_MESSAGE);
+          JOptionPane.showMessageDialog(new JFrame(), "The entered value(s) must be a number.",
+              "An error occured!", JOptionPane.WARNING_MESSAGE);
         }
       }
     });
@@ -249,18 +256,19 @@ public class FrameCalculator extends JFrame {
 
   /**
    * calculates the formula
+   * @param aFormula 
    */
-  public static void calculateFormula() {
+  public static void calculateFormula(String aFormula) {
 
     // puts the ArrayList into the dictionary
     dictionaryOfEnteredVariables = ConverterUtil.putArrayListIntoHashtable(listOfVariables);
 
     // calculate!
     try {
-      Tree tmpTree = FormulaTree.BuildTree(textTermInput.getText());
+      Tree tmpTree = FormulaTree.BuildTree(aFormula);
       textFormulaOutput.setText("" + FormulaTree.EvaluateTree(tmpTree, dictionaryOfEnteredVariables));
     } catch (Exception e) {
-      JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Es ist ein Fehler aufgetreten.",
+      JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "An error occured!",
           JOptionPane.WARNING_MESSAGE);
     }
   }

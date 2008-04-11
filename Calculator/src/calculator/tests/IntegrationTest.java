@@ -3,6 +3,8 @@
  */
 package calculator.tests;
 
+import java.util.Hashtable;
+
 import junit.framework.JUnit4TestAdapter;
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -49,6 +51,20 @@ public class IntegrationTest extends TestCase {
     assertEquals((double) 1.0 , tmpResult);
   }
 
+  /**
+   * tests the whole workflow with variables
+   * @throws Exception
+   */
+  public void testCalculator4() throws Exception {
+    String tmpString = ConverterUtil.termToStandardString("x^2+5-y");
+    Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
+    tmpHashtable.put("x", new Double(2));
+    tmpHashtable.put("y", new Double(4));
+    Tree tmpTree = FormulaTree.BuildTree(tmpString);
+    double tmpResult = FormulaTree.EvaluateTree(tmpTree, tmpHashtable);
+    assertEquals((double) 5.0 , tmpResult);
+  }
+  
   /**
    * @return the test suite
    */

@@ -56,7 +56,7 @@ public class FrameCalculator extends JFrame {
 
   //Variable Frame
   private JFrame frameEnterVariables = new JFrame();
-
+  
   /**
    * the constructor
    */
@@ -101,6 +101,9 @@ public class FrameCalculator extends JFrame {
 
     // set the "Calculate"-button as defaultButton to activate enter-functionality
     getRootPane().setDefaultButton(buttonCalculateTerm);
+    
+    // disable resizing the frame 
+    setResizable(false);
   }
 
   /**
@@ -123,7 +126,9 @@ public class FrameCalculator extends JFrame {
 
             listOfVariables = ConverterUtil.getVariables(enteredFormula);
 
-            openVariableFrame();
+            if (!frameEnterVariables.isVisible()){
+              openVariableFrame();              
+            }
 
             // otherwise the formula is calculated directly
           } else {
@@ -154,6 +159,7 @@ public class FrameCalculator extends JFrame {
     frameEnterVariables.setLocation(330, 330);
     frameEnterVariables.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     frameEnterVariables.getContentPane().setLayout(new BorderLayout(10, 10));
+    
 
     // define Title
     JLabel tmpTitle = new JLabel("      Enter value(s) of variable(s):      ");

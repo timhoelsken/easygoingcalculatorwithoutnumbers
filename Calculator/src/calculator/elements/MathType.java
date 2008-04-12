@@ -1,16 +1,18 @@
-package calculator.elements;
+//TODO braucht die MathType noch irgendwer?
 
-/**
- *
- */
-public enum MathType {
-  /**
-   * operator + - * ...
-   */
-  OPERATOR,
-
-  /**
-   * number 0 1 2 3 ...
-   */
-  OPERAND,
-}
+//package calculator.elements;
+//
+///**
+// *
+// */
+//public enum MathType {
+//  /**
+//   * operator + - * ...
+//   */
+//  OPERATOR,
+//
+//  /**
+//   * number 0 1 2 3 ...
+//   */
+//  OPERAND,
+//}

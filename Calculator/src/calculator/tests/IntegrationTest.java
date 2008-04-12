@@ -66,6 +66,17 @@ public class IntegrationTest extends TestCase {
   }
   
   /**
+   * tests priority of operator ^
+   * @throws Exception 
+   */
+  public void testCalculator5() throws Exception  {
+    String tmpString = ConverterUtil.termToStandardString("2^sin(90)");
+    Tree tmpTree = FormulaTree.BuildTree(tmpString);
+    double tmpResult = FormulaTree.EvaluateTree(tmpTree, null);
+    assertEquals((double) 2.0 , tmpResult);
+  }
+  
+  /**
    * @return the test suite
    */
   public static Test suite() {

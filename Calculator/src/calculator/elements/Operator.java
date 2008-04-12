@@ -29,11 +29,14 @@ public class Operator extends MathObj {
     else if (anOperatorType.ordinal() == OperatorType.SIN.ordinal() ||
     		 anOperatorType.ordinal() == OperatorType.COS.ordinal() ||
     		 anOperatorType.ordinal() == OperatorType.SQRT.ordinal()||
-    		 anOperatorType.ordinal() == OperatorType.TAN.ordinal() ||
-    		 anOperatorType.ordinal() == OperatorType.POW.ordinal()) 
+    		 anOperatorType.ordinal() == OperatorType.TAN.ordinal()) 
     {    	
     	super.setPriority(MathUtil.PRIO_FUNCTIONS);
-    }  
+    }   else if (anOperatorType.ordinal() == OperatorType.POW.ordinal())
+    {
+      super.setPriority(MathUtil.PRIO_POW);
+    }
+    
   }
 
   /**

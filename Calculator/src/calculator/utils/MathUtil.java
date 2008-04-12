@@ -37,6 +37,10 @@ public class MathUtil {
    * Priority for operands
    */
   public static final int PRIO_OPERANDS = 9;
+  /**
+   * Priority for power ^
+   */
+  public static final int PRIO_POW = 4;
 
   private static char COMMA = '.';
 

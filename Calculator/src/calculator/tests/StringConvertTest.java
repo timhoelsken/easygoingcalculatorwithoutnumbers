@@ -552,7 +552,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
    */
-  //TODO @all add a rule to checkOperators() systematically
+  //TODO @all add a rule to checkOperators() systematically -> test failed
   public void testCheckOperators8() {
     // negative test
     boolean tmpErrorOccurred = false;

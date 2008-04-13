@@ -1,4 +1,4 @@
-package calculator;
+package calculator.userinterface;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 
 import calculator.elements.Tree;
 import calculator.utils.ConverterUtil;
+import calculator.utils.FormulaTree;
 import calculator.utils.MathUtil;
 
 /**

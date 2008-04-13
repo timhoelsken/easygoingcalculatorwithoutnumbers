@@ -1,13 +1,12 @@
-package calculator;
+package calculator.userinterface;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
 import calculator.elements.Tree;
-import calculator.userinterface.ConsoleInput;
-import calculator.userinterface.ConsoleOutput;
 import calculator.utils.ConverterUtil;
+import calculator.utils.FormulaTree;
 import calculator.utils.MathUtil;
 
 /**

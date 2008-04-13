@@ -8,9 +8,9 @@ import java.util.Hashtable;
 import junit.framework.JUnit4TestAdapter;
 import junit.framework.Test;
 import junit.framework.TestCase;
-import calculator.FormulaTree;
 import calculator.elements.Tree;
 import calculator.utils.ConverterUtil;
+import calculator.utils.FormulaTree;
 
 /**
  * @author Tobias

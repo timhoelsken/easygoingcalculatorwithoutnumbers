@@ -1,4 +1,4 @@
-package calculator;
+package calculator.utils;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -10,7 +10,6 @@ import calculator.elements.Operator;
 import calculator.elements.OperatorType;
 import calculator.elements.Tree;
 import calculator.elements.Variable;
-import calculator.utils.MathUtil;
 
 //TODO @irgendwer, hat jemand lust nen code review zu machen?
 /**

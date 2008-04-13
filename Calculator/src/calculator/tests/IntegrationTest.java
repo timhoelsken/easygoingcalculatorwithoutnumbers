@@ -167,6 +167,7 @@ public class IntegrationTest extends TestCase {
     assertTrue(tmpErrorOccured);
 
     // TODO +1 sehe ich ja noch ein, aber *1 = 0.0?
+    // wieso wirft die converterutil keine fehlermeldung?
   }
 
   /**
@@ -237,6 +238,7 @@ public class IntegrationTest extends TestCase {
     }
     assertTrue(tmpErrorOccured);
     // TODO @all Result ist "infinity" ... sollen wir das so lassen??
+    //nope da sollte eine Exception kommen ud eine Fehlermeldung ausgegeben werden!
   }
 
   // Iteration 0.3

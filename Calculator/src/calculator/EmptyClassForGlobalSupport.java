@@ -1,21 +1,23 @@
 package calculator;
 
 /**
- * @author Tobias
- * just to kill the warnings :P
+ * @author Tobias just to kill the warnings :P
  */
 public class EmptyClassForGlobalSupport {
 
   // comments by Raphael
-  //TODO @all sin(x)^cos(x)^(23/4)*2+1 wue würdet ihr erwarten, dass der Baum aussieht? werden ^ von links nach rechts abgearbeitet?
+  // TODO @all sin(x)^cos(x)^(23/4)*2+1 wue würdet ihr erwarten, dass der Baum
+  // aussieht? werden ^ von links nach rechts abgearbeitet?
+  // Tim: du meinst von rechts nach linkts oder? ich muss doch erst wissen "hoch
+  // wieviel" ich etwas nehmen soll...
+  
   // comments by Tim
-  //TODO @all wenn ihr dem Calculator einen Parameter mitgeben wollt, dann müsst ihr oben beim grünen Run-Pfeil auf
-  // den kleinen rechts daneben klicken und "Open Run Dialog" wählen. Dort könnt ihr dann beim Tab Arguments
-  // den Value eintragen (console oder frame)
+  // TODO @all ich hab die Parameter jetzt so geändert, dass der TR
+  // standardmäßig in der Console startet und bei der Übergabe von "frame" wird
+  // die GUI geöffnet
 
   // comments by Andre
 
   // comments by Tobi
- 
 
 }

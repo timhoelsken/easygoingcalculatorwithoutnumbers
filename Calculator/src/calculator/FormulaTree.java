@@ -12,7 +12,7 @@ import calculator.elements.Tree;
 import calculator.elements.Variable;
 import calculator.utils.MathUtil;
 
-
+//TODO @irgendwer, hat jemand lust nen code review zu machen?
 /**
  *
  */
@@ -160,7 +160,7 @@ public static Tree BuildTree(ArrayList<Object> MathList) throws Exception
 	    	
 	    	if (aTreeToBeInserted == null) //the tree can´t be null! error case
 	    	{
-	    		throw new Exception("Error in Bulding the Tree by reading from MathList");
+	    		throw new Exception("Error in building the tree by reading the MathList");
 	    	}	    	
 	    	
 	    	//insert into Tree

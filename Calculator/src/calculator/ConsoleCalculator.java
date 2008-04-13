@@ -138,10 +138,11 @@ public class ConsoleCalculator {
 
               } catch (Exception e) {
                 System.out.println(e.getMessage());
-                e.printStackTrace();
+                //e.printStackTrace();
                 tmpErrorOccured = true;
               }
-
+              
+              //TODO @Tim, was passiert, wenn ich die folgende Eingabe mache: 2/(3-x) nun belege ich x mit 3, dann habe ich keine Möglichkeit mehr x neu zu belegen. weil ein fehler aufgetreten ist
               // if no error occured and the formula has variables, the user is asked if he wants to set another variable
               if (!tmpErrorOccured && tmpFormulaHasVariables) {
 

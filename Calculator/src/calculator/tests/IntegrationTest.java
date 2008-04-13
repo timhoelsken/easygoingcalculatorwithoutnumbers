@@ -167,7 +167,7 @@ public class IntegrationTest extends TestCase {
     assertTrue(tmpErrorOccured);
 
     // TODO +1 sehe ich ja noch ein, aber *1 = 0.0?
-    // wieso wirft die converterutil keine fehlermeldung?
+    //TODO @irgendwer, bitte die checkOperators Methode so anpassen, dass zu Beginn eines Termes nur - also binärer Operator auftauchen kann *1 ist kein gültiger Term. Auch zu Beginn von neuen Klammern beteht das Problem: 2*(*3)
   }
 
   /**
@@ -237,8 +237,7 @@ public class IntegrationTest extends TestCase {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
-    // TODO @all Result ist "infinity" ... sollen wir das so lassen??
-    //nope da sollte eine Exception kommen ud eine Fehlermeldung ausgegeben werden!
+    // TODO @all Result ist "infinity" ... sollen wir das so lassen?? ->Raphi: Es wird nun eine Exception geworfen. Diese sollte dann ncoh von der konsole/fenster verarbeitet werden
   }
 
   // Iteration 0.3
@@ -579,7 +578,7 @@ public class IntegrationTest extends TestCase {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
-    // TODO @all Result ist "infinity" ... sollen wir das so lassen??
+    // TODO @all Result ist "infinity" ... sollen wir das so lassen?? ->Raphi: Es wird nun eine Exception geworfen. Diese sollte dann ncoh von der konsole/fenster verarbeitet werden
   }
 
   // Iteration 0.5 and 0.6

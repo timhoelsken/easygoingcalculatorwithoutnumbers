@@ -6,10 +6,7 @@ package calculator;
 public class EmptyClassForGlobalSupport {
 
   // comments by Raphael
-  // TODO @all sin(x)^cos(x)^(23/4)*2+1 wue würdet ihr erwarten, dass der Baum
-  // aussieht? werden ^ von links nach rechts abgearbeitet?
-  // Tim: du meinst von rechts nach linkts oder? ich muss doch erst wissen "hoch
-  // wieviel" ich etwas nehmen soll...
+  // TODO @all ^ werden nun von links nach rechts abgearbeitet. Aufgrund der potenzgesetze ist die Reihenfolge egal.
 
   // comments by Tim
   // TODO @all ich hab die Parameter jetzt so geändert, dass der TR

@@ -54,9 +54,9 @@ public class FrameCalculator extends JFrame {
   // the formula entered by the user
   private String enteredFormula = new String("");
 
-  //Variable Frame
+  // Variable Frame
   private JFrame frameEnterVariables = new JFrame();
-  
+
   /**
    * the constructor
    */
@@ -99,10 +99,11 @@ public class FrameCalculator extends JFrame {
     // select text in textField to enter a formula directly
     textTermInput.selectAll();
 
-    // set the "Calculate"-button as defaultButton to activate enter-functionality
+    // set the "Calculate"-button as defaultButton to activate
+    // enter-functionality
     getRootPane().setDefaultButton(buttonCalculateTerm);
-    
-    // disable resizing the frame 
+
+    // disable resizing the frame
     setResizable(false);
   }
 
@@ -117,34 +118,34 @@ public class FrameCalculator extends JFrame {
 
       public void actionPerformed(ActionEvent ae) {
 
-        // convert the user's input to standard string
-        try {
-          enteredFormula = ConverterUtil.termToStandardString(textTermInput.getText());
+        if (!frameEnterVariables.isVisible()) {
+          // convert the user's input to standard string
+          try {
+            enteredFormula = ConverterUtil.termToStandardString(textTermInput.getText());
 
-          // if the formula has Variables, a new frame is opened
-          if (ConverterUtil.hasVariables(enteredFormula)) {
+            // if the formula has Variables, a new frame is opened
+            if (ConverterUtil.hasVariables(enteredFormula)) {
 
-            listOfVariables = ConverterUtil.getVariables(enteredFormula);
+              listOfVariables = ConverterUtil.getVariables(enteredFormula);
 
-            if (!frameEnterVariables.isVisible()){
-              openVariableFrame();              
+              openVariableFrame();
+
+              // otherwise the formula is calculated directly
+            } else {
+
+              // reset the list to avoid errors
+              listOfVariables = new ArrayList<String[]>();
+
+              calculateFormula(enteredFormula);
             }
 
-            // otherwise the formula is calculated directly
-          } else {
+          } catch (Exception e) {
 
-            // reset the list to avoid errors
-            listOfVariables = new ArrayList<String[]>();
-
-            calculateFormula(enteredFormula);
+            JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "An error occured!",
+                JOptionPane.WARNING_MESSAGE);
           }
 
-        } catch (Exception e) {
-
-          JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "An error occured!",
-              JOptionPane.WARNING_MESSAGE);
         }
-
       }
     });
   }
@@ -159,7 +160,6 @@ public class FrameCalculator extends JFrame {
     frameEnterVariables.setLocation(330, 330);
     frameEnterVariables.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     frameEnterVariables.getContentPane().setLayout(new BorderLayout(10, 10));
-    
 
     // define Title
     JLabel tmpTitle = new JLabel("      Enter value(s) of variable(s):      ");
@@ -187,7 +187,7 @@ public class FrameCalculator extends JFrame {
       tmpLabelsOfVariablesArray[i] = new JLabel(listOfVariables.get(i)[0] + " = ");
       inputFieldOfVariablesArray[i] = new JTextField(3);
 
-      //Er machts nicht richtig! :(
+      // Er machts nicht richtig! :(
       inputFieldOfVariablesArray[i].setSize(12, 30);
 
       // allign elements
@@ -251,6 +251,9 @@ public class FrameCalculator extends JFrame {
         // calculated
         if (tmpAllVariablesAreFloats) {
           frameEnterVariables.dispose();
+          if (!enteredFormula.equals(textTermInput.getText())) {
+            textTermInput.setText(enteredFormula);
+          }
           calculateFormula(enteredFormula);
         } else {
           JOptionPane.showMessageDialog(new JFrame(), "The entered value(s) must be a number.",
@@ -262,7 +265,8 @@ public class FrameCalculator extends JFrame {
 
   /**
    * calculates the formula
-   * @param aFormula 
+   * 
+   * @param aFormula
    */
   public static void calculateFormula(String aFormula) {
 

@@ -152,14 +152,15 @@ public class MathUtil {
     return (aChar == ')');
   }
 
-  /**
-   *
-   * @param aChar
-   * @return true if char is a bracket
-   */
-  public static boolean IsBracket(char aChar) {
-    return (IsRightBracket(aChar)|| IsLeftBracket(aChar));
-  }
+  //TODO wer braucht die Methode IsBracket????
+//  /**
+//   *
+//   * @param aChar
+//   * @return true if char is a bracket
+//   */
+//  public static boolean IsBracket(char aChar) {
+//    return (IsRightBracket(aChar)|| IsLeftBracket(aChar));
+//  }
 
   /**
    * method creates a float value based mathobj out of a given string

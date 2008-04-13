@@ -6,7 +6,6 @@ package calculator;
 public class EmptyClassForGlobalSupport {
 
   // comments by Raphael
-  // TODO @all ^ werden nun von links nach rechts abgearbeitet. Aufgrund der potenzgesetze ist die Reihenfolge egal.
 
   // comments by Tim
   // TODO @all ich hab die Parameter jetzt so geändert, dass der TR

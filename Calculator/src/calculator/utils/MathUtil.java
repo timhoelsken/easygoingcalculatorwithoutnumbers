@@ -233,7 +233,7 @@ public class MathUtil {
    * @todo Andre: Add support for negative numbers and brackets
    */
   public static ArrayList<Object> FormulaToArrayList(String aFormula) {
-    //TODO die Eingabe des Strings: 2^(-x) liefert mit eine Liste: [numberobj (2), operator (^), numberobj(0)]. Bitte um Fehlerkorrektur 
+    //TODO @andre, die Eingabe des Strings: 2^(-x) liefert mit eine Liste: [numberobj (2), operator (^), numberobj(0)]. Bitte um Fehlerkorrektur 
     ArrayList<Object> MathList = new ArrayList<Object>();
 
     int iLenOfString;

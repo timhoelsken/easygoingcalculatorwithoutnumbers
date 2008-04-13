@@ -184,13 +184,8 @@ public class StringConvertTest extends TestCase {
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
-    //TODO @all fürs Testen ist es besser statt
-    //assertTrue("The String is correct", !tmpErrorOccured && "3+((-a)+b)".equals(tmpConvertedString));
-    //das hier zu schreiben
     assertTrue(!tmpErrorOccured);
-    assertEquals("3+((-a)+b)", tmpConvertedString);
-    //so wird bei evtl. Fehlern beim letzten assert automatisch Erwartung und tatsächlicher Wert ausgegeben
-    //und man kann sich die Fehlermeldung, die einem eh nich hilft (The String is correct) sparen.
+    assertEquals("3+((-a)+b)", tmpConvertedString);   
   }
 
   /**
@@ -552,7 +547,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
    */
-  //TODO @add a rule to checkOperators() systematically -> test failed
+  //TODO @add a rule to checkOperators() systematically
   public void testCheckOperators8() {
     // negative test
     boolean tmpErrorOccurred = false;
@@ -568,13 +563,30 @@ public class StringConvertTest extends TestCase {
    * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
    */
   public void testCheckOperators9() {
-    // positive test
+    // negative test
+    boolean tmpErrorOccurred = false;
     try {
-      ConverterUtil.checkOperators("+e");
+      ConverterUtil.checkOperators("^2");
     } catch (Exception e) {
-      assertTrue(false);
+      tmpErrorOccurred = true;
     }
+    assertTrue(tmpErrorOccurred);
   }
+  
+  /**
+   * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
+   */
+  public void testCheckOperators10() {
+    // negative test
+    boolean tmpErrorOccurred = false;
+    try {
+      ConverterUtil.checkOperators("2*(*2)");
+    } catch (Exception e) {
+      tmpErrorOccurred = true;
+    }
+    assertTrue(tmpErrorOccurred);
+  }
+
 
   /**
    * Test method for

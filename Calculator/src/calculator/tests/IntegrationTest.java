@@ -167,7 +167,7 @@ public class IntegrationTest extends TestCase {
     assertTrue(tmpErrorOccured);
 
     // TODO +1 sehe ich ja noch ein, aber *1 = 0.0?
-    //TODO @irgendwer, bitte die checkOperators Methode so anpassen, dass zu Beginn eines Termes nur - also binärer Operator auftauchen kann *1 ist kein gültiger Term. Auch zu Beginn von neuen Klammern beteht das Problem: 2*(*3)
+    //TODO @Tobi, bitte die checkOperators Methode so anpassen, dass zu Beginn eines Termes nur - also binärer Operator auftauchen kann *1 ist kein gültiger Term. Auch zu Beginn von neuen Klammern beteht das Problem: 2*(*3)
   }
 
   /**
@@ -559,7 +559,7 @@ public class IntegrationTest extends TestCase {
 
     double tmpResult = FormulaTree.EvaluateTree(tmpTree, null);
 
-    assertEquals((double) 6.0, tmpResult);
+    assertEquals((double) 8.0, tmpResult);
   }
 
   /**

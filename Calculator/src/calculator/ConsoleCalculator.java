@@ -11,15 +11,15 @@ import calculator.utils.ConverterUtil;
 import calculator.utils.MathUtil;
 
 /**
- *
+ * 
  * @author Tim
- *
+ * 
  */
 public class ConsoleCalculator {
 
   /**
    * The Calculator
-   *
+   * 
    * @param args
    */
   public static void start() {
@@ -42,112 +42,123 @@ public class ConsoleCalculator {
         e.printStackTrace();
       }
 
-      // if termin out
-      if (tmpInputString.equals("t")) {
+      // if the user wants to enter a formula
+      if (tmpInputString.equals("f")) {
 
         tmpInputString = "";
-        boolean tmpTermHasVariables = false;
+
+        boolean tmpFormulaHasVariables = false;
+        boolean tmpErrorOccured = false;
+
         String tmpEnterVariablesValue = new String("");
+
         ArrayList<String[]> tmpVariablesList = new ArrayList<String[]>();
         Hashtable<String, Double> tmpVariableDictionary = new Hashtable<String, Double>();
 
-        // while the user has not chosen to quit the calculator
+        // while the user has not chosen to quit entering formulas
         while (!tmpInputString.toLowerCase().equals("n")) {
 
-          System.out.println("Bitte geben Sie einen Term ein:");
-
+          // reset of control variables
+          tmpErrorOccured = false;
           tmpEnterVariablesValue = "";
+
+          ConsoleOutput.promptFormulaInput();
+
           // the user types in the term
           try {
             tmpInputString = ConsoleInput.getConsoleInput();
           } catch (IOException e) {
             ConsoleOutput.printError(e.getMessage());
-            e.printStackTrace();
           }
 
           try {
             tmpInputString = ConverterUtil.termToStandardString(tmpInputString);
           } catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-            tmpEnterVariablesValue = "error";
+            ConsoleOutput.printError(e.getMessage());
+            tmpErrorOccured = true;
           }
 
-          tmpTermHasVariables = ConverterUtil.hasVariables(tmpInputString);
+          if (!tmpErrorOccured) {
 
-          // while the user has not chosen to stop enter variables
-          do {
+            tmpFormulaHasVariables = ConverterUtil.hasVariables(tmpInputString);
 
-            // Variable Block Start
-            if (tmpTermHasVariables) {
+            // while the user has not chosen to stop enter variables
+            do {
 
-              tmpVariablesList = ConverterUtil.getVariables(tmpInputString);
-              String tmpInputVariableValue = new String("");
+              // Variable Block Start
+              if (tmpFormulaHasVariables) {
 
-              ConsoleOutput.promptVariableInput();
-              // ==== Variable input start ====
-              for (int i = 0; i < tmpVariablesList.size(); i++) {
-                do {
-                  tmpInputVariableValue = "";
-                  System.out.print(tmpVariablesList.get(i)[0] + " = ");
-                  try {
-                    tmpInputVariableValue = ConsoleInput.getConsoleInput();
-                  } catch (IOException e) {
-                    ConsoleOutput.printError(e.getMessage());
-                    e.printStackTrace();
-                  }
+                tmpVariablesList = ConverterUtil.getVariables(tmpInputString);
+                String tmpInputVariableValue = new String("");
 
-                  tmpInputVariableValue = ConverterUtil.unifyCommas(tmpInputVariableValue);
-                  if (!MathUtil.isDouble(tmpInputVariableValue)) {
-                    System.out
-                        .println("\nDer eingegebene Wert muss eine Zahl sein. Bitte wiederholen Sie ihre Eingabe.\n");
-                  }
-                } while (!MathUtil.isDouble(tmpInputVariableValue));
+                ConsoleOutput.promptVariableInput();
 
-                tmpVariablesList.get(i)[1] = tmpInputVariableValue;
+                // ==== Variable input start ====
+                for (int i = 0; i < tmpVariablesList.size(); i++) {
+                  do {
+                    tmpInputVariableValue = "";
+                    System.out.print(tmpVariablesList.get(i)[0] + " = ");
+
+                    try {
+                      tmpInputVariableValue = ConsoleInput.getConsoleInput();
+                    } catch (IOException e) {
+                      ConsoleOutput.printError(e.getMessage());
+                    }
+
+                    // convert , to .
+                    tmpInputVariableValue = ConverterUtil.unifyCommas(tmpInputVariableValue);
+
+                    if (!MathUtil.isDouble(tmpInputVariableValue)) {
+                      ConsoleOutput.invalidDouble();
+                    }
+                  } while (!MathUtil.isDouble(tmpInputVariableValue));
+
+                  // assign variable with variableValue
+                  tmpVariablesList.get(i)[1] = tmpInputVariableValue;
+                }
+
+                tmpVariableDictionary = ConverterUtil.putArrayListIntoHashtable(tmpVariablesList);
+                // ==== Variable input end ====
               }
+              // Variable Block End
 
-              tmpVariableDictionary = ConverterUtil.putArrayListIntoHashtable(tmpVariablesList);
-
-              // ==== Variable input end ====
-
-            }
-            else{
-              tmpEnterVariablesValue = "noVariables";
-            }
-            // Variable Block End
-
-            // calculate term
-            try {
-
-              Tree tmpTree = FormulaTree.BuildTree(tmpInputString);
-
-              System.out.println(FormulaTree.EvaluateTree(tmpTree, tmpVariableDictionary));
-              tmpEnterVariablesValue = "calculated";
-              tmpTree.paintMe();
-
-            } catch (Exception e) {
-              System.out.println(e.getMessage());
-              e.printStackTrace();
-              tmpEnterVariablesValue = "error";
-            }
-            // if no error occurs, the user is asked if he wants to set another
-            // variable
-            if (!tmpEnterVariablesValue.equals("error") && tmpTermHasVariables) {
-
-              System.out.println("Wollen Sie andere Werte fuer die Variablen im Term eingeben? (j / n)\n");
-
+              // calculate formula
               try {
-                tmpEnterVariablesValue = ConsoleInput.getConsoleInput();
-              } catch (IOException e) {
-                ConsoleOutput.printError(e.getMessage());
+
+                Tree tmpTree = FormulaTree.BuildTree(tmpInputString);
+
+                System.out.println(FormulaTree.EvaluateTree(tmpTree, tmpVariableDictionary));
+
+                // to avoid endless loop the control is set to "n" (Do-While-Loop)
+                if (!ConverterUtil.hasVariables(tmpInputString)) {
+                  tmpEnterVariablesValue = "n";
+                }
+
+                tmpTree.paintMe();
+
+              } catch (Exception e) {
+                System.out.println(e.getMessage());
                 e.printStackTrace();
+                tmpErrorOccured = true;
               }
-            }
-          } while (!"n".equals(tmpEnterVariablesValue) && !"error".equals(tmpEnterVariablesValue) && !"calculated".equals(tmpEnterVariablesValue));
 
+              // if no error occured and the formula has variables, the user is asked if he wants to set another variable
+              if (!tmpErrorOccured && tmpFormulaHasVariables) {
 
-          System.out.println("Wollen Sie einen weiteren Term eingeben? (j / n)\n");
+                ConsoleOutput.askAnotherVariableInput();
+
+                try {
+                  tmpEnterVariablesValue = ConsoleInput.getConsoleInput();
+                } catch (IOException e) {
+                  ConsoleOutput.printError(e.getMessage());
+                  e.printStackTrace();
+                }
+              }
+              // Enter variables loop
+            } while (!"n".equals(tmpEnterVariablesValue) && !tmpErrorOccured);
+          }
+
+          ConsoleOutput.askAnotherFormulaInput();
 
           try {
             tmpInputString = ConsoleInput.getConsoleInput();
@@ -157,7 +168,8 @@ public class ConsoleCalculator {
           }
 
         }
-        // if Helpmenu
+
+        // if helpmenu
       } else if (tmpInputString.equals("h")) {
 
         ConsoleOutput.showHelp();
@@ -173,6 +185,6 @@ public class ConsoleCalculator {
         ConsoleOutput.unknownCommand();
       }
     }
-    System.out.println("\nSie verlassen nun den Taschenrechner.\n\n");
+    ConsoleOutput.exitCalculator();
   }
 }

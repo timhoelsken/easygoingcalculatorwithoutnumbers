@@ -13,11 +13,11 @@ public final class ConsoleOutput {
    */
   public static void showMenu() {
 
-    System.out.println("\nHauptmenu");
+    System.out.println("\nMainmenu");
     System.out.println(horizontalLine());
-    System.out.println("Bitte waehlen Sie eine der folgenden Aktionen aus:\n");
-    System.out.println("t \t Term eingeben");
-    System.out.println("h \t Hilfe");
+    System.out.println("Please choose a menuitem:\n");
+    System.out.println("f \t enter formula");
+    System.out.println("h \t help");
     System.out.println("e \t exit");
   }
 
@@ -25,8 +25,8 @@ public final class ConsoleOutput {
    * Prompts the user to type a term.
    * 
    */
-  public static void showInputPrompt() {
-    System.out.println("\nBitte geben Sie einen Term ein:\n");
+  public static void promptFormulaInput() {
+    System.out.println("\nPlease enter a formula:\n");
   }
 
   /**
@@ -35,7 +35,7 @@ public final class ConsoleOutput {
    */
   public static void showTitle() {
     System.out.println(horizontalLine());
-    System.out.println("Willkommen beim PSE III Taschenrechner der Gruppe 3");
+    System.out.println("Welcome to the PSE III calculator of group 3");
     System.out.println(horizontalLine());
   }
 
@@ -45,7 +45,7 @@ public final class ConsoleOutput {
    * @param anErrorMessage
    */
   public static void printError(String anErrorMessage) {
-    System.out.println("\nBei der Verarbeitung ist folgender Fehler aufgetreten:");
+    System.out.println("\nFollowing error occurd while calculating the formula:");
     System.out.println(anErrorMessage + "\n");
 
   }
@@ -65,16 +65,14 @@ public final class ConsoleOutput {
    */
   public static void showHelp() {
 
-    System.out.println("\nHilfe Menu");
+    System.out.println("\nHelp menu");
     System.out.println(horizontalLine());
-    System.out.println("\nUmgang mit dem Taschenrechner:\n");
-    System.out.println("Mit der Eingabe von t gelangen Sie zur Eingabe eines Terms.\n"
-        + "Nachfolgend koennen Sie folgende Inhalte einer Formel eingeben:\n\n" 
-        + "- reale Zahlen (negative Zahlen muessen geklammert werden)\n"
-        + "- Operatoren \"+ - * \"\n" 
-        + "- Funktionen \"sin cos tan sqrt\"\n" 
-        + "- Variablen\n\n" 
-        + "Nach der Eingabe von Variablen werden Sie aufgefordert einen Wert fuer diese einzugeben.\n");
+    System.out.println("\nHow to use the calculator:\n");
+    System.out.println("By entering f, you get to the formula input.\n"
+        + "There you can input the following as part of the formula:\n\n"
+        + "- real numbers (negative numbers have to be in brackets)\n" + "- operators \"+ - * \\ ^\"\n"
+        + "- functions \"sin() cos() tan() sqrt()\"\n" + "- variables\n\n"
+        + "If your formula contains variables, you are prompted to enter their value.\n");
 
   }
 
@@ -85,7 +83,7 @@ public final class ConsoleOutput {
    * @param anOutput
    */
   public static void showResultOnScreen(String anOutput) {
-    System.out.println("Der eingegebene Term wurde mit folgendem Ergebnis berechnet:\n");
+    System.out.println("The entered formula has the following result:\n");
     System.out.println(anOutput);
   }
 
@@ -94,14 +92,45 @@ public final class ConsoleOutput {
    * 
    */
   public static void unknownCommand() {
-    System.out.println("\nIhr eingegebener Befehl konnte leider nicht verarbeitet werden.\n\n");
+    System.out.println("\nThe entered command is unknown.\n\n");
+  }
+  
+  /**
+   * Prints an errorMessage that the value must be a number.
+   * 
+   */
+  public static void invalidDouble() {
+    System.out.println("\nThe entered value must be a number.\n\n");
+  }
+  
+  /**
+   * Prints a message that the calculater is closed.
+   * 
+   */
+  public static void exitCalculator() {
+    System.out.println("\nThe calculator is shut down.\n\n");
   }
 
   /**
    * Prompts the user to type the values of variables
    */
   public static void promptVariableInput() {
-    System.out
-        .println("\nIhr eingegebener Term beinhaltet mindestens eine Variable. Bitte geben Sie nachfolgend die Werte ein:\n");
+    System.out.println("\nYour formula contains at least one variable. Please enter the value(s):\n");
+  }
+  
+  /**
+   * Prints a question to enter new values for variable(s)
+   * 
+   */
+  public static void askAnotherVariableInput() {
+    System.out.println("\nDo you like to enter other values for the variable(s)? (y / n)\n");
+  }
+  
+  /**
+   * Prints a question to enter new formula
+   * 
+   */
+  public static void askAnotherFormulaInput() {
+    System.out.println("\nDo you like to enter another formula? (y / n)\n");
   }
 }

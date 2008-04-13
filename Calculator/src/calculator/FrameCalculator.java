@@ -256,7 +256,7 @@ public class FrameCalculator extends JFrame {
           }
           calculateFormula(enteredFormula);
         } else {
-          JOptionPane.showMessageDialog(new JFrame(), "The entered value(s) must be a number.",
+          JOptionPane.showMessageDialog(new JFrame(), "The entered value(s) must be number(s).",
               "An error occured!", JOptionPane.WARNING_MESSAGE);
         }
       }

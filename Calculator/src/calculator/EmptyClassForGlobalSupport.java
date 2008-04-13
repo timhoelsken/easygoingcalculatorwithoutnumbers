@@ -10,11 +10,14 @@ public class EmptyClassForGlobalSupport {
   // aussieht? werden ^ von links nach rechts abgearbeitet?
   // Tim: du meinst von rechts nach linkts oder? ich muss doch erst wissen "hoch
   // wieviel" ich etwas nehmen soll...
-  
+
   // comments by Tim
   // TODO @all ich hab die Parameter jetzt so geändert, dass der TR
   // standardmäßig in der Console startet und bei der Übergabe von "frame" wird
   // die GUI geöffnet
+
+  // TODO @all (TestFailures!)ich habe im IntegrationTest einen Abschnitt
+  // "Iteration Tests" hizugefügt... sind so 49 Testfälle geworden ^^
 
   // comments by Andre
 

@@ -17,7 +17,7 @@ public class EmptyClassForGlobalSupport {
   // die GUI geöffnet
 
   // TODO @all (TestFailures!)ich habe im IntegrationTest einen Abschnitt
-  // "Iteration Tests" hizugefügt... sind so 49 Testfälle geworden ^^
+  // "Iteration Tests" hizugefügt... sind so 50 Testfälle geworden ^^
 
   // comments by Andre
 

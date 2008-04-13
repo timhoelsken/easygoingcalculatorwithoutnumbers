@@ -282,6 +282,24 @@ public class IntegrationTest extends TestCase {
 
     assertEquals((double) 2.7, tmpResult);
   }
+  
+  /**
+   * test of iteration 0.3
+   * 
+   * @throws Exception
+   */
+  public void testIteration0304() throws Exception {
+
+    boolean tmpErrorOccured = false;
+
+    try {
+      Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("3+-2"));
+      FormulaTree.EvaluateTree(tmpTree, null);
+    } catch (Exception e) {
+      tmpErrorOccured = true;
+    }
+    assertTrue(tmpErrorOccured);
+  }
 
   // Iteration 0.4
 

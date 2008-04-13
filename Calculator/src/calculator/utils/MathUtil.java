@@ -93,7 +93,7 @@ public class MathUtil {
    * @return true if char is a number or variable
    */
   public static boolean isNumberOrVariable(char aCharacter) {
-    return (isNumber(aCharacter) || isVariable(aCharacter)) ? true : false;
+    return (isNumber(aCharacter) || isVariable(aCharacter));
   }
 
   /**
@@ -175,6 +175,8 @@ public class MathUtil {
     try {
       tmpFl = Double.valueOf(aNumberContainingString).doubleValue();
     } catch (NumberFormatException e) {
+      //TODO @andre, was ist hier mit Fehlerbehandlung? wenn du die exception nicht behandeln willst, dann wirf sie einfach nach oben
+      //aber im fehlerfall ist es besser, wenn wir ne exception bekommen, als dass wir z.B. durch eine "default-Null" ein falsches ergebnis bekommen
     }
 
     NumberObj tmpNumberObj = new NumberObj(tmpFl);
@@ -255,7 +257,7 @@ public class MathUtil {
         try {
           MathList.add(buildNumberMathObject(aFormula.substring(iStartPosition, iEndPosition)));
         } catch (Exception e) {
-          e.printStackTrace();
+          e.printStackTrace(); //TODO @Andre, soll im ausgelieferten Produkt später auch der StackTrace ausgegeben werden?
         }
       } else if (MathUtil.IsLeftBracket(aFormula.charAt(iStartPosition))
           && (MathUtil.IsMinus(aFormula.charAt(iStartPosition + 1)))) {

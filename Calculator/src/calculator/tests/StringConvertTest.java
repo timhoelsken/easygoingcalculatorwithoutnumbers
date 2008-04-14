@@ -599,6 +599,19 @@ public class StringConvertTest extends TestCase {
   }
 
   /**
+   * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
+   */
+  public void testCheckOperators12() {
+    // positive test
+    try {
+      //TODO @Raphi kann das hier verarbeitet werden?
+      ConverterUtil.checkOperators("-sin(3+4)");
+    } catch (Exception e) {
+      assertTrue(false);
+    }
+  }
+
+  /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#setBracketsAroundNegativeNumbers()}.
    */

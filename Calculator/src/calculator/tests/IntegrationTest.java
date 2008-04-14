@@ -87,11 +87,10 @@ public class IntegrationTest extends TestCase {
    * @throws Exception
    */
   public void testCalculator6() throws Exception {
-    //TODO @Raphi Prioisierung scheint falsch zu laufen?!
     String tmpString = ConverterUtil.termToStandardString("-2^sin(90)^2");
     Tree tmpTree = FormulaTree.BuildTree(tmpString);
     double tmpResult = FormulaTree.EvaluateTree(tmpTree, null);
-    assertEquals((double) -2.0, tmpResult);
+    assertEquals((double) 4.0, tmpResult);
   }
 
   /**
@@ -122,7 +121,7 @@ public class IntegrationTest extends TestCase {
    * @throws Exception
    */
   public void testIteration0101() throws Exception {
-    //TODO @all Wer muss hier die Exception schmeißen? Fehlermeldung "Empty formula" wäre angemessen, gell?!
+    
     boolean tmpErrorOccured = false;
 
     try {
@@ -261,7 +260,6 @@ public class IntegrationTest extends TestCase {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
-    // TODO @all Result ist "infinity" ... sollen wir das so lassen?? ->Raphi: Es wird nun eine Exception geworfen. Diese sollte dann ncoh von der konsole/fenster verarbeitet werden
   }
 
   // Iteration 0.3
@@ -602,7 +600,6 @@ public class IntegrationTest extends TestCase {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
-    // TODO @all Result ist "infinity" ... sollen wir das so lassen?? ->Raphi: Es wird nun eine Exception geworfen. Diese sollte dann ncoh von der konsole/fenster verarbeitet werden
   }
 
   // Iteration 0.5 and 0.6

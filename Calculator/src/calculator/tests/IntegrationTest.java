@@ -124,12 +124,14 @@ public class IntegrationTest extends TestCase {
    * @throws Exception
    */
   public void testIteration0103() throws Exception {
+    boolean tmpErrorOccured = false;
+    try {
+      ConverterUtil.termToStandardString("+1");
+    } catch (IllegalArgumentException e) {
+      tmpErrorOccured = true;
+    }
 
-    Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("+1"));
-
-    double tmpResult = FormulaTree.EvaluateTree(tmpTree, null);
-
-    assertEquals((double) 1.0, tmpResult);
+    assertTrue(tmpErrorOccured);
   }
 
   /**
@@ -138,15 +140,13 @@ public class IntegrationTest extends TestCase {
    * @throws Exception
    */
   public void testIteration0104() throws Exception {
-
     boolean tmpErrorOccured = false;
-    Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("+1"));
-
     try {
-      FormulaTree.EvaluateTree(tmpTree, null);
-    } catch (Exception e) {
+      ConverterUtil.termToStandardString("*1");
+    } catch (IllegalArgumentException e) {
       tmpErrorOccured = true;
     }
+
     assertTrue(tmpErrorOccured);
   }
 
@@ -156,15 +156,13 @@ public class IntegrationTest extends TestCase {
    * @throws Exception
    */
   public void testIteration0105() throws Exception {
-
     boolean tmpErrorOccured = false;
-    Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("*1"));
-
     try {
-      FormulaTree.EvaluateTree(tmpTree, null);
-    } catch (Exception e) {
+      ConverterUtil.termToStandardString("/1");
+    } catch (IllegalArgumentException e) {
       tmpErrorOccured = true;
     }
+
     assertTrue(tmpErrorOccured);
   }
 
@@ -174,15 +172,13 @@ public class IntegrationTest extends TestCase {
    * @throws Exception
    */
   public void testIteration0106() throws Exception {
-
     boolean tmpErrorOccured = false;
-    Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("/1"));
-
     try {
-      FormulaTree.EvaluateTree(tmpTree, null);
-    } catch (Exception e) {
+      ConverterUtil.termToStandardString("^1");
+    } catch (IllegalArgumentException e) {
       tmpErrorOccured = true;
     }
+
     assertTrue(tmpErrorOccured);
   }
 

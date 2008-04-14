@@ -152,16 +152,6 @@ public class MathUtil {
     return (aChar == ')');
   }
 
-  //TODO wer braucht die Methode IsBracket????
-//  /**
-//   *
-//   * @param aChar
-//   * @return true if char is a bracket
-//   */
-//  public static boolean IsBracket(char aChar) {
-//    return (IsRightBracket(aChar)|| IsLeftBracket(aChar));
-//  }
-
   /**
    * method creates a float value based mathobj out of a given string
    *
@@ -172,12 +162,7 @@ public class MathUtil {
   public static MathObj buildNumberMathObject(String aNumberContainingString) {
     Double tmpFl; // Double tmpFl = new Double("0.0");
     tmpFl = Double.valueOf("0.0").doubleValue();
-    try {
       tmpFl = Double.valueOf(aNumberContainingString).doubleValue();
-    } catch (NumberFormatException e) {
-      //TODO @andre, was ist hier mit Fehlerbehandlung? wenn du die exception nicht behandeln willst, dann wirf sie einfach nach oben
-      //aber im fehlerfall ist es besser, wenn wir ne exception bekommen, als dass wir z.B. durch eine "default-Null" ein falsches ergebnis bekommen
-    }
 
     NumberObj tmpNumberObj = new NumberObj(tmpFl);
     return tmpNumberObj;
@@ -236,7 +221,6 @@ public class MathUtil {
    * @todo Andre: Add support for negative numbers and brackets
    */
   public static ArrayList<Object> FormulaToArrayList(String aFormula) {
-    //TODO @andre, die Eingabe des Strings: 2^(-x) liefert mit eine Liste: [numberobj (2), operator (^), numberobj(0)]. Bitte um Fehlerkorrektur 
     ArrayList<Object> MathList = new ArrayList<Object>();
 
     int iLenOfString;
@@ -254,23 +238,15 @@ public class MathUtil {
                 .charAt(iEndPosition))))) {
           iEndPosition++;
         }
-        try {
           MathList.add(buildNumberMathObject(aFormula.substring(iStartPosition, iEndPosition)));
-        } catch (Exception e) {
-          e.printStackTrace(); //TODO @Andre, soll im ausgelieferten Produkt später auch der StackTrace ausgegeben werden?
-        }
       } else if (MathUtil.IsLeftBracket(aFormula.charAt(iStartPosition))
-          && (MathUtil.IsMinus(aFormula.charAt(iStartPosition + 1)))) {
+          && (MathUtil.IsMinus(aFormula.charAt(iStartPosition + 1))) && (MathUtil.isNumber(aFormula.charAt(iStartPosition + 2))) ) {
         iStartPosition++;
         iEndPosition = iStartPosition + 1;
         while ((MathUtil.IsRightBracket(aFormula.charAt(iEndPosition))) == false) {
           iEndPosition++;
         }
-        try {
           MathList.add(buildNumberMathObject(aFormula.substring(iStartPosition, iEndPosition)));
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
         iEndPosition++;
       } else if (MathUtil.IsLeftBracket(aFormula.charAt(iStartPosition))) {
         iStartPosition++;
@@ -288,26 +264,14 @@ public class MathUtil {
           }
           iEndPosition++;
         }
-        try {
           MathList.add(MathUtil.FormulaToArrayList(aFormula.substring(iStartPosition, iEndPosition)));
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
         iEndPosition++;
       } else if (MathUtil.IsOperator(aFormula.charAt(iStartPosition))) {
         iEndPosition = iStartPosition + 1;
-        try {
           MathList.add(buildOperatorMathObject(aFormula.substring(iStartPosition, iEndPosition)));
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
       } else if (MathUtil.isVariable(aFormula.charAt(iStartPosition))) {
         iEndPosition = iStartPosition + 1;
-        try {
           MathList.add(buildVariableMathObject(aFormula.charAt(iStartPosition)));
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
       }
       else {
         System.out.println(aFormula.charAt(iStartPosition));

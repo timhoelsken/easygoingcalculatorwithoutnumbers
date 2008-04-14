@@ -91,11 +91,12 @@ public class IntegrationTest extends TestCase {
    * @throws Exception
    */
   public void testIteration0101() throws Exception {
-
+    //TODO @all Wer muss hier die Exception schmeiﬂen? Fehlermeldung "Empty formula" w‰re angemessen, gell?!
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString(""));
+      String tmpString = ConverterUtil.termToStandardString("");
+      Tree tmpTree = FormulaTree.BuildTree(tmpString);
       FormulaTree.EvaluateTree(tmpTree, null);
     } catch (Exception e) {
       tmpErrorOccured = true;

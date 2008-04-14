@@ -81,6 +81,37 @@ public class IntegrationTest extends TestCase {
     assertEquals((double) 2.0, tmpResult);
   }
 
+  /**
+   * tests priority of operator ^
+   *
+   * @throws Exception
+   */
+  public void testCalculator6() throws Exception {
+    //TODO @Raphi Prioisierung scheint falsch zu laufen?!
+    String tmpString = ConverterUtil.termToStandardString("-2^sin(90)^2");
+    Tree tmpTree = FormulaTree.BuildTree(tmpString);
+    double tmpResult = FormulaTree.EvaluateTree(tmpTree, null);
+    assertEquals((double) -2.0, tmpResult);
+  }
+
+  /**
+   * tests the whole workflow
+   *
+   * @throws Exception
+   */
+  public void testCalculator7() throws Exception {
+    boolean tmpErrorOccured = false;
+
+    try {
+      String tmpString = ConverterUtil.termToStandardString("sqrt(-1)");
+      Tree tmpTree = FormulaTree.BuildTree(tmpString);
+      FormulaTree.EvaluateTree(tmpTree, null);
+    } catch (Exception e) {
+      tmpErrorOccured = true;
+    }
+    assertTrue(tmpErrorOccured);
+  }
+
   // === Iteration Tests ===
 
   // Iteration 0.1 and 0.2

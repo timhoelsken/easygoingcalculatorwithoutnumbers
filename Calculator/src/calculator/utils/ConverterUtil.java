@@ -351,32 +351,6 @@ public class ConverterUtil {
     }
   }
 
-//TODO @all, wer braucht die getNextBlankPosition???
-//  /**
-//   * gets the position of the next blank in a string
-//   *
-//   * @param aFormula
-//   * @param aStartPosition
-//   * @return The position of the next blank in the given String, returns -1 if
-//   *         no blank is found
-//   */
-//  public static int getNextBlankPosition(String aFormula, int aStartPosition) {
-//    int tmpPosition = -1;
-//
-//    if (aStartPosition != 0) {
-//      aStartPosition++;
-//    }
-//
-//    for (int i = aStartPosition; i < aFormula.length(); i++) {
-//      if (aFormula.charAt(i) == ' ') {
-//        tmpPosition = i;
-//        i = aFormula.length();
-//      }
-//    }
-//
-//    return tmpPosition;
-//  }
-
   /**
    * paints a string in the center of some spaces, needed to paint the tree in
    * the console

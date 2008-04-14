@@ -184,7 +184,6 @@ public class IntegrationTest extends TestCase {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
-    // TODO +1 sehe ich ja noch ein, aber /1 = 0.0?
   }
 
   /**

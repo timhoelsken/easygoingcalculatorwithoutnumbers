@@ -10,7 +10,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import calculator.elements.Tree;
 import calculator.utils.ConverterUtil;
-import calculator.utils.FormulaTree;
+import calculator.utils.FormulaTreeUtil;
 
 /**
  * @author Tobias
@@ -25,8 +25,8 @@ public class IntegrationTest extends TestCase {
    */
   public void testCalculator1() throws Exception {
     String tmpString = ConverterUtil.termToStandardString("2 + 5 - (2*2.5)");
-    Tree tmpTree = FormulaTree.BuildTree(tmpString);
-    double tmpResult = FormulaTree.EvaluateTree(tmpTree, null);
+    Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
     assertEquals((double) 2.0, tmpResult);
   }
 
@@ -37,8 +37,8 @@ public class IntegrationTest extends TestCase {
    */
   public void testCalculator2() throws Exception {
     String tmpString = ConverterUtil.termToStandardString("1234567890");
-    Tree tmpTree = FormulaTree.BuildTree(tmpString);
-    double tmpResult = FormulaTree.EvaluateTree(tmpTree, null);
+    Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
     assertEquals((double) 1234567890.0, tmpResult);
   }
 
@@ -49,8 +49,8 @@ public class IntegrationTest extends TestCase {
    */
   public void testCalculator3() throws Exception {
     String tmpString = ConverterUtil.termToStandardString("sqrt(4)^((5-3)-2)");
-    Tree tmpTree = FormulaTree.BuildTree(tmpString);
-    double tmpResult = FormulaTree.EvaluateTree(tmpTree, null);
+    Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
     assertEquals((double) 1.0, tmpResult);
   }
 
@@ -64,8 +64,8 @@ public class IntegrationTest extends TestCase {
     Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
     tmpHashtable.put("x", new Double(2));
     tmpHashtable.put("y", new Double(4));
-    Tree tmpTree = FormulaTree.BuildTree(tmpString);
-    double tmpResult = FormulaTree.EvaluateTree(tmpTree, tmpHashtable);
+    Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
     assertEquals((double) 5.0, tmpResult);
   }
 
@@ -76,8 +76,8 @@ public class IntegrationTest extends TestCase {
    */
   public void testCalculator5() throws Exception {
     String tmpString = ConverterUtil.termToStandardString("2^sin(90)");
-    Tree tmpTree = FormulaTree.BuildTree(tmpString);
-    double tmpResult = FormulaTree.EvaluateTree(tmpTree, null);
+    Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
     assertEquals((double) 2.0, tmpResult);
   }
 
@@ -88,8 +88,8 @@ public class IntegrationTest extends TestCase {
    */
   public void testCalculator6() throws Exception {
     String tmpString = ConverterUtil.termToStandardString("-2^sin(90)^2");
-    Tree tmpTree = FormulaTree.BuildTree(tmpString);
-    double tmpResult = FormulaTree.EvaluateTree(tmpTree, null);
+    Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
     assertEquals((double) 4.0, tmpResult);
   }
 
@@ -103,8 +103,8 @@ public class IntegrationTest extends TestCase {
 
     try {
       String tmpString = ConverterUtil.termToStandardString("sqrt(-1)");
-      Tree tmpTree = FormulaTree.BuildTree(tmpString);
-      FormulaTree.EvaluateTree(tmpTree, null);
+      Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
+      FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
@@ -126,8 +126,8 @@ public class IntegrationTest extends TestCase {
 
     try {
       String tmpString = ConverterUtil.termToStandardString("");
-      Tree tmpTree = FormulaTree.BuildTree(tmpString);
-      FormulaTree.EvaluateTree(tmpTree, null);
+      Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
+      FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
@@ -141,9 +141,9 @@ public class IntegrationTest extends TestCase {
    */
   public void testIteration0102() throws Exception {
 
-    Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("1"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("1"));
 
-    double tmpResult = FormulaTree.EvaluateTree(tmpTree, null);
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
 
     assertEquals((double) 1.0, tmpResult);
   }
@@ -222,8 +222,8 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("1+"));
-      FormulaTree.EvaluateTree(tmpTree, null);
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("1+"));
+      FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
@@ -237,9 +237,9 @@ public class IntegrationTest extends TestCase {
    */
   public void testIteration0108() throws Exception {
 
-    Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("1+1"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("1+1"));
 
-    double tmpResult = FormulaTree.EvaluateTree(tmpTree, null);
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
 
     assertEquals((double) 2.0, tmpResult);
   }
@@ -254,8 +254,8 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("2/0"));
-      FormulaTree.EvaluateTree(tmpTree, null);
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("2/0"));
+      FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
@@ -271,9 +271,9 @@ public class IntegrationTest extends TestCase {
    */
   public void testIteration0301() throws Exception {
 
-    Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("1+1*2"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("1+1*2"));
 
-    double tmpResult = FormulaTree.EvaluateTree(tmpTree, null);
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
 
     assertEquals((double) 3.0, tmpResult);
   }
@@ -285,9 +285,9 @@ public class IntegrationTest extends TestCase {
    */
   public void testIteration0302() throws Exception {
 
-    Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("1/1-1"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("1/1-1"));
 
-    double tmpResult = FormulaTree.EvaluateTree(tmpTree, null);
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
 
     assertEquals((double) 0.0, tmpResult);
   }
@@ -299,9 +299,9 @@ public class IntegrationTest extends TestCase {
    */
   public void testIteration0303() throws Exception {
 
-    Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("1.5+1.2"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("1.5+1.2"));
 
-    double tmpResult = FormulaTree.EvaluateTree(tmpTree, null);
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
 
     assertEquals((double) 2.7, tmpResult);
   }
@@ -316,8 +316,8 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("3+-2"));
-      FormulaTree.EvaluateTree(tmpTree, null);
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("3+-2"));
+      FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
@@ -336,8 +336,8 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("("));
-      FormulaTree.EvaluateTree(tmpTree, null);
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("("));
+      FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
@@ -354,8 +354,8 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString(")"));
-      FormulaTree.EvaluateTree(tmpTree, null);
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString(")"));
+      FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
@@ -372,8 +372,8 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("()"));
-      FormulaTree.EvaluateTree(tmpTree, null);
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("()"));
+      FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
@@ -390,8 +390,8 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("(1+1"));
-      FormulaTree.EvaluateTree(tmpTree, null);
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("(1+1"));
+      FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
@@ -408,8 +408,8 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("1+1)"));
-      FormulaTree.EvaluateTree(tmpTree, null);
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("1+1)"));
+      FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
@@ -426,8 +426,8 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("()1-1"));
-      FormulaTree.EvaluateTree(tmpTree, null);
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("()1-1"));
+      FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
@@ -444,8 +444,8 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("()+1"));
-      FormulaTree.EvaluateTree(tmpTree, null);
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("()+1"));
+      FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
@@ -462,8 +462,8 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("()+1+1"));
-      FormulaTree.EvaluateTree(tmpTree, null);
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("()+1+1"));
+      FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
@@ -480,8 +480,8 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("1()"));
-      FormulaTree.EvaluateTree(tmpTree, null);
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("1()"));
+      FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
@@ -498,8 +498,8 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("()1"));
-      FormulaTree.EvaluateTree(tmpTree, null);
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("()1"));
+      FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
@@ -516,8 +516,8 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("1()1+1)"));
-      FormulaTree.EvaluateTree(tmpTree, null);
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("1()1+1)"));
+      FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
@@ -534,8 +534,8 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString(")(1+3"));
-      FormulaTree.EvaluateTree(tmpTree, null);
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString(")(1+3"));
+      FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
@@ -549,9 +549,9 @@ public class IntegrationTest extends TestCase {
    */
   public void testIteration0413() throws Exception {
 
-    Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("5-(3-4)"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("5-(3-4)"));
 
-    double tmpResult = FormulaTree.EvaluateTree(tmpTree, null);
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
 
     assertEquals((double) 6.0, tmpResult);
   }
@@ -563,9 +563,9 @@ public class IntegrationTest extends TestCase {
    */
   public void testIteration0414() throws Exception {
 
-    Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("5-(3)"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("5-(3)"));
 
-    double tmpResult = FormulaTree.EvaluateTree(tmpTree, null);
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
 
     assertEquals((double) 2.0, tmpResult);
   }
@@ -577,9 +577,9 @@ public class IntegrationTest extends TestCase {
    */
   public void testIteration0415() throws Exception {
 
-    Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("5+(3)"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("5+(3)"));
 
-    double tmpResult = FormulaTree.EvaluateTree(tmpTree, null);
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
 
     assertEquals((double) 8.0, tmpResult);
   }
@@ -594,8 +594,8 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("1/(1-1)"));
-      FormulaTree.EvaluateTree(tmpTree, null);
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("1/(1-1)"));
+      FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
@@ -614,9 +614,9 @@ public class IntegrationTest extends TestCase {
     Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
     tmpHashtable.put("x", new Double(2));
 
-    Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("x"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("x"));
 
-    double tmpResult = FormulaTree.EvaluateTree(tmpTree, tmpHashtable);
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
 
     assertEquals((double) 2.0, tmpResult);
   }
@@ -634,8 +634,8 @@ public class IntegrationTest extends TestCase {
     tmpHashtable.put("x", new Double(2));
 
     try {
-      Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("x/0"));
-      FormulaTree.EvaluateTree(tmpTree, tmpHashtable);
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("x/0"));
+      FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
@@ -652,9 +652,9 @@ public class IntegrationTest extends TestCase {
     Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
     tmpHashtable.put("x", new Double(2));
 
-    Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("x/x"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("x/x"));
 
-    double tmpResult = FormulaTree.EvaluateTree(tmpTree, tmpHashtable);
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
 
     assertEquals((double) 1.0, tmpResult);
   }
@@ -675,9 +675,9 @@ public class IntegrationTest extends TestCase {
     tmpHashtable.put("o", new Double(2));
     tmpHashtable.put("u", new Double(2));
 
-    Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("2dirty4you"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("2dirty4you"));
 
-    double tmpResult = FormulaTree.EvaluateTree(tmpTree, tmpHashtable);
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
 
     assertEquals((double) 2048.0, tmpResult);
   }
@@ -694,8 +694,8 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("sin"));
-      FormulaTree.EvaluateTree(tmpTree, null);
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("sin"));
+      FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
@@ -712,8 +712,8 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("sin()"));
-      FormulaTree.EvaluateTree(tmpTree, null);
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("sin()"));
+      FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
@@ -735,8 +735,8 @@ public class IntegrationTest extends TestCase {
     tmpHashtable.put("n", new Double(2));
 
     try {
-      Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("sin)"));
-      FormulaTree.EvaluateTree(tmpTree, tmpHashtable);
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("sin)"));
+      FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
@@ -758,9 +758,9 @@ public class IntegrationTest extends TestCase {
     tmpHashtable.put("n", new Double(2));
     tmpHashtable.put("u", new Double(45));
 
-    Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("cosin(us)"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("cosin(us)"));
 
-    double tmpResult = FormulaTree.EvaluateTree(tmpTree, tmpHashtable);
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
 
     assertEquals((double) 4.0, tmpResult);
   }
@@ -772,9 +772,9 @@ public class IntegrationTest extends TestCase {
    */
   public void testIteration0705() throws Exception {
 
-    Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("sin(90)"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("sin(90)"));
 
-    double tmpResult = FormulaTree.EvaluateTree(tmpTree, null);
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
 
     assertEquals((double) 1.0, tmpResult);
   }
@@ -786,9 +786,9 @@ public class IntegrationTest extends TestCase {
    */
   public void testIteration0706() throws Exception {
 
-    Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("sin((-90))"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("sin((-90))"));
 
-    double tmpResult = FormulaTree.EvaluateTree(tmpTree, null);
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
 
     assertEquals((double) -1.0, tmpResult);
   }
@@ -802,8 +802,8 @@ public class IntegrationTest extends TestCase {
 
     boolean tmpErrorOccured = false;
     try {
-      Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("^"));
-      FormulaTree.EvaluateTree(tmpTree, null);
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("^"));
+      FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
@@ -819,8 +819,8 @@ public class IntegrationTest extends TestCase {
 
     boolean tmpErrorOccured = false;
     try {
-      Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("2^"));
-      FormulaTree.EvaluateTree(tmpTree, null);
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("2^"));
+      FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
@@ -836,8 +836,8 @@ public class IntegrationTest extends TestCase {
 
     boolean tmpErrorOccured = false;
     try {
-      Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("^2"));
-      FormulaTree.EvaluateTree(tmpTree, null);
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("^2"));
+      FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
@@ -851,9 +851,9 @@ public class IntegrationTest extends TestCase {
    */
   public void testIteration0710() throws Exception {
 
-    Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("2^2"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("2^2"));
 
-    double tmpResult = FormulaTree.EvaluateTree(tmpTree, null);
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
 
     assertEquals((double) 4.0, tmpResult);
   }
@@ -868,9 +868,9 @@ public class IntegrationTest extends TestCase {
     Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
     tmpHashtable.put("x", new Double(2));
 
-    Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("x^x"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("x^x"));
 
-    double tmpResult = FormulaTree.EvaluateTree(tmpTree, tmpHashtable);
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
 
     assertEquals((double) 4.0, tmpResult);
   }
@@ -885,9 +885,9 @@ public class IntegrationTest extends TestCase {
     Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
     tmpHashtable.put("x", new Double(90));
 
-    Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("sin(x^1)"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("sin(x^1)"));
 
-    double tmpResult = FormulaTree.EvaluateTree(tmpTree, tmpHashtable);
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
 
     assertEquals((double) 1.0, tmpResult);
   }
@@ -902,9 +902,9 @@ public class IntegrationTest extends TestCase {
     Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
     tmpHashtable.put("x", new Double(2));
 
-    Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("x^sin(90)"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("x^sin(90)"));
 
-    double tmpResult = FormulaTree.EvaluateTree(tmpTree, tmpHashtable);
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
 
     assertEquals((double) 2.0, tmpResult);
   }
@@ -919,9 +919,9 @@ public class IntegrationTest extends TestCase {
     Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
     tmpHashtable.put("x", new Double(2));
 
-    Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("sqrt(4)"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("sqrt(4)"));
 
-    double tmpResult = FormulaTree.EvaluateTree(tmpTree, tmpHashtable);
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
 
     assertEquals((double) 2.0, tmpResult);
   }
@@ -936,8 +936,8 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("sqrt(-4)"));
-      FormulaTree.EvaluateTree(tmpTree, null);
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("sqrt(-4)"));
+      FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (Exception e) {
       tmpErrorOccured = true;
     }
@@ -955,9 +955,9 @@ public class IntegrationTest extends TestCase {
     tmpHashtable.put("x", new Double(-4));
 
     String tmpString = ConverterUtil.termToStandardString("sqrt(-x)");
-    Tree tmpTree = FormulaTree.BuildTree(tmpString);
+    Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
-    double tmpResult = FormulaTree.EvaluateTree(tmpTree, tmpHashtable);
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
 
     assertEquals((double) 2.0, tmpResult);
   }

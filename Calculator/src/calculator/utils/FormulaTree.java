@@ -15,7 +15,7 @@ import calculator.elements.Variable;
 /**
  *
  */
-public final class FormulaTreeUtil {
+public final class FormulaTree {
 	
   /**
    * Calculates the result of a formula-tree and returns it as a "double"
@@ -44,28 +44,28 @@ public final class FormulaTreeUtil {
       Operator tmpOperator = (Operator) aTree.getRoot();
 
       if (tmpOperator.getOperatorType() == OperatorType.ADDITION) {
-        tmpResult = FormulaTreeUtil.EvaluateTree(aTree.getLeftSon(),aVariableHashTable) + FormulaTreeUtil.EvaluateTree(aTree.getRightSon(),aVariableHashTable);
+        tmpResult = FormulaTree.EvaluateTree(aTree.getLeftSon(),aVariableHashTable) + FormulaTree.EvaluateTree(aTree.getRightSon(),aVariableHashTable);
       } else if (tmpOperator.getOperatorType() == OperatorType.DIVISION) {
-        Double tmpLeft = FormulaTreeUtil.EvaluateTree(aTree.getLeftSon(),aVariableHashTable);
-        Double tmpRight = FormulaTreeUtil.EvaluateTree(aTree.getRightSon(),aVariableHashTable);
+        Double tmpLeft = FormulaTree.EvaluateTree(aTree.getLeftSon(),aVariableHashTable);
+        Double tmpRight = FormulaTree.EvaluateTree(aTree.getRightSon(),aVariableHashTable);
         if (tmpRight == 0) throw new Exception ("Division by 0 not allowed");
         tmpResult = tmpLeft/tmpRight ;
       } else if (tmpOperator.getOperatorType() == OperatorType.MULTIPLICATION) {
-        tmpResult = FormulaTreeUtil.EvaluateTree(aTree.getLeftSon(),aVariableHashTable)* FormulaTreeUtil.EvaluateTree(aTree.getRightSon(),aVariableHashTable);
+        tmpResult = FormulaTree.EvaluateTree(aTree.getLeftSon(),aVariableHashTable)* FormulaTree.EvaluateTree(aTree.getRightSon(),aVariableHashTable);
       } else if (tmpOperator.getOperatorType() == OperatorType.SUBTRACTION) {
-        tmpResult = FormulaTreeUtil.EvaluateTree(aTree.getLeftSon(),aVariableHashTable) - FormulaTreeUtil.EvaluateTree(aTree.getRightSon(),aVariableHashTable);
+        tmpResult = FormulaTree.EvaluateTree(aTree.getLeftSon(),aVariableHashTable) - FormulaTree.EvaluateTree(aTree.getRightSon(),aVariableHashTable);
       } else if (tmpOperator.getOperatorType() == OperatorType.SIN)  {
-    	  tmpResult = Math.sin(Math.toRadians(FormulaTreeUtil.EvaluateTree(aTree.getRightSon(),aVariableHashTable))); 
+    	  tmpResult = Math.sin(Math.toRadians(FormulaTree.EvaluateTree(aTree.getRightSon(),aVariableHashTable))); 
       }      else if (tmpOperator.getOperatorType() == OperatorType.SQRT)       {       
-          Double tmpRight = FormulaTreeUtil.EvaluateTree(aTree.getRightSon(),aVariableHashTable);
+          Double tmpRight = FormulaTree.EvaluateTree(aTree.getRightSon(),aVariableHashTable);
           if (tmpRight < 0) throw new Exception ("sqrt can only be used with positive operands");
     	  tmpResult = Math.sqrt(tmpRight); 
       }      else if (tmpOperator.getOperatorType() == OperatorType.TAN)       {
-    	  tmpResult = Math.tan(Math.toRadians(FormulaTreeUtil.EvaluateTree(aTree.getRightSon(),aVariableHashTable))); 
+    	  tmpResult = Math.tan(Math.toRadians(FormulaTree.EvaluateTree(aTree.getRightSon(),aVariableHashTable))); 
       }      else if (tmpOperator.getOperatorType() == OperatorType.COS)       {
-    	  tmpResult = Math.cos(Math.toRadians(FormulaTreeUtil.EvaluateTree(aTree.getRightSon(),aVariableHashTable))); 
+    	  tmpResult = Math.cos(Math.toRadians(FormulaTree.EvaluateTree(aTree.getRightSon(),aVariableHashTable))); 
       }      else if (tmpOperator.getOperatorType() == OperatorType.POW)       {
-    	  tmpResult = Math.pow(FormulaTreeUtil.EvaluateTree(aTree.getLeftSon(),aVariableHashTable), FormulaTreeUtil.EvaluateTree(aTree.getRightSon(),aVariableHashTable));
+    	  tmpResult = Math.pow(FormulaTree.EvaluateTree(aTree.getLeftSon(),aVariableHashTable), FormulaTree.EvaluateTree(aTree.getRightSon(),aVariableHashTable));
       }    
       } else
       throw (new Exception("Not possible to calculate the formula-tree."));
@@ -152,7 +152,7 @@ public static Tree BuildTree(ArrayList<Object> MathList) throws Exception
 	    	}
 	    	else if (tmpNextElement instanceof ArrayList) //in case of brackets, build a tree recursive 
 	    	{
-	    		aTreeToBeInserted = FormulaTreeUtil.BuildTree((ArrayList<Object>)tmpNextElement);
+	    		aTreeToBeInserted = FormulaTree.BuildTree((ArrayList<Object>)tmpNextElement);
 	    		if (aTreeToBeInserted!=null) //set highest priority manually
 	    			aTreeToBeInserted.getRoot().setPriority(MathUtil.PRIO_BRACKETS);
 	    	}	
@@ -163,7 +163,7 @@ public static Tree BuildTree(ArrayList<Object> MathList) throws Exception
 	    	}	    	
 	    	
 	    	//insert into Tree
-	    	Oldestfather = FormulaTreeUtil.InsertMathObjIntoTree(Oldestfather, aTreeToBeInserted);
+	    	Oldestfather = FormulaTree.InsertMathObjIntoTree(Oldestfather, aTreeToBeInserted);
 
 	    }
 

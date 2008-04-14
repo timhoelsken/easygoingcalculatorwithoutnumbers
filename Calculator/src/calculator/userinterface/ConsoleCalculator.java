@@ -6,7 +6,7 @@ import java.util.Hashtable;
 
 import calculator.elements.Tree;
 import calculator.utils.ConverterUtil;
-import calculator.utils.FormulaTreeUtil;
+import calculator.utils.FormulaTree;
 import calculator.utils.MathUtil;
 
 /**
@@ -124,9 +124,9 @@ public class ConsoleCalculator {
               // calculate formula
               try {
 
-                Tree tmpTree = FormulaTreeUtil.BuildTree(tmpInputString);
+                Tree tmpTree = FormulaTree.BuildTree(tmpInputString);
 
-                System.out.println(FormulaTreeUtil.EvaluateTree(tmpTree, tmpVariableDictionary));
+                System.out.println(FormulaTree.EvaluateTree(tmpTree, tmpVariableDictionary));
 
                 // to avoid endless loop the control is set to "n" (Do-While-Loop)
                 if (!ConverterUtil.hasVariables(tmpInputString)) {

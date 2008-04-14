@@ -191,24 +191,34 @@ public class ConverterUtil {
    * @author Tobias
    */
   public static void checkOperators(String aFormula) throws IllegalArgumentException {
-    // cases "- ( ..."
-    if (aFormula.length() > 1 && aFormula.charAt(1) == '(') {
-      Pattern tmpPattern = Pattern.compile("[\\+\\-\\*/\\^]");
-      if (tmpPattern.matcher(Character.toString(aFormula.charAt(0))).find()) {
-        throw new IllegalArgumentException(
-            "Do not let a bracket follow an alone standing arithmetic operator.");
-      }
+//    // cases "- ( ..."
+//    //TODO Sinn?? => s. testCheckOperators11()
+//    if (aFormula.length() > 1 && aFormula.charAt(1) == '(') {
+//      Pattern tmpPattern = Pattern.compile("[\\+\\-\\*/\\^]");
+//      if (tmpPattern.matcher(Character.toString(aFormula.charAt(0))).find()) {
+//        throw new IllegalArgumentException(
+//            "Do not let a bracket follow an alone standing arithmetic operator.");
+//      }
+//    }
+
+    Pattern tmpPattern;
+    Matcher tmpMatcher;
+
+    // cases "+|*|/|^..."
+    tmpPattern = Pattern.compile("[\\+\\*/\\^].*");
+    tmpMatcher = tmpPattern.matcher(aFormula);
+    if (tmpMatcher.matches()) {
+      throw new IllegalArgumentException("The formula starts with an operator.");
     }
     // cases "... +|-|*|/|^"
-    Pattern tmpSingleOperatorPattern = Pattern.compile("[\\+\\-\\*/\\^]");
-    String tmpLastSignInFormular = Character.toString(aFormula.charAt(aFormula.length() - 1));
-    Matcher tmpSingleOperatorMatcher = tmpSingleOperatorPattern.matcher(tmpLastSignInFormular);
-    if (tmpSingleOperatorMatcher.find()) {
+    tmpPattern = Pattern.compile(".*[\\+\\-\\*/\\^]");
+    tmpMatcher = tmpPattern.matcher(aFormula);
+    if (tmpMatcher.matches()) {
       throw new IllegalArgumentException("The formula ends with an operator.");
     }
     // cases "+-", "*/" ...
-    Pattern tmpPattern = Pattern.compile("[\\+\\-\\*/\\^] *[\\+\\-\\*/\\^\\)]");
-    Matcher tmpMatcher = tmpPattern.matcher(aFormula);
+    tmpPattern = Pattern.compile("[\\+\\-\\*/\\^] *[\\+\\-\\*/\\^\\)]");
+    tmpMatcher = tmpPattern.matcher(aFormula);
     if (tmpMatcher.find()) {
       throw new IllegalArgumentException("The order of operators in the formula is not correct.");
     }
@@ -216,7 +226,7 @@ public class ConverterUtil {
     tmpPattern = Pattern.compile("\\([\\+\\*/\\^]");
     tmpMatcher = tmpPattern.matcher(aFormula);
     if (tmpMatcher.find()) {
-      throw new IllegalArgumentException("Do not let an alone standing arithmetic operator follow a bracket.");
+      throw new IllegalArgumentException("Do not let an alone standing arithmetic operator follow an opening bracket.");
     }
   }
 
@@ -431,7 +441,7 @@ public class ConverterUtil {
     }
 
     tmpVariableList.trimToSize();
-    
+
     return tmpVariableList;
   }
 
@@ -453,7 +463,7 @@ public class ConverterUtil {
   }
 
   /**
-   * 
+   *
    * @param aListOfVariables
    * @param aVariable
    * @return

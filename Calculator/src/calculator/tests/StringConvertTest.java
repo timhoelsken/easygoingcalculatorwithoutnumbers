@@ -72,8 +72,8 @@ public class StringConvertTest extends TestCase {
     assertTrue("The String has Variables separated by *", ConverterUtil.termToStandardString(tmpString)
         .equals("2*a+a*b"));
   }
-  
- 
+
+
 
   /**
    * Test method for
@@ -185,7 +185,7 @@ public class StringConvertTest extends TestCase {
       tmpErrorOccured = true;
     }
     assertTrue(!tmpErrorOccured);
-    assertEquals("3+((-a)+b)", tmpConvertedString);   
+    assertEquals("3+((-a)+b)", tmpConvertedString);
   }
 
   /**
@@ -276,12 +276,12 @@ public class StringConvertTest extends TestCase {
 	    } catch (Exception e) {
 	      tmpErrorOccured = true;
 	    }
-	    
+
 	    assertTrue(!tmpErrorOccured);
 	    assertEquals("2*0.0000559", tmpConvertedString);
 
 	  }
-  
+
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#insertMultiplicationOperators(java.lang.String)}.
@@ -547,7 +547,6 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
    */
-  //TODO @add a rule to checkOperators() systematically
   public void testCheckOperators8() {
     // negative test
     boolean tmpErrorOccurred = false;
@@ -572,7 +571,7 @@ public class StringConvertTest extends TestCase {
     }
     assertTrue(tmpErrorOccurred);
   }
-  
+
   /**
    * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
    */
@@ -587,6 +586,17 @@ public class StringConvertTest extends TestCase {
     assertTrue(tmpErrorOccurred);
   }
 
+  /**
+   * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
+   */
+  public void testCheckOperators11() {
+    // positive test
+    try {
+      ConverterUtil.checkOperators("-(3+4)");
+    } catch (Exception e) {
+      assertTrue(false);
+    }
+  }
 
   /**
    * Test method for

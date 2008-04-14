@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 
 import calculator.elements.Tree;
 import calculator.utils.ConverterUtil;
-import calculator.utils.FormulaTreeUtil;
+import calculator.utils.FormulaTree;
 import calculator.utils.MathUtil;
 
 /**
@@ -276,8 +276,8 @@ public class FrameCalculator extends JFrame {
 
     // calculate!
     try {
-      Tree tmpTree = FormulaTreeUtil.BuildTree(aFormula);
-      textFormulaOutput.setText("" + FormulaTreeUtil.EvaluateTree(tmpTree, dictionaryOfEnteredVariables));
+      Tree tmpTree = FormulaTree.BuildTree(aFormula);
+      textFormulaOutput.setText("" + FormulaTree.EvaluateTree(tmpTree, dictionaryOfEnteredVariables));
     } catch (Exception e) {
       JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "An error occured!",
           JOptionPane.WARNING_MESSAGE);

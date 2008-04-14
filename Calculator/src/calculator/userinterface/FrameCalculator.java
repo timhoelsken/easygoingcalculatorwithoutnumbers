@@ -22,10 +22,12 @@ import calculator.utils.MathUtil;
 
 /**
  * This openes the calculator in a frame.
- * 
+ *
  * @author Tim
- * 
+ *
  */
+//TODO @Tim wenn ich über die GUI Variablen eingebe, hab ich danach im Formelfeld den Standardstring (z.B. % statt sin()). Nicht so schön :)
+// Dabei hätt mich so interessiert, ob ich die Möglichkeit habe, erneut die Variablen einzugeben ;)
 public class FrameCalculator extends JFrame {
 
   private static final long serialVersionUID = -4971700820441624660L;
@@ -110,7 +112,7 @@ public class FrameCalculator extends JFrame {
 
   /**
    * Actionlistener for the calculator button
-   * 
+   *
    * @param aButton
    */
   private void addCalculatorButtonListener(JButton aButton) {
@@ -226,7 +228,7 @@ public class FrameCalculator extends JFrame {
 
   /**
    * Actionlistener for the variable input button
-   * 
+   *
    * @param aButton
    */
   public void addVariableButtonListener(JButton aButton) {
@@ -266,7 +268,7 @@ public class FrameCalculator extends JFrame {
 
   /**
    * calculates the formula
-   * 
+   *
    * @param aFormula
    */
   public static void calculateFormula(String aFormula) {

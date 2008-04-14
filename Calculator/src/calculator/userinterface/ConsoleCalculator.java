@@ -147,8 +147,8 @@ public class ConsoleCalculator {
               //}
               }
               
-              //TODO @Tim, was passiert, wenn ich die folgende Eingabe mache: 2/(3-x) nun belege ich x mit 3, dann habe ich keine Möglichkeit mehr x neu zu belegen. weil ein fehler aufgetreten ist
-              // Reply Tim: Ja, aber das liegt daran, dass ich nicht unterscheiden kann weshalb ein Fehler auftritt! Wenn in der Message bspw. der Grund steht, dann kann ich das unterscheiden (s. auskommentierter Code)
+              //TODO @all Wir sollten unsere Exceptions nochmal überdenken. Ich schlage folgende Exception Kategorien vor: "Syntatktischer Fehler" (z.B. 2+()**sin()), Rechenfehler " 2/0 ", Programmfehler (aufteilung nach ebenen: gui,mathutil,formelbaum). Braucht jemand noch mehr Kategorien für Fehler?
+              //TODO fehlerbehandlung in der gui -> nach exceptions neuordnung
               
               // if no error occured and the formula has variables, the user is asked if he wants to set another variable
               if (!tmpErrorOccuredInVariableInput && tmpFormulaHasVariables) {

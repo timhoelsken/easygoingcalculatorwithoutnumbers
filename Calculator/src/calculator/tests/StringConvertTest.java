@@ -604,7 +604,7 @@ public class StringConvertTest extends TestCase {
   public void testCheckOperators12() {
     // positive test
     try {
-      //TODO @Raphi kann das hier verarbeitet werden?@von Raphi: der Baum kann dat, aber irgendwer meckert vorher mit ner Fehlermeldung
+      //TODO @Raphi kann das hier verarbeitet werden?@von Raphi: der Baum kann dat, aber die checkoperators net. Siehe anderes todo!
       ConverterUtil.checkOperators("-sin(3+4)");
     } catch (Exception e) {
       assertTrue(false);

@@ -10,9 +10,6 @@ import calculator.elements.OperatorType;
 import calculator.elements.Tree;
 import calculator.elements.Variable;
 
-//TODO @irgendwer, hat jemand lust nen code review zu machen?
-//By Tim: Hmm... ich hab soweit nichts einzuwenden, EvaluateTree könnte nur vielleicht noch ein paar Leerzeichen vertragen ;)
-// ==> hab eclipse den Code formatieren lassen (strg+shift+f)
 /**
  * 
  */
@@ -37,47 +34,62 @@ public final class FormulaTree {
     Double tmpResult = 0.0;
 
     if (aTree.getRoot() instanceof NumberObj) {
-      // is it a tree where there is only a number at the root? return the
-      // number!
+      // is it a tree where there is only a number at the root? return the number!
       tmpResult = ((NumberObj) aTree.getRoot()).getValue();
     } else if (aTree.getRoot() instanceof Variable) {
+      
       tmpResult = aVariableHashTable.get(Character.toString(((Variable) aTree.getRoot()).getValue()));
-      if (tmpResult == null)
-        throw (new Exception("Not all variables are assigned with values"));
+      if (tmpResult == null)throw (new Exception("Not all variables are assigned with values"));
+      
     } else if (aTree.getRoot() instanceof Operator) {
 
       Operator tmpOperator = (Operator) aTree.getRoot();
 
       if (tmpOperator.getOperatorType() == OperatorType.ADDITION) {
+        
         tmpResult = FormulaTree.EvaluateTree(aTree.getLeftSon(), aVariableHashTable)
             + FormulaTree.EvaluateTree(aTree.getRightSon(), aVariableHashTable);
+        
       } else if (tmpOperator.getOperatorType() == OperatorType.DIVISION) {
+        
         Double tmpLeft = FormulaTree.EvaluateTree(aTree.getLeftSon(), aVariableHashTable);
         Double tmpRight = FormulaTree.EvaluateTree(aTree.getRightSon(), aVariableHashTable);
-        if (tmpRight == 0)
-          throw new Exception("Division by 0 not allowed");
+        if (tmpRight == 0) throw new Exception("Division by 0 not allowed");
         tmpResult = tmpLeft / tmpRight;
+        
       } else if (tmpOperator.getOperatorType() == OperatorType.MULTIPLICATION) {
+        
         tmpResult = FormulaTree.EvaluateTree(aTree.getLeftSon(), aVariableHashTable)
             * FormulaTree.EvaluateTree(aTree.getRightSon(), aVariableHashTable);
+        
       } else if (tmpOperator.getOperatorType() == OperatorType.SUBTRACTION) {
+        
         tmpResult = FormulaTree.EvaluateTree(aTree.getLeftSon(), aVariableHashTable)
             - FormulaTree.EvaluateTree(aTree.getRightSon(), aVariableHashTable);
+        
       } else if (tmpOperator.getOperatorType() == OperatorType.SIN) {
+        
         tmpResult = Math
             .sin(Math.toRadians(FormulaTree.EvaluateTree(aTree.getRightSon(), aVariableHashTable)));
+        
       } else if (tmpOperator.getOperatorType() == OperatorType.SQRT) {
+        
         Double tmpRight = FormulaTree.EvaluateTree(aTree.getRightSon(), aVariableHashTable);
-        if (tmpRight < 0)
-          throw new Exception("sqrt can only be used with positive operands");
+        if (tmpRight < 0)  throw new Exception("sqrt can only be used with positive operands");
         tmpResult = Math.sqrt(tmpRight);
+        
       } else if (tmpOperator.getOperatorType() == OperatorType.TAN) {
+        
         tmpResult = Math
             .tan(Math.toRadians(FormulaTree.EvaluateTree(aTree.getRightSon(), aVariableHashTable)));
+        
       } else if (tmpOperator.getOperatorType() == OperatorType.COS) {
+        
         tmpResult = Math
             .cos(Math.toRadians(FormulaTree.EvaluateTree(aTree.getRightSon(), aVariableHashTable)));
+        
       } else if (tmpOperator.getOperatorType() == OperatorType.POW) {
+        
         tmpResult = Math.pow(FormulaTree.EvaluateTree(aTree.getLeftSon(), aVariableHashTable), FormulaTree
             .EvaluateTree(aTree.getRightSon(), aVariableHashTable));
       }

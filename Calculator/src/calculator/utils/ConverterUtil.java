@@ -193,6 +193,12 @@ public class ConverterUtil {
    * @author Tobias
    */
   public static void checkOperators(String aFormula) throws IllegalArgumentException {
+    //TODO @Tobi, problem: es laufen vorher jede menge andere checks, z.b. checks, die das sin durch % ersetzen. (beispiel: -sin(3+4))
+    //die regulären ausdrücke gehen darauf aber nicht ein! es gibt lokale tests die durchlaufen, 
+    //aber im integrationstest würden sie auf die nase fallen! -> alle lokalen tests zu integrationstests umformen?
+    
+    
+    
 //    // cases "- ( ..."
 //    //TODO Sinn?? => s. testCheckOperators11()
 //    if (aFormula.length() > 1 && aFormula.charAt(1) == '(') {

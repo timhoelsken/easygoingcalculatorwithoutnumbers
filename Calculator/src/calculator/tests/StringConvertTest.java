@@ -604,7 +604,7 @@ public class StringConvertTest extends TestCase {
   public void testCheckOperators12() {
     // positive test
     try {
-      //TODO @Raphi kann das hier verarbeitet werden?@von Raphi: der Baum kann dat, aber die checkoperators net. Siehe anderes todo!
+      //TODO @discussion Das hier läuft durch, der String als Input wird aber abgewehrt, weil die checkNegativeNumbers das umgewandelte % nicht erkennt und das - einklammert. Was ist die schönste Lösung?
       ConverterUtil.checkOperators("-sin(3+4)");
     } catch (Exception e) {
       assertTrue(false);

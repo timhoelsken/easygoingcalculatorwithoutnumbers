@@ -930,7 +930,8 @@ public class IntegrationTest extends TestCase {
     Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
     tmpHashtable.put("x", new Double(-4));
 
-    Tree tmpTree = FormulaTree.BuildTree(ConverterUtil.termToStandardString("sqrt(-x)"));
+    String tmpString = ConverterUtil.termToStandardString("sqrt(-x)");
+    Tree tmpTree = FormulaTree.BuildTree(tmpString);
 
     double tmpResult = FormulaTree.EvaluateTree(tmpTree, tmpHashtable);
 

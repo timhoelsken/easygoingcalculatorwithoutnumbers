@@ -47,7 +47,8 @@ public class ConsoleCalculator {
         tmpInputString = "";
 
         boolean tmpFormulaHasVariables = false;
-        boolean tmpErrorOccured = false;
+        boolean tmpErrorOccuredInTerm = false;
+        boolean tmpErrorOccuredInVariableInput = false;
 
         String tmpEnterVariablesValue = new String("");
 
@@ -58,7 +59,7 @@ public class ConsoleCalculator {
         while (!tmpInputString.toLowerCase().equals("n")) {
 
           // reset of control variables
-          tmpErrorOccured = false;
+          tmpErrorOccuredInTerm = false;
           tmpEnterVariablesValue = "";
 
           ConsoleOutput.promptFormulaInput();
@@ -74,10 +75,10 @@ public class ConsoleCalculator {
             tmpInputString = ConverterUtil.termToStandardString(tmpInputString);
           } catch (Exception e) {
             ConsoleOutput.printError(e.getMessage());
-            tmpErrorOccured = true;
+            tmpErrorOccuredInTerm = true;
           }
 
-          if (!tmpErrorOccured) {
+          if (!tmpErrorOccuredInTerm) {
 
             tmpFormulaHasVariables = ConverterUtil.hasVariables(tmpInputString);
 
@@ -138,12 +139,19 @@ public class ConsoleCalculator {
               } catch (Exception e) {
                 System.out.println(e.getMessage());
                 //e.printStackTrace();
-                tmpErrorOccured = true;
+                // if (e.getMessage().equals("")){
+                tmpErrorOccuredInVariableInput = true;
+                //
+                //else{
+                tmpErrorOccuredInTerm = true;
+              //}
               }
               
               //TODO @Tim, was passiert, wenn ich die folgende Eingabe mache: 2/(3-x) nun belege ich x mit 3, dann habe ich keine Möglichkeit mehr x neu zu belegen. weil ein fehler aufgetreten ist
+              // Reply Tim: Ja, aber das liegt daran, dass ich nicht unterscheiden kann weshalb ein Fehler auftritt! Wenn in der Message bspw. der Grund steht, dann kann ich das unterscheiden (s. auskommentierter Code)
+              
               // if no error occured and the formula has variables, the user is asked if he wants to set another variable
-              if (!tmpErrorOccured && tmpFormulaHasVariables) {
+              if (!tmpErrorOccuredInVariableInput && tmpFormulaHasVariables) {
 
                 ConsoleOutput.askAnotherVariableInput();
 
@@ -155,7 +163,7 @@ public class ConsoleCalculator {
                 }
               }
               // Enter variables loop
-            } while (!"n".equals(tmpEnterVariablesValue) && !tmpErrorOccured);
+            } while (!"n".equals(tmpEnterVariablesValue) && !tmpErrorOccuredInTerm);
           }
 
           ConsoleOutput.askAnotherFormulaInput();

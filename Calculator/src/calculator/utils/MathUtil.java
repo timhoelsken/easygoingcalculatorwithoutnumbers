@@ -170,7 +170,7 @@ public class MathUtil {
    * @return MathObj
    */
   public static MathObj buildNumberMathObject(String aNumberContainingString) {
-    Double tmpFl;
+    Double tmpFl; // Double tmpFl = new Double("0.0");
     tmpFl = Double.valueOf("0.0").doubleValue();
     try {
       tmpFl = Double.valueOf(aNumberContainingString).doubleValue();

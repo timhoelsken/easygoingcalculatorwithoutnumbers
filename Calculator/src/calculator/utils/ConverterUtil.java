@@ -23,6 +23,8 @@ public class ConverterUtil {
    */
   public static String termToStandardString(String aFormula) throws IllegalArgumentException {
 
+    if (aFormula==null || aFormula.length()==0) throw new IllegalArgumentException("Empty Formula");
+    
     checkIfValidSignsOnly(aFormula);
     checkIfEmptyBrackets(aFormula);
     aFormula = removeBlanks(aFormula);

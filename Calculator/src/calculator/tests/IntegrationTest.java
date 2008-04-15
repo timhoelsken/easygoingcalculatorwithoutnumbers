@@ -1739,7 +1739,7 @@ public class IntegrationTest extends TestCase {
 
    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
 
-   assertEquals((double) 26.0, tmpResult);
+   assertEquals((double) 11.0, tmpResult);
  }
 
  /**

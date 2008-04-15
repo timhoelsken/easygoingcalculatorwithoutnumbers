@@ -1300,7 +1300,7 @@ public class IntegrationTest extends TestCase {
    tmpHashtable.put("y", new Double(-5));
    tmpHashtable.put("z", new Double(66));
 
-   String tmpString = ConverterUtil.termToStandardString("5*x+y*Z");
+   String tmpString = ConverterUtil.termToStandardString("5*x+y*z");
    Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);

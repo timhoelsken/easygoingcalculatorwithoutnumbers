@@ -213,9 +213,9 @@ public class ConverterUtil {
    */
   public static String setBracketsAroundNegatives(String aFormula) {
 
-    if (aFormula.length() > 0) {
+    if (aFormula.length() > 1) {
       // check negative number at the beginning
-      if (aFormula.charAt(0) == '-') {
+      if (aFormula.charAt(0) == '-' && aFormula.charAt(1) != '(') {
         aFormula = setBracketsAroundNegative(aFormula, 0);
       }
     }
@@ -298,7 +298,6 @@ public class ConverterUtil {
         }
       }
     }
-
     return aFormula;
   }
 

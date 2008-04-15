@@ -3,6 +3,8 @@
  */
 package calculator.tests;
 
+import calculator.exceptions.CalculatingException;
+import calculator.exceptions.FormulaConversionException;
 import calculator.utils.ConverterUtil;
 import junit.framework.JUnit4TestAdapter;
 import junit.framework.Test;
@@ -134,8 +136,8 @@ public class StringConvertTest extends TestCase {
 
 		try {
 			ConverterUtil.termToStandardString("-");
-		} catch (Exception e) {
-			assertTrue("The order of operators in the formula is not correct.".equals(e.getMessage()));
+		} catch (FormulaConversionException e) {
+			assertEquals("The formula ends with an operator.", e.getMessage());
 			tmpErrorOccured = true;
 		}
 		assertTrue("The String is not correct", tmpErrorOccured);

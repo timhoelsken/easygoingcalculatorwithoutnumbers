@@ -1690,7 +1690,20 @@ public class IntegrationTest extends TestCase {
    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
 
    assertEquals((double) -1218.0, Math.floor(tmpResult*10000));
+ }
 
+ /**
+  * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
+  * @throws Exception
+  */
+ public void testCheckOperators13() throws Exception {
+
+   String tmpString = ConverterUtil.termToStandardString("7-(3+4)");
+   Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
+
+   double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
+
+   assertEquals((double) 0.0, tmpResult);
  }
 
  /**

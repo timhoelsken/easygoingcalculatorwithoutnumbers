@@ -27,18 +27,10 @@ import calculator.utils.MathUtil;
 
 /**
  * This openes the calculator in a frame.
- * 
+ *
  * @author Tim
- * 
+ *
  */
-// TODO @Tim wenn ich über die GUI Variablen eingebe, hab ich danach im
-// Formelfeld den Standardstring (z.B. % statt sin()). Nicht so schön :)
-// Dabei hätt mich so interessiert, ob ich die Möglichkeit habe, erneut die
-// Variablen einzugeben ;)
-// Reply Tim: Sollte jetzt funktionieren, hatte das Eingebaut für den
-// Fehlerfall, dass jemand eine Formel mit Variable eingibt, dann sich das
-// Variablenfenster öffnet, das bei seite geschoben wird und die Formel
-// umgeändert wird
 public class FrameCalculator extends JFrame {
 
   private static final long serialVersionUID = -4971700820441624660L;
@@ -53,9 +45,9 @@ public class FrameCalculator extends JFrame {
 
   // input / output fields
   private static JTextField textTermInput = new JTextField(16);
-  
+
   /**
-   * 
+   *
    */
   public static JTextField textFormulaOutput = new JTextField();
 
@@ -73,7 +65,7 @@ public class FrameCalculator extends JFrame {
   // the formula entered by the user
   private String convertedFormula = new String("");
   /**
-   * 
+   *
    */
   public static String calculatedFormula = new String("");
 
@@ -89,13 +81,13 @@ public class FrameCalculator extends JFrame {
   private JMenuItem menuItemHelp = new JMenuItem("Help");
   private JMenuItem menuItemExit = new JMenuItem("Exit");
 
-  private JMenuItem menuItemProgressBar = new JMenuItem("disable progressbar");
-  
+  private JMenuItem menuItemProgressBar = new JMenuItem("Enable ProgressBar");
+
   // == Menu Components ==
-  
+
   // define if a progressBar is loading
-  private static boolean loadProgressBar = true;
-  
+  private static boolean loadProgressBar = false;
+
   // the progressbar :)
   private JProgressBar progressBar = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
 
@@ -113,7 +105,7 @@ public class FrameCalculator extends JFrame {
 
     // align elements
     labelCalculatorTitle.setHorizontalAlignment(JLabel.CENTER);
-    labelEnterFormula.setVerticalAlignment((JLabel.CENTER));
+    labelEnterFormula.setVerticalAlignment((JLabel.TOP));
     buttonCalculateTerm.setVerticalAlignment(JButton.CENTER);
     labelResult.setHorizontalAlignment(JLabel.LEFT);
     textFormulaOutput.setHorizontalAlignment(JTextField.CENTER);
@@ -129,6 +121,7 @@ public class FrameCalculator extends JFrame {
     panelBottom.add(textFormulaOutput);
 
     panelCenter.add(textTermInput);
+    progressBar.setVisible(false);
     panelCenter.add(progressBar);
 
     // place labels, textField, button and panel on frame
@@ -165,25 +158,26 @@ public class FrameCalculator extends JFrame {
         if (loadProgressBar) {
           loadProgressBar = false;
           progressBar.setVisible(false);
-          menuItemProgressBar.setText("enable ProgressBar");
+          menuItemProgressBar.setText("Enable ProgressBar");
         } else {
           loadProgressBar = true;
           progressBar.setValue(0);
+          progressBar.setStringPainted(false);
           progressBar.setVisible(true);
-          menuItemProgressBar.setText("disable ProgressBar");
+          menuItemProgressBar.setText("Disable ProgressBar");
         }
         repaint();
       }
     });
 
     // == ActionListener of the menu ==
-    
+
     // build menu
     menuFile.add(menuItemHelp);
     menuFile.add(menuItemExit);
-    
+
     menuOptions.add(menuItemProgressBar);
-   
+
     menuBarcalculator.add(menuFile);
     menuBarcalculator.add(menuOptions);
 
@@ -206,7 +200,7 @@ public class FrameCalculator extends JFrame {
 
   /**
    * Actionlistener for the calculator button
-   * 
+   *
    * @param aButton
    */
   private void addCalculatorButtonListener(JButton aButton) {
@@ -234,7 +228,7 @@ public class FrameCalculator extends JFrame {
               Thread tmpProgressBarThread = new ProgressBarThread(progressBar);
               tmpProgressBarThread.start();
             }
-            
+
             // reset the list to avoid errors
             listOfVariables = new ArrayList<String[]>();
 
@@ -258,8 +252,7 @@ public class FrameCalculator extends JFrame {
   private void openVariableDialog() {
 
     // define modal dialog
-    dialogEnterVariables = new JDialog(FrameCalculator.this, "Variable(s)",
-        Dialog.ModalityType.DOCUMENT_MODAL);
+    dialogEnterVariables = new JDialog(FrameCalculator.this, "Variable(s)", Dialog.ModalityType.DOCUMENT_MODAL);
     dialogEnterVariables.setLocation(330, 330);
     dialogEnterVariables.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     dialogEnterVariables.getContentPane().setLayout(new BorderLayout(10, 10));
@@ -331,7 +324,7 @@ public class FrameCalculator extends JFrame {
 
   /**
    * Actionlistener for the variable input button
-   * 
+   *
    * @param aButton
    */
   public void addVariableButtonListener(JButton aButton) {
@@ -357,7 +350,7 @@ public class FrameCalculator extends JFrame {
         // calculated
         if (tmpAllVariablesAreFloats) {
           dialogEnterVariables.dispose();
-          
+
           // use the progressBar?
           if (loadProgressBar) {
             Thread tmpProgressBarThread = new ProgressBarThread(progressBar);
@@ -379,7 +372,7 @@ public class FrameCalculator extends JFrame {
 
   /**
    * calculates the formula
-   * 
+   *
    * @param aFormula
    */
   public static void calculateFormula(String aFormula) {
@@ -401,7 +394,7 @@ public class FrameCalculator extends JFrame {
   }
 
   /**
-   * 
+   *
    */
   public static void showCalculation() {
     textFormulaOutput.setText(calculatedFormula);

@@ -9,6 +9,7 @@ import calculator.elements.Operator;
 import calculator.elements.OperatorType;
 import calculator.elements.Tree;
 import calculator.elements.Variable;
+import calculator.exceptions.CalculatingException;
 
 /**
  *
@@ -23,11 +24,11 @@ public final class FormulaTreeUtil {
    * @param aVariableHashTable
    *            the values for all variables used
    * @return the result of the tree is returned as double value
-   * @throws Exception
+   * @throws CalculatingException
    *             It is not possible to calculate the tree. An internal error
    *             occurred.
    */
-  public static double EvaluateTree(Tree aTree, Hashtable<String, Double> aVariableHashTable) throws Exception {
+  public static double EvaluateTree(Tree aTree, Hashtable<String, Double> aVariableHashTable) throws CalculatingException {
     // no tree? no calculation!
     if (aTree == null)
       return 0;
@@ -39,7 +40,7 @@ public final class FormulaTreeUtil {
     } else if (aTree.getRoot() instanceof Variable) {
 
       tmpResult = aVariableHashTable.get(Character.toString(((Variable) aTree.getRoot()).getValue()));
-      if (tmpResult == null)throw (new Exception("Not all variables are assigned with values."));
+      if (tmpResult == null)throw (new CalculatingException("Not all variables are assigned with values."));
 
     } else if (aTree.getRoot() instanceof Operator) {
 
@@ -54,7 +55,7 @@ public final class FormulaTreeUtil {
 
         Double tmpLeft = FormulaTreeUtil.EvaluateTree(aTree.getLeftSon(), aVariableHashTable);
         Double tmpRight = FormulaTreeUtil.EvaluateTree(aTree.getRightSon(), aVariableHashTable);
-        if (tmpRight == 0) throw new Exception("Division by 0 not allowed");
+        if (tmpRight == 0) throw new CalculatingException("Division by 0 not allowed");
         tmpResult = tmpLeft / tmpRight;
 
       } else if (tmpOperator.getOperatorType() == OperatorType.MULTIPLICATION) {
@@ -75,7 +76,7 @@ public final class FormulaTreeUtil {
       } else if (tmpOperator.getOperatorType() == OperatorType.SQRT) {
 
         Double tmpRight = FormulaTreeUtil.EvaluateTree(aTree.getRightSon(), aVariableHashTable);
-        if (tmpRight < 0)  throw new Exception("sqrt() can only be used with positive operands.");
+        if (tmpRight < 0)  throw new CalculatingException("sqrt() can only be used with positive operands.");
         tmpResult = Math.sqrt(tmpRight);
 
       } else if (tmpOperator.getOperatorType() == OperatorType.TAN) {
@@ -94,7 +95,7 @@ public final class FormulaTreeUtil {
             .EvaluateTree(aTree.getRightSon(), aVariableHashTable));
       }
     } else
-      throw (new Exception("Not possible to calculate the formulaTree."));
+      throw (new CalculatingException("Not possible to calculate the formulaTree."));
 
     return tmpResult;
   }
@@ -141,9 +142,9 @@ public final class FormulaTreeUtil {
    *
    * @param aFunction
    * @return the built tree
-   * @throws Exception
+   * @throws CalculatingException
    */
-  public static Tree BuildTree(String aFunction) throws Exception {
+  public static Tree BuildTree(String aFunction) throws CalculatingException {
     // convert String into Math-List and call overloaded other method
     ArrayList<Object> MathList = MathUtil.FormulaToArrayList(aFunction);
     return BuildTree(MathList);
@@ -155,11 +156,11 @@ public final class FormulaTreeUtil {
    * @param MathList
    *            a sorted list with math objects
    * @return a tree :-) surprise
-   * @throws Exception
+   * @throws CalculatingException
    *             if an error occurred
    */
   @SuppressWarnings("unchecked")
-  private static Tree BuildTree(ArrayList<Object> MathList) throws Exception {
+  private static Tree BuildTree(ArrayList<Object> MathList) throws CalculatingException {
     Tree Oldestfather = null; // the root at the top of the tree - the father of
     // all fathers which has no father
 
@@ -181,7 +182,7 @@ public final class FormulaTreeUtil {
 
       if (aTreeToBeInserted == null) // the tree can´t be null! error case
       {
-        throw new Exception("Error in building the tree by reading the MathList.");
+        throw new CalculatingException("Error in building the tree by reading the MathList.");
       }
 
       // insert into Tree

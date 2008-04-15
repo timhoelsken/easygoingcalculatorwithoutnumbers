@@ -9,6 +9,7 @@ import junit.framework.JUnit4TestAdapter;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import calculator.elements.Tree;
+import calculator.exceptions.FormulaConversionException;
 import calculator.utils.ConverterUtil;
 import calculator.utils.FormulaTreeUtil;
 
@@ -155,7 +156,7 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
     try {
       ConverterUtil.termToStandardString("+1");
-    } catch (IllegalArgumentException e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
 
@@ -171,7 +172,7 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
     try {
       ConverterUtil.termToStandardString("*1");
-    } catch (IllegalArgumentException e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
 
@@ -187,7 +188,7 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
     try {
       ConverterUtil.termToStandardString("/1");
-    } catch (IllegalArgumentException e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
 
@@ -203,7 +204,7 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
     try {
       ConverterUtil.termToStandardString("^1");
-    } catch (IllegalArgumentException e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
 

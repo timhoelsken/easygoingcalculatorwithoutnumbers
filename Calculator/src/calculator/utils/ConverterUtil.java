@@ -5,6 +5,8 @@ import java.util.Hashtable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import calculator.exceptions.FormulaConversionException;
+
 /**
  */
 public class ConverterUtil {
@@ -15,12 +17,12 @@ public class ConverterUtil {
    *
    * @param aFormula
    * @return the standard term
-   * @throws IllegalArgumentException
+   * @throws FormulaConversionException
    *             if any checks fail
    */
-  public static String termToStandardString(String aFormula) throws IllegalArgumentException {
+  public static String termToStandardString(String aFormula) throws FormulaConversionException {
 
-    if (aFormula==null || aFormula.length()==0) throw new IllegalArgumentException("Empty formula.");
+    if (aFormula==null || aFormula.length()==0) throw new FormulaConversionException("Empty formula.");
 
     checkIfValidSignsOnly(aFormula);
     checkIfEmptyBrackets(aFormula);
@@ -38,27 +40,27 @@ public class ConverterUtil {
 
   /**
    * @param aFormula
-   * @throws IllegalArgumentException
+   * @throws FormulaConversionException
    *             if illegal signs in the formula
    */
-  public static void checkIfValidSignsOnly(String aFormula) throws IllegalArgumentException {
+  public static void checkIfValidSignsOnly(String aFormula) throws FormulaConversionException {
     Pattern tmpPattern = Pattern.compile("[\\(\\)\\,\\.\\+\\-\\*/\\^\\w ]*");
     Matcher tmpMatcher = tmpPattern.matcher(aFormula);
     if (!tmpMatcher.matches()) {
-      throw new IllegalArgumentException("The formula contains invalid signs.");
+      throw new FormulaConversionException("The formula contains invalid signs.");
     }
   }
 
   /**
    * @param aFormula
-   * @throws IllegalArgumentException
+   * @throws FormulaConversionException
    *            if empty brackets in the formula
    */
-  public static void checkIfEmptyBrackets(String aFormula) throws IllegalArgumentException {
+  public static void checkIfEmptyBrackets(String aFormula) throws FormulaConversionException {
     Pattern tmpPattern = Pattern.compile("\\(\\)");
     Matcher tmpMatcher = tmpPattern.matcher(aFormula);
     if (tmpMatcher.find()) {
-      throw new IllegalArgumentException("The formula contains empty brackets.");
+      throw new FormulaConversionException("The formula contains empty brackets.");
     }
 
   }
@@ -110,11 +112,11 @@ public class ConverterUtil {
 
   /**
    * @param aFormula
-   * @throws IllegalArgumentException
+   * @throws FormulaConversionException
    *             if illegal commas in the formula, for example '3.45.34' or
    *             '32.'
    */
-  public static void checkDecimalNumbers(String aFormula) throws IllegalArgumentException {
+  public static void checkDecimalNumbers(String aFormula) throws FormulaConversionException {
 
     if (aFormula.contains(".")) {
 
@@ -127,20 +129,20 @@ public class ConverterUtil {
 
         while (tmpCommaPosition != -1) {
           if (!MathUtil.isNumber(tmpCopyOfFormula.charAt(tmpCommaPosition - 1))) {
-            throw new IllegalArgumentException("The formula contains invalid commas.");
+            throw new FormulaConversionException("The formula contains invalid commas.");
           }
           int i = tmpCommaPosition + 1;
           while (i < tmpCopyOfFormula.length() - 1 && MathUtil.isNumber(tmpCopyOfFormula.charAt(i))) {
             i++;
           }
           if (tmpCopyOfFormula.charAt(i) == '.') {
-            throw new IllegalArgumentException("The formula contains invalid commas.");
+            throw new FormulaConversionException("The formula contains invalid commas.");
           }
           tmpCopyOfFormula = tmpCopyOfFormula.substring(tmpCommaPosition + 1, tmpCopyOfFormula.length());
           tmpCommaPosition = tmpCopyOfFormula.indexOf(".");
         }
       } else {
-        throw new IllegalArgumentException("The formula contains invalid commas.");
+        throw new FormulaConversionException("The formula contains invalid commas.");
       }
     }
   }
@@ -164,11 +166,11 @@ public class ConverterUtil {
 
   /**
    * @param aFormula
-   * @throws IllegalArgumentException
+   * @throws FormulaConversionException
    *             if there are operators directly beside each other like "*-",
    *             "+/", "+)" or "* /" ...
    */
-  public static void checkOperators(String aFormula) throws IllegalArgumentException {
+  public static void checkOperators(String aFormula) throws FormulaConversionException {
     Pattern tmpPattern;
     Matcher tmpMatcher;
 
@@ -176,25 +178,25 @@ public class ConverterUtil {
     tmpPattern = Pattern.compile("[\\+\\*/\\^].*");
     tmpMatcher = tmpPattern.matcher(aFormula);
     if (tmpMatcher.matches()) {
-      throw new IllegalArgumentException("The formula starts with an operator.");
+      throw new FormulaConversionException("The formula starts with an operator.");
     }
     // cases "... +|-|*|/|^"
     tmpPattern = Pattern.compile(".*[\\+\\-\\*/\\^]");
     tmpMatcher = tmpPattern.matcher(aFormula);
     if (tmpMatcher.matches()) {
-      throw new IllegalArgumentException("The formula ends with an operator.");
+      throw new FormulaConversionException("The formula ends with an operator.");
     }
     // cases "+-", "*/" ...
     tmpPattern = Pattern.compile("[\\+\\-\\*/\\^][\\+\\-\\*/\\^\\)]");
     tmpMatcher = tmpPattern.matcher(aFormula);
     if (tmpMatcher.find()) {
-      throw new IllegalArgumentException("The order of operators in the formula is not correct.");
+      throw new FormulaConversionException("The order of operators in the formula is not correct.");
     }
     // cases "(+", "(*" ...
     tmpPattern = Pattern.compile("\\([\\+\\*/\\^]");
     tmpMatcher = tmpPattern.matcher(aFormula);
     if (tmpMatcher.find()) {
-      throw new IllegalArgumentException("Do not let an alone standing arithmetic operator follow an opening bracket.");
+      throw new FormulaConversionException("Do not let an alone standing arithmetic operator follow an opening bracket.");
     }
   }
 
@@ -278,10 +280,10 @@ public class ConverterUtil {
    *
    * @param aFormula
    * @return the bracked formula
-   * @throws IllegalArgumentException
+   * @throws FormulaConversionException
    *             if not all negative numbers are in brackets
    */
-  public static String checkNegativeNumbers(String aFormula) throws IllegalArgumentException {
+  public static String checkNegativeNumbers(String aFormula) throws FormulaConversionException {
 
     aFormula = setBracketsAroundNegatives(aFormula);
 
@@ -290,7 +292,7 @@ public class ConverterUtil {
         Pattern tmpPattern = Pattern.compile("[\\(\\)\\w]");
         Matcher tmpMatcher = tmpPattern.matcher(Character.toString(aFormula.charAt(i - 1)));
         if (!tmpMatcher.matches()) {
-          throw new IllegalArgumentException("Some negative operands are not in brackets.");
+          throw new FormulaConversionException("Some negative operands are not in brackets.");
         }
       }
     }
@@ -303,10 +305,10 @@ public class ConverterUtil {
    * lead of ( , that means not more than there should be
    *
    * @param aFormula
-   * @throws IllegalArgumentException
+   * @throws FormulaConversionException
    *             if the brackets in the term are not correct
    */
-  public static void checkBrackets(String aFormula) throws IllegalArgumentException {
+  public static void checkBrackets(String aFormula) throws FormulaConversionException {
 
     int tmpSum = 0;
     for (int i = 0; i < aFormula.length(); i++) {
@@ -315,11 +317,11 @@ public class ConverterUtil {
       if (aFormula.charAt(i) == ')')
         --tmpSum;
       if (tmpSum < 0) {
-        throw new IllegalArgumentException("Wrong bracket order in the formula.");
+        throw new FormulaConversionException("Wrong bracket order in the formula.");
       }
     }
     if (tmpSum != 0) {
-      throw new IllegalArgumentException("Missing closing brackets in the formula.");
+      throw new FormulaConversionException("Missing closing brackets in the formula.");
     }
   }
 

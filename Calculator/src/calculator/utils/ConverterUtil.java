@@ -20,7 +20,7 @@ public class ConverterUtil {
    */
   public static String termToStandardString(String aFormula) throws IllegalArgumentException {
 
-    if (aFormula==null || aFormula.length()==0) throw new IllegalArgumentException("Empty formula");
+    if (aFormula==null || aFormula.length()==0) throw new IllegalArgumentException("Empty formula.");
 
     checkIfValidSignsOnly(aFormula);
     checkIfEmptyBrackets(aFormula);

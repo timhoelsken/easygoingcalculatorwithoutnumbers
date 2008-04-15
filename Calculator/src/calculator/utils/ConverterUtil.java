@@ -193,22 +193,6 @@ public class ConverterUtil {
    * @author Tobias
    */
   public static void checkOperators(String aFormula) throws IllegalArgumentException {
-    //TODO @Tobi, problem: es laufen vorher jede menge andere checks, z.b. checks, die das sin durch % ersetzen. (beispiel: -sin(3+4))
-    //die regulären ausdrücke gehen darauf aber nicht ein! es gibt lokale tests die durchlaufen,
-    //aber im integrationstest würden sie auf die nase fallen! -> alle lokalen tests zu integrationstests umformen?
-
-
-
-//    // cases "- ( ..."
-//    //TODO Sinn?? => s. testCheckOperators11()
-//    if (aFormula.length() > 1 && aFormula.charAt(1) == '(') {
-//      Pattern tmpPattern = Pattern.compile("[\\+\\-\\*/\\^]");
-//      if (tmpPattern.matcher(Character.toString(aFormula.charAt(0))).find()) {
-//        throw new IllegalArgumentException(
-//            "Do not let a bracket follow an alone standing arithmetic operator.");
-//      }
-//    }
-
     Pattern tmpPattern;
     Matcher tmpMatcher;
 
@@ -246,7 +230,6 @@ public class ConverterUtil {
    *
    * @param aFormula
    * @return the bracked formula
-   * @author Tobias
    */
   public static String setBracketsAroundNegatives(String aFormula) {
 

@@ -1496,6 +1496,36 @@ public class IntegrationTest extends TestCase {
 
  /**
   * Test method for
+  * {@link calculator.utils.ConverterUtil#checkDecimalNumbers()}.
+  */
+ public void testCheckDecimalNumbers6() {
+   // negative test
+   boolean tmpErrorOccurred = false;
+   try {
+     ConverterUtil.termToStandardString("999+7.5+23.2+1.3.2");
+   } catch (FormulaConversionException e) {
+     tmpErrorOccurred = true;
+   }
+   assertTrue(tmpErrorOccurred);
+ }
+
+ /**
+  * Test method for
+  * {@link calculator.utils.ConverterUtil#checkDecimalNumbers()}.
+  */
+ public void testCheckDecimalNumbers7() {
+   // negative test
+   boolean tmpErrorOccurred = false;
+   try {
+     ConverterUtil.termToStandardString("999+7.5+23.2+1.3.");
+   } catch (FormulaConversionException e) {
+     tmpErrorOccurred = true;
+   }
+   assertTrue(tmpErrorOccurred);
+ }
+
+ /**
+  * Test method for
   * {@link calculator.utils.ConverterUtil#insertMultiplicationOperators()}.
   * @throws Exception
   */

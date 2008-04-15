@@ -13,22 +13,19 @@ import javax.swing.JTextArea;
 import calculator.utils.ActionListenerUtil;
 
 /**
- * 
- * @author Tim
- * 
  */
 public class CalculatorHelpDialog extends JDialog {
 
   private JLabel labelTitle = new JLabel("Help:");
   private JTextArea textAreaContent = new JTextArea();
-  private JButton buttonClose = new JButton("Close"); 
+  private JButton buttonClose = new JButton("Close");
   /**
-   * 
+   *
    */
   private static final long serialVersionUID = 1L;
 
   /**
-   * 
+   *
    * @param aParentFrame
    */
   public CalculatorHelpDialog(JFrame aParentFrame) {

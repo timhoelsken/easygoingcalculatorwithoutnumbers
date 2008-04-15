@@ -8,16 +8,13 @@ import javax.swing.JDialog;
 import javax.swing.JMenuItem;
 
 /**
- * 
- * @author Tim
- * 
  */
 public class ActionListenerUtil {
 
   /**
    * @param aDialog
    * @param aButton
-   * 
+   *
    */
   public static void setDialogCloseListener(final JDialog aDialog, JButton aButton) {
     aButton.addActionListener(new ActionListener() {
@@ -29,7 +26,7 @@ public class ActionListenerUtil {
   }
 
   /**
-   * 
+   *
    * @param aMenuItem
    * @param aDialog
    */

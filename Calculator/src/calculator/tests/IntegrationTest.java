@@ -1004,7 +1004,6 @@ public class IntegrationTest extends TestCase {
  /**
   * positiv test
   *
-  * @author André
   * @throws Exception
   */
  public void testPositiv001() throws Exception {
@@ -1019,7 +1018,6 @@ public class IntegrationTest extends TestCase {
  /**
   * positiv test
   *
-  * @author André
   * @throws Exception
   */
  public void testPositiv002() throws Exception {
@@ -1034,7 +1032,6 @@ public class IntegrationTest extends TestCase {
  /**
   * positiv test
   *
-  * @author André
   * @throws Exception
   */
  public void testPositiv003() throws Exception {
@@ -1051,7 +1048,6 @@ public class IntegrationTest extends TestCase {
  /**
   * positiv test
   *
-  * @author André
   * @throws Exception
   */
  public void testPositiv004() throws Exception {
@@ -1066,7 +1062,6 @@ public class IntegrationTest extends TestCase {
  /**
   * positiv test
   *
-  * @author André
   * @throws Exception
   */
  public void testPositiv005() throws Exception {
@@ -1081,7 +1076,6 @@ public class IntegrationTest extends TestCase {
  /**
   * positiv test
   *
-  * @author André
   * @throws Exception
   */
  public void testPositiv006() throws Exception {
@@ -1096,7 +1090,6 @@ public class IntegrationTest extends TestCase {
  /**
   * positiv test
   *
-  * @author André
   * @throws Exception
   */
  public void testPositiv007() throws Exception {

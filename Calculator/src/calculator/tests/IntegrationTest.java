@@ -277,6 +277,9 @@ public class IntegrationTest extends TestCase {
 
     assertEquals((double) 3.0, tmpResult);
   }
+  
+  
+  
 
   /**
    * test of iteration 0.3
@@ -323,6 +326,7 @@ public class IntegrationTest extends TestCase {
     }
     assertTrue(tmpErrorOccured);
   }
+  
 
   // Iteration 0.4
 
@@ -961,6 +965,40 @@ public class IntegrationTest extends TestCase {
 
     assertEquals((double) 2.0, tmpResult);
   }
+  
+  /**
+   * test of iteration 0.7
+   *
+   * @throws Exception
+   */
+  public void testIteration0717() throws Exception {
+
+    Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
+    tmpHashtable.put("x", new Double(-4));
+
+    String tmpString = ConverterUtil.termToStandardString("-x");
+    Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
+
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
+
+    assertEquals((double) 4.0, tmpResult);
+  }
+  
+  /**
+   * test of iteration 0.7
+   *
+   * @throws Exception
+   */
+  public void testIteration0718() throws Exception {
+
+    String tmpString = ConverterUtil.termToStandardString("-55");
+    Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
+
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
+
+    assertEquals((double) -55.0, tmpResult);
+  }
+
 
   // === End Iteration Tests ===
   /**

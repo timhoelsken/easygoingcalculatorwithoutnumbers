@@ -1,6 +1,7 @@
 package calculator.userinterface;
 
 import java.awt.BorderLayout;
+import java.awt.Dialog;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,12 +9,16 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JTextField;
 
 import calculator.elements.Tree;
 import calculator.utils.ConverterUtil;
@@ -38,7 +43,7 @@ public class FrameCalculator extends JFrame {
 
   private static final long serialVersionUID = -4971700820441624660L;
 
-  // button
+  // button to calculate formula
   private JButton buttonCalculateTerm = new JButton("calculate");
 
   // labels
@@ -48,10 +53,15 @@ public class FrameCalculator extends JFrame {
 
   // input / output fields
   private static JTextField textTermInput = new JTextField(16);
-  private static JTextField textFormulaOutput = new JTextField();
+  
+  /**
+   * 
+   */
+  public static JTextField textFormulaOutput = new JTextField();
 
-  // sub panel
-  private JPanel bottomPanel = new JPanel(new GridLayout(1, 2));
+  // sub panels
+  private JPanel panelBottom = new JPanel(new GridLayout(1, 2));
+  private JPanel panelCenter = new JPanel(new GridLayout(2, 1));
 
   // list and dictionary for variables
   private static ArrayList<String[]> listOfVariables = new ArrayList<String[]>();
@@ -62,10 +72,32 @@ public class FrameCalculator extends JFrame {
 
   // the formula entered by the user
   private String convertedFormula = new String("");
-  private String enteredFormula = new String("");
+  /**
+   * 
+   */
+  public static String calculatedFormula = new String("");
 
-  // Variable Frame
-  private JFrame frameEnterVariables = new JFrame();
+  // Variable Dialog
+  JDialog dialogEnterVariables = new JDialog();
+
+  // == Menu Components ==
+  private JMenuBar menuBarcalculator = new JMenuBar();
+
+  private JMenu menuFile = new JMenu("File");
+  private JMenu menuOptions = new JMenu("Options");
+
+  private JMenuItem menuItemHelp = new JMenuItem("Help");
+  private JMenuItem menuItemExit = new JMenuItem("Exit");
+
+  private JMenuItem menuItemProgressBar = new JMenuItem("disable progressbar");
+  
+  // == Menu Components ==
+  
+  // define if a progressBar is loading
+  private static boolean loadProgressBar = true;
+  
+  // the progressbar :)
+  private JProgressBar progressBar = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
 
   /**
    * the constructor
@@ -93,15 +125,70 @@ public class FrameCalculator extends JFrame {
     textFormulaOutput.setEditable(false);
 
     // place label and textField on panel
-    bottomPanel.add(labelResult);
-    bottomPanel.add(textFormulaOutput);
+    panelBottom.add(labelResult);
+    panelBottom.add(textFormulaOutput);
+
+    panelCenter.add(textTermInput);
+    panelCenter.add(progressBar);
 
     // place labels, textField, button and panel on frame
     getContentPane().add(BorderLayout.NORTH, labelCalculatorTitle);
     getContentPane().add(BorderLayout.WEST, labelEnterFormula);
-    getContentPane().add(BorderLayout.CENTER, textTermInput);
+    getContentPane().add(BorderLayout.CENTER, panelCenter);
     getContentPane().add(BorderLayout.EAST, buttonCalculateTerm);
-    getContentPane().add(BorderLayout.SOUTH, bottomPanel);
+    getContentPane().add(BorderLayout.SOUTH, panelBottom);
+
+    // define menu shortcuts
+    menuFile.setMnemonic('F');
+    menuItemHelp.setMnemonic('H');
+    menuOptions.setMnemonic('O');
+    menuItemExit.setMnemonic('E');
+    menuItemProgressBar.setMnemonic('P');
+
+    // == ActionListener of the menu ==
+    menuItemExit.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent ae) {
+        setVisible(false);
+        dispose();
+        System.exit(0);
+      }
+    });
+
+    menuItemHelp.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent ae) {
+        openHelpDialog();
+      }
+    });
+
+    menuItemProgressBar.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent ae) {
+        if (loadProgressBar) {
+          loadProgressBar = false;
+          progressBar.setVisible(false);
+          menuItemProgressBar.setText("enable ProgressBar");
+        } else {
+          loadProgressBar = true;
+          progressBar.setValue(0);
+          progressBar.setVisible(true);
+          menuItemProgressBar.setText("disable ProgressBar");
+        }
+        repaint();
+      }
+    });
+
+    // == ActionListener of the menu ==
+    
+    // build menu
+    menuFile.add(menuItemHelp);
+    menuFile.add(menuItemExit);
+    
+    menuOptions.add(menuItemProgressBar);
+   
+    menuBarcalculator.add(menuFile);
+    menuBarcalculator.add(menuOptions);
+
+    // place menu on the frame
+    setJMenuBar(menuBarcalculator);
 
     // generate frame correctly
     pack();
@@ -128,49 +215,54 @@ public class FrameCalculator extends JFrame {
 
       public void actionPerformed(ActionEvent ae) {
 
-        if (!frameEnterVariables.isVisible()) {
-          // convert the user's input to standard string
-          try {
-            convertedFormula = ConverterUtil.termToStandardString(textTermInput.getText());
-            enteredFormula = textTermInput.getText();
+        // convert the user's input to standard string
+        try {
+          convertedFormula = ConverterUtil.termToStandardString(textTermInput.getText());
 
-            // if the formula has Variables, a new frame is opened
-            if (ConverterUtil.hasVariables(convertedFormula)) {
+          // if the formula has Variables, a new frame is opened
+          if (ConverterUtil.hasVariables(convertedFormula)) {
 
-              listOfVariables = ConverterUtil.getVariables(convertedFormula);
+            listOfVariables = ConverterUtil.getVariables(convertedFormula);
 
-              openVariableFrame();
+            openVariableDialog();
 
-              // otherwise the formula is calculated directly
-            } else {
+            // otherwise the formula is calculated directly
+          } else {
 
-              // reset the list to avoid errors
-              listOfVariables = new ArrayList<String[]>();
-
-              calculateFormula(convertedFormula);
+            // use the progressBar?
+            if (loadProgressBar) {
+              Thread tmpProgressBarThread = new ProgressBarThread(progressBar);
+              tmpProgressBarThread.start();
             }
+            
+            // reset the list to avoid errors
+            listOfVariables = new ArrayList<String[]>();
 
-          } catch (Exception e) {
-
-            JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "An error occured!",
-                JOptionPane.WARNING_MESSAGE);
+            calculateFormula(convertedFormula);
           }
 
+        } catch (Exception e) {
+
+          JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "An error occured!",
+              JOptionPane.WARNING_MESSAGE);
         }
+
       }
+
     });
   }
 
   /**
    * Opens the additional frame to enter the variables
    */
-  private void openVariableFrame() {
+  private void openVariableDialog() {
 
-    // define frame
-    frameEnterVariables = new JFrame("Variable(s)");
-    frameEnterVariables.setLocation(330, 330);
-    frameEnterVariables.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    frameEnterVariables.getContentPane().setLayout(new BorderLayout(10, 10));
+    // define modal dialog
+    dialogEnterVariables = new JDialog(FrameCalculator.this, "Variable(s)",
+        Dialog.ModalityType.DOCUMENT_MODAL);
+    dialogEnterVariables.setLocation(330, 330);
+    dialogEnterVariables.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    dialogEnterVariables.getContentPane().setLayout(new BorderLayout(10, 10));
 
     // define Title
     JLabel tmpTitle = new JLabel("      Enter value(s) of variable(s):      ");
@@ -219,19 +311,22 @@ public class FrameCalculator extends JFrame {
     tmpButton.setVerticalAlignment(JButton.NORTH);
 
     // place label, textField, button on frame
-    frameEnterVariables.getContentPane().add(BorderLayout.NORTH, tmpTitle);
-    frameEnterVariables.getContentPane().add(BorderLayout.WEST, tmpPanelOfVariableLabels);
-    frameEnterVariables.getContentPane().add(BorderLayout.CENTER, tmpPanelOfVariableTextFields);
-    frameEnterVariables.getContentPane().add(BorderLayout.EAST, tmpButtonPanel);
+    dialogEnterVariables.getContentPane().add(BorderLayout.NORTH, tmpTitle);
+    dialogEnterVariables.getContentPane().add(BorderLayout.WEST, tmpPanelOfVariableLabels);
+    dialogEnterVariables.getContentPane().add(BorderLayout.CENTER, tmpPanelOfVariableTextFields);
+    dialogEnterVariables.getContentPane().add(BorderLayout.EAST, tmpButtonPanel);
 
     // generate frame correctly
-    frameEnterVariables.pack();
+    dialogEnterVariables.pack();
 
     // select text in textField to enter a formula directly
-    frameEnterVariables.setVisible(true);
+    dialogEnterVariables.setVisible(true);
 
     // set the "Enter"-button as defaultButton to activate enter-functionality
-    frameEnterVariables.getRootPane().setDefaultButton(tmpButton);
+    dialogEnterVariables.getRootPane().setDefaultButton(tmpButton);
+
+    // disable resizing the dialog
+    dialogEnterVariables.setResizable(false);
   }
 
   /**
@@ -261,9 +356,12 @@ public class FrameCalculator extends JFrame {
         // if everything is OK, the window is closed and the formula is
         // calculated
         if (tmpAllVariablesAreFloats) {
-          frameEnterVariables.dispose();
-          if (!enteredFormula.equals(textTermInput.getText())) {
-            textTermInput.setText(enteredFormula);
+          dialogEnterVariables.dispose();
+          
+          // use the progressBar?
+          if (loadProgressBar) {
+            Thread tmpProgressBarThread = new ProgressBarThread(progressBar);
+            tmpProgressBarThread.start();
           }
           calculateFormula(convertedFormula);
         } else {
@@ -272,6 +370,11 @@ public class FrameCalculator extends JFrame {
         }
       }
     });
+  }
+
+  private static void openHelpDialog() {
+    // TODO Display Help-Dialog
+
   }
 
   /**
@@ -287,11 +390,20 @@ public class FrameCalculator extends JFrame {
     // calculate!
     try {
       Tree tmpTree = FormulaTreeUtil.BuildTree(aFormula);
-      textFormulaOutput.setText("" + FormulaTreeUtil.EvaluateTree(tmpTree, dictionaryOfEnteredVariables));
+      calculatedFormula = "" + FormulaTreeUtil.EvaluateTree(tmpTree, dictionaryOfEnteredVariables);
+      if (!loadProgressBar) {
+        textFormulaOutput.setText(calculatedFormula);
+      }
     } catch (Exception e) {
       JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "An error occured!",
           JOptionPane.WARNING_MESSAGE);
     }
   }
 
+  /**
+   * 
+   */
+  public static void showCalculation() {
+    textFormulaOutput.setText(calculatedFormula);
+  }
 }

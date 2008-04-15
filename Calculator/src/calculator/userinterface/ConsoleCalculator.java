@@ -54,13 +54,16 @@ public class ConsoleCalculator {
 
         ArrayList<String[]> tmpVariablesList = new ArrayList<String[]>();
         Hashtable<String, Double> tmpVariableDictionary = new Hashtable<String, Double>();
+        
+        Tree tmpTree = null;
 
         // while the user has not chosen to quit entering formulas
         while (!tmpInputString.toLowerCase().equals("n")) {
 
-          // reset of control variables
+          // reset of control variables and tree
           tmpErrorOccuredInTerm = false;
           tmpEnterVariablesValue = "";
+          tmpTree = null;
 
           ConsoleOutput.promptFormulaInput();
 
@@ -76,6 +79,7 @@ public class ConsoleCalculator {
           } catch (Exception e) {
             ConsoleOutput.printError(e.getMessage());
             tmpErrorOccuredInTerm = true;
+            tmpTree = null;
           }
 
           if (!tmpErrorOccuredInTerm) {
@@ -125,7 +129,9 @@ public class ConsoleCalculator {
               // calculate formula
               try {
 
-                Tree tmpTree = FormulaTreeUtil.BuildTree(tmpInputString);
+                if (tmpTree == null){
+                  tmpTree = FormulaTreeUtil.BuildTree(tmpInputString);                  
+                }
 
                 System.out.println(FormulaTreeUtil.EvaluateTree(tmpTree, tmpVariableDictionary));
 
@@ -138,7 +144,7 @@ public class ConsoleCalculator {
 
               } catch (Exception e) {
                 System.out.println(e.getMessage());
-                //e.printStackTrace();
+                tmpTree = null;
                 // if (e.getMessage().equals("")){
                 tmpErrorOccuredInVariableInput = true;
                 //
@@ -159,7 +165,7 @@ public class ConsoleCalculator {
                   tmpEnterVariablesValue = ConsoleInput.getConsoleInput();
                 } catch (IOException e) {
                   ConsoleOutput.printError(e.getMessage());
-                  e.printStackTrace();
+                  //e.printStackTrace();
                 }
               }
               // Enter variables loop
@@ -172,7 +178,7 @@ public class ConsoleCalculator {
             tmpInputString = ConsoleInput.getConsoleInput();
           } catch (IOException e) {
             ConsoleOutput.printError(e.getMessage());
-            e.printStackTrace();
+            //e.printStackTrace();
           }
 
         }

@@ -23,7 +23,9 @@ public class ConverterUtil {
   public static String termToStandardString(String aFormula) throws FormulaConversionException {
 
     if (aFormula==null || aFormula.length()==0) throw new FormulaConversionException("Empty formula.");
-
+    aFormula = aFormula.toLowerCase();
+    
+    
     checkIfValidSignsOnly(aFormula);
     checkIfEmptyBrackets(aFormula);
     aFormula = removeBlanks(aFormula);

@@ -996,8 +996,115 @@ public class IntegrationTest extends TestCase {
 
     assertEquals((double) -55.0, tmpResult);
   }
+ 
+ /**
+  * positiv test
+  * 
+  * @author André
+  * @throws Exception
+  */
+ public void testPositiv001() throws Exception {
+   
+   String tmpString = ConverterUtil.termToStandardString("sin(55)");
+   Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
+   
+   double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
+   assertEquals((double) 0.81915204428899178968448838591684, tmpResult);
+ }
+ 
+ /**
+  * positiv test
+  * 
+  * @author André
+  * @throws Exception
+  */
+ public void testPositiv002() throws Exception {
+   
+   String tmpString = ConverterUtil.termToStandardString("(2*5)+12*3-((3/4)*1,76)");
+   Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
+   
+   double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
+   assertEquals((double) 44.68, tmpResult);
+ }
 
+ /**
+  * positiv test
+  * 
+  * @author André
+  * @throws Exception
+  */
+ public void testPositiv003() throws Exception {
+   
+   String tmpString = ConverterUtil.termToStandardString("sin((1.76/3)*(700/(7*5))+cos(78.5))");
+   Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
+   
+   double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
+   assertEquals((double)  0.20676263068784143, tmpResult);
+ }
+ 
+ 
+ 
+ /**
+  * positiv test
+  * 
+  * @author André
+  * @throws Exception
+  */
+ public void testPositiv004() throws Exception {
+   
+   String tmpString = ConverterUtil.termToStandardString("2^(sqrt(3*cos(89)*sin(3)*tan(9)))*1.187237432");
+   Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
+   
+   double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
+   assertEquals((double)  1.2045056319101493, tmpResult);
+ }
+ 
+ /**
+  * positiv test
+  * 
+  * @author André
+  * @throws Exception
+  */
+ public void testPositiv005() throws Exception {
+   
+   String tmpString = ConverterUtil.termToStandardString("(-5)*sqrt(12*(12/sin(90)))*2^(-(1/2))");
+   Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
+   
+   double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
+   assertEquals((double)  -42.426406871192846, tmpResult);
+ }
 
+ /**
+  * positiv test
+  * 
+  * @author André
+  * @throws Exception
+  */
+ public void testPositiv006() throws Exception {
+   
+   String tmpString = ConverterUtil.termToStandardString("2*12/5+sin(12*(2*3+2^(sin(3.4*9.8+4711)+9)/2)*tan(57))");
+   Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
+   
+   double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
+   assertEquals((double)  3.9884201073146137, tmpResult);
+ }
+
+ /**
+  * positiv test
+  * 
+  * @author André
+  * @throws Exception
+  */
+ public void testPositiv007() throws Exception {
+   
+   String tmpString = ConverterUtil.termToStandardString("2*12/6+4*8+10/2+98-43-67-981*3+2+7612634+87221-38263-19273+4846+16383+1635/5*3");
+   Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
+   
+   double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
+   assertEquals((double)  7661617, tmpResult);
+ } 
+ 
+ 
   // === End Iteration Tests ===
   /**
    * @return the test suite

@@ -1150,7 +1150,7 @@ public class IntegrationTest extends TestCase {
 
    tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
 
-   assertEquals((double) -40123.0, Math.floor(tmpResult*10000));
+   assertEquals((double) 40123.0, Math.floor(tmpResult*10000));
 
  }
 

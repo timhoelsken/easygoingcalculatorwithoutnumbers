@@ -1,9 +1,10 @@
 package calculator.elements;
 
-import calculator.utils.ConverterUtil;;
+import calculator.utils.ConverterUtil;
+import calculator.utils.FormulaTreeUtil;
 
 /**
- * 
+ *
  */
 public class Tree {
   private MathObj root;
@@ -72,7 +73,7 @@ public class Tree {
 
   /**
    * constructor (sets both sons to NULL)
-   * 
+   *
    * @param aRoot
    */
   public Tree(MathObj aRoot) {
@@ -82,7 +83,7 @@ public class Tree {
 
   /**
    * constructor
-   * 
+   *
    * @param aRoot
    * @param aFather
    * @param aLeft
@@ -97,11 +98,11 @@ public class Tree {
 
   /**
    * paints current tree on the console
-   * 
+   *
    * @author Tobias
    */
   public void paintMe() {
-    int tmpDepth = getDepth(this);
+    int tmpDepth = FormulaTreeUtil.getDepth(this);
     System.out.println("TreeDepth: " + tmpDepth);
     System.out.println();
     if (tmpDepth == 0) {
@@ -173,20 +174,5 @@ public class Tree {
       return getMathObj(--aLevel, anObject, tmpPartTree);
     }
     return null;
-  }
-
-  private int getDepth(Tree aTree) {
-    if (aTree == null) {
-      return 0;
-    }
-    int tmpRight;
-    int tmpLeft;
-    tmpRight = getDepth(aTree.getRightSon()) + 1;
-    tmpLeft = getDepth(aTree.getLeftSon()) + 1;
-    if (tmpRight > tmpLeft) {
-      return tmpRight;
-    } else {
-      return tmpLeft;
-    }
   }
 }

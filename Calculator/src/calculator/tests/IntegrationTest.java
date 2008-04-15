@@ -1861,9 +1861,9 @@ public class IntegrationTest extends TestCase {
    String tmpString = ConverterUtil.termToStandardString("sin(abc)+cos(abcd)+tan+tan(abc)+sqrt(23)");
    Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
-   double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
+   double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
 
-   assertEquals((double) 95935.0, Math.floor(tmpResult*10000));
+   assertEquals((double) 95935.0, Math.floor(tmpResult*1000));
 
  }
 

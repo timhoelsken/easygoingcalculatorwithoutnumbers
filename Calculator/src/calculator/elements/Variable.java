@@ -1,7 +1,7 @@
 package calculator.elements;
 
 /**
- *
+ * 
  */
 public class Variable extends Operand {
 
@@ -16,7 +16,7 @@ public class Variable extends Operand {
 
   /**
    * constructor
-   *
+   * 
    * @param aValue
    */
   public Variable(char aValue) {
@@ -25,10 +25,10 @@ public class Variable extends Operand {
 
   /**
    * gives the value of the variable
+   * 
    * @see java.lang.Object#toString()
    */
-  public String toString()
-  {
+  public String toString() {
     return Character.toString(value);
   }
 }

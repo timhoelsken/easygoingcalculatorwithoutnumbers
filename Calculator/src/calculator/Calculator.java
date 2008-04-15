@@ -4,14 +4,14 @@ import calculator.userinterface.ConsoleCalculator;
 import calculator.userinterface.FrameCalculator;
 
 /**
- *
- *
+ * 
+ * 
  */
 public class Calculator {
 
   /**
    * Starts the calculator
-   *
+   * 
    * @param args
    */
   public static void main(String[] args) {

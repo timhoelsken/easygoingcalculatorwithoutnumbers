@@ -8,10 +8,10 @@ import calculator.utils.MathUtil;
 public class Operand extends MathObj {
   /**
    * constructor
-   *
+   * 
    * @param aValue
    */
   public Operand() {
-	  super.setPriority(MathUtil.PRIO_OPERANDS);
+    super.setPriority(MathUtil.PRIO_OPERANDS);
   }
 }

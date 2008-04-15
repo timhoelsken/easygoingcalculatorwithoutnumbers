@@ -44,7 +44,7 @@ public class FrameCalculator extends JFrame {
   private static JTextField textTermInput = new JTextField(16);
 
   /**
-   *
+   * 
    */
   public static JTextField textFormulaOutput = new JTextField();
 
@@ -62,15 +62,17 @@ public class FrameCalculator extends JFrame {
   // the formula entered by the user
   private String convertedFormula = new String("");
   /**
-   *
+   * 
    */
   public static String calculatedFormula = new String("");
 
   // Variable Dialog
   JDialog dialogEnterVariables = new JDialog();
-  //TODO @Tim Dialog nicht benutzerfreundlich. Schmeißt bei Zweiteingabe alle Ersteingaben weg. Doof. :)
+  // TODO @Tim Dialog nicht benutzerfreundlich. Schmeißt bei Zweiteingabe alle
+  // Ersteingaben weg. Doof. :)
 
-  //TODO @Tim noch was Benutzerunfreundliches: Man sieht beim Ergebnis nicht, welche Variablen man eingegeben hat.
+  // TODO @Tim noch was Benutzerunfreundliches: Man sieht beim Ergebnis nicht,
+  // welche Variablen man eingegeben hat.
 
   // == Menu Components ==
   private JMenuBar menuBarcalculator = new JMenuBar();
@@ -92,6 +94,9 @@ public class FrameCalculator extends JFrame {
   private static boolean loadProgressBar = false;
 
   // the progressbar :)
+  // TODO @Tim die läuft auch wenn beim Rechnen (z.B. Division durch 0) ein
+  // Fehler auftritt (gleichzeitig). Ich würde sagen, entweder vorher oder gar
+  // nicht. Lieber vorher. Da ist die Spannung größer :P
   private JProgressBar progressBar = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
 
   /**
@@ -210,7 +215,7 @@ public class FrameCalculator extends JFrame {
 
   /**
    * Actionlistener for the calculator button
-   *
+   * 
    * @param aButton
    */
   private void addCalculatorButtonListener(JButton aButton) {
@@ -340,7 +345,7 @@ public class FrameCalculator extends JFrame {
 
   /**
    * Actionlistener for the variable input button
-   *
+   * 
    * @param aButton
    */
   public void addVariableButtonListener(JButton aButton) {
@@ -389,7 +394,7 @@ public class FrameCalculator extends JFrame {
 
   /**
    * calculates the formula
-   *
+   * 
    * @param aFormula
    */
   public static void calculateFormula(String aFormula) {
@@ -411,7 +416,7 @@ public class FrameCalculator extends JFrame {
   }
 
   /**
-   *
+   * 
    */
   public static void showCalculation() {
     textFormulaOutput.setText(calculatedFormula);

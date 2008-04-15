@@ -52,7 +52,7 @@ public class MathUtil {
 
   /**
    * Checks if a string is numeric
-   *
+   * 
    * @param aString
    * @return true if the given string is numeric only
    */
@@ -62,7 +62,7 @@ public class MathUtil {
   }
 
   /**
-   *
+   * 
    * @param aChar
    * @return
    */
@@ -86,7 +86,7 @@ public class MathUtil {
   }
 
   /**
-   *
+   * 
    * @param aCharacter
    * @return true if char is a number or variable
    */
@@ -103,7 +103,7 @@ public class MathUtil {
   }
 
   /**
-   *
+   * 
    * @param aChar
    * @return true if char is a minus
    */
@@ -133,7 +133,7 @@ public class MathUtil {
   }
 
   /**
-   *
+   * 
    * @param aChar
    * @return true if char is left bracket
    */
@@ -142,7 +142,7 @@ public class MathUtil {
   }
 
   /**
-   *
+   * 
    * @param aChar
    * @return true if char is a right bracket
    */
@@ -152,14 +152,14 @@ public class MathUtil {
 
   /**
    * method creates a float value based mathobj out of a given string
-   *
+   * 
    * @param aNumberContainingString
    * @return MathObj
    */
   public static MathObj buildNumberMathObject(String aNumberContainingString) {
     Double tmpFl; // Double tmpFl = new Double("0.0");
     tmpFl = Double.valueOf("0.0").doubleValue();
-      tmpFl = Double.valueOf(aNumberContainingString).doubleValue();
+    tmpFl = Double.valueOf(aNumberContainingString).doubleValue();
 
     NumberObj tmpNumberObj = new NumberObj(tmpFl);
     return tmpNumberObj;
@@ -167,7 +167,7 @@ public class MathUtil {
 
   /**
    * method creates a operator mathobj out of a given string
-   *
+   * 
    * @param aOperatorContainingString
    * @return MathObj
    */
@@ -198,7 +198,7 @@ public class MathUtil {
 
   /**
    * method build a new variable object
-   *
+   * 
    * @param cVariable
    * @return MathObj
    */
@@ -208,10 +208,10 @@ public class MathUtil {
 
   /**
    * method creates a mathobj list out of the form string
-   *
+   * 
    * @return ArrayList of mathobj
    * @param aFormula
-   *          sting which contains a formula containing string
+   *            sting which contains a formula containing string
    * @todo Andre: Add support for negative numbers and brackets
    */
   public static ArrayList<Object> FormulaToArrayList(String aFormula) {
@@ -232,15 +232,16 @@ public class MathUtil {
                 .charAt(iEndPosition))))) {
           iEndPosition++;
         }
-          MathList.add(buildNumberMathObject(aFormula.substring(iStartPosition, iEndPosition)));
+        MathList.add(buildNumberMathObject(aFormula.substring(iStartPosition, iEndPosition)));
       } else if (MathUtil.IsLeftBracket(aFormula.charAt(iStartPosition))
-          && (MathUtil.IsMinus(aFormula.charAt(iStartPosition + 1))) && (MathUtil.isNumber(aFormula.charAt(iStartPosition + 2))) ) {
+          && (MathUtil.IsMinus(aFormula.charAt(iStartPosition + 1)))
+          && (MathUtil.isNumber(aFormula.charAt(iStartPosition + 2)))) {
         iStartPosition++;
         iEndPosition = iStartPosition + 1;
         while ((MathUtil.IsRightBracket(aFormula.charAt(iEndPosition))) == false) {
           iEndPosition++;
         }
-          MathList.add(buildNumberMathObject(aFormula.substring(iStartPosition, iEndPosition)));
+        MathList.add(buildNumberMathObject(aFormula.substring(iStartPosition, iEndPosition)));
         iEndPosition++;
       } else if (MathUtil.IsLeftBracket(aFormula.charAt(iStartPosition))) {
         iStartPosition++;
@@ -258,16 +259,15 @@ public class MathUtil {
           }
           iEndPosition++;
         }
-          MathList.add(MathUtil.FormulaToArrayList(aFormula.substring(iStartPosition, iEndPosition)));
+        MathList.add(MathUtil.FormulaToArrayList(aFormula.substring(iStartPosition, iEndPosition)));
         iEndPosition++;
       } else if (MathUtil.IsOperator(aFormula.charAt(iStartPosition))) {
         iEndPosition = iStartPosition + 1;
-          MathList.add(buildOperatorMathObject(aFormula.substring(iStartPosition, iEndPosition)));
+        MathList.add(buildOperatorMathObject(aFormula.substring(iStartPosition, iEndPosition)));
       } else if (MathUtil.isVariable(aFormula.charAt(iStartPosition))) {
         iEndPosition = iStartPosition + 1;
-          MathList.add(buildVariableMathObject(aFormula.charAt(iStartPosition)));
-      }
-      else {
+        MathList.add(buildVariableMathObject(aFormula.charAt(iStartPosition)));
+      } else {
         System.out.println(aFormula.charAt(iStartPosition));
         throw new IllegalInputStreamException("Input String contains non valid characters!");
       }

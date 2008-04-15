@@ -11,7 +11,7 @@ public final class ConsoleInput {
   private static String inputString;
 
   /**
-   *
+   * 
    * @return The input of the user, tested and corrected with private methods on
    *         usability
    * @throws IOException

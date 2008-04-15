@@ -4,7 +4,7 @@ import javax.swing.JProgressBar;
 
 /**
  */
-public class ProgressBarThread extends Thread{
+public class ProgressBarThread extends Thread {
 
   // defines the speed of "loading" ;-)
   private static int DELAY = 10;
@@ -12,17 +12,17 @@ public class ProgressBarThread extends Thread{
   private JProgressBar progressBar;
 
   /**
-   *
+   * 
    * @param bar
    */
-  public ProgressBarThread(JProgressBar bar){
+  public ProgressBarThread(JProgressBar bar) {
     progressBar = bar;
   }
 
   /**
-   *
+   * 
    */
-  public void run(){
+  public void run() {
 
     // reset the progressBar
     progressBar.setValue(0);
@@ -33,14 +33,15 @@ public class ProgressBarThread extends Thread{
     int maximum = progressBar.getMaximum();
 
     // increase value by 1 in the defined speed
-    for (int i = minimum; i < maximum;i++){
-      try{
+    for (int i = minimum; i < maximum; i++) {
+      try {
         int value = progressBar.getValue();
-        progressBar.setValue(value+1);
+        progressBar.setValue(value + 1);
         progressBar.setString(value + "%");
 
         Thread.sleep(DELAY);
-      }catch (InterruptedException e){}
+      } catch (InterruptedException e) {
+      }
     }
     progressBar.setString("100%");
     // when finished, show the Result

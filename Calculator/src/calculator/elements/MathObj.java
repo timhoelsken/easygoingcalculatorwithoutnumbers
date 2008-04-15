@@ -4,7 +4,7 @@ package calculator.elements;
  * 
  */
 public class MathObj {
-  
+
   private int priority;
 
   /**
@@ -13,9 +13,9 @@ public class MathObj {
    * @param aType
    */
   public MathObj() {
-	 priority = 0;
+    priority = 0;
   }
-  
+
   /**
    * 
    * @return the priority
@@ -26,11 +26,12 @@ public class MathObj {
 
   /**
    * sets the priority
-   * @param aPriority 
+   * 
+   * @param aPriority
    * 
    */
   public void setPriority(int aPriority) {
     priority = aPriority;
   }
-  
+
 }

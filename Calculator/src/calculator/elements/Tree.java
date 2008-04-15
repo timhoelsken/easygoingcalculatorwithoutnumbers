@@ -4,7 +4,7 @@ import calculator.utils.ConverterUtil;
 import calculator.utils.FormulaTreeUtil;
 
 /**
- *
+ * 
  */
 public class Tree {
   private MathObj root;
@@ -73,7 +73,7 @@ public class Tree {
 
   /**
    * constructor (sets both sons to NULL)
-   *
+   * 
    * @param aRoot
    */
   public Tree(MathObj aRoot) {
@@ -83,7 +83,7 @@ public class Tree {
 
   /**
    * constructor
-   *
+   * 
    * @param aRoot
    * @param aFather
    * @param aLeft

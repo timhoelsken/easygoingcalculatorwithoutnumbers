@@ -25,7 +25,7 @@ public class AllTests extends TestCase {
 
   /**
    * Start the pse3.tests here.
-   *
+   * 
    * @param args
    */
   public static void main(String[] args) {

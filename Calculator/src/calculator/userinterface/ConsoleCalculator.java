@@ -15,7 +15,7 @@ public class ConsoleCalculator {
 
   /**
    * The Calculator
-   *
+   * 
    * @param args
    */
   public static void start() {
@@ -126,13 +126,14 @@ public class ConsoleCalculator {
               // calculate formula
               try {
 
-                if (tmpTree == null){
+                if (tmpTree == null) {
                   tmpTree = FormulaTreeUtil.BuildTree(tmpInputString);
                 }
 
                 System.out.println(FormulaTreeUtil.EvaluateTree(tmpTree, tmpVariableDictionary));
 
-                // to avoid endless loop the control is set to "n" (Do-While-Loop)
+                // to avoid endless loop the control is set to "n"
+                // (Do-While-Loop)
                 if (!ConverterUtil.hasVariables(tmpInputString)) {
                   tmpEnterVariablesValue = "n";
                 }
@@ -145,16 +146,22 @@ public class ConsoleCalculator {
                 // if (e.getMessage().equals("")){
                 tmpErrorOccuredInVariableInput = true;
                 //
-                //else{
+                // else{
                 tmpErrorOccuredInTerm = true;
-              //}
+                // }
               }
 
-              //TODO @all Wir sollten unsere Exceptions nochmal überdenken. Ich schlage folgende Exception Kategorien vor: "Syntatktischer Fehler" (z.B. 2+()**sin()), Rechenfehler " 2/0 ", Programmfehler (aufteilung nach ebenen: gui,mathutil,formelbaum). Braucht jemand noch mehr Kategorien für Fehler?
-              //TODO fehlerbehandlung in der gui -> nach exceptions neuordnung
-              //TODO gut so?
+              // TODO @all Wir sollten unsere Exceptions nochmal überdenken. Ich
+              // schlage folgende Exception Kategorien vor: "Syntatktischer
+              // Fehler" (z.B. 2+()**sin()), Rechenfehler " 2/0 ",
+              // Programmfehler (aufteilung nach ebenen:
+              // gui,mathutil,formelbaum). Braucht jemand noch mehr Kategorien
+              // für Fehler?
+              // TODO fehlerbehandlung in der gui -> nach exceptions neuordnung
+              // TODO gut so?
 
-              // if no error occured and the formula has variables, the user is asked if he wants to set another variable
+              // if no error occured and the formula has variables, the user is
+              // asked if he wants to set another variable
               if (!tmpErrorOccuredInVariableInput && tmpFormulaHasVariables) {
 
                 ConsoleOutput.askAnotherVariableInput();
@@ -163,7 +170,7 @@ public class ConsoleCalculator {
                   tmpEnterVariablesValue = ConsoleInput.getConsoleInput();
                 } catch (IOException e) {
                   ConsoleOutput.printError(e.getMessage());
-                  //e.printStackTrace();
+                  // e.printStackTrace();
                 }
               }
               // Enter variables loop
@@ -176,7 +183,7 @@ public class ConsoleCalculator {
             tmpInputString = ConsoleInput.getConsoleInput();
           } catch (IOException e) {
             ConsoleOutput.printError(e.getMessage());
-            //e.printStackTrace();
+            // e.printStackTrace();
           }
 
         }

@@ -20,12 +20,12 @@ public class CalculatorHelpDialog extends JDialog {
   private JTextArea textAreaContent = new JTextArea();
   private JButton buttonClose = new JButton("Close");
   /**
-   *
+   * 
    */
   private static final long serialVersionUID = 1L;
 
   /**
-   *
+   * 
    * @param aParentFrame
    */
   public CalculatorHelpDialog(JFrame aParentFrame) {
@@ -48,7 +48,6 @@ public class CalculatorHelpDialog extends JDialog {
     textAreaContent.setEnabled(false);
     textAreaContent.setDisabledTextColor(Color.BLACK);
     textAreaContent.setBackground(aParentFrame.getBackground());
-
 
     // add ActionListener to Close-Button
     ActionListenerUtil.setDialogCloseListener(this, buttonClose);

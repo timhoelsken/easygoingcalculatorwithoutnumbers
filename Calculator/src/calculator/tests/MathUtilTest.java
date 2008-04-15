@@ -37,7 +37,8 @@ public class MathUtilTest extends TestCase {
   }
 
   /**
-   * test method for {@link calculator.utils.MathUtil#isDouble(java.lang.String)}
+   * test method for
+   * {@link calculator.utils.MathUtil#isDouble(java.lang.String)}
    */
   public void testIsFloat() {
     assertTrue(MathUtil.isDouble("3.4"));
@@ -93,7 +94,7 @@ public class MathUtilTest extends TestCase {
 
   /**
    * Start the MathUtilTest here.
-   *
+   * 
    * @param args
    */
   public static void main(String[] args) {

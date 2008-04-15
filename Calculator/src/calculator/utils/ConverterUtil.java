@@ -123,25 +123,24 @@ public class ConverterUtil {
 		if (aFormula.contains(".")) {
 
 			int tmpCommaPosition = 0;
-			String tmpFormulaToCut = aFormula;
 
-			tmpCommaPosition = tmpFormulaToCut.indexOf(".");
+			tmpCommaPosition = aFormula.indexOf(".");
 
 			if (tmpCommaPosition != 0) {
 
 				while (tmpCommaPosition != -1) {
-					if (!MathUtil.isNumber(tmpFormulaToCut.charAt(tmpCommaPosition - 1))) {
+					if (!MathUtil.isNumber(aFormula.charAt(tmpCommaPosition - 1))) {
 						throw new FormulaConversionException("The formula contains invalid commas.");
 					}
 					int i = tmpCommaPosition + 1;
-					while (i < tmpFormulaToCut.length() - 1 && MathUtil.isNumber(tmpFormulaToCut.charAt(i))) {
+					while (i < aFormula.length() - 1 && MathUtil.isNumber(aFormula.charAt(i))) {
 						i++;
 					}
-					if (i> tmpFormulaToCut.length()-1 || tmpFormulaToCut.charAt(i) == '.') {
+					if (i> aFormula.length()-1 || aFormula.charAt(i) == '.') {
 						throw new FormulaConversionException("The formula contains invalid commas.");
 					}
-					tmpFormulaToCut = tmpFormulaToCut.substring(tmpCommaPosition + 1, tmpFormulaToCut.length());
-					tmpCommaPosition = tmpFormulaToCut.indexOf(".");
+					aFormula = aFormula.substring(tmpCommaPosition + 1, aFormula.length());
+					tmpCommaPosition = aFormula.indexOf(".");
 				}
 			} else {
 				throw new FormulaConversionException("The formula contains invalid commas.");

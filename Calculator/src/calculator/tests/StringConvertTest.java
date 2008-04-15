@@ -3,12 +3,11 @@
  */
 package calculator.tests;
 
-import calculator.exceptions.CalculatingException;
-import calculator.exceptions.FormulaConversionException;
-import calculator.utils.ConverterUtil;
 import junit.framework.JUnit4TestAdapter;
 import junit.framework.Test;
 import junit.framework.TestCase;
+import calculator.exceptions.FormulaConversionException;
+import calculator.utils.ConverterUtil;
 
 /**
  */

@@ -366,7 +366,7 @@ public class FrameCalculator extends JFrame {
           }
           calculateFormula(convertedFormula);
         } else {
-          JOptionPane.showMessageDialog(new JFrame(), "The entered value(s) must be number(s).",
+          JOptionPane.showMessageDialog(new JFrame(), "The entered value(s) must be numeric.",
               "An error occured!", JOptionPane.WARNING_MESSAGE);
         }
       }

@@ -11,424 +11,424 @@ import calculator.exceptions.FormulaConversionException;
  */
 public class ConverterUtil {
 
-  /**
-   * Method makes the parameter formula a standard term (see
-   * misc/documents/Standard-String.txt)
-   *
-   * @param aFormula
-   * @return the standard term
-   * @throws FormulaConversionException
-   *             if any checks fail
-   */
-  public static String termToStandardString(String aFormula) throws FormulaConversionException {
+	/**
+	 * Method makes the parameter formula a standard term (see
+	 * misc/documents/Standard-String.txt)
+	 *
+	 * @param aFormula
+	 * @return the standard term
+	 * @throws FormulaConversionException
+	 *             if any checks fail
+	 */
+	public static String termToStandardString(String aFormula) throws FormulaConversionException {
 
-    if (aFormula==null || aFormula.length()==0) throw new FormulaConversionException("Empty formula.");
-    aFormula = aFormula.toLowerCase();
-    
-    
-    checkIfValidSignsOnly(aFormula);
-    checkIfEmptyBrackets(aFormula);
-    aFormula = removeBlanks(aFormula);
-    aFormula = unifyCommas(aFormula);
-    aFormula = changeFunctionsIntoSigns(aFormula);
-    aFormula = insertMultiplicationOperators(aFormula);
-    checkDecimalNumbers(aFormula);
-    aFormula = checkNegativeNumbers(aFormula);
-    checkOperators(aFormula);
-    checkBrackets(aFormula);
+		if (aFormula == null || aFormula.length() == 0)
+			throw new FormulaConversionException("Empty formula.");
+		aFormula = aFormula.toLowerCase();
 
-    return aFormula;
-  }
+		checkIfValidSignsOnly(aFormula);
+		checkIfEmptyBrackets(aFormula);
+		aFormula = removeBlanks(aFormula);
+		aFormula = unifyCommas(aFormula);
+		aFormula = changeFunctionsIntoSigns(aFormula);
+		aFormula = insertMultiplicationOperators(aFormula);
+		checkDecimalNumbers(aFormula);
+		aFormula = checkNegativeNumbers(aFormula);
+		checkOperators(aFormula);
+		checkBrackets(aFormula);
 
-  /**
-   * @param aFormula
-   * @throws FormulaConversionException
-   *             if illegal signs in the formula
-   */
-  public static void checkIfValidSignsOnly(String aFormula) throws FormulaConversionException {
-    Pattern tmpPattern = Pattern.compile("[\\(\\)\\,\\.\\+\\-\\*/\\^\\w ]*");
-    Matcher tmpMatcher = tmpPattern.matcher(aFormula);
-    if (!tmpMatcher.matches()) {
-      throw new FormulaConversionException("The formula contains invalid signs.");
-    }
-  }
+		return aFormula;
+	}
 
-  /**
-   * @param aFormula
-   * @throws FormulaConversionException
-   *            if empty brackets in the formula
-   */
-  public static void checkIfEmptyBrackets(String aFormula) throws FormulaConversionException {
-    Pattern tmpPattern = Pattern.compile("\\(\\)");
-    Matcher tmpMatcher = tmpPattern.matcher(aFormula);
-    if (tmpMatcher.find()) {
-      throw new FormulaConversionException("The formula contains empty brackets.");
-    }
+	/**
+	 * @param aFormula
+	 * @throws FormulaConversionException
+	 *             if illegal signs in the formula
+	 */
+	public static void checkIfValidSignsOnly(String aFormula) throws FormulaConversionException {
+		Pattern tmpPattern = Pattern.compile("[\\(\\)\\,\\.\\+\\-\\*/\\^\\w ]*");
+		Matcher tmpMatcher = tmpPattern.matcher(aFormula);
+		if (!tmpMatcher.matches()) {
+			throw new FormulaConversionException("The formula contains invalid signs.");
+		}
+	}
 
-  }
+	/**
+	 * @param aFormula
+	 * @throws FormulaConversionException
+	 *            if empty brackets in the formula
+	 */
+	public static void checkIfEmptyBrackets(String aFormula) throws FormulaConversionException {
+		Pattern tmpPattern = Pattern.compile("\\(\\)");
+		Matcher tmpMatcher = tmpPattern.matcher(aFormula);
+		if (tmpMatcher.find()) {
+			throw new FormulaConversionException("The formula contains empty brackets.");
+		}
 
-  /**
-   * @param aString
-   * @return aString without blanks
-   */
-  public static String removeBlanks(String aString) {
-    // + is part of a regular expression. it has nothin to do with the char '+'
-    return aString.replaceAll(" +", "");
-  }
+	}
 
-  /**
-   * Replaces all commas (,) of a string with full-stops (.)
-   *
-   * @param aFormula
-   * @return a string containing .
-   */
-  public static String unifyCommas(String aFormula) {
-    return aFormula.replace(',', '.');
-  }
+	/**
+	 * @param aString
+	 * @return aString without blanks
+	 */
+	public static String removeBlanks(String aString) {
+		// + is part of a regular expression. it has nothin to do with the char '+'
+		return aString.replaceAll(" +", "");
+	}
 
-  /**
-   * A method to clean the variables in aFormula. Variables "ab" will be
-   * replaced with "a*b" "2a" will be replaced with "2*a"
-   *
-   * @param aFormula
-   * @return a String that contains no "ab" or "2a" variables
-   */
-  public static String insertMultiplicationOperators(String aFormula) {
+	/**
+	 * Replaces all commas (,) of a string with full-stops (.)
+	 *
+	 * @param aFormula
+	 * @return a string containing .
+	 */
+	public static String unifyCommas(String aFormula) {
+		return aFormula.replace(',', '.');
+	}
 
-    String tmpOutput = new String("");
+	/**
+	 * A method to clean the variables in aFormula. Variables "ab" will be
+	 * replaced with "a*b" "2a" will be replaced with "2*a"
+	 *
+	 * @param aFormula
+	 * @return a String that contains no "ab" or "2a" variables
+	 */
+	public static String insertMultiplicationOperators(String aFormula) {
 
-    for (int i = 0; i < aFormula.length(); i++) {
-      tmpOutput += aFormula.charAt(i);
-      if (MathUtil.isVariable(aFormula.charAt(i))
-          && (i + 1 < aFormula.length() && (MathUtil.isNumberOrVariable(aFormula.charAt(i + 1))
-              || aFormula.charAt(i + 1) == '(' || MathUtil.isFunction(aFormula.charAt(i + 1))))) {
-        tmpOutput += "*";
-      } else if (MathUtil.isNumber(aFormula.charAt(i))
-          && (i + 1 < aFormula.length() && (MathUtil.isVariable(aFormula.charAt(i + 1))
-              || aFormula.charAt(i + 1) == '(' || MathUtil.isFunction(aFormula.charAt(i + 1))))) {
-        tmpOutput += "*";
-      }
-    }
-    return tmpOutput;
-  }
+		String tmpOutput = new String("");
 
-  /**
-   * @param aFormula
-   * @throws FormulaConversionException
-   *             if illegal commas in the formula, for example '3.45.34' or
-   *             '32.'
-   */
-  public static void checkDecimalNumbers(String aFormula) throws FormulaConversionException {
+		for (int i = 0; i < aFormula.length(); i++) {
+			tmpOutput += aFormula.charAt(i);
+			if (MathUtil.isVariable(aFormula.charAt(i))
+					&& (i + 1 < aFormula.length() && (MathUtil.isNumberOrVariable(aFormula.charAt(i + 1)) || aFormula.charAt(i + 1) == '(' || MathUtil
+							.isFunction(aFormula.charAt(i + 1))))) {
+				tmpOutput += "*";
+			} else if (MathUtil.isNumber(aFormula.charAt(i))
+					&& (i + 1 < aFormula.length() && (MathUtil.isVariable(aFormula.charAt(i + 1)) || aFormula.charAt(i + 1) == '(' || MathUtil
+							.isFunction(aFormula.charAt(i + 1))))) {
+				tmpOutput += "*";
+			}
+		}
+		return tmpOutput;
+	}
 
-    if (aFormula.contains(".")) {
+	/**
+	 * @param aFormula
+	 * @throws FormulaConversionException
+	 *             if illegal commas in the formula, for example '3.45.34' or
+	 *             '32.'
+	 */
+	public static void checkDecimalNumbers(String aFormula) throws FormulaConversionException {
 
-      int tmpCommaPosition = 0;
-      String tmpCopyOfFormula = aFormula;
+		if (aFormula.contains(".")) {
 
-      tmpCommaPosition = tmpCopyOfFormula.indexOf(".");
+			int tmpCommaPosition = 0;
+			String tmpCopyOfFormula = aFormula;
 
-      if (tmpCommaPosition != 0) {
+			tmpCommaPosition = tmpCopyOfFormula.indexOf(".");
 
-        while (tmpCommaPosition != -1) {
-          if (!MathUtil.isNumber(tmpCopyOfFormula.charAt(tmpCommaPosition - 1))) {
-            throw new FormulaConversionException("The formula contains invalid commas.");
-          }
-          int i = tmpCommaPosition + 1;
-          while (i < tmpCopyOfFormula.length() - 1 && MathUtil.isNumber(tmpCopyOfFormula.charAt(i))) {
-            i++;
-          }
-          if (tmpCopyOfFormula.charAt(i) == '.') {
-            throw new FormulaConversionException("The formula contains invalid commas.");
-          }
-          tmpCopyOfFormula = tmpCopyOfFormula.substring(tmpCommaPosition + 1, tmpCopyOfFormula.length());
-          tmpCommaPosition = tmpCopyOfFormula.indexOf(".");
-        }
-      } else {
-        throw new FormulaConversionException("The formula contains invalid commas.");
-      }
-    }
-  }
+			if (tmpCommaPosition != 0) {
 
-  /**
-   * Replaces sin, cos, tan, sqrt functions with abbreviation signs
-   *
-   * @param aFormula
-   * @return a string containing abbreviation sign, defined in
-   *         Standard-String.txt
-   */
-  public static String changeFunctionsIntoSigns(String aFormula) {
+				while (tmpCommaPosition != -1) {
+					if (!MathUtil.isNumber(tmpCopyOfFormula.charAt(tmpCommaPosition - 1))) {
+						throw new FormulaConversionException("The formula contains invalid commas.");
+					}
+					int i = tmpCommaPosition + 1;
+					while (i < tmpCopyOfFormula.length() - 1 && MathUtil.isNumber(tmpCopyOfFormula.charAt(i))) {
+						i++;
+					}
+					if (tmpCopyOfFormula.charAt(i) == '.') {
+						throw new FormulaConversionException("The formula contains invalid commas.");
+					}
+					tmpCopyOfFormula = tmpCopyOfFormula.substring(tmpCommaPosition + 1, tmpCopyOfFormula.length());
+					tmpCommaPosition = tmpCopyOfFormula.indexOf(".");
+				}
+			} else {
+				throw new FormulaConversionException("The formula contains invalid commas.");
+			}
+		}
+	}
 
-    aFormula = aFormula.replace("sin(", "%(");
-    aFormula = aFormula.replace("cos(", "~(");
-    aFormula = aFormula.replace("tan(", "#(");
-    aFormula = aFormula.replace("sqrt(", "&(");
+	/**
+	 * Replaces sin, cos, tan, sqrt functions with abbreviation signs
+	 *
+	 * @param aFormula
+	 * @return a string containing abbreviation sign, defined in
+	 *         Standard-String.txt
+	 */
+	public static String changeFunctionsIntoSigns(String aFormula) {
 
-    return aFormula;
-  }
+		aFormula = aFormula.replace("sin(", "%(");
+		aFormula = aFormula.replace("cos(", "~(");
+		aFormula = aFormula.replace("tan(", "#(");
+		aFormula = aFormula.replace("sqrt(", "&(");
 
-  /**
-   * @param aFormula
-   * @throws FormulaConversionException
-   *             if there are operators directly beside each other like "*-",
-   *             "+/", "+)" or "* /" ...
-   */
-  public static void checkOperators(String aFormula) throws FormulaConversionException {
-    Pattern tmpPattern;
-    Matcher tmpMatcher;
+		return aFormula;
+	}
 
-    // cases "+|*|/|^..."
-    tmpPattern = Pattern.compile("[\\+\\*/\\^].*");
-    tmpMatcher = tmpPattern.matcher(aFormula);
-    if (tmpMatcher.matches()) {
-      throw new FormulaConversionException("The formula starts with an operator.");
-    }
-    // cases "... +|-|*|/|^"
-    tmpPattern = Pattern.compile(".*[\\+\\-\\*/\\^]");
-    tmpMatcher = tmpPattern.matcher(aFormula);
-    if (tmpMatcher.matches()) {
-      throw new FormulaConversionException("The formula ends with an operator.");
-    }
-    // cases "+-", "*/" ...
-    tmpPattern = Pattern.compile("[\\+\\-\\*/\\^][\\+\\-\\*/\\^\\)]");
-    tmpMatcher = tmpPattern.matcher(aFormula);
-    if (tmpMatcher.find()) {
-      throw new FormulaConversionException("The order of operators in the formula is not correct.");
-    }
-    // cases "(+", "(*" ...
-    tmpPattern = Pattern.compile("\\([\\+\\*/\\^]");
-    tmpMatcher = tmpPattern.matcher(aFormula);
-    if (tmpMatcher.find()) {
-      throw new FormulaConversionException("Do not let an alone standing arithmetic operator follow an opening bracket.");
-    }
-  }
+	/**
+	 * @param aFormula
+	 * @throws FormulaConversionException
+	 *             if there are operators directly beside each other like "*-",
+	 *             "+/", "+)" or "* /" ...
+	 */
+	public static void checkOperators(String aFormula) throws FormulaConversionException {
+		Pattern tmpPattern;
+		Matcher tmpMatcher;
 
-  /**
-   * sets brackets around negative numbers at the beginning of the formular or
-   * at the beginning of brackets
-   *
-   * makes -3*2*(-5*6) look like (-3)*2*((-5)*6)
-   *
-   * @param aFormula
-   * @return the bracked formula
-   */
-  public static String setBracketsAroundNegatives(String aFormula) {
+		// cases "+|*|/|^..."
+		tmpPattern = Pattern.compile("[\\+\\*/\\^].*");
+		tmpMatcher = tmpPattern.matcher(aFormula);
+		if (tmpMatcher.matches()) {
+			throw new FormulaConversionException("The formula starts with an operator.");
+		}
+		// cases "... +|-|*|/|^"
+		tmpPattern = Pattern.compile(".*[\\+\\-\\*/\\^]");
+		tmpMatcher = tmpPattern.matcher(aFormula);
+		if (tmpMatcher.matches()) {
+			throw new FormulaConversionException("The formula ends with an operator.");
+		}
+		// cases "+-", "*/" ...
+		tmpPattern = Pattern.compile("[\\+\\-\\*/\\^][\\+\\-\\*/\\^\\)]");
+		tmpMatcher = tmpPattern.matcher(aFormula);
+		if (tmpMatcher.find()) {
+			throw new FormulaConversionException("The order of operators in the formula is not correct.");
+		}
+		// cases "(+", "(*" ...
+		tmpPattern = Pattern.compile("\\([\\+\\*/\\^]");
+		tmpMatcher = tmpPattern.matcher(aFormula);
+		if (tmpMatcher.find()) {
+			throw new FormulaConversionException("Do not let an alone standing arithmetic operator follow an opening bracket.");
+		}
+	}
 
-    if (aFormula.length() > 1) {
-      // check negative number at the beginning
-      if (aFormula.charAt(0) == '-' && aFormula.charAt(1) != '(') {
-        aFormula = setBracketsAroundNegative(aFormula, 0);
-      }
-    }
+	/**
+	 * sets brackets around negative numbers at the beginning of the formular or
+	 * at the beginning of brackets
+	 *
+	 * makes -3*2*(-5*6) look like (-3)*2*((-5)*6)
+	 *
+	 * @param aFormula
+	 * @return the bracked formula
+	 */
+	public static String setBracketsAroundNegatives(String aFormula) {
 
-    // check negative numbers at the beginning of brackets
-    int i = 0;
-    int newBracketsCounter = 0;
-    Pattern tmpPattern = Pattern.compile("[%~#&]\\(\\-[\\w\\.]+\\)");
-    Matcher tmpMatcher = tmpPattern.matcher(aFormula);
-    while (tmpMatcher.find(i)) {
-      int tmpStart = tmpMatcher.start() + 1;
-      aFormula = setBracketsAroundNegative(aFormula, ++tmpStart + newBracketsCounter);
-      newBracketsCounter = newBracketsCounter + 2;
-      i = tmpStart;
-    }
+		if (aFormula.length() > 1) {
+			// check negative number at the beginning
+			if (aFormula.charAt(0) == '-' && aFormula.charAt(1) != '(') {
+				aFormula = setBracketsAroundNegative(aFormula, 0);
+			}
+		}
 
-    i = 0;
-    newBracketsCounter = 0;
+		// check negative numbers at the beginning of brackets
+		int i = 0;
+		int newBracketsCounter = 0;
+		Pattern tmpPattern = Pattern.compile("[%~#&]\\(\\-[\\w\\.]+\\)");
+		Matcher tmpMatcher = tmpPattern.matcher(aFormula);
+		while (tmpMatcher.find(i)) {
+			int tmpStart = tmpMatcher.start() + 1;
+			aFormula = setBracketsAroundNegative(aFormula, ++tmpStart + newBracketsCounter);
+			newBracketsCounter = newBracketsCounter + 2;
+			i = tmpStart;
+		}
 
-    tmpPattern = Pattern.compile("\\(\\-[\\w\\.]+[^\\)\\w]");
-    tmpMatcher = tmpPattern.matcher(aFormula);
-    while (tmpMatcher.find(i)) {
-      int tmpStart = tmpMatcher.start();
-      aFormula = setBracketsAroundNegative(aFormula, ++tmpStart + newBracketsCounter);
-      newBracketsCounter = newBracketsCounter + 2;
-      i = tmpStart;
-    }
+		i = 0;
+		newBracketsCounter = 0;
 
-    return aFormula;
-  }
+		tmpPattern = Pattern.compile("\\(\\-[\\w\\.]+[^\\)\\w]");
+		tmpMatcher = tmpPattern.matcher(aFormula);
+		while (tmpMatcher.find(i)) {
+			int tmpStart = tmpMatcher.start();
+			aFormula = setBracketsAroundNegative(aFormula, ++tmpStart + newBracketsCounter);
+			newBracketsCounter = newBracketsCounter + 2;
+			i = tmpStart;
+		}
 
-  /**
-   * @param aFormula
-   * @param startIndex
-   *            index of the minus sign '-'
-   * @return the formula with brackets around the number beginning at the
-   *         startIndex
-   */
-  private static String setBracketsAroundNegative(String aFormula, int aStartIndex) {
-    int i = aStartIndex + 1;
-    Matcher tmpMatcher;
-    do {
-      Pattern tmpPattern = Pattern.compile("[\\w\\.]");
-      if (i == aFormula.length()) {
-        tmpMatcher = null;
-      } else {
-        tmpMatcher = tmpPattern.matcher(Character.toString(aFormula.charAt(i++)));
-      }
-    } while (tmpMatcher != null && tmpMatcher.find());
+		return aFormula;
+	}
 
-    if (i != aFormula.length()) {
-	    aFormula = aFormula.substring(0, aStartIndex) + "(" + aFormula.substring(aStartIndex, --i) + ")"
-	        + aFormula.substring(i);
-    } else {
-    	aFormula = aFormula.substring(0, aStartIndex) + "(" + aFormula.substring(aStartIndex, i) + ")"
-        + aFormula.substring(i);
-    }
-    return aFormula;
-  }
+	/**
+	 * @param aFormula
+	 * @param startIndex
+	 *            index of the minus sign '-'
+	 * @return the formula with brackets around the number beginning at the
+	 *         startIndex
+	 */
+	private static String setBracketsAroundNegative(String aFormula, int aStartIndex) {
+		if (!MathUtil.isFunction(aFormula.charAt(aStartIndex + 1))) {
+			int i = aStartIndex + 1;
+			Matcher tmpMatcher;
+			do {
+				Pattern tmpPattern = Pattern.compile("[\\w\\.]");
+				if (i == aFormula.length()) {
+					tmpMatcher = null;
+				} else {
+					tmpMatcher = tmpPattern.matcher(Character.toString(aFormula.charAt(i++)));
+				}
+			} while (tmpMatcher != null && tmpMatcher.find());
 
-  /**
-   * if there is a negative number at the beginning of the formula it has to be
-   * in brackets to make this method work!
-   *
-   * @param aFormula
-   * @return the bracked formula
-   * @throws FormulaConversionException
-   *             if not all negative numbers are in brackets
-   */
-  public static String checkNegativeNumbers(String aFormula) throws FormulaConversionException {
+			if (i != aFormula.length()) {
+				aFormula = aFormula.substring(0, aStartIndex) + "(" + aFormula.substring(aStartIndex, --i) + ")" + aFormula.substring(i);
+			} else {
+				aFormula = aFormula.substring(0, aStartIndex) + "(" + aFormula.substring(aStartIndex, i) + ")" + aFormula.substring(i);
+			}
+		}
+		return aFormula;
+	}
 
-    aFormula = setBracketsAroundNegatives(aFormula);
+	/**
+	 * if there is a negative number at the beginning of the formula it has to be
+	 * in brackets to make this method work!
+	 *
+	 * @param aFormula
+	 * @return the bracked formula
+	 * @throws FormulaConversionException
+	 *             if not all negative numbers are in brackets
+	 */
+	public static String checkNegativeNumbers(String aFormula) throws FormulaConversionException {
 
-    for (int i = 1; i < aFormula.length(); i++) {
-      if (aFormula.charAt(i) == '-') {
-        Pattern tmpPattern = Pattern.compile("[\\(\\)\\w]");
-        Matcher tmpMatcher = tmpPattern.matcher(Character.toString(aFormula.charAt(i - 1)));
-        if (!tmpMatcher.matches()) {
-          throw new FormulaConversionException("Some negative operands are not in brackets.");
-        }
-      }
-    }
-    return aFormula;
-  }
+		aFormula = setBracketsAroundNegatives(aFormula);
 
-  /**
-   * checks if there is the same amount of ( and ) brackets, and if no ) are in
-   * lead of ( , that means not more than there should be
-   *
-   * @param aFormula
-   * @throws FormulaConversionException
-   *             if the brackets in the term are not correct
-   */
-  public static void checkBrackets(String aFormula) throws FormulaConversionException {
+		for (int i = 1; i < aFormula.length(); i++) {
+			if (aFormula.charAt(i) == '-') {
+				Pattern tmpPattern = Pattern.compile("[\\(\\)\\w]");
+				Matcher tmpMatcher = tmpPattern.matcher(Character.toString(aFormula.charAt(i - 1)));
+				if (!tmpMatcher.matches()) {
+					throw new FormulaConversionException("Some negative operands are not in brackets.");
+				}
+			}
+		}
+		return aFormula;
+	}
 
-    int tmpSum = 0;
-    for (int i = 0; i < aFormula.length(); i++) {
-      if (aFormula.charAt(i) == '(')
-        ++tmpSum;
-      if (aFormula.charAt(i) == ')')
-        --tmpSum;
-      if (tmpSum < 0) {
-        throw new FormulaConversionException("Wrong bracket order in the formula.");
-      }
-    }
-    if (tmpSum != 0) {
-      throw new FormulaConversionException("Missing closing brackets in the formula.");
-    }
-  }
+	/**
+	 * checks if there is the same amount of ( and ) brackets, and if no ) are in
+	 * lead of ( , that means not more than there should be
+	 *
+	 * @param aFormula
+	 * @throws FormulaConversionException
+	 *             if the brackets in the term are not correct
+	 */
+	public static void checkBrackets(String aFormula) throws FormulaConversionException {
 
-  /**
-   * paints a string in the center of some spaces, needed to paint the tree in
-   * the console
-   *
-   * @param someSpaces
-   * @param aString
-   * @return a string centered in the given spaces
-   */
-  public static String centerStringInSpaces(String someSpaces, String aString) {
-    String tmpReturnString = new String();
-    int tmpSpaceLength = someSpaces.length();
-    int tmpStringLength = aString.length();
-    if (tmpSpaceLength <= tmpStringLength) {
-      return aString;
-    }
-    int tmpStart = tmpSpaceLength / 2 - tmpStringLength / 2;
-    tmpReturnString = someSpaces.substring(0, tmpStart);
-    tmpReturnString += aString;
-    for (int i = tmpReturnString.length() + 1; i < tmpSpaceLength; i++) {
-      tmpReturnString += " ";
-    }
-    return tmpReturnString;
-  }
+		int tmpSum = 0;
+		for (int i = 0; i < aFormula.length(); i++) {
+			if (aFormula.charAt(i) == '(')
+				++tmpSum;
+			if (aFormula.charAt(i) == ')')
+				--tmpSum;
+			if (tmpSum < 0) {
+				throw new FormulaConversionException("Wrong bracket order in the formula.");
+			}
+		}
+		if (tmpSum != 0) {
+			throw new FormulaConversionException("Missing closing brackets in the formula.");
+		}
+	}
 
-  /**
-   * Checks if a formula has variables
-   *
-   * @param aFormula
-   * @return true if a formula has variables
-   */
-  public static boolean hasVariables(String aFormula) {
+	/**
+	 * paints a string in the center of some spaces, needed to paint the tree in
+	 * the console
+	 *
+	 * @param someSpaces
+	 * @param aString
+	 * @return a string centered in the given spaces
+	 */
+	public static String centerStringInSpaces(String someSpaces, String aString) {
+		String tmpReturnString = new String();
+		int tmpSpaceLength = someSpaces.length();
+		int tmpStringLength = aString.length();
+		if (tmpSpaceLength <= tmpStringLength) {
+			return aString;
+		}
+		int tmpStart = tmpSpaceLength / 2 - tmpStringLength / 2;
+		tmpReturnString = someSpaces.substring(0, tmpStart);
+		tmpReturnString += aString;
+		for (int i = tmpReturnString.length() + 1; i < tmpSpaceLength; i++) {
+			tmpReturnString += " ";
+		}
+		return tmpReturnString;
+	}
 
-    Pattern tmpPattern = Pattern.compile("[A-Za-z]");
-    Matcher tmpMatcher = tmpPattern.matcher(aFormula);
+	/**
+	 * Checks if a formula has variables
+	 *
+	 * @param aFormula
+	 * @return true if a formula has variables
+	 */
+	public static boolean hasVariables(String aFormula) {
 
-    return tmpMatcher.find();
-  }
+		Pattern tmpPattern = Pattern.compile("[A-Za-z]");
+		Matcher tmpMatcher = tmpPattern.matcher(aFormula);
 
-  /**
-   * Finds all variables in the given formula string
-   *
-   * @param aFormula
-   * @return a String[] ArrayList of variables. [0] is the variable, [1] is the
-   *         variable's value
-   */
-  public static ArrayList<String[]> getVariables(String aFormula) {
+		return tmpMatcher.find();
+	}
 
-    ArrayList<String[]> tmpVariableList = new ArrayList<String[]>();
+	/**
+	 * Finds all variables in the given formula string
+	 *
+	 * @param aFormula
+	 * @return a String[] ArrayList of variables. [0] is the variable, [1] is the
+	 *         variable's value
+	 */
+	public static ArrayList<String[]> getVariables(String aFormula) {
 
-    Pattern tmpPattern = Pattern.compile("[A-Za-z]");
-    Matcher tmpMatcher = tmpPattern.matcher(aFormula);
+		ArrayList<String[]> tmpVariableList = new ArrayList<String[]>();
 
-    while (tmpMatcher.find()) {
+		Pattern tmpPattern = Pattern.compile("[A-Za-z]");
+		Matcher tmpMatcher = tmpPattern.matcher(aFormula);
 
-      String[] tmpStringArray = new String[2];
-      tmpStringArray[0] = tmpMatcher.group();
-      tmpStringArray[1] = null;
+		while (tmpMatcher.find()) {
 
-      if (!isInList(tmpVariableList, tmpStringArray[0])) {
-        tmpVariableList.add(tmpStringArray);
-      }
-    }
+			String[] tmpStringArray = new String[2];
+			tmpStringArray[0] = tmpMatcher.group();
+			tmpStringArray[1] = null;
 
-    tmpVariableList.trimToSize();
+			if (!isInList(tmpVariableList, tmpStringArray[0])) {
+				tmpVariableList.add(tmpStringArray);
+			}
+		}
 
-    return tmpVariableList;
-  }
+		tmpVariableList.trimToSize();
 
-  /**
-   * Puts a String[] ArrayList into a Hashtable<String, Double>
-   *
-   * @param aListOfVariables
-   * @return a Hashtable<String, Double>, where key is the variable and value
-   *         is the variables value
-   */
-  public static Hashtable<String, Double> putArrayListIntoHashtable(ArrayList<String[]> aListOfVariables) {
-    Hashtable<String, Double> tmpVariableDictionary = new Hashtable<String, Double>();
+		return tmpVariableList;
+	}
 
-    for (int i = 0; i < aListOfVariables.size(); i++) {
-      tmpVariableDictionary.put(aListOfVariables.get(i)[0], Double.parseDouble(aListOfVariables.get(i)[1]));
-    }
+	/**
+	 * Puts a String[] ArrayList into a Hashtable<String, Double>
+	 *
+	 * @param aListOfVariables
+	 * @return a Hashtable<String, Double>, where key is the variable and value
+	 *         is the variables value
+	 */
+	public static Hashtable<String, Double> putArrayListIntoHashtable(ArrayList<String[]> aListOfVariables) {
+		Hashtable<String, Double> tmpVariableDictionary = new Hashtable<String, Double>();
 
-    return tmpVariableDictionary;
-  }
+		for (int i = 0; i < aListOfVariables.size(); i++) {
+			tmpVariableDictionary.put(aListOfVariables.get(i)[0], Double.parseDouble(aListOfVariables.get(i)[1]));
+		}
 
-  /**
-   *
-   * @param aListOfVariables
-   * @param aVariable
-   * @return
-   */
-  public static boolean isInList(ArrayList<String[]> aListOfVariables, String aVariable) {
+		return tmpVariableDictionary;
+	}
 
-    if (aListOfVariables.size() == 0) {
-      return false;
-    } else {
+	/**
+	 *
+	 * @param aListOfVariables
+	 * @param aVariable
+	 * @return
+	 */
+	public static boolean isInList(ArrayList<String[]> aListOfVariables, String aVariable) {
 
-      for (int i = 0; i < aListOfVariables.size(); i++) {
-        if (aVariable.equals(aListOfVariables.get(i)[0])) {
-          return true;
-        }
-      }
-      return false;
-    }
-  }
+		if (aListOfVariables.size() == 0) {
+			return false;
+		} else {
+
+			for (int i = 0; i < aListOfVariables.size(); i++) {
+				if (aVariable.equals(aListOfVariables.get(i)[0])) {
+					return true;
+				}
+			}
+			return false;
+		}
+	}
 }

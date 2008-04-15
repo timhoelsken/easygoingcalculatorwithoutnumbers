@@ -1688,7 +1688,7 @@ public class IntegrationTest extends TestCase {
 
    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
 
-   assertEquals((double) -1218.0, Math.floor(tmpResult*10000));
+   assertEquals((double) -1219.0, Math.floor(tmpResult*10000));
  }
 
  /**
@@ -1703,6 +1703,20 @@ public class IntegrationTest extends TestCase {
    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
 
    assertEquals((double) 0.0, tmpResult);
+ }
+
+ /**
+  * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
+  * @throws Exception
+  */
+ public void testCheckOperators14() throws Exception {
+   // positive test
+   String tmpString = ConverterUtil.termToStandardString("5-cos(3+4)");
+   Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
+
+   double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
+
+   assertEquals((double) 40074.0, Math.floor(tmpResult*10000));
  }
 
  /**

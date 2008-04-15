@@ -1137,7 +1137,7 @@ public class IntegrationTest extends TestCase {
 
    tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
 
-   assertEquals((double) -9.0, tmpResult);
+   assertEquals((double) 9.0, tmpResult);
 
 
    tmpHashtable = new Hashtable<String, Double>();

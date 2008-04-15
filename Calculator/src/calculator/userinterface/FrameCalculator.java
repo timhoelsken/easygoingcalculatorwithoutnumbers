@@ -77,11 +77,14 @@ public class FrameCalculator extends JFrame {
 
   private JMenu menuFile = new JMenu("File");
   private JMenu menuOptions = new JMenu("Options");
+  private JMenu menuHelp = new JMenu("Help");
 
-  private JMenuItem menuItemHelp = new JMenuItem("Help");
   private JMenuItem menuItemExit = new JMenuItem("Exit");
 
   private JMenuItem menuItemProgressBar = new JMenuItem("Enable ProgressBar");
+
+  private JMenuItem menuItemHelp = new JMenuItem("Help");
+  private JMenuItem menuItemInfo = new JMenuItem("Info");
 
   // == Menu Components ==
 
@@ -133,10 +136,14 @@ public class FrameCalculator extends JFrame {
 
     // define menu shortcuts
     menuFile.setMnemonic('F');
-    menuItemHelp.setMnemonic('H');
-    menuOptions.setMnemonic('O');
     menuItemExit.setMnemonic('E');
+
+    menuOptions.setMnemonic('O');
     menuItemProgressBar.setMnemonic('P');
+
+    menuHelp.setMnemonic('H');
+    menuItemHelp.setMnemonic('H');
+    menuItemInfo.setMnemonic('I');
 
     // == ActionListener of the menu ==
     menuItemExit.addActionListener(new ActionListener() {
@@ -173,13 +180,16 @@ public class FrameCalculator extends JFrame {
     // == ActionListener of the menu ==
 
     // build menu
-    menuFile.add(menuItemHelp);
     menuFile.add(menuItemExit);
 
     menuOptions.add(menuItemProgressBar);
 
+    menuHelp.add(menuItemHelp);
+    menuHelp.add(menuItemInfo);
+
     menuBarcalculator.add(menuFile);
     menuBarcalculator.add(menuOptions);
+    menuBarcalculator.add(menuHelp);
 
     // place menu on the frame
     setJMenuBar(menuBarcalculator);

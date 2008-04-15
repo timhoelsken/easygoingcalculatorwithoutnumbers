@@ -7,7 +7,7 @@ public class EmptyClassForGlobalSupport {
 
   // comments by Raphael
   //TODO wer tests schreibt für die util klassen der macht den selben test bitte auch einmal als integrationstest
-
+ //TODO @irgendwer, alle großbuchstaben werden der einfach heit am anfang in kleinbuchstaben konvertiert :P
   // comments by Tim
 
   // TODO @all ich habe im ConsoleCalculator eine Abfrage eingebaut, die prüft

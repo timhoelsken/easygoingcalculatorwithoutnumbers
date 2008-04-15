@@ -22,12 +22,18 @@ import calculator.utils.MathUtil;
 
 /**
  * This openes the calculator in a frame.
- *
+ * 
  * @author Tim
- *
+ * 
  */
-//TODO @Tim wenn ich über die GUI Variablen eingebe, hab ich danach im Formelfeld den Standardstring (z.B. % statt sin()). Nicht so schön :)
-// Dabei hätt mich so interessiert, ob ich die Möglichkeit habe, erneut die Variablen einzugeben ;)
+// TODO @Tim wenn ich über die GUI Variablen eingebe, hab ich danach im
+// Formelfeld den Standardstring (z.B. % statt sin()). Nicht so schön :)
+// Dabei hätt mich so interessiert, ob ich die Möglichkeit habe, erneut die
+// Variablen einzugeben ;)
+// Reply Tim: Sollte jetzt funktionieren, hatte das Eingebaut für den
+// Fehlerfall, dass jemand eine Formel mit Variable eingibt, dann sich das
+// Variablenfenster öffnet, das bei seite geschoben wird und die Formel
+// umgeändert wird
 public class FrameCalculator extends JFrame {
 
   private static final long serialVersionUID = -4971700820441624660L;
@@ -55,6 +61,7 @@ public class FrameCalculator extends JFrame {
   private JTextField[] inputFieldOfVariablesArray = new JTextField[0];
 
   // the formula entered by the user
+  private String convertedFormula = new String("");
   private String enteredFormula = new String("");
 
   // Variable Frame
@@ -112,7 +119,7 @@ public class FrameCalculator extends JFrame {
 
   /**
    * Actionlistener for the calculator button
-   *
+   * 
    * @param aButton
    */
   private void addCalculatorButtonListener(JButton aButton) {
@@ -124,12 +131,13 @@ public class FrameCalculator extends JFrame {
         if (!frameEnterVariables.isVisible()) {
           // convert the user's input to standard string
           try {
-            enteredFormula = ConverterUtil.termToStandardString(textTermInput.getText());
+            convertedFormula = ConverterUtil.termToStandardString(textTermInput.getText());
+            enteredFormula = textTermInput.getText();
 
             // if the formula has Variables, a new frame is opened
-            if (ConverterUtil.hasVariables(enteredFormula)) {
+            if (ConverterUtil.hasVariables(convertedFormula)) {
 
-              listOfVariables = ConverterUtil.getVariables(enteredFormula);
+              listOfVariables = ConverterUtil.getVariables(convertedFormula);
 
               openVariableFrame();
 
@@ -139,7 +147,7 @@ public class FrameCalculator extends JFrame {
               // reset the list to avoid errors
               listOfVariables = new ArrayList<String[]>();
 
-              calculateFormula(enteredFormula);
+              calculateFormula(convertedFormula);
             }
 
           } catch (Exception e) {
@@ -228,7 +236,7 @@ public class FrameCalculator extends JFrame {
 
   /**
    * Actionlistener for the variable input button
-   *
+   * 
    * @param aButton
    */
   public void addVariableButtonListener(JButton aButton) {
@@ -257,7 +265,7 @@ public class FrameCalculator extends JFrame {
           if (!enteredFormula.equals(textTermInput.getText())) {
             textTermInput.setText(enteredFormula);
           }
-          calculateFormula(enteredFormula);
+          calculateFormula(convertedFormula);
         } else {
           JOptionPane.showMessageDialog(new JFrame(), "The entered value(s) must be number(s).",
               "An error occured!", JOptionPane.WARNING_MESSAGE);
@@ -268,7 +276,7 @@ public class FrameCalculator extends JFrame {
 
   /**
    * calculates the formula
-   *
+   * 
    * @param aFormula
    */
   public static void calculateFormula(String aFormula) {

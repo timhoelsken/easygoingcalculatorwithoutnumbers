@@ -612,6 +612,30 @@ public class StringConvertTest extends TestCase {
   }
 
   /**
+   * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
+   */
+  public void testCheckOperators13() {
+    // positive test
+    try {
+      ConverterUtil.checkOperators("(((-12122.2))*2321*sin(12))");
+    } catch (Exception e) {
+      assertTrue(false);
+    }
+  }
+
+  /**
+   * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
+   */
+  public void testCheckOperators14() {
+    // positive test
+    try {
+      ConverterUtil.checkOperators("x/z*sin(12)");
+    } catch (Exception e) {
+      assertTrue(false);
+    }
+  }
+
+  /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#setBracketsAroundNegativeNumbers()}.
    */

@@ -64,26 +64,6 @@ public class ConverterUtil {
   }
 
   /**
-   * Checks if there are only valid blanks in the string
-   *
-   * @param aFormula
-   * @throws IllegalArgumentException
-   */
-  /*
-   * public static void checkIfValidBlanksOnly(String aFormula) throws
-   * IllegalArgumentException { int tmpPosition = 0; while
-   * (getNextBlankPosition(aFormula, tmpPosition) != -1) { tmpPosition =
-   * getNextBlankPosition(aFormula, tmpPosition); if (tmpPosition != 0 ||
-   * tmpPosition != aFormula.length()) {
-   *
-   * if ((tmpPosition - 1 > -1 &&
-   * MathUtil.isNumberOrVariable(aFormula.charAt(tmpPosition - 1))) &&
-   * (tmpPosition + 1 <= aFormula.length() &&
-   * MathUtil.isNumberOrVariable(aFormula .charAt(tmpPosition - 1)))) { throw
-   * new IllegalArgumentException("The formula contains invalid blanks."); } } } }
-   */
-
-  /**
    * @param aString
    * @return aString without blanks
    */

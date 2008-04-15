@@ -39,7 +39,7 @@ public final class FormulaTreeUtil {
     } else if (aTree.getRoot() instanceof Variable) {
 
       tmpResult = aVariableHashTable.get(Character.toString(((Variable) aTree.getRoot()).getValue()));
-      if (tmpResult == null)throw (new Exception("Not all variables are assigned with values"));
+      if (tmpResult == null)throw (new Exception("Not all variables are assigned with values."));
 
     } else if (aTree.getRoot() instanceof Operator) {
 
@@ -75,7 +75,7 @@ public final class FormulaTreeUtil {
       } else if (tmpOperator.getOperatorType() == OperatorType.SQRT) {
 
         Double tmpRight = FormulaTreeUtil.EvaluateTree(aTree.getRightSon(), aVariableHashTable);
-        if (tmpRight < 0)  throw new Exception("sqrt can only be used with positive operands");
+        if (tmpRight < 0)  throw new Exception("sqrt() can only be used with positive operands.");
         tmpResult = Math.sqrt(tmpRight);
 
       } else if (tmpOperator.getOperatorType() == OperatorType.TAN) {
@@ -94,7 +94,7 @@ public final class FormulaTreeUtil {
             .EvaluateTree(aTree.getRightSon(), aVariableHashTable));
       }
     } else
-      throw (new Exception("Not possible to calculate the formula-tree."));
+      throw (new Exception("Not possible to calculate the formulaTree."));
 
     return tmpResult;
   }
@@ -181,7 +181,7 @@ public final class FormulaTreeUtil {
 
       if (aTreeToBeInserted == null) // the tree can´t be null! error case
       {
-        throw new Exception("Error in building the tree by reading the MathList");
+        throw new Exception("Error in building the tree by reading the MathList.");
       }
 
       // insert into Tree

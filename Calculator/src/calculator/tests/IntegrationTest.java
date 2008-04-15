@@ -1532,6 +1532,22 @@ public class IntegrationTest extends TestCase {
    assertTrue(tmpErrorOccurred);
  }
 
+
+ /**
+  * Test method for
+  * {@link calculator.utils.ConverterUtil#checkDecimalNumbers()}.
+  */
+ public void testCheckDecimalNumbers9() {
+   // negative test
+   boolean tmpErrorOccurred = false;
+   try {
+     ConverterUtil.termToStandardString(".999+7.5+23.2+3.5");
+   } catch (FormulaConversionException e) {
+     tmpErrorOccurred = true;
+   }
+   assertTrue(tmpErrorOccurred);
+ }
+
  /**
   * Test method for
   * {@link calculator.utils.ConverterUtil#insertMultiplicationOperators()}.

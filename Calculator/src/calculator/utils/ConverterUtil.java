@@ -6,9 +6,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- *
- * @author Tim, Tobias
- *
  */
 public class ConverterUtil {
 
@@ -190,7 +187,6 @@ public class ConverterUtil {
    * @throws IllegalArgumentException
    *             if there are operators directly beside each other like "*-",
    *             "+/", "+)" or "* /" ...
-   * @author Tobias
    */
   public static void checkOperators(String aFormula) throws IllegalArgumentException {
     Pattern tmpPattern;

@@ -12,8 +12,6 @@ import calculator.elements.Variable;
 import calculator.exceptions.IllegalInputStreamException;
 
 /**
- * @author Tobias
- *
  */
 public class MathUtil {
 
@@ -155,7 +153,6 @@ public class MathUtil {
   /**
    * method creates a float value based mathobj out of a given string
    *
-   * @author André
    * @param aNumberContainingString
    * @return MathObj
    */
@@ -171,7 +168,6 @@ public class MathUtil {
   /**
    * method creates a operator mathobj out of a given string
    *
-   * @author André
    * @param aOperatorContainingString
    * @return MathObj
    */
@@ -205,7 +201,6 @@ public class MathUtil {
    *
    * @param cVariable
    * @return MathObj
-   * @author André
    */
   public static MathObj buildVariableMathObject(char cVariable) {
     return new Variable(cVariable);
@@ -214,7 +209,6 @@ public class MathUtil {
   /**
    * method creates a mathobj list out of the form string
    *
-   * @author André
    * @return ArrayList of mathobj
    * @param aFormula
    *          sting which contains a formula containing string

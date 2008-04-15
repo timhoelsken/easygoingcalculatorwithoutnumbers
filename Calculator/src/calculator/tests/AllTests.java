@@ -9,8 +9,6 @@ import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 
 /**
- * @author Tobias
- *
  */
 public class AllTests extends TestCase {
 

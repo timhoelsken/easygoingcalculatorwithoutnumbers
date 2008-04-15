@@ -9,8 +9,6 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 
 /**
- * @author all
- *
  */
 public class StringConvertTest extends TestCase {
 

@@ -10,15 +10,12 @@ import calculator.utils.FormulaTreeUtil;
 import calculator.utils.MathUtil;
 
 /**
- * 
- * @author Tim
- * 
  */
 public class ConsoleCalculator {
 
   /**
    * The Calculator
-   * 
+   *
    * @param args
    */
   public static void start() {
@@ -54,7 +51,7 @@ public class ConsoleCalculator {
 
         ArrayList<String[]> tmpVariablesList = new ArrayList<String[]>();
         Hashtable<String, Double> tmpVariableDictionary = new Hashtable<String, Double>();
-        
+
         Tree tmpTree = null;
 
         // while the user has not chosen to quit entering formulas
@@ -130,7 +127,7 @@ public class ConsoleCalculator {
               try {
 
                 if (tmpTree == null){
-                  tmpTree = FormulaTreeUtil.BuildTree(tmpInputString);                  
+                  tmpTree = FormulaTreeUtil.BuildTree(tmpInputString);
                 }
 
                 System.out.println(FormulaTreeUtil.EvaluateTree(tmpTree, tmpVariableDictionary));
@@ -152,10 +149,10 @@ public class ConsoleCalculator {
                 tmpErrorOccuredInTerm = true;
               //}
               }
-              
+
               //TODO @all Wir sollten unsere Exceptions nochmal überdenken. Ich schlage folgende Exception Kategorien vor: "Syntatktischer Fehler" (z.B. 2+()**sin()), Rechenfehler " 2/0 ", Programmfehler (aufteilung nach ebenen: gui,mathutil,formelbaum). Braucht jemand noch mehr Kategorien für Fehler?
               //TODO fehlerbehandlung in der gui -> nach exceptions neuordnung
-              
+
               // if no error occured and the formula has variables, the user is asked if he wants to set another variable
               if (!tmpErrorOccuredInVariableInput && tmpFormulaHasVariables) {
 

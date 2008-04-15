@@ -1,15 +1,12 @@
 package calculator.userinterface;
 
 /**
- * 
- * @author Tim
- * 
  */
 public final class ConsoleOutput {
 
   /**
    * Prints the mainmenu on the screen
-   * 
+   *
    */
   public static void showMenu() {
 
@@ -23,7 +20,7 @@ public final class ConsoleOutput {
 
   /**
    * Prompts the user to type a term.
-   * 
+   *
    */
   public static void promptFormulaInput() {
     System.out.println("\nPlease enter a formula:\n");
@@ -31,7 +28,7 @@ public final class ConsoleOutput {
 
   /**
    * Prints the headline of the calculator
-   * 
+   *
    */
   public static void showTitle() {
     System.out.println(horizontalLine());
@@ -41,7 +38,7 @@ public final class ConsoleOutput {
 
   /**
    * Prints a standard error Message, containing the given errorMessage.
-   * 
+   *
    * @param anErrorMessage
    */
   public static void printError(String anErrorMessage) {
@@ -52,7 +49,7 @@ public final class ConsoleOutput {
 
   /**
    * Prints a line on the screen.
-   * 
+   *
    * @return A horizontal line with "-"
    */
   private static String horizontalLine() {
@@ -61,7 +58,7 @@ public final class ConsoleOutput {
 
   /**
    * Prints a help dialog on the screen.
-   * 
+   *
    */
   public static void showHelp() {
 
@@ -79,7 +76,7 @@ public final class ConsoleOutput {
   /**
    * A given result will be printed on the console, with a static prefix
    * sentance.
-   * 
+   *
    * @param anOutput
    */
   public static void showResultOnScreen(String anOutput) {
@@ -89,23 +86,23 @@ public final class ConsoleOutput {
 
   /**
    * Prints an errorMessage that the command could not be read.
-   * 
+   *
    */
   public static void unknownCommand() {
     System.out.println("\nThe entered command is unknown.\n\n");
   }
-  
+
   /**
    * Prints an errorMessage that the value must be a number.
-   * 
+   *
    */
   public static void invalidDouble() {
     System.out.println("\nThe entered value must be a number.\n\n");
   }
-  
+
   /**
    * Prints a message that the calculater is closed.
-   * 
+   *
    */
   public static void exitCalculator() {
     System.out.println("\nThe calculator is shut down.\n\n");
@@ -117,18 +114,18 @@ public final class ConsoleOutput {
   public static void promptVariableInput() {
     System.out.println("\nYour formula contains at least one variable. Please enter the value(s):\n");
   }
-  
+
   /**
    * Prints a question to enter new values for variable(s)
-   * 
+   *
    */
   public static void askAnotherVariableInput() {
     System.out.println("\nDo you like to enter other values for the variable(s)? (y / n)\n");
   }
-  
+
   /**
    * Prints a question to enter new formula
-   * 
+   *
    */
   public static void askAnotherFormulaInput() {
     System.out.println("\nDo you like to enter another formula? (y / n)\n");

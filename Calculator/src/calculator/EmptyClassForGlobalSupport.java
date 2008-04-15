@@ -1,7 +1,7 @@
 package calculator;
 
 /**
- * @author Tobias just to kill the warnings :P
+ * just to kill the warnings :P
  */
 public class EmptyClassForGlobalSupport {
 

@@ -10,8 +10,6 @@ import junit.textui.TestRunner;
 import calculator.utils.MathUtil;
 
 /**
- * @author Tobias
- *
  */
 public class MathUtilTest extends TestCase {
 

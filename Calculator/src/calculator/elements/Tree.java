@@ -98,8 +98,6 @@ public class Tree {
 
   /**
    * paints current tree on the console
-   *
-   * @author Tobias
    */
   public void paintMe() {
     int tmpDepth = FormulaTreeUtil.getDepth(this);

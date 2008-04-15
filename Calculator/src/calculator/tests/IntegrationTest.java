@@ -13,8 +13,6 @@ import calculator.utils.ConverterUtil;
 import calculator.utils.FormulaTreeUtil;
 
 /**
- * @author Tobias
- *
  */
 public class IntegrationTest extends TestCase {
 
@@ -121,7 +119,7 @@ public class IntegrationTest extends TestCase {
    * @throws Exception
    */
   public void testIteration0101() throws Exception {
-    
+
     boolean tmpErrorOccured = false;
 
     try {
@@ -277,9 +275,9 @@ public class IntegrationTest extends TestCase {
 
     assertEquals((double) 3.0, tmpResult);
   }
-  
-  
-  
+
+
+
 
   /**
    * test of iteration 0.3
@@ -326,7 +324,7 @@ public class IntegrationTest extends TestCase {
     }
     assertTrue(tmpErrorOccured);
   }
-  
+
 
   // Iteration 0.4
 
@@ -965,7 +963,7 @@ public class IntegrationTest extends TestCase {
 
     assertEquals((double) 2.0, tmpResult);
   }
-  
+
   /**
    * test of iteration 0.7
    *
@@ -983,7 +981,7 @@ public class IntegrationTest extends TestCase {
 
     assertEquals((double) 4.0, tmpResult);
   }
-  
+
   /**
    * test of iteration 0.7
    *

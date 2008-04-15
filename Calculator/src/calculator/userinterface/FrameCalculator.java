@@ -27,9 +27,6 @@ import calculator.utils.MathUtil;
 
 /**
  * This openes the calculator in a frame.
- *
- * @author Tim
- *
  */
 public class FrameCalculator extends JFrame {
 

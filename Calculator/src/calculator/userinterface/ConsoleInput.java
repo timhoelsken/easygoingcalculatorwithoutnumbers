@@ -5,9 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- *
- * @author Tim
- *
  */
 public final class ConsoleInput {
 

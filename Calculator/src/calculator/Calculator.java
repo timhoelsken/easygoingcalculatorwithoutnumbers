@@ -4,15 +4,14 @@ import calculator.userinterface.ConsoleCalculator;
 import calculator.userinterface.FrameCalculator;
 
 /**
- * 
- * @author Tim
- * 
+ *
+ *
  */
 public class Calculator {
 
   /**
    * Starts the calculator
-   * 
+   *
    * @param args
    */
   public static void main(String[] args) {

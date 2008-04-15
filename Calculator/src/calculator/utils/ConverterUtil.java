@@ -225,7 +225,7 @@ public class ConverterUtil {
       throw new IllegalArgumentException("The formula ends with an operator.");
     }
     // cases "+-", "*/" ...
-    tmpPattern = Pattern.compile("[\\+\\-\\*/\\^] *[\\+\\-\\*/\\^\\)]");
+    tmpPattern = Pattern.compile("[\\+\\-\\*/\\^][\\+\\-\\*/\\^\\)]");
     tmpMatcher = tmpPattern.matcher(aFormula);
     if (tmpMatcher.find()) {
       throw new IllegalArgumentException("The order of operators in the formula is not correct.");
@@ -304,8 +304,13 @@ public class ConverterUtil {
       }
     } while (tmpMatcher != null && tmpMatcher.find());
 
-    aFormula = aFormula.substring(0, aStartIndex) + "(" + aFormula.substring(aStartIndex, --i) + ")"
+    if (i != aFormula.length()) {
+	    aFormula = aFormula.substring(0, aStartIndex) + "(" + aFormula.substring(aStartIndex, --i) + ")"
+	        + aFormula.substring(i);
+    } else {
+    	aFormula = aFormula.substring(0, aStartIndex) + "(" + aFormula.substring(aStartIndex, i) + ")"
         + aFormula.substring(i);
+    }
     return aFormula;
   }
 

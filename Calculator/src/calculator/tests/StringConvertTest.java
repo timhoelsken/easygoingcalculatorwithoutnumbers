@@ -146,7 +146,7 @@ public class StringConvertTest extends TestCase {
     try {
       ConverterUtil.termToStandardString("-");
     } catch (Exception e) {
-      assertTrue("The formula ends with an operator.".equals(e.getMessage()));
+      assertTrue("The order of operators in the formula is not correct.".equals(e.getMessage()));
       tmpErrorOccured = true;
     }
     assertTrue("The String is not correct", tmpErrorOccured);

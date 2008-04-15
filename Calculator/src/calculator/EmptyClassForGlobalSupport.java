@@ -6,6 +6,7 @@ package calculator;
 public class EmptyClassForGlobalSupport {
 
   // comments by Raphael
+  //TODO wer tests schreibt für die util klassen der macht den selben test bitte auch einmal als integrationstest
 
   // comments by Tim
 

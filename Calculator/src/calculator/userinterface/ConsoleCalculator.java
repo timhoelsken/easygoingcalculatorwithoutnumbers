@@ -152,6 +152,7 @@ public class ConsoleCalculator {
 
               //TODO @all Wir sollten unsere Exceptions nochmal überdenken. Ich schlage folgende Exception Kategorien vor: "Syntatktischer Fehler" (z.B. 2+()**sin()), Rechenfehler " 2/0 ", Programmfehler (aufteilung nach ebenen: gui,mathutil,formelbaum). Braucht jemand noch mehr Kategorien für Fehler?
               //TODO fehlerbehandlung in der gui -> nach exceptions neuordnung
+              //TODO gut so?
 
               // if no error occured and the formula has variables, the user is asked if he wants to set another variable
               if (!tmpErrorOccuredInVariableInput && tmpFormulaHasVariables) {

@@ -225,7 +225,6 @@ public class IntegrationTest extends TestCase {
       Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("1+"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (FormulaConversionException e) {
-    	//TODO what kind of exception?
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);

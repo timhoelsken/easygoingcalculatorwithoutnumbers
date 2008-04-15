@@ -1,7 +1,6 @@
 package calculator.userinterface;
 
 import java.awt.BorderLayout;
-import java.awt.Dialog;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -21,9 +19,9 @@ import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 
 import calculator.elements.Tree;
+import calculator.utils.ActionListenerUtil;
 import calculator.utils.ConverterUtil;
 import calculator.utils.FormulaTreeUtil;
-import calculator.utils.MathUtil;
 
 /**
  * This openes the calculator in a frame.
@@ -34,6 +32,9 @@ public class FrameCalculator extends JFrame {
 
   // button to calculate formula
   private JButton buttonCalculateTerm = new JButton("calculate");
+
+  private CalculatorHelpDialog dialogHelpText = new CalculatorHelpDialog(this);
+  private CalculatorInfoDialog dialogInfoText = new CalculatorInfoDialog(this);
 
   // labels
   private JLabel labelCalculatorTitle = new JLabel("PSE III Calculator");
@@ -53,11 +54,13 @@ public class FrameCalculator extends JFrame {
   private JPanel panelCenter = new JPanel(new GridLayout(2, 1));
 
   // list and dictionary for variables
-  private static ArrayList<String[]> listOfVariables = new ArrayList<String[]>();
+  /**
+   * 
+   */
+  private ArrayList<String[]> listOfVariables = new ArrayList<String[]>();
   private static Hashtable<String, Double> dictionaryOfEnteredVariables = new Hashtable<String, Double>();
 
   // an array of textfields for dynamic variableinput
-  private JTextField[] inputFieldOfVariablesArray = new JTextField[0];
 
   // the formula entered by the user
   private String convertedFormula = new String("");
@@ -67,7 +70,8 @@ public class FrameCalculator extends JFrame {
   public static String calculatedFormula = new String("");
 
   // Variable Dialog
-  JDialog dialogEnterVariables = new JDialog();
+  // JDialog dialogEnterVariables = new JDialog();
+  private CalculatorVariableDialog dialogEnterVariables = new CalculatorVariableDialog(this);
   // TODO @Tim Dialog nicht benutzerfreundlich. Schmeiﬂt bei Zweiteingabe alle
   // Ersteingaben weg. Doof. :)
 
@@ -121,6 +125,9 @@ public class FrameCalculator extends JFrame {
     // add listener to calculateButton
     addCalculatorButtonListener(buttonCalculateTerm);
 
+    ActionListenerUtil.setMenuItemOpenDialogListener(menuItemHelp, dialogHelpText);
+    ActionListenerUtil.setMenuItemOpenDialogListener(menuItemInfo, dialogInfoText);
+
     // disable result textField
     textFormulaOutput.setEditable(false);
 
@@ -156,12 +163,6 @@ public class FrameCalculator extends JFrame {
         setVisible(false);
         dispose();
         System.exit(0);
-      }
-    });
-
-    menuItemHelp.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent ae) {
-        openHelpDialog();
       }
     });
 
@@ -233,7 +234,8 @@ public class FrameCalculator extends JFrame {
 
             listOfVariables = ConverterUtil.getVariables(convertedFormula);
 
-            openVariableDialog();
+            // openVariableDialog();
+            dialogEnterVariables.load(listOfVariables);
 
             // otherwise the formula is calculated directly
           } else {
@@ -247,7 +249,7 @@ public class FrameCalculator extends JFrame {
             // reset the list to avoid errors
             listOfVariables = new ArrayList<String[]>();
 
-            calculateFormula(convertedFormula);
+            calculateFormula(FrameCalculator.this);
           }
 
         } catch (Exception e) {
@@ -262,149 +264,19 @@ public class FrameCalculator extends JFrame {
   }
 
   /**
-   * Opens the additional frame to enter the variables
-   */
-  private void openVariableDialog() {
-
-    // define modal dialog
-    dialogEnterVariables = new JDialog(FrameCalculator.this, "Variable(s)", Dialog.ModalityType.DOCUMENT_MODAL);
-    dialogEnterVariables.setLocation(330, 330);
-    dialogEnterVariables.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    dialogEnterVariables.getContentPane().setLayout(new BorderLayout(10, 10));
-
-    // define Title
-    String tmpValue = "value";
-    String tmpVariable = "variable";
-    if (listOfVariables.size() > 1) {
-      tmpValue = tmpValue += "s";
-      tmpVariable = tmpVariable += "s";
-    }
-    JLabel tmpTitle = new JLabel("      Enter " + tmpValue + " of " + tmpVariable + ":      ");
-
-    // define button for proceeding variable input
-    JButton tmpButton = new JButton("Enter");
-
-    // define Panels for the button and dynamic variable input
-    JPanel tmpButtonPanel = new JPanel(new GridLayout(listOfVariables.size(), 1));
-    JPanel tmpPanelOfVariableLabels = new JPanel(new GridLayout(listOfVariables.size(), 1));
-    JPanel tmpPanelOfVariableTextFields = new JPanel(new GridLayout(listOfVariables.size(), 1));
-
-    // an arraylist in the size of variable number
-    JLabel[] tmpLabelsOfVariablesArray = new JLabel[listOfVariables.size()];
-
-    // the private attribute of the main frame is redimensioned to the size of
-    // variable number
-    inputFieldOfVariablesArray = new JTextField[listOfVariables.size()];
-
-    // each variable gets its Label and textField, which is centered
-    // horizontally and then put on the spezific panel
-    for (int i = 0; i < listOfVariables.size(); i++) {
-
-      // define label and textField
-      tmpLabelsOfVariablesArray[i] = new JLabel(listOfVariables.get(i)[0] + " = ");
-      inputFieldOfVariablesArray[i] = new JTextField(3);
-
-      // Er machts nicht richtig! :(
-      inputFieldOfVariablesArray[i].setSize(12, 30);
-
-      // allign elements
-      tmpLabelsOfVariablesArray[i].setHorizontalAlignment(JLabel.CENTER);
-      inputFieldOfVariablesArray[i].setHorizontalAlignment(JTextField.CENTER);
-
-      // put elements on panel
-      tmpPanelOfVariableLabels.add(tmpLabelsOfVariablesArray[i]);
-      tmpPanelOfVariableTextFields.add(inputFieldOfVariablesArray[i]);
-      tmpButtonPanel.add(tmpButton);
-    }
-
-    // add Variable listener to buttom
-    addVariableButtonListener(tmpButton);
-
-    // align elements
-    tmpTitle.setHorizontalAlignment(JLabel.CENTER);
-    tmpButton.setVerticalAlignment(JButton.NORTH);
-
-    // place label, textField, button on frame
-    dialogEnterVariables.getContentPane().add(BorderLayout.NORTH, tmpTitle);
-    dialogEnterVariables.getContentPane().add(BorderLayout.WEST, tmpPanelOfVariableLabels);
-    dialogEnterVariables.getContentPane().add(BorderLayout.CENTER, tmpPanelOfVariableTextFields);
-    dialogEnterVariables.getContentPane().add(BorderLayout.EAST, tmpButtonPanel);
-
-    // generate frame correctly
-    dialogEnterVariables.pack();
-
-    // select text in textField to enter a formula directly
-    dialogEnterVariables.setVisible(true);
-
-    // set the "Enter"-button as defaultButton to activate enter-functionality
-    dialogEnterVariables.getRootPane().setDefaultButton(tmpButton);
-
-    // disable resizing the dialog
-    dialogEnterVariables.setResizable(false);
-  }
-
-  /**
-   * Actionlistener for the variable input button
-   * 
-   * @param aButton
-   */
-  public void addVariableButtonListener(JButton aButton) {
-
-    aButton.addActionListener(new ActionListener() {
-
-      public void actionPerformed(ActionEvent ae) {
-
-        boolean tmpAllVariablesAreFloats = true;
-
-        // check if each variable is a float value and write the variables in
-        // the list
-        for (int i = 0; i < inputFieldOfVariablesArray.length; i++) {
-          if (MathUtil.isDouble(ConverterUtil.unifyCommas(inputFieldOfVariablesArray[i].getText()))) {
-            listOfVariables.get(i)[1] = ConverterUtil.unifyCommas(inputFieldOfVariablesArray[i].getText());
-          } else {
-            tmpAllVariablesAreFloats = false;
-            i = inputFieldOfVariablesArray.length;
-          }
-        }
-
-        // if everything is OK, the window is closed and the formula is
-        // calculated
-        if (tmpAllVariablesAreFloats) {
-          dialogEnterVariables.dispose();
-
-          // use the progressBar?
-          if (loadProgressBar) {
-            Thread tmpProgressBarThread = new ProgressBarThread(progressBar);
-            tmpProgressBarThread.start();
-          }
-          calculateFormula(convertedFormula);
-        } else {
-          String tmpValue = listOfVariables.size() > 1 ? "values" : "value";
-          JOptionPane.showMessageDialog(new JFrame(), "The entered " + tmpValue + " must be numeric.",
-              "An error occured!", JOptionPane.WARNING_MESSAGE);
-        }
-      }
-    });
-  }
-
-  private static void openHelpDialog() {
-    // TODO Display Help-Dialog
-
-  }
-
-  /**
    * calculates the formula
+   * @param aFrameCalculator 
    * 
    * @param aFormula
    */
-  public static void calculateFormula(String aFormula) {
+  public static void calculateFormula(FrameCalculator aFrameCalculator) {
 
     // puts the ArrayList into the dictionary
-    dictionaryOfEnteredVariables = ConverterUtil.putArrayListIntoHashtable(listOfVariables);
+    dictionaryOfEnteredVariables = ConverterUtil.putArrayListIntoHashtable(aFrameCalculator.getListOfVariables());
 
     // calculate!
     try {
-      Tree tmpTree = FormulaTreeUtil.BuildTree(aFormula);
+      Tree tmpTree = FormulaTreeUtil.BuildTree(aFrameCalculator.getConvertedFormula());
       calculatedFormula = "" + FormulaTreeUtil.EvaluateTree(tmpTree, dictionaryOfEnteredVariables);
       if (!loadProgressBar) {
         textFormulaOutput.setText(calculatedFormula);
@@ -420,5 +292,40 @@ public class FrameCalculator extends JFrame {
    */
   public static void showCalculation() {
     textFormulaOutput.setText(calculatedFormula);
+  }
+
+  /**
+   * @return the progressBar
+   */
+  public boolean getProgressBarStatus() {
+    return loadProgressBar;
+  }
+
+  /**
+   * @return the progressBar
+   */
+  public JProgressBar getProgressBar() {
+    return progressBar;
+  }
+
+  /**
+   * @return the progressBar
+   */
+  public String getConvertedFormula() {
+    return convertedFormula;
+  }
+
+  /**
+   * @return the listOfVariables
+   */
+  public ArrayList<String[]> getListOfVariables() {
+    return listOfVariables;
+  }
+
+  /**
+   * @param aListOfVariables the listOfVariables to set
+   */
+  public void setListOfVariables(ArrayList<String[]> aListOfVariables) {
+    listOfVariables = aListOfVariables;
   }
 }

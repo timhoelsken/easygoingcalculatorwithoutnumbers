@@ -70,6 +70,8 @@ public class FrameCalculator extends JFrame {
   JDialog dialogEnterVariables = new JDialog();
   //TODO @Tim Dialog nicht benutzerfreundlich. Schmeißt bei Zweiteingabe alle Ersteingaben weg. Doof. :)
 
+  //TODO @Tim noch was Benutzerunfreundliches: Man sieht beim Ergebnis nicht, welche Variablen man eingegeben hat.
+
   // == Menu Components ==
   private JMenuBar menuBarcalculator = new JMenuBar();
 
@@ -266,7 +268,13 @@ public class FrameCalculator extends JFrame {
     dialogEnterVariables.getContentPane().setLayout(new BorderLayout(10, 10));
 
     // define Title
-    JLabel tmpTitle = new JLabel("      Enter value(s) of variable(s):      ");
+    String tmpValue = "value";
+    String tmpVariable = "variable";
+    if (listOfVariables.size() > 1) {
+      tmpValue = tmpValue += "s";
+      tmpVariable = tmpVariable += "s";
+    }
+    JLabel tmpTitle = new JLabel("      Enter " + tmpValue + " of " + tmpVariable + ":      ");
 
     // define button for proceeding variable input
     JButton tmpButton = new JButton("Enter");
@@ -366,7 +374,8 @@ public class FrameCalculator extends JFrame {
           }
           calculateFormula(convertedFormula);
         } else {
-          JOptionPane.showMessageDialog(new JFrame(), "The entered value(s) must be numeric.",
+          String tmpValue = listOfVariables.size() > 1 ? "values" : "value";
+          JOptionPane.showMessageDialog(new JFrame(), "The entered " + tmpValue + " must be numeric.",
               "An error occured!", JOptionPane.WARNING_MESSAGE);
         }
       }

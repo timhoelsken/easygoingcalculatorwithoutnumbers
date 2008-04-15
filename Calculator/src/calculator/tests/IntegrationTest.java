@@ -128,8 +128,7 @@ public class IntegrationTest extends TestCase {
       String tmpString = ConverterUtil.termToStandardString("");
       Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
-    } catch (Exception e) {
-    	//TODO what kind of exception?
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
@@ -225,7 +224,7 @@ public class IntegrationTest extends TestCase {
     try {
       Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("1+"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
     	//TODO what kind of exception?
       tmpErrorOccured = true;
     }
@@ -323,7 +322,7 @@ public class IntegrationTest extends TestCase {
     try {
       Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("3+-2"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
@@ -344,7 +343,7 @@ public class IntegrationTest extends TestCase {
     try {
       Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("("));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
@@ -362,7 +361,7 @@ public class IntegrationTest extends TestCase {
     try {
       Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString(")"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
@@ -380,7 +379,7 @@ public class IntegrationTest extends TestCase {
     try {
       Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("()"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
@@ -398,7 +397,7 @@ public class IntegrationTest extends TestCase {
     try {
       Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("(1+1"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
@@ -416,7 +415,7 @@ public class IntegrationTest extends TestCase {
     try {
       Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("1+1)"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
@@ -434,7 +433,7 @@ public class IntegrationTest extends TestCase {
     try {
       Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("()1-1"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
@@ -452,7 +451,7 @@ public class IntegrationTest extends TestCase {
     try {
       Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("()+1"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
@@ -470,7 +469,7 @@ public class IntegrationTest extends TestCase {
     try {
       Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("()+1+1"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
@@ -488,7 +487,7 @@ public class IntegrationTest extends TestCase {
     try {
       Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("1()"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
@@ -506,7 +505,7 @@ public class IntegrationTest extends TestCase {
     try {
       Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("()1"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
@@ -524,7 +523,7 @@ public class IntegrationTest extends TestCase {
     try {
       Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("1()1+1)"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
@@ -542,7 +541,7 @@ public class IntegrationTest extends TestCase {
     try {
       Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString(")(1+3"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
@@ -602,7 +601,7 @@ public class IntegrationTest extends TestCase {
     try {
       Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("1/(1-1)"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
-    } catch (Exception e) {
+    } catch (CalculatingException e) {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
@@ -642,7 +641,7 @@ public class IntegrationTest extends TestCase {
     try {
       Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("x/0"));
       FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
-    } catch (Exception e) {
+    } catch (CalculatingException e) {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
@@ -702,7 +701,7 @@ public class IntegrationTest extends TestCase {
     try {
       Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("sin"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
@@ -720,7 +719,7 @@ public class IntegrationTest extends TestCase {
     try {
       Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("sin()"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
@@ -743,7 +742,7 @@ public class IntegrationTest extends TestCase {
     try {
       Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("sin)"));
       FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
@@ -810,7 +809,7 @@ public class IntegrationTest extends TestCase {
     try {
       Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("^"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
@@ -827,7 +826,7 @@ public class IntegrationTest extends TestCase {
     try {
       Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("2^"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
@@ -844,7 +843,7 @@ public class IntegrationTest extends TestCase {
     try {
       Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("^2"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
@@ -944,7 +943,7 @@ public class IntegrationTest extends TestCase {
     try {
       Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("sqrt(-4)"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
-    } catch (Exception e) {
+    } catch (CalculatingException e) {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);
@@ -1368,7 +1367,7 @@ public class IntegrationTest extends TestCase {
    boolean tmpErrorOccurred = false;
    try {
      ConverterUtil.termToStandardString("ä");
-   } catch (Exception e) {
+   } catch (FormulaConversionException e) {
      tmpErrorOccurred = true;
    }
    assertTrue(tmpErrorOccurred);
@@ -1383,7 +1382,7 @@ public class IntegrationTest extends TestCase {
    boolean tmpErrorOccurred = false;
    try {
      ConverterUtil.termToStandardString("()");
-   } catch (Exception e) {
+   } catch (FormulaConversionException e) {
      tmpErrorOccurred = true;
    }
    assertTrue(tmpErrorOccurred);
@@ -1411,7 +1410,7 @@ public class IntegrationTest extends TestCase {
    boolean tmpErrorOccurred = false;
    try {
      ConverterUtil.termToStandardString(",,dfa34.,.,.");
-   } catch (Exception e) {
+   } catch (FormulaConversionException e) {
      tmpErrorOccurred = true;
    }
    assertTrue(tmpErrorOccurred);
@@ -1443,7 +1442,7 @@ public class IntegrationTest extends TestCase {
 
    try {
      ConverterUtil.termToStandardString("5.6.3+34+2.0+100.9");
-   } catch (Exception e) {
+   } catch (FormulaConversionException e) {
      tmpErrorOccurred = true;
    }
    assertTrue(tmpErrorOccurred);
@@ -1458,7 +1457,7 @@ public class IntegrationTest extends TestCase {
    boolean tmpErrorOccurred = false;
    try {
      ConverterUtil.termToStandardString(".");
-   } catch (Exception e) {
+   } catch (FormulaConversionException e) {
      tmpErrorOccurred = true;
    }
    assertTrue(tmpErrorOccurred);
@@ -1473,7 +1472,7 @@ public class IntegrationTest extends TestCase {
    boolean tmpErrorOccurred = false;
    try {
      ConverterUtil.termToStandardString(".999+7");
-   } catch (Exception e) {
+   } catch (FormulaConversionException e) {
      tmpErrorOccurred = true;
    }
    assertTrue(tmpErrorOccurred);
@@ -1488,7 +1487,7 @@ public class IntegrationTest extends TestCase {
    boolean tmpErrorOccurred = false;
    try {
      ConverterUtil.termToStandardString("999+7.");
-   } catch (Exception e) {
+   } catch (FormulaConversionException e) {
      tmpErrorOccurred = true;
    }
    assertTrue(tmpErrorOccurred);
@@ -1546,7 +1545,7 @@ public class IntegrationTest extends TestCase {
    boolean tmpErrorOccurred = false;
    try {
      ConverterUtil.termToStandardString("+(23*55)");
-   } catch (Exception e) {
+   } catch (FormulaConversionException e) {
      tmpErrorOccurred = true;
    }
    assertTrue(tmpErrorOccurred);
@@ -1560,7 +1559,7 @@ public class IntegrationTest extends TestCase {
    boolean tmpErrorOccurred = false;
    try {
      ConverterUtil.termToStandardString("23+-99+9*8");
-   } catch (Exception e) {
+   } catch (FormulaConversionException e) {
      tmpErrorOccurred = true;
    }
    assertTrue(tmpErrorOccurred);
@@ -1574,7 +1573,7 @@ public class IntegrationTest extends TestCase {
    boolean tmpErrorOccurred = false;
    try {
      ConverterUtil.termToStandardString("23*(+99)");
-   } catch (Exception e) {
+   } catch (FormulaConversionException e) {
      tmpErrorOccurred = true;
    }
    assertTrue(tmpErrorOccurred);
@@ -1588,7 +1587,7 @@ public class IntegrationTest extends TestCase {
    boolean tmpErrorOccurred = false;
    try {
      ConverterUtil.termToStandardString("23*(2+99^)");
-   } catch (Exception e) {
+   } catch (FormulaConversionException e) {
      tmpErrorOccurred = true;
    }
    assertTrue(tmpErrorOccurred);
@@ -1602,7 +1601,7 @@ public class IntegrationTest extends TestCase {
    boolean tmpErrorOccurred = false;
    try {
      ConverterUtil.termToStandardString("23*(2+99)**2");
-   } catch (Exception e) {
+   } catch (FormulaConversionException e) {
      tmpErrorOccurred = true;
    }
    assertTrue(tmpErrorOccurred);
@@ -1616,7 +1615,7 @@ public class IntegrationTest extends TestCase {
    boolean tmpErrorOccurred = false;
    try {
      ConverterUtil.termToStandardString("3+5*");
-   } catch (Exception e) {
+   } catch (FormulaConversionException e) {
      tmpErrorOccurred = true;
    }
    assertTrue(tmpErrorOccurred);
@@ -1630,7 +1629,7 @@ public class IntegrationTest extends TestCase {
    boolean tmpErrorOccurred = false;
    try {
      ConverterUtil.termToStandardString("+e");
-   } catch (Exception e) {
+   } catch (FormulaConversionException e) {
      tmpErrorOccurred = true;
    }
    assertTrue(tmpErrorOccurred);
@@ -1644,7 +1643,7 @@ public class IntegrationTest extends TestCase {
    boolean tmpErrorOccurred = false;
    try {
      ConverterUtil.termToStandardString("^2");
-   } catch (Exception e) {
+   } catch (FormulaConversionException e) {
      tmpErrorOccurred = true;
    }
    assertTrue(tmpErrorOccurred);
@@ -1658,7 +1657,7 @@ public class IntegrationTest extends TestCase {
    boolean tmpErrorOccurred = false;
    try {
      ConverterUtil.termToStandardString("2*(*2)");
-   } catch (Exception e) {
+   } catch (FormulaConversionException e) {
      tmpErrorOccurred = true;
    }
    assertTrue(tmpErrorOccurred);
@@ -1735,7 +1734,7 @@ public class IntegrationTest extends TestCase {
    boolean tmpErrorOccurred = false;
    try {
      ConverterUtil.termToStandardString("-8+(-23.23434+-34)*-5+(-23^3)+(-1*(-2*(-5)))))+(-a+b)");
-   } catch (Exception e) {
+   } catch (FormulaConversionException e) {
      tmpErrorOccurred = true;
    }
    assertTrue(tmpErrorOccurred);
@@ -1763,7 +1762,7 @@ public class IntegrationTest extends TestCase {
    boolean tmpErrorOccurred = false;
    try {
      ConverterUtil.termToStandardString("-5)*(-2)+((-4)+5)");
-   } catch (Exception e) {
+   } catch (FormulaConversionException e) {
      tmpErrorOccurred = true;
    }
    assertTrue(tmpErrorOccurred);
@@ -1779,7 +1778,7 @@ public class IntegrationTest extends TestCase {
 
    try {
      ConverterUtil.termToStandardString("(-5)*-2+(-4)+5)");
-   } catch (Exception e) {
+   } catch (FormulaConversionException e) {
      tmpErrorOccurred = true;
    }
    assertTrue(tmpErrorOccurred);
@@ -1794,7 +1793,7 @@ public class IntegrationTest extends TestCase {
    boolean tmpErrorOccurred = false;
    try {
      ConverterUtil.termToStandardString("(-5)*(-2)+((-4)+-5)");
-   } catch (Exception e) {
+   } catch (FormulaConversionException e) {
      tmpErrorOccurred = true;
    }
    assertTrue(tmpErrorOccurred);
@@ -1823,7 +1822,7 @@ public class IntegrationTest extends TestCase {
    boolean tmpErrorOccurred = false;
    try {
      ConverterUtil.termToStandardString(")(((5+5+5+5)))");
-   } catch (Exception e) {
+   } catch (FormulaConversionException e) {
      tmpErrorOccurred = true;
    }
    assertTrue(tmpErrorOccurred);
@@ -1837,7 +1836,7 @@ public class IntegrationTest extends TestCase {
    boolean tmpErrorOccurred = false;
    try {
      ConverterUtil.termToStandardString("(((5+5+5+5))))");
-   } catch (Exception e) {
+   } catch (FormulaConversionException e) {
      tmpErrorOccurred = true;
    }
    assertTrue(tmpErrorOccurred);
@@ -1851,7 +1850,7 @@ public class IntegrationTest extends TestCase {
    boolean tmpErrorOccurred = false;
    try {
      ConverterUtil.termToStandardString("(((((5+5+5+5))))");
-   } catch (Exception e) {
+   } catch (FormulaConversionException e) {
      tmpErrorOccurred = true;
    }
    assertTrue(tmpErrorOccurred);

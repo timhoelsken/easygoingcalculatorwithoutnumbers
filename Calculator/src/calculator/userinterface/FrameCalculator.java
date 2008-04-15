@@ -68,6 +68,7 @@ public class FrameCalculator extends JFrame {
 
   // Variable Dialog
   JDialog dialogEnterVariables = new JDialog();
+  //TODO @Tim Dialog nicht benutzerfreundlich. Schmeiﬂt bei Zweiteingabe alle Ersteingaben weg. Doof. :)
 
   // == Menu Components ==
   private JMenuBar menuBarcalculator = new JMenuBar();

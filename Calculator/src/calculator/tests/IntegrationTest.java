@@ -1704,12 +1704,12 @@ public class IntegrationTest extends TestCase {
    tmpHashtable.put("a", new Double(1));
    tmpHashtable.put("b", new Double(-2));
 
-   String tmpString = ConverterUtil.termToStandardString("-8+(-23.23434+(-34))*(-5)+(-23^3)+(-1*(-2*(-5)))))+(-a+b)");
+   String tmpString = ConverterUtil.termToStandardString("-8+(-23.23434+(-34))*(-5)+(-23^3)+(-1*(-2*(-5)))+(-a+b)");
    Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
 
-   assertEquals((double) -11901.0, Math.floor(tmpResult));
+   assertEquals((double) -11902.0, Math.floor(tmpResult));
 
 
  }

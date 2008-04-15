@@ -248,6 +248,7 @@ public class ConverterUtil {
    * @return the bracked formula
    * @author Tobias
    */
+  //TODO @tobi , -55 = -(5)5
   public static String setBracketsAroundNegatives(String aFormula) {
 
     if (aFormula.length() > 0) {

@@ -497,6 +497,51 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
+   * {@link calculator.utils.ConverterUtil#checkDecimalNumbers()}.
+   */
+  public void testCheckDecimalNumbers6() {
+    // negative test
+    boolean tmpErrorOccurred = false;
+    try {
+      ConverterUtil.checkDecimalNumbers("7.a");
+    } catch (FormulaConversionException e) {
+      tmpErrorOccurred = true;
+    }
+    assertTrue(tmpErrorOccurred);
+  }
+
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#checkDecimalNumbers()}.
+   */
+  public void testCheckDecimalNumbers8() {
+    // negative test
+    boolean tmpErrorOccurred = false;
+    try {
+      ConverterUtil.checkDecimalNumbers("3.+2");
+    } catch (FormulaConversionException e) {
+      tmpErrorOccurred = true;
+    }
+    assertTrue(tmpErrorOccurred);
+  }
+
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#checkDecimalNumbers()}.
+   */
+  public void testCheckDecimalNumbers9() {
+    // negative test
+    boolean tmpErrorOccurred = false;
+    try {
+      ConverterUtil.checkDecimalNumbers("a.2");
+    } catch (FormulaConversionException e) {
+      tmpErrorOccurred = true;
+    }
+    assertTrue(tmpErrorOccurred);
+  }
+
+  /**
+   * Test method for
    * {@link calculator.utils.ConverterUtil#insertMultiplicationOperators()}.
    */
   public void testInsertMultiplicationOperators() {

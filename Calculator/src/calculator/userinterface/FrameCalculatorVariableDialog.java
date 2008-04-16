@@ -29,6 +29,7 @@ public class FrameCalculatorVariableDialog extends JDialog {
   private JLabel labelTitle = new JLabel("      Enter value(s) of variable(s):      ");
 
   private JButton buttonEnter = new JButton("Enter");
+  private JButton buttonCancel = new JButton("Cancel");
 
   private JPanel panelButton = new JPanel();
   private JPanel panelLabelsForVariable = new JPanel();
@@ -48,6 +49,7 @@ public class FrameCalculatorVariableDialog extends JDialog {
     getContentPane().setLayout(new BorderLayout(10, 10));
 
     ActionListenerUtil.setVariableCalculateListener(aParentFrame, this, buttonEnter);
+    ActionListenerUtil.putCancelListener(this, buttonCancel);
   }
 
   /**
@@ -92,6 +94,7 @@ public class FrameCalculatorVariableDialog extends JDialog {
       panelLabelsForVariable.add(labelsOfVariablesArray[i]);
       panelTextFieldsForVariables.add(inputFieldsOfVariablesArray[i]);
       panelButton.add(buttonEnter);
+      panelButton.add(buttonCancel);
     }
 
     // align elements

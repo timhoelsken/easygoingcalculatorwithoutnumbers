@@ -43,7 +43,7 @@ public class ConverterUtil {
 	// TODO @Tim abgespeckte standardString Conversion findest du hier:
 	/**
 	 * Method makes the parameter formula a GUI-standard term, that means
-	 * without spaces and without capital letters
+	 * without spaces, without capital letters and without wrong commas
 	 *
 	 * @param aFormula
 	 * @return the standard term
@@ -54,6 +54,7 @@ public class ConverterUtil {
 
 		aFormula = aFormula.toLowerCase();
 		aFormula = removeBlanks(aFormula);
+		aFormula = unifyCommas(aFormula);
 
 		return aFormula;
 	}

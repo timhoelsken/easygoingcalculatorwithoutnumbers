@@ -50,7 +50,6 @@ public class ProgressBarThread extends Thread {
     }
     progressBar.setString("100%");
 
-    //TODO ROFL
     // when finished, show the Result
     FrameCalculator.convertAndCalculate((FrameCalculator)progressBar.getParent().getParent().getParent().getParent().getParent());
   }

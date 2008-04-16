@@ -301,7 +301,7 @@ public class StringConvertTest extends TestCase {
    * @throws Exception
    */
   public void testTermToStandardString15() throws Exception {
-    // positive test
+    // negative test
     boolean tmpErrorOccured = false;
 	try {
       ConverterUtil.termToStandardString("4,7.2");
@@ -317,7 +317,8 @@ public class StringConvertTest extends TestCase {
    * @throws Exception
    */
   public void testTermToStandardString16() throws Exception {
-    // positive test
+    // negative test
+	//TODO @Tim/Raphi (who's first) - Check schlägt nicht fehl obwohl er sollte
     boolean tmpErrorOccured = false;
 	try {
       ConverterUtil.termToStandardString("2+32.a");

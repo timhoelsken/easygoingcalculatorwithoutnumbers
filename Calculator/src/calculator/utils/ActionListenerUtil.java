@@ -21,7 +21,7 @@ public class ActionListenerUtil {
 
   /**
    * Listener for closing a dialog with a button
-   * 
+   *
    * @param aDialog
    * @param aButton
    */
@@ -37,7 +37,7 @@ public class ActionListenerUtil {
 
   /**
    * Listener for opening a dialog via a menuItem
-   * 
+   *
    * @param aMenuItem
    * @param aDialog
    */
@@ -52,7 +52,7 @@ public class ActionListenerUtil {
 
   /**
    * Opens the dialog containing the drawn tree
-   * 
+   *
    * @param aMenuItem
    * @param aDialog
    * @param aParentFrame
@@ -70,7 +70,7 @@ public class ActionListenerUtil {
 
   /**
    * Listener to open the variable input dialog
-   * 
+   *
    * @param aDialogsParentFrame
    * @param aDialog
    * @param aButton
@@ -111,16 +111,13 @@ public class ActionListenerUtil {
           JOptionPane.showMessageDialog(new JFrame(), "The entered value(s) must be number(s).",
               "An error occured!", JOptionPane.WARNING_MESSAGE);
         }
-
-        aDialog.setVisible(false);
-        aDialog.dispose();
       }
     });
   }
 
   /**
    * Listener to start the calculation
-   * 
+   *
    * @param aParentFrame
    * @param aButton
    */
@@ -128,7 +125,7 @@ public class ActionListenerUtil {
     aButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent ae) {
 
-        
+
         // use the progressBar?
         if (FrameCalculator.isLoadProgressBar()) {
           Thread tmpProgressBarThread = new ProgressBarThread(aParentFrame);
@@ -143,7 +140,7 @@ public class ActionListenerUtil {
 
   /**
    * Listener to close the FrameCalculator
-   * 
+   *
    * @param aParentFrame
    * @param aMenuItem
    */
@@ -160,7 +157,7 @@ public class ActionListenerUtil {
 
   /**
    * Listener to activate / deactivate the progressbar
-   * 
+   *
    * @param aParentFrame
    * @param aMenuItem
    */
@@ -187,7 +184,7 @@ public class ActionListenerUtil {
 
   /**
    * Listener to show / hide the painted tree
-   * 
+   *
    * @param aParentFrame
    * @param aMenuItem
    */
@@ -205,11 +202,11 @@ public class ActionListenerUtil {
       }
     });
   }
-  
+
   /**
-   * @param aParentFrame 
-   * @param aButton 
-   * 
+   * @param aParentFrame
+   * @param aButton
+   *
    */
   public static void putCancelListener(final FrameCalculatorVariableDialog aParentFrame, JButton aButton){
     aButton.addActionListener(new ActionListener() {

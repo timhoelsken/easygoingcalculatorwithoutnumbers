@@ -296,6 +296,22 @@ public class StringConvertTest extends TestCase {
   }
 
   /**
+   * another new test :-)
+   *
+   * @throws Exception
+   */
+  public void testTermToStandardString15() throws Exception {
+    // positive test
+    boolean tmpErrorOccured = false;
+	try {
+      ConverterUtil.termToStandardString("4,7.2");
+    } catch (Exception e) {
+      tmpErrorOccured = true;
+    }
+    assertTrue("Two commas in one number.", tmpErrorOccured);
+  }
+
+  /**
    * @throws Exception
    */
   public void testTermToGUIStandardString14() throws Exception {

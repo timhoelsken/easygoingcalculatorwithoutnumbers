@@ -20,7 +20,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * tests the whole workflow
-   * 
+   *
    * @throws Exception
    */
   public void testCalculator1() throws Exception {
@@ -32,7 +32,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * tests the whole workflow
-   * 
+   *
    * @throws Exception
    */
   public void testCalculator2() throws Exception {
@@ -44,7 +44,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * tests the whole workflow
-   * 
+   *
    * @throws Exception
    */
   public void testCalculator3() throws Exception {
@@ -56,7 +56,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * tests the whole workflow with variables
-   * 
+   *
    * @throws Exception
    */
   public void testCalculator4() throws Exception {
@@ -71,7 +71,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * tests priority of operator ^
-   * 
+   *
    * @throws Exception
    */
   public void testCalculator5() throws Exception {
@@ -83,7 +83,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * tests priority of operator ^
-   * 
+   *
    * @throws Exception
    */
   public void testCalculator6() throws Exception {
@@ -95,7 +95,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * tests the whole workflow
-   * 
+   *
    * @throws Exception
    */
   public void testCalculator7() throws Exception {
@@ -111,13 +111,29 @@ public class IntegrationTest extends TestCase {
     assertTrue(tmpErrorOccured);
   }
 
+  /**
+   * tests the whole workflow with variables
+   *
+   * @throws Exception
+   */
+  public void testCalculator8() throws Exception {
+    String tmpString = ConverterUtil.termToStandardString("sin*sIN");
+    Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
+    tmpHashtable.put("s", new Double(3));
+    tmpHashtable.put("i", new Double(3));
+    tmpHashtable.put("n", new Double(3));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
+    double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
+    assertEquals((double) 729.0, tmpResult);
+  }
+
   // === Iteration Tests ===
 
   // Iteration 0.1 and 0.2
 
   /**
    * test of iterations 0.1 and 0.2
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0101() throws Exception {
@@ -136,7 +152,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iterations 0.1 and 0.2
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0102() throws Exception {
@@ -150,7 +166,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iterations 0.1 and 0.2
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0103() throws Exception {
@@ -166,7 +182,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iterations 0.1 and 0.2
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0104() throws Exception {
@@ -182,7 +198,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iterations 0.1 and 0.2
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0105() throws Exception {
@@ -198,7 +214,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iterations 0.1 and 0.2
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0106() throws Exception {
@@ -214,7 +230,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iterations 0.1 and 0.2
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0107() throws Exception {
@@ -232,7 +248,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iterations 0.1 and 0.2
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0108() throws Exception {
@@ -246,7 +262,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iterations 0.1 and 0.2
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0109() throws Exception {
@@ -266,7 +282,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.3
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0301() throws Exception {
@@ -280,7 +296,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.3
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0302() throws Exception {
@@ -294,7 +310,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.3
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0303() throws Exception {
@@ -308,7 +324,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.3
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0304() throws Exception {
@@ -328,7 +344,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0401() throws Exception {
@@ -346,7 +362,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0402() throws Exception {
@@ -364,7 +380,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0403() throws Exception {
@@ -382,7 +398,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0404() throws Exception {
@@ -400,7 +416,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0405() throws Exception {
@@ -418,7 +434,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0406() throws Exception {
@@ -436,7 +452,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0407() throws Exception {
@@ -454,7 +470,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0408() throws Exception {
@@ -472,7 +488,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0409() throws Exception {
@@ -490,7 +506,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0410() throws Exception {
@@ -508,7 +524,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0411() throws Exception {
@@ -526,7 +542,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0412() throws Exception {
@@ -544,7 +560,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0413() throws Exception {
@@ -558,7 +574,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0414() throws Exception {
@@ -572,7 +588,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0415() throws Exception {
@@ -586,7 +602,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0416() throws Exception {
@@ -606,7 +622,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.5 and 0.6
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0501() throws Exception {
@@ -623,7 +639,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.5 and 0.6
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0502() throws Exception {
@@ -644,7 +660,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.5 and 0.6
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0503() throws Exception {
@@ -661,7 +677,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.5 and 0.6
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0504() throws Exception {
@@ -686,7 +702,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0701() throws Exception {
@@ -706,7 +722,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0702() throws Exception {
@@ -724,7 +740,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0703() throws Exception {
@@ -747,7 +763,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0704() throws Exception {
@@ -769,7 +785,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0705() throws Exception {
@@ -783,7 +799,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0706() throws Exception {
@@ -797,7 +813,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0707() throws Exception {
@@ -814,7 +830,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0708() throws Exception {
@@ -831,7 +847,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0709() throws Exception {
@@ -848,7 +864,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0710() throws Exception {
@@ -862,7 +878,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0711() throws Exception {
@@ -879,7 +895,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0712() throws Exception {
@@ -896,7 +912,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0713() throws Exception {
@@ -913,7 +929,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0714() throws Exception {
@@ -930,7 +946,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0715() throws Exception {
@@ -948,7 +964,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0716() throws Exception {
@@ -966,7 +982,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0717() throws Exception {
@@ -984,7 +1000,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   * 
+   *
    * @throws Exception
    */
   public void testIteration0718() throws Exception {
@@ -999,7 +1015,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * positiv test
-   * 
+   *
    * @throws Exception
    */
   public void testPositiv001() throws Exception {
@@ -1013,7 +1029,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * positiv test
-   * 
+   *
    * @throws Exception
    */
   public void testPositiv002() throws Exception {
@@ -1027,7 +1043,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * positiv test
-   * 
+   *
    * @throws Exception
    */
   public void testPositiv003() throws Exception {
@@ -1041,7 +1057,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * positiv test
-   * 
+   *
    * @throws Exception
    */
   public void testPositiv004() throws Exception {
@@ -1055,7 +1071,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * positiv test
-   * 
+   *
    * @throws Exception
    */
   public void testPositiv005() throws Exception {
@@ -1069,7 +1085,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * positiv test
-   * 
+   *
    * @throws Exception
    */
   public void testPositiv006() throws Exception {
@@ -1084,7 +1100,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * positiv test
-   * 
+   *
    * @throws Exception
    */
   public void testPositiv007() throws Exception {
@@ -1101,7 +1117,7 @@ public class IntegrationTest extends TestCase {
    * Test method for
    * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
    * The three examples out of the "requirement"
-   * 
+   *
    * @throws Exception
    */
   public void testRequirements() throws Exception {
@@ -1144,7 +1160,7 @@ public class IntegrationTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testTermToStandardString1() throws Exception {
@@ -1164,7 +1180,7 @@ public class IntegrationTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testTermToStandardString2() throws Exception {
@@ -1180,7 +1196,7 @@ public class IntegrationTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testTermToStandardString4() throws Exception {
@@ -1203,7 +1219,7 @@ public class IntegrationTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testTermToStandardString7() throws Exception {
@@ -1221,7 +1237,7 @@ public class IntegrationTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testTermToStandardString8() throws Exception {
@@ -1240,7 +1256,7 @@ public class IntegrationTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testTermToStandardString9() throws Exception {
@@ -1260,7 +1276,7 @@ public class IntegrationTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testTermToStandardString10() throws Exception {
@@ -1278,7 +1294,7 @@ public class IntegrationTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testTermToStandardString11() throws Exception {
@@ -1298,7 +1314,7 @@ public class IntegrationTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testTermToStandardString12() throws Exception {
@@ -1314,7 +1330,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * a new test :-)
-   * 
+   *
    * @throws Exception
    */
   public void testTermToStandardString13() throws Exception {
@@ -1331,7 +1347,7 @@ public class IntegrationTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#insertMultiplicationOperators(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testCleanVariables() throws Exception {
@@ -1380,7 +1396,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * Test method for {@link calculator.utils.ConverterUtil#removeBlanks()}.
-   * 
+   *
    * @throws Exception
    */
   public void testRemoveBlanks() throws Exception {
@@ -1410,7 +1426,7 @@ public class IntegrationTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#checkDecimalNumbers()}.
-   * 
+   *
    * @throws Exception
    */
   public void testCheckDecimalNumbers1() throws Exception {
@@ -1548,7 +1564,7 @@ public class IntegrationTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#insertMultiplicationOperators()}.
-   * 
+   *
    * @throws Exception
    */
   public void testInsertMultiplicationOperators() throws Exception {
@@ -1577,7 +1593,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
-   * 
+   *
    * @throws Exception
    */
   public void testCheckOperators1() throws Exception {
@@ -1719,7 +1735,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
-   * 
+   *
    * @throws Exception
    */
   public void testCheckOperators11() throws Exception {
@@ -1734,7 +1750,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
-   * 
+   *
    * @throws Exception
    */
   public void testCheckOperators12() throws Exception {
@@ -1749,7 +1765,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
-   * 
+   *
    * @throws Exception
    */
   public void testCheckOperators13() throws Exception {
@@ -1764,7 +1780,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
-   * 
+   *
    * @throws Exception
    */
   public void testCheckOperators14() throws Exception {
@@ -1780,7 +1796,7 @@ public class IntegrationTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#setBracketsAroundNegativeNumbers()}.
-   * 
+   *
    * @throws Exception
    */
   public void testSetBracketsAroundNegativeNumbers1() throws Exception {
@@ -1816,7 +1832,7 @@ public class IntegrationTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#checkNegativeNumbers()}.
-   * 
+   *
    * @throws Exception
    */
   public void testCheckNegativeNumbers1() throws Exception {
@@ -1875,7 +1891,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * Test method for {@link calculator.utils.ConverterUtil#checkBrackets()}.
-   * 
+   *
    * @throws Exception
    */
   public void testCheckBrackets1() throws Exception {
@@ -1934,7 +1950,7 @@ public class IntegrationTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#changeFunctionsIntoSigns()}.
-   * 
+   *
    * @throws Exception
    */
   public void testChangeFunctionsIntoSigns() throws Exception {

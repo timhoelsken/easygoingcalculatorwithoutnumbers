@@ -33,9 +33,7 @@ public class FrameCalculator extends JFrame {
 	private FrameCalculatorHelpDialog dialogHelpText = new FrameCalculatorHelpDialog(this);
 	private FrameCalculatorInfoDialog dialogInfoText = new FrameCalculatorInfoDialog(this);
 	private FrameCalculatorTreeDialog dialogShowTree = new FrameCalculatorTreeDialog(this);
-	// TODO @Tim Dialog nicht benutzerfreundlich. Schmeiﬂt bei Zweiteingabe alle
-	// Ersteingaben weg. Doof. :)
-
+	
 	// sub panels
 	private JPanel panelBottom = new JPanel(new GridLayout(1, 2));
 	private JPanel panelCenter = new JPanel(new GridLayout(2, 1));
@@ -195,9 +193,6 @@ public class FrameCalculator extends JFrame {
       calculatedFormula = ""
           + FormulaTreeUtil.EvaluateTree(aFrameCalculator.getCalculatorTree(), dictionaryOfEnteredVariables);
 
-      aFrameCalculator.getTextTermInput().setText(
-          (ConverterUtil.termToGUIStandardString(aFrameCalculator.getTextTermInput().getText())));
-
       if (!loadProgressBar) {
         textFormulaOutput.setText(calculatedFormula);
       }
@@ -218,6 +213,8 @@ public class FrameCalculator extends JFrame {
 		try {
 			aParentFrame.setConvertedFormula(ConverterUtil.termToStandardString(aParentFrame.getTextTermInput().getText()));
 
+			aParentFrame.getTextTermInput().setText(
+		          (ConverterUtil.termToGUIStandardString(aParentFrame.getTextTermInput().getText())));
 			// if the formula has Variables, a new frame is opened
 			if (ConverterUtil.hasVariables(aParentFrame.getConvertedFormula())) {
 

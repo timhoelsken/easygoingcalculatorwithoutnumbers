@@ -99,47 +99,8 @@ public class Tree {
   /**
    * paints current tree on the console
    */
-  //TODO @Fehler: ich aktiviere die baumausgabe in der gui und gebe folgende formel ein : qwertzuiopasdfghjklyxcvbnm => absturz
   public void paintMe() {
-    int tmpDepth = FormulaTreeUtil.getDepth(this);
-    System.out.println("TreeDepth: " + tmpDepth);
-    System.out.println();
-    if (tmpDepth == 0) {
-      System.out.println("Tree is empty.");
-    } else {
-      int tmpLineWidth = ((int) Math.pow(2.0, tmpDepth - 1)) * 3;
-
-      String tmpRootValue = new String();
-      for (int i = 0; i < (tmpLineWidth / 2); i++) {
-        tmpRootValue += " ";
-      }
-      tmpRootValue += getRoot().toString();
-      System.out.println(tmpRootValue);
-      System.out.println();
-
-      if (tmpDepth > 1) {
-        String tmpOutput;
-        for (int i = 1; i < tmpDepth; i++) {
-          tmpOutput = new String();
-          int tmpExpectedObjects = (int) Math.pow(2.0, i);
-          for (int j = 1; j <= tmpExpectedObjects; j++) {
-            String tmpSpaces = new String();
-            for (int k = 0; k <= (tmpLineWidth / tmpExpectedObjects); k++) {
-              tmpSpaces += " ";
-            }
-            MathObj tmpMathObj = getMathObj(i, j);
-            if (tmpMathObj != null) {
-              String tmpObjValue = tmpMathObj.toString();
-              tmpOutput += ConverterUtil.centerStringInSpaces(tmpSpaces, tmpObjValue);
-            } else {
-              tmpOutput += ConverterUtil.centerStringInSpaces(tmpSpaces, "");
-            }
-          }
-          System.out.println(tmpOutput);
-          System.out.println();
-        }
-      }
-    }
+	  System.out.println(paintMeAsString());
   }
 
   /**
@@ -150,41 +111,46 @@ public class Tree {
   public String paintMeAsString() {
     String tmpPaintedTree = new String("");
     int tmpDepth = FormulaTreeUtil.getDepth(this);
-    tmpPaintedTree += "TreeDepth: " + tmpDepth + "\n";
-
-    if (tmpDepth == 0) {
-      tmpPaintedTree += "Tree is empty.";
+    int tmpMaximumDepth = 7;
+    if (tmpDepth > tmpMaximumDepth) {
+    	tmpPaintedTree = "Only trees with a depth < " + (tmpMaximumDepth + 1) + " are painted.";
     } else {
-      int tmpLineWidth = ((int) Math.pow(2.0, tmpDepth - 1)) * 3;
+	    tmpPaintedTree += "TreeDepth: " + tmpDepth + "\n";
 
-      String tmpRootValue = new String();
-      for (int i = 0; i < (tmpLineWidth / 2); i++) {
-        tmpRootValue += " ";
-      }
-      tmpRootValue += getRoot().toString();
-      tmpPaintedTree += tmpRootValue + "\n";
+	    if (tmpDepth == 0) {
+	      tmpPaintedTree += "Tree is empty.";
+	    } else {
+	      int tmpLineWidth = ((int) Math.pow(2.0, tmpDepth - 1)) * 3;
 
-      if (tmpDepth > 1) {
-        String tmpOutput;
-        for (int i = 1; i < tmpDepth; i++) {
-          tmpOutput = new String();
-          int tmpExpectedObjects = (int) Math.pow(2.0, i);
-          for (int j = 1; j <= tmpExpectedObjects; j++) {
-            String tmpSpaces = new String();
-            for (int k = 0; k <= (tmpLineWidth / tmpExpectedObjects); k++) {
-              tmpSpaces += " ";
-            }
-            MathObj tmpMathObj = getMathObj(i, j);
-            if (tmpMathObj != null) {
-              String tmpObjValue = tmpMathObj.toString();
-              tmpOutput += ConverterUtil.centerStringInSpaces(tmpSpaces, tmpObjValue);
-            } else {
-              tmpOutput += ConverterUtil.centerStringInSpaces(tmpSpaces, "");
-            }
-          }
-          tmpPaintedTree += tmpOutput + "\n";
-        }
-      }
+	      String tmpRootValue = new String();
+	      for (int i = 0; i < (tmpLineWidth / 2); i++) {
+	        tmpRootValue += " ";
+	      }
+	      tmpRootValue += getRoot().toString();
+	      tmpPaintedTree += tmpRootValue + "\n";
+
+	      if (tmpDepth > 1) {
+	        String tmpOutput;
+	        for (int i = 1; i < tmpDepth; i++) {
+	          tmpOutput = new String();
+	          int tmpExpectedObjects = (int) Math.pow(2.0, i);
+	          for (int j = 1; j <= tmpExpectedObjects; j++) {
+	            String tmpSpaces = new String();
+	            for (int k = 0; k <= (tmpLineWidth / tmpExpectedObjects); k++) {
+	              tmpSpaces += " ";
+	            }
+	            MathObj tmpMathObj = getMathObj(i, j);
+	            if (tmpMathObj != null) {
+	              String tmpObjValue = tmpMathObj.toString();
+	              tmpOutput += ConverterUtil.centerStringInSpaces(tmpSpaces, tmpObjValue);
+	            } else {
+	              tmpOutput += ConverterUtil.centerStringInSpaces(tmpSpaces, "");
+	            }
+	          }
+	          tmpPaintedTree += tmpOutput + "\n";
+	        }
+	      }
+	    }
     }
     return tmpPaintedTree;
   }

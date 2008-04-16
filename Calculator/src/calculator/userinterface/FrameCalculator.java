@@ -214,6 +214,9 @@ public class FrameCalculator extends JFrame {
 
 			aParentFrame.getTextTermInput().setText(
 		          (ConverterUtil.termToGUIStandardString(aParentFrame.getTextTermInput().getText())));
+			
+			FrameCalculator.textFormulaOutput.setText("");
+			
 			// if the formula has Variables, a new frame is opened
 			if (ConverterUtil.hasVariables(aParentFrame.getConvertedFormula())) {
 

@@ -128,6 +128,7 @@ public class ActionListenerUtil {
     aButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent ae) {
 
+        
         // use the progressBar?
         if (FrameCalculator.isLoadProgressBar()) {
           Thread tmpProgressBarThread = new ProgressBarThread(aParentFrame);

@@ -210,10 +210,10 @@ public class FrameCalculator extends JFrame {
 	public static void convertAndCalculate(FrameCalculator aParentFrame) {
 		// convert the user's input to standard string
 		try {
-			aParentFrame.setConvertedFormula(ConverterUtil.termToStandardString(aParentFrame.getTextTermInput().getText()));
+		  aParentFrame.getTextTermInput().setText(
+		      (ConverterUtil.termToGUIStandardString(aParentFrame.getTextTermInput().getText())));
 
-			aParentFrame.getTextTermInput().setText(
-		          (ConverterUtil.termToGUIStandardString(aParentFrame.getTextTermInput().getText())));
+		  aParentFrame.setConvertedFormula(ConverterUtil.termToStandardString(aParentFrame.getTextTermInput().getText()));
 			
 			FrameCalculator.textFormulaOutput.setText("");
 			

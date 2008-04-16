@@ -17,6 +17,8 @@ import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 
 import calculator.elements.Tree;
+import calculator.exceptions.CalculatingException;
+import calculator.exceptions.FormulaConversionException;
 import calculator.utils.ActionListenerUtil;
 import calculator.utils.ConverterUtil;
 import calculator.utils.FormulaTreeUtil;
@@ -33,7 +35,7 @@ public class FrameCalculator extends JFrame {
 	private FrameCalculatorHelpDialog dialogHelpText = new FrameCalculatorHelpDialog(this);
 	private FrameCalculatorInfoDialog dialogInfoText = new FrameCalculatorInfoDialog(this);
 	private FrameCalculatorTreeDialog dialogShowTree = new FrameCalculatorTreeDialog(this);
-	
+
 	// sub panels
 	private JPanel panelBottom = new JPanel(new GridLayout(1, 2));
 	private JPanel panelCenter = new JPanel(new GridLayout(2, 1));
@@ -199,7 +201,7 @@ public class FrameCalculator extends JFrame {
       if (displayTree) {
         aFrameCalculator.dialogShowTree.paintTree(aFrameCalculator);
       }
-    } catch (Exception e) {
+    } catch (CalculatingException e) {
       JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "An error occured!",
           JOptionPane.WARNING_MESSAGE);
     }
@@ -243,7 +245,7 @@ public class FrameCalculator extends JFrame {
 				FrameCalculator.calculateFormula(aParentFrame);
 			}
 
-		} catch (Exception e) {
+		} catch (FormulaConversionException e) {
 
 			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "An error occured!", JOptionPane.WARNING_MESSAGE);
 		}

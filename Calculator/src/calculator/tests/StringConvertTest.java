@@ -318,7 +318,6 @@ public class StringConvertTest extends TestCase {
    */
   public void testTermToStandardString16() throws Exception {
     // negative test
-	//TODO @Tim/Raphi (who's first) - Check schlägt nicht fehl obwohl er sollte
     boolean tmpErrorOccured = false;
 	try {
       ConverterUtil.termToStandardString("2+32.a");

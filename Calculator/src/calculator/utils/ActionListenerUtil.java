@@ -205,4 +205,19 @@ public class ActionListenerUtil {
       }
     });
   }
+  
+  /**
+   * @param aParentFrame 
+   * @param aButton 
+   * 
+   */
+  public static void putCancelListener(final FrameCalculatorVariableDialog aParentFrame, JButton aButton){
+    aButton.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent ae) {
+
+        aParentFrame.setVisible(false);
+        aParentFrame.dispose();
+      }
+    });
+  }
 }

@@ -712,8 +712,6 @@ public class IntegrationTest extends TestCase {
     try {
       Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("sin"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
-      // TODO @Raphi Test auf nullpointerexception wegen fehlender
-      // variablenwerte so gewollt?
     } catch (CalculatingException e) {
       tmpErrorOccured = true;
     }

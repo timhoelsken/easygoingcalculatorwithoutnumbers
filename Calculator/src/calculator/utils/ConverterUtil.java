@@ -18,7 +18,7 @@ public class ConverterUtil {
 	 * @param aFormula
 	 * @return the standard term
 	 * @throws FormulaConversionException
-	 *             if any checks fail
+	 *             if any check fails
 	 */
 	public static String termToStandardString(String aFormula) throws FormulaConversionException {
 

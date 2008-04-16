@@ -4,7 +4,7 @@ import calculator.utils.ConverterUtil;
 import calculator.utils.FormulaTreeUtil;
 
 /**
- * 
+ *
  */
 public class Tree {
   private MathObj root;
@@ -73,7 +73,7 @@ public class Tree {
 
   /**
    * constructor (sets both sons to NULL)
-   * 
+   *
    * @param aRoot
    */
   public Tree(MathObj aRoot) {
@@ -83,7 +83,7 @@ public class Tree {
 
   /**
    * constructor
-   * 
+   *
    * @param aRoot
    * @param aFather
    * @param aLeft
@@ -99,6 +99,7 @@ public class Tree {
   /**
    * paints current tree on the console
    */
+  //TODO @Fehler: ich aktiviere die baumausgabe in der gui und gebe folgende formel ein : qwertzuiopasdfghjklyxcvbnm => absturz
   public void paintMe() {
     int tmpDepth = FormulaTreeUtil.getDepth(this);
     System.out.println("TreeDepth: " + tmpDepth);
@@ -143,7 +144,7 @@ public class Tree {
 
   /**
    * paints current tree in a String
-   * 
+   *
    * @return a String containing a tree painted in chars
    */
   public String paintMeAsString() {

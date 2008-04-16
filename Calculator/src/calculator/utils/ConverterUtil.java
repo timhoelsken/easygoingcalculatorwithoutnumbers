@@ -46,10 +46,8 @@ public class ConverterUtil {
 	 *
 	 * @param aFormula
 	 * @return the standard term
-	 * @throws FormulaConversionException
-	 *             if any checks fail
 	 */
-	public static String termToGUIStandardString(String aFormula) throws FormulaConversionException {
+	public static String termToGUIStandardString(String aFormula) {
 
 		aFormula = aFormula.toLowerCase();
 		aFormula = removeBlanks(aFormula);

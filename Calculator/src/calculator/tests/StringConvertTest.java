@@ -317,11 +317,7 @@ public class StringConvertTest extends TestCase {
   public void testTermToGUIStandardString14() throws Exception {
     // positive test
     String tmpString = null;
-	try {
-      tmpString = ConverterUtil.termToGUIStandardString("Ya* aA+ B   - x");
-    } catch (FormulaConversionException e) {
-      assertTrue(false);
-    }
+    tmpString = ConverterUtil.termToGUIStandardString("Ya* aA+ B   - x");
     assertEquals("ya*aa+b-x", tmpString);
   }
 

@@ -18,7 +18,7 @@ import calculator.userinterface.ProgressBarThread;
  * @author Tim
  */
 public class ActionListenerUtil {
-
+	//TODO @Tim diese Klasse scheint mir sinnlos zu sein. Ich möchte doch die Listener in den Fenstern wo ich sie brauche. Für den closer mags noch Sinn machen, aber die fensterbezogenen Listener wie z.B. der Calculator in ne Util-Methode?? Versteh ich nicht.
   /**
    * Listener for closing a dialog with a button
    *

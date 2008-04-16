@@ -67,6 +67,7 @@ public class FrameCalculator extends JFrame {
 	// == Menu Components ==
 
 	// the progressbar :)
+	// TODO @Tim versuch mal mit progressbar ne formel mit variablen einzugeben. da is die reihenfolge noch was falsch
 	private JProgressBar progressBar = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
 
 	// define if a progressBar is loading and if a tree should be drawn

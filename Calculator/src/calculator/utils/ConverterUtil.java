@@ -40,7 +40,6 @@ public class ConverterUtil {
 		return aFormula;
 	}
 
-	// TODO @Tim abgespeckte standardString Conversion findest du hier:
 	/**
 	 * Method makes the parameter formula a GUI-standard term, that means
 	 * without spaces, without capital letters and without wrong commas

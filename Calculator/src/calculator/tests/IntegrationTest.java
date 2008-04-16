@@ -714,7 +714,7 @@ public class IntegrationTest extends TestCase {
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
       // TODO @Raphi Test auf nullpointerexception wegen fehlender
       // variablenwerte so gewollt?
-    } catch (NullPointerException e) {
+    } catch (CalculatingException e) {
       tmpErrorOccured = true;
     }
     assertTrue(tmpErrorOccured);

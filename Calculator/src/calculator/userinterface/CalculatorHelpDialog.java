@@ -20,12 +20,12 @@ public class CalculatorHelpDialog extends JDialog {
   private JTextArea textAreaContent = new JTextArea();
   private JButton buttonClose = new JButton("Close");
   /**
-   * 
+   *
    */
   private static final long serialVersionUID = 1L;
 
   /**
-   * 
+   *
    * @param aParentFrame
    */
   public CalculatorHelpDialog(JFrame aParentFrame) {
@@ -37,7 +37,7 @@ public class CalculatorHelpDialog extends JDialog {
     getContentPane().setLayout(new BorderLayout(10, 10));
 
     String tmpHelpTextContent = new String("");
-    tmpHelpTextContent = "How to use the calculator:\n" + "Enter the formula in the input field.\n"
+    tmpHelpTextContent = "How to use the calculator:\n" + "Enter a formula in the input field.\n"
         + "You can put in the following as part of the formula:\n\n"
         + "- real numbers (negative numbers have to be in brackets)\n" + "- operators \"+ - * \\ ^\"\n"
         + "- functions \"sin() cos() tan() sqrt()\"\n" + "- variables\n\n"

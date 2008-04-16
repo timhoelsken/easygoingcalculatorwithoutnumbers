@@ -189,20 +189,26 @@ public class FrameCalculator extends JFrame {
 		// puts the ArrayList into the dictionary
 		dictionaryOfEnteredVariables = ConverterUtil.putArrayListIntoHashtable(aFrameCalculator.getListOfVariables());
 
-		// calculate!
-		try {
-			aFrameCalculator.setCalculatorTree(FormulaTreeUtil.BuildTree(aFrameCalculator.getConvertedFormula()));
-			calculatedFormula = "" + FormulaTreeUtil.EvaluateTree(aFrameCalculator.getCalculatorTree(), dictionaryOfEnteredVariables);
-			if (!loadProgressBar) {
-				textFormulaOutput.setText(calculatedFormula);
-			}
-			if (displayTree) {
-				aFrameCalculator.dialogShowTree.paintTree(aFrameCalculator);
-			}
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "An error occured!", JOptionPane.WARNING_MESSAGE);
-		}
-	}
+    // calculate!
+    try {
+      aFrameCalculator.setCalculatorTree(FormulaTreeUtil.BuildTree(aFrameCalculator.getConvertedFormula()));
+      calculatedFormula = ""
+          + FormulaTreeUtil.EvaluateTree(aFrameCalculator.getCalculatorTree(), dictionaryOfEnteredVariables);
+
+      aFrameCalculator.getTextTermInput().setText(
+          (ConverterUtil.termToGUIStandardString(aFrameCalculator.getTextTermInput().getText())));
+
+      if (!loadProgressBar) {
+        textFormulaOutput.setText(calculatedFormula);
+      }
+      if (displayTree) {
+        aFrameCalculator.dialogShowTree.paintTree(aFrameCalculator);
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "An error occured!",
+          JOptionPane.WARNING_MESSAGE);
+    }
+  }
 
 	/**
 	 * @param aParentFrame
@@ -364,11 +370,19 @@ public class FrameCalculator extends JFrame {
 		return displayTree;
 	}
 
-	/**
-	 * @param aDisplayTree
-	 *            the displayTree to set
-	 */
-	public static void setDisplayTree(boolean aDisplayTree) {
-		displayTree = aDisplayTree;
-	}
+  /**
+   * @param aDisplayTree
+   *            the displayTree to set
+   */
+  public static void setDisplayTree(boolean aDisplayTree) {
+    displayTree = aDisplayTree;
+  }
+
+  /**
+   * @param aTextTermInput
+   *            the textTermInput to set
+   */
+  public void setTextTermInput(JTextField aTextTermInput) {
+    textTermInput = aTextTermInput;
+  }
 }

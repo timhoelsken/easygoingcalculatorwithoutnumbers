@@ -149,6 +149,9 @@ public class ConverterUtil {
 					if (!MathUtil.isNumber(aFormula.charAt(tmpCommaPosition - 1))) {
 						throw new FormulaConversionException("The formula contains invalid commas.");
 					}
+					if (tmpCommaPosition+1 >= aFormula.length() || !MathUtil.isNumber(aFormula.charAt(tmpCommaPosition +1))) {
+                      throw new FormulaConversionException("The formula contains invalid commas.");
+                    }
 					int i = tmpCommaPosition + 1;
 					while (i < aFormula.length() - 1 && MathUtil.isNumber(aFormula.charAt(i))) {
 						i++;

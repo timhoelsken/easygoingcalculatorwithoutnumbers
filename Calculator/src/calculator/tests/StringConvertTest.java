@@ -17,7 +17,7 @@ public class StringConvertTest extends TestCase {
    * Test method for
    * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
    * The three examples out of the "requirement"
-   * 
+   *
    * @throws Exception
    */
   public void testRequirements() throws Exception {
@@ -61,7 +61,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testTermToStandardString1() throws Exception {
@@ -74,7 +74,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testTermToStandardString2() throws Exception {
@@ -95,7 +95,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testTermToStandardString4() throws Exception {
@@ -115,7 +115,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testTermToStandardString5() throws Exception {
@@ -133,7 +133,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testTermToStandardString6() throws Exception {
@@ -151,7 +151,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testTermToStandardString7() throws Exception {
@@ -168,7 +168,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testTermToStandardString8() throws Exception {
@@ -187,7 +187,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testTermToStandardString9() throws Exception {
@@ -205,7 +205,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testTermToStandardString10() throws Exception {
@@ -223,7 +223,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testTermToStandardString11() throws Exception {
@@ -242,7 +242,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testTermToStandardString12() throws Exception {
@@ -260,7 +260,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * a new test :-)
-   * 
+   *
    * @throws Exception
    */
   public void testTermToStandardString13() throws Exception {
@@ -281,16 +281,32 @@ public class StringConvertTest extends TestCase {
 
   /**
    * another new test :-)
-   * 
+   *
    * @throws Exception
    */
   public void testTermToStandardString14() throws Exception {
     // positive test
-    try {
-      ConverterUtil.termToStandardString("sin(abc)+cos(abcd)+tan+tan(abc)+sqrt(23)");
+    String tmpString = null;
+	try {
+      tmpString = ConverterUtil.termToStandardString("sin(abc)+cos(abcd)+tan+tan(abc)+sqrt(23)");
     } catch (Exception e) {
       assertTrue(false);
     }
+    assertEquals("%(a*b*c)+~(a*b*c*d)+t*a*n+#(a*b*c)+&(23)", tmpString);
+  }
+
+  /**
+   * @throws Exception
+   */
+  public void testTermToGUIStandardString14() throws Exception {
+    // positive test
+    String tmpString = null;
+	try {
+      tmpString = ConverterUtil.termToGUIStandardString("Ya* aA+ B   - x");
+    } catch (Exception e) {
+      assertTrue(false);
+    }
+    assertEquals("ya*aa+b-x", tmpString);
   }
 
   /**

@@ -141,6 +141,53 @@ public class Tree {
     }
   }
 
+  /**
+   * paints current tree in a String
+   * 
+   * @return a String containing a tree painted in chars
+   */
+  public String paintMeAsString() {
+    String tmpPaintedTree = new String("");
+    int tmpDepth = FormulaTreeUtil.getDepth(this);
+    tmpPaintedTree += "TreeDepth: " + tmpDepth + "\n";
+
+    if (tmpDepth == 0) {
+      tmpPaintedTree += "Tree is empty.";
+    } else {
+      int tmpLineWidth = ((int) Math.pow(2.0, tmpDepth - 1)) * 3;
+
+      String tmpRootValue = new String();
+      for (int i = 0; i < (tmpLineWidth / 2); i++) {
+        tmpRootValue += " ";
+      }
+      tmpRootValue += getRoot().toString();
+      tmpPaintedTree += tmpRootValue + "\n";
+
+      if (tmpDepth > 1) {
+        String tmpOutput;
+        for (int i = 1; i < tmpDepth; i++) {
+          tmpOutput = new String();
+          int tmpExpectedObjects = (int) Math.pow(2.0, i);
+          for (int j = 1; j <= tmpExpectedObjects; j++) {
+            String tmpSpaces = new String();
+            for (int k = 0; k <= (tmpLineWidth / tmpExpectedObjects); k++) {
+              tmpSpaces += " ";
+            }
+            MathObj tmpMathObj = getMathObj(i, j);
+            if (tmpMathObj != null) {
+              String tmpObjValue = tmpMathObj.toString();
+              tmpOutput += ConverterUtil.centerStringInSpaces(tmpSpaces, tmpObjValue);
+            } else {
+              tmpOutput += ConverterUtil.centerStringInSpaces(tmpSpaces, "");
+            }
+          }
+          tmpPaintedTree += tmpOutput + "\n";
+        }
+      }
+    }
+    return tmpPaintedTree;
+  }
+
   private MathObj getMathObj(int aTargetLevel, int aTargetObject) {
     return getMathObj(aTargetLevel, aTargetObject, this);
   }

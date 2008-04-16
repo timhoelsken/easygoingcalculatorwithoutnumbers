@@ -15,9 +15,9 @@ import javax.swing.JTextField;
 import calculator.utils.ActionListenerUtil;
 
 /**
- * 
+ *
  * @author Tim
- * 
+ *
  */
 public class FrameCalculatorVariableDialog extends JDialog {
 
@@ -26,7 +26,7 @@ public class FrameCalculatorVariableDialog extends JDialog {
   private JTextField[] inputFieldsOfVariablesArray = new JTextField[0];
 
   private JLabel[] labelsOfVariablesArray = new JLabel[0];
-  private JLabel labelTitle = new JLabel("      Enter value(s) of variable(s):      ");
+  private JLabel labelTitle = new JLabel();
 
   private JButton buttonEnter = new JButton("Enter");
   private JButton buttonCancel = new JButton("Cancel");
@@ -37,7 +37,7 @@ public class FrameCalculatorVariableDialog extends JDialog {
 
   /**
    * The constructor
-   * 
+   *
    * @param aParentFrame
    */
   public FrameCalculatorVariableDialog(FrameCalculator aParentFrame) {
@@ -54,7 +54,7 @@ public class FrameCalculatorVariableDialog extends JDialog {
 
   /**
    * dynamically place the variable inputs on the dialog
-   * 
+   *
    * @param aListOfVariables
    */
   public void load(ArrayList<String[]> aListOfVariables) {
@@ -96,6 +96,14 @@ public class FrameCalculatorVariableDialog extends JDialog {
       panelButton.add(buttonEnter);
       panelButton.add(buttonCancel);
     }
+
+    String tmpValue = "value";
+    String tmpVariable = "variable";
+    if (inputFieldsOfVariablesArray.length > 1) {
+    	tmpValue += "s";
+    	tmpVariable += "s";
+    }
+    labelTitle.setText("      Enter " + tmpValue + " of " + tmpVariable + ":      ");
 
     // align elements
     labelTitle.setHorizontalAlignment(JLabel.CENTER);

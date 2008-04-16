@@ -83,9 +83,6 @@ public class FrameCalculator extends JFrame {
 	private String convertedFormula = new String("");
 	private static String calculatedFormula = new String("");
 
-	// TODO @Tim noch was Benutzerunfreundliches: Man sieht beim Ergebnis nicht,
-	// welche Variablen man eingegeben hat.
-
 	/**
 	 * the constructor of a FrameCalculator
 	 */

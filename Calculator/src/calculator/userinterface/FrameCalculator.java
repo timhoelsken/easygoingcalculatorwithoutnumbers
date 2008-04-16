@@ -82,6 +82,7 @@ public class FrameCalculator extends JFrame {
 	// the formula entered by the user
 	private String convertedFormula = new String("");
 	private static String calculatedFormula = new String("");
+	private static final String ERROR = "ERROR";
 
 	/**
 	 * the constructor of a FrameCalculator
@@ -186,23 +187,23 @@ public class FrameCalculator extends JFrame {
 		// puts the ArrayList into the dictionary
 		dictionaryOfEnteredVariables = ConverterUtil.putArrayListIntoHashtable(aFrameCalculator.getListOfVariables());
 
-    // calculate!
-    try {
-      aFrameCalculator.setCalculatorTree(FormulaTreeUtil.BuildTree(aFrameCalculator.getConvertedFormula()));
-      calculatedFormula = ""
-          + FormulaTreeUtil.EvaluateTree(aFrameCalculator.getCalculatorTree(), dictionaryOfEnteredVariables);
+		// calculate!
+		try {
+			aFrameCalculator.setCalculatorTree(FormulaTreeUtil.BuildTree(aFrameCalculator.getConvertedFormula()));
+			calculatedFormula = "" + FormulaTreeUtil.EvaluateTree(aFrameCalculator.getCalculatorTree(), dictionaryOfEnteredVariables);
 
-      if (!loadProgressBar) {
-        textFormulaOutput.setText(calculatedFormula);
-      }
-      if (displayTree) {
-        aFrameCalculator.dialogShowTree.paintTree(aFrameCalculator);
-      }
-    } catch (CalculatingException e) {
-      JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "An error occured!",
-          JOptionPane.WARNING_MESSAGE);
-    }
-  }
+			if (!loadProgressBar) {
+				textFormulaOutput.setText(calculatedFormula);
+			}
+			if (displayTree) {
+				aFrameCalculator.dialogShowTree.paintTree(aFrameCalculator);
+			}
+		} catch (CalculatingException e) {
+			calculatedFormula = ERROR;
+			showCalculation();
+			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "An error occured!", JOptionPane.WARNING_MESSAGE);
+		}
+	}
 
 	/**
 	 * @param aParentFrame
@@ -210,13 +211,13 @@ public class FrameCalculator extends JFrame {
 	public static void convertAndCalculate(FrameCalculator aParentFrame) {
 		// convert the user's input to standard string
 		try {
-		  aParentFrame.getTextTermInput().setText(
-		      (ConverterUtil.termToGUIStandardString(aParentFrame.getTextTermInput().getText())));
+			aParentFrame.getTextTermInput().setText((ConverterUtil.termToGUIStandardString(aParentFrame.getTextTermInput().getText())));
 
-		  aParentFrame.setConvertedFormula(ConverterUtil.termToStandardString(aParentFrame.getTextTermInput().getText()));
-			
+			aParentFrame.setConvertedFormula(ConverterUtil.termToStandardString(aParentFrame.getTextTermInput().getText()));
+
 			FrameCalculator.textFormulaOutput.setText("");
-			
+			calculatedFormula = "";
+
 			// if the formula has Variables, a new frame is opened
 			if (ConverterUtil.hasVariables(aParentFrame.getConvertedFormula())) {
 
@@ -244,12 +245,12 @@ public class FrameCalculator extends JFrame {
 
 				FrameCalculator.calculateFormula(aParentFrame);
 			}
-
+			showCalculation();
 		} catch (FormulaConversionException e) {
-
+			calculatedFormula = ERROR;
+			showCalculation();
 			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "An error occured!", JOptionPane.WARNING_MESSAGE);
 		}
-		showCalculation();
 	}
 
 	/**
@@ -369,19 +370,19 @@ public class FrameCalculator extends JFrame {
 		return displayTree;
 	}
 
-  /**
-   * @param aDisplayTree
-   *            the displayTree to set
-   */
-  public static void setDisplayTree(boolean aDisplayTree) {
-    displayTree = aDisplayTree;
-  }
+	/**
+	 * @param aDisplayTree
+	 *            the displayTree to set
+	 */
+	public static void setDisplayTree(boolean aDisplayTree) {
+		displayTree = aDisplayTree;
+	}
 
-  /**
-   * @param aTextTermInput
-   *            the textTermInput to set
-   */
-  public void setTextTermInput(JTextField aTextTermInput) {
-    textTermInput = aTextTermInput;
-  }
+	/**
+	 * @param aTextTermInput
+	 *            the textTermInput to set
+	 */
+	public void setTextTermInput(JTextField aTextTermInput) {
+		textTermInput = aTextTermInput;
+	}
 }

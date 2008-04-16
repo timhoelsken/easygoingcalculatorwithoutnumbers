@@ -13,22 +13,22 @@ import javax.swing.JTextArea;
 import calculator.utils.ActionListenerUtil;
 
 /**
- * 
+ *
  * @author Tim
- * 
+ *
  */
 public class FrameCalculatorInfoDialog extends JDialog {
 
   private JLabel labelTitle = new JLabel("Info:");
   private JTextArea textAreaContent = new JTextArea();
-  private JButton buttonClose = new JButton("Close"); 
+  private JButton buttonClose = new JButton("Close");
   /**
-   * 
+   *
    */
   private static final long serialVersionUID = 1L;
 
   /**
-   * 
+   *
    * @param aParentFrame
    */
   public FrameCalculatorInfoDialog(JFrame aParentFrame) {
@@ -41,10 +41,10 @@ public class FrameCalculatorInfoDialog extends JDialog {
 
     String tmpHelpTextContent = new String("");
     tmpHelpTextContent = "This formula calculator is brought to you by PSE III group 3:\n\n"+
-    "- André Wuthenow\n" +
-    "- Raphael Zimmer\n" +
     "- Tim Hölsken\n" +
-    "- Tobias Wörenkämper";
+    "- André Wuthenow\n" +
+    "- Tobias Wörenkämper\n" +
+    "- Raphael Zimmer";
 
     // define TextArea
     textAreaContent.setText(tmpHelpTextContent);

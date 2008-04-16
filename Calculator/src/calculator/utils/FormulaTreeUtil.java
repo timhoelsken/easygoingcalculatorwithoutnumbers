@@ -40,11 +40,10 @@ public final class FormulaTreeUtil {
       // number!
       tmpResult = ((NumberObj) aTree.getRoot()).getValue();
     } else if (aTree.getRoot() instanceof Variable) {
-
-      tmpResult = aVariableHashTable.get(Character.toString(((Variable) aTree.getRoot()).getValue()));
-      if (tmpResult == null)
-        throw (new CalculatingException("Not all variables are assigned with values."));
-
+      if (aVariableHashTable!=null && aVariableHashTable.containsKey(Character.toString(((Variable) aTree.getRoot()).getValue())))
+      {      
+        tmpResult = aVariableHashTable.get(Character.toString(((Variable) aTree.getRoot()).getValue()));
+      }else throw (new CalculatingException("Not all variables are assigned with values."));
     } else if (aTree.getRoot() instanceof Operator) {
 
       Operator tmpOperator = (Operator) aTree.getRoot();

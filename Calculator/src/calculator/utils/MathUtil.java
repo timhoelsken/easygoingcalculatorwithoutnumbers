@@ -212,7 +212,6 @@ public class MathUtil {
    * @return ArrayList of mathobj
    * @param aFormula
    *            sting which contains a formula containing string
-   * @todo Andre: Add support for negative numbers and brackets
    */
   public static ArrayList<Object> FormulaToArrayList(String aFormula) {
     ArrayList<Object> MathList = new ArrayList<Object>();
@@ -223,7 +222,7 @@ public class MathUtil {
     int iStartPosition = 0;
     int iEndPosition = 0;
     int iCounterLeftBracket;
-
+    
     while (iStartPosition < iLenOfString) {
       if ((MathUtil.isNumber(aFormula.charAt(iStartPosition)))) {
         iEndPosition = iStartPosition + 1;

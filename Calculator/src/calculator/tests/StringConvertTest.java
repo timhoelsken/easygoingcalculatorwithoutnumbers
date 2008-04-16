@@ -312,6 +312,22 @@ public class StringConvertTest extends TestCase {
   }
 
   /**
+   * another new test ...
+   *
+   * @throws Exception
+   */
+  public void testTermToStandardString16() throws Exception {
+    // positive test
+    boolean tmpErrorOccured = false;
+	try {
+      ConverterUtil.termToStandardString("2+32.a");
+    } catch (FormulaConversionException e) {
+      tmpErrorOccured = true;
+    }
+    assertTrue("Wrong comma.", tmpErrorOccured);
+  }
+
+  /**
    * @throws Exception
    */
   public void testTermToGUIStandardString14() throws Exception {

@@ -3,6 +3,7 @@ package calculator.userinterface;
 import javax.swing.JProgressBar;
 
 /**
+ * @author Tim
  */
 public class ProgressBarThread extends Thread {
 
@@ -12,22 +13,26 @@ public class ProgressBarThread extends Thread {
   private JProgressBar progressBar;
 
   /**
+   * The constructor
    * 
-   * @param bar
+   * @param aParentFrame
    */
-  public ProgressBarThread(JProgressBar bar) {
-    progressBar = bar;
+  public ProgressBarThread(FrameCalculator aParentFrame) {
+    progressBar = aParentFrame.getProgressBar();
   }
 
   /**
-   * 
+   * starts the "loading"
    */
   public void run() {
+
+    // is called by start() !!!
 
     // reset the progressBar
     progressBar.setValue(0);
     progressBar.setString("0%");
     progressBar.setStringPainted(true);
+
     // get min and max Values
     int minimum = progressBar.getMinimum();
     int maximum = progressBar.getMaximum();
@@ -44,7 +49,9 @@ public class ProgressBarThread extends Thread {
       }
     }
     progressBar.setString("100%");
+
+    //TODO ROFL
     // when finished, show the Result
-    FrameCalculator.showCalculation();
+    FrameCalculator.convertAndCalculate((FrameCalculator)progressBar.getParent().getParent().getParent().getParent().getParent());
   }
 }

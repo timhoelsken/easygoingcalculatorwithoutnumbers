@@ -2,8 +2,6 @@ package calculator.userinterface;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -30,11 +28,17 @@ public class FrameCalculator extends JFrame {
 
   private static final long serialVersionUID = -4971700820441624660L;
 
-  // button to calculate formula
-  private JButton buttonCalculateTerm = new JButton("calculate");
+  // dialogs
+  private FrameCalculatorVariableDialog dialogEnterVariables = new FrameCalculatorVariableDialog(this);
+  private FrameCalculatorHelpDialog dialogHelpText = new FrameCalculatorHelpDialog(this);
+  private FrameCalculatorInfoDialog dialogInfoText = new FrameCalculatorInfoDialog(this);
+  private FrameCalculatorTreeDialog dialogShowTree = new FrameCalculatorTreeDialog(this);
+  // TODO @Tim Dialog nicht benutzerfreundlich. Schmeißt bei Zweiteingabe alle
+  // Ersteingaben weg. Doof. :)
 
-  private CalculatorHelpDialog dialogHelpText = new CalculatorHelpDialog(this);
-  private CalculatorInfoDialog dialogInfoText = new CalculatorInfoDialog(this);
+  // sub panels
+  private JPanel panelBottom = new JPanel(new GridLayout(1, 2));
+  private JPanel panelCenter = new JPanel(new GridLayout(2, 1));
 
   // labels
   private JLabel labelCalculatorTitle = new JLabel("PSE III Calculator");
@@ -42,69 +46,48 @@ public class FrameCalculator extends JFrame {
   private JLabel labelResult = new JLabel("RESULT:");
 
   // input / output fields
-  private static JTextField textTermInput = new JTextField(16);
+  private JTextField textTermInput = new JTextField(16);
+  private static JTextField textFormulaOutput = new JTextField();
 
-  /**
-   * 
-   */
-  public static JTextField textFormulaOutput = new JTextField();
-
-  // sub panels
-  private JPanel panelBottom = new JPanel(new GridLayout(1, 2));
-  private JPanel panelCenter = new JPanel(new GridLayout(2, 1));
-
-  // list and dictionary for variables
-  /**
-   * 
-   */
-  private ArrayList<String[]> listOfVariables = new ArrayList<String[]>();
-  private static Hashtable<String, Double> dictionaryOfEnteredVariables = new Hashtable<String, Double>();
-
-  // an array of textfields for dynamic variableinput
-
-  // the formula entered by the user
-  private String convertedFormula = new String("");
-  /**
-   * 
-   */
-  public static String calculatedFormula = new String("");
-
-  // Variable Dialog
-  // JDialog dialogEnterVariables = new JDialog();
-  private CalculatorVariableDialog dialogEnterVariables = new CalculatorVariableDialog(this);
-  // TODO @Tim Dialog nicht benutzerfreundlich. Schmeißt bei Zweiteingabe alle
-  // Ersteingaben weg. Doof. :)
-
-  // TODO @Tim noch was Benutzerunfreundliches: Man sieht beim Ergebnis nicht,
-  // welche Variablen man eingegeben hat.
+  // button to calculate formula
+  private JButton buttonCalculateTerm = new JButton("calculate");
 
   // == Menu Components ==
   private JMenuBar menuBarcalculator = new JMenuBar();
 
   private JMenu menuFile = new JMenu("File");
-  private JMenu menuOptions = new JMenu("Options");
-  private JMenu menuHelp = new JMenu("Help");
+  private JMenu menuExtras = new JMenu("Extras");
+  private JMenu menuHelp = new JMenu("?");
 
   private JMenuItem menuItemExit = new JMenuItem("Exit");
-
   private JMenuItem menuItemProgressBar = new JMenuItem("Enable ProgressBar");
-
+  private JMenuItem menuItemShowTree = new JMenuItem("Show Tree");
   private JMenuItem menuItemHelp = new JMenuItem("Help");
   private JMenuItem menuItemInfo = new JMenuItem("Info");
-
   // == Menu Components ==
 
-  // define if a progressBar is loading
-  private static boolean loadProgressBar = false;
-
   // the progressbar :)
-  // TODO @Tim die läuft auch wenn beim Rechnen (z.B. Division durch 0) ein
-  // Fehler auftritt (gleichzeitig). Ich würde sagen, entweder vorher oder gar
-  // nicht. Lieber vorher. Da ist die Spannung größer :P
   private JProgressBar progressBar = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
 
+  // define if a progressBar is loading and if a tree should be drawn
+  private static boolean loadProgressBar = false;
+  private static boolean displayTree = false;
+
+  // list and dictionary for variables
+  private ArrayList<String[]> listOfVariables = new ArrayList<String[]>();
+  private static Hashtable<String, Double> dictionaryOfEnteredVariables = new Hashtable<String, Double>();
+
+  private Tree calculatorTree;
+
+  // the formula entered by the user
+  private String convertedFormula = new String("");
+  private static String calculatedFormula = new String("");
+
+  // TODO @Tim noch was Benutzerunfreundliches: Man sieht beim Ergebnis nicht,
+  // welche Variablen man eingegeben hat.
+
   /**
-   * the constructor
+   * the constructor of a FrameCalculator
    */
   public FrameCalculator() {
 
@@ -122,21 +105,36 @@ public class FrameCalculator extends JFrame {
     labelResult.setHorizontalAlignment(JLabel.LEFT);
     textFormulaOutput.setHorizontalAlignment(JTextField.CENTER);
 
-    // add listener to calculateButton
-    addCalculatorButtonListener(buttonCalculateTerm);
+    // define menu shortcuts
+    menuFile.setMnemonic('F');
+    menuItemExit.setMnemonic('E');
 
-    ActionListenerUtil.setMenuItemOpenDialogListener(menuItemHelp, dialogHelpText);
-    ActionListenerUtil.setMenuItemOpenDialogListener(menuItemInfo, dialogInfoText);
+    menuExtras.setMnemonic('E');
+    menuItemProgressBar.setMnemonic('P');
+    menuItemShowTree.setMnemonic('T');
 
-    // disable result textField
-    textFormulaOutput.setEditable(false);
+    menuHelp.setMnemonic('H');
+    menuItemHelp.setMnemonic('H');
+    menuItemInfo.setMnemonic('I');
+
+    // build menu
+    menuFile.add(menuItemExit);
+
+    menuExtras.add(menuItemProgressBar);
+    menuExtras.add(menuItemShowTree);
+
+    menuHelp.add(menuItemHelp);
+    menuHelp.add(menuItemInfo);
+
+    menuBarcalculator.add(menuFile);
+    menuBarcalculator.add(menuExtras);
+    menuBarcalculator.add(menuHelp);
 
     // place label and textField on panel
     panelBottom.add(labelResult);
     panelBottom.add(textFormulaOutput);
 
     panelCenter.add(textTermInput);
-    progressBar.setVisible(false);
     panelCenter.add(progressBar);
 
     // place labels, textField, button and panel on frame
@@ -146,145 +144,126 @@ public class FrameCalculator extends JFrame {
     getContentPane().add(BorderLayout.EAST, buttonCalculateTerm);
     getContentPane().add(BorderLayout.SOUTH, panelBottom);
 
-    // define menu shortcuts
-    menuFile.setMnemonic('F');
-    menuItemExit.setMnemonic('E');
-
-    menuOptions.setMnemonic('O');
-    menuItemProgressBar.setMnemonic('P');
-
-    menuHelp.setMnemonic('H');
-    menuItemHelp.setMnemonic('H');
-    menuItemInfo.setMnemonic('I');
-
-    // == ActionListener of the menu ==
-    menuItemExit.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent ae) {
-        setVisible(false);
-        dispose();
-        System.exit(0);
-      }
-    });
-
-    menuItemProgressBar.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent ae) {
-        if (loadProgressBar) {
-          loadProgressBar = false;
-          progressBar.setVisible(false);
-          menuItemProgressBar.setText("Enable ProgressBar");
-        } else {
-          loadProgressBar = true;
-          progressBar.setValue(0);
-          progressBar.setStringPainted(false);
-          progressBar.setVisible(true);
-          menuItemProgressBar.setText("Disable ProgressBar");
-        }
-        repaint();
-      }
-    });
-
-    // == ActionListener of the menu ==
-
-    // build menu
-    menuFile.add(menuItemExit);
-
-    menuOptions.add(menuItemProgressBar);
-
-    menuHelp.add(menuItemHelp);
-    menuHelp.add(menuItemInfo);
-
-    menuBarcalculator.add(menuFile);
-    menuBarcalculator.add(menuOptions);
-    menuBarcalculator.add(menuHelp);
-
     // place menu on the frame
     setJMenuBar(menuBarcalculator);
+
+    // add listeners
+    ActionListenerUtil.putCalculateFormulaListener(this, buttonCalculateTerm);
+    ActionListenerUtil.putMenuItemOpenDialogListener(menuItemHelp, dialogHelpText);
+    ActionListenerUtil.putMenuItemOpenDialogListener(menuItemInfo, dialogInfoText);
+    // == ActionListener of the menu ==
+    ActionListenerUtil.putFrameCalculatorCloseListener(this, menuItemExit);
+    ActionListenerUtil.putProgressBarActivateListener(this, menuItemProgressBar);
+    ActionListenerUtil.putShowTreeActivateListener(this, menuItemShowTree);
+    // == ActionListener of the menu ==
 
     // generate frame correctly
     pack();
 
-    // select text in textField to enter a formula directly
-    textTermInput.selectAll();
+    // focus on textField to enter a formula directly
+    textTermInput.setFocusable(true);
+
+    // set progressBar invisible by default
+    progressBar.setVisible(false);
 
     // set the "Calculate"-button as defaultButton to activate
     // enter-functionality
     getRootPane().setDefaultButton(buttonCalculateTerm);
+
+    // disable result textField
+    textFormulaOutput.setEditable(false);
 
     // disable resizing the frame
     setResizable(false);
   }
 
   /**
-   * Actionlistener for the calculator button
-   * 
-   * @param aButton
-   */
-  private void addCalculatorButtonListener(JButton aButton) {
-
-    aButton.addActionListener(new ActionListener() {
-
-      public void actionPerformed(ActionEvent ae) {
-
-        // convert the user's input to standard string
-        try {
-          convertedFormula = ConverterUtil.termToStandardString(textTermInput.getText());
-
-          // if the formula has Variables, a new frame is opened
-          if (ConverterUtil.hasVariables(convertedFormula)) {
-
-            listOfVariables = ConverterUtil.getVariables(convertedFormula);
-
-            // openVariableDialog();
-            dialogEnterVariables.load(listOfVariables);
-
-            // otherwise the formula is calculated directly
-          } else {
-
-            // use the progressBar?
-            if (loadProgressBar) {
-              Thread tmpProgressBarThread = new ProgressBarThread(progressBar);
-              tmpProgressBarThread.start();
-            }
-
-            // reset the list to avoid errors
-            listOfVariables = new ArrayList<String[]>();
-
-            calculateFormula(FrameCalculator.this);
-          }
-
-        } catch (Exception e) {
-
-          JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "An error occured!",
-              JOptionPane.WARNING_MESSAGE);
-        }
-
-      }
-
-    });
-  }
-
-  /**
    * calculates the formula
-   * @param aFrameCalculator 
+   * 
+   * @param aFrameCalculator
    * 
    * @param aFormula
    */
   public static void calculateFormula(FrameCalculator aFrameCalculator) {
 
     // puts the ArrayList into the dictionary
-    dictionaryOfEnteredVariables = ConverterUtil.putArrayListIntoHashtable(aFrameCalculator.getListOfVariables());
+    dictionaryOfEnteredVariables = ConverterUtil.putArrayListIntoHashtable(aFrameCalculator
+        .getListOfVariables());
 
     // calculate!
     try {
-      Tree tmpTree = FormulaTreeUtil.BuildTree(aFrameCalculator.getConvertedFormula());
-      calculatedFormula = "" + FormulaTreeUtil.EvaluateTree(tmpTree, dictionaryOfEnteredVariables);
+      aFrameCalculator.setCalculatorTree(FormulaTreeUtil.BuildTree(aFrameCalculator.getConvertedFormula()));
+      calculatedFormula = ""
+          + FormulaTreeUtil.EvaluateTree(aFrameCalculator.getCalculatorTree(), dictionaryOfEnteredVariables);
       if (!loadProgressBar) {
         textFormulaOutput.setText(calculatedFormula);
+      }
+      if (displayTree) {
+        aFrameCalculator.dialogShowTree.paintTree(aFrameCalculator);
       }
     } catch (Exception e) {
       JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "An error occured!",
           JOptionPane.WARNING_MESSAGE);
     }
+  }
+
+  /**
+   * @param aParentFrame
+   */
+  public static void convertAndCalculate(FrameCalculator aParentFrame) {
+    // convert the user's input to standard string
+    try {
+      aParentFrame.setConvertedFormula(ConverterUtil.termToStandardString(aParentFrame.getTextTermInput()
+          .getText()));
+
+      // if the formula has Variables, a new frame is opened
+      if (ConverterUtil.hasVariables(aParentFrame.getConvertedFormula())) {
+
+        // TODO @Tobi der Reset der Variablen geschieht hier! Damit die
+        // Daten erhalten bleiben muss der Code HIER geändert werden
+        aParentFrame.setListOfVariables(ConverterUtil.getVariables(aParentFrame.getConvertedFormula()));
+
+        // openVariableDialog();
+        aParentFrame.getDialogEnterVariables().load(aParentFrame.getListOfVariables());
+
+        // otherwise the formula is calculated directly
+      } else {
+
+        // reset the list to avoid errors
+        aParentFrame.setListOfVariables(new ArrayList<String[]>());
+
+        FrameCalculator.calculateFormula(aParentFrame);
+      }
+
+    } catch (Exception e) {
+
+      JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "An error occured!",
+          JOptionPane.WARNING_MESSAGE);
+    }
+    showCalculation();
+  }
+
+  /**
+   * @return the calculatedFormula
+   */
+  public static String getCalculatedFormula() {
+    return calculatedFormula;
+  }
+
+  /**
+   * @param aCalculatedFormula
+   *            the calculatedFormula to set
+   */
+  public static void setCalculatedFormula(String aCalculatedFormula) {
+    calculatedFormula = aCalculatedFormula;
+  }
+
+  /**
+   * @param aConvertedFormula
+   *            the convertedFormula to set
+   */
+  public void setConvertedFormula(String aConvertedFormula) {
+    convertedFormula = aConvertedFormula;
   }
 
   /**
@@ -323,9 +302,69 @@ public class FrameCalculator extends JFrame {
   }
 
   /**
-   * @param aListOfVariables the listOfVariables to set
+   * @param aListOfVariables
+   *            the listOfVariables to set
    */
   public void setListOfVariables(ArrayList<String[]> aListOfVariables) {
     listOfVariables = aListOfVariables;
+  }
+
+  /**
+   * @return the calculatorTree
+   */
+  public Tree getCalculatorTree() {
+    return calculatorTree;
+  }
+
+  /**
+   * @param aCalculatorTree
+   *            the calculatorTree to set
+   */
+  public void setCalculatorTree(Tree aCalculatorTree) {
+    calculatorTree = aCalculatorTree;
+  }
+
+  /**
+   * @return the textTermInput
+   */
+  public JTextField getTextTermInput() {
+    return textTermInput;
+  }
+
+  /**
+   * @return the dialogEnterVariables
+   */
+  public FrameCalculatorVariableDialog getDialogEnterVariables() {
+    return dialogEnterVariables;
+  }
+
+  /**
+   * @return the loadProgressBar
+   */
+  public static boolean isLoadProgressBar() {
+    return loadProgressBar;
+  }
+
+  /**
+   * @param aLoadProgressBar
+   *            the loadProgressBar to set
+   */
+  public static void setLoadProgressBar(boolean aLoadProgressBar) {
+    loadProgressBar = aLoadProgressBar;
+  }
+
+  /**
+   * @return the displayTree
+   */
+  public static boolean isDisplayTree() {
+    return displayTree;
+  }
+
+  /**
+   * @param aDisplayTree
+   *            the displayTree to set
+   */
+  public static void setDisplayTree(boolean aDisplayTree) {
+    displayTree = aDisplayTree;
   }
 }

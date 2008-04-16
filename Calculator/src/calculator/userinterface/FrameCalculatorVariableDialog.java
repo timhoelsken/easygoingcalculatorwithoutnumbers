@@ -19,60 +19,54 @@ import calculator.utils.ActionListenerUtil;
  * @author Tim
  * 
  */
-public class CalculatorVariableDialog extends JDialog {
+public class FrameCalculatorVariableDialog extends JDialog {
 
-  /**
-   * 
-   */
   private static final long serialVersionUID = 1L;
-  
-  /**
-   * 
-   */
-  public JTextField[] inputFieldsOfVariablesArray = new JTextField[0];
-  /**
-   * 
-   */
-  public JLabel[] labelsOfVariablesArray = new JLabel[0];
-  
+
+  private JTextField[] inputFieldsOfVariablesArray = new JTextField[0];
+
+  private JLabel[] labelsOfVariablesArray = new JLabel[0];
   private JLabel labelTitle = new JLabel("      Enter value(s) of variable(s):      ");
+
   private JButton buttonEnter = new JButton("Enter");
 
   private JPanel panelButton = new JPanel();
   private JPanel panelLabelsForVariable = new JPanel();
   private JPanel panelTextFieldsForVariables = new JPanel();
-  
+
   /**
+   * The constructor
    * 
    * @param aParentFrame
    */
-  public CalculatorVariableDialog(FrameCalculator aParentFrame) {
+  public FrameCalculatorVariableDialog(FrameCalculator aParentFrame) {
+
     // define modal dialog
     super(aParentFrame, "Variable(s)", Dialog.ModalityType.DOCUMENT_MODAL);
     setLocation(330, 330);
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     getContentPane().setLayout(new BorderLayout(10, 10));
-    
+
     ActionListenerUtil.setVariableCalculateListener(aParentFrame, this, buttonEnter);
-
-    
-
   }
-  
+
   /**
+   * dynamically place the variable inputs on the dialog
    * 
    * @param aListOfVariables
    */
-  public void load(ArrayList<String[]> aListOfVariables){
-    
- // define Panels for the button and dynamic variable input
+  public void load(ArrayList<String[]> aListOfVariables) {
+
+    // define Panels for the button and dynamic variable input
     panelButton = new JPanel(new GridLayout(aListOfVariables.size(), 1));
     panelLabelsForVariable = new JPanel(new GridLayout(aListOfVariables.size(), 1));
     panelTextFieldsForVariables = new JPanel(new GridLayout(aListOfVariables.size(), 1));
-    
- // an arraylist in the size of variable number
+
+    // an arraylist in the size of variable number
     labelsOfVariablesArray = new JLabel[aListOfVariables.size()];
- // the private attribute of the main frame is redimensioned to the size of
+
+    // the private attribute of the FrameCalculator is redimensioned to the size
+    // of
     // variable number
     inputFieldsOfVariablesArray = new JTextField[aListOfVariables.size()];
 
@@ -84,8 +78,11 @@ public class CalculatorVariableDialog extends JDialog {
       labelsOfVariablesArray[i] = new JLabel(aListOfVariables.get(i)[0] + " = ");
       inputFieldsOfVariablesArray[i] = new JTextField(3);
 
-      // Er machts nicht richtig! :(
-      inputFieldsOfVariablesArray[i].setSize(12, 30);
+      if (aListOfVariables.get(i)[1] != null) {
+        inputFieldsOfVariablesArray[i].setText(aListOfVariables.get(i)[1]);
+      } else {
+        inputFieldsOfVariablesArray[i].setText("");
+      }
 
       // allign elements
       labelsOfVariablesArray[i].setHorizontalAlignment(JLabel.CENTER);
@@ -96,28 +93,37 @@ public class CalculatorVariableDialog extends JDialog {
       panelTextFieldsForVariables.add(inputFieldsOfVariablesArray[i]);
       panelButton.add(buttonEnter);
     }
-    
- // align elements
+
+    // align elements
     labelTitle.setHorizontalAlignment(JLabel.CENTER);
     buttonEnter.setVerticalAlignment(JButton.NORTH);
 
-     // set the "Enter"-button as defaultButton to activate enter-functionality
+    // set the "Enter"-button as defaultButton to activate enter-functionality
     getRootPane().setDefaultButton(buttonEnter);
 
-    
-    
- // place label, textField, button on frame
+    // reset the dialog to avoid errors
+    getContentPane().removeAll();
+
+    // place label, textField, button on frame
     getContentPane().add(BorderLayout.NORTH, labelTitle);
     getContentPane().add(BorderLayout.WEST, panelLabelsForVariable);
     getContentPane().add(BorderLayout.CENTER, panelTextFieldsForVariables);
     getContentPane().add(BorderLayout.EAST, panelButton);
-    
- // generate frame correctly
+
+    // generate frame correctly
     pack();
 
- // disable resizing the dialog
+    // disable resizing the dialog
     setResizable(false);
+
     setVisible(true);
+  }
+
+  /**
+   * @return the inputFieldsOfVariablesArray
+   */
+  public JTextField[] getInputFieldsOfVariablesArray() {
+    return inputFieldsOfVariablesArray;
   }
 
 }

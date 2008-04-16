@@ -26,7 +26,7 @@ public class StringConvertTest extends TestCase {
 
     try {
       tmpConvertedString = ConverterUtil.termToStandardString("(3x + 5) * 15");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
 
@@ -38,7 +38,7 @@ public class StringConvertTest extends TestCase {
 
     try {
       tmpConvertedString = ConverterUtil.termToStandardString("x^2 + 2*x*y + y^2");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
 
@@ -50,7 +50,7 @@ public class StringConvertTest extends TestCase {
 
     try {
       tmpConvertedString = ConverterUtil.termToStandardString("c*cos(x) + s * sin(sqrt(2) - x)");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
 
@@ -104,7 +104,7 @@ public class StringConvertTest extends TestCase {
 
     try {
       tmpConvertedString = ConverterUtil.termToStandardString("abcossin(cos(-3))");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
 
@@ -123,7 +123,7 @@ public class StringConvertTest extends TestCase {
 
     try {
       ConverterUtil.termToStandardString("a^cos((-3+4)^(2+1))*s df ghj+3-");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       assertTrue("The formula ends with an operator.".equals(e.getMessage()));
       tmpErrorOccured = true;
     }
@@ -159,7 +159,7 @@ public class StringConvertTest extends TestCase {
 
     try {
       ConverterUtil.termToStandardString("a");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
     assertTrue("The String is correct", !tmpErrorOccured);
@@ -177,7 +177,7 @@ public class StringConvertTest extends TestCase {
 
     try {
       tmpConvertedString = ConverterUtil.termToStandardString("3+(-a+b)");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
     assertTrue(!tmpErrorOccured);
@@ -196,7 +196,7 @@ public class StringConvertTest extends TestCase {
 
     try {
       tmpConvertedString = ConverterUtil.termToStandardString("sin4");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
     assertTrue("The String is correct", !tmpErrorOccured && "s*i*n*4".equals(tmpConvertedString));
@@ -214,7 +214,7 @@ public class StringConvertTest extends TestCase {
 
     try {
       tmpConvertedString = ConverterUtil.termToStandardString("-a+45");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
     assertTrue("The String is correct", !tmpErrorOccured && "(-a)+45".equals(tmpConvertedString));
@@ -232,7 +232,7 @@ public class StringConvertTest extends TestCase {
 
     try {
       tmpConvertedString = ConverterUtil.termToStandardString("5*x+y*z");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
 
@@ -251,7 +251,7 @@ public class StringConvertTest extends TestCase {
 
     try {
       tmpConvertedString = ConverterUtil.termToStandardString("sin(3^cos(-4))");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
 
@@ -270,7 +270,7 @@ public class StringConvertTest extends TestCase {
 
     try {
       tmpConvertedString = ConverterUtil.termToStandardString("2*0,0000559");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
 
@@ -289,7 +289,7 @@ public class StringConvertTest extends TestCase {
     String tmpString = null;
 	try {
       tmpString = ConverterUtil.termToStandardString("sin(abc)+cos(abcd)+tan+tan(abc)+sqrt(23)");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       assertTrue(false);
     }
     assertEquals("%(a*b*c)+~(a*b*c*d)+t*a*n+#(a*b*c)+&(23)", tmpString);
@@ -305,7 +305,7 @@ public class StringConvertTest extends TestCase {
     boolean tmpErrorOccured = false;
 	try {
       ConverterUtil.termToStandardString("4,7.2");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
     assertTrue("Two commas in one number.", tmpErrorOccured);
@@ -319,7 +319,7 @@ public class StringConvertTest extends TestCase {
     String tmpString = null;
 	try {
       tmpString = ConverterUtil.termToGUIStandardString("Ya* aA+ B   - x");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       assertTrue(false);
     }
     assertEquals("ya*aa+b-x", tmpString);
@@ -344,7 +344,7 @@ public class StringConvertTest extends TestCase {
     try {
       ConverterUtil
           .checkIfValidSignsOnly(".,abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-*/+^()");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       assertTrue(false);
     }
   }
@@ -358,7 +358,7 @@ public class StringConvertTest extends TestCase {
     Boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkIfValidSignsOnly("%");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
@@ -373,7 +373,7 @@ public class StringConvertTest extends TestCase {
     boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkIfValidSignsOnly("ä");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
@@ -388,7 +388,7 @@ public class StringConvertTest extends TestCase {
     boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkIfEmptyBrackets("()");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
@@ -416,7 +416,7 @@ public class StringConvertTest extends TestCase {
     // positive test
     try {
       ConverterUtil.checkDecimalNumbers("5.6+34+2.0+100.9");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       assertTrue(false);
     }
   }
@@ -431,7 +431,7 @@ public class StringConvertTest extends TestCase {
 
     try {
       ConverterUtil.checkDecimalNumbers("5.6.3+34+2.0+100.9");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
@@ -446,7 +446,7 @@ public class StringConvertTest extends TestCase {
     boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkDecimalNumbers(".");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
@@ -461,7 +461,7 @@ public class StringConvertTest extends TestCase {
     boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkDecimalNumbers(".999+7");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
@@ -476,7 +476,7 @@ public class StringConvertTest extends TestCase {
     boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkDecimalNumbers("999+7.");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
@@ -498,7 +498,7 @@ public class StringConvertTest extends TestCase {
     // positive test
     try {
       ConverterUtil.checkOperators("5+6-98*(23^2)-98/8");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       assertTrue(false);
     }
   }
@@ -511,7 +511,7 @@ public class StringConvertTest extends TestCase {
     boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkOperators("+(23*55)");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
@@ -525,7 +525,7 @@ public class StringConvertTest extends TestCase {
     boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkOperators("23+-99+9*8");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
@@ -539,7 +539,7 @@ public class StringConvertTest extends TestCase {
     boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkOperators("23*(+99)");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
@@ -553,7 +553,7 @@ public class StringConvertTest extends TestCase {
     boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkOperators("23*(2+99^)");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
@@ -567,7 +567,7 @@ public class StringConvertTest extends TestCase {
     boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkOperators("23*(2+99)**2");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
@@ -581,7 +581,7 @@ public class StringConvertTest extends TestCase {
     boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkOperators("3+5*");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
@@ -595,7 +595,7 @@ public class StringConvertTest extends TestCase {
     boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkOperators("+e");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
@@ -609,7 +609,7 @@ public class StringConvertTest extends TestCase {
     boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkOperators("^2");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
@@ -623,7 +623,7 @@ public class StringConvertTest extends TestCase {
     boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkOperators("2*(*2)");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
@@ -636,7 +636,7 @@ public class StringConvertTest extends TestCase {
     // positive test
     try {
       ConverterUtil.checkOperators("-(3+4)");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       assertTrue(false);
     }
   }
@@ -648,7 +648,7 @@ public class StringConvertTest extends TestCase {
     // positive test
     try {
       ConverterUtil.checkOperators("-%(3+4)");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       assertTrue(false);
     }
   }
@@ -660,7 +660,7 @@ public class StringConvertTest extends TestCase {
     // positive test
     try {
       ConverterUtil.checkOperators("(((-12122.2))*2321*%(12))");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       assertTrue(false);
     }
   }
@@ -672,7 +672,7 @@ public class StringConvertTest extends TestCase {
     // positive test
     try {
       ConverterUtil.checkOperators("x/z*%(12)");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       assertTrue(false);
     }
   }
@@ -684,7 +684,7 @@ public class StringConvertTest extends TestCase {
     // positive test
     try {
       ConverterUtil.checkOperators("%(abc)+~(abcd)+tan+#(abc)+&(23)");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       assertTrue(false);
     }
   }
@@ -718,7 +718,7 @@ public class StringConvertTest extends TestCase {
     // positive test
     try {
       ConverterUtil.checkNegativeNumbers("(-5)*(-2)+((-4)+5)");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       assertTrue(false);
     }
   }
@@ -733,7 +733,7 @@ public class StringConvertTest extends TestCase {
       String tmp = ConverterUtil.setBracketsAroundNegatives("-5)*(-2)+((-4)+5)");
 
       ConverterUtil.checkNegativeNumbers(tmp);
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       assertTrue(false);
     }
   }
@@ -748,7 +748,7 @@ public class StringConvertTest extends TestCase {
 
     try {
       ConverterUtil.checkNegativeNumbers("(-5)*-2+(-4)+5)");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
@@ -763,7 +763,7 @@ public class StringConvertTest extends TestCase {
     boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkNegativeNumbers("(-5)*(-2)+((-4)+-5)");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
@@ -775,7 +775,7 @@ public class StringConvertTest extends TestCase {
   public void testCheckBrackets1() {
     try {
       ConverterUtil.checkBrackets("(((5+5+5+5)))");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       assertTrue(false);
     }
   }
@@ -789,7 +789,7 @@ public class StringConvertTest extends TestCase {
     boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkBrackets(")(((5+5+5+5)))");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
@@ -803,7 +803,7 @@ public class StringConvertTest extends TestCase {
     boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkBrackets("(((5+5+5+5))))");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);
@@ -817,7 +817,7 @@ public class StringConvertTest extends TestCase {
     boolean tmpErrorOccurred = false;
     try {
       ConverterUtil.checkBrackets("(((((5+5+5+5))))");
-    } catch (Exception e) {
+    } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
     assertTrue(tmpErrorOccurred);

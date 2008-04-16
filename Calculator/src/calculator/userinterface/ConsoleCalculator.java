@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 import calculator.elements.Tree;
+import calculator.exceptions.CalculatingException;
+import calculator.exceptions.FormulaConversionException;
 import calculator.utils.ConverterUtil;
 import calculator.utils.FormulaTreeUtil;
 import calculator.utils.MathUtil;
@@ -15,7 +17,7 @@ public class ConsoleCalculator {
 
   /**
    * The Calculator
-   * 
+   *
    * @param args
    */
   public static void start() {
@@ -73,7 +75,7 @@ public class ConsoleCalculator {
 
           try {
             tmpInputString = ConverterUtil.termToStandardString(tmpInputString);
-          } catch (Exception e) {
+          } catch (FormulaConversionException e) {
             ConsoleOutput.printError(e.getMessage());
             tmpErrorOccuredInTerm = true;
             tmpTree = null;
@@ -140,7 +142,7 @@ public class ConsoleCalculator {
 
                 tmpTree.paintMe();
 
-              } catch (Exception e) {
+              } catch (CalculatingException e) {
                 System.out.println(e.getMessage());
                 tmpTree = null;
                 // if (e.getMessage().equals("")){

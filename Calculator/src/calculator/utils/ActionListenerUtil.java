@@ -18,7 +18,7 @@ import calculator.userinterface.ProgressBarThread;
  * @author Tim
  */
 public class ActionListenerUtil {
-  // TODO @Tim diese Klasse scheint mir sinnlos zu sein. Ich möchte doch die
+  // @Tim diese Klasse scheint mir sinnlos zu sein. Ich möchte doch die
   // Listener in den Fenstern wo ich sie brauche. Für den closer mags noch
   // Sinn machen, aber die fensterbezogenen Listener wie z.B. der Calculator
   // in ne Util-Methode?? Versteh ich nicht.
@@ -26,9 +26,16 @@ public class ActionListenerUtil {
   // Reply Tim: ich persönlich finde es so angenehmer, denn wenn ich die
   // Listener alle noch in die FrameKlasse packe, wird die für mich sehr
   // unübersichtlich... ist halt Geschmack...
+
+  // TODO @Tim Strg+O macht jede Klasse übersichtlich :P
+  // Naja, ich find's irgendwie konzeptionell falsch. Auch für Menülistener
+  // ist das alles in Ordnung. Aber nicht für so spezielle, an die du dann
+  // auch noch 12 Parameter übergeben musst. Das find ich eher unübersichtlich.
+  // Vor allem muss ich immer erst 2 Klassen aufmachen. Naja, viel. stimmen
+  // wir ab oder so?! :P
   /**
    * Listener for closing a dialog with a button
-   * 
+   *
    * @param aDialog
    * @param aButton
    */
@@ -44,7 +51,7 @@ public class ActionListenerUtil {
 
   /**
    * Listener for opening a dialog via a menuItem
-   * 
+   *
    * @param aMenuItem
    * @param aDialog
    */
@@ -59,7 +66,7 @@ public class ActionListenerUtil {
 
   /**
    * Opens the dialog containing the drawn tree
-   * 
+   *
    * @param aMenuItem
    * @param aDialog
    * @param aParentFrame
@@ -77,7 +84,7 @@ public class ActionListenerUtil {
 
   /**
    * Listener to open the variable input dialog
-   * 
+   *
    * @param aDialogsParentFrame
    * @param aDialog
    * @param aButton
@@ -126,7 +133,7 @@ public class ActionListenerUtil {
 
   /**
    * Listener to start the calculation
-   * 
+   *
    * @param aParentFrame
    * @param aButton
    */
@@ -146,7 +153,7 @@ public class ActionListenerUtil {
 
   /**
    * Listener to close the FrameCalculator
-   * 
+   *
    * @param aParentFrame
    * @param aMenuItem
    */
@@ -163,7 +170,7 @@ public class ActionListenerUtil {
 
   /**
    * Listener to activate / deactivate the progressbar
-   * 
+   *
    * @param aParentFrame
    * @param aMenuItem
    */
@@ -190,7 +197,7 @@ public class ActionListenerUtil {
 
   /**
    * Listener to show / hide the painted tree
-   * 
+   *
    * @param aParentFrame
    * @param aMenuItem
    */
@@ -212,7 +219,7 @@ public class ActionListenerUtil {
   /**
    * @param aParentFrame
    * @param aButton
-   * 
+   *
    */
   public static void putCancelListener(final FrameCalculatorVariableDialog aParentFrame, JButton aButton) {
     aButton.addActionListener(new ActionListener() {

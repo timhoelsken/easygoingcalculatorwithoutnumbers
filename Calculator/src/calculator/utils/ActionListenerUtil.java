@@ -18,10 +18,17 @@ import calculator.userinterface.ProgressBarThread;
  * @author Tim
  */
 public class ActionListenerUtil {
-	//TODO @Tim diese Klasse scheint mir sinnlos zu sein. Ich möchte doch die Listener in den Fenstern wo ich sie brauche. Für den closer mags noch Sinn machen, aber die fensterbezogenen Listener wie z.B. der Calculator in ne Util-Methode?? Versteh ich nicht.
+  // TODO @Tim diese Klasse scheint mir sinnlos zu sein. Ich möchte doch die
+  // Listener in den Fenstern wo ich sie brauche. Für den closer mags noch
+  // Sinn machen, aber die fensterbezogenen Listener wie z.B. der Calculator
+  // in ne Util-Methode?? Versteh ich nicht.
+
+  // Reply Tim: ich persönlich finde es so angenehmer, denn wenn ich die
+  // Listener alle noch in die FrameKlasse packe, wird die für mich sehr
+  // unübersichtlich... ist halt Geschmack...
   /**
    * Listener for closing a dialog with a button
-   *
+   * 
    * @param aDialog
    * @param aButton
    */
@@ -37,7 +44,7 @@ public class ActionListenerUtil {
 
   /**
    * Listener for opening a dialog via a menuItem
-   *
+   * 
    * @param aMenuItem
    * @param aDialog
    */
@@ -52,7 +59,7 @@ public class ActionListenerUtil {
 
   /**
    * Opens the dialog containing the drawn tree
-   *
+   * 
    * @param aMenuItem
    * @param aDialog
    * @param aParentFrame
@@ -70,7 +77,7 @@ public class ActionListenerUtil {
 
   /**
    * Listener to open the variable input dialog
-   *
+   * 
    * @param aDialogsParentFrame
    * @param aDialog
    * @param aButton
@@ -86,9 +93,10 @@ public class ActionListenerUtil {
         // the list
         for (int i = 0; i < aDialog.getInputFieldsOfVariablesArray().length; i++) {
 
-          if (MathUtil.isDouble(ConverterUtil.unifyCommas(aDialog.getInputFieldsOfVariablesArray()[i].getText()))) {
-            aDialogsParentFrame.getListOfVariables().get(i)[1] = ConverterUtil
-                .unifyCommas(aDialog.getInputFieldsOfVariablesArray()[i].getText());
+          if (MathUtil.isDouble(ConverterUtil.unifyCommas(aDialog.getInputFieldsOfVariablesArray()[i]
+              .getText()))) {
+            aDialogsParentFrame.getListOfVariables().get(i)[1] = ConverterUtil.unifyCommas(aDialog
+                .getInputFieldsOfVariablesArray()[i].getText());
           } else {
             tmpAllVariablesAreFloats = false;
             i = aDialog.getInputFieldsOfVariablesArray().length;
@@ -101,12 +109,13 @@ public class ActionListenerUtil {
           aDialog.dispose();
 
           // use the progressBar?
-          if (aDialogsParentFrame.getProgressBarStatus()) {
+          if (FrameCalculator.isLoadProgressBar()) {
             Thread tmpProgressBarThread = new ProgressBarThread(aDialogsParentFrame);
             tmpProgressBarThread.start();
-          }
+          } else {
+            FrameCalculator.calculateFormula(aDialogsParentFrame);
 
-          FrameCalculator.calculateFormula(aDialogsParentFrame);
+          }
         } else {
           JOptionPane.showMessageDialog(new JFrame(), "The entered value(s) must be number(s).",
               "An error occured!", JOptionPane.WARNING_MESSAGE);
@@ -117,7 +126,7 @@ public class ActionListenerUtil {
 
   /**
    * Listener to start the calculation
-   *
+   * 
    * @param aParentFrame
    * @param aButton
    */
@@ -125,22 +134,19 @@ public class ActionListenerUtil {
     aButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent ae) {
 
-
-        // use the progressBar?
+        // reset progressbar if it is activated
         if (FrameCalculator.isLoadProgressBar()) {
-          Thread tmpProgressBarThread = new ProgressBarThread(aParentFrame);
-          tmpProgressBarThread.start();
+          aParentFrame.getProgressBar().setValue(0);
+          aParentFrame.getProgressBar().setString("0%");
         }
-        else{
-          FrameCalculator.convertAndCalculate(aParentFrame);
-        }
+        FrameCalculator.convertAndCalculate(aParentFrame);
       }
     });
   }
 
   /**
    * Listener to close the FrameCalculator
-   *
+   * 
    * @param aParentFrame
    * @param aMenuItem
    */
@@ -157,7 +163,7 @@ public class ActionListenerUtil {
 
   /**
    * Listener to activate / deactivate the progressbar
-   *
+   * 
    * @param aParentFrame
    * @param aMenuItem
    */
@@ -184,7 +190,7 @@ public class ActionListenerUtil {
 
   /**
    * Listener to show / hide the painted tree
-   *
+   * 
    * @param aParentFrame
    * @param aMenuItem
    */
@@ -206,9 +212,9 @@ public class ActionListenerUtil {
   /**
    * @param aParentFrame
    * @param aButton
-   *
+   * 
    */
-  public static void putCancelListener(final FrameCalculatorVariableDialog aParentFrame, JButton aButton){
+  public static void putCancelListener(final FrameCalculatorVariableDialog aParentFrame, JButton aButton) {
     aButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent ae) {
 

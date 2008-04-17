@@ -15,9 +15,9 @@ import javax.swing.JTextField;
 import calculator.utils.ActionListenerUtil;
 
 /**
- *
+ * 
  * @author Tim
- *
+ * 
  */
 public class FrameCalculatorVariableDialog extends JDialog {
 
@@ -37,13 +37,13 @@ public class FrameCalculatorVariableDialog extends JDialog {
 
   /**
    * The constructor
-   *
+   * 
    * @param aParentFrame
    */
   public FrameCalculatorVariableDialog(FrameCalculator aParentFrame) {
 
     // define modal dialog
-    super(aParentFrame, "Variable(s)", Dialog.ModalityType.DOCUMENT_MODAL);
+    super(aParentFrame, "Variable Input", Dialog.ModalityType.DOCUMENT_MODAL);
     setLocation(330, 330);
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     getContentPane().setLayout(new BorderLayout(10, 10));
@@ -54,15 +54,21 @@ public class FrameCalculatorVariableDialog extends JDialog {
 
   /**
    * dynamically place the variable inputs on the dialog
-   *
+   * 
    * @param aListOfVariables
    */
   public void load(ArrayList<String[]> aListOfVariables) {
 
     // define Panels for the button and dynamic variable input
-    panelButton = new JPanel(new GridLayout(aListOfVariables.size(), 1));
-    panelLabelsForVariable = new JPanel(new GridLayout(aListOfVariables.size(), 1));
-    panelTextFieldsForVariables = new JPanel(new GridLayout(aListOfVariables.size(), 1));
+    if (aListOfVariables.size() > 1) {
+      panelButton = new JPanel(new GridLayout(aListOfVariables.size(), 1));
+      panelLabelsForVariable = new JPanel(new GridLayout(aListOfVariables.size(), 1));
+      panelTextFieldsForVariables = new JPanel(new GridLayout(aListOfVariables.size(), 1));
+    } else {
+      panelButton = new JPanel(new GridLayout(2, 1));
+      panelLabelsForVariable = new JPanel(new GridLayout(2, 1));
+      panelTextFieldsForVariables = new JPanel(new GridLayout(2, 1));
+    }
 
     // an arraylist in the size of variable number
     labelsOfVariablesArray = new JLabel[aListOfVariables.size()];
@@ -100,8 +106,8 @@ public class FrameCalculatorVariableDialog extends JDialog {
     String tmpValue = "value";
     String tmpVariable = "variable";
     if (inputFieldsOfVariablesArray.length > 1) {
-    	tmpValue += "s";
-    	tmpVariable += "s";
+      tmpValue += "s";
+      tmpVariable += "s";
     }
     labelTitle.setText("      Enter " + tmpValue + " of " + tmpVariable + ":      ");
 

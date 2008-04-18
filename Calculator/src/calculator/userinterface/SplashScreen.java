@@ -26,7 +26,7 @@ public class SplashScreen extends JWindow implements Runnable {
     setVisible(true);
 
     try {
-      Thread.sleep(5000);
+      Thread.sleep(8000);
     } catch (InterruptedException e) {
       dispose();
     }

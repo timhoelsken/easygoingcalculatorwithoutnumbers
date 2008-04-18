@@ -177,13 +177,13 @@ public class FrameCalculator extends JFrame {
 
   /**
    * calculates the formula
-   * 
+   *
    * @param aFrameCalculator
-   * 
+   *
    * @param aFormula
    */
   public static void calculateFormula(FrameCalculator aFrameCalculator) {
-    
+
     // puts the ArrayList into the dictionary
     dictionaryOfEnteredVariables = ConverterUtil.putArrayListIntoHashtable(aFrameCalculator
         .getListOfVariables());
@@ -255,7 +255,7 @@ public class FrameCalculator extends JFrame {
           tmpProgressBarThread.start();
         }else{
           FrameCalculator.calculateFormula(aParentFrame);
-          
+
         }
       }
       showCalculation();
@@ -291,7 +291,7 @@ public class FrameCalculator extends JFrame {
   }
 
   /**
-   * 
+   *
    */
   public static void showCalculation() {
     textFormulaOutput.setText(calculatedFormula);

@@ -42,8 +42,8 @@ public class FrameCalculatorInfoDialog extends JDialog {
     String tmpHelpTextContent = new String("");
     tmpHelpTextContent = "This formula calculator is brought to you by PSE III group 3:\n\n"+
     "- Tim Hölsken\n" +
-    "- André Wuthenow\n" +
     "- Tobias Wörenkämper\n" +
+    "- André Wuthenow\n" +
     "- Raphael Zimmer";
 
     // define TextArea

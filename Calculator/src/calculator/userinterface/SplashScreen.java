@@ -40,8 +40,7 @@ public class SplashScreen extends JWindow implements Runnable {
    */
   public void paint(Graphics g) {
     ClassLoader tmpClassLoader = this.getClass().getClassLoader();
-    URL tmpUrl = tmpClassLoader.getResource("SplashScreen.jpg");
-    System.out.println(tmpUrl.toString());
+    URL tmpUrl = tmpClassLoader.getResource("SplashScreen.jpg");   
     Image tmpSplashImage = getToolkit().getImage(tmpUrl);
     g.drawImage(tmpSplashImage, 0, 0, this);
   }

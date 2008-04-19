@@ -13,40 +13,45 @@ import javax.swing.JTextArea;
 import calculator.utils.ActionListenerUtil;
 
 /**
+ *
+ * @author Tim
+ *
  */
-public class FrameCalculatorHelpDialog extends JDialog {
+public class FrameCalculatorAboutDialog extends JDialog {
 
-  private static final long serialVersionUID = 1L;
-
-  private JLabel labelTitle = new JLabel("Help:");
+  private JLabel labelTitle = new JLabel("About:");
   private JTextArea textAreaContent = new JTextArea();
   private JButton buttonClose = new JButton("Close");
+  /**
+   *
+   */
+  private static final long serialVersionUID = 1L;
 
   /**
-   * The constructor
    *
    * @param aParentFrame
    */
-  public FrameCalculatorHelpDialog(JFrame aParentFrame) {
+  public FrameCalculatorAboutDialog(JFrame aParentFrame) {
 
     // define dialog window
-    super(aParentFrame, "Help", Dialog.ModalityType.DOCUMENT_MODAL);
+    super(aParentFrame, "Info", Dialog.ModalityType.DOCUMENT_MODAL);
     setLocation(330, 330);
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     getContentPane().setLayout(new BorderLayout(10, 10));
 
     String tmpHelpTextContent = new String("");
-    tmpHelpTextContent = "How to use the calculator:\n" + "Enter a formula in the input field.\n"
-        + "You can put in the following as part of the formula:\n\n"
-        + "- real numbers (negative numbers have to be in brackets)\n" + "- operators \"+ - * \\ ^\"\n"
-        + "- functions \"sin() cos() tan() sqrt()\"\n" + "- variables\n\n"
-        + "If your formula contains variables, you are prompted to enter their value.\n";
+    tmpHelpTextContent = "This formula calculator is brought to you by PSE III group 3:\n\n"+
+    "- Tim Hölsken\n" +
+    "- André Wuthenow\n" +
+    "- Tobias Wörenkämper\n" +
+    "- Raphael Zimmer";
 
     // define TextArea
     textAreaContent.setText(tmpHelpTextContent);
     textAreaContent.setEnabled(false);
     textAreaContent.setDisabledTextColor(Color.BLACK);
     textAreaContent.setBackground(aParentFrame.getBackground());
+
 
     // add ActionListener to Close-Button
     ActionListenerUtil.putDialogCloseListener(this, buttonClose);

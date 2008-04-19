@@ -2,13 +2,13 @@ package calculator.userinterface;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -34,8 +34,8 @@ public class FrameCalculator extends JFrame {
 
   private static final long serialVersionUID = -4971700820441624660L;
 
-  private BufferedImage calculatorIcon;
-  
+  private Image calculatorIcon;
+
   // dialogs
   private FrameCalculatorVariableDialog dialogEnterVariables = new FrameCalculatorVariableDialog(this);
   private FrameCalculatorManualDialog dialogHelpText = new FrameCalculatorManualDialog(this);
@@ -56,7 +56,7 @@ public class FrameCalculator extends JFrame {
   private static JTextField textFormulaOutput = new JTextField();
 
   // button to calculate formula
-  private JButton buttonCalculateTerm = new JButton("calculate");
+  private static JButton buttonCalculateTerm = new JButton("calculate");
 
   // == Menu Components ==
   private JMenuBar menuBarcalculator = new JMenuBar();
@@ -98,14 +98,11 @@ public class FrameCalculator extends JFrame {
     super("PSE III Calculator");
 
     // set Icon
-    try{
-      File tmpFile = new File("misc/images/CalcIcon.jpg");
-      calculatorIcon = ImageIO.read(tmpFile);
-    }catch (IOException e){
-      e.printStackTrace();
-    }
-    
+    ClassLoader tmpClassLoader = this.getClass().getClassLoader();
+    URL tmpUrl = tmpClassLoader.getResource("CalcIcon.jpg");
+    calculatorIcon = getToolkit().getImage(tmpUrl);
     setIconImage(calculatorIcon);
+
     // define frame
     setLocation(330, 330);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -161,13 +158,62 @@ public class FrameCalculator extends JFrame {
     setJMenuBar(menuBarcalculator);
 
     // add listeners
-    ActionListenerUtil.putCalculateFormulaListener(this, buttonCalculateTerm);
     ActionListenerUtil.putMenuItemOpenDialogListener(menuItemManual, dialogHelpText);
     ActionListenerUtil.putMenuItemOpenDialogListener(menuItemAbout, dialogInfoText);
-    // == ActionListener of the menu ==
-    ActionListenerUtil.putFrameCalculatorCloseListener(this, menuItemExit);
-    ActionListenerUtil.putProgressBarActivateListener(this, menuItemProgressBar);
-    ActionListenerUtil.putShowTreeActivateListener(this, menuItemShowTree);
+
+    buttonCalculateTerm.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent ae) {
+
+        // reset progressbar if it is activated
+        if (FrameCalculator.isLoadProgressBar()) {
+          FrameCalculator.this.getProgressBar().setValue(0);
+          FrameCalculator.this.getProgressBar().setString("0%");
+        }
+        convertAndCalculate();
+      }
+    });
+    
+    // == ActionListener of the menu ==   
+    menuItemExit.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent ae) {
+
+        FrameCalculator.this.setVisible(false);
+        FrameCalculator.this.dispose();
+        System.exit(0);
+      }
+    });
+    
+    menuItemProgressBar.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent ae) {
+
+        if (FrameCalculator.isLoadProgressBar()) {
+          FrameCalculator.setLoadProgressBar(false);
+          FrameCalculator.this.getProgressBar().setVisible(false);
+          menuItemProgressBar.setText("Enable ProgressBar");
+        } else {
+          FrameCalculator.setLoadProgressBar(true);
+          FrameCalculator.this.getProgressBar().setValue(0);
+          FrameCalculator.this.getProgressBar().setStringPainted(false);
+          FrameCalculator.this.getProgressBar().setVisible(true);
+          menuItemProgressBar.setText("Disable ProgressBar");
+        }
+        FrameCalculator.this.repaint();
+      }
+    });
+    
+    menuItemShowTree.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent ae) {
+
+        if (FrameCalculator.isDisplayTree()) {
+          FrameCalculator.setDisplayTree(false);
+          menuItemShowTree.setText("Show Tree");
+        } else {
+          FrameCalculator.setDisplayTree(true);
+          menuItemShowTree.setText("Hide Tree");
+        }
+      }
+    });
+    
     // == ActionListener of the menu ==
 
     // generate frame correctly
@@ -198,7 +244,7 @@ public class FrameCalculator extends JFrame {
    * @param aFormula
    */
   public static void calculateFormula(FrameCalculator aFrameCalculator) {
-    
+
     // puts the ArrayList into the dictionary
     dictionaryOfEnteredVariables = ConverterUtil.putArrayListIntoHashtable(aFrameCalculator
         .getListOfVariables());
@@ -215,9 +261,11 @@ public class FrameCalculator extends JFrame {
       if (displayTree) {
         aFrameCalculator.dialogShowTree.paintTree(aFrameCalculator);
       }
+      textFormulaOutput.setEditable(true);
       showCalculation();
     } catch (CalculatingException e) {
       calculatedFormula = ERROR;
+      textFormulaOutput.setEditable(true);
       showCalculation();
       JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "An error occured!",
           JOptionPane.WARNING_MESSAGE);
@@ -227,23 +275,25 @@ public class FrameCalculator extends JFrame {
   /**
    * @param aParentFrame
    */
-  public static void convertAndCalculate(FrameCalculator aParentFrame) {
+  private void convertAndCalculate() {
+    
+    buttonCalculateTerm.setEnabled(false);
+    
     // convert the user's input to standard string
     try {
-      aParentFrame.getTextTermInput().setText(
-          (ConverterUtil.termToGUIStandardString(aParentFrame.getTextTermInput().getText())));
+      textTermInput.setText(
+          (ConverterUtil.termToGUIStandardString(textTermInput.getText())));
 
-      aParentFrame.setConvertedFormula(ConverterUtil.termToStandardString(aParentFrame.getTextTermInput()
-          .getText()));
+      convertedFormula = ConverterUtil.termToStandardString(textTermInput.getText());
 
-      FrameCalculator.textFormulaOutput.setText("");
+      textFormulaOutput.setText("");
       calculatedFormula = "";
 
       // if the formula has Variables, a new frame is opened
-      if (ConverterUtil.hasVariables(aParentFrame.getConvertedFormula())) {
+      if (ConverterUtil.hasVariables(getConvertedFormula())) {
 
-        ArrayList<String[]> tmpOldVariables = aParentFrame.getListOfVariables();
-        ArrayList<String[]> tmpNewVariables = ConverterUtil.getVariables(aParentFrame.getConvertedFormula());
+        ArrayList<String[]> tmpOldVariables = getListOfVariables();
+        ArrayList<String[]> tmpNewVariables = ConverterUtil.getVariables(getConvertedFormula());
         for (String[] tmpNewStrings : tmpNewVariables) {
           String tmpNewVariable = tmpNewStrings[0];
           for (String[] tmpOldStrings : tmpOldVariables) {
@@ -253,63 +303,41 @@ public class FrameCalculator extends JFrame {
             }
           }
         }
-        aParentFrame.setListOfVariables(tmpNewVariables);
+        setListOfVariables(tmpNewVariables);
 
         // openVariableDialog();
-        aParentFrame.getDialogEnterVariables().load(aParentFrame.getListOfVariables());
+        dialogEnterVariables.load(getListOfVariables());
 
         // otherwise the formula is calculated directly
       } else {
 
         // reset the list to avoid errors
-        aParentFrame.setListOfVariables(new ArrayList<String[]>());
+        setListOfVariables(new ArrayList<String[]>());
 
-     // use the progressBar?
+        // use the progressBar?
         if (FrameCalculator.isLoadProgressBar()) {
-          Thread tmpProgressBarThread = new ProgressBarThread(aParentFrame);
+          Thread tmpProgressBarThread = new ProgressBarThread(this);
           tmpProgressBarThread.start();
-        }else{
-          FrameCalculator.calculateFormula(aParentFrame);
-          
+        } else {
+          FrameCalculator.calculateFormula(this);
+
         }
       }
-      showCalculation();
-    } catch (FormulaConversionException e) {
+     } catch (FormulaConversionException e) {
       calculatedFormula = ERROR;
+      buttonCalculateTerm.setEnabled(true);
       showCalculation();
       JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "An error occured!",
           JOptionPane.WARNING_MESSAGE);
     }
   }
-
-  /**
-   * @return the calculatedFormula
-   */
-  public static String getCalculatedFormula() {
-    return calculatedFormula;
-  }
-
-  /**
-   * @param aCalculatedFormula
-   *            the calculatedFormula to set
-   */
-  public static void setCalculatedFormula(String aCalculatedFormula) {
-    calculatedFormula = aCalculatedFormula;
-  }
-
-  /**
-   * @param aConvertedFormula
-   *            the convertedFormula to set
-   */
-  public void setConvertedFormula(String aConvertedFormula) {
-    convertedFormula = aConvertedFormula;
-  }
-
+  
   /**
    * 
    */
   public static void showCalculation() {
     textFormulaOutput.setText(calculatedFormula);
+    buttonCalculateTerm.setEnabled(true);
   }
 
   /**
@@ -368,13 +396,6 @@ public class FrameCalculator extends JFrame {
    */
   public JTextField getTextTermInput() {
     return textTermInput;
-  }
-
-  /**
-   * @return the dialogEnterVariables
-   */
-  public FrameCalculatorVariableDialog getDialogEnterVariables() {
-    return dialogEnterVariables;
   }
 
   /**

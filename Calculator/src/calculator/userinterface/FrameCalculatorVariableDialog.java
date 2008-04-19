@@ -3,16 +3,21 @@ package calculator.userinterface;
 import java.awt.BorderLayout;
 import java.awt.Dialog;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import calculator.utils.ActionListenerUtil;
+import calculator.utils.ConverterUtil;
+import calculator.utils.MathUtil;
 
 /**
  * 
@@ -48,8 +53,46 @@ public class FrameCalculatorVariableDialog extends JDialog {
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     getContentPane().setLayout(new BorderLayout(10, 10));
 
-    ActionListenerUtil.setVariableCalculateListener(aParentFrame, this, buttonEnter);
-    ActionListenerUtil.putCancelListener(this, buttonCancel);
+    buttonEnter.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent ae) {
+
+        boolean tmpAllVariablesAreFloats = true;
+
+        // check if each variable is a float value and write the variables in
+        // the list
+        for (int i = 0; i < FrameCalculatorVariableDialog.this.getInputFieldsOfVariablesArray().length; i++) {
+
+          if (MathUtil.isDouble(ConverterUtil.unifyCommas(FrameCalculatorVariableDialog.this.getInputFieldsOfVariablesArray()[i]
+              .getText()))) {
+            FrameCalculatorVariableDialog.this.getParentFrame().getListOfVariables().get(i)[1] = ConverterUtil.unifyCommas(FrameCalculatorVariableDialog.this
+                .getInputFieldsOfVariablesArray()[i].getText());
+          } else {
+            tmpAllVariablesAreFloats = false;
+            i = FrameCalculatorVariableDialog.this.getInputFieldsOfVariablesArray().length;
+          }
+        }
+
+        // if everything is OK, the window is closed and the formula is
+        // calculated
+        if (tmpAllVariablesAreFloats) {
+          FrameCalculatorVariableDialog.this.dispose();
+
+          // use the progressBar?
+          if (FrameCalculator.isLoadProgressBar()) {
+            Thread tmpProgressBarThread = new ProgressBarThread(FrameCalculatorVariableDialog.this.getParentFrame());
+            tmpProgressBarThread.start();
+          } else {
+            FrameCalculator.calculateFormula(FrameCalculatorVariableDialog.this.getParentFrame());
+
+          }
+        } else {
+          JOptionPane.showMessageDialog(new JFrame(), "The entered value(s) must be number(s).",
+              "An error occured!", JOptionPane.WARNING_MESSAGE);
+        }
+      }
+    });
+    
+    ActionListenerUtil.putDialogCloseListener(this, buttonCancel);
   }
 
   /**
@@ -134,6 +177,14 @@ public class FrameCalculatorVariableDialog extends JDialog {
     setResizable(false);
 
     setVisible(true);
+  }
+  
+  /**
+   * 
+   * @return
+   */
+  public FrameCalculator getParentFrame(){
+    return ((FrameCalculator) this.getParent());
   }
 
   /**

@@ -258,11 +258,11 @@ public class FrameCalculator extends JFrame {
       if (!loadProgressBar) {
         textFormulaOutput.setText(calculatedFormula);
       }
+      textFormulaOutput.setEditable(true);
+      showCalculation();
       if (displayTree) {
         aFrameCalculator.dialogShowTree.paintTree(aFrameCalculator);
       }
-      textFormulaOutput.setEditable(true);
-      showCalculation();
     } catch (CalculatingException e) {
       calculatedFormula = ERROR;
       textFormulaOutput.setEditable(true);

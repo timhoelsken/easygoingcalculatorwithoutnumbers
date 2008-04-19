@@ -99,7 +99,7 @@ public class FrameCalculator extends JFrame {
 
     // set Icon
     try{
-      File tmpFile = new File("misc/imgages/CalcIcon.jpg");
+      File tmpFile = new File("misc/images/CalcIcon.jpg");
       calculatorIcon = ImageIO.read(tmpFile);
     }catch (IOException e){
       e.printStackTrace();

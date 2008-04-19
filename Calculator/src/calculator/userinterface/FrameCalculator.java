@@ -2,9 +2,13 @@ package calculator.userinterface;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,10 +34,12 @@ public class FrameCalculator extends JFrame {
 
   private static final long serialVersionUID = -4971700820441624660L;
 
+  private BufferedImage calculatorIcon;
+  
   // dialogs
   private FrameCalculatorVariableDialog dialogEnterVariables = new FrameCalculatorVariableDialog(this);
-  private FrameCalculatorHelpDialog dialogHelpText = new FrameCalculatorHelpDialog(this);
-  private FrameCalculatorInfoDialog dialogInfoText = new FrameCalculatorInfoDialog(this);
+  private FrameCalculatorManualDialog dialogHelpText = new FrameCalculatorManualDialog(this);
+  private FrameCalculatorAboutDialog dialogInfoText = new FrameCalculatorAboutDialog(this);
   private FrameCalculatorTreeDialog dialogShowTree = new FrameCalculatorTreeDialog(this);
 
   // sub panels
@@ -56,14 +62,14 @@ public class FrameCalculator extends JFrame {
   private JMenuBar menuBarcalculator = new JMenuBar();
 
   private JMenu menuFile = new JMenu("File");
-  private JMenu menuExtras = new JMenu("Extras");
-  private JMenu menuHelp = new JMenu("?");
+  private JMenu menuView = new JMenu("View");
+  private JMenu menuHelp = new JMenu("Help");
 
   private JMenuItem menuItemExit = new JMenuItem("Exit");
   private JMenuItem menuItemProgressBar = new JMenuItem("Enable ProgressBar");
   private JMenuItem menuItemShowTree = new JMenuItem("Show Tree");
-  private JMenuItem menuItemHelp = new JMenuItem("Help");
-  private JMenuItem menuItemInfo = new JMenuItem("Info");
+  private JMenuItem menuItemManual = new JMenuItem("Manual");
+  private JMenuItem menuItemAbout = new JMenuItem("About");
   // == Menu Components ==
 
   // the progressbar :)
@@ -91,6 +97,15 @@ public class FrameCalculator extends JFrame {
 
     super("PSE III Calculator");
 
+    // set Icon
+    try{
+      File tmpFile = new File("misc/imgages/CalcIcon.jpg");
+      calculatorIcon = ImageIO.read(tmpFile);
+    }catch (IOException e){
+      e.printStackTrace();
+    }
+    
+    setIconImage(calculatorIcon);
     // define frame
     setLocation(330, 330);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -107,25 +122,25 @@ public class FrameCalculator extends JFrame {
     menuFile.setMnemonic('F');
     menuItemExit.setMnemonic('E');
 
-    menuExtras.setMnemonic('E');
+    menuView.setMnemonic('V');
     menuItemProgressBar.setMnemonic('P');
     menuItemShowTree.setMnemonic('T');
 
     menuHelp.setMnemonic('H');
-    menuItemHelp.setMnemonic('H');
-    menuItemInfo.setMnemonic('I');
+    menuItemManual.setMnemonic('M');
+    menuItemAbout.setMnemonic('A');
 
     // build menu
     menuFile.add(menuItemExit);
 
-    menuExtras.add(menuItemProgressBar);
-    menuExtras.add(menuItemShowTree);
+    menuView.add(menuItemProgressBar);
+    menuView.add(menuItemShowTree);
 
-    menuHelp.add(menuItemHelp);
-    menuHelp.add(menuItemInfo);
+    menuHelp.add(menuItemManual);
+    menuHelp.add(menuItemAbout);
 
     menuBarcalculator.add(menuFile);
-    menuBarcalculator.add(menuExtras);
+    menuBarcalculator.add(menuView);
     menuBarcalculator.add(menuHelp);
 
     // place label and textField on panel
@@ -147,8 +162,8 @@ public class FrameCalculator extends JFrame {
 
     // add listeners
     ActionListenerUtil.putCalculateFormulaListener(this, buttonCalculateTerm);
-    ActionListenerUtil.putMenuItemOpenDialogListener(menuItemHelp, dialogHelpText);
-    ActionListenerUtil.putMenuItemOpenDialogListener(menuItemInfo, dialogInfoText);
+    ActionListenerUtil.putMenuItemOpenDialogListener(menuItemManual, dialogHelpText);
+    ActionListenerUtil.putMenuItemOpenDialogListener(menuItemAbout, dialogInfoText);
     // == ActionListener of the menu ==
     ActionListenerUtil.putFrameCalculatorCloseListener(this, menuItemExit);
     ActionListenerUtil.putProgressBarActivateListener(this, menuItemProgressBar);
@@ -177,13 +192,13 @@ public class FrameCalculator extends JFrame {
 
   /**
    * calculates the formula
-   *
+   * 
    * @param aFrameCalculator
-   *
+   * 
    * @param aFormula
    */
   public static void calculateFormula(FrameCalculator aFrameCalculator) {
-
+    
     // puts the ArrayList into the dictionary
     dictionaryOfEnteredVariables = ConverterUtil.putArrayListIntoHashtable(aFrameCalculator
         .getListOfVariables());
@@ -255,7 +270,7 @@ public class FrameCalculator extends JFrame {
           tmpProgressBarThread.start();
         }else{
           FrameCalculator.calculateFormula(aParentFrame);
-
+          
         }
       }
       showCalculation();
@@ -291,7 +306,7 @@ public class FrameCalculator extends JFrame {
   }
 
   /**
-   *
+   * 
    */
   public static void showCalculation() {
     textFormulaOutput.setText(calculatedFormula);

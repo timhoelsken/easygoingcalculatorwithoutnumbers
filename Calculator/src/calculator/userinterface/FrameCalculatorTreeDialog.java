@@ -3,6 +3,7 @@ package calculator.userinterface;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dialog;
+import java.awt.Point;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -34,7 +35,7 @@ public class FrameCalculatorTreeDialog extends JDialog {
 
     // define dialog window
     super(aParentFrame, "Tree", Dialog.ModalityType.DOCUMENT_MODAL);
-    setLocation(330, 330);
+    
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     getContentPane().setLayout(new BorderLayout(10, 10));
 
@@ -49,6 +50,12 @@ public class FrameCalculatorTreeDialog extends JDialog {
    */
   public void paintTree(FrameCalculator aParentFrame) {
 
+    Point tmpPoint = aParentFrame.getLocationOnScreen();
+    int tmpX = tmpPoint.x - this.getWidth();
+    int tmpY = tmpPoint.y;
+    
+    setLocation(tmpX, tmpY);
+    
     String tmpHelpTextContent = new String("");
     tmpHelpTextContent = aParentFrame.getCalculatorTree().paintMeAsString();
 

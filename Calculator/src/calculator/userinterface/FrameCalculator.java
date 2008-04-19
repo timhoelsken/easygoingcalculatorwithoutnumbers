@@ -1,6 +1,7 @@
 package calculator.userinterface;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -104,7 +105,6 @@ public class FrameCalculator extends JFrame {
     setIconImage(calculatorIcon);
 
     // define frame
-    setLocation(330, 330);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     getContentPane().setLayout(new BorderLayout(10, 10));
 
@@ -218,6 +218,11 @@ public class FrameCalculator extends JFrame {
 
     // generate frame correctly
     pack();
+    
+    Dimension tmpDimension = getToolkit().getScreenSize();
+    int tmpX = tmpDimension.width/2 - getWidth()/2;
+    int tmpY = tmpDimension.height/2 - getHeight()/2;
+    setLocation(tmpX, tmpY);
 
     // focus on textField to enter a formula directly
     textTermInput.setFocusable(true);

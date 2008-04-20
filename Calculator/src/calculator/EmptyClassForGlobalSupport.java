@@ -6,7 +6,6 @@ package calculator;
 public class EmptyClassForGlobalSupport {
 
   // comments by Raphael
-  // TODO @wer will: Klassendiagramm gerade ziehen
 
   // comments by Tim
 
@@ -18,13 +17,18 @@ public class EmptyClassForGlobalSupport {
   // "Variable forced calculating error", dann kann ich das unterscheiden und in
   // der Variablenschleife bleiben und der User muss nicht eine neue Formel
   // eingeben.
+  // @Tim: die Fehlermeldung kann ich dir leider nicht zurückgeben, da in der Klammer ein beliebiger neuer Ausdruck
+  // stehen kann (sqrt(s*sin(x)+9*2^x+23*x(-1))) - da müsste ich eine sehr aufwändige Analyse fahren... 
+  // Ich kann leider nur eine Fehlermeldung ausgeben, dass der Term in sqrt() negativ ist. Mehr Informationen habe ich nicht
+  // zur Verfügung
 
   // TODO Soweit ich das sehe ist jetzt alles bei der GUI toll. Ich stell jetzt
   // aber noch die Frage in den Raum, ob wir nicht das calculator.userinterface
   // Paket in die zwei Pakete "calculator.userinterface.console" und
   // "calculator.userinterface.frame" aufteilen sollen?
+  //von raphi: bin dafür :-) ist eine sinnvolle struktur
 
-  // TODO was ich noch vorhabe zu ändern ist das Icon. Muss ich aber nochmal von
+  // TODO @tobi - was ich noch vorhabe zu ändern ist das Icon. Muss ich aber nochmal von
   // Tobi bekommen.
 
   // TODO @all: im Moment ist es in der Console so, dass der Baum "gespeichert"
@@ -32,6 +36,8 @@ public class EmptyClassForGlobalSupport {
   // wurde. Im Frame wird der Baum jedes mal neu berechnet, was _meiner_ Ansicht
   // nach nicht der Aufgabenstellung entspricht... Sollen wir da noch was
   // optimieren oder es so lassen?
+  // von Raphi: Mir ist das schnurzpiepegal :-) lass es so. wir haben die anforderung strukturell erfüllt :-)
+  // wenn er meckert ist es in der console realisiert.
 
   // comments by Andre
 

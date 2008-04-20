@@ -9,7 +9,7 @@ public class EmptyClassForGlobalSupport {
 
   // comments by Tim
 
-  // TODO @Raphi wenn du es noch schaffst in der evaluateTree von
+  // TODO (Beantwortet) @Raphi wenn du es noch schaffst in der evaluateTree von
   // FormulaTreeUtil zwischen einer Exception wegen falscher Variablen zu
   // unterscheiden, dann kann ich auch den consolen TR toll machen :D genauer
   // gemeint ist der Fall, wenn der User die Formel sqrt(a) eingibt und dann a

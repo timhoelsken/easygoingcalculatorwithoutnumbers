@@ -20,11 +20,11 @@ public class IntegrationTest extends TestCase {
 
   /**
    * tests the whole workflow
-   *
+   * 
    * @throws Exception
    */
   public void testCalculator1() throws Exception {
-    String tmpString = ConverterUtil.termToStandardString("2 + 5 - (2*2.5)");
+    String tmpString = ConverterUtil.formulaToStandardString("2 + 5 - (2*2.5)");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
     assertEquals((double) 2.0, tmpResult);
@@ -32,11 +32,11 @@ public class IntegrationTest extends TestCase {
 
   /**
    * tests the whole workflow
-   *
+   * 
    * @throws Exception
    */
   public void testCalculator2() throws Exception {
-    String tmpString = ConverterUtil.termToStandardString("1234567890");
+    String tmpString = ConverterUtil.formulaToStandardString("1234567890");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
     assertEquals((double) 1234567890.0, tmpResult);
@@ -44,11 +44,11 @@ public class IntegrationTest extends TestCase {
 
   /**
    * tests the whole workflow
-   *
+   * 
    * @throws Exception
    */
   public void testCalculator3() throws Exception {
-    String tmpString = ConverterUtil.termToStandardString("sqrt(4)^((5-3)-2)");
+    String tmpString = ConverterUtil.formulaToStandardString("sqrt(4)^((5-3)-2)");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
     assertEquals((double) 1.0, tmpResult);
@@ -56,11 +56,11 @@ public class IntegrationTest extends TestCase {
 
   /**
    * tests the whole workflow with variables
-   *
+   * 
    * @throws Exception
    */
   public void testCalculator4() throws Exception {
-    String tmpString = ConverterUtil.termToStandardString("x^2+5-y");
+    String tmpString = ConverterUtil.formulaToStandardString("x^2+5-y");
     Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
     tmpHashtable.put("x", new Double(2));
     tmpHashtable.put("y", new Double(4));
@@ -71,11 +71,11 @@ public class IntegrationTest extends TestCase {
 
   /**
    * tests priority of operator ^
-   *
+   * 
    * @throws Exception
    */
   public void testCalculator5() throws Exception {
-    String tmpString = ConverterUtil.termToStandardString("2^sin(90)");
+    String tmpString = ConverterUtil.formulaToStandardString("2^sin(90)");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
     assertEquals((double) 2.0, tmpResult);
@@ -83,11 +83,11 @@ public class IntegrationTest extends TestCase {
 
   /**
    * tests priority of operator ^
-   *
+   * 
    * @throws Exception
    */
   public void testCalculator6() throws Exception {
-    String tmpString = ConverterUtil.termToStandardString("-2^sin(90)^2");
+    String tmpString = ConverterUtil.formulaToStandardString("-2^sin(90)^2");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
     assertEquals((double) 4.0, tmpResult);
@@ -95,14 +95,14 @@ public class IntegrationTest extends TestCase {
 
   /**
    * tests the whole workflow
-   *
+   * 
    * @throws Exception
    */
   public void testCalculator7() throws Exception {
     boolean tmpErrorOccured = false;
 
     try {
-      String tmpString = ConverterUtil.termToStandardString("sqrt(-1)");
+      String tmpString = ConverterUtil.formulaToStandardString("sqrt(-1)");
       Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (CalculatingException e) {
@@ -113,11 +113,11 @@ public class IntegrationTest extends TestCase {
 
   /**
    * tests the whole workflow with variables
-   *
+   * 
    * @throws Exception
    */
   public void testCalculator8() throws Exception {
-    String tmpString = ConverterUtil.termToStandardString("sin*sIN");
+    String tmpString = ConverterUtil.formulaToStandardString("sin*sIN");
     Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
     tmpHashtable.put("s", new Double(3));
     tmpHashtable.put("i", new Double(3));
@@ -133,7 +133,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iterations 0.1 and 0.2
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0101() throws Exception {
@@ -141,7 +141,7 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      String tmpString = ConverterUtil.termToStandardString("");
+      String tmpString = ConverterUtil.formulaToStandardString("");
       Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (FormulaConversionException e) {
@@ -152,12 +152,12 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iterations 0.1 and 0.2
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0102() throws Exception {
 
-    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("1"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("1"));
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
 
@@ -166,13 +166,13 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iterations 0.1 and 0.2
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0103() throws Exception {
     boolean tmpErrorOccured = false;
     try {
-      ConverterUtil.termToStandardString("+1");
+      ConverterUtil.formulaToStandardString("+1");
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
@@ -182,13 +182,13 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iterations 0.1 and 0.2
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0104() throws Exception {
     boolean tmpErrorOccured = false;
     try {
-      ConverterUtil.termToStandardString("*1");
+      ConverterUtil.formulaToStandardString("*1");
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
@@ -198,13 +198,13 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iterations 0.1 and 0.2
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0105() throws Exception {
     boolean tmpErrorOccured = false;
     try {
-      ConverterUtil.termToStandardString("/1");
+      ConverterUtil.formulaToStandardString("/1");
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
@@ -214,13 +214,13 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iterations 0.1 and 0.2
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0106() throws Exception {
     boolean tmpErrorOccured = false;
     try {
-      ConverterUtil.termToStandardString("^1");
+      ConverterUtil.formulaToStandardString("^1");
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
@@ -230,7 +230,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iterations 0.1 and 0.2
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0107() throws Exception {
@@ -238,7 +238,7 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("1+"));
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("1+"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
@@ -248,12 +248,12 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iterations 0.1 and 0.2
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0108() throws Exception {
 
-    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("1+1"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("1+1"));
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
 
@@ -262,7 +262,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iterations 0.1 and 0.2
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0109() throws Exception {
@@ -270,7 +270,7 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("2/0"));
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("2/0"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (CalculatingException e) {
       tmpErrorOccured = true;
@@ -282,12 +282,12 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.3
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0301() throws Exception {
 
-    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("1+1*2"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("1+1*2"));
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
 
@@ -296,12 +296,12 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.3
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0302() throws Exception {
 
-    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("1/1-1"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("1/1-1"));
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
 
@@ -310,12 +310,12 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.3
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0303() throws Exception {
 
-    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("1.5+1.2"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("1.5+1.2"));
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
 
@@ -324,7 +324,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.3
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0304() throws Exception {
@@ -332,7 +332,7 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("3+-2"));
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("3+-2"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
@@ -344,7 +344,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0401() throws Exception {
@@ -352,7 +352,7 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("("));
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("("));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
@@ -362,7 +362,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0402() throws Exception {
@@ -370,7 +370,7 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString(")"));
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString(")"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
@@ -380,7 +380,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0403() throws Exception {
@@ -388,7 +388,7 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("()"));
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("()"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
@@ -398,7 +398,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0404() throws Exception {
@@ -406,7 +406,7 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("(1+1"));
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("(1+1"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
@@ -416,7 +416,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0405() throws Exception {
@@ -424,7 +424,7 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("1+1)"));
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("1+1)"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
@@ -434,7 +434,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0406() throws Exception {
@@ -442,7 +442,7 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("()1-1"));
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("()1-1"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
@@ -452,7 +452,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0407() throws Exception {
@@ -460,7 +460,7 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("()+1"));
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("()+1"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
@@ -470,7 +470,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0408() throws Exception {
@@ -478,7 +478,7 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("()+1+1"));
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("()+1+1"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
@@ -488,7 +488,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0409() throws Exception {
@@ -496,7 +496,7 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("1()"));
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("1()"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
@@ -506,7 +506,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0410() throws Exception {
@@ -514,7 +514,7 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("()1"));
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("()1"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
@@ -524,7 +524,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0411() throws Exception {
@@ -532,7 +532,7 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("1()1+1)"));
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("1()1+1)"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
@@ -542,7 +542,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0412() throws Exception {
@@ -550,7 +550,7 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString(")(1+3"));
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString(")(1+3"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
@@ -560,12 +560,12 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0413() throws Exception {
 
-    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("5-(3-4)"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("5-(3-4)"));
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
 
@@ -574,12 +574,12 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0414() throws Exception {
 
-    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("5-(3)"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("5-(3)"));
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
 
@@ -588,12 +588,12 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0415() throws Exception {
 
-    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("5+(3)"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("5+(3)"));
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
 
@@ -602,7 +602,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.4
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0416() throws Exception {
@@ -610,7 +610,7 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("1/(1-1)"));
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("1/(1-1)"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (CalculatingException e) {
       tmpErrorOccured = true;
@@ -622,7 +622,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.5 and 0.6
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0501() throws Exception {
@@ -630,7 +630,7 @@ public class IntegrationTest extends TestCase {
     Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
     tmpHashtable.put("x", new Double(2));
 
-    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("x"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("x"));
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
 
@@ -639,7 +639,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.5 and 0.6
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0502() throws Exception {
@@ -650,7 +650,7 @@ public class IntegrationTest extends TestCase {
     tmpHashtable.put("x", new Double(2));
 
     try {
-      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("x/0"));
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("x/0"));
       FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
     } catch (CalculatingException e) {
       tmpErrorOccured = true;
@@ -660,7 +660,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.5 and 0.6
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0503() throws Exception {
@@ -668,7 +668,7 @@ public class IntegrationTest extends TestCase {
     Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
     tmpHashtable.put("x", new Double(2));
 
-    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("x/x"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("x/x"));
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
 
@@ -677,7 +677,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.5 and 0.6
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0504() throws Exception {
@@ -691,7 +691,7 @@ public class IntegrationTest extends TestCase {
     tmpHashtable.put("o", new Double(2));
     tmpHashtable.put("u", new Double(2));
 
-    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("2dirty4you"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("2dirty4you"));
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
 
@@ -702,7 +702,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0701() throws Exception {
@@ -710,7 +710,7 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("sin"));
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("sin"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (CalculatingException e) {
       tmpErrorOccured = true;
@@ -720,7 +720,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0702() throws Exception {
@@ -728,7 +728,7 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("sin()"));
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("sin()"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
@@ -738,7 +738,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0703() throws Exception {
@@ -751,7 +751,7 @@ public class IntegrationTest extends TestCase {
     tmpHashtable.put("n", new Double(2));
 
     try {
-      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("sin)"));
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("sin)"));
       FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
@@ -761,7 +761,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0704() throws Exception {
@@ -774,7 +774,7 @@ public class IntegrationTest extends TestCase {
     tmpHashtable.put("n", new Double(2));
     tmpHashtable.put("u", new Double(45));
 
-    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("cosin(us)"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("cosin(us)"));
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
 
@@ -783,12 +783,12 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0705() throws Exception {
 
-    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("sin(90)"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("sin(90)"));
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
 
@@ -797,12 +797,12 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0706() throws Exception {
 
-    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("sin((-90))"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("sin((-90))"));
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
 
@@ -811,14 +811,14 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0707() throws Exception {
 
     boolean tmpErrorOccured = false;
     try {
-      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("^"));
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("^"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
@@ -828,14 +828,14 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0708() throws Exception {
 
     boolean tmpErrorOccured = false;
     try {
-      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("2^"));
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("2^"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
@@ -845,14 +845,14 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0709() throws Exception {
 
     boolean tmpErrorOccured = false;
     try {
-      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("^2"));
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("^2"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
@@ -862,12 +862,12 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0710() throws Exception {
 
-    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("2^2"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("2^2"));
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
 
@@ -876,7 +876,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0711() throws Exception {
@@ -884,7 +884,7 @@ public class IntegrationTest extends TestCase {
     Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
     tmpHashtable.put("x", new Double(2));
 
-    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("x^x"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("x^x"));
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
 
@@ -893,7 +893,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0712() throws Exception {
@@ -901,7 +901,7 @@ public class IntegrationTest extends TestCase {
     Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
     tmpHashtable.put("x", new Double(90));
 
-    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("sin(x^1)"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("sin(x^1)"));
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
 
@@ -910,7 +910,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0713() throws Exception {
@@ -918,7 +918,7 @@ public class IntegrationTest extends TestCase {
     Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
     tmpHashtable.put("x", new Double(2));
 
-    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("x^sin(90)"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("x^sin(90)"));
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
 
@@ -927,7 +927,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0714() throws Exception {
@@ -935,7 +935,7 @@ public class IntegrationTest extends TestCase {
     Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
     tmpHashtable.put("x", new Double(2));
 
-    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("sqrt(4)"));
+    Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("sqrt(4)"));
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
 
@@ -944,7 +944,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0715() throws Exception {
@@ -952,7 +952,7 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccured = false;
 
     try {
-      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.termToStandardString("sqrt(-4)"));
+      Tree tmpTree = FormulaTreeUtil.BuildTree(ConverterUtil.formulaToStandardString("sqrt(-4)"));
       FormulaTreeUtil.EvaluateTree(tmpTree, null);
     } catch (CalculatingException e) {
       tmpErrorOccured = true;
@@ -962,7 +962,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0716() throws Exception {
@@ -970,7 +970,7 @@ public class IntegrationTest extends TestCase {
     Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
     tmpHashtable.put("x", new Double(-4));
 
-    String tmpString = ConverterUtil.termToStandardString("sqrt(-x)");
+    String tmpString = ConverterUtil.formulaToStandardString("sqrt(-x)");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
@@ -980,7 +980,7 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0717() throws Exception {
@@ -988,7 +988,7 @@ public class IntegrationTest extends TestCase {
     Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
     tmpHashtable.put("x", new Double(-4));
 
-    String tmpString = ConverterUtil.termToStandardString("-x");
+    String tmpString = ConverterUtil.formulaToStandardString("-x");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
@@ -998,12 +998,12 @@ public class IntegrationTest extends TestCase {
 
   /**
    * test of iteration 0.7
-   *
+   * 
    * @throws Exception
    */
   public void testIteration0718() throws Exception {
 
-    String tmpString = ConverterUtil.termToStandardString("-55");
+    String tmpString = ConverterUtil.formulaToStandardString("-55");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
@@ -1013,12 +1013,12 @@ public class IntegrationTest extends TestCase {
 
   /**
    * positiv test
-   *
+   * 
    * @throws Exception
    */
   public void testPositiv001() throws Exception {
 
-    String tmpString = ConverterUtil.termToStandardString("sin(55)");
+    String tmpString = ConverterUtil.formulaToStandardString("sin(55)");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
@@ -1027,12 +1027,12 @@ public class IntegrationTest extends TestCase {
 
   /**
    * positiv test
-   *
+   * 
    * @throws Exception
    */
   public void testPositiv002() throws Exception {
 
-    String tmpString = ConverterUtil.termToStandardString("(2*5)+12*3-((3/4)*1,76)");
+    String tmpString = ConverterUtil.formulaToStandardString("(2*5)+12*3-((3/4)*1,76)");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
@@ -1041,12 +1041,12 @@ public class IntegrationTest extends TestCase {
 
   /**
    * positiv test
-   *
+   * 
    * @throws Exception
    */
   public void testPositiv003() throws Exception {
 
-    String tmpString = ConverterUtil.termToStandardString("sin((1.76/3)*(700/(7*5))+cos(78.5))");
+    String tmpString = ConverterUtil.formulaToStandardString("sin((1.76/3)*(700/(7*5))+cos(78.5))");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
@@ -1055,12 +1055,12 @@ public class IntegrationTest extends TestCase {
 
   /**
    * positiv test
-   *
+   * 
    * @throws Exception
    */
   public void testPositiv004() throws Exception {
 
-    String tmpString = ConverterUtil.termToStandardString("2^(sqrt(3*cos(89)*sin(3)*tan(9)))*1.187237432");
+    String tmpString = ConverterUtil.formulaToStandardString("2^(sqrt(3*cos(89)*sin(3)*tan(9)))*1.187237432");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
@@ -1069,12 +1069,12 @@ public class IntegrationTest extends TestCase {
 
   /**
    * positiv test
-   *
+   * 
    * @throws Exception
    */
   public void testPositiv005() throws Exception {
 
-    String tmpString = ConverterUtil.termToStandardString("(-5)*sqrt(12*(12/sin(90)))*2^(-(1/2))");
+    String tmpString = ConverterUtil.formulaToStandardString("(-5)*sqrt(12*(12/sin(90)))*2^(-(1/2))");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
@@ -1083,13 +1083,13 @@ public class IntegrationTest extends TestCase {
 
   /**
    * positiv test
-   *
+   * 
    * @throws Exception
    */
   public void testPositiv006() throws Exception {
 
     String tmpString = ConverterUtil
-        .termToStandardString("2*12/5+sin(12*(2*3+2^(sin(3.4*9.8+4711)+9)/2)*tan(57))");
+        .formulaToStandardString("2*12/5+sin(12*(2*3+2^(sin(3.4*9.8+4711)+9)/2)*tan(57))");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
@@ -1098,13 +1098,13 @@ public class IntegrationTest extends TestCase {
 
   /**
    * positiv test
-   *
+   * 
    * @throws Exception
    */
   public void testPositiv007() throws Exception {
 
     String tmpString = ConverterUtil
-        .termToStandardString("2*12/6+4*8+10/2+98-43-67-981*3+2+7612634+87221-38263-19273+4846+16383+1635/5*3");
+        .formulaToStandardString("2*12/6+4*8+10/2+98-43-67-981*3+2+7612634+87221-38263-19273+4846+16383+1635/5*3");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
@@ -1113,9 +1113,9 @@ public class IntegrationTest extends TestCase {
 
   /**
    * Test method for
-   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
+   * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
    * The three examples out of the "requirement"
-   *
+   * 
    * @throws Exception
    */
   public void testRequirements() throws Exception {
@@ -1123,7 +1123,7 @@ public class IntegrationTest extends TestCase {
     Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
     tmpHashtable.put("x", new Double(2));
 
-    String tmpString = ConverterUtil.termToStandardString("(3x + 5) * 15");
+    String tmpString = ConverterUtil.formulaToStandardString("(3x + 5) * 15");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
@@ -1134,7 +1134,7 @@ public class IntegrationTest extends TestCase {
     tmpHashtable.put("x", new Double(-6));
     tmpHashtable.put("y", new Double(3));
 
-    tmpString = ConverterUtil.termToStandardString("x^2 + 2*x*y + y^2");
+    tmpString = ConverterUtil.formulaToStandardString("x^2 + 2*x*y + y^2");
     tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
@@ -1146,7 +1146,7 @@ public class IntegrationTest extends TestCase {
     tmpHashtable.put("s", new Double(100));
     tmpHashtable.put("x", new Double(-1));
 
-    tmpString = ConverterUtil.termToStandardString("c*cos(x) + s * sin(sqrt(2) - x)");
+    tmpString = ConverterUtil.formulaToStandardString("c*cos(x) + s * sin(sqrt(2) - x)");
     tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
@@ -1157,17 +1157,17 @@ public class IntegrationTest extends TestCase {
 
   /**
    * Test method for
-   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   *
+   * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
+   * 
    * @throws Exception
    */
-  public void testTermToStandardString1() throws Exception {
+  public void testFormulaToStandardString1() throws Exception {
 
     Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
     tmpHashtable.put("a", new Double(-99));
     tmpHashtable.put("b", new Double(99));
 
-    String tmpString = ConverterUtil.termToStandardString("2a + a b");
+    String tmpString = ConverterUtil.formulaToStandardString("2a + a b");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
@@ -1177,13 +1177,13 @@ public class IntegrationTest extends TestCase {
 
   /**
    * Test method for
-   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   *
+   * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
+   * 
    * @throws Exception
    */
-  public void testTermToStandardString2() throws Exception {
+  public void testFormulaToStandardString2() throws Exception {
 
-    String tmpString = ConverterUtil.termToStandardString("3 sin(4 + 5) - (-3)");
+    String tmpString = ConverterUtil.formulaToStandardString("3 sin(4 + 5) - (-3)");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
@@ -1193,11 +1193,11 @@ public class IntegrationTest extends TestCase {
 
   /**
    * Test method for
-   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   *
+   * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
+   * 
    * @throws Exception
    */
-  public void testTermToStandardString4() throws Exception {
+  public void testFormulaToStandardString4() throws Exception {
 
     Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
     tmpHashtable.put("a", new Double(1));
@@ -1206,7 +1206,7 @@ public class IntegrationTest extends TestCase {
     tmpHashtable.put("o", new Double(4));
     tmpHashtable.put("s", new Double(5));
 
-    String tmpString = ConverterUtil.termToStandardString("abcossin(cos(-3))");
+    String tmpString = ConverterUtil.formulaToStandardString("abcossin(cos(-3))");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
@@ -1216,15 +1216,15 @@ public class IntegrationTest extends TestCase {
 
   /**
    * Test method for
-   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   *
+   * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
+   * 
    * @throws Exception
    */
-  public void testTermToStandardString7() throws Exception {
+  public void testFormulaToStandardString7() throws Exception {
     Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
     tmpHashtable.put("a", new Double(-31));
 
-    String tmpString = ConverterUtil.termToStandardString("a");
+    String tmpString = ConverterUtil.formulaToStandardString("a");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
@@ -1234,16 +1234,16 @@ public class IntegrationTest extends TestCase {
 
   /**
    * Test method for
-   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   *
+   * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
+   * 
    * @throws Exception
    */
-  public void testTermToStandardString8() throws Exception {
+  public void testFormulaToStandardString8() throws Exception {
     Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
     tmpHashtable.put("a", new Double(-1));
     tmpHashtable.put("b", new Double(2));
 
-    String tmpString = ConverterUtil.termToStandardString("3+(-a+b)");
+    String tmpString = ConverterUtil.formulaToStandardString("3+(-a+b)");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
@@ -1253,17 +1253,17 @@ public class IntegrationTest extends TestCase {
 
   /**
    * Test method for
-   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   *
+   * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
+   * 
    * @throws Exception
    */
-  public void testTermToStandardString9() throws Exception {
+  public void testFormulaToStandardString9() throws Exception {
     Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
     tmpHashtable.put("s", new Double(-1));
     tmpHashtable.put("i", new Double(2));
     tmpHashtable.put("n", new Double(3));
 
-    String tmpString = ConverterUtil.termToStandardString("sin4");
+    String tmpString = ConverterUtil.formulaToStandardString("sin4");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
@@ -1273,15 +1273,15 @@ public class IntegrationTest extends TestCase {
 
   /**
    * Test method for
-   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   *
+   * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
+   * 
    * @throws Exception
    */
-  public void testTermToStandardString10() throws Exception {
+  public void testFormulaToStandardString10() throws Exception {
     Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
     tmpHashtable.put("a", new Double(500));
 
-    String tmpString = ConverterUtil.termToStandardString("-a+45");
+    String tmpString = ConverterUtil.formulaToStandardString("-a+45");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
@@ -1291,17 +1291,17 @@ public class IntegrationTest extends TestCase {
 
   /**
    * Test method for
-   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   *
+   * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
+   * 
    * @throws Exception
    */
-  public void testTermToStandardString11() throws Exception {
+  public void testFormulaToStandardString11() throws Exception {
     Hashtable<String, Double> tmpHashtable = new Hashtable<String, Double>();
     tmpHashtable.put("x", new Double(5));
     tmpHashtable.put("y", new Double(-5));
     tmpHashtable.put("z", new Double(66));
 
-    String tmpString = ConverterUtil.termToStandardString("5*x+y*z");
+    String tmpString = ConverterUtil.formulaToStandardString("5*x+y*z");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
@@ -1311,13 +1311,13 @@ public class IntegrationTest extends TestCase {
 
   /**
    * Test method for
-   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   *
+   * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
+   * 
    * @throws Exception
    */
-  public void testTermToStandardString12() throws Exception {
+  public void testFormulaToStandardString12() throws Exception {
 
-    String tmpString = ConverterUtil.termToStandardString("sin(3^cos(-4))");
+    String tmpString = ConverterUtil.formulaToStandardString("sin(3^cos(-4))");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
@@ -1328,12 +1328,12 @@ public class IntegrationTest extends TestCase {
 
   /**
    * a new test :-)
-   *
+   * 
    * @throws Exception
    */
-  public void testTermToStandardString13() throws Exception {
+  public void testFormulaToStandardString13() throws Exception {
 
-    String tmpString = ConverterUtil.termToStandardString("2*0,0000559");
+    String tmpString = ConverterUtil.formulaToStandardString("2*0,0000559");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
@@ -1345,7 +1345,7 @@ public class IntegrationTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#insertMultiplicationOperators(java.lang.String)}.
-   *
+   * 
    * @throws Exception
    */
   public void testCleanVariables() throws Exception {
@@ -1354,7 +1354,7 @@ public class IntegrationTest extends TestCase {
     tmpHashtable.put("a", new Double(5));
     tmpHashtable.put("b", new Double(-5.5));
 
-    String tmpString = ConverterUtil.termToStandardString("2a+ab");
+    String tmpString = ConverterUtil.formulaToStandardString("2a+ab");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
@@ -1370,7 +1370,7 @@ public class IntegrationTest extends TestCase {
     // negative test
     boolean tmpErrorOccurred = false;
     try {
-      ConverterUtil.termToStandardString("ä");
+      ConverterUtil.formulaToStandardString("ä");
     } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
@@ -1385,7 +1385,7 @@ public class IntegrationTest extends TestCase {
   public void testCheckIfEmptyBrackets() {
     boolean tmpErrorOccurred = false;
     try {
-      ConverterUtil.termToStandardString("()");
+      ConverterUtil.formulaToStandardString("()");
     } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
@@ -1394,12 +1394,12 @@ public class IntegrationTest extends TestCase {
 
   /**
    * Test method for {@link calculator.utils.ConverterUtil#removeBlanks()}.
-   *
+   * 
    * @throws Exception
    */
   public void testRemoveBlanks() throws Exception {
 
-    String tmpString = ConverterUtil.termToStandardString("2+  3+4 5 + 666");
+    String tmpString = ConverterUtil.formulaToStandardString("2+  3+4 5 + 666");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
@@ -1414,7 +1414,7 @@ public class IntegrationTest extends TestCase {
   public void testUnifyCommas() {
     boolean tmpErrorOccurred = false;
     try {
-      ConverterUtil.termToStandardString(",,dfa34.,.,.");
+      ConverterUtil.formulaToStandardString(",,dfa34.,.,.");
     } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
@@ -1424,12 +1424,12 @@ public class IntegrationTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#checkDecimalNumbers()}.
-   *
+   * 
    * @throws Exception
    */
   public void testCheckDecimalNumbers1() throws Exception {
 
-    String tmpString = ConverterUtil.termToStandardString("5,6+34+2.0+100.9");
+    String tmpString = ConverterUtil.formulaToStandardString("5,6+34+2.0+100.9");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
@@ -1447,7 +1447,7 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccurred = false;
 
     try {
-      ConverterUtil.termToStandardString("5.6.3+34+2.0+100.9");
+      ConverterUtil.formulaToStandardString("5.6.3+34+2.0+100.9");
     } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
@@ -1462,7 +1462,7 @@ public class IntegrationTest extends TestCase {
     // negative test
     boolean tmpErrorOccurred = false;
     try {
-      ConverterUtil.termToStandardString(".");
+      ConverterUtil.formulaToStandardString(".");
     } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
@@ -1477,7 +1477,7 @@ public class IntegrationTest extends TestCase {
     // negative test
     boolean tmpErrorOccurred = false;
     try {
-      ConverterUtil.termToStandardString(".999+7");
+      ConverterUtil.formulaToStandardString(".999+7");
     } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
@@ -1492,7 +1492,7 @@ public class IntegrationTest extends TestCase {
     // negative test
     boolean tmpErrorOccurred = false;
     try {
-      ConverterUtil.termToStandardString("999+7.");
+      ConverterUtil.formulaToStandardString("999+7.");
     } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
@@ -1507,7 +1507,7 @@ public class IntegrationTest extends TestCase {
     // negative test
     boolean tmpErrorOccurred = false;
     try {
-      ConverterUtil.termToStandardString("999+7.5+23.2+1.3.2");
+      ConverterUtil.formulaToStandardString("999+7.5+23.2+1.3.2");
     } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
@@ -1522,7 +1522,7 @@ public class IntegrationTest extends TestCase {
     // negative test
     boolean tmpErrorOccurred = false;
     try {
-      ConverterUtil.termToStandardString("999+7.5+23.2+1.3.");
+      ConverterUtil.formulaToStandardString("999+7.5+23.2+1.3.");
     } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
@@ -1537,7 +1537,7 @@ public class IntegrationTest extends TestCase {
     // negative test
     boolean tmpErrorOccurred = false;
     try {
-      ConverterUtil.termToStandardString("999+7.5+23.2+3.");
+      ConverterUtil.formulaToStandardString("999+7.5+23.2+3.");
     } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
@@ -1552,7 +1552,7 @@ public class IntegrationTest extends TestCase {
     // negative test
     boolean tmpErrorOccurred = false;
     try {
-      ConverterUtil.termToStandardString(".999+7.5+23.2+3.5");
+      ConverterUtil.formulaToStandardString(".999+7.5+23.2+3.5");
     } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
@@ -1562,7 +1562,7 @@ public class IntegrationTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#insertMultiplicationOperators()}.
-   *
+   * 
    * @throws Exception
    */
   public void testInsertMultiplicationOperators() throws Exception {
@@ -1581,7 +1581,7 @@ public class IntegrationTest extends TestCase {
     tmpHashtable.put("n", new Double(-6));
     tmpHashtable.put("o", new Double(7));
 
-    String tmpString = ConverterUtil.termToStandardString("3+5.5xa4bc3def5gh+sin+cos6");
+    String tmpString = ConverterUtil.formulaToStandardString("3+5.5xa4bc3def5gh+sin+cos6");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
@@ -1591,12 +1591,12 @@ public class IntegrationTest extends TestCase {
 
   /**
    * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
-   *
+   * 
    * @throws Exception
    */
   public void testCheckOperators1() throws Exception {
 
-    String tmpString = ConverterUtil.termToStandardString("5+6-98*(23^2)-98/8");
+    String tmpString = ConverterUtil.formulaToStandardString("5+6-98*(23^2)-98/8");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
@@ -1612,7 +1612,7 @@ public class IntegrationTest extends TestCase {
     // negative test
     boolean tmpErrorOccurred = false;
     try {
-      ConverterUtil.termToStandardString("+(23*55)");
+      ConverterUtil.formulaToStandardString("+(23*55)");
     } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
@@ -1626,7 +1626,7 @@ public class IntegrationTest extends TestCase {
     // negative test
     boolean tmpErrorOccurred = false;
     try {
-      ConverterUtil.termToStandardString("23+-99+9*8");
+      ConverterUtil.formulaToStandardString("23+-99+9*8");
     } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
@@ -1640,7 +1640,7 @@ public class IntegrationTest extends TestCase {
     // negative test
     boolean tmpErrorOccurred = false;
     try {
-      ConverterUtil.termToStandardString("23*(+99)");
+      ConverterUtil.formulaToStandardString("23*(+99)");
     } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
@@ -1654,7 +1654,7 @@ public class IntegrationTest extends TestCase {
     // negative test
     boolean tmpErrorOccurred = false;
     try {
-      ConverterUtil.termToStandardString("23*(2+99^)");
+      ConverterUtil.formulaToStandardString("23*(2+99^)");
     } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
@@ -1668,7 +1668,7 @@ public class IntegrationTest extends TestCase {
     // negative test
     boolean tmpErrorOccurred = false;
     try {
-      ConverterUtil.termToStandardString("23*(2+99)**2");
+      ConverterUtil.formulaToStandardString("23*(2+99)**2");
     } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
@@ -1682,7 +1682,7 @@ public class IntegrationTest extends TestCase {
     // negative test
     boolean tmpErrorOccurred = false;
     try {
-      ConverterUtil.termToStandardString("3+5*");
+      ConverterUtil.formulaToStandardString("3+5*");
     } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
@@ -1696,7 +1696,7 @@ public class IntegrationTest extends TestCase {
     // negative test
     boolean tmpErrorOccurred = false;
     try {
-      ConverterUtil.termToStandardString("+e");
+      ConverterUtil.formulaToStandardString("+e");
     } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
@@ -1710,7 +1710,7 @@ public class IntegrationTest extends TestCase {
     // negative test
     boolean tmpErrorOccurred = false;
     try {
-      ConverterUtil.termToStandardString("^2");
+      ConverterUtil.formulaToStandardString("^2");
     } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
@@ -1724,7 +1724,7 @@ public class IntegrationTest extends TestCase {
     // negative test
     boolean tmpErrorOccurred = false;
     try {
-      ConverterUtil.termToStandardString("2*(*2)");
+      ConverterUtil.formulaToStandardString("2*(*2)");
     } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
@@ -1733,12 +1733,12 @@ public class IntegrationTest extends TestCase {
 
   /**
    * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
-   *
+   * 
    * @throws Exception
    */
   public void testCheckOperators11() throws Exception {
 
-    String tmpString = ConverterUtil.termToStandardString("-(3+4)");
+    String tmpString = ConverterUtil.formulaToStandardString("-(3+4)");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
@@ -1748,12 +1748,12 @@ public class IntegrationTest extends TestCase {
 
   /**
    * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
-   *
+   * 
    * @throws Exception
    */
   public void testCheckOperators12() throws Exception {
     // positive test
-    String tmpString = ConverterUtil.termToStandardString("-sin(3+4)");
+    String tmpString = ConverterUtil.formulaToStandardString("-sin(3+4)");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
@@ -1763,12 +1763,12 @@ public class IntegrationTest extends TestCase {
 
   /**
    * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
-   *
+   * 
    * @throws Exception
    */
   public void testCheckOperators13() throws Exception {
 
-    String tmpString = ConverterUtil.termToStandardString("7-(3+4)");
+    String tmpString = ConverterUtil.formulaToStandardString("7-(3+4)");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
@@ -1778,12 +1778,12 @@ public class IntegrationTest extends TestCase {
 
   /**
    * Test method for {@link calculator.utils.ConverterUtil#checkOperators()}.
-   *
+   * 
    * @throws Exception
    */
   public void testCheckOperators14() throws Exception {
     // positive test
-    String tmpString = ConverterUtil.termToStandardString("5-cos(3+4)");
+    String tmpString = ConverterUtil.formulaToStandardString("5-cos(3+4)");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
@@ -1794,7 +1794,7 @@ public class IntegrationTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#setBracketsAroundNegativeNumbers()}.
-   *
+   * 
    * @throws Exception
    */
   public void testSetBracketsAroundNegativeNumbers1() throws Exception {
@@ -1804,7 +1804,7 @@ public class IntegrationTest extends TestCase {
     tmpHashtable.put("b", new Double(-2));
 
     String tmpString = ConverterUtil
-        .termToStandardString("-8+(-23.23434+(-34))*(-5)+(-23^3)+(-1*(-2*(-5)))+(-a+b)");
+        .formulaToStandardString("-8+(-23.23434+(-34))*(-5)+(-23^3)+(-1*(-2*(-5)))+(-a+b)");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
@@ -1820,7 +1820,7 @@ public class IntegrationTest extends TestCase {
   public void testSetBracketsAroundNegativeNumbers2() {
     boolean tmpErrorOccurred = false;
     try {
-      ConverterUtil.termToStandardString("-8+(-23.23434+-34)*-5+(-23^3)+(-1*(-2*(-5)))))+(-a+b)");
+      ConverterUtil.formulaToStandardString("-8+(-23.23434+-34)*-5+(-23^3)+(-1*(-2*(-5)))))+(-a+b)");
     } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
@@ -1830,11 +1830,11 @@ public class IntegrationTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#checkNegativeNumbers()}.
-   *
+   * 
    * @throws Exception
    */
   public void testCheckNegativeNumbers1() throws Exception {
-    String tmpString = ConverterUtil.termToStandardString("(-5)*(-2)+((-4)+5)");
+    String tmpString = ConverterUtil.formulaToStandardString("(-5)*(-2)+((-4)+5)");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
@@ -1849,7 +1849,7 @@ public class IntegrationTest extends TestCase {
   public void testCheckNegativeNumbers2() {
     boolean tmpErrorOccurred = false;
     try {
-      ConverterUtil.termToStandardString("-5)*(-2)+((-4)+5)");
+      ConverterUtil.formulaToStandardString("-5)*(-2)+((-4)+5)");
     } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
@@ -1865,7 +1865,7 @@ public class IntegrationTest extends TestCase {
     boolean tmpErrorOccurred = false;
 
     try {
-      ConverterUtil.termToStandardString("(-5)*-2+(-4)+5)");
+      ConverterUtil.formulaToStandardString("(-5)*-2+(-4)+5)");
     } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
@@ -1880,7 +1880,7 @@ public class IntegrationTest extends TestCase {
     // negative test
     boolean tmpErrorOccurred = false;
     try {
-      ConverterUtil.termToStandardString("(-5)*(-2)+((-4)+-5)");
+      ConverterUtil.formulaToStandardString("(-5)*(-2)+((-4)+-5)");
     } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
@@ -1889,12 +1889,12 @@ public class IntegrationTest extends TestCase {
 
   /**
    * Test method for {@link calculator.utils.ConverterUtil#checkBrackets()}.
-   *
+   * 
    * @throws Exception
    */
   public void testCheckBrackets1() throws Exception {
 
-    String tmpString = ConverterUtil.termToStandardString("(((5+5+5+5)))");
+    String tmpString = ConverterUtil.formulaToStandardString("(((5+5+5+5)))");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, null);
@@ -1910,7 +1910,7 @@ public class IntegrationTest extends TestCase {
     // negative test
     boolean tmpErrorOccurred = false;
     try {
-      ConverterUtil.termToStandardString(")(((5+5+5+5)))");
+      ConverterUtil.formulaToStandardString(")(((5+5+5+5)))");
     } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
@@ -1924,7 +1924,7 @@ public class IntegrationTest extends TestCase {
     // negative test
     boolean tmpErrorOccurred = false;
     try {
-      ConverterUtil.termToStandardString("(((5+5+5+5))))");
+      ConverterUtil.formulaToStandardString("(((5+5+5+5))))");
     } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
@@ -1938,7 +1938,7 @@ public class IntegrationTest extends TestCase {
     // negative test
     boolean tmpErrorOccurred = false;
     try {
-      ConverterUtil.termToStandardString("(((((5+5+5+5))))");
+      ConverterUtil.formulaToStandardString("(((((5+5+5+5))))");
     } catch (FormulaConversionException e) {
       tmpErrorOccurred = true;
     }
@@ -1948,7 +1948,7 @@ public class IntegrationTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#changeFunctionsIntoSigns()}.
-   *
+   * 
    * @throws Exception
    */
   public void testChangeFunctionsIntoSigns() throws Exception {
@@ -1960,7 +1960,7 @@ public class IntegrationTest extends TestCase {
     tmpHashtable.put("t", new Double(90));
     tmpHashtable.put("n", new Double(1));
 
-    String tmpString = ConverterUtil.termToStandardString("sin(abc)+cos(abcd)+tan+tan(abc)+sqrt(23)");
+    String tmpString = ConverterUtil.formulaToStandardString("sin(abc)+cos(abcd)+tan+tan(abc)+sqrt(23)");
     Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
 
     double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);

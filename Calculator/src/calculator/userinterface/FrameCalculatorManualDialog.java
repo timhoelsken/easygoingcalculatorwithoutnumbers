@@ -3,6 +3,7 @@ package calculator.userinterface;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dialog;
+import java.awt.Point;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -13,6 +14,7 @@ import javax.swing.JTextArea;
 import calculator.utils.ActionListenerUtil;
 
 /**
+ * the manual dialog
  */
 public class FrameCalculatorManualDialog extends JDialog {
 
@@ -24,17 +26,23 @@ public class FrameCalculatorManualDialog extends JDialog {
 
   /**
    * The constructor
-   *
+   * 
    * @param aParentFrame
    */
   public FrameCalculatorManualDialog(JFrame aParentFrame) {
 
     // define dialog window
     super(aParentFrame, "Help", Dialog.ModalityType.DOCUMENT_MODAL);
-    setLocation(330, 330);
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     getContentPane().setLayout(new BorderLayout(10, 10));
+  }
 
+  /**
+   * loads the manual dialog
+   */
+  public void load() {
+
+    // set text content
     String tmpHelpTextContent = new String("");
     tmpHelpTextContent = "How to use the calculator:\n" + "Enter a formula in the input field.\n"
         + "You can put in the following as part of the formula:\n\n"
@@ -46,7 +54,7 @@ public class FrameCalculatorManualDialog extends JDialog {
     textAreaContent.setText(tmpHelpTextContent);
     textAreaContent.setEnabled(false);
     textAreaContent.setDisabledTextColor(Color.BLACK);
-    textAreaContent.setBackground(aParentFrame.getBackground());
+    textAreaContent.setBackground(getParent().getBackground());
 
     // add ActionListener to Close-Button
     ActionListenerUtil.putDialogCloseListener(this, buttonClose);
@@ -63,10 +71,17 @@ public class FrameCalculatorManualDialog extends JDialog {
     // generate frame correctly
     pack();
 
+    // set location of the dialog
+    Point tmpPoint = getParent().getLocationOnScreen();
+    int tmpX = tmpPoint.x + getParent().getWidth() / 2 - getWidth() / 2;
+    int tmpY = tmpPoint.y;
+    setLocation(tmpX, tmpY);
+
     // set the "Enter"-button as defaultButton to activate enter-functionality
     getRootPane().setDefaultButton(buttonClose);
 
-    // disable resizing the dialog
+    // disable resizing the dialog and display it
     setResizable(false);
+    setVisible(true);
   }
 }

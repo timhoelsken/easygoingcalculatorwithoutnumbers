@@ -21,6 +21,7 @@ import calculator.utils.ConverterUtil;
 import calculator.utils.MathUtil;
 
 /**
+ * the variable dialog
  * 
  * @author Tim
  * 
@@ -29,14 +30,18 @@ public class FrameCalculatorVariableDialog extends JDialog {
 
   private static final long serialVersionUID = 1L;
 
+  // textField
   private JTextField[] inputFieldsOfVariablesArray = new JTextField[0];
 
+  // labels
   private JLabel[] labelsOfVariablesArray = new JLabel[0];
   private JLabel labelTitle = new JLabel();
 
+  // buttons
   private JButton buttonEnter = new JButton("Enter");
   private JButton buttonCancel = new JButton("Cancel");
 
+  // sub panels
   private JPanel panelButton = new JPanel();
   private JPanel panelLabelsForVariable = new JPanel();
   private JPanel panelTextFieldsForVariables = new JPanel();
@@ -50,8 +55,7 @@ public class FrameCalculatorVariableDialog extends JDialog {
 
     // define modal dialog
     super(aParentFrame, "Variable Input", Dialog.ModalityType.DOCUMENT_MODAL);
-    
-    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    addWindowListener(new FrameCalculatorCloseVariableDialog());
     getContentPane().setLayout(new BorderLayout(10, 10));
 
     buttonEnter.addActionListener(new ActionListener() {
@@ -63,10 +67,10 @@ public class FrameCalculatorVariableDialog extends JDialog {
         // the list
         for (int i = 0; i < FrameCalculatorVariableDialog.this.getInputFieldsOfVariablesArray().length; i++) {
 
-          if (MathUtil.isDouble(ConverterUtil.unifyCommas(FrameCalculatorVariableDialog.this.getInputFieldsOfVariablesArray()[i]
-              .getText()))) {
-            FrameCalculatorVariableDialog.this.getParentFrame().getListOfVariables().get(i)[1] = ConverterUtil.unifyCommas(FrameCalculatorVariableDialog.this
-                .getInputFieldsOfVariablesArray()[i].getText());
+          if (MathUtil.isDouble(ConverterUtil.unifyCommas(FrameCalculatorVariableDialog.this
+              .getInputFieldsOfVariablesArray()[i].getText()))) {
+            FrameCalculatorVariableDialog.this.getParentFrame().getListOfVariables().get(i)[1] = ConverterUtil
+                .unifyCommas(FrameCalculatorVariableDialog.this.getInputFieldsOfVariablesArray()[i].getText());
           } else {
             tmpAllVariablesAreFloats = false;
             i = FrameCalculatorVariableDialog.this.getInputFieldsOfVariablesArray().length;
@@ -80,7 +84,8 @@ public class FrameCalculatorVariableDialog extends JDialog {
 
           // use the progressBar?
           if (FrameCalculator.isLoadProgressBar()) {
-            Thread tmpProgressBarThread = new ProgressBarThread(FrameCalculatorVariableDialog.this.getParentFrame());
+            Thread tmpProgressBarThread = new ProgressBarThread(FrameCalculatorVariableDialog.this
+                .getParentFrame());
             tmpProgressBarThread.start();
           } else {
             FrameCalculator.calculateFormula(FrameCalculatorVariableDialog.this.getParentFrame());
@@ -92,7 +97,7 @@ public class FrameCalculatorVariableDialog extends JDialog {
         }
       }
     });
-    
+
     ActionListenerUtil.putDialogCloseListener(this, buttonCancel);
   }
 
@@ -103,12 +108,12 @@ public class FrameCalculatorVariableDialog extends JDialog {
    */
   public void load(ArrayList<String[]> aListOfVariables) {
 
+    // set location of the dialog
     Point tmpPoint = this.getParent().getLocationOnScreen();
-    int tmpX = tmpPoint.x + this.getParent().getWidth();
+    int tmpX = tmpPoint.x + getParent().getWidth();
     int tmpY = tmpPoint.y;
-    
     setLocation(tmpX, tmpY);
-    
+
     // define Panels for the button and dynamic variable input
     if (aListOfVariables.size() > 1) {
       panelButton = new JPanel(new GridLayout(aListOfVariables.size(), 1));
@@ -123,9 +128,8 @@ public class FrameCalculatorVariableDialog extends JDialog {
     // an arraylist in the size of variable number
     labelsOfVariablesArray = new JLabel[aListOfVariables.size()];
 
-    // the private attribute of the FrameCalculator is redimensioned to the size
-    // of
-    // variable number
+    // the attribute of variableDialog is redimensioned to the size of variable
+    // number
     inputFieldsOfVariablesArray = new JTextField[aListOfVariables.size()];
 
     // each variable gets its Label and textField, which is centered
@@ -136,13 +140,14 @@ public class FrameCalculatorVariableDialog extends JDialog {
       labelsOfVariablesArray[i] = new JLabel(aListOfVariables.get(i)[0] + " = ");
       inputFieldsOfVariablesArray[i] = new JTextField(3);
 
+      // the variable already has a value, it is set in the textField
       if (aListOfVariables.get(i)[1] != null) {
         inputFieldsOfVariablesArray[i].setText(aListOfVariables.get(i)[1]);
       } else {
         inputFieldsOfVariablesArray[i].setText("");
       }
 
-      // allign elements
+      // align elements
       labelsOfVariablesArray[i].setHorizontalAlignment(JLabel.CENTER);
       inputFieldsOfVariablesArray[i].setHorizontalAlignment(JTextField.CENTER);
 
@@ -153,6 +158,7 @@ public class FrameCalculatorVariableDialog extends JDialog {
       panelButton.add(buttonCancel);
     }
 
+    // define title
     String tmpValue = "value";
     String tmpVariable = "variable";
     if (inputFieldsOfVariablesArray.length > 1) {
@@ -180,17 +186,16 @@ public class FrameCalculatorVariableDialog extends JDialog {
     // generate frame correctly
     pack();
 
-    // disable resizing the dialog
+    // disable resizing the dialog and display it
     setResizable(false);
-
     setVisible(true);
   }
-  
+
   /**
    * 
-   * @return
+   * @return the FrameCalculator
    */
-  public FrameCalculator getParentFrame(){
+  public FrameCalculator getParentFrame() {
     return ((FrameCalculator) this.getParent());
   }
 

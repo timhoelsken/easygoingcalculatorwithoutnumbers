@@ -10,13 +10,29 @@ public class EmptyClassForGlobalSupport {
 
   // comments by Tim
 
-  // TODO @all: Der TR wird jetz immer in der Mitte vom Bildschirm geöffnet, das
-  // Variablenfenster öffnet sich immer rechts neben dem TR. Beim Baum will das
-  // irgendwie nicht klappen, wer schauen mag kann das gerne tun. Ein Problem
-  // habe ich noch bei der GUI, wenn der Variablendialog geöffnet ist und der
-  // User das fenster weg Xt dann ist der calculate button noch disabled. Lösung
-  // dafür hab ich schon, muss ich aber noch implementieren.
-  
+  // TODO @Raphi wenn du es noch schaffst in der evaluateTree von
+  // FormulaTreeUtil zwischen einer Exception wegen falscher Variablen zu
+  // unterscheiden, dann kann ich auch den consolen TR toll machen :D genauer
+  // gemeint ist der Fall, wenn der User die Formel sqrt(a) eingibt und dann a
+  // mit -1 belegt. Wenn du mir da als Exception etwas zurück gibst wie
+  // "Variable forced calculating error", dann kann ich das unterscheiden und in
+  // der Variablenschleife bleiben und der User muss nicht eine neue Formel
+  // eingeben.
+
+  // TODO Soweit ich das sehe ist jetzt alles bei der GUI toll. Ich stell jetzt
+  // aber noch die Frage in den Raum, ob wir nicht das calculator.userinterface
+  // Paket in die zwei Pakete "calculator.userinterface.console" und
+  // "calculator.userinterface.frame" aufteilen sollen?
+
+  // TODO was ich noch vorhabe zu ändern ist das Icon. Muss ich aber nochmal von
+  // Tobi bekommen.
+
+  // TODO @all: im Moment ist es in der Console so, dass der Baum "gespeichert"
+  // wird und nicht immer neu berechnet wird, solange kein neuer eingegeben
+  // wurde. Im Frame wird der Baum jedes mal neu berechnet, was _meiner_ Ansicht
+  // nach nicht der Aufgabenstellung entspricht... Sollen wir da noch was
+  // optimieren oder es so lassen?
+
   // comments by Andre
 
   // comments by Tobi

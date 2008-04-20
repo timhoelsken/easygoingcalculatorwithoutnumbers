@@ -11,6 +11,7 @@ public final class ConsoleInput {
   private static String inputString;
 
   /**
+   * Reads the console input of the user
    * 
    * @return The input of the user, tested and corrected with private methods on
    *         usability

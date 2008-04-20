@@ -15,9 +15,9 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
+   * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
    * The three examples out of the "requirement"
-   *
+   * 
    * @throws Exception
    */
   public void testRequirements() throws Exception {
@@ -25,7 +25,7 @@ public class StringConvertTest extends TestCase {
     String tmpConvertedString = null;
 
     try {
-      tmpConvertedString = ConverterUtil.termToStandardString("(3x + 5) * 15");
+      tmpConvertedString = ConverterUtil.formulaToStandardString("(3x + 5) * 15");
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
@@ -37,7 +37,7 @@ public class StringConvertTest extends TestCase {
     tmpConvertedString = null;
 
     try {
-      tmpConvertedString = ConverterUtil.termToStandardString("x^2 + 2*x*y + y^2");
+      tmpConvertedString = ConverterUtil.formulaToStandardString("x^2 + 2*x*y + y^2");
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
@@ -49,7 +49,7 @@ public class StringConvertTest extends TestCase {
     tmpConvertedString = null;
 
     try {
-      tmpConvertedString = ConverterUtil.termToStandardString("c*cos(x) + s * sin(sqrt(2) - x)");
+      tmpConvertedString = ConverterUtil.formulaToStandardString("c*cos(x) + s * sin(sqrt(2) - x)");
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
@@ -60,29 +60,29 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   *
+   * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
+   * 
    * @throws Exception
    */
-  public void testTermToStandardString1() throws Exception {
+  public void testFormulaToStandardString1() throws Exception {
 
     String tmpString = new String("2a + a b");
-    assertTrue("The String has Variables separated by *", ConverterUtil.termToStandardString(tmpString)
+    assertTrue("The String has Variables separated by *", ConverterUtil.formulaToStandardString(tmpString)
         .equals("2*a+a*b"));
   }
 
   /**
    * Test method for
-   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   *
+   * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
+   * 
    * @throws Exception
    */
-  public void testTermToStandardString2() throws Exception {
+  public void testFormulaToStandardString2() throws Exception {
     boolean tmpErrorOccured = false;
     String tmpConvertedString = null;
 
     try {
-      tmpConvertedString = ConverterUtil.termToStandardString("3 sin(4 + 5) - (-3)");
+      tmpConvertedString = ConverterUtil.formulaToStandardString("3 sin(4 + 5) - (-3)");
     } catch (IllegalArgumentException e) {
       tmpErrorOccured = true;
       e.printStackTrace();
@@ -94,16 +94,16 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   *
+   * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
+   * 
    * @throws Exception
    */
-  public void testTermToStandardString4() throws Exception {
+  public void testFormulaToStandardString4() throws Exception {
     boolean tmpErrorOccured = false;
     String tmpConvertedString = null;
 
     try {
-      tmpConvertedString = ConverterUtil.termToStandardString("abcossin(cos(-3))");
+      tmpConvertedString = ConverterUtil.formulaToStandardString("abcossin(cos(-3))");
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
@@ -114,15 +114,15 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   *
+   * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
+   * 
    * @throws Exception
    */
-  public void testTermToStandardString5() throws Exception {
+  public void testFormulaToStandardString5() throws Exception {
     boolean tmpErrorOccured = false;
 
     try {
-      ConverterUtil.termToStandardString("a^cos((-3+4)^(2+1))*s df ghj+3-");
+      ConverterUtil.formulaToStandardString("a^cos((-3+4)^(2+1))*s df ghj+3-");
     } catch (FormulaConversionException e) {
       assertTrue("The formula ends with an operator.".equals(e.getMessage()));
       tmpErrorOccured = true;
@@ -132,15 +132,15 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   *
+   * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
+   * 
    * @throws Exception
    */
-  public void testTermToStandardString6() throws Exception {
+  public void testFormulaToStandardString6() throws Exception {
     boolean tmpErrorOccured = false;
 
     try {
-      ConverterUtil.termToStandardString("-");
+      ConverterUtil.formulaToStandardString("-");
     } catch (FormulaConversionException e) {
       assertEquals("The formula ends with an operator.", e.getMessage());
       tmpErrorOccured = true;
@@ -150,15 +150,15 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   *
+   * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
+   * 
    * @throws Exception
    */
-  public void testTermToStandardString7() throws Exception {
+  public void testFormulaToStandardString7() throws Exception {
     boolean tmpErrorOccured = false;
 
     try {
-      ConverterUtil.termToStandardString("a");
+      ConverterUtil.formulaToStandardString("a");
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
@@ -167,16 +167,16 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   *
+   * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
+   * 
    * @throws Exception
    */
-  public void testTermToStandardString8() throws Exception {
+  public void testFormulaToStandardString8() throws Exception {
     boolean tmpErrorOccured = false;
     String tmpConvertedString = null;
 
     try {
-      tmpConvertedString = ConverterUtil.termToStandardString("3+(-a+b)");
+      tmpConvertedString = ConverterUtil.formulaToStandardString("3+(-a+b)");
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
@@ -186,16 +186,16 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   *
+   * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
+   * 
    * @throws Exception
    */
-  public void testTermToStandardString9() throws Exception {
+  public void testFormulaToStandardString9() throws Exception {
     boolean tmpErrorOccured = false;
     String tmpConvertedString = null;
 
     try {
-      tmpConvertedString = ConverterUtil.termToStandardString("sin4");
+      tmpConvertedString = ConverterUtil.formulaToStandardString("sin4");
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
@@ -204,16 +204,16 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   *
+   * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
+   * 
    * @throws Exception
    */
-  public void testTermToStandardString10() throws Exception {
+  public void testFormulaToStandardString10() throws Exception {
     boolean tmpErrorOccured = false;
     String tmpConvertedString = null;
 
     try {
-      tmpConvertedString = ConverterUtil.termToStandardString("-a+45");
+      tmpConvertedString = ConverterUtil.formulaToStandardString("-a+45");
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
@@ -222,16 +222,16 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   *
+   * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
+   * 
    * @throws Exception
    */
-  public void testTermToStandardString11() throws Exception {
+  public void testFormulaToStandardString11() throws Exception {
     boolean tmpErrorOccured = false;
     String tmpConvertedString = null;
 
     try {
-      tmpConvertedString = ConverterUtil.termToStandardString("5*x+y*z");
+      tmpConvertedString = ConverterUtil.formulaToStandardString("5*x+y*z");
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
@@ -241,16 +241,16 @@ public class StringConvertTest extends TestCase {
 
   /**
    * Test method for
-   * {@link calculator.utils.ConverterUtil#termToStandardString(java.lang.String)}.
-   *
+   * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
+   * 
    * @throws Exception
    */
-  public void testTermToStandardString12() throws Exception {
+  public void testFormulaToStandardString12() throws Exception {
     boolean tmpErrorOccured = false;
     String tmpConvertedString = null;
 
     try {
-      tmpConvertedString = ConverterUtil.termToStandardString("sin(3^cos(-4))");
+      tmpConvertedString = ConverterUtil.formulaToStandardString("sin(3^cos(-4))");
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
@@ -260,16 +260,16 @@ public class StringConvertTest extends TestCase {
 
   /**
    * a new test :-)
-   *
+   * 
    * @throws Exception
    */
-  public void testTermToStandardString13() throws Exception {
+  public void testFormulaToStandardString13() throws Exception {
 
     boolean tmpErrorOccured = false;
     String tmpConvertedString = null;
 
     try {
-      tmpConvertedString = ConverterUtil.termToStandardString("2*0,0000559");
+      tmpConvertedString = ConverterUtil.formulaToStandardString("2*0,0000559");
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
@@ -281,14 +281,14 @@ public class StringConvertTest extends TestCase {
 
   /**
    * another new test :-)
-   *
+   * 
    * @throws Exception
    */
-  public void testTermToStandardString14() throws Exception {
+  public void testFormulaToStandardString14() throws Exception {
     // positive test
     String tmpString = null;
-	try {
-      tmpString = ConverterUtil.termToStandardString("sin(abc)+cos(abcd)+tan+tan(abc)+sqrt(23)");
+    try {
+      tmpString = ConverterUtil.formulaToStandardString("sin(abc)+cos(abcd)+tan+tan(abc)+sqrt(23)");
     } catch (FormulaConversionException e) {
       assertTrue(false);
     }
@@ -297,14 +297,14 @@ public class StringConvertTest extends TestCase {
 
   /**
    * another new test :-)
-   *
+   * 
    * @throws Exception
    */
-  public void testTermToStandardString15() throws Exception {
+  public void testFormulaToStandardString15() throws Exception {
     // negative test
     boolean tmpErrorOccured = false;
-	try {
-      ConverterUtil.termToStandardString("4,7.2");
+    try {
+      ConverterUtil.formulaToStandardString("4,7.2");
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
@@ -313,14 +313,14 @@ public class StringConvertTest extends TestCase {
 
   /**
    * another new test ...
-   *
+   * 
    * @throws Exception
    */
-  public void testTermToStandardString16() throws Exception {
+  public void testFormulaToStandardString16() throws Exception {
     // negative test
     boolean tmpErrorOccured = false;
-	try {
-      ConverterUtil.termToStandardString("2+32.a");
+    try {
+      ConverterUtil.formulaToStandardString("2+32.a");
     } catch (FormulaConversionException e) {
       tmpErrorOccured = true;
     }
@@ -330,10 +330,10 @@ public class StringConvertTest extends TestCase {
   /**
    * @throws Exception
    */
-  public void testTermToGUIStandardString14() throws Exception {
+  public void testFormulaToGUIStandardString14() throws Exception {
     // positive test
     String tmpString = null;
-    tmpString = ConverterUtil.termToGUIStandardString("Ya* aA+ B   - x");
+    tmpString = ConverterUtil.formulaToGUIStandardString("Ya* aA+ B   - x");
     assertEquals("ya*aa+b-x", tmpString);
   }
 

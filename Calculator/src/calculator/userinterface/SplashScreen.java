@@ -10,8 +10,10 @@ import java.net.URL;
 import javax.swing.JWindow;
 
 /**
+ * the splashScreen
+ * 
  * @author Tobias
- *
+ * 
  */
 public class SplashScreen extends JWindow implements Runnable {
 
@@ -21,6 +23,8 @@ public class SplashScreen extends JWindow implements Runnable {
    * runs the splashscreen
    */
   public void run() {
+
+    // define screen and set location
     setSize(600, 300);
     setLocationRelativeTo(null);
     setVisible(true);
@@ -35,13 +39,16 @@ public class SplashScreen extends JWindow implements Runnable {
 
   /**
    * shows us the splashscreen
-   *
+   * 
    * @param g
    */
   public void paint(Graphics g) {
+
+    // load image
     ClassLoader tmpClassLoader = this.getClass().getClassLoader();
-    URL tmpUrl = tmpClassLoader.getResource("SplashScreen.jpg");   
+    URL tmpUrl = tmpClassLoader.getResource("SplashScreen.jpg");
     Image tmpSplashImage = getToolkit().getImage(tmpUrl);
+
     g.drawImage(tmpSplashImage, 0, 0, this);
   }
 }

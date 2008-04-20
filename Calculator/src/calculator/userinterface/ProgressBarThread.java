@@ -3,6 +3,8 @@ package calculator.userinterface;
 import javax.swing.JProgressBar;
 
 /**
+ * the progress bar
+ * 
  * @author Tim
  */
 public class ProgressBarThread extends Thread {
@@ -51,6 +53,7 @@ public class ProgressBarThread extends Thread {
     progressBar.setString("100%");
 
     // when finished, show the Result
-    FrameCalculator.calculateFormula((FrameCalculator)progressBar.getParent().getParent().getParent().getParent().getParent());
+    FrameCalculator.calculateFormula((FrameCalculator) progressBar.getParent().getParent().getParent()
+        .getParent().getParent());
   }
 }

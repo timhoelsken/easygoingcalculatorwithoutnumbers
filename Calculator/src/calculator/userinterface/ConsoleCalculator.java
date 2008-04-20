@@ -12,12 +12,13 @@ import calculator.utils.FormulaTreeUtil;
 import calculator.utils.MathUtil;
 
 /**
+ * the console calculator
  */
 public class ConsoleCalculator {
 
   /**
-   * The Calculator
-   *
+   * starts the console calculator
+   * 
    * @param args
    */
   public static void start() {
@@ -46,8 +47,8 @@ public class ConsoleCalculator {
         tmpInputString = "";
 
         boolean tmpFormulaHasVariables = false;
-        boolean tmpErrorOccuredInTerm = false;
-        boolean tmpErrorOccuredInVariableInput = false;
+        boolean tmpErrorOccuredInFormula = false;
+        boolean tmpErrorOccuredInVariableInput = false; // TODO Marked4Tim
 
         String tmpEnterVariablesValue = new String("");
 
@@ -60,28 +61,29 @@ public class ConsoleCalculator {
         while (!tmpInputString.toLowerCase().equals("n")) {
 
           // reset of control variables and tree
-          tmpErrorOccuredInTerm = false;
+          tmpErrorOccuredInFormula = false;
           tmpEnterVariablesValue = "";
           tmpTree = null;
 
           ConsoleOutput.promptFormulaInput();
 
-          // the user types in the term
+          // the user types in the formula
           try {
             tmpInputString = ConsoleInput.getConsoleInput();
           } catch (IOException e) {
             ConsoleOutput.printError(e.getMessage());
           }
 
+          // convert input into the standard string
           try {
-            tmpInputString = ConverterUtil.termToStandardString(tmpInputString);
+            tmpInputString = ConverterUtil.formulaToStandardString(tmpInputString);
           } catch (FormulaConversionException e) {
             ConsoleOutput.printError(e.getMessage());
-            tmpErrorOccuredInTerm = true;
+            tmpErrorOccuredInFormula = true;
             tmpTree = null;
           }
 
-          if (!tmpErrorOccuredInTerm) {
+          if (!tmpErrorOccuredInFormula) {
 
             tmpFormulaHasVariables = ConverterUtil.hasVariables(tmpInputString);
 
@@ -102,6 +104,7 @@ public class ConsoleCalculator {
                     tmpInputVariableValue = "";
                     System.out.print(tmpVariablesList.get(i)[0] + " = ");
 
+                    // read users input
                     try {
                       tmpInputVariableValue = ConsoleInput.getConsoleInput();
                     } catch (IOException e) {
@@ -111,6 +114,8 @@ public class ConsoleCalculator {
                     // convert , to .
                     tmpInputVariableValue = ConverterUtil.unifyCommas(tmpInputVariableValue);
 
+                    // while the entered value is not a double value, show
+                    // message and repeat the loop
                     if (!MathUtil.isDouble(tmpInputVariableValue)) {
                       ConsoleOutput.invalidDouble();
                     }
@@ -120,6 +125,7 @@ public class ConsoleCalculator {
                   tmpVariablesList.get(i)[1] = tmpInputVariableValue;
                 }
 
+                // put list into a dictionary
                 tmpVariableDictionary = ConverterUtil.putArrayListIntoHashtable(tmpVariablesList);
                 // ==== Variable input end ====
               }
@@ -128,10 +134,12 @@ public class ConsoleCalculator {
               // calculate formula
               try {
 
+                // if the tree already exist, use it!
                 if (tmpTree == null) {
                   tmpTree = FormulaTreeUtil.BuildTree(tmpInputString);
                 }
 
+                // calculate!
                 System.out.println(FormulaTreeUtil.EvaluateTree(tmpTree, tmpVariableDictionary));
 
                 // to avoid endless loop the control is set to "n"
@@ -146,15 +154,15 @@ public class ConsoleCalculator {
                 System.out.println(e.getMessage());
                 tmpTree = null;
                 // if (e.getMessage().equals("")){
-                tmpErrorOccuredInVariableInput = true;
+                tmpErrorOccuredInVariableInput = true; // TODO Marked4Tim
                 //
                 // else{
-                tmpErrorOccuredInTerm = true;
+                tmpErrorOccuredInFormula = true;
                 // }
               }
 
               // if no error occured and the formula has variables, the user is
-              // asked if he wants to set another variable
+              // asked if he wants to enter another variable
               if (!tmpErrorOccuredInVariableInput && tmpFormulaHasVariables) {
 
                 ConsoleOutput.askAnotherVariableInput();
@@ -163,11 +171,10 @@ public class ConsoleCalculator {
                   tmpEnterVariablesValue = ConsoleInput.getConsoleInput();
                 } catch (IOException e) {
                   ConsoleOutput.printError(e.getMessage());
-                  // e.printStackTrace();
                 }
               }
               // Enter variables loop
-            } while (!"n".equals(tmpEnterVariablesValue) && !tmpErrorOccuredInTerm);
+            } while (!"n".equals(tmpEnterVariablesValue) && !tmpErrorOccuredInFormula);
           }
 
           ConsoleOutput.askAnotherFormulaInput();
@@ -176,9 +183,9 @@ public class ConsoleCalculator {
             tmpInputString = ConsoleInput.getConsoleInput();
           } catch (IOException e) {
             ConsoleOutput.printError(e.getMessage());
-            // e.printStackTrace();
           }
 
+          // end of entering formulas loop
         }
 
         // if helpmenu

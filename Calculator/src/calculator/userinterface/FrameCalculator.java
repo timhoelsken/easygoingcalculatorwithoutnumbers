@@ -29,7 +29,7 @@ import calculator.utils.ConverterUtil;
 import calculator.utils.FormulaTreeUtil;
 
 /**
- * This openes the calculator in a frame.
+ * This is the frame based calculator
  */
 public class FrameCalculator extends JFrame {
 
@@ -39,8 +39,8 @@ public class FrameCalculator extends JFrame {
 
   // dialogs
   private FrameCalculatorVariableDialog dialogEnterVariables = new FrameCalculatorVariableDialog(this);
-  private FrameCalculatorManualDialog dialogHelpText = new FrameCalculatorManualDialog(this);
-  private FrameCalculatorAboutDialog dialogInfoText = new FrameCalculatorAboutDialog(this);
+  private FrameCalculatorManualDialog dialogManualText = new FrameCalculatorManualDialog(this);
+  private FrameCalculatorAboutDialog dialogAboutText = new FrameCalculatorAboutDialog(this);
   private FrameCalculatorTreeDialog dialogShowTree = new FrameCalculatorTreeDialog(this);
 
   // sub panels
@@ -53,11 +53,11 @@ public class FrameCalculator extends JFrame {
   private JLabel labelResult = new JLabel("RESULT:");
 
   // input / output fields
-  private JTextField textTermInput = new JTextField(16);
+  private JTextField textFormulaInput = new JTextField(16);
   private static JTextField textFormulaOutput = new JTextField();
 
   // button to calculate formula
-  private static JButton buttonCalculateTerm = new JButton("calculate");
+  private static JButton buttonCalculateFormula = new JButton("calculate");
 
   // == Menu Components ==
   private JMenuBar menuBarcalculator = new JMenuBar();
@@ -111,7 +111,7 @@ public class FrameCalculator extends JFrame {
     // align elements
     labelCalculatorTitle.setHorizontalAlignment(JLabel.CENTER);
     labelEnterFormula.setVerticalAlignment((JLabel.TOP));
-    buttonCalculateTerm.setVerticalAlignment(JButton.CENTER);
+    buttonCalculateFormula.setVerticalAlignment(JButton.CENTER);
     labelResult.setHorizontalAlignment(JLabel.LEFT);
     textFormulaOutput.setHorizontalAlignment(JTextField.CENTER);
 
@@ -144,24 +144,25 @@ public class FrameCalculator extends JFrame {
     panelBottom.add(labelResult);
     panelBottom.add(textFormulaOutput);
 
-    panelCenter.add(textTermInput);
+    panelCenter.add(textFormulaInput);
     panelCenter.add(progressBar);
 
-    // place labels, textField, button and panel on frame
+    // place labels, textField, button and panels on frame
     getContentPane().add(BorderLayout.NORTH, labelCalculatorTitle);
     getContentPane().add(BorderLayout.WEST, labelEnterFormula);
     getContentPane().add(BorderLayout.CENTER, panelCenter);
-    getContentPane().add(BorderLayout.EAST, buttonCalculateTerm);
+    getContentPane().add(BorderLayout.EAST, buttonCalculateFormula);
     getContentPane().add(BorderLayout.SOUTH, panelBottom);
 
     // place menu on the frame
     setJMenuBar(menuBarcalculator);
 
-    // add listeners
-    ActionListenerUtil.putMenuItemOpenDialogListener(menuItemManual, dialogHelpText);
-    ActionListenerUtil.putMenuItemOpenDialogListener(menuItemAbout, dialogInfoText);
+    // *** add listeners ***
+    ActionListenerUtil.putMenuItemOpenDialogListener(menuItemManual, dialogManualText);
+    ActionListenerUtil.putMenuItemOpenDialogListener(menuItemAbout, dialogAboutText);
 
-    buttonCalculateTerm.addActionListener(new ActionListener() {
+    // for calculating
+    buttonCalculateFormula.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent ae) {
 
         // reset progressbar if it is activated
@@ -172,8 +173,8 @@ public class FrameCalculator extends JFrame {
         convertAndCalculate();
       }
     });
-    
-    // == ActionListener of the menu ==   
+
+    // == ActionListener of the menu ==
     menuItemExit.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent ae) {
 
@@ -182,7 +183,7 @@ public class FrameCalculator extends JFrame {
         System.exit(0);
       }
     });
-    
+
     menuItemProgressBar.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent ae) {
 
@@ -200,7 +201,7 @@ public class FrameCalculator extends JFrame {
         FrameCalculator.this.repaint();
       }
     });
-    
+
     menuItemShowTree.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent ae) {
 
@@ -213,26 +214,29 @@ public class FrameCalculator extends JFrame {
         }
       }
     });
-    
+
     // == ActionListener of the menu ==
+
+    // *** add listeners ***
 
     // generate frame correctly
     pack();
-    
+
+    // set location of the frame
     Dimension tmpDimension = getToolkit().getScreenSize();
-    int tmpX = tmpDimension.width/2 - getWidth()/2;
-    int tmpY = tmpDimension.height/2 - getHeight()/2;
+    int tmpX = tmpDimension.width / 2 - getWidth() / 2;
+    int tmpY = tmpDimension.height / 2 - getHeight() / 2;
     setLocation(tmpX, tmpY);
 
     // focus on textField to enter a formula directly
-    textTermInput.setFocusable(true);
+    textFormulaInput.setFocusable(true);
 
     // set progressBar invisible by default
     progressBar.setVisible(false);
 
     // set the "Calculate"-button as defaultButton to activate
     // enter-functionality
-    getRootPane().setDefaultButton(buttonCalculateTerm);
+    getRootPane().setDefaultButton(buttonCalculateFormula);
 
     // disable result textField
     textFormulaOutput.setEditable(false);
@@ -263,33 +267,36 @@ public class FrameCalculator extends JFrame {
       if (!loadProgressBar) {
         textFormulaOutput.setText(calculatedFormula);
       }
-      textFormulaOutput.setEditable(true);
+
+      enableButtonCalculateFormula();
       showCalculation();
+
       if (displayTree) {
         aFrameCalculator.dialogShowTree.paintTree(aFrameCalculator);
       }
     } catch (CalculatingException e) {
       calculatedFormula = ERROR;
-      textFormulaOutput.setEditable(true);
+
+      enableButtonCalculateFormula();
       showCalculation();
+
       JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "An error occured!",
           JOptionPane.WARNING_MESSAGE);
     }
   }
 
   /**
-   * @param aParentFrame
+   * converts the formula to standard string and calls calculate formula
    */
   private void convertAndCalculate() {
-    
-    buttonCalculateTerm.setEnabled(false);
-    
+
+    buttonCalculateFormula.setEnabled(false);
+
     // convert the user's input to standard string
     try {
-      textTermInput.setText(
-          (ConverterUtil.termToGUIStandardString(textTermInput.getText())));
+      textFormulaInput.setText((ConverterUtil.formulaToGUIStandardString(textFormulaInput.getText())));
 
-      convertedFormula = ConverterUtil.termToStandardString(textTermInput.getText());
+      convertedFormula = ConverterUtil.formulaToStandardString(textFormulaInput.getText());
 
       textFormulaOutput.setText("");
       calculatedFormula = "";
@@ -297,12 +304,16 @@ public class FrameCalculator extends JFrame {
       // if the formula has Variables, a new frame is opened
       if (ConverterUtil.hasVariables(getConvertedFormula())) {
 
+        // remember values of already entered variables
         ArrayList<String[]> tmpOldVariables = getListOfVariables();
         ArrayList<String[]> tmpNewVariables = ConverterUtil.getVariables(getConvertedFormula());
+
         for (String[] tmpNewStrings : tmpNewVariables) {
           String tmpNewVariable = tmpNewStrings[0];
+
           for (String[] tmpOldStrings : tmpOldVariables) {
             String tmpOldVariable = tmpOldStrings[0];
+
             if (tmpNewVariable.equals(tmpOldVariable)) {
               tmpNewStrings[1] = tmpOldStrings[1];
             }
@@ -325,31 +336,32 @@ public class FrameCalculator extends JFrame {
           tmpProgressBarThread.start();
         } else {
           FrameCalculator.calculateFormula(this);
-
         }
       }
-     } catch (FormulaConversionException e) {
+    } catch (FormulaConversionException e) {
       calculatedFormula = ERROR;
-      buttonCalculateTerm.setEnabled(true);
+
+      enableButtonCalculateFormula();
       showCalculation();
+
       JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "An error occured!",
           JOptionPane.WARNING_MESSAGE);
     }
   }
-  
+
   /**
-   * 
+   * displays the result
    */
   public static void showCalculation() {
     textFormulaOutput.setText(calculatedFormula);
-    buttonCalculateTerm.setEnabled(true);
+    enableButtonCalculateFormula();
   }
 
   /**
-   * @return the progressBar
+   * enables the calculate button
    */
-  public boolean getProgressBarStatus() {
-    return loadProgressBar;
+  public static void enableButtonCalculateFormula() {
+    buttonCalculateFormula.setEnabled(true);
   }
 
   /**
@@ -360,7 +372,7 @@ public class FrameCalculator extends JFrame {
   }
 
   /**
-   * @return the progressBar
+   * @return the convertedFormula
    */
   public String getConvertedFormula() {
     return convertedFormula;
@@ -397,10 +409,10 @@ public class FrameCalculator extends JFrame {
   }
 
   /**
-   * @return the textTermInput
+   * @return the textFormulaInput
    */
-  public JTextField getTextTermInput() {
-    return textTermInput;
+  public JTextField getTextFormulaInput() {
+    return textFormulaInput;
   }
 
   /**
@@ -431,13 +443,5 @@ public class FrameCalculator extends JFrame {
    */
   public static void setDisplayTree(boolean aDisplayTree) {
     displayTree = aDisplayTree;
-  }
-
-  /**
-   * @param aTextTermInput
-   *            the textTermInput to set
-   */
-  public void setTextTermInput(JTextField aTextTermInput) {
-    textTermInput = aTextTermInput;
   }
 }

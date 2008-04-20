@@ -14,6 +14,7 @@ import javax.swing.JTextArea;
 import calculator.utils.ActionListenerUtil;
 
 /**
+ * the tree dialog
  * 
  * @author Tim
  * 
@@ -35,7 +36,6 @@ public class FrameCalculatorTreeDialog extends JDialog {
 
     // define dialog window
     super(aParentFrame, "Tree", Dialog.ModalityType.DOCUMENT_MODAL);
-    
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     getContentPane().setLayout(new BorderLayout(10, 10));
 
@@ -50,12 +50,7 @@ public class FrameCalculatorTreeDialog extends JDialog {
    */
   public void paintTree(FrameCalculator aParentFrame) {
 
-    Point tmpPoint = aParentFrame.getLocationOnScreen();
-    int tmpX = tmpPoint.x - this.getWidth();
-    int tmpY = tmpPoint.y;
-    
-    setLocation(tmpX, tmpY);
-    
+    // set text content
     String tmpHelpTextContent = new String("");
     tmpHelpTextContent = aParentFrame.getCalculatorTree().paintMeAsString();
 
@@ -77,12 +72,17 @@ public class FrameCalculatorTreeDialog extends JDialog {
     // generate frame correctly
     pack();
 
+    // set location of the dialog
+    Point tmpPoint = aParentFrame.getLocationOnScreen();
+    int tmpX = tmpPoint.x + aParentFrame.getWidth() / 2 - getWidth() / 2;
+    int tmpY = tmpPoint.y + aParentFrame.getHeight();
+    setLocation(tmpX, tmpY);
+
     // set the "Enter"-button as defaultButton to activate enter-functionality
     getRootPane().setDefaultButton(buttonClose);
 
-    // disable resizing the dialog
+    // disable resizing the dialog and display it
     setResizable(false);
-
     setVisible(true);
   }
 }

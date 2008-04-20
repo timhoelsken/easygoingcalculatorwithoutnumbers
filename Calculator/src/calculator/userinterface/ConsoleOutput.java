@@ -1,6 +1,7 @@
 package calculator.userinterface;
 
 /**
+ * defines the user dialogs
  */
 public final class ConsoleOutput {
 
@@ -19,7 +20,7 @@ public final class ConsoleOutput {
   }
 
   /**
-   * Prompts the user to type a term.
+   * Prompts the user to type a formula.
    * 
    */
   public static void promptFormulaInput() {

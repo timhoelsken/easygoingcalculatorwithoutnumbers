@@ -6,7 +6,7 @@ j mathematische Formeln können als Text eingegeben werden
 
 j danach können wiederholt Werte für die Unbekannten eingegeben werden
 
-- das Ergebnis wird dann berechnet
+j das Ergebnis wird dann berechnet
 
 j Formel soll über Konsole oder Eingabefenster eingegeben werden
 
@@ -29,4 +29,6 @@ j nich implementierte mathematische Symbole oder andere Zeichen sollen mit einer
   
 j Interpretation der Formel nach allgemein gültiger Syntax
 
-- Syntaxfehler sollen dem Benutzer gemeldet werden
+j Syntaxfehler sollen dem Benutzer gemeldet werden
+
+==> Fertig! :D

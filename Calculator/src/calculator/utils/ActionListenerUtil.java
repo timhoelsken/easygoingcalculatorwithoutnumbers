@@ -7,14 +7,20 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JMenuItem;
 
+import calculator.userinterface.FrameCalculator;
+import calculator.userinterface.FrameCalculatorAboutDialog;
+import calculator.userinterface.FrameCalculatorManualDialog;
+
 /**
+ * an util class for adding listeners to the FrameCalculator
+ * 
  * @author Tim
  */
 public class ActionListenerUtil {
-  
+
   /**
    * Listener for closing a dialog with a button
-   *
+   * 
    * @param aDialog
    * @param aButton
    */
@@ -22,6 +28,7 @@ public class ActionListenerUtil {
     aButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent ae) {
 
+        FrameCalculator.enableButtonCalculateFormula();
         aDialog.setVisible(false);
         aDialog.dispose();
       }
@@ -30,7 +37,7 @@ public class ActionListenerUtil {
 
   /**
    * Listener for opening a dialog via a menuItem
-   *
+   * 
    * @param aMenuItem
    * @param aDialog
    */
@@ -38,7 +45,15 @@ public class ActionListenerUtil {
     aMenuItem.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent ae) {
 
-        aDialog.setVisible(true);
+        if (aDialog instanceof FrameCalculatorAboutDialog) {
+          FrameCalculatorAboutDialog tmpAboutDialog = (FrameCalculatorAboutDialog) aDialog;
+          tmpAboutDialog.load();
+        } else if (aDialog instanceof FrameCalculatorManualDialog) {
+          FrameCalculatorManualDialog tmpManualDialog = (FrameCalculatorManualDialog) aDialog;
+          tmpManualDialog.load();
+        } else {
+          aDialog.setVisible(true);
+        }
       }
     });
   }

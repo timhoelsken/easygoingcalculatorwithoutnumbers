@@ -48,7 +48,6 @@ public class ConsoleCalculator {
 
         boolean tmpFormulaHasVariables = false;
         boolean tmpErrorOccuredInFormula = false;
-        boolean tmpErrorOccuredInVariableInput = false; // TODO Marked4Tim
 
         String tmpEnterVariablesValue = new String("");
 
@@ -153,17 +152,12 @@ public class ConsoleCalculator {
               } catch (CalculatingException e) {
                 System.out.println(e.getMessage());
                 tmpTree = null;
-                // if (e.getMessage().equals("")){
-                tmpErrorOccuredInVariableInput = true; // TODO Marked4Tim
-                //
-                // else{
                 tmpErrorOccuredInFormula = true;
-                // }
               }
 
               // if no error occured and the formula has variables, the user is
               // asked if he wants to enter another variable
-              if (!tmpErrorOccuredInVariableInput && tmpFormulaHasVariables) {
+              if (!tmpErrorOccuredInFormula && tmpFormulaHasVariables) {
 
                 ConsoleOutput.askAnotherVariableInput();
 

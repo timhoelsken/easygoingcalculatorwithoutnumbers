@@ -22,9 +22,9 @@ import calculator.utils.MathUtil;
 
 /**
  * the variable dialog
- * 
+ *
  * @author Tim
- * 
+ *
  */
 public class FrameCalculatorVariableDialog extends JDialog {
 
@@ -48,7 +48,7 @@ public class FrameCalculatorVariableDialog extends JDialog {
 
   /**
    * The constructor
-   * 
+   *
    * @param aParentFrame
    */
   public FrameCalculatorVariableDialog(FrameCalculator aParentFrame) {
@@ -92,7 +92,11 @@ public class FrameCalculatorVariableDialog extends JDialog {
 
           }
         } else {
-          JOptionPane.showMessageDialog(new JFrame(), "The entered value(s) must be number(s).",
+          String tmpValue = "value";
+          if (getInputFieldsOfVariablesArray().length > 1) {
+            tmpValue += "s";
+          }
+          JOptionPane.showMessageDialog(new JFrame(), "The entered " + tmpValue + " must be numeric.",
               "An error occured!", JOptionPane.WARNING_MESSAGE);
         }
       }
@@ -103,7 +107,7 @@ public class FrameCalculatorVariableDialog extends JDialog {
 
   /**
    * dynamically place the variable inputs on the dialog
-   * 
+   *
    * @param aListOfVariables
    */
   public void load(ArrayList<String[]> aListOfVariables) {
@@ -192,7 +196,7 @@ public class FrameCalculatorVariableDialog extends JDialog {
   }
 
   /**
-   * 
+   *
    * @return the FrameCalculator
    */
   public FrameCalculator getParentFrame() {

@@ -97,6 +97,8 @@ public final class FormulaTreeUtil {
 
         tmpResult = Math.pow(FormulaTreeUtil.EvaluateTree(aTree.getLeftSon(), aVariableHashTable),
             FormulaTreeUtil.EvaluateTree(aTree.getRightSon(), aVariableHashTable));
+        if (tmpResult == null || tmpResult.toString().equalsIgnoreCase("NAN"))
+          throw (new CalculatingException("Negative square root not allowed."));
       }
     } else
       throw (new CalculatingException("Not possible to calculate the formulaTree."));

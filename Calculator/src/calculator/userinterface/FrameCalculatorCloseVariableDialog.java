@@ -5,6 +5,7 @@ import java.awt.event.WindowListener;
 
 /**
  * Listener to close variable dialog and enable calculate button again!
+ * 
  * @author Tim
  * 
  */

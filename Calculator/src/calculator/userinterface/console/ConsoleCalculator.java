@@ -1,6 +1,8 @@
 package calculator.userinterface.console;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -18,7 +20,7 @@ public class ConsoleCalculator {
 
 	/**
 	 * starts the console calculator
-	 * 
+	 *
 	 * @param args
 	 */
 	public static void start() {
@@ -142,8 +144,10 @@ public class ConsoleCalculator {
 								}
 
 								// calculate!
-								System.out.println(FormulaTreeUtil
-										.EvaluateTree(tmpTree, tmpVariableDictionary));
+								double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpVariableDictionary);
+								// round the result to the eighth decimal place
+								tmpResult = BigDecimal.valueOf(tmpResult).setScale(8, RoundingMode.HALF_UP).doubleValue();
+								System.out.println(tmpResult);
 
 								// to avoid endless loop the control is set to
 								// "n"

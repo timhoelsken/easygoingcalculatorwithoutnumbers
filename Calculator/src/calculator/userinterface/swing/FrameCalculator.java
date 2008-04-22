@@ -6,6 +6,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -323,8 +325,10 @@ public class FrameCalculator extends JFrame {
 		try {
 			aFrameCalculator.setCalculatorTree(FormulaTreeUtil.BuildTree(aFrameCalculator
 					.getConvertedFormula()));
-			calculatedFormula = String.valueOf(FormulaTreeUtil.EvaluateTree(aFrameCalculator
-					.getCalculatorTree(), dictionaryOfEnteredVariables));
+			double tmpResult = FormulaTreeUtil.EvaluateTree(aFrameCalculator.getCalculatorTree(), dictionaryOfEnteredVariables);
+			// round the result to the eighth decimal place
+			tmpResult = BigDecimal.valueOf(tmpResult).setScale(8, RoundingMode.HALF_UP).doubleValue();
+			calculatedFormula = String.valueOf(tmpResult);
 
 			showCalculation();
 

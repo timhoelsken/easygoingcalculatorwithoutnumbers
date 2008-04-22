@@ -12,13 +12,13 @@ import calculator.elements.Variable;
 import calculator.exceptions.CalculatingException;
 
 /**
- * 
+ * all about the formula tree
  */
 public final class FormulaTreeUtil {
 
 	/**
 	 * Calculates the result of a formula-tree and returns it as a "double"
-	 * 
+	 *
 	 * @param aTree
 	 *            the tree from which the result should be calculated
 	 * @param aVariableHashTable
@@ -149,8 +149,8 @@ public final class FormulaTreeUtil {
 	}
 
 	/**
-	 * Creates a new wonderful tree :-)
-	 * 
+	 * Creates a new wonderful tree
+	 *
 	 * @param aFunction
 	 * @return the built tree
 	 * @throws CalculatingException
@@ -163,10 +163,10 @@ public final class FormulaTreeUtil {
 
 	/**
 	 * Creates a new wonderful tree
-	 * 
+	 *
 	 * @param MathList
 	 *            a sorted list with math objects
-	 * @return a tree :-) surprise
+	 * @return a tree (surprise, surprise!)
 	 * @throws CalculatingException
 	 *             if an error occurred
 	 */

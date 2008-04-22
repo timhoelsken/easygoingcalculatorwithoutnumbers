@@ -9,15 +9,13 @@ import calculator.exceptions.FormulaConversionException;
 
 /**
  * an util class for converting the userinput into the standard string
- * 
- * @author Tim, Tobias
  */
 public class ConverterUtil {
 
   /**
    * Method makes the parameter formula a standard formula (see
    * misc/documents/Standard-String.txt)
-   * 
+   *
    * @param aFormula
    * @return the standard formula
    * @throws FormulaConversionException
@@ -46,7 +44,7 @@ public class ConverterUtil {
   /**
    * Method makes the parameter formula a GUI-standard formula, that means
    * without spaces, without capital letters and without wrong commas
-   * 
+   *
    * @param aFormula
    * @return the standard formula
    */
@@ -98,7 +96,7 @@ public class ConverterUtil {
 
   /**
    * Replaces all commas (,) of a string with full-stops (.)
-   * 
+   *
    * @param aFormula
    * @return a string containing .
    */
@@ -109,7 +107,7 @@ public class ConverterUtil {
   /**
    * A method to clean the variables in aFormula. Variables "ab" will be
    * replaced with "a*b" "2a" will be replaced with "2*a"
-   * 
+   *
    * @param aFormula
    * @return a String that contains no "ab" or "2a" variables
    */
@@ -174,7 +172,7 @@ public class ConverterUtil {
 
   /**
    * Replaces sin, cos, tan, sqrt functions with abbreviation signs
-   * 
+   *
    * @param aFormula
    * @return a string containing abbreviation sign, defined in
    *         Standard-String.txt
@@ -229,9 +227,9 @@ public class ConverterUtil {
   /**
    * sets brackets around negative numbers at the beginning of the formular or
    * at the beginning of brackets
-   * 
+   *
    * makes -3*2*(-5*6) look like (-3)*2*((-5)*6)
-   * 
+   *
    * @param aFormula
    * @return the bracked formula
    */
@@ -305,7 +303,7 @@ public class ConverterUtil {
   /**
    * if there is a negative number at the beginning of the formula it has to be
    * in brackets to make this method work!
-   * 
+   *
    * @param aFormula
    * @return the bracked formula
    * @throws FormulaConversionException
@@ -330,7 +328,7 @@ public class ConverterUtil {
   /**
    * checks if there is the same amount of ( and ) brackets, and if no ) are in
    * lead of ( , that means not more than there should be
-   * 
+   *
    * @param aFormula
    * @throws FormulaConversionException
    *             if the brackets in the formula are not correct
@@ -355,7 +353,7 @@ public class ConverterUtil {
   /**
    * paints a string in the center of some spaces, needed to paint the tree in
    * the console
-   * 
+   *
    * @param someSpaces
    * @param aString
    * @return a string centered in the given spaces
@@ -378,7 +376,7 @@ public class ConverterUtil {
 
   /**
    * Checks if a formula has variables
-   * 
+   *
    * @param aFormula
    * @return true if a formula has variables
    */
@@ -392,7 +390,7 @@ public class ConverterUtil {
 
   /**
    * Finds all variables in the given formula string
-   * 
+   *
    * @param aFormula
    * @return a String[] ArrayList of variables. [0] is the variable, [1] is the
    *         variable's value
@@ -422,7 +420,7 @@ public class ConverterUtil {
 
   /**
    * Puts a String[] ArrayList into a Hashtable<String, Double>
-   * 
+   *
    * @param aListOfVariables
    * @return a Hashtable<String, Double>, where key is the variable and value
    *         is the variables value
@@ -439,7 +437,7 @@ public class ConverterUtil {
 
   /**
    * Checks if a variable is already in the list of variables.
-   * 
+   *
    * @param aListOfVariables
    * @param aVariable
    * @return true if the given variable is already in the list of variables

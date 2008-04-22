@@ -15,9 +15,6 @@ import calculator.utils.ActionListenerUtil;
 
 /**
  * the tree dialog
- * 
- * @author Tim
- * 
  */
 public class FrameCalculatorTreeDialog extends JDialog {
 
@@ -29,7 +26,7 @@ public class FrameCalculatorTreeDialog extends JDialog {
 
   /**
    * The Constructor
-   * 
+   *
    * @param aParentFrame
    */
   public FrameCalculatorTreeDialog(FrameCalculator aParentFrame) {
@@ -45,7 +42,7 @@ public class FrameCalculatorTreeDialog extends JDialog {
 
   /**
    * Paints the tree in the dialog
-   * 
+   *
    * @param aParentFrame
    */
   public void paintTree(FrameCalculator aParentFrame) {

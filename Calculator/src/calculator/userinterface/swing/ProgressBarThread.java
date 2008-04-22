@@ -4,8 +4,6 @@ import javax.swing.JProgressBar;
 
 /**
  * the progress bar
- * 
- * @author Tim
  */
 public class ProgressBarThread extends Thread {
 
@@ -16,7 +14,7 @@ public class ProgressBarThread extends Thread {
 
   /**
    * The constructor
-   * 
+   *
    * @param aParentFrame
    */
   public ProgressBarThread(FrameCalculator aParentFrame) {

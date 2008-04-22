@@ -15,9 +15,6 @@ import calculator.utils.ActionListenerUtil;
 
 /**
  * the about dialog
- * 
- * @author Tim
- * 
  */
 public class FrameCalculatorAboutDialog extends JDialog {
 
@@ -28,7 +25,7 @@ public class FrameCalculatorAboutDialog extends JDialog {
   private static final long serialVersionUID = 1L;
 
   /**
-   * 
+   *
    * @param aParentFrame
    */
   public FrameCalculatorAboutDialog(JFrame aParentFrame) {

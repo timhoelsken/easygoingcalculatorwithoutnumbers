@@ -13,14 +13,12 @@ import calculator.userinterface.swing.FrameCalculatorManualDialog;
 
 /**
  * an util class for adding listeners to the FrameCalculator
- * 
- * @author Tim
  */
 public class ActionListenerUtil {
 
   /**
    * Listener for closing a dialog with a button
-   * 
+   *
    * @param aDialog
    * @param aButton
    */
@@ -37,7 +35,7 @@ public class ActionListenerUtil {
 
   /**
    * Listener for opening a dialog via a menuItem
-   * 
+   *
    * @param aMenuItem
    * @param aDialog
    */

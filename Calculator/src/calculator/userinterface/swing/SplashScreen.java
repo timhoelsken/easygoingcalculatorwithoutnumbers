@@ -11,9 +11,6 @@ import javax.swing.JWindow;
 
 /**
  * the splashScreen
- * 
- * @author Tobias
- * 
  */
 public class SplashScreen extends JWindow implements Runnable {
 
@@ -39,7 +36,7 @@ public class SplashScreen extends JWindow implements Runnable {
 
   /**
    * shows us the splashscreen
-   * 
+   *
    * @param g
    */
   public void paint(Graphics g) {

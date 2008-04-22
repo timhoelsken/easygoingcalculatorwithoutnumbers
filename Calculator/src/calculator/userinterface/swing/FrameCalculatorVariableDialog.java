@@ -22,9 +22,6 @@ import calculator.utils.MathUtil;
 
 /**
  * the variable dialog
- *
- * @author Tim
- *
  */
 public class FrameCalculatorVariableDialog extends JDialog {
 

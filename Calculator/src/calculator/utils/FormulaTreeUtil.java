@@ -107,7 +107,7 @@ public final class FormulaTreeUtil {
 		} else
 			throw (new CalculatingException("Not possible to calculate the formulaTree."));
 
-		return Math.floor(tmpResult * 1000) / 1000;
+		return tmpResult;
 	}
 
 	private static Tree InsertMathObjIntoTree(Tree anOldestFatherTree, Tree aTreeToBeInserted) {

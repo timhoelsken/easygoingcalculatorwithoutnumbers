@@ -2,33 +2,31 @@
 Anforderungen vom Aufgabenblatt
 ===============================
 
-j mathematische Formeln können als Text eingegeben werden
+mathematische Formeln können als Text eingegeben werden
 
-j danach können wiederholt Werte für die Unbekannten eingegeben werden
+danach können wiederholt Werte für die Unbekannten eingegeben werden
 
-j das Ergebnis wird dann berechnet
+das Ergebnis wird dann berechnet
 
-j Formel soll über Konsole oder Eingabefenster eingegeben werden
+Formel soll über Konsole oder Eingabefenster eingegeben werden
 
-j soll bspw. in Baumstruktur festgehalten werden
+soll bspw. in Baumstruktur festgehalten werden
 
-j die Operatoren + - * / sollen implementiert werden
+die Operatoren + - * / sollen implementiert werden
 
-j potenzieren soll durch ^ geschehen
+potenzieren soll durch ^ geschehen
 
-j Funktionen sqrt(), sin(), cos(), tan() sollen implementiert werden
+Funktionen sqrt(), sin(), cos(), tan() sollen implementiert werden
 
-j Klammersetzung soll möglich sein
+Klammersetzung soll möglich sein
 
-j Unbekannte sollen einfache Buchstaben sein (a - z)
+Unbekannte sollen einfache Buchstaben sein (a - z)
 
-j Numerische Werte sollen Gleitkommazahlen sein
+Numerische Werte sollen Gleitkommazahlen sein
 
-j nich implementierte mathematische Symbole oder andere Zeichen sollen mit einer
+nich implementierte mathematische Symbole oder andere Zeichen sollen mit einer
   verständlichen Fehlermeldung abgewiesen werden.
-  
-j Interpretation der Formel nach allgemein gültiger Syntax
 
-j Syntaxfehler sollen dem Benutzer gemeldet werden
+Interpretation der Formel nach allgemein gültiger Syntax
 
-==> Fertig! :D
+Syntaxfehler sollen dem Benutzer gemeldet werden

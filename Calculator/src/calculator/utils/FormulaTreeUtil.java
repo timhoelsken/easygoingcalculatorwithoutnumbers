@@ -31,8 +31,9 @@ public final class FormulaTreeUtil {
 	public static double EvaluateTree(Tree aTree, Hashtable<String, Double> aVariableHashTable)
 			throws CalculatingException {
 		// no tree? no calculation!
-		if (aTree == null)
+		if (aTree == null) {
 			return 0;
+		}
 		Double tmpResult = 0.0;
 
 		if (aTree.getRoot() instanceof NumberObj) {
@@ -61,7 +62,7 @@ public final class FormulaTreeUtil {
 				Double tmpLeft = FormulaTreeUtil.EvaluateTree(aTree.getLeftSon(), aVariableHashTable);
 				Double tmpRight = FormulaTreeUtil.EvaluateTree(aTree.getRightSon(), aVariableHashTable);
 				if (tmpRight == 0)
-					throw new CalculatingException("Division by 0 not allowed");
+					throw new CalculatingException("Division by 0 is not allowed.");
 				tmpResult = tmpLeft / tmpRight;
 
 			} else if (tmpOperator.getOperatorType() == OperatorType.MULTIPLICATION) {
@@ -109,35 +110,37 @@ public final class FormulaTreeUtil {
 		return Math.floor(tmpResult * 1000) / 1000;
 	}
 
-	private static Tree InsertMathObjIntoTree(Tree aOldestFatherTree, Tree aTreeToBeInserted) {
+	private static Tree InsertMathObjIntoTree(Tree anOldestFatherTree, Tree aTreeToBeInserted) {
 
 		// is the tree still empty? return the given tree as result
-		if (aOldestFatherTree == null) {
+		if (anOldestFatherTree == null) {
 			return aTreeToBeInserted;
 		}
 
-		Tree tmpTree = aOldestFatherTree;
+		Tree tmpTree = anOldestFatherTree;
 
-		// go into the right branch as long as, a.) there is a right branch b.)
-		// the
-		// priority of the current branch is lower than the mathobj´s priority
+		// go into the right branch as long as a.) there is a right branch AND
+		// b.) the priority of the current branch is lower than the mathobj's
+		// priority
 		while (tmpTree.getRightSon() != null
 				&& tmpTree.getRoot().getPriority() < aTreeToBeInserted.getRoot().getPriority()) {
 			tmpTree = tmpTree.getRightSon();
 		}
 
+		// if it has a higher priority go left or change root
 		if (tmpTree.getRoot().getPriority() >= aTreeToBeInserted.getRoot().getPriority()) {
 			aTreeToBeInserted.setFather(tmpTree.getFather());
 			aTreeToBeInserted.setLeftSon(tmpTree);
 
-			if (tmpTree.getFather() != null) // is there a father
+			if (tmpTree.getFather() != null) // is there a father?
 			{
 				tmpTree.getFather().setRightSon(aTreeToBeInserted);
 			} else {
-				aOldestFatherTree = aTreeToBeInserted; // it is the oldest
-				// father
+				// it is the oldest father
+				anOldestFatherTree = aTreeToBeInserted;
 			}
 			tmpTree.setFather(aTreeToBeInserted);
+			// else set right
 		} else {
 			aTreeToBeInserted.setFather(tmpTree);
 			if (tmpTree.getRightSon() != null)
@@ -145,7 +148,7 @@ public final class FormulaTreeUtil {
 			tmpTree.setRightSon(aTreeToBeInserted);
 		}
 
-		return aOldestFatherTree;
+		return anOldestFatherTree;
 	}
 
 	/**
@@ -172,9 +175,9 @@ public final class FormulaTreeUtil {
 	 */
 	@SuppressWarnings("unchecked")
 	private static Tree BuildTree(ArrayList<Object> MathList) throws CalculatingException {
-		Tree Oldestfather = null; // the root at the top of the tree - the
-		// father of
-		// all fathers which has no father
+		// the root at the top of the tree - the father of all fathers, has
+		// no father himself
+		Tree Oldestfather = null;
 
 		// iterate over all elements of the formula
 		for (Object tmpNextElement : MathList) {
@@ -193,9 +196,8 @@ public final class FormulaTreeUtil {
 					aTreeToBeInserted.getRoot().setPriority(MathUtil.PRIO_BRACKETS);
 			}
 
-			if (aTreeToBeInserted == null) // the tree can´t be null! error
-			// case
-			{
+			// the tree cannot be null! error case
+			if (aTreeToBeInserted == null) {
 				throw new CalculatingException("Error in building the tree by reading the MathList.");
 			}
 

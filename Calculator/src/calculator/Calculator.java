@@ -1,8 +1,8 @@
 package calculator;
 
-import calculator.userinterface.ConsoleCalculator;
-import calculator.userinterface.FrameCalculator;
-import calculator.userinterface.SplashScreen;
+import calculator.userinterface.console.ConsoleCalculator;
+import calculator.userinterface.swing.FrameCalculator;
+import calculator.userinterface.swing.SplashScreen;
 
 /**
  * The main calculator-class

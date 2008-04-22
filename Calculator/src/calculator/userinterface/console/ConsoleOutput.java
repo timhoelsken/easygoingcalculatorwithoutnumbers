@@ -1,4 +1,4 @@
-package calculator.userinterface;
+package calculator.userinterface.console;
 
 /**
  * defines the user dialogs

@@ -1,4 +1,4 @@
-package calculator.userinterface;
+package calculator.userinterface.console;
 
 import java.io.IOException;
 import java.util.ArrayList;

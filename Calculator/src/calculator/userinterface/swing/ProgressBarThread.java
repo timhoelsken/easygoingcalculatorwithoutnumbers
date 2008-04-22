@@ -1,4 +1,4 @@
-package calculator.userinterface;
+package calculator.userinterface.swing;
 
 import javax.swing.JProgressBar;
 

@@ -1,7 +1,7 @@
 /**
  *
  */
-package calculator.userinterface;
+package calculator.userinterface.swing;
 
 import java.awt.Graphics;
 import java.awt.Image;

@@ -7,9 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JMenuItem;
 
-import calculator.userinterface.FrameCalculator;
-import calculator.userinterface.FrameCalculatorAboutDialog;
-import calculator.userinterface.FrameCalculatorManualDialog;
+import calculator.userinterface.swing.FrameCalculator;
+import calculator.userinterface.swing.FrameCalculatorAboutDialog;
+import calculator.userinterface.swing.FrameCalculatorManualDialog;
 
 /**
  * an util class for adding listeners to the FrameCalculator

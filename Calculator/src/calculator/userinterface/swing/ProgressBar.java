@@ -7,14 +7,14 @@ import javax.swing.JProgressBar;
  */
 public class ProgressBar extends Thread {
 
-	// defines the speed of "loading" ;-)
+	// defines the speed of "loading"
 	private static int DELAY = 10;
 
 	private JProgressBar progressBar;
 
 	/**
 	 * The constructor
-	 * 
+	 *
 	 * @param aParentFrame
 	 */
 	public ProgressBar(FrameCalculator aParentFrame) {
@@ -50,7 +50,7 @@ public class ProgressBar extends Thread {
 		}
 		progressBar.setString("100%");
 
-		// when finished, show the Result
+		// when finished, show the result
 		FrameCalculator.calculateFormula((FrameCalculator) progressBar.getParent().getParent().getParent()
 				.getParent().getParent());
 	}

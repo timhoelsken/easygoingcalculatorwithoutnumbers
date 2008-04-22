@@ -53,27 +53,28 @@ public class FrameCalculator extends JFrame {
 	private JLabel labelResult = new JLabel("RESULT:");
 
 	// input / output fields
-	private JTextField textFormulaInput = new JTextField(16);
+	private JTextField textFormulaInput = new JTextField();
 	private static JTextField textFormulaOutput = new JTextField();
 
 	// button to calculate formula
 	private static JButton buttonCalculateFormula = new JButton("calculate");
 
-	// == Menu Components ==
+	// Menu Bar
 	private JMenuBar menuBarcalculator = new JMenuBar();
 
+	// Menu Buttons
 	private JMenu menuFile = new JMenu("File");
 	private JMenu menuView = new JMenu("View");
 	private JMenu menuHelp = new JMenu("Help");
 
+	// Menu Items
 	private JMenuItem menuItemExit = new JMenuItem("Exit");
 	private JMenuItem menuItemProgressBar = new JMenuItem("Enable ProgressBar");
 	private JMenuItem menuItemShowTree = new JMenuItem("Show Tree");
 	private JMenuItem menuItemManual = new JMenuItem("Manual");
 	private JMenuItem menuItemAbout = new JMenuItem("About");
-	// == Menu Components ==
 
-	// the progressbar :)
+	// the progressbar
 	private JProgressBar progressBar = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
 
 	// define if a progressBar is loading and if a tree should be drawn
@@ -87,8 +88,8 @@ public class FrameCalculator extends JFrame {
 	private Tree calculatorTree;
 
 	// the formula entered by the user
-	private String convertedFormula = new String("");
-	private static String calculatedFormula = new String("");
+	private String convertedFormula;
+	private static String calculatedFormula;
 	private static final String ERROR = "ERROR";
 
 	/**
@@ -157,11 +158,7 @@ public class FrameCalculator extends JFrame {
 		// place menu on the frame
 		setJMenuBar(menuBarcalculator);
 
-		// *** add listeners ***
-		ActionListenerUtil.putMenuItemOpenDialogListener(menuItemManual, dialogManualText);
-		ActionListenerUtil.putMenuItemOpenDialogListener(menuItemAbout, dialogAboutText);
-
-		// for calculating
+		// add listeners for calculating
 		buttonCalculateFormula.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 
@@ -174,7 +171,10 @@ public class FrameCalculator extends JFrame {
 			}
 		});
 
-		// == ActionListener of the menu ==
+		// ActionListener of the menu
+		ActionListenerUtil.putMenuItemOpenDialogListener(menuItemManual, dialogManualText);
+		ActionListenerUtil.putMenuItemOpenDialogListener(menuItemAbout, dialogAboutText);
+
 		menuItemExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 
@@ -215,10 +215,6 @@ public class FrameCalculator extends JFrame {
 			}
 		});
 
-		// == ActionListener of the menu ==
-
-		// *** add listeners ***
-
 		// generate frame correctly
 		pack();
 
@@ -232,7 +228,7 @@ public class FrameCalculator extends JFrame {
 		textFormulaInput.setFocusable(true);
 
 		// set progressBar invisible by default
-		progressBar.setVisible(false);
+		progressBar.setVisible(loadProgressBar);
 
 		// set the "Calculate"-button as defaultButton to activate
 		// enter-functionality
@@ -246,48 +242,6 @@ public class FrameCalculator extends JFrame {
 	}
 
 	/**
-	 * calculates the formula
-	 *
-	 * @param aFrameCalculator
-	 *
-	 * @param aFormula
-	 */
-	public static void calculateFormula(FrameCalculator aFrameCalculator) {
-
-		// puts the ArrayList into the dictionary
-		dictionaryOfEnteredVariables = ConverterUtil.putArrayListIntoHashtable(aFrameCalculator
-				.getListOfVariables());
-
-		// calculate!
-		try {
-			aFrameCalculator.setCalculatorTree(FormulaTreeUtil.BuildTree(aFrameCalculator
-					.getConvertedFormula()));
-			calculatedFormula = ""
-					+ FormulaTreeUtil.EvaluateTree(aFrameCalculator.getCalculatorTree(),
-							dictionaryOfEnteredVariables);
-
-			if (!loadProgressBar) {
-				textFormulaOutput.setText(calculatedFormula);
-			}
-
-			enableButtonCalculateFormula();
-			showCalculation();
-
-			if (displayTree) {
-				aFrameCalculator.dialogShowTree.paintTree(aFrameCalculator);
-			}
-		} catch (CalculatingException e) {
-			calculatedFormula = ERROR;
-
-			enableButtonCalculateFormula();
-			showCalculation();
-
-			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "An error occured!",
-					JOptionPane.WARNING_MESSAGE);
-		}
-	}
-
-	/**
 	 * converts the formula to standard string and calls calculate formula
 	 */
 	private void convertAndCalculate() {
@@ -296,7 +250,8 @@ public class FrameCalculator extends JFrame {
 
 		// convert the user's input to standard string
 		try {
-			textFormulaInput.setText((ConverterUtil.formulaToGUIStandardString(textFormulaInput.getText())));
+			String tmpGUIStandardString = ConverterUtil.formulaToGUIStandardString(textFormulaInput.getText());
+			textFormulaInput.setText(tmpGUIStandardString);
 
 			convertedFormula = ConverterUtil.formulaToStandardString(textFormulaInput.getText());
 
@@ -334,8 +289,8 @@ public class FrameCalculator extends JFrame {
 
 				// use the progressBar?
 				if (FrameCalculator.isLoadProgressBar()) {
-					Thread tmpProgressBarThread = new ProgressBar(this);
-					tmpProgressBarThread.start();
+					Thread tmpProgressBar = new ProgressBar(this);
+					tmpProgressBar.start();
 				} else {
 					FrameCalculator.calculateFormula(this);
 				}
@@ -344,6 +299,41 @@ public class FrameCalculator extends JFrame {
 			calculatedFormula = ERROR;
 
 			enableButtonCalculateFormula();
+			showCalculation();
+
+			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "An error occured!",
+					JOptionPane.WARNING_MESSAGE);
+		}
+	}
+
+	/**
+	 * calculates the formula
+	 *
+	 * @param aFrameCalculator
+	 *
+	 * @param aFormula
+	 */
+	public static void calculateFormula(FrameCalculator aFrameCalculator) {
+
+		// puts the ArrayList into the dictionary
+		dictionaryOfEnteredVariables = ConverterUtil.putArrayListIntoHashtable(aFrameCalculator
+				.getListOfVariables());
+
+		// calculate!
+		try {
+			aFrameCalculator.setCalculatorTree(FormulaTreeUtil.BuildTree(aFrameCalculator
+					.getConvertedFormula()));
+			calculatedFormula = String.valueOf(FormulaTreeUtil.EvaluateTree(aFrameCalculator
+					.getCalculatorTree(), dictionaryOfEnteredVariables));
+
+			showCalculation();
+
+			if (displayTree) {
+				aFrameCalculator.dialogShowTree.paintTree(aFrameCalculator);
+			}
+		} catch (CalculatingException e) {
+			calculatedFormula = ERROR;
+
 			showCalculation();
 
 			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "An error occured!",

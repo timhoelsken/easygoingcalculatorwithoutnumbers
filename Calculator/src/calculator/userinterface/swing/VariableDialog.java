@@ -45,7 +45,7 @@ public class VariableDialog extends JDialog {
 
 	/**
 	 * The constructor
-	 * 
+	 *
 	 * @param aParentFrame
 	 */
 	public VariableDialog(FrameCalculator aParentFrame) {
@@ -61,15 +61,13 @@ public class VariableDialog extends JDialog {
 				boolean tmpAllVariablesAreFloats = true;
 
 				// check if each variable is a float value and write the
-				// variables in
-				// the list
+				// variables in the list
 				for (int i = 0; i < VariableDialog.this.getInputFieldsOfVariablesArray().length; i++) {
 
 					if (MathUtil.isDouble(ConverterUtil.unifyCommas(VariableDialog.this
 							.getInputFieldsOfVariablesArray()[i].getText()))) {
 						VariableDialog.this.getParentFrame().getListOfVariables().get(i)[1] = ConverterUtil
-								.unifyCommas(VariableDialog.this
-										.getInputFieldsOfVariablesArray()[i].getText());
+								.unifyCommas(VariableDialog.this.getInputFieldsOfVariablesArray()[i].getText());
 					} else {
 						tmpAllVariablesAreFloats = false;
 						i = VariableDialog.this.getInputFieldsOfVariablesArray().length;
@@ -83,8 +81,7 @@ public class VariableDialog extends JDialog {
 
 					// use the progressBar?
 					if (FrameCalculator.isLoadProgressBar()) {
-						Thread tmpProgressBarThread = new ProgressBar(VariableDialog.this
-								.getParentFrame());
+						Thread tmpProgressBarThread = new ProgressBar(VariableDialog.this.getParentFrame());
 						tmpProgressBarThread.start();
 					} else {
 						FrameCalculator.calculateFormula(VariableDialog.this.getParentFrame());
@@ -106,7 +103,7 @@ public class VariableDialog extends JDialog {
 
 	/**
 	 * dynamically place the variable inputs on the dialog
-	 * 
+	 *
 	 * @param aListOfVariables
 	 */
 	public void load(ArrayList<String[]> aListOfVariables) {
@@ -197,7 +194,7 @@ public class VariableDialog extends JDialog {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return the FrameCalculator
 	 */
 	public FrameCalculator getParentFrame() {

@@ -12,23 +12,23 @@ import junit.textui.TestRunner;
  */
 public class AllTests extends TestCase {
 
-  /**
-   * @return all test suites of package pse3.tests
-   */
-  public static Test suite() {
-    TestSuite suite = new TestSuite();
-    suite.addTestSuite(MathUtilTest.class);
-    suite.addTestSuite(StringConvertTest.class);
-    suite.addTestSuite(IntegrationTest.class);
-    return suite;
-  }
+	/**
+	 * @return all test suites of package pse3.tests
+	 */
+	public static Test suite() {
+		TestSuite suite = new TestSuite();
+		suite.addTestSuite(MathUtilTest.class);
+		suite.addTestSuite(StringConvertTest.class);
+		suite.addTestSuite(IntegrationTest.class);
+		return suite;
+	}
 
-  /**
-   * Start the pse3.tests here.
-   * 
-   * @param args
-   */
-  public static void main(String[] args) {
-    TestRunner.run(AllTests.class);
-  }
+	/**
+	 * Start the pse3.tests here.
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		TestRunner.run(AllTests.class);
+	}
 }

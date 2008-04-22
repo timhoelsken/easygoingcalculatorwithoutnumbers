@@ -100,7 +100,7 @@ public class FrameCalculator extends JFrame {
 
     // set Icon
     ClassLoader tmpClassLoader = this.getClass().getClassLoader();
-    URL tmpUrl = tmpClassLoader.getResource("CalcIcon.jpg");
+    URL tmpUrl = tmpClassLoader.getResource("CalculatorIcon.jpg");
     calculatorIcon = getToolkit().getImage(tmpUrl);
     setIconImage(calculatorIcon);
 
@@ -247,9 +247,9 @@ public class FrameCalculator extends JFrame {
 
   /**
    * calculates the formula
-   * 
+   *
    * @param aFrameCalculator
-   * 
+   *
    * @param aFormula
    */
   public static void calculateFormula(FrameCalculator aFrameCalculator) {

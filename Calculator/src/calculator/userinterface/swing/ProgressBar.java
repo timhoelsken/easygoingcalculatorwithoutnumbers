@@ -37,6 +37,11 @@ public class ProgressBar extends Thread {
 		int minimum = progressBar.getMinimum();
 		int maximum = progressBar.getMaximum();
 
+		if (FrameCalculator.isPlaySound()){
+		  Flam tmpFlam = new Flam();
+		  tmpFlam.start();
+		}
+		
 		// increase value by 1 in the defined speed
 		for (int i = minimum; i < maximum; i++) {
 			try {

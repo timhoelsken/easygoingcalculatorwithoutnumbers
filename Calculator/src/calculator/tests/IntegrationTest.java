@@ -126,6 +126,24 @@ public class IntegrationTest extends TestCase {
 		double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpHashtable);
 		assertEquals((double) 729.0, tmpResult);
 	}
+	
+	/**
+	 * 
+	 * @throws Exception
+	 */
+	public void testCalculator9() throws Exception {
+      boolean tmpErrorOccured = false;
+      String tmpString = null;
+
+      try {
+          tmpString = ConverterUtil.formulaToStandardString("(1+3)(2+3)+(1+2*3+3+4)");
+          Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
+          FormulaTreeUtil.EvaluateTree(tmpTree, null);
+      } catch (CalculatingException e) {
+          tmpErrorOccured = true;
+      }
+      assertTrue(!tmpErrorOccured && "23.0".equals(tmpString));
+  }
 
 	// === Iteration Tests ===
 

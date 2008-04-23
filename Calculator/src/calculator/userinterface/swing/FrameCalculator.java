@@ -72,6 +72,7 @@ public class FrameCalculator extends JFrame {
 	// Menu Items
 	private JMenuItem menuItemExit = new JMenuItem("Exit");
 	private JMenuItem menuItemProgressBar = new JMenuItem("Enable ProgressBar");
+	private JMenuItem menuItemFlam = new JMenuItem("Enable Sound");
 	private JMenuItem menuItemShowTree = new JMenuItem("Show Tree");
 	private JMenuItem menuItemManual = new JMenuItem("Manual");
 	private JMenuItem menuItemAbout = new JMenuItem("About");
@@ -82,6 +83,7 @@ public class FrameCalculator extends JFrame {
 	// define if a progressBar is loading and if a tree should be drawn
 	private static boolean loadProgressBar = false;
 	private static boolean displayTree = false;
+	private static boolean playSound = false;
 
 	/**
 	 * list and dictionary for variables
@@ -126,6 +128,7 @@ public class FrameCalculator extends JFrame {
 
 		menuView.setMnemonic('V');
 		menuItemProgressBar.setMnemonic('P');
+		menuItemFlam.setMnemonic('S');
 		menuItemShowTree.setMnemonic('T');
 
 		menuHelp.setMnemonic('H');
@@ -136,6 +139,7 @@ public class FrameCalculator extends JFrame {
 		menuFile.add(menuItemExit);
 
 		menuView.add(menuItemProgressBar);
+		menuView.add(menuItemFlam);
 		menuView.add(menuItemShowTree);
 
 		menuHelp.add(menuItemManual);
@@ -145,6 +149,13 @@ public class FrameCalculator extends JFrame {
 		menuBarcalculator.add(menuView);
 		menuBarcalculator.add(menuHelp);
 
+		if (!loadProgressBar){
+		  menuItemFlam.setEnabled(false);
+		}
+		else{
+		  menuItemFlam.setEnabled(true);
+		}
+		
 		// place label and textField on panel
 		panelBottom.add(labelResult);
 		panelBottom.add(textFormulaOutput);
@@ -167,9 +178,9 @@ public class FrameCalculator extends JFrame {
 			public void actionPerformed(ActionEvent ae) {
 
 				// reset progressbar if it is activated
-				if (FrameCalculator.isLoadProgressBar()) {
-					FrameCalculator.this.getProgressBar().setValue(0);
-					FrameCalculator.this.getProgressBar().setString("0%");
+				if (loadProgressBar) {
+					progressBar.setValue(0);
+					progressBar.setString("0%");
 				}
 				convertAndCalculate();
 			}
@@ -182,8 +193,8 @@ public class FrameCalculator extends JFrame {
 		menuItemExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 
-				FrameCalculator.this.setVisible(false);
-				FrameCalculator.this.dispose();
+				setVisible(false);
+				dispose();
 				System.exit(0);
 			}
 		});
@@ -191,29 +202,46 @@ public class FrameCalculator extends JFrame {
 		menuItemProgressBar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 
-				if (FrameCalculator.isLoadProgressBar()) {
-					FrameCalculator.setLoadProgressBar(false);
-					FrameCalculator.this.getProgressBar().setVisible(false);
+				if (loadProgressBar) {
+					loadProgressBar = false;
+					progressBar.setVisible(false);
+					menuItemFlam.setEnabled(false);
+					playSound = false;
 					menuItemProgressBar.setText("Enable ProgressBar");
+					menuItemFlam.setText("Enable Sound");
 				} else {
-					FrameCalculator.setLoadProgressBar(true);
-					FrameCalculator.this.getProgressBar().setValue(0);
-					FrameCalculator.this.getProgressBar().setStringPainted(false);
-					FrameCalculator.this.getProgressBar().setVisible(true);
+					loadProgressBar = true;
+					progressBar.setValue(0);
+					progressBar.setStringPainted(false);
+					progressBar.setVisible(true);
+					menuItemFlam.setEnabled(true);
 					menuItemProgressBar.setText("Disable ProgressBar");
 				}
-				FrameCalculator.this.repaint();
+				repaint();
 			}
 		});
+		
+		menuItemFlam.addActionListener(new ActionListener() {
+          public void actionPerformed(ActionEvent ae) {
+
+              if (playSound) {
+                  playSound = false;
+                  menuItemFlam.setText("Enable Sound");
+              } else {
+                  playSound = true;
+                  menuItemFlam.setText("Disable Sound");
+              }
+          }
+      });
 
 		menuItemShowTree.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 
-				if (FrameCalculator.isDisplayTree()) {
-					FrameCalculator.setDisplayTree(false);
+				if (displayTree) {
+					displayTree = false;
 					menuItemShowTree.setText("Show Tree");
 				} else {
-					FrameCalculator.setDisplayTree(true);
+					displayTree = true;
 					menuItemShowTree.setText("Hide Tree");
 				}
 			}
@@ -392,39 +420,16 @@ public class FrameCalculator extends JFrame {
 	}
 
 	/**
-	 * @return the textFormulaInput
-	 */
-	public JTextField getTextFormulaInput() {
-		return textFormulaInput;
-	}
-
-	/**
 	 * @return the loadProgressBar
 	 */
 	public static boolean isLoadProgressBar() {
 		return loadProgressBar;
 	}
 
-	/**
-	 * @param aLoadProgressBar
-	 *            the loadProgressBar to set
-	 */
-	public static void setLoadProgressBar(boolean aLoadProgressBar) {
-		loadProgressBar = aLoadProgressBar;
-	}
-
-	/**
-	 * @return the displayTree
-	 */
-	public static boolean isDisplayTree() {
-		return displayTree;
-	}
-
-	/**
-	 * @param aDisplayTree
-	 *            the displayTree to set
-	 */
-	public static void setDisplayTree(boolean aDisplayTree) {
-		displayTree = aDisplayTree;
-	}
+  /**
+   * @return the playSound
+   */
+  public static boolean isPlaySound() {
+    return playSound;
+  }
 }

@@ -58,7 +58,7 @@ public class ManualDialog extends JDialog {
 		textAreaContent.setBackground(getParent().getBackground());
 
 		// add ActionListener to Close-Button
-		ActionListenerUtil.putDialogCloseListener(this, buttonClose);
+		ActionListenerUtil.putButtonDialogCloseListener(this, buttonClose);
 
 		// align elements
 		labelTitle.setHorizontalAlignment(JLabel.LEFT);

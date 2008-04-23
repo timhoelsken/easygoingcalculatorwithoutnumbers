@@ -6,7 +6,6 @@ import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -52,8 +51,8 @@ public class VariableDialog extends JDialog {
 
 		// define modal dialog
 		super(aParentFrame, "Variable Input", Dialog.ModalityType.DOCUMENT_MODAL);
-		addWindowListener(new VariableDialogCloseListener());
 		getContentPane().setLayout(new BorderLayout(10, 10));
+		ActionListenerUtil.putFrameDialogCloseListener(this);		
 
 		buttonEnter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
@@ -66,7 +65,7 @@ public class VariableDialog extends JDialog {
 
 					if (MathUtil.isDouble(ConverterUtil.unifyCommas(VariableDialog.this
 							.getInputFieldsOfVariablesArray()[i].getText()))) {
-						VariableDialog.this.getParentFrame().getListOfVariables().get(i)[1] = ConverterUtil
+					  FrameCalculator.listOfVariables.get(i)[1] = ConverterUtil
 								.unifyCommas(VariableDialog.this.getInputFieldsOfVariablesArray()[i].getText());
 					} else {
 						tmpAllVariablesAreFloats = false;
@@ -98,7 +97,7 @@ public class VariableDialog extends JDialog {
 			}
 		});
 
-		ActionListenerUtil.putDialogCloseListener(this, buttonCancel);
+		ActionListenerUtil.putButtonDialogCloseListener(this, buttonCancel);
 	}
 
 	/**
@@ -106,7 +105,7 @@ public class VariableDialog extends JDialog {
 	 *
 	 * @param aListOfVariables
 	 */
-	public void load(ArrayList<String[]> aListOfVariables) {
+	public void load() {
 
 		// set location of the dialog
 		Point tmpPoint = this.getParent().getLocationOnScreen();
@@ -114,11 +113,12 @@ public class VariableDialog extends JDialog {
 		int tmpY = tmpPoint.y;
 		setLocation(tmpX, tmpY);
 
+		
 		// define Panels for the button and dynamic variable input
-		if (aListOfVariables.size() > 1) {
-			panelButton = new JPanel(new GridLayout(aListOfVariables.size(), 1));
-			panelLabelsForVariable = new JPanel(new GridLayout(aListOfVariables.size(), 1));
-			panelTextFieldsForVariables = new JPanel(new GridLayout(aListOfVariables.size(), 1));
+		if (FrameCalculator.listOfVariables.size() > 1) {
+			panelButton = new JPanel(new GridLayout(FrameCalculator.listOfVariables.size(), 1));
+			panelLabelsForVariable = new JPanel(new GridLayout(FrameCalculator.listOfVariables.size(), 1));
+			panelTextFieldsForVariables = new JPanel(new GridLayout(FrameCalculator.listOfVariables.size(), 1));
 		} else {
 			panelButton = new JPanel(new GridLayout(2, 1));
 			panelLabelsForVariable = new JPanel(new GridLayout(2, 1));
@@ -126,24 +126,24 @@ public class VariableDialog extends JDialog {
 		}
 
 		// an arraylist in the size of variable number
-		labelsOfVariablesArray = new JLabel[aListOfVariables.size()];
+		labelsOfVariablesArray = new JLabel[FrameCalculator.listOfVariables.size()];
 
 		// the attribute of variableDialog is redimensioned to the size of
 		// variable
 		// number
-		inputFieldsOfVariablesArray = new JTextField[aListOfVariables.size()];
+		inputFieldsOfVariablesArray = new JTextField[FrameCalculator.listOfVariables.size()];
 
 		// each variable gets its Label and textField, which is centered
 		// horizontally and then put on the spezific panel
-		for (int i = 0; i < aListOfVariables.size(); i++) {
+		for (int i = 0; i < FrameCalculator.listOfVariables.size(); i++) {
 
 			// define label and textField
-			labelsOfVariablesArray[i] = new JLabel(aListOfVariables.get(i)[0] + " = ");
+			labelsOfVariablesArray[i] = new JLabel(FrameCalculator.listOfVariables.get(i)[0] + " = ");
 			inputFieldsOfVariablesArray[i] = new JTextField(3);
 
 			// the variable already has a value, it is set in the textField
-			if (aListOfVariables.get(i)[1] != null) {
-				inputFieldsOfVariablesArray[i].setText(aListOfVariables.get(i)[1]);
+			if (FrameCalculator.listOfVariables.get(i)[1] != null) {
+				inputFieldsOfVariablesArray[i].setText(FrameCalculator.listOfVariables.get(i)[1]);
 			} else {
 				inputFieldsOfVariablesArray[i].setText("");
 			}

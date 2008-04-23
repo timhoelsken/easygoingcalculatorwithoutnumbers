@@ -83,8 +83,10 @@ public class FrameCalculator extends JFrame {
 	private static boolean loadProgressBar = false;
 	private static boolean displayTree = false;
 
-	// list and dictionary for variables
-	private ArrayList<String[]> listOfVariables = new ArrayList<String[]>();
+	/**
+	 * list and dictionary for variables
+	 */
+	public static ArrayList<String[]> listOfVariables = new ArrayList<String[]>();
 	private static Hashtable<String, Double> dictionaryOfEnteredVariables = new Hashtable<String, Double>();
 
 	private Tree calculatorTree;
@@ -264,7 +266,7 @@ public class FrameCalculator extends JFrame {
 			if (ConverterUtil.hasVariables(getConvertedFormula())) {
 
 				// remember values of already entered variables
-				ArrayList<String[]> tmpOldVariables = getListOfVariables();
+				ArrayList<String[]> tmpOldVariables = listOfVariables;
 				ArrayList<String[]> tmpNewVariables = ConverterUtil.getVariables(getConvertedFormula());
 
 				for (String[] tmpNewStrings : tmpNewVariables) {
@@ -278,16 +280,16 @@ public class FrameCalculator extends JFrame {
 						}
 					}
 				}
-				setListOfVariables(tmpNewVariables);
+				listOfVariables = tmpNewVariables;
 
 				// openVariableDialog();
-				dialogEnterVariables.load(getListOfVariables());
+				dialogEnterVariables.load();
 
 				// otherwise the formula is calculated directly
 			} else {
 
 				// reset the list to avoid errors
-				setListOfVariables(new ArrayList<String[]>());
+				listOfVariables = new ArrayList<String[]>();
 
 				// use the progressBar?
 				if (FrameCalculator.isLoadProgressBar()) {
@@ -318,8 +320,8 @@ public class FrameCalculator extends JFrame {
 	public static void calculateFormula(FrameCalculator aFrameCalculator) {
 
 		// puts the ArrayList into the dictionary
-		dictionaryOfEnteredVariables = ConverterUtil.putArrayListIntoHashtable(aFrameCalculator
-				.getListOfVariables());
+		dictionaryOfEnteredVariables = ConverterUtil.putArrayListIntoHashtable(FrameCalculator
+				.listOfVariables);
 
 		// calculate!
 		try {
@@ -372,21 +374,6 @@ public class FrameCalculator extends JFrame {
 	 */
 	public String getConvertedFormula() {
 		return convertedFormula;
-	}
-
-	/**
-	 * @return the listOfVariables
-	 */
-	public ArrayList<String[]> getListOfVariables() {
-		return listOfVariables;
-	}
-
-	/**
-	 * @param aListOfVariables
-	 *            the listOfVariables to set
-	 */
-	public void setListOfVariables(ArrayList<String[]> aListOfVariables) {
-		listOfVariables = aListOfVariables;
 	}
 
 	/**

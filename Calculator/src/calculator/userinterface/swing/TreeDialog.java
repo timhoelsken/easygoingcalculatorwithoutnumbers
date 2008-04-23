@@ -37,7 +37,7 @@ public class TreeDialog extends JDialog {
 		getContentPane().setLayout(new BorderLayout(10, 10));
 
 		// add ActionListener to Close-Button
-		ActionListenerUtil.putDialogCloseListener(this, buttonClose);
+		ActionListenerUtil.putButtonDialogCloseListener(this, buttonClose);
 	}
 
 	/**

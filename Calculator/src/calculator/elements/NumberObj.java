@@ -1,32 +1,32 @@
 package calculator.elements;
 
 /**
- * @author  Raphael
+ * @author Raphael
  */
 public class NumberObj extends Operand {
-	private Double value;
+  private Double value;
 
-	/**
-   * @return  the value
-   * @uml.property  name="value"
+  /**
+   * @return the value
+   * @uml.property name="value"
    */
-	public Double getValue() {
-		return value;
-	}
+  public Double getValue() {
+    return value;
+  }
 
-	/**
-	 * constructor
-	 * 
-	 * @param aValue
-	 */
-	public NumberObj(Double aValue) {
-		value = aValue;
-	}
+  /**
+   * constructor
+   * 
+   * @param aValue
+   */
+  public NumberObj(Double aValue) {
+    value = aValue;
+  }
 
-	/**
-	 * @see java.lang.Object#toString()
-	 */
-	public String toString() {
-		return Double.toString(value);
-	}
+  /**
+   * @see java.lang.Object#toString()
+   */
+  public String toString() {
+    return Double.toString(value);
+  }
 }

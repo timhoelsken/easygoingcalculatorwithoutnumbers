@@ -1,36 +1,37 @@
 package calculator.elements;
 
 /**
- * @author  Raphael
+ * @author Raphael
  */
 public class MathObj {
 
-	private int priority;
+  private int priority;
 
-	/**
-	 * constructor
-	 * 
-	 * @param aType
-	 */
-	public MathObj() {
-		priority = 0;
-	}
-
-	/**
-   * @return  the priority
-   * @uml.property  name="priority"
+  /**
+   * constructor
+   * 
+   * @param aType
    */
-	public int getPriority() {
-		return priority;
-	}
+  public MathObj() {
+    priority = 0;
+  }
 
-	/**
+  /**
+   * @return the priority
+   * @uml.property name="priority"
+   */
+  public int getPriority() {
+    return priority;
+  }
+
+  /**
    * sets the priority
-   * @param  aPriority
-   * @uml.property  name="priority"
+   * 
+   * @param aPriority
+   * @uml.property name="priority"
    */
-	public void setPriority(int aPriority) {
-		priority = aPriority;
-	}
+  public void setPriority(int aPriority) {
+    priority = aPriority;
+  }
 
 }

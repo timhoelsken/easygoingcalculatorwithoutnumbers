@@ -18,196 +18,194 @@ import calculator.utils.MathUtil;
  */
 public class ConsoleCalculator {
 
-	/**
-	 * starts the console calculator
-	 *
-	 * @param args
-	 */
-	public static void start() {
+  /**
+   * starts the console calculator
+   * 
+   * @param args
+   */
+  public static void start() {
 
-		// defines that the calculator is running
-		Boolean runCalculator = true;
-		String tmpInputString = new String("");
+    // defines that the calculator is running
+    Boolean runCalculator = true;
+    String tmpInputString = new String("");
 
-		ConsoleOutput.showTitle();
+    ConsoleOutput.showTitle();
 
-		while (runCalculator) {
+    while (runCalculator) {
 
-			ConsoleOutput.showMenu();
+      ConsoleOutput.showMenu();
 
-			// read user's choice of the mainmenu
-			try {
-				tmpInputString = ConsoleInput.getConsoleInput();
-			} catch (IOException e) {
-				ConsoleOutput.printError(e.getMessage());
-				e.printStackTrace();
-			}
+      // read user's choice of the mainmenu
+      try {
+        tmpInputString = ConsoleInput.getConsoleInput();
+      } catch (IOException e) {
+        ConsoleOutput.printError(e.getMessage());
+        e.printStackTrace();
+      }
 
-			// if the user wants to enter a formula
-			if (tmpInputString.equals("f")) {
+      // if the user wants to enter a formula
+      if (tmpInputString.equals("f")) {
 
-				tmpInputString = "";
+        tmpInputString = "";
 
-				boolean tmpFormulaHasVariables = false;
-				boolean tmpErrorOccuredInFormula = false;
+        boolean tmpFormulaHasVariables = false;
+        boolean tmpErrorOccuredInFormula = false;
 
-				String tmpEnterVariablesValue = new String("");
+        String tmpEnterVariablesValue = new String("");
 
-				ArrayList<String[]> tmpVariablesList = new ArrayList<String[]>();
-				Hashtable<String, Double> tmpVariableDictionary = new Hashtable<String, Double>();
+        ArrayList<String[]> tmpVariablesList = new ArrayList<String[]>();
+        Hashtable<String, Double> tmpVariableDictionary = new Hashtable<String, Double>();
 
-				Tree tmpTree = null;
+        Tree tmpTree = null;
 
-				// while the user has not chosen to quit entering formulas
-				while (!tmpInputString.toLowerCase().equals("n")) {
+        // while the user has not chosen to quit entering formulas
+        while (!tmpInputString.toLowerCase().equals("n")) {
 
-					// reset of control variables and tree
-					tmpErrorOccuredInFormula = false;
-					tmpEnterVariablesValue = "";
-					tmpTree = null;
+          // reset of control variables and tree
+          tmpErrorOccuredInFormula = false;
+          tmpEnterVariablesValue = "";
+          tmpTree = null;
 
-					ConsoleOutput.promptFormulaInput();
+          ConsoleOutput.promptFormulaInput();
 
-					// the user types in the formula
-					try {
-						tmpInputString = ConsoleInput.getConsoleInput();
-					} catch (IOException e) {
-						ConsoleOutput.printError(e.getMessage());
-					}
+          // the user types in the formula
+          try {
+            tmpInputString = ConsoleInput.getConsoleInput();
+          } catch (IOException e) {
+            ConsoleOutput.printError(e.getMessage());
+          }
 
-					// convert input into the standard string
-					try {
-						tmpInputString = ConverterUtil.formulaToStandardString(tmpInputString);
-					} catch (FormulaConversionException e) {
-						ConsoleOutput.printError(e.getMessage());
-						tmpErrorOccuredInFormula = true;
-						tmpTree = null;
-					}
+          // convert input into the standard string
+          try {
+            tmpInputString = ConverterUtil.formulaToStandardString(tmpInputString);
+          } catch (FormulaConversionException e) {
+            ConsoleOutput.printError(e.getMessage());
+            tmpErrorOccuredInFormula = true;
+            tmpTree = null;
+          }
 
-					if (!tmpErrorOccuredInFormula) {
+          if (!tmpErrorOccuredInFormula) {
 
-						tmpFormulaHasVariables = ConverterUtil.hasVariables(tmpInputString);
+            tmpFormulaHasVariables = ConverterUtil.hasVariables(tmpInputString);
 
-						// while the user has not chosen to stop enter variables
-						do {
+            // while the user has not chosen to stop enter variables
+            do {
 
-							// Variable Block Start
-							if (tmpFormulaHasVariables) {
+              // Variable Block Start
+              if (tmpFormulaHasVariables) {
 
-								tmpVariablesList = ConverterUtil.getVariables(tmpInputString);
-								String tmpInputVariableValue = new String("");
+                tmpVariablesList = ConverterUtil.getVariables(tmpInputString);
+                String tmpInputVariableValue = new String("");
 
-								ConsoleOutput.promptVariableInput();
+                ConsoleOutput.promptVariableInput();
 
-								// ==== Variable input start ====
-								for (int i = 0; i < tmpVariablesList.size(); i++) {
-									do {
-										tmpInputVariableValue = "";
-										System.out.print(tmpVariablesList.get(i)[0] + " = ");
+                // ==== Variable input start ====
+                for (int i = 0; i < tmpVariablesList.size(); i++) {
+                  do {
+                    tmpInputVariableValue = "";
+                    System.out.print(tmpVariablesList.get(i)[0] + " = ");
 
-										// read users input
-										try {
-											tmpInputVariableValue = ConsoleInput.getConsoleInput();
-										} catch (IOException e) {
-											ConsoleOutput.printError(e.getMessage());
-										}
+                    // read users input
+                    try {
+                      tmpInputVariableValue = ConsoleInput.getConsoleInput();
+                    } catch (IOException e) {
+                      ConsoleOutput.printError(e.getMessage());
+                    }
 
-										// convert , to .
-										tmpInputVariableValue = ConverterUtil
-												.unifyCommas(tmpInputVariableValue);
+                    // convert , to .
+                    tmpInputVariableValue = ConverterUtil.unifyCommas(tmpInputVariableValue);
 
-										// while the entered value is not a
-										// double value, show
-										// message and repeat the loop
-										if (!MathUtil.isDouble(tmpInputVariableValue)) {
-											ConsoleOutput.invalidDouble();
-										}
-									} while (!MathUtil.isDouble(tmpInputVariableValue));
+                    // while the entered value is not a
+                    // double value, show
+                    // message and repeat the loop
+                    if (!MathUtil.isDouble(tmpInputVariableValue)) {
+                      ConsoleOutput.invalidDouble();
+                    }
+                  } while (!MathUtil.isDouble(tmpInputVariableValue));
 
-									// assign variable with variableValue
-									tmpVariablesList.get(i)[1] = tmpInputVariableValue;
-								}
+                  // assign variable with variableValue
+                  tmpVariablesList.get(i)[1] = tmpInputVariableValue;
+                }
 
-								// put list into a dictionary
-								tmpVariableDictionary = ConverterUtil
-										.putArrayListIntoHashtable(tmpVariablesList);
-								// ==== Variable input end ====
-							}
-							// Variable Block End
+                // put list into a dictionary
+                tmpVariableDictionary = ConverterUtil.putArrayListIntoHashtable(tmpVariablesList);
+                // ==== Variable input end ====
+              }
+              // Variable Block End
 
-							// calculate formula
-							try {
+              // calculate formula
+              try {
 
-								// if the tree already exist, use it!
-								if (tmpTree == null) {
-									tmpTree = FormulaTreeUtil.BuildTree(tmpInputString);
-								}
+                // if the tree already exist, use it!
+                if (tmpTree == null) {
+                  tmpTree = FormulaTreeUtil.BuildTree(tmpInputString);
+                }
 
-								// calculate!
-								double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpVariableDictionary);
-								// round the result to the eighth decimal place
-								tmpResult = BigDecimal.valueOf(tmpResult).setScale(8, RoundingMode.HALF_UP).doubleValue();
-								System.out.println(tmpResult);
+                // calculate!
+                double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpVariableDictionary);
+                // round the result to the eighth decimal place
+                tmpResult = BigDecimal.valueOf(tmpResult).setScale(8, RoundingMode.HALF_UP).doubleValue();
+                System.out.println(tmpResult);
 
-								// to avoid endless loop the control is set to
-								// "n"
-								// (Do-While-Loop)
-								if (!ConverterUtil.hasVariables(tmpInputString)) {
-									tmpEnterVariablesValue = "n";
-								}
+                // to avoid endless loop the control is set to
+                // "n"
+                // (Do-While-Loop)
+                if (!ConverterUtil.hasVariables(tmpInputString)) {
+                  tmpEnterVariablesValue = "n";
+                }
 
-								tmpTree.paintMe();
+                tmpTree.paintMe();
 
-							} catch (CalculatingException e) {
-								System.out.println(e.getMessage());
-								tmpTree = null;
-								tmpErrorOccuredInFormula = true;
-							}
+              } catch (CalculatingException e) {
+                System.out.println(e.getMessage());
+                tmpTree = null;
+                tmpErrorOccuredInFormula = true;
+              }
 
-							// if no error occured and the formula has
-							// variables, the user is
-							// asked if he wants to enter another variable
-							if (!tmpErrorOccuredInFormula && tmpFormulaHasVariables) {
+              // if no error occured and the formula has
+              // variables, the user is
+              // asked if he wants to enter another variable
+              if (!tmpErrorOccuredInFormula && tmpFormulaHasVariables) {
 
-								ConsoleOutput.askAnotherVariableInput();
+                ConsoleOutput.askAnotherVariableInput();
 
-								try {
-									tmpEnterVariablesValue = ConsoleInput.getConsoleInput();
-								} catch (IOException e) {
-									ConsoleOutput.printError(e.getMessage());
-								}
-							}
-							// Enter variables loop
-						} while (!"n".equals(tmpEnterVariablesValue) && !tmpErrorOccuredInFormula);
-					}
+                try {
+                  tmpEnterVariablesValue = ConsoleInput.getConsoleInput();
+                } catch (IOException e) {
+                  ConsoleOutput.printError(e.getMessage());
+                }
+              }
+              // Enter variables loop
+            } while (!"n".equals(tmpEnterVariablesValue) && !tmpErrorOccuredInFormula);
+          }
 
-					ConsoleOutput.askAnotherFormulaInput();
+          ConsoleOutput.askAnotherFormulaInput();
 
-					try {
-						tmpInputString = ConsoleInput.getConsoleInput();
-					} catch (IOException e) {
-						ConsoleOutput.printError(e.getMessage());
-					}
+          try {
+            tmpInputString = ConsoleInput.getConsoleInput();
+          } catch (IOException e) {
+            ConsoleOutput.printError(e.getMessage());
+          }
 
-					// end of entering formulas loop
-				}
+          // end of entering formulas loop
+        }
 
-				// if helpmenu
-			} else if (tmpInputString.equals("h")) {
+        // if helpmenu
+      } else if (tmpInputString.equals("h")) {
 
-				ConsoleOutput.showHelp();
+        ConsoleOutput.showHelp();
 
-				// if exit
-			} else if (tmpInputString.toLowerCase().equals("e") || tmpInputString.toLowerCase().equals("exit")) {
+        // if exit
+      } else if (tmpInputString.toLowerCase().equals("e") || tmpInputString.toLowerCase().equals("exit")) {
 
-				runCalculator = false;
+        runCalculator = false;
 
-				// if unknown command
-			} else {
+        // if unknown command
+      } else {
 
-				ConsoleOutput.unknownCommand();
-			}
-		}
-		ConsoleOutput.exitCalculator();
-	}
+        ConsoleOutput.unknownCommand();
+      }
+    }
+    ConsoleOutput.exitCalculator();
+  }
 }

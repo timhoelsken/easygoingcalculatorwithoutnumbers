@@ -143,7 +143,8 @@ public class IntegrationTest extends TestCase {
     } catch (CalculatingException e) {
       tmpErrorOccured = true;
     }
-    assertTrue(!tmpErrorOccured && d == 34.0);
+    assertTrue("There should no error occure.", !tmpErrorOccured);
+    assertEquals(34.0, d);
   }
 
   /**
@@ -163,7 +164,7 @@ public class IntegrationTest extends TestCase {
       tmpErrorOccured = true;
     }
     assertTrue("There should no error occure.", !tmpErrorOccured);
-    assertEquals("-17.0", tmpResult);
+    assertEquals(-17.0, tmpResult);
   }
 
   // === Iteration Tests ===

@@ -143,8 +143,9 @@ public final class FormulaTreeUtil {
 			// else set right
 		} else {
 			aTreeToBeInserted.setFather(tmpTree);
-			if (tmpTree.getRightSon() != null)
+			if (tmpTree.getRightSon() != null) {
 				aTreeToBeInserted.setLeftSon(tmpTree.getRightSon());
+			}
 			tmpTree.setRightSon(aTreeToBeInserted);
 		}
 

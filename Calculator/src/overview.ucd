@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="overview" size="924,356" id="" metadata="uml2-1.0" initialized="true" tag="1000" key="32303037303533312D313030302043616C63756C61746F722F5261706861656C">
-  <children xsi:type="editmodel:PackageEditModel" name="calculator" location="15,5" size="122,174" id="calculator">
+  <children xsi:type="editmodel:PackageEditModel" name="calculator" location="15,5" size="133,174" id="calculator">
     <children xsi:type="editmodel:ClassEditModel" name="Calculator" location="10,38" size="107,29" id="calculator/Calculator" runTimeClassModel="main([Ljava.lang.String;)">
       <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
       <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
@@ -8,8 +8,8 @@
       <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
     </children>
   </children>
-  <children xsi:type="editmodel:PackageEditModel" name="calculator.elements" location="285,195" size="376,256" id="calculator.elements">
-    <children xsi:type="editmodel:EnumerationEditModel" name="OperatorType" location="236,36" size="129,43" id="calculator.elements/OperatorType" runTimeClassModel="TAN%,MULTIPLICATION%,ADDITION%,POW%,SIN%,SUBTRACTION%,DIVISION%,COS%,SQRT%">
+  <children xsi:type="editmodel:PackageEditModel" name="calculator.elements" location="285,195" size="382,256" id="calculator.elements">
+    <children xsi:type="editmodel:EnumerationEditModel" name="OperatorType" location="236,36" size="129,43" id="calculator.elements/OperatorType" runTimeClassModel="TAN%,MULTIPLICATION%,ADDITION%,POW%,SIN%,SUBTRACTION%,DIVISION%,SQRT%,COS%">
       <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
       <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
     </children>
@@ -66,7 +66,7 @@
       <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
     </children>
   </children>
-  <children xsi:type="editmodel:PackageEditModel" name="calculator.exceptions" location="10,186" size="272,260" id="calculator.exceptions">
+  <children xsi:type="editmodel:PackageEditModel" name="calculator.exceptions" location="10,186" size="274,260" id="calculator.exceptions">
     <children xsi:type="editmodel:ClassEditModel" name="FormulaConversionException" location="29,51" size="229,29" id="calculator.exceptions/FormulaConversionException" runTimeClassModel="FormulaConversionException(Ljava.lang.String;),FormulaConversionException()">
       <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
       <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
@@ -112,7 +112,7 @@
       <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
     </children>
   </children>
-  <children xsi:type="editmodel:PackageEditModel" name="calculator.userinterface.console" location="150,5" size="196,179" id="calculator.userinterface.console">
+  <children xsi:type="editmodel:PackageEditModel" name="calculator.userinterface.console" location="150,5" size="198,179" id="calculator.userinterface.console">
     <children xsi:type="editmodel:ClassEditModel" name="ConsoleCalculator" location="24,35" size="158,29" id="calculator.userinterface.console/ConsoleCalculator" runTimeClassModel="start()">
       <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
       <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
@@ -132,7 +132,7 @@
       <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
     </children>
   </children>
-  <children xsi:type="editmodel:PackageEditModel" name="calculator.userinterface.swing" location="375,10" size="504,179" id="calculator.userinterface.swing">
+  <children xsi:type="editmodel:PackageEditModel" name="calculator.userinterface.swing" location="375,10" size="507,181" id="calculator.userinterface.swing">
     <children xsi:type="editmodel:ClassEditModel" name="AboutDialog" location="51,92" size="120,29" id="calculator.userinterface.swing/AboutDialog" runTimeClassModel="load(),AboutDialog(Ljavax.swing.JFrame;)">
       <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
       <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>

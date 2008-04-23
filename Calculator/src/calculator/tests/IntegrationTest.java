@@ -142,7 +142,7 @@ public class IntegrationTest extends TestCase {
       } catch (CalculatingException e) {
           tmpErrorOccured = true;
       }
-      assertTrue(!tmpErrorOccured && "23.0".equals(tmpString));
+      assertTrue(!tmpErrorOccured && "34.0".equals(tmpString));
   }
 
 	// === Iteration Tests ===

@@ -3,7 +3,7 @@ package calculator.elements;
 import calculator.utils.MathUtil;
 
 /**
- * 
+ * @author  Raphael
  */
 public class Operator extends MathObj {
 
@@ -34,8 +34,9 @@ public class Operator extends MathObj {
 	}
 
 	/**
-	 * @return the operatorType
-	 */
+   * @return  the operatorType
+   * @uml.property  name="operatorType"
+   */
 	public OperatorType getOperatorType() {
 		return operatorType;
 	}

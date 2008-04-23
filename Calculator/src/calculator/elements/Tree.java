@@ -4,7 +4,7 @@ import calculator.utils.ConverterUtil;
 import calculator.utils.FormulaTreeUtil;
 
 /**
- * 
+ * @author  Raphael
  */
 public class Tree {
 	private MathObj root;
@@ -13,60 +13,65 @@ public class Tree {
 	private Tree Father;
 
 	/**
-	 * @return the father
-	 */
+   * @return  the father
+   * @uml.property  name="father"
+   */
 	public Tree getFather() {
 		return Father;
 	}
 
 	/**
-	 * @param aFather
-	 */
+   * @param  aFather
+   * @uml.property  name="father"
+   */
 	public void setFather(Tree aFather) {
 		Father = aFather;
 	}
 
 	/**
-	 * @return the root
-	 */
+   * @return  the root
+   * @uml.property  name="root"
+   */
 	public MathObj getRoot() {
 		return root;
 	}
 
 	/**
-	 * @param aRoot
-	 *            to set
-	 */
+   * @param aRoot  to set
+   * @uml.property  name="root"
+   */
 	public void setRoot(MathObj aRoot) {
 		root = aRoot;
 	}
 
 	/**
-	 * @return the left son tree
-	 */
+   * @return  the left son tree
+   * @uml.property  name="leftSon"
+   */
 	public Tree getLeftSon() {
 		return LeftSon;
 	}
 
 	/**
-	 * @param aLeft
-	 *            tree to set
-	 */
+   * @param aLeft  tree to set
+   * @uml.property  name="leftSon"
+   */
 	public void setLeftSon(Tree aLeft) {
 		LeftSon = aLeft;
 	}
 
 	/**
-	 * @return the right son tree
-	 */
+   * @return  the right son tree
+   * @uml.property  name="rightSon"
+   */
 	public Tree getRightSon() {
 		return RightSon;
 	}
 
 	/**
-	 * @param aRight
-	 *            tree to set
-	 */
+   * @param aRight  tree to set
+   * @uml.property  name="rightSon"
+   */
 	public void setRightSon(Tree aRight) {
 		RightSon = aRight;
 	}

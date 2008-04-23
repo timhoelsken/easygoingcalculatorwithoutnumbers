@@ -1,15 +1,16 @@
 package calculator.elements;
 
 /**
- * 
+ * @author  Raphael
  */
 public class Variable extends Operand {
 
 	private char value;
 
 	/**
-	 * @return the value
-	 */
+   * @return  the value
+   * @uml.property  name="value"
+   */
 	public char getValue() {
 		return value;
 	}

@@ -1,14 +1,15 @@
 package calculator.elements;
 
 /**
- * 
+ * @author  Raphael
  */
 public class NumberObj extends Operand {
 	private Double value;
 
 	/**
-	 * @return the value
-	 */
+   * @return  the value
+   * @uml.property  name="value"
+   */
 	public Double getValue() {
 		return value;
 	}

@@ -202,8 +202,9 @@ public class VariableDialog extends JDialog {
 	}
 
 	/**
-	 * @return the inputFieldsOfVariablesArray
-	 */
+   * @return  the inputFieldsOfVariablesArray
+   * @uml.property  name="inputFieldsOfVariablesArray"
+   */
 	public JTextField[] getInputFieldsOfVariablesArray() {
 		return inputFieldsOfVariablesArray;
 	}

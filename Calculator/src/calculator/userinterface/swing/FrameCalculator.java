@@ -391,43 +391,48 @@ public class FrameCalculator extends JFrame {
 	}
 
 	/**
-	 * @return the progressBar
-	 */
+   * @return  the progressBar
+   * @uml.property  name="progressBar"
+   */
 	public JProgressBar getProgressBar() {
 		return progressBar;
 	}
 
 	/**
-	 * @return the convertedFormula
-	 */
+   * @return  the convertedFormula
+   * @uml.property  name="convertedFormula"
+   */
 	public String getConvertedFormula() {
 		return convertedFormula;
 	}
 
 	/**
-	 * @return the calculatorTree
-	 */
+   * @return  the calculatorTree
+   * @uml.property  name="calculatorTree"
+   */
 	public Tree getCalculatorTree() {
 		return calculatorTree;
 	}
 
 	/**
-	 * @param aCalculatorTree
-	 *            the calculatorTree to set
-	 */
+   * @param aCalculatorTree  the calculatorTree to set
+   * @uml.property  name="calculatorTree"
+   */
 	public void setCalculatorTree(Tree aCalculatorTree) {
 		calculatorTree = aCalculatorTree;
 	}
 
 	/**
-	 * @return the loadProgressBar
-	 */
+   * @return  the loadProgressBar
+   * @uml.property  name="loadProgressBar"
+   */
 	public static boolean isLoadProgressBar() {
 		return loadProgressBar;
 	}
 
   /**
-   * @return the playSound
+   * @return  the playSound
+   * @uml.property  name="playSound"
    */
   public static boolean isPlaySound() {
     return playSound;

@@ -8,23 +8,21 @@ import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 
 /**
- *
- * @author Tim
- *
+ * the flam sound class
  */
 public class Flam extends Thread {
 
   private InputStream flamAudio;
 
   /**
-   *
+   * the standard constructor
    */
   public Flam() {
     loadFlam();
   }
 
   /**
-   *
+   * runs the audio player
    */
   public void run() {
     try {
@@ -37,7 +35,7 @@ public class Flam extends Thread {
   }
 
   /**
-   *
+   * loads the sound file
    */
   public void loadFlam() {
     ClassLoader tmpClassLoader = this.getClass().getClassLoader();
@@ -46,7 +44,6 @@ public class Flam extends Thread {
     try {
       flamAudio = new FileInputStream(tmpUrl.getFile());
     } catch (Exception e) {
-      System.err.println("Error loading Sound!");
       e.printStackTrace();
     }
   }

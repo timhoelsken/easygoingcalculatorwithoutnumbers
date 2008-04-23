@@ -134,15 +134,16 @@ public class IntegrationTest extends TestCase {
 	public void testCalculator9() throws Exception {
       boolean tmpErrorOccured = false;
       String tmpString = null;
+      Double d = 0.0;
 
       try {
           tmpString = ConverterUtil.formulaToStandardString("(1+3)(2+3)+(1+2*3+3+4)");
           Tree tmpTree = FormulaTreeUtil.BuildTree(tmpString);
-          FormulaTreeUtil.EvaluateTree(tmpTree, null);
+           d = FormulaTreeUtil.EvaluateTree(tmpTree, null);
       } catch (CalculatingException e) {
           tmpErrorOccured = true;
       }
-      assertTrue(!tmpErrorOccured && "34.0".equals(tmpString));
+      assertTrue(!tmpErrorOccured && d == 34.0);
   }
 
 	// === Iteration Tests ===

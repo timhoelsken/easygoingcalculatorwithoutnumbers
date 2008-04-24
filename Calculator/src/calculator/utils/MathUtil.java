@@ -98,7 +98,7 @@ public class MathUtil {
    * @param aChar
    * @return true if char is a comma
    */
-  public static boolean IsComma(char aChar) {
+  public static boolean isComma(char aChar) {
     return (aChar == COMMA);
   }
 
@@ -107,7 +107,7 @@ public class MathUtil {
    * @param aChar
    * @return true if char is a minus
    */
-  public static boolean IsMinus(char aChar) {
+  public static boolean isMinus(char aChar) {
     return (aChar == '-');
   }
 
@@ -115,7 +115,7 @@ public class MathUtil {
    * @param aChar
    * @return true if char is operator
    */
-  public static boolean IsOperator(char aChar) {
+  public static boolean isOperator(char aChar) {
     switch (aChar) {
       case '+':
       case '-':
@@ -137,7 +137,7 @@ public class MathUtil {
    * @param aChar
    * @return true if char is left bracket
    */
-  public static boolean IsLeftBracket(char aChar) {
+  public static boolean isLeftBracket(char aChar) {
     return (aChar == '(');
   }
 
@@ -146,7 +146,7 @@ public class MathUtil {
    * @param aChar
    * @return true if char is a right bracket
    */
-  public static boolean IsRightBracket(char aChar) {
+  public static boolean isRightBracket(char aChar) {
     return (aChar == ')');
   }
 
@@ -211,7 +211,7 @@ public class MathUtil {
    * @param aFormula
    *            sting which contains a formula containing string
    */
-  public static ArrayList<Object> FormulaToArrayList(String aFormula) {
+  public static ArrayList<Object> formulaToArrayList(String aFormula) {
     ArrayList<Object> MathList = new ArrayList<Object>();
 
     int tmpLenOfString = aFormula.length();
@@ -224,32 +224,32 @@ public class MathUtil {
       if ((MathUtil.isNumber(aFormula.charAt(tmpStartPosition)))) {
         tmpEndPosition = tmpStartPosition + 1;
         while ((tmpEndPosition < tmpLenOfString)
-            && ((MathUtil.isNumber(aFormula.charAt(tmpEndPosition))) || (MathUtil.IsComma(aFormula
+            && ((MathUtil.isNumber(aFormula.charAt(tmpEndPosition))) || (MathUtil.isComma(aFormula
                 .charAt(tmpEndPosition))))) {
           tmpEndPosition++;
         }
         MathList.add(buildNumberMathObject(aFormula.substring(tmpStartPosition, tmpEndPosition)));
         // extract negative numbers
-      } else if (MathUtil.IsLeftBracket(aFormula.charAt(tmpStartPosition))
-          && (MathUtil.IsMinus(aFormula.charAt(tmpStartPosition + 1)))
+      } else if (MathUtil.isLeftBracket(aFormula.charAt(tmpStartPosition))
+          && (MathUtil.isMinus(aFormula.charAt(tmpStartPosition + 1)))
           && (MathUtil.isNumber(aFormula.charAt(tmpStartPosition + 2)))) {
         tmpStartPosition++;
         tmpEndPosition = tmpStartPosition + 1;
-        while ((MathUtil.IsRightBracket(aFormula.charAt(tmpEndPosition))) == false) {
+        while ((MathUtil.isRightBracket(aFormula.charAt(tmpEndPosition))) == false) {
           tmpEndPosition++;
         }
         MathList.add(buildNumberMathObject(aFormula.substring(tmpStartPosition, tmpEndPosition)));
         tmpEndPosition++;
         // extract inner formula (brackets)
-      } else if (MathUtil.IsLeftBracket(aFormula.charAt(tmpStartPosition))) {
+      } else if (MathUtil.isLeftBracket(aFormula.charAt(tmpStartPosition))) {
         tmpStartPosition++;
         int tmpCounterLeftBracket = 1;
         tmpEndPosition = tmpStartPosition;
         outer: while (true) {
-          if (MathUtil.IsLeftBracket(aFormula.charAt(tmpEndPosition))) {
+          if (MathUtil.isLeftBracket(aFormula.charAt(tmpEndPosition))) {
             tmpCounterLeftBracket++;
           }
-          if (MathUtil.IsRightBracket(aFormula.charAt(tmpEndPosition))) {
+          if (MathUtil.isRightBracket(aFormula.charAt(tmpEndPosition))) {
             tmpCounterLeftBracket--;
             if (tmpCounterLeftBracket == 0) {
               break outer;
@@ -257,10 +257,10 @@ public class MathUtil {
           }
           tmpEndPosition++;
         }
-        MathList.add(MathUtil.FormulaToArrayList(aFormula.substring(tmpStartPosition, tmpEndPosition)));
+        MathList.add(MathUtil.formulaToArrayList(aFormula.substring(tmpStartPosition, tmpEndPosition)));
         tmpEndPosition++;
         // extract operators (only one sign)
-      } else if (MathUtil.IsOperator(aFormula.charAt(tmpStartPosition))) {
+      } else if (MathUtil.isOperator(aFormula.charAt(tmpStartPosition))) {
         tmpEndPosition = tmpStartPosition + 1;
         MathList.add(buildOperatorMathObject(aFormula.substring(tmpStartPosition, tmpEndPosition)));
         // extract variables (only one sign)

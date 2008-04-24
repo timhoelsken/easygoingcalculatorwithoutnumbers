@@ -26,7 +26,7 @@ public class ManualDialog extends JDialog {
 
   /**
    * The constructor
-   * 
+   *
    * @param aParentFrame
    */
   public ManualDialog(JFrame aParentFrame) {
@@ -43,8 +43,7 @@ public class ManualDialog extends JDialog {
   public void load() {
 
     // set text content
-    String tmpHelpTextContent = new String("");
-    tmpHelpTextContent = "How to use the calculator:\n" + "Enter a formula in the input field.\n"
+    String tmpHelpTextContent = "How to use the calculator:\n" + "Enter a formula in the input field.\n"
         + "You can put in the following as part of the formula:\n\n"
         + "- real numbers (negative numbers have to be in brackets)\n" + "- operators \"+ - * \\ ^\"\n"
         + "- functions \"sin() cos() tan() sqrt()\"\n" + "- variables\n\n"

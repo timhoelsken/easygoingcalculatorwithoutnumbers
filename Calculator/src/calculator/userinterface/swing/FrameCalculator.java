@@ -351,8 +351,8 @@ public class FrameCalculator extends JFrame {
 
     // calculate!
     try {
-      aFrameCalculator.setCalculatorTree(FormulaTreeUtil.BuildTree(aFrameCalculator.getConvertedFormula()));
-      double tmpResult = FormulaTreeUtil.EvaluateTree(aFrameCalculator.getCalculatorTree(),
+      aFrameCalculator.setCalculatorTree(FormulaTreeUtil.buildTree(aFrameCalculator.getConvertedFormula()));
+      double tmpResult = FormulaTreeUtil.evaluateTree(aFrameCalculator.getCalculatorTree(),
           dictionaryOfEnteredVariables);
       // round the result to the eighth decimal place
       tmpResult = BigDecimal.valueOf(tmpResult).setScale(8, RoundingMode.HALF_UP).doubleValue();

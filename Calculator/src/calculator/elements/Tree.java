@@ -93,7 +93,7 @@ public class Tree {
    * @return a String containing a tree painted in chars
    */
   public String paintMeAsString() {
-    String tmpPaintedTree = new String("");
+    String tmpPaintedTree = "";
     int tmpDepth = FormulaTreeUtil.getDepth(this);
     int tmpMaximumDepth = 7;
     if (tmpDepth > tmpMaximumDepth) {
@@ -106,7 +106,7 @@ public class Tree {
       } else {
         int tmpLineWidth = ((int) Math.pow(2.0, tmpDepth - 1)) * 3;
 
-        String tmpRootValue = new String();
+        String tmpRootValue = "";
         for (int i = 0; i < (tmpLineWidth / 2); i++) {
           tmpRootValue += " ";
         }
@@ -116,10 +116,10 @@ public class Tree {
         if (tmpDepth > 1) {
           String tmpOutput;
           for (int i = 1; i < tmpDepth; i++) {
-            tmpOutput = new String();
+            tmpOutput = "";
             int tmpExpectedObjects = (int) Math.pow(2.0, i);
             for (int j = 1; j <= tmpExpectedObjects; j++) {
-              String tmpSpaces = new String();
+              String tmpSpaces = "";
               for (int k = 0; k <= (tmpLineWidth / tmpExpectedObjects); k++) {
                 tmpSpaces += " ";
               }

@@ -28,7 +28,7 @@ public final class FormulaTreeUtil {
    *             It is not possible to calculate the tree. An internal error
    *             occurred.
    */
-  public static double EvaluateTree(Tree aTree, Hashtable<String, Double> aVariableHashTable)
+  public static double evaluateTree(Tree aTree, Hashtable<String, Double> aVariableHashTable)
       throws CalculatingException {
     // no tree? no calculation!
     if (aTree == null) {
@@ -54,53 +54,53 @@ public final class FormulaTreeUtil {
 
       if (tmpOperator.getOperatorType() == OperatorType.ADDITION) {
 
-        tmpResult = FormulaTreeUtil.EvaluateTree(aTree.getLeftSon(), aVariableHashTable)
-            + FormulaTreeUtil.EvaluateTree(aTree.getRightSon(), aVariableHashTable);
+        tmpResult = FormulaTreeUtil.evaluateTree(aTree.getLeftSon(), aVariableHashTable)
+            + FormulaTreeUtil.evaluateTree(aTree.getRightSon(), aVariableHashTable);
 
       } else if (tmpOperator.getOperatorType() == OperatorType.DIVISION) {
 
-        Double tmpLeft = FormulaTreeUtil.EvaluateTree(aTree.getLeftSon(), aVariableHashTable);
-        Double tmpRight = FormulaTreeUtil.EvaluateTree(aTree.getRightSon(), aVariableHashTable);
+        Double tmpLeft = FormulaTreeUtil.evaluateTree(aTree.getLeftSon(), aVariableHashTable);
+        Double tmpRight = FormulaTreeUtil.evaluateTree(aTree.getRightSon(), aVariableHashTable);
         if (tmpRight == 0)
           throw new CalculatingException("Division by 0 is not allowed.");
         tmpResult = tmpLeft / tmpRight;
 
       } else if (tmpOperator.getOperatorType() == OperatorType.MULTIPLICATION) {
 
-        tmpResult = FormulaTreeUtil.EvaluateTree(aTree.getLeftSon(), aVariableHashTable)
-            * FormulaTreeUtil.EvaluateTree(aTree.getRightSon(), aVariableHashTable);
+        tmpResult = FormulaTreeUtil.evaluateTree(aTree.getLeftSon(), aVariableHashTable)
+            * FormulaTreeUtil.evaluateTree(aTree.getRightSon(), aVariableHashTable);
 
       } else if (tmpOperator.getOperatorType() == OperatorType.SUBTRACTION) {
 
-        tmpResult = FormulaTreeUtil.EvaluateTree(aTree.getLeftSon(), aVariableHashTable)
-            - FormulaTreeUtil.EvaluateTree(aTree.getRightSon(), aVariableHashTable);
+        tmpResult = FormulaTreeUtil.evaluateTree(aTree.getLeftSon(), aVariableHashTable)
+            - FormulaTreeUtil.evaluateTree(aTree.getRightSon(), aVariableHashTable);
 
       } else if (tmpOperator.getOperatorType() == OperatorType.SIN) {
 
-        tmpResult = Math.sin(Math.toRadians(FormulaTreeUtil.EvaluateTree(aTree.getRightSon(),
+        tmpResult = Math.sin(Math.toRadians(FormulaTreeUtil.evaluateTree(aTree.getRightSon(),
             aVariableHashTable)));
 
       } else if (tmpOperator.getOperatorType() == OperatorType.SQRT) {
 
-        Double tmpRight = FormulaTreeUtil.EvaluateTree(aTree.getRightSon(), aVariableHashTable);
+        Double tmpRight = FormulaTreeUtil.evaluateTree(aTree.getRightSon(), aVariableHashTable);
         if (tmpRight < 0)
           throw new CalculatingException("sqrt() can only be used with positive operands.");
         tmpResult = Math.sqrt(tmpRight);
 
       } else if (tmpOperator.getOperatorType() == OperatorType.TAN) {
 
-        tmpResult = Math.tan(Math.toRadians(FormulaTreeUtil.EvaluateTree(aTree.getRightSon(),
+        tmpResult = Math.tan(Math.toRadians(FormulaTreeUtil.evaluateTree(aTree.getRightSon(),
             aVariableHashTable)));
 
       } else if (tmpOperator.getOperatorType() == OperatorType.COS) {
 
-        tmpResult = Math.cos(Math.toRadians(FormulaTreeUtil.EvaluateTree(aTree.getRightSon(),
+        tmpResult = Math.cos(Math.toRadians(FormulaTreeUtil.evaluateTree(aTree.getRightSon(),
             aVariableHashTable)));
 
       } else if (tmpOperator.getOperatorType() == OperatorType.POW) {
 
-        tmpResult = Math.pow(FormulaTreeUtil.EvaluateTree(aTree.getLeftSon(), aVariableHashTable),
-            FormulaTreeUtil.EvaluateTree(aTree.getRightSon(), aVariableHashTable));
+        tmpResult = Math.pow(FormulaTreeUtil.evaluateTree(aTree.getLeftSon(), aVariableHashTable),
+            FormulaTreeUtil.evaluateTree(aTree.getRightSon(), aVariableHashTable));
         if (tmpResult == null || tmpResult.toString().equalsIgnoreCase("NAN"))
           throw (new CalculatingException("Negative square root not allowed."));
       }
@@ -156,9 +156,9 @@ public final class FormulaTreeUtil {
    * @return the built tree
    * @throws CalculatingException
    */
-  public static Tree BuildTree(String aFunction) throws CalculatingException {
+  public static Tree buildTree(String aFunction) throws CalculatingException {
     // convert String into Math-List and call overloaded other method
-    ArrayList<Object> MathList = MathUtil.FormulaToArrayList(aFunction);
+    ArrayList<Object> MathList = MathUtil.formulaToArrayList(aFunction);
     return BuildTree(MathList);
   }
 

@@ -20,14 +20,14 @@ public class ConsoleCalculator {
 
   /**
    * starts the console calculator
-   * 
+   *
    * @param args
    */
   public static void start() {
 
     // defines that the calculator is running
     Boolean runCalculator = true;
-    String tmpInputString = new String("");
+    String tmpInputString = "";
 
     ConsoleOutput.showTitle();
 
@@ -51,7 +51,7 @@ public class ConsoleCalculator {
         boolean tmpFormulaHasVariables = false;
         boolean tmpErrorOccuredInFormula = false;
 
-        String tmpEnterVariablesValue = new String("");
+        String tmpEnterVariablesValue = "";
 
         ArrayList<String[]> tmpVariablesList = new ArrayList<String[]>();
         Hashtable<String, Double> tmpVariableDictionary = new Hashtable<String, Double>();
@@ -95,7 +95,7 @@ public class ConsoleCalculator {
               if (tmpFormulaHasVariables) {
 
                 tmpVariablesList = ConverterUtil.getVariables(tmpInputString);
-                String tmpInputVariableValue = new String("");
+                String tmpInputVariableValue = "";
 
                 ConsoleOutput.promptVariableInput();
 
@@ -138,11 +138,11 @@ public class ConsoleCalculator {
 
                 // if the tree already exist, use it!
                 if (tmpTree == null) {
-                  tmpTree = FormulaTreeUtil.BuildTree(tmpInputString);
+                  tmpTree = FormulaTreeUtil.buildTree(tmpInputString);
                 }
 
                 // calculate!
-                double tmpResult = FormulaTreeUtil.EvaluateTree(tmpTree, tmpVariableDictionary);
+                double tmpResult = FormulaTreeUtil.evaluateTree(tmpTree, tmpVariableDictionary);
                 // round the result to the eighth decimal place
                 tmpResult = BigDecimal.valueOf(tmpResult).setScale(8, RoundingMode.HALF_UP).doubleValue();
                 System.out.println(tmpResult);

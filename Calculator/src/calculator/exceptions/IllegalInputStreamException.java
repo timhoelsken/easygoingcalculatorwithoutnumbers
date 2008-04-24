@@ -14,13 +14,6 @@ public class IllegalInputStreamException extends IllegalArgumentException {
 
   /**
    * 
-   */
-  public IllegalInputStreamException() {
-    super();
-  }
-
-  /**
-   * 
    * @param message
    */
   public IllegalInputStreamException(String message) {

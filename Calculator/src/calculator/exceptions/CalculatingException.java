@@ -14,13 +14,6 @@ public class CalculatingException extends Exception {
 
   /**
    * 
-   */
-  public CalculatingException() {
-    super();
-  }
-
-  /**
-   * 
    * @param message
    */
   public CalculatingException(String message) {

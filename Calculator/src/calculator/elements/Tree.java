@@ -37,15 +37,6 @@ public class Tree {
   }
 
   /**
-   * @param aRoot
-   *            to set
-   * @uml.property name="root"
-   */
-  public void setRoot(MathObj aRoot) {
-    root = aRoot;
-  }
-
-  /**
    * @return the left son tree
    * @uml.property name="leftSon"
    */
@@ -87,21 +78,6 @@ public class Tree {
   public Tree(MathObj aRoot) {
     root = aRoot;
     LeftSon = RightSon = Father = null;
-  }
-
-  /**
-   * constructor
-   * 
-   * @param aRoot
-   * @param aFather
-   * @param aLeft
-   * @param aRight
-   */
-  public Tree(MathObj aRoot, Tree aFather, Tree aLeft, Tree aRight) {
-    root = aRoot;
-    LeftSon = aLeft;
-    RightSon = aRight;
-    Father = aFather;
   }
 
   /**

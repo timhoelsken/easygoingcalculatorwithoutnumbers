@@ -2008,6 +2008,41 @@ public class IntegrationTest extends TestCase {
     assertEquals((double) 95935.0, Math.floor(tmpResult * 1000));
 
   }
+  
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#changeFunctionsIntoSigns()}.
+   * 
+   * @throws Exception
+   */
+  public void testNegativeSquareRoot(){
+    
+    boolean ok = false;
+    
+    String tmpString= null;
+    try {
+      tmpString = ConverterUtil.formulaToStandardString("(-2)^(1/2)");
+    } catch (FormulaConversionException e) {
+      ok=false;
+    }
+    
+    Tree tmpTree = null;
+    try {
+      tmpTree = FormulaTreeUtil.BuildTree(tmpString);
+    } catch (CalculatingException e) {
+      ok=false;
+    }
+
+
+    try {
+      FormulaTreeUtil.EvaluateTree(tmpTree, null);
+    } catch (CalculatingException e) {
+      ok=true;
+    }
+
+    assertTrue("True", ok);
+
+  }
 
   // === End Iteration Tests ===
   /**

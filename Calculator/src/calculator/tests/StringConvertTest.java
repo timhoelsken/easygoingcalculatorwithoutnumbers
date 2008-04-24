@@ -3,6 +3,8 @@
  */
 package calculator.tests;
 
+import java.util.ArrayList;
+
 import junit.framework.JUnit4TestAdapter;
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -17,7 +19,7 @@ public class StringConvertTest extends TestCase {
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
    * The three examples out of the "requirement"
-   * 
+   *
    * @throws Exception
    */
   public void testRequirements() throws Exception {
@@ -61,7 +63,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testFormulaToStandardString1() throws Exception {
@@ -74,7 +76,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testFormulaToStandardString2() throws Exception {
@@ -95,7 +97,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testFormulaToStandardString4() throws Exception {
@@ -115,7 +117,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testFormulaToStandardString5() throws Exception {
@@ -133,7 +135,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testFormulaToStandardString6() throws Exception {
@@ -151,7 +153,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testFormulaToStandardString7() throws Exception {
@@ -168,7 +170,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testFormulaToStandardString8() throws Exception {
@@ -187,7 +189,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testFormulaToStandardString9() throws Exception {
@@ -205,7 +207,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testFormulaToStandardString10() throws Exception {
@@ -223,7 +225,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testFormulaToStandardString11() throws Exception {
@@ -242,7 +244,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   * 
+   *
    * @throws Exception
    */
   public void testFormulaToStandardString12() throws Exception {
@@ -260,7 +262,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * a new test :-)
-   * 
+   *
    * @throws Exception
    */
   public void testFormulaToStandardString13() throws Exception {
@@ -281,7 +283,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * another new test :-)
-   * 
+   *
    * @throws Exception
    */
   public void testFormulaToStandardString14() throws Exception {
@@ -297,7 +299,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * another new test :-)
-   * 
+   *
    * @throws Exception
    */
   public void testFormulaToStandardString15() throws Exception {
@@ -313,7 +315,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * another new test ...
-   * 
+   *
    * @throws Exception
    */
   public void testFormulaToStandardString16() throws Exception {
@@ -887,6 +889,27 @@ public class StringConvertTest extends TestCase {
   public void testChangeFunctionsIntoSigns() {
     assertTrue(ConverterUtil.changeFunctionsIntoSigns("sin(abc)+cos(abcd)+tan+tan(abc)+sqrt(23)").equals(
         "%(abc)+~(abcd)+tan+#(abc)+&(23)"));
+  }
+
+  /**
+   * Test method for {@link calculator.utils.ConverterUtil#hasVariables()}.
+   */
+  public void testHasVariables() {
+    assertTrue("a is a variable", ConverterUtil.hasVariables("a"));
+    assertTrue("z is a variable", ConverterUtil.hasVariables("z"));
+    assertFalse("There are no variables", ConverterUtil.hasVariables("1+2"));
+  }
+
+  /**
+   * Test method for {@link calculator.utils.ConverterUtil#getVariables()}.
+   */
+  public void testGetVariables() {
+    ArrayList<String[]> tmpVariables = ConverterUtil.getVariables("3*a+2n-x");
+    assertEquals(3, tmpVariables.size());
+    for (String[] tmpStrings : tmpVariables) {
+      String tmpVariable = tmpStrings[0];
+      assertTrue("Should be a, n or x", "a".equals(tmpVariable) || "n".equals(tmpVariable) || "x".equals(tmpVariable) );
+    }
   }
 
   /**

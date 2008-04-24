@@ -72,7 +72,7 @@ public class Tree {
 
   /**
    * constructor (sets both sons to NULL)
-   * 
+   *
    * @param aRoot
    */
   public Tree(MathObj aRoot) {
@@ -89,7 +89,7 @@ public class Tree {
 
   /**
    * paints current tree in a String
-   * 
+   *
    * @return a String containing a tree painted in chars
    */
   public String paintMeAsString() {

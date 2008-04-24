@@ -24,6 +24,13 @@ public class Flam extends Thread {
   public void run() {
     flamAudio.play();
   }
+  
+  /**
+   * stops the playback
+   */
+  public void halt(){
+    flamAudio.stop();
+  }
 
   /**
    * loads the sound file

@@ -105,8 +105,8 @@ public class ConverterUtil {
   }
 
   /**
-   * A method to clean the variables in aFormula. Variables "ab" will be
-   * replaced with "a*b" "2a" will be replaced with "2*a"
+   * A method to clean the variables, numbers and brackets in aFormula.
+   * Variables "ab" will be replaced with "a*b" "2a" will be replaced with "2*a"
    * 
    * @param aFormula
    * @return a String that contains no "ab" or "2a" variables

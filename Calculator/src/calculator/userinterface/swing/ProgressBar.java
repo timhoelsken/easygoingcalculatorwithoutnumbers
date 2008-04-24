@@ -11,6 +11,7 @@ public class ProgressBar extends Thread {
   private static int DELAY = 10;
 
   private JProgressBar progressBar;
+  private Flam flam;
 
   /**
    * The constructor
@@ -38,8 +39,8 @@ public class ProgressBar extends Thread {
     int maximum = progressBar.getMaximum();
 
     if (FrameCalculator.isPlaySound()) {
-      Flam tmpFlam = new Flam();
-      tmpFlam.start();
+      flam = new Flam();
+      flam.start();
     }
 
     // increase value by 1 in the defined speed
@@ -54,6 +55,10 @@ public class ProgressBar extends Thread {
       }
     }
     progressBar.setString("100%");
+
+    if (FrameCalculator.isPlaySound()) {
+      flam.halt();
+    }
 
     // when finished, show the result
     FrameCalculator.calculateFormula((FrameCalculator) progressBar.getParent().getParent().getParent()

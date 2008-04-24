@@ -43,7 +43,7 @@ public class AboutDialog extends JDialog {
 
     // set text content
     String tmpHelpTextContent = new String("");
-    tmpHelpTextContent = "This formula calculator is brought to you by PSE III group 3:\n\n"
+    tmpHelpTextContent = "This formula calculator is brought to you by:\n\n"
         + "- Tim Hölsken\n" + "- André Wuthenow\n" + "- Tobias Wörenkämper\n" + "- Raphael Zimmer";
 
     // define TextArea

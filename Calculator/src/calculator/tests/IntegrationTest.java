@@ -11,8 +11,10 @@ import junit.framework.TestCase;
 import calculator.elements.Tree;
 import calculator.exceptions.CalculatingException;
 import calculator.exceptions.FormulaConversionException;
+import calculator.exceptions.IllegalInputStreamException;
 import calculator.utils.ConverterUtil;
 import calculator.utils.FormulaTreeUtil;
+import calculator.utils.MathUtil;
 
 /**
  */

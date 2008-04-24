@@ -66,7 +66,7 @@ public class FrameCalculator extends JFrame {
 
   // Menu Buttons
   private JMenu menuFile = new JMenu("File");
-  private JMenu menuView = new JMenu("View");
+  private JMenu menuExtras = new JMenu("Extras");
   private JMenu menuHelp = new JMenu("Help");
 
   // Menu Items
@@ -126,7 +126,7 @@ public class FrameCalculator extends JFrame {
     menuFile.setMnemonic('F');
     menuItemExit.setMnemonic('E');
 
-    menuView.setMnemonic('V');
+    menuExtras.setMnemonic('E');
     menuItemProgressBar.setMnemonic('P');
     menuItemFlam.setMnemonic('S');
     menuItemShowTree.setMnemonic('T');
@@ -138,15 +138,15 @@ public class FrameCalculator extends JFrame {
     // build menu
     menuFile.add(menuItemExit);
 
-    menuView.add(menuItemProgressBar);
-    menuView.add(menuItemFlam);
-    menuView.add(menuItemShowTree);
+    menuExtras.add(menuItemProgressBar);
+    menuExtras.add(menuItemFlam);
+    menuExtras.add(menuItemShowTree);
 
     menuHelp.add(menuItemManual);
     menuHelp.add(menuItemAbout);
 
     menuBarcalculator.add(menuFile);
-    menuBarcalculator.add(menuView);
+    menuBarcalculator.add(menuExtras);
     menuBarcalculator.add(menuHelp);
 
     if (!loadProgressBar) {

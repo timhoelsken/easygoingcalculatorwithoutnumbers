@@ -2141,6 +2141,24 @@ public class IntegrationTest extends TestCase {
     assertTrue("True", ok);
 
   }
+  
+  
+  /**
+   * 
+   */
+  public void testNegativeMathUtil(){
+    boolean ok = false;
+    try
+    {
+    MathUtil.FormulaToArrayList("2)(*/sin)");
+    } catch (IllegalInputStreamException e)
+    {
+      ok=true;
+    }
+    
+    assertTrue("True", ok);
+  }
+
 
   // === End Iteration Tests ===
   /**

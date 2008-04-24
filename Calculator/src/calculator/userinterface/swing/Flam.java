@@ -29,6 +29,10 @@ public class Flam extends Thread {
    * stops the playback
    */
   public void halt(){
+    try{
+      Thread.sleep(100);
+    } catch (InterruptedException e) {
+    }
     flamAudio.stop();
   }
 

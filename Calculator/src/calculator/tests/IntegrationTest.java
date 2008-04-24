@@ -2043,6 +2043,38 @@ public class IntegrationTest extends TestCase {
     assertTrue("True", ok);
 
   }
+  
+  /**
+   * 
+   */
+  public void testNegativeSquareRoot2(){
+    
+    boolean ok = false;
+    
+    String tmpString= null;
+    try {
+      tmpString = ConverterUtil.formulaToStandardString("sqrt(-5)");
+    } catch (FormulaConversionException e) {
+      ok=false;
+    }
+    
+    Tree tmpTree = null;
+    try {
+      tmpTree = FormulaTreeUtil.BuildTree(tmpString);
+    } catch (CalculatingException e) {
+      ok=false;
+    }
+
+
+    try {
+      FormulaTreeUtil.EvaluateTree(tmpTree, null);
+    } catch (CalculatingException e) {
+      ok=true;
+    }
+
+    assertTrue("True", ok);
+
+  }
 
   // === End Iteration Tests ===
   /**

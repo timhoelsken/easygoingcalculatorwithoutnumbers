@@ -56,10 +56,6 @@ public class ProgressBar extends Thread {
     }
     progressBar.setString("100%");
 
-    if (FrameCalculator.isPlaySound()) {
-      flam.halt();
-    }
-
     // when finished, show the result
     FrameCalculator.calculateFormula((FrameCalculator) progressBar.getParent().getParent().getParent()
         .getParent().getParent());

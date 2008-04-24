@@ -88,7 +88,7 @@ public class FrameCalculator extends JFrame {
   /**
    * list and dictionary for variables
    */
-  public static ArrayList<String[]> listOfVariables = new ArrayList<String[]>();
+  protected static ArrayList<String[]> listOfVariables = new ArrayList<String[]>();
   private static Hashtable<String, Double> dictionaryOfEnteredVariables = new Hashtable<String, Double>();
 
   private Tree calculatorTree;
@@ -339,9 +339,9 @@ public class FrameCalculator extends JFrame {
 
   /**
    * calculates the formula
-   * 
+   *
    * @param aFrameCalculator
-   * 
+   *
    * @param aFormula
    */
   public static void calculateFormula(FrameCalculator aFrameCalculator) {

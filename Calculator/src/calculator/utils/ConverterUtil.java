@@ -370,7 +370,7 @@ public class ConverterUtil {
     int tmpStart = tmpSpaceLength / 2 - tmpStringLength / 2;
     tmpReturnString = someSpaces.substring(0, tmpStart);
     tmpReturnString += aString;
-    for (int i = tmpReturnString.length() + 1; i < tmpSpaceLength; i++) {
+    for (int i = tmpReturnString.length() + 1; i <= tmpSpaceLength; i++) {
       tmpReturnString += " ";
     }
     return tmpReturnString;

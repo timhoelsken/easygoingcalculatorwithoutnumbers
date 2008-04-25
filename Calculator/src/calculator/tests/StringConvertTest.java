@@ -913,6 +913,16 @@ public class StringConvertTest extends TestCase {
   }
 
   /**
+   * Test method for {@link calculator.utils.ConverterUtil#centerStringInSpaces()}.
+   */
+  public void testCenterStringInSpaces() {
+    assertEquals(" a ", ConverterUtil.centerStringInSpaces("   ", "a"));
+    assertEquals("ab ", ConverterUtil.centerStringInSpaces("   ", "ab"));
+    assertEquals("abc", ConverterUtil.centerStringInSpaces("   ", "abc"));
+    assertEquals("abc", ConverterUtil.centerStringInSpaces("  ", "abc"));
+  }
+
+  /**
    * @return the test suite
    */
   public static Test suite() {

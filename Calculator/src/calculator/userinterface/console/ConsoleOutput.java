@@ -33,7 +33,7 @@ public final class ConsoleOutput {
    */
   public static void showTitle() {
     System.out.println(horizontalLine());
-    System.out.println("Welcome to the PSE III calculator of group 3");
+    System.out.println("Welcome to THE PSE III calculator");
     System.out.println(horizontalLine());
   }
 

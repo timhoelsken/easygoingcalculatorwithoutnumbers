@@ -18,7 +18,7 @@ public final class FormulaTreeUtil {
 
   /**
    * Calculates the result of a formula-tree and returns it as a "double"
-   * 
+   *
    * @param aTree
    *            the tree from which the result should be calculated
    * @param aVariableHashTable
@@ -156,7 +156,7 @@ public final class FormulaTreeUtil {
 
   /**
    * Creates a new wonderful tree
-   * 
+   *
    * @param aFunction
    * @return the built tree
    * @throws CalculatingException
@@ -169,7 +169,7 @@ public final class FormulaTreeUtil {
 
   /**
    * Creates a new wonderful tree
-   * 
+   *
    * @param MathList
    *            a sorted list with math objects
    * @return a tree (surprise, surprise!)
@@ -217,13 +217,17 @@ public final class FormulaTreeUtil {
    * @return the depth of the tree
    */
   public static int getDepth(Tree aTree) {
+    // empty trees don't have a depth
     if (aTree == null || aTree.getRoot() == null) {
       return 0;
     }
     int tmpRight;
     int tmpLeft;
+    // go right and check the depth there recursively
     tmpRight = getDepth(aTree.getRightSon()) + 1;
+    // do the same on the left
     tmpLeft = getDepth(aTree.getLeftSon()) + 1;
+    // the higher one is the right one
     if (tmpRight > tmpLeft) {
       return tmpRight;
     } else {

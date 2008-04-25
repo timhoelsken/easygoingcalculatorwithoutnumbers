@@ -93,7 +93,9 @@ public class Tree {
    */
   public String paintMeAsString() {
     String tmpPaintedTree = "";
+    // get tree depth
     int tmpDepth = FormulaTreeUtil.getDepth(this);
+    // maximum painted depth
     int tmpMaximumDepth = 7;
     if (tmpDepth > tmpMaximumDepth) {
       tmpPaintedTree = "Only trees with a depth < " + (tmpMaximumDepth + 1) + " are painted.";
@@ -103,8 +105,10 @@ public class Tree {
       if (tmpDepth == 0) {
         tmpPaintedTree += "Tree is empty.";
       } else {
+        // calculate the line width (6 signs for every leaf)
         int tmpLineWidth = ((int) Math.pow(2.0, tmpDepth - 1)) * 3;
 
+        // place root in first line (center)
         String tmpRootValue = "";
         for (int i = 0; i < (tmpLineWidth / 2); i++) {
           tmpRootValue += " ";
@@ -112,24 +116,33 @@ public class Tree {
         tmpRootValue += getRoot().toString();
         tmpPaintedTree += tmpRootValue + "\n";
 
+        // go deeper if tree is deep enough...
         if (tmpDepth > 1) {
           String tmpOutput;
+          // for every level...
           for (int i = 1; i < tmpDepth; i++) {
             tmpOutput = "";
-            int tmpExpectedObjects = (int) Math.pow(2.0, i);
-            for (int j = 1; j <= tmpExpectedObjects; j++) {
+            // how many elements could be in this level?
+            int tmpExpectedElements = (int) Math.pow(2.0, i);
+            // for every possible element...
+            for (int j = 1; j <= tmpExpectedElements; j++) {
               String tmpSpaces = "";
-              for (int k = 0; k <= (tmpLineWidth / tmpExpectedObjects); k++) {
+              // calculate spaces for the element to paint
+              for (int k = 0; k <= (tmpLineWidth / tmpExpectedElements); k++) {
                 tmpSpaces += " ";
               }
+              // get the element
               MathObj tmpMathObj = getMathObj(i, j);
               if (tmpMathObj != null) {
+                // if available, paint it
                 String tmpObjValue = tmpMathObj.toString();
                 tmpOutput += ConverterUtil.centerStringInSpaces(tmpSpaces, tmpObjValue);
               } else {
-                tmpOutput += ConverterUtil.centerStringInSpaces(tmpSpaces, "");
+                // if not, just paint spaces
+                tmpOutput += tmpSpaces + tmpSpaces;
               }
             }
+            // add level to paintString
             tmpPaintedTree += tmpOutput + "\n";
           }
         }
@@ -138,14 +151,17 @@ public class Tree {
     return tmpPaintedTree;
   }
 
-  private MathObj getMathObj(int aTargetLevel, int aTargetObject) {
-    return getMathObj(aTargetLevel, aTargetObject, this);
+  private MathObj getMathObj(int aTargetLevel, int aTargetElementPosition) {
+    // call the method for this tree
+    return getMathObj(aTargetLevel, aTargetElementPosition, this);
   }
 
-  private MathObj getMathObj(int aLevel, int anObject, Tree aTree) {
-    if (aLevel == 1) {
+  private MathObj getMathObj(int aLevelCounter, int anElementPosition, Tree aTree) {
+    // special handling of target tree (found it)
+    if (aLevelCounter == 1) {
       Tree tmpSon = null;
-      switch (anObject) {
+      switch (anElementPosition) {
+        // there are only 2 possible sons
         case 1:
           tmpSon = aTree.getLeftSon();
           break;
@@ -153,21 +169,31 @@ public class Tree {
           tmpSon = aTree.getRightSon();
       }
       if (tmpSon != null) {
+        // return the son's root mathObj (if not null)
         return tmpSon.getRoot();
       }
+      // if the son is null, the requested element does not exist
       return null;
     }
-    int tmpNumberOfObjectsOfTargetLevel = (int) Math.pow(2.0, aLevel);
+
+    // search the right tree to go to
+    // calculate number of elements in the current level
+    int tmpNumberOfElementsOfTargetLevel = (int) Math.pow(2.0, aLevelCounter);
     Tree tmpPartTree;
-    if ((tmpNumberOfObjectsOfTargetLevel / 2) < anObject) {
+    // if the element is on the right side from here, the right son is the right one
+    if ((tmpNumberOfElementsOfTargetLevel / 2) < anElementPosition) {
       tmpPartTree = aTree.getRightSon();
-      anObject = anObject - tmpNumberOfObjectsOfTargetLevel / 2;
+      // here we also have to change the position of the wanted element
+      anElementPosition = anElementPosition - tmpNumberOfElementsOfTargetLevel / 2;
     } else {
+      // ... else the left son is the new partTree
       tmpPartTree = aTree.getLeftSon();
     }
+    // if partTree exists call recursively (nearer to the wanted leaf)
     if (tmpPartTree != null) {
-      return getMathObj(--aLevel, anObject, tmpPartTree);
+      return getMathObj(--aLevelCounter, anElementPosition, tmpPartTree);
     }
+    // if there's no partTree, the requested element does not exist
     return null;
   }
 }

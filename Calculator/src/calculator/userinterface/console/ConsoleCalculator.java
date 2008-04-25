@@ -53,7 +53,7 @@ public class ConsoleCalculator {
 
         String tmpEnterVariablesValue = "";
 
-        ArrayList<String[]> tmpVariablesList = new ArrayList<String[]>();
+        ArrayList<String[]> tmpVariablesList;
         Hashtable<String, Double> tmpVariableDictionary = new Hashtable<String, Double>();
 
         Tree tmpTree = null;

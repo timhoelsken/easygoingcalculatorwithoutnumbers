@@ -71,7 +71,7 @@ public class Tree {
 
   /**
    * constructor (sets both sons to NULL)
-   *
+   * 
    * @param aRoot
    */
   public Tree(MathObj aRoot) {
@@ -88,7 +88,7 @@ public class Tree {
 
   /**
    * paints current tree in a String
-   *
+   * 
    * @return a String containing a tree painted in chars
    */
   public String paintMeAsString() {
@@ -180,7 +180,8 @@ public class Tree {
     // calculate number of elements in the current level
     int tmpNumberOfElementsOfTargetLevel = (int) Math.pow(2.0, aLevelCounter);
     Tree tmpPartTree;
-    // if the element is on the right side from here, the right son is the right one
+    // if the element is on the right side from here, the right son is the right
+    // one
     if ((tmpNumberOfElementsOfTargetLevel / 2) < anElementPosition) {
       tmpPartTree = aTree.getRightSon();
       // here we also have to change the position of the wanted element

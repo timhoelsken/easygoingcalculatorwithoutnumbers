@@ -20,7 +20,7 @@ public class StringConvertTest extends TestCase {
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
    * The three examples out of the "requirement"
-   *
+   * 
    * @throws Exception
    */
   public void testRequirements() throws Exception {
@@ -64,7 +64,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString1() throws Exception {
@@ -77,7 +77,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString2() throws Exception {
@@ -98,7 +98,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString4() throws Exception {
@@ -118,7 +118,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString5() throws Exception {
@@ -136,7 +136,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString6() throws Exception {
@@ -154,7 +154,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString7() throws Exception {
@@ -171,7 +171,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString8() throws Exception {
@@ -190,7 +190,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString9() throws Exception {
@@ -208,7 +208,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString10() throws Exception {
@@ -226,7 +226,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString11() throws Exception {
@@ -245,7 +245,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString12() throws Exception {
@@ -263,7 +263,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * a new test :-)
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString13() throws Exception {
@@ -284,7 +284,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * another new test :-)
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString14() throws Exception {
@@ -300,7 +300,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * another new test :-)
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString15() throws Exception {
@@ -316,7 +316,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * another new test ...
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString16() throws Exception {
@@ -332,7 +332,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * another new test ...
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString17() throws Exception {
@@ -342,12 +342,13 @@ public class StringConvertTest extends TestCase {
 
   /**
    * another new test ...
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString18() throws Exception {
     // positive test
-    assertEquals("3+%(90)*2+((-12)+24)*3*12*12+2*3*5*#(12)*&(12)", ConverterUtil.formulaToStandardString("3+sin(90)*2+(-12+24)*3*12*12+2*3*5*tan(12)sqrt(12)"));
+    assertEquals("3+%(90)*2+((-12)+24)*3*12*12+2*3*5*#(12)*&(12)", ConverterUtil
+        .formulaToStandardString("3+sin(90)*2+(-12+24)*3*12*12+2*3*5*tan(12)sqrt(12)"));
   }
 
   /**
@@ -570,32 +571,29 @@ public class StringConvertTest extends TestCase {
     assertTrue(ConverterUtil.insertMultiplicationOperators("3+5.5xa4bc3def5gh+sin+cos6").equals(
         "3+5.5*x*a*4*b*c*3*d*e*f*5*g*h+s*i*n+c*o*s*6"));
   }
-  
+
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#insertMultiplicationOperators()}.
    */
   public void testInsertMultiplicationOperators2() {
-    assertTrue(ConverterUtil.insertMultiplicationOperators("(2+2)2").equals(
-        "(2+2)*2"));
+    assertTrue(ConverterUtil.insertMultiplicationOperators("(2+2)2").equals("(2+2)*2"));
   }
-  
+
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#insertMultiplicationOperators()}.
    */
   public void testInsertMultiplicationOperators3() {
-    assertTrue(ConverterUtil.insertMultiplicationOperators("(2+2)a").equals(
-        "(2+2)*a"));
+    assertTrue(ConverterUtil.insertMultiplicationOperators("(2+2)a").equals("(2+2)*a"));
   }
-  
+
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#insertMultiplicationOperators()}.
    */
   public void testInsertMultiplicationOperators4() {
-    assertTrue(ConverterUtil.insertMultiplicationOperators("%(90)%(90)").equals(
-        "%(90)*%(90)"));
+    assertTrue(ConverterUtil.insertMultiplicationOperators("%(90)%(90)").equals("%(90)*%(90)"));
   }
 
   /**
@@ -999,7 +997,7 @@ public class StringConvertTest extends TestCase {
   }
 
   /**
-   *
+   * 
    */
   public void testPutArrayListIntoHashtable() {
     ArrayList<String[]> tmpArrayList = new ArrayList<String[]>();

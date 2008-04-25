@@ -15,7 +15,7 @@ public final class ConverterUtil {
   /**
    * Method makes the parameter formula a standard formula (see
    * misc/documents/Standard-String.txt)
-   *
+   * 
    * @param aFormula
    * @return the standard formula
    * @throws FormulaConversionException
@@ -44,7 +44,7 @@ public final class ConverterUtil {
   /**
    * Method makes the parameter formula a GUI-standard formula, that means
    * without spaces, without capital letters and without wrong commas
-   *
+   * 
    * @param aFormula
    * @return the standard formula
    */
@@ -96,7 +96,7 @@ public final class ConverterUtil {
 
   /**
    * Replaces all commas (,) of a string with full-stops (.)
-   *
+   * 
    * @param aFormula
    * @return a string containing .
    */
@@ -108,7 +108,7 @@ public final class ConverterUtil {
    * A method to clean the variables, numbers, functions and brackets in a
    * formula. Inserts multiplicationoperators between the concatinated
    * variables, numbers, functions or brackets
-   *
+   * 
    * @param aFormula
    * @return a String that contains no concatinated variables, numbers,
    *         functions or brackets
@@ -180,7 +180,7 @@ public final class ConverterUtil {
 
   /**
    * Replaces sin, cos, tan, sqrt functions with abbreviation signs
-   *
+   * 
    * @param aFormula
    * @return a string containing abbreviation sign, defined in
    *         Standard-String.txt
@@ -235,9 +235,9 @@ public final class ConverterUtil {
   /**
    * sets brackets around negative numbers at the beginning of the formular or
    * at the beginning of brackets
-   *
+   * 
    * makes -3*2*(-5*6) look like (-3)*2*((-5)*6)
-   *
+   * 
    * @param aFormula
    * @return the bracked formula
    */
@@ -310,7 +310,7 @@ public final class ConverterUtil {
 
   /**
    * all negative numbers are set in brackets here
-   *
+   * 
    * @param aFormula
    * @return the bracked formula
    * @throws FormulaConversionException
@@ -335,7 +335,7 @@ public final class ConverterUtil {
   /**
    * checks if there is the same amount of ( and ) brackets, and if no ) are in
    * lead of ( , that means not more than there should be
-   *
+   * 
    * @param aFormula
    * @throws FormulaConversionException
    *             if the brackets in the formula are not correct
@@ -360,7 +360,7 @@ public final class ConverterUtil {
   /**
    * paints a string in the center of some spaces, needed to paint the tree in
    * the console
-   *
+   * 
    * @param someSpaces
    * @param aString
    * @return a string centered in the given spaces
@@ -386,7 +386,7 @@ public final class ConverterUtil {
 
   /**
    * Checks if a formula has variables
-   *
+   * 
    * @param aFormula
    * @return true if a formula has variables
    */
@@ -400,7 +400,7 @@ public final class ConverterUtil {
 
   /**
    * Finds all variables in the given formula string
-   *
+   * 
    * @param aFormula
    * @return a String[] ArrayList of variables. [0] is the variable, [1] is the
    *         variable's value
@@ -430,7 +430,7 @@ public final class ConverterUtil {
 
   /**
    * Puts a String[] ArrayList into a Hashtable<String, Double>
-   *
+   * 
    * @param aListOfVariables
    * @return a Hashtable<String, Double>, where key is the variable and value
    *         is the variables value
@@ -447,7 +447,7 @@ public final class ConverterUtil {
 
   /**
    * Checks if a variable is already in the list of variables.
-   *
+   * 
    * @param aListOfVariables
    * @param aVariable
    * @return true if the given variable is already in the list of variables

@@ -566,9 +566,36 @@ public class StringConvertTest extends TestCase {
    * Test method for
    * {@link calculator.utils.ConverterUtil#insertMultiplicationOperators()}.
    */
-  public void testInsertMultiplicationOperators() {
+  public void testInsertMultiplicationOperators1() {
     assertTrue(ConverterUtil.insertMultiplicationOperators("3+5.5xa4bc3def5gh+sin+cos6").equals(
         "3+5.5*x*a*4*b*c*3*d*e*f*5*g*h+s*i*n+c*o*s*6"));
+  }
+  
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#insertMultiplicationOperators()}.
+   */
+  public void testInsertMultiplicationOperators2() {
+    assertTrue(ConverterUtil.insertMultiplicationOperators("(2+2)2").equals(
+        "(2+2)*2"));
+  }
+  
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#insertMultiplicationOperators()}.
+   */
+  public void testInsertMultiplicationOperators3() {
+    assertTrue(ConverterUtil.insertMultiplicationOperators("(2+2)a").equals(
+        "(2+2)*a"));
+  }
+  
+  /**
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#insertMultiplicationOperators()}.
+   */
+  public void testInsertMultiplicationOperators4() {
+    assertTrue(ConverterUtil.insertMultiplicationOperators("%(90)%(90)").equals(
+        "%(90)*%(90)"));
   }
 
   /**

@@ -3,6 +3,7 @@ package calculator.userinterface.swing;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dialog;
+import java.awt.Font;
 import java.awt.Point;
 
 import javax.swing.JButton;
@@ -26,7 +27,7 @@ public class TreeDialog extends JDialog {
 
   /**
    * The Constructor
-   * 
+   *
    * @param aParentFrame
    */
   public TreeDialog(FrameCalculator aParentFrame) {
@@ -42,17 +43,18 @@ public class TreeDialog extends JDialog {
 
   /**
    * Paints the tree in the dialog
-   * 
+   *
    * @param aParentFrame
    */
   public void paintTree(FrameCalculator aParentFrame) {
 
-    // set text content
-    String tmpHelpTextContent = "";
-    tmpHelpTextContent = aParentFrame.getCalculatorTree().paintMeAsString();
+    // set String-Tree
+    String tmpTree = "";
+    tmpTree = aParentFrame.getCalculatorTree().paintMeAsString();
 
     // define TextArea
-    textAreaContent.setText(tmpHelpTextContent);
+    textAreaContent.setText(tmpTree);
+    textAreaContent.setFont(new Font("Courier New", Font.PLAIN, 11));
     textAreaContent.setEnabled(false);
     textAreaContent.setDisabledTextColor(Color.BLACK);
     textAreaContent.setBackground(aParentFrame.getBackground());

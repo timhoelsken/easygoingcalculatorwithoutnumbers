@@ -922,6 +922,10 @@ public class StringConvertTest extends TestCase {
     assertEquals("abc", ConverterUtil.centerStringInSpaces("  ", "abc"));
   }
 
+  //TODO tests for
+  //putArrayListIntoHashtable()
+  //isInList()
+
   /**
    * @return the test suite
    */

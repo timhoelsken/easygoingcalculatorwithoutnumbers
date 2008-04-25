@@ -359,9 +359,9 @@ public class FrameCalculator extends JFrame {
 
   /**
    * calculates the formula
-   * 
+   *
    * @param aFrameCalculator
-   * 
+   *
    * @param aFormula
    */
   public static void calculateFormula(FrameCalculator aFrameCalculator) {
@@ -412,7 +412,6 @@ public class FrameCalculator extends JFrame {
 
   /**
    * @return the progressBar
-   * @uml.property name="progressBar"
    */
   public JProgressBar getProgressBar() {
     return progressBar;
@@ -420,7 +419,6 @@ public class FrameCalculator extends JFrame {
 
   /**
    * @return the convertedFormula
-   * @uml.property name="convertedFormula"
    */
   public String getConvertedFormula() {
     return convertedFormula;
@@ -428,7 +426,6 @@ public class FrameCalculator extends JFrame {
 
   /**
    * @return the calculatorTree
-   * @uml.property name="calculatorTree"
    */
   public Tree getCalculatorTree() {
     return calculatorTree;
@@ -437,7 +434,6 @@ public class FrameCalculator extends JFrame {
   /**
    * @param aCalculatorTree
    *            the calculatorTree to set
-   * @uml.property name="calculatorTree"
    */
   public void setCalculatorTree(Tree aCalculatorTree) {
     calculatorTree = aCalculatorTree;
@@ -445,7 +441,6 @@ public class FrameCalculator extends JFrame {
 
   /**
    * @return the loadProgressBar
-   * @uml.property name="loadProgressBar"
    */
   public static boolean isLoadProgressBar() {
     return loadProgressBar;
@@ -453,7 +448,6 @@ public class FrameCalculator extends JFrame {
 
   /**
    * @return the playSound
-   * @uml.property name="playSound"
    */
   public static boolean isPlaySound() {
     return playSound;

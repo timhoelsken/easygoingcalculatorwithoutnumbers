@@ -13,7 +13,6 @@ public class Tree {
 
   /**
    * @return the father
-   * @uml.property name="father"
    */
   public Tree getFather() {
     return Father;
@@ -21,7 +20,6 @@ public class Tree {
 
   /**
    * @param aFather
-   * @uml.property name="father"
    */
   public void setFather(Tree aFather) {
     Father = aFather;
@@ -29,7 +27,6 @@ public class Tree {
 
   /**
    * @return the root
-   * @uml.property name="root"
    */
   public MathObj getRoot() {
     return root;
@@ -37,7 +34,6 @@ public class Tree {
 
   /**
    * @return the left son tree
-   * @uml.property name="leftSon"
    */
   public Tree getLeftSon() {
     return LeftSon;
@@ -46,7 +42,6 @@ public class Tree {
   /**
    * @param aLeft
    *            tree to set
-   * @uml.property name="leftSon"
    */
   public void setLeftSon(Tree aLeft) {
     LeftSon = aLeft;
@@ -54,7 +49,6 @@ public class Tree {
 
   /**
    * @return the right son tree
-   * @uml.property name="rightSon"
    */
   public Tree getRightSon() {
     return RightSon;
@@ -63,7 +57,6 @@ public class Tree {
   /**
    * @param aRight
    *            tree to set
-   * @uml.property name="rightSon"
    */
   public void setRightSon(Tree aRight) {
     RightSon = aRight;
@@ -71,7 +64,7 @@ public class Tree {
 
   /**
    * constructor (sets both sons to NULL)
-   * 
+   *
    * @param aRoot
    */
   public Tree(MathObj aRoot) {
@@ -88,7 +81,7 @@ public class Tree {
 
   /**
    * paints current tree in a String
-   * 
+   *
    * @return a String containing a tree painted in chars
    */
   public String paintMeAsString() {

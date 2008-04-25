@@ -7,7 +7,6 @@ public class NumberObj extends Operand {
 
   /**
    * @return the value
-   * @uml.property name="value"
    */
   public Double getValue() {
     return value;
@@ -15,7 +14,7 @@ public class NumberObj extends Operand {
 
   /**
    * constructor
-   * 
+   *
    * @param aValue
    */
   public NumberObj(Double aValue) {

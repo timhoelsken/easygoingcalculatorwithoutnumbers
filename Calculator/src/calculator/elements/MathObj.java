@@ -8,7 +8,7 @@ public class MathObj {
 
   /**
    * constructor
-   * 
+   *
    * @param aType
    */
   public MathObj() {
@@ -17,7 +17,6 @@ public class MathObj {
 
   /**
    * @return the priority
-   * @uml.property name="priority"
    */
   public int getPriority() {
     return priority;
@@ -25,9 +24,8 @@ public class MathObj {
 
   /**
    * sets the priority
-   * 
+   *
    * @param aPriority
-   * @uml.property name="priority"
    */
   public void setPriority(int aPriority) {
     priority = aPriority;

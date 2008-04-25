@@ -4,7 +4,7 @@ import calculator.exceptions.IllegalInputStreamException;
 import calculator.utils.MathUtil;
 
 /**
- * 
+ *
  */
 public class Operator extends MathObj {
 
@@ -36,7 +36,6 @@ public class Operator extends MathObj {
 
   /**
    * @return the operatorType
-   * @uml.property name="operatorType"
    */
   public OperatorType getOperatorType() {
     return operatorType;
@@ -44,7 +43,7 @@ public class Operator extends MathObj {
 
   /**
    * @see java.lang.Object#toString()
-   * 
+   *
    * @throws IllegalInputStreamException
    *             if no operatorType
    */

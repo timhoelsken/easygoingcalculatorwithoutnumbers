@@ -44,8 +44,9 @@ public class Operator extends MathObj {
 
   /**
    * @see java.lang.Object#toString()
-   *
-   * @throws IllegalInputStreamException if no operatorType
+   * 
+   * @throws IllegalInputStreamException
+   *             if no operatorType
    */
   public String toString() throws IllegalInputStreamException {
     switch (operatorType) {

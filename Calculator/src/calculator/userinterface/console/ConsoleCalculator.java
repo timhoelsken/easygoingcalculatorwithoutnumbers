@@ -20,7 +20,7 @@ public class ConsoleCalculator {
 
   /**
    * starts the console calculator
-   *
+   * 
    * @param args
    */
   public static void start() {

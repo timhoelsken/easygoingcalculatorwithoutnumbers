@@ -18,7 +18,7 @@ public final class FormulaTreeUtil {
 
   /**
    * Calculates the result of a formula-tree and returns it as a "double"
-   *
+   * 
    * @param aTree
    *            the tree from which the result should be calculated
    * @param aVariableHashTable
@@ -35,19 +35,24 @@ public final class FormulaTreeUtil {
       return 0;
     }
 
-    Double tmpResult = 0.0; //temporary storage for the result
+    Double tmpResult = 0.0; // temporary storage for the result
 
-    //is the root of the tree a number? return the number ; this is the easiest case
+    // is the root of the tree a number? return the number ; this is the easiest
+    // case
     if (aTree.getRoot() instanceof NumberObj) {
       tmpResult = ((NumberObj) aTree.getRoot()).getValue();
 
-    //is the root of the tree a variable? try to get the value for the variable out of the HasTable and return it
+      // is the root of the tree a variable? try to get the value for the
+      // variable out of the HasTable and return it
     } else if (aTree.getRoot() instanceof Variable) {
-      if (aVariableHashTable != null && aVariableHashTable.containsKey(Character.toString(((Variable) aTree.getRoot()).getValue()))) {
+      if (aVariableHashTable != null
+          && aVariableHashTable.containsKey(Character.toString(((Variable) aTree.getRoot()).getValue()))) {
         tmpResult = aVariableHashTable.get(Character.toString(((Variable) aTree.getRoot()).getValue()));
-      } else throw (new CalculatingException("Not all variables are assigned with values."));
+      } else
+        throw (new CalculatingException("Not all variables are assigned with values."));
 
-    //sonst haben wir einen operator und wir müssen rechnen. Dabei wird nach LWR rekursiv ausgewertet
+      // sonst haben wir einen operator und wir müssen rechnen. Dabei wird nach
+      // LWR rekursiv ausgewertet
     } else if (aTree.getRoot() instanceof Operator) {
 
       Operator tmpOperator = (Operator) aTree.getRoot();
@@ -151,7 +156,7 @@ public final class FormulaTreeUtil {
 
   /**
    * Creates a new wonderful tree
-   *
+   * 
    * @param aFunction
    * @return the built tree
    * @throws CalculatingException
@@ -164,7 +169,7 @@ public final class FormulaTreeUtil {
 
   /**
    * Creates a new wonderful tree
-   *
+   * 
    * @param MathList
    *            a sorted list with math objects
    * @return a tree (surprise, surprise!)

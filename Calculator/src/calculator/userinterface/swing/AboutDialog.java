@@ -25,7 +25,7 @@ public class AboutDialog extends JDialog {
   private static final long serialVersionUID = 1L;
 
   /**
-   *
+   * 
    * @param aParentFrame
    */
   public AboutDialog(JFrame aParentFrame) {
@@ -43,8 +43,8 @@ public class AboutDialog extends JDialog {
 
     // set text content
     String tmpHelpTextContent = "";
-    tmpHelpTextContent = "This formula calculator is brought to you by:\n\n"
-        + "- Tim Hölsken\n" + "- André Wuthenow\n" + "- Tobias Wörenkämper\n" + "- Raphael Zimmer";
+    tmpHelpTextContent = "This formula calculator is brought to you by:\n\n" + "- Tim Hölsken\n"
+        + "- André Wuthenow\n" + "- Tobias Wörenkämper\n" + "- Raphael Zimmer";
 
     // define TextArea
     textAreaContent.setText(tmpHelpTextContent);

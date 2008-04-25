@@ -26,7 +26,7 @@ public class ManualDialog extends JDialog {
 
   /**
    * The constructor
-   *
+   * 
    * @param aParentFrame
    */
   public ManualDialog(JFrame aParentFrame) {

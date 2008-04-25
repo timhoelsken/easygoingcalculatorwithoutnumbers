@@ -14,4 +14,4 @@ public class Operand extends MathObj {
   public Operand() {
     super.setPriority(MathUtil.PRIO_OPERANDS);
   }
- }
+}

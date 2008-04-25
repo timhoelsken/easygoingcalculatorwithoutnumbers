@@ -20,7 +20,7 @@ public class StringConvertTest extends TestCase {
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
    * The three examples out of the "requirement"
-   *
+   * 
    * @throws Exception
    */
   public void testRequirements() throws Exception {
@@ -64,7 +64,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString1() throws Exception {
@@ -77,7 +77,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString2() throws Exception {
@@ -98,7 +98,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString4() throws Exception {
@@ -118,7 +118,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString5() throws Exception {
@@ -136,7 +136,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString6() throws Exception {
@@ -154,7 +154,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString7() throws Exception {
@@ -171,7 +171,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString8() throws Exception {
@@ -190,7 +190,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString9() throws Exception {
@@ -208,7 +208,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString10() throws Exception {
@@ -226,7 +226,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString11() throws Exception {
@@ -245,7 +245,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for
    * {@link calculator.utils.ConverterUtil#formulaToStandardString(java.lang.String)}.
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString12() throws Exception {
@@ -263,7 +263,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * a new test :-)
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString13() throws Exception {
@@ -284,7 +284,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * another new test :-)
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString14() throws Exception {
@@ -300,7 +300,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * another new test :-)
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString15() throws Exception {
@@ -316,7 +316,7 @@ public class StringConvertTest extends TestCase {
 
   /**
    * another new test ...
-   *
+   * 
    * @throws Exception
    */
   public void testFormulaToStandardString16() throws Exception {
@@ -909,12 +909,14 @@ public class StringConvertTest extends TestCase {
     assertEquals(3, tmpVariables.size());
     for (String[] tmpStrings : tmpVariables) {
       String tmpVariable = tmpStrings[0];
-      assertTrue("Should be a, n or x", "a".equals(tmpVariable) || "n".equals(tmpVariable) || "x".equals(tmpVariable) );
+      assertTrue("Should be a, n or x", "a".equals(tmpVariable) || "n".equals(tmpVariable)
+          || "x".equals(tmpVariable));
     }
   }
 
   /**
-   * Test method for {@link calculator.utils.ConverterUtil#centerStringInSpaces()}.
+   * Test method for
+   * {@link calculator.utils.ConverterUtil#centerStringInSpaces()}.
    */
   public void testCenterStringInSpaces() {
     assertEquals(" a ", ConverterUtil.centerStringInSpaces("   ", "a"));
@@ -926,7 +928,7 @@ public class StringConvertTest extends TestCase {
   /**
    * Test method for {@link calculator.utils.ConverterUtil#isInList()}.
    */
-  public void testIsInList(){
+  public void testIsInList() {
     ArrayList<String[]> tmpArrayListOne = new ArrayList<String[]>();
     ArrayList<String[]> tmpArrayListTwo = new ArrayList<String[]>();
     String[] tmpVariableArrayOne = new String[2];
@@ -943,16 +945,16 @@ public class StringConvertTest extends TestCase {
     tmpVariableArrayThree[1] = "1";
     tmpArrayListOne.add(tmpVariableArrayThree);
     tmpArrayListTwo.add(tmpVariableArrayEmpty);
-    
+
     assertTrue("Variable not in list.", ConverterUtil.isInList(tmpArrayListOne, "a"));
     assertFalse("Variable in list.", ConverterUtil.isInList(tmpArrayListOne, "d"));
     assertFalse("Variable in list", ConverterUtil.isInList(tmpArrayListTwo, "a"));
   }
-  
+
   /**
    * 
    */
-  public void testPutArrayListIntoHashtable(){
+  public void testPutArrayListIntoHashtable() {
     ArrayList<String[]> tmpArrayList = new ArrayList<String[]>();
     String[] tmpVariableArrayOne = new String[2];
     String[] tmpVariableArrayTwo = new String[2];
@@ -963,11 +965,11 @@ public class StringConvertTest extends TestCase {
     tmpArrayList.add(tmpVariableArrayOne);
     tmpArrayList.add(tmpVariableArrayTwo);
     Hashtable<String, Double> tmpVariableDictionary = ConverterUtil.putArrayListIntoHashtable(tmpArrayList);
-    
+
     assertEquals(2, tmpVariableDictionary.size());
     assertEquals(0.1, tmpVariableDictionary.get("a"));
     assertEquals(1.5, tmpVariableDictionary.get("b"));
-    assertTrue("Variable in Dictionary", null ==tmpVariableDictionary.get("c"));
+    assertTrue("Variable in Dictionary", null == tmpVariableDictionary.get("c"));
   }
 
   /**

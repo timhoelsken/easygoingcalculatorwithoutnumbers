@@ -39,5 +39,5 @@ public enum OperatorType {
   /**
    * potenz
    */
-  POW; 
+  POW;
 }

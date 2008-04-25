@@ -26,7 +26,7 @@ public class TreeDialog extends JDialog {
 
   /**
    * The Constructor
-   *
+   * 
    * @param aParentFrame
    */
   public TreeDialog(FrameCalculator aParentFrame) {
@@ -42,7 +42,7 @@ public class TreeDialog extends JDialog {
 
   /**
    * Paints the tree in the dialog
-   *
+   * 
    * @param aParentFrame
    */
   public void paintTree(FrameCalculator aParentFrame) {

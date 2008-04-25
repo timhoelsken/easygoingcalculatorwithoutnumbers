@@ -189,25 +189,18 @@ public class FrameCalculator extends JFrame {
 
     // textField listener
     textFormulaInput.getDocument().addDocumentListener(new DocumentListener() {
-
       // update on changes made by keyboard
-      @Override
       public void changedUpdate(DocumentEvent aArg0) {
-        
         setCalculatorTree(null);
       }
 
       // update by copy and paste
-      @Override
       public void insertUpdate(DocumentEvent aArg0) {
-        
         setCalculatorTree(null);
       }
 
       // update on deleting
-      @Override
       public void removeUpdate(DocumentEvent aArg0) {
-        
         setCalculatorTree(null);
       }
     });

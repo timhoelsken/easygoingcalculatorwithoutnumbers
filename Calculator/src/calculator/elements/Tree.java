@@ -93,12 +93,10 @@ public class Tree {
     if (tmpDepth > tmpMaximumDepth) {
       tmpPaintedTree = "Only trees with a depth < " + (tmpMaximumDepth + 1) + " are painted.";
     } else {
-      tmpPaintedTree += "TreeDepth: " + tmpDepth + "\n";
-
       if (tmpDepth == 0) {
         tmpPaintedTree += "Tree is empty.";
       } else {
-        // calculate the line width (6 signs for every leaf)
+        // calculate the line width (3 signs for every leaf)
         int tmpLineWidth = ((int) Math.pow(2.0, tmpDepth - 1)) * 3;
 
         // place root in first line (center)
@@ -121,7 +119,7 @@ public class Tree {
             for (int j = 1; j <= tmpExpectedElements; j++) {
               String tmpSpaces = "";
               // calculate spaces for the element to paint
-              for (int k = 0; k <= (tmpLineWidth / tmpExpectedElements); k++) {
+              for (int k = 0; k < (tmpLineWidth / tmpExpectedElements); k++) {
                 tmpSpaces += " ";
               }
               // get the element
@@ -132,7 +130,7 @@ public class Tree {
                 tmpOutput += ConverterUtil.centerStringInSpaces(tmpSpaces, tmpObjValue);
               } else {
                 // if not, just paint spaces
-                tmpOutput += tmpSpaces + tmpSpaces;
+                tmpOutput += tmpSpaces;
               }
             }
             // add level to paintString

@@ -4,6 +4,7 @@
 package calculator.tests;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 import junit.framework.JUnit4TestAdapter;
 import junit.framework.Test;
@@ -922,9 +923,52 @@ public class StringConvertTest extends TestCase {
     assertEquals("abc", ConverterUtil.centerStringInSpaces("  ", "abc"));
   }
 
-  //TODO tests for
-  //putArrayListIntoHashtable()
-  //isInList()
+  /**
+   * Test method for {@link calculator.utils.ConverterUtil#isInList()}.
+   */
+  public void testIsInList(){
+    ArrayList<String[]> tmpArrayListOne = new ArrayList<String[]>();
+    ArrayList<String[]> tmpArrayListTwo = new ArrayList<String[]>();
+    String[] tmpVariableArrayOne = new String[2];
+    String[] tmpVariableArrayTwo = new String[2];
+    String[] tmpVariableArrayThree = new String[2];
+    String[] tmpVariableArrayEmpty = new String[2];
+    tmpVariableArrayOne[0] = "a";
+    tmpVariableArrayOne[1] = "0";
+    tmpArrayListOne.add(tmpVariableArrayOne);
+    tmpVariableArrayTwo[0] = "b";
+    tmpVariableArrayTwo[1] = "1";
+    tmpArrayListOne.add(tmpVariableArrayTwo);
+    tmpVariableArrayThree[0] = "c";
+    tmpVariableArrayThree[1] = "1";
+    tmpArrayListOne.add(tmpVariableArrayThree);
+    tmpArrayListTwo.add(tmpVariableArrayEmpty);
+    
+    assertTrue("Variable not in list.", ConverterUtil.isInList(tmpArrayListOne, "a"));
+    assertFalse("Variable in list.", ConverterUtil.isInList(tmpArrayListOne, "d"));
+    assertFalse("Variable in list", ConverterUtil.isInList(tmpArrayListTwo, "a"));
+  }
+  
+  /**
+   * 
+   */
+  public void testPutArrayListIntoHashtable(){
+    ArrayList<String[]> tmpArrayList = new ArrayList<String[]>();
+    String[] tmpVariableArrayOne = new String[2];
+    String[] tmpVariableArrayTwo = new String[2];
+    tmpVariableArrayOne[0] = "a";
+    tmpVariableArrayOne[1] = "0.1";
+    tmpVariableArrayTwo[0] = "b";
+    tmpVariableArrayTwo[1] = "1.5";
+    tmpArrayList.add(tmpVariableArrayOne);
+    tmpArrayList.add(tmpVariableArrayTwo);
+    Hashtable<String, Double> tmpVariableDictionary = ConverterUtil.putArrayListIntoHashtable(tmpArrayList);
+    
+    assertEquals(2, tmpVariableDictionary.size());
+    assertEquals(0.1, tmpVariableDictionary.get("a"));
+    assertEquals(1.5, tmpVariableDictionary.get("b"));
+    assertTrue("Variable in Dictionary", null ==tmpVariableDictionary.get("c"));
+  }
 
   /**
    * @return the test suite

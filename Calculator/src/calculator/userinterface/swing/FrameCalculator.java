@@ -22,6 +22,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import calculator.elements.Tree;
 import calculator.exceptions.CalculatingException;
@@ -185,6 +187,31 @@ public class FrameCalculator extends JFrame {
       }
     });
 
+    // textField listener
+    textFormulaInput.getDocument().addDocumentListener(new DocumentListener() {
+
+      // update on changes made by keyboard
+      @Override
+      public void changedUpdate(DocumentEvent aArg0) {
+        
+        setCalculatorTree(null);
+      }
+
+      // update by copy and paste
+      @Override
+      public void insertUpdate(DocumentEvent aArg0) {
+        
+        setCalculatorTree(null);
+      }
+
+      // update on deleting
+      @Override
+      public void removeUpdate(DocumentEvent aArg0) {
+        
+        setCalculatorTree(null);
+      }
+    });
+
     // ActionListener of the menu
     ActionListenerUtil.putMenuItemOpenDialogListener(menuItemManual, dialogManualText);
     ActionListenerUtil.putMenuItemOpenDialogListener(menuItemAbout, dialogAboutText);
@@ -339,9 +366,9 @@ public class FrameCalculator extends JFrame {
 
   /**
    * calculates the formula
-   *
+   * 
    * @param aFrameCalculator
-   *
+   * 
    * @param aFormula
    */
   public static void calculateFormula(FrameCalculator aFrameCalculator) {
@@ -351,7 +378,9 @@ public class FrameCalculator extends JFrame {
 
     // calculate!
     try {
-      aFrameCalculator.setCalculatorTree(FormulaTreeUtil.buildTree(aFrameCalculator.getConvertedFormula()));
+      if (aFrameCalculator.getCalculatorTree() == null) {
+        aFrameCalculator.setCalculatorTree(FormulaTreeUtil.buildTree(aFrameCalculator.getConvertedFormula()));
+      }
       double tmpResult = FormulaTreeUtil.evaluateTree(aFrameCalculator.getCalculatorTree(),
           dictionaryOfEnteredVariables);
       // round the result to the eighth decimal place

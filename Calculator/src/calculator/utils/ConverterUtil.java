@@ -10,7 +10,7 @@ import calculator.exceptions.FormulaConversionException;
 /**
  * an util class for converting the userinput into the standard string
  */
-public class ConverterUtil {
+public final class ConverterUtil {
 
   /**
    * Method makes the parameter formula a standard formula (see

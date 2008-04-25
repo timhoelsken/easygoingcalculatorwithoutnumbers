@@ -1,7 +1,7 @@
 package calculator.elements;
 
 /**
- * @author Raphael
+ * 
  */
 public enum OperatorType {
   /**

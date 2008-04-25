@@ -16,7 +16,7 @@ import calculator.userinterface.swing.ManualDialog;
 /**
  * an util class for adding listeners to the FrameCalculator
  */
-public class ActionListenerUtil {
+public final class ActionListenerUtil {
 
   /**
    * Listener for closing a dialog with a button

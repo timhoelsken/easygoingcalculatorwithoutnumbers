@@ -4,7 +4,7 @@ import calculator.exceptions.IllegalInputStreamException;
 import calculator.utils.MathUtil;
 
 /**
- * @author Raphael
+ * 
  */
 public class Operator extends MathObj {
 

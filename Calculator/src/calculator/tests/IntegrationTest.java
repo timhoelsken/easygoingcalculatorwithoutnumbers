@@ -8,6 +8,7 @@ import java.util.Hashtable;
 import junit.framework.JUnit4TestAdapter;
 import junit.framework.Test;
 import junit.framework.TestCase;
+import calculator.Calculator;
 import calculator.elements.Tree;
 import calculator.exceptions.CalculatingException;
 import calculator.exceptions.FormulaConversionException;
@@ -2155,7 +2156,19 @@ public class IntegrationTest extends TestCase {
     assertTrue("True", ok);
   }
 
-
+  /**
+   * tests the start of the calculator
+   */
+  public void testStartCalculator(){
+    String[] tmpArgs = new String[1];
+    tmpArgs[0] = "calculator";
+    try{
+      Calculator.main(tmpArgs);
+    }catch (IllegalArgumentException e){
+      assertEquals("Please start the Calculator with the parameter \"console\" or without any.", e.getMessage());
+    }
+  }
+  
   // === End Iteration Tests ===
   /**
    * @return the test suite

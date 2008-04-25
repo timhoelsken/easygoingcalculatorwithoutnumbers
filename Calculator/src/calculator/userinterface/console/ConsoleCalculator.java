@@ -145,7 +145,7 @@ public class ConsoleCalculator {
                 double tmpResult = FormulaTreeUtil.evaluateTree(tmpTree, tmpVariableDictionary);
                 // round the result to the eighth decimal place
                 tmpResult = BigDecimal.valueOf(tmpResult).setScale(8, RoundingMode.HALF_UP).doubleValue();
-                System.out.println(tmpResult);
+                ConsoleOutput.showResultOnScreen(String.valueOf(tmpResult));
 
                 // to avoid endless loop the control is set to
                 // "n"

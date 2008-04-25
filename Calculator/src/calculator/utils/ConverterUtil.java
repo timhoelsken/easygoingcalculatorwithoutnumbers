@@ -126,7 +126,7 @@ public final class ConverterUtil {
               || aFormula.charAt(i + 1) == '(' || MathUtil.isFunction(aFormula.charAt(i + 1))))) {
         tmpOutput += "*";
       } else if (i + 1 < aFormula.length() && MathUtil.isRightBracket(aFormula.charAt(i))
-          && MathUtil.isLeftBracket(aFormula.charAt(i + 1))) {
+          && (MathUtil.isLeftBracket(aFormula.charAt(i + 1)) || MathUtil.isNumberOrVariable(aFormula.charAt(i + 1)) || MathUtil.isFunction(aFormula.charAt(i + 1)))) {
         tmpOutput += "*";
       }
     }

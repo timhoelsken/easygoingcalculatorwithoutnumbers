@@ -44,7 +44,7 @@ public class VariableDialog extends JDialog {
 
   /**
    * The constructor
-   *
+   * 
    * @param aParentFrame
    */
   public VariableDialog(FrameCalculator aParentFrame) {
@@ -102,7 +102,7 @@ public class VariableDialog extends JDialog {
 
   /**
    * dynamically place the variable inputs on the dialog
-   *
+   * 
    * @param aListOfVariables
    */
   public void load() {
@@ -193,7 +193,7 @@ public class VariableDialog extends JDialog {
   }
 
   /**
-   *
+   * 
    * @return the FrameCalculator
    */
   public FrameCalculator getParentFrame() {

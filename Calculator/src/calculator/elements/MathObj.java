@@ -8,7 +8,7 @@ public class MathObj {
 
   /**
    * constructor
-   *
+   * 
    * @param aType
    */
   public MathObj() {
@@ -24,7 +24,7 @@ public class MathObj {
 
   /**
    * sets the priority
-   *
+   * 
    * @param aPriority
    */
   public void setPriority(int aPriority) {

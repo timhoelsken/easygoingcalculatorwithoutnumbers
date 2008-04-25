@@ -14,7 +14,7 @@ public class NumberObj extends Operand {
 
   /**
    * constructor
-   *
+   * 
    * @param aValue
    */
   public NumberObj(Double aValue) {

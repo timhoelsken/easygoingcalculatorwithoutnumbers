@@ -378,7 +378,7 @@ public final class ConverterUtil {
     tmpReturnString = someSpaces.substring(0, tmpStart);
     tmpReturnString += aString;
     // fill the string with spaces
-    for (int i = tmpReturnString.length() + 1; i <= tmpSpacesLength; i++) {
+    for (int i = tmpReturnString.length(); i < tmpSpacesLength; i++) {
       tmpReturnString += " ";
     }
     return tmpReturnString;

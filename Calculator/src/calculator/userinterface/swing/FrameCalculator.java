@@ -359,9 +359,9 @@ public class FrameCalculator extends JFrame {
 
   /**
    * calculates the formula
-   *
+   * 
    * @param aFrameCalculator
-   *
+   * 
    * @param aFormula
    */
   public static void calculateFormula(FrameCalculator aFrameCalculator) {

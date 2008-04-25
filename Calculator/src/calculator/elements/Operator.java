@@ -1,5 +1,6 @@
 package calculator.elements;
 
+import calculator.exceptions.IllegalInputStreamException;
 import calculator.utils.MathUtil;
 
 /**
@@ -43,8 +44,10 @@ public class Operator extends MathObj {
 
   /**
    * @see java.lang.Object#toString()
+   *
+   * @throws IllegalInputStreamException if no operatorType
    */
-  public String toString() {
+  public String toString() throws IllegalInputStreamException {
     switch (operatorType) {
       case ADDITION:
         return "+";
@@ -65,7 +68,7 @@ public class Operator extends MathObj {
       case POW:
         return "pow";
       default:
-        return "+";
+        throw new IllegalInputStreamException("Not supported OperatorType.");
     }
 
   }

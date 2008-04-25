@@ -1,7 +1,6 @@
 package calculator.elements;
 
 /**
- * @author Raphael
  */
 public class NumberObj extends Operand {
   private Double value;
@@ -16,7 +15,7 @@ public class NumberObj extends Operand {
 
   /**
    * constructor
-   * 
+   *
    * @param aValue
    */
   public NumberObj(Double aValue) {

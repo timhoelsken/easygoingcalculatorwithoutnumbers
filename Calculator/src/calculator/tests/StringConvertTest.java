@@ -68,7 +68,7 @@ public class StringConvertTest extends TestCase {
    */
   public void testFormulaToStandardString1() throws Exception {
 
-    String tmpString = new String("2a + a b");
+    String tmpString = "2a + a b";
     assertTrue("The String has Variables separated by *", ConverterUtil.formulaToStandardString(tmpString)
         .equals("2*a+a*b"));
   }
@@ -344,7 +344,7 @@ public class StringConvertTest extends TestCase {
    * {@link calculator.utils.ConverterUtil#insertMultiplicationOperators(java.lang.String)}.
    */
   public void testCleanVariables() {
-    String tmpString = new String("2a+ab");
+    String tmpString = "2a+ab";
     assertTrue("The String has Variables separated by *", ConverterUtil.insertMultiplicationOperators(
         tmpString).equals("2*a+a*b"));
   }

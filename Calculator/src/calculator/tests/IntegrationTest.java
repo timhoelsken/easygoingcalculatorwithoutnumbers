@@ -2091,25 +2091,23 @@ public class IntegrationTest extends TestCase {
     String tmpString= null;
     try {
       tmpString = ConverterUtil.formulaToStandardString("(-2)^(1/2)");
+      Tree tmpTree = null;
+      try {
+        tmpTree = FormulaTreeUtil.buildTree(tmpString);
+        try {
+          FormulaTreeUtil.evaluateTree(tmpTree, null);
+        } catch (CalculatingException e) {
+          ok=true;
+        }
+      } catch (CalculatingException e) {
+        ok=false;
+      }
     } catch (FormulaConversionException e) {
       ok=false;
     }
 
-    Tree tmpTree = null;
-    try {
-      tmpTree = FormulaTreeUtil.buildTree(tmpString);
-    } catch (CalculatingException e) {
-      ok=false;
-    }
-
-    try {
-      FormulaTreeUtil.evaluateTree(tmpTree, null);
-    } catch (CalculatingException e) {
-      ok=true;
-    }
 
     assertTrue("True", ok);
-
   }
 
   /**
@@ -2122,31 +2120,27 @@ public class IntegrationTest extends TestCase {
     String tmpString= null;
     try {
       tmpString = ConverterUtil.formulaToStandardString("sqrt(-5)");
+      Tree tmpTree = null;
+      try {
+        tmpTree = FormulaTreeUtil.buildTree(tmpString);
+        try {
+          FormulaTreeUtil.evaluateTree(tmpTree, null);
+        } catch (CalculatingException e) {
+          ok=true;
+        }
+      } catch (CalculatingException e) {
+        ok=false;
+      }
     } catch (FormulaConversionException e) {
       ok=false;
     }
 
-    Tree tmpTree = null;
-    try {
-      tmpTree = FormulaTreeUtil.buildTree(tmpString);
-    } catch (CalculatingException e) {
-      ok=false;
-    }
-
-
-    try {
-      FormulaTreeUtil.evaluateTree(tmpTree, null);
-    } catch (CalculatingException e) {
-      ok=true;
-    }
-
     assertTrue("True", ok);
-
   }
-  
-  
+
+
   /**
-   * 
+   *
    */
   public void testNegativeMathUtil(){
     boolean ok = false;
@@ -2157,7 +2151,7 @@ public class IntegrationTest extends TestCase {
     {
       ok=true;
     }
-    
+
     assertTrue("True", ok);
   }
 

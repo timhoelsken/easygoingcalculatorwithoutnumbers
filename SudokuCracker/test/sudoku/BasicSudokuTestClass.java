@@ -6,11 +6,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * 
- * @author Tim
- * 
+ *
+ * @authors Timbo & Tobe
+ *
  */
-public class MyFirstTestClass {
+public class BasicSudokuTestClass {
 
   Sudoku aSudoku;
 
@@ -28,7 +28,6 @@ public class MyFirstTestClass {
    */
   @Test
   public void checkDimension() {
-
     assertEquals(9, aSudoku.getDimension());
   }
 
@@ -37,7 +36,6 @@ public class MyFirstTestClass {
    */
   @Test
   public void setFirstField() {
-
     assertTrue(aSudoku.setContent(1, 1, 1));
   }
 
@@ -61,5 +59,4 @@ public class MyFirstTestClass {
     assertEquals(1, aSudoku.getField(1, 1));
     assertEquals(2, aSudoku.getField(1, 2));
   }
-
 }

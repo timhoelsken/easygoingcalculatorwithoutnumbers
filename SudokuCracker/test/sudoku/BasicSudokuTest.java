@@ -3,6 +3,7 @@ package sudoku;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -10,7 +11,7 @@ import org.junit.Test;
  * @authors Timbo & Tobe
  *
  */
-public class BasicSudokuTestClass {
+public class BasicSudokuTest {
 
   Sudoku aSudoku;
 
@@ -52,6 +53,7 @@ public class BasicSudokuTestClass {
    * A test to check if the set values of the top left field and the next right
    * field are readable
    */
+  @Ignore ("Lower level first")
   @Test
   public void testGetField() {
     aSudoku.setContent(1, 1, 1);

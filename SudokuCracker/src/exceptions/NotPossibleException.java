@@ -4,7 +4,7 @@
 package exceptions;
 
 /**
- * @author Tobias
+ * @author Tobe
  *
  */
 public class NotPossibleException extends Throwable {

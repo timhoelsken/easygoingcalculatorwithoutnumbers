@@ -11,7 +11,7 @@ import org.junit.Test;
  * @authors Timbo & Tobe
  *
  */
-public class BasicSudokuTest {
+public class SudokuTest {
 
   Sudoku aSudoku;
 

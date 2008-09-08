@@ -2,6 +2,8 @@ package sudoku;
 
 import java.util.ArrayList;
 
+import exceptions.NotPossibleException;
+
 /**
  *
  * @authors Timbo & Tobe
@@ -145,7 +147,7 @@ public class Sudoku {
   /**
    * @param aRowNo
    * @param aSquareNo
-   * @return
+   * @return Returns all missing numbers in both, row and square
    */
   public int[] getMissingNumbersInRowAndSquare(int aRowNo, int aSquareNo) {
     int[] tmpRowNumbers = getMissingNumbersInRow(aRowNo);
@@ -161,5 +163,42 @@ public class Sudoku {
     }
 
     return makeIntegerArrayListAnArray(tmpNumbers);
+  }
+
+  /**
+   * @param aColumnNo
+   * @param aSquareNo
+   * @return
+   */
+  public int[] getMissingNumbersInColumnAndSquare(int aColumnNo, int aSquareNo) {
+    int[] tmpColumnNumbers = getMissingNumbersInColumn(aColumnNo);
+    int[] tmpSquareNumbers = getMissingNumbersInSquare(aSquareNo);
+
+    ArrayList<Integer> tmpNumbers = new ArrayList<Integer>();
+    for (int i = 0; i < tmpColumnNumbers.length; i++) {
+      for (int j = 0; j < tmpSquareNumbers.length; j++) {
+        if (tmpColumnNumbers[i] == tmpSquareNumbers[j]) {
+          tmpNumbers.add(tmpColumnNumbers[i]);
+        }
+      }
+    }
+
+    return makeIntegerArrayListAnArray(tmpNumbers);
+  }
+
+  /**
+   * @param anX
+   * @param aY
+   * @return Returns the missing number if possible
+   * @throws NotPossibleException if calculation not possible yet
+   */
+  public int getMissingNumberOfField(int anX, int aY) throws NotPossibleException {
+    int[] tmpColumnNumbers = getMissingNumbersInColumn(anX);
+    int[] tmpRowNumbers = getMissingNumbersInRow(aY);
+
+    if (tmpColumnNumbers.length == tmpRowNumbers.length && tmpColumnNumbers.length == 1) {
+      return tmpColumnNumbers[0];
+    }
+    throw new NotPossibleException("Calculation of missing number for that field is not possible yet.");
   }
 }

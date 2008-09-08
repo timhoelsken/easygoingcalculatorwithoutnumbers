@@ -231,7 +231,9 @@ public class SudokuTest {
   }
 
   /**
-   * Wants the number of the specified field (easy possible)
+   * Wants to calculate the number of the specified field (easy possible) and
+   * that this number is the field's value after calculation
+   *
    * @throws NotPossibleException
    */
   @Test
@@ -255,13 +257,15 @@ public class SudokuTest {
     aSudoku.setValue(8, 5, 8);
     aSudoku.setValue(9, 5, 9);
     assertEquals(5, aSudoku.getMissingNumberOfField(5, 5));
+    assertEquals(5, aSudoku.getValue(5, 5));
   }
 
   /**
    * Wants the number of the specified field (not easy possible)
+   *
    * @throws NotPossibleException
    */
-  @Test (expected = NotPossibleException.class)
+  @Test(expected = NotPossibleException.class)
   public void getExceptionWhileWantingMissingNumberOfField() throws NotPossibleException {
     aSudoku.getMissingNumberOfField(5, 5);
   }

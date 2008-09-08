@@ -197,7 +197,9 @@ public class Sudoku {
     int[] tmpRowNumbers = getMissingNumbersInRow(aY);
 
     if (tmpColumnNumbers.length == tmpRowNumbers.length && tmpColumnNumbers.length == 1) {
-      return tmpColumnNumbers[0];
+      int tmpMissingNumber = tmpColumnNumbers[0] = tmpRowNumbers[0];
+      setValue(tmpMissingNumber, anX, aY);
+      return tmpMissingNumber;
     }
     throw new NotPossibleException("Calculation of missing number for that field is not possible yet.");
   }

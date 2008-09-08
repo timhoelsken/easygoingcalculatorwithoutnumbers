@@ -7,11 +7,13 @@ package sudoku;
  */
 public class Sudoku {
 
+  private int[][] aSudoku;
+
   /**
-   * @return Returns the dimension of the sudoku
+   * Standard constructor
    */
-  public int getDimension() {
-    return 9;
+  public Sudoku() {
+    aSudoku = new int[9][9];
   }
 
   /**
@@ -20,10 +22,9 @@ public class Sudoku {
    * @param anX
    * @param aY
    * @param aValue
-   * @return Returns true if the content could be set
    */
-  public boolean setContent(int aValue, int anX, int aY) {
-    return true;
+  public void setContent(int aValue, int anX, int aY) {
+    aSudoku[aY-1][anX-1] = aValue;
   }
 
   /**
@@ -31,7 +32,7 @@ public class Sudoku {
    * @param aY
    * @return Returns the value of the field with the coordinates x and y
    */
-  public Object getField(int anX, int aY) {
-    return 1;
+  public int getField(int anX, int aY) {
+    return aSudoku[aY-1][anX-1];
   }
 }

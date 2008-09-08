@@ -12,6 +12,6 @@ import org.junit.runners.Suite.SuiteClasses;
  * Class to run all tests of the project
  */
 @RunWith(Suite.class)
-@SuiteClasses({BasicSudokuTest.class, FieldTest.class})
+@SuiteClasses({BasicSudokuTest.class})
 public class AllTests {
 }

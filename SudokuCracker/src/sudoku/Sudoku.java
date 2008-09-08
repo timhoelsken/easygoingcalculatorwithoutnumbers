@@ -32,6 +32,14 @@ public class Sudoku {
     return tmpNumbers;
   }
 
+  private int[] makeIntegerArrayListAnArray(ArrayList<Integer> aList) {
+    int[] tmpArray = new int[aList.size()];
+    for (int i = 0; i < aList.size(); i++) {
+      tmpArray[i] = aList.get(i);
+    }
+    return tmpArray;
+  }
+
   /**
    * Sets the given value on the field with the coordinates x and y
    *
@@ -48,7 +56,7 @@ public class Sudoku {
    * @param aY
    * @return Returns the value of the field with the coordinates x and y
    */
-  public int getField(int anX, int aY) {
+  public int getValue(int anX, int aY) {
     return aSudoku[aY - 1][anX - 1];
   }
 
@@ -97,15 +105,11 @@ public class Sudoku {
 
     for (int y = 1; y <= tmpY; y++) {
       for (int x = 1; x <= tmpX; x++) {
-        tmpNumbers.remove((Object) getField(x, y));
+        tmpNumbers.remove((Object) getValue(x, y));
       }
     }
 
-    int[] tmpNumberArray = new int[tmpNumbers.size()];
-    for (int i = 0; i < tmpNumbers.size(); i++) {
-      tmpNumberArray[i] = tmpNumbers.get(i);
-    }
-    return tmpNumberArray;
+    return makeIntegerArrayListAnArray(tmpNumbers);
   }
 
   /**
@@ -117,32 +121,45 @@ public class Sudoku {
     ArrayList<Integer> tmpNumbers = getAllNumbers();
 
     for (int x = 1; x <= 9; x++) {
-      tmpNumbers.remove((Object) getField(x, aRowNo));
+      tmpNumbers.remove((Object) getValue(x, aRowNo));
     }
 
-    int[] tmpNumberArray = new int[tmpNumbers.size()];
-    for (int i = 0; i < tmpNumbers.size(); i++) {
-      tmpNumberArray[i] = tmpNumbers.get(i);
-    }
-    return tmpNumberArray;
+    return makeIntegerArrayListAnArray(tmpNumbers);
   }
 
   /**
-   * @param aColumnNo (from 1 - left - to 9 - right)
+   * @param aColumnNo
+   *            (from 1 - left - to 9 - right)
    * @return An array with all missing numbers
    */
   public int[] getMissingNumbersInColumn(int aColumnNo) {
     ArrayList<Integer> tmpNumbers = getAllNumbers();
 
     for (int y = 1; y <= 9; y++) {
-      tmpNumbers.remove((Object) getField(aColumnNo, y));
+      tmpNumbers.remove((Object) getValue(aColumnNo, y));
     }
 
-    int[] tmpNumberArray = new int[tmpNumbers.size()];
-    for (int i = 0; i < tmpNumbers.size(); i++) {
-      tmpNumberArray[i] = tmpNumbers.get(i);
-    }
-    return tmpNumberArray;
+    return makeIntegerArrayListAnArray(tmpNumbers);
   }
 
+  /**
+   * @param aRowNo
+   * @param aSquareNo
+   * @return
+   */
+  public int[] getMissingNumbersInRowAndSquare(int aRowNo, int aSquareNo) {
+    int[] tmpRowNumbers = getMissingNumbersInRow(aRowNo);
+    int[] tmpSquareNumbers = getMissingNumbersInSquare(aSquareNo);
+
+    ArrayList<Integer> tmpNumbers = new ArrayList<Integer>();
+    for (int i = 0; i < tmpRowNumbers.length; i++) {
+      for (int j = 0; j < tmpSquareNumbers.length; j++) {
+        if (tmpRowNumbers[i] == tmpSquareNumbers[j]) {
+          tmpNumbers.add(tmpRowNumbers[i]);
+        }
+      }
+    }
+
+    return makeIntegerArrayListAnArray(tmpNumbers);
+  }
 }

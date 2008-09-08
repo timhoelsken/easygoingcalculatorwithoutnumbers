@@ -29,7 +29,15 @@ public class SudokuTest {
   @Test
   public void getFirstFieldsValue() {
     aSudoku.setValue(1, 1, 1);
-    assertEquals(1, aSudoku.getField(1, 1));
+    assertEquals(1, aSudoku.getValue(1, 1));
+  }
+
+  /**
+   * A test to check if the standard value of a field is 0
+   */
+  @Test
+  public void getFirstFieldsNonValue() {
+    assertEquals(0, aSudoku.getValue(1, 1));
   }
 
   /**
@@ -40,8 +48,8 @@ public class SudokuTest {
   public void getTwoValuesOfTwoFields() {
     aSudoku.setValue(1, 1, 1);
     aSudoku.setValue(2, 1, 2);
-    assertEquals(1, aSudoku.getField(1, 1));
-    assertEquals(2, aSudoku.getField(1, 2));
+    assertEquals(1, aSudoku.getValue(1, 1));
+    assertEquals(2, aSudoku.getValue(1, 2));
   }
 
   /**
@@ -49,7 +57,7 @@ public class SudokuTest {
    */
   @Test(expected=IndexOutOfBoundsException.class)
   public void getAnOutOfBoundField() {
-    aSudoku.getField(9, 10);
+    aSudoku.getValue(9, 10);
   }
 
   /**
@@ -57,7 +65,7 @@ public class SudokuTest {
    */
   @Test(expected=IndexOutOfBoundsException.class)
   public void getAnotherOutOfBoundField() {
-    aSudoku.getField(10, 9);
+    aSudoku.getValue(10, 9);
   }
 
   /**
@@ -182,5 +190,23 @@ public class SudokuTest {
     int[] expectedArray = {2, 3, 4, 5, 6, 7, 8, 9};
     aSudoku.setValue(1, 9, 1);
     assertArrayEquals(expectedArray, aSudoku.getMissingNumbersInColumn(9));
+  }
+
+  /**
+   * Wants all numbers that are missing in row 1 and square 2
+   */
+  @Test
+  public void getMissingNumbersOfFirstRowAndMiddleUpperSquare() {
+    int[] expectedArray = {3, 5, 7};
+    // values in row only
+    aSudoku.setValue(1, 2, 1);
+    aSudoku.setValue(2, 8, 1);
+    //values in square only
+    aSudoku.setValue(4, 4, 2);
+    aSudoku.setValue(6, 5, 3);
+    //values in both
+    aSudoku.setValue(8, 4, 1);
+    aSudoku.setValue(9, 6, 1);
+    assertArrayEquals(expectedArray, aSudoku.getMissingNumbersInRowAndSquare(1, 2));
   }
 }

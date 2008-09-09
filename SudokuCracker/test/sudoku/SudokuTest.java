@@ -79,6 +79,17 @@ public class SudokuTest {
     aSudoku.setValue(1, 1, 1);
     assertArrayEquals(expectedArray, aSudoku.getMissingNumbersInSquare(1));
   }
+  
+  /**
+   * Wants all missing numbers of square 3
+   */
+  @Test
+  public void getMissingNumbersOfUpperRightSquareWithOtherNumbersInSquareTwoExisting() {
+    int[] expectedArray = { 2, 3, 4, 5, 6, 7, 8, 9 };
+    aSudoku.setValue(1, 9, 3);
+    aSudoku.setValue(2, 1, 1);
+    assertArrayEquals(expectedArray, aSudoku.getMissingNumbersInSquare(3));
+  }
 
   /**
    * Wants all missing numbers of square 5
@@ -195,6 +206,23 @@ public class SudokuTest {
   }
 
   /**
+   * Wants all missing numbers of column 1 (none in this case)
+   */
+  @Test
+  public void noNumberMissingInFirstColumn() {
+    aSudoku.setValue(1, 1, 1);
+    aSudoku.setValue(2, 1, 2);
+    aSudoku.setValue(3, 1, 3);
+    aSudoku.setValue(4, 1, 4);
+    aSudoku.setValue(5, 1, 5);
+    aSudoku.setValue(6, 1, 6);
+    aSudoku.setValue(7, 1, 7);
+    aSudoku.setValue(8, 1, 8);
+    aSudoku.setValue(9, 1, 9);
+    assertArrayEquals(new int[] {}, aSudoku.getMissingNumbersInColumn(1));
+  }
+  
+  /**
    * Wants all numbers that are missing in row 1 and square 2
    */
   @Test
@@ -269,4 +297,5 @@ public class SudokuTest {
   public void getExceptionWhileWantingMissingNumberOfField() throws NotPossibleException {
     aSudoku.getMissingNumberOfField(5, 5);
   }
-}
+  
+  }

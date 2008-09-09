@@ -70,43 +70,69 @@ public class Sudoku {
   public int[] getMissingNumbersInSquare(int aSquareNo) {
     ArrayList<Integer> tmpNumbers = getAllNumbers();
 
-    int tmpX = 0;
+    int tmpLowerRightX = 0;
+    int tmpUpperLeftX = 0;
+    int tmpLowerRightY = 0;
+    int tmpUpperLeftY = 0;
     switch (aSquareNo) {
       case 1:
-      case 4:
-      case 7:
-        tmpX = 3;
+        tmpLowerRightX = 3;
+        tmpUpperLeftX = 1;
+        tmpLowerRightY = 3;
+        tmpUpperLeftY = 1;
         break;
       case 2:
-      case 5:
-      case 8:
-        tmpX = 6;
+        tmpLowerRightX = 6;
+        tmpUpperLeftX = 4;
+        tmpLowerRightY = 3;
+        tmpUpperLeftY = 1;
         break;
       case 3:
-      case 6:
-      case 9:
-        tmpX = 9;
-    }
-    int tmpY = 0;
-    switch (aSquareNo) {
-      case 1:
-      case 2:
-      case 3:
-        tmpY = 3;
+        tmpLowerRightX = 9;
+        tmpUpperLeftX = 7;
+        tmpLowerRightY = 3;
+        tmpUpperLeftY = 1;
         break;
       case 4:
+        tmpLowerRightX = 3;
+        tmpUpperLeftX = 1;
+        tmpLowerRightY = 6;
+        tmpUpperLeftY = 4;
+        break;
       case 5:
+        tmpLowerRightX = 6;
+        tmpUpperLeftX = 4;
+        tmpLowerRightY = 6;
+        tmpUpperLeftY = 4;
+        break;
       case 6:
-        tmpY = 6;
+        tmpLowerRightX = 9;
+        tmpUpperLeftX = 7;
+        tmpLowerRightY = 6;
+        tmpUpperLeftY = 4;
         break;
       case 7:
+        tmpLowerRightX = 3;
+        tmpUpperLeftX = 1;
+        tmpLowerRightY = 9;
+        tmpUpperLeftY = 7;
+        break;
       case 8:
+        tmpLowerRightX = 6;
+        tmpUpperLeftX = 4;
+        tmpLowerRightY = 9;
+        tmpUpperLeftY = 7;
+        break;
       case 9:
-        tmpY = 9;
+        tmpLowerRightX = 9;
+        tmpUpperLeftX = 7;
+        tmpLowerRightY = 9;
+        tmpUpperLeftY = 7;
+        break;
     }
-
-    for (int y = 1; y <= tmpY; y++) {
-      for (int x = 1; x <= tmpX; x++) {
+    
+    for (int y = tmpUpperLeftY; y <= tmpLowerRightY; y++) {
+      for (int x = tmpUpperLeftX; x <= tmpLowerRightX; x++) {
         tmpNumbers.remove((Object) getValue(x, y));
       }
     }

@@ -44,6 +44,15 @@ public class Sudoku {
     return tmpArray;
   }
 
+  private boolean checkIfValueIsInArray(int aValue, int[] anArray) {
+    for (int i = 0; i < anArray.length; i++) {
+      if (anArray[i] == aValue) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   /**
    * Sets the given value on the field with the coordinates x and y and checks
    * the correctness of the set action before
@@ -56,16 +65,80 @@ public class Sudoku {
    */
   public void setValue(int aValue, int anX, int aY) throws InternalException {
     int[] tmpRowNumbers = getMissingNumbersInRow(aY);
-    boolean tmpChecked = false;
-    for (int i = 0; i < tmpRowNumbers.length; i++) {
-      if (tmpRowNumbers[i] == aValue) {
-        tmpChecked = true;
-        i = tmpRowNumbers.length;
-      }
+    if (!checkIfValueIsInArray(aValue, tmpRowNumbers)) {
+      throw new InternalException("Value set not allowed. Value already in row.");
     }
-    if (!tmpChecked) {
-      throw new InternalException("Value set not allowed.");
+    int[] tmpColumnNumbers = getMissingNumbersInColumn(anX);
+    if (!checkIfValueIsInArray(aValue, tmpColumnNumbers)) {
+      throw new InternalException("Value set not allowed. Value already in column.");
     }
+    int tmpSquareNo = 0;
+    switch (anX) {
+      case 1:
+      case 2:
+      case 3:
+        switch (aY) {
+          case 1:
+          case 2:
+          case 3:
+            tmpSquareNo = 1;
+            break;
+          case 4:
+          case 5:
+          case 6:
+            tmpSquareNo = 4;
+            break;
+          case 7:
+          case 8:
+          case 9:
+            tmpSquareNo = 7;
+        }
+        break;
+      case 4:
+      case 5:
+      case 6:
+        switch (aY) {
+          case 1:
+          case 2:
+          case 3:
+            tmpSquareNo = 2;
+            break;
+          case 4:
+          case 5:
+          case 6:
+            tmpSquareNo = 5;
+            break;
+          case 7:
+          case 8:
+          case 9:
+            tmpSquareNo = 8;
+        }
+        break;
+      case 7:
+      case 8:
+      case 9:
+        switch (aY) {
+          case 1:
+          case 2:
+          case 3:
+            tmpSquareNo = 3;
+            break;
+          case 4:
+          case 5:
+          case 6:
+            tmpSquareNo = 6;
+            break;
+          case 7:
+          case 8:
+          case 9:
+            tmpSquareNo = 9;
+        }
+    }
+    int[] tmpSquareNumbers = getMissingNumbersInSquare(tmpSquareNo);
+    if (!checkIfValueIsInArray(aValue, tmpSquareNumbers)) {
+      throw new InternalException("Value set not allowed. Value already in square.");
+    }
+
     aSudoku[aY - 1][anX - 1] = aValue;
   }
 

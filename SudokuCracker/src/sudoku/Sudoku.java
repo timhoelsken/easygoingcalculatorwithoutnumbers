@@ -2,12 +2,13 @@ package sudoku;
 
 import java.util.ArrayList;
 
-import exceptions.NotPossibleException;
+import sudoku.exceptions.InternalException;
+import sudoku.exceptions.NotPossibleException;
 
 /**
- * 
+ *
  * @authors Timbo & Tobe
- * 
+ *
  */
 public class Sudoku {
 
@@ -44,13 +45,27 @@ public class Sudoku {
   }
 
   /**
-   * Sets the given value on the field with the coordinates x and y
-   * 
+   * Sets the given value on the field with the coordinates x and y and checks
+   * the correctness of the set action before
+   *
    * @param anX
    * @param aY
    * @param aValue
+   * @throws InternalException
+   *             if set action is not allowed
    */
-  public void setValue(int aValue, int anX, int aY) {
+  public void setValue(int aValue, int anX, int aY) throws InternalException {
+    int[] tmpRowNumbers = getMissingNumbersInRow(aY);
+    boolean tmpChecked = false;
+    for (int i = 0; i < tmpRowNumbers.length; i++) {
+      if (tmpRowNumbers[i] == aValue) {
+        tmpChecked = true;
+        i = tmpRowNumbers.length;
+      }
+    }
+    if (!tmpChecked) {
+      throw new InternalException("Value set not allowed.");
+    }
     aSudoku[aY - 1][anX - 1] = aValue;
   }
 
@@ -130,7 +145,7 @@ public class Sudoku {
 
   /**
    * Determs all missing numbers in the given square
-   * 
+   *
    * @param aSquareNo
    *            (from 1 - upper left - to 9 - lower right)
    * @return Returns an array with all missing numbers
@@ -151,7 +166,7 @@ public class Sudoku {
 
   /**
    * Determs all missing numbers in the given row
-   * 
+   *
    * @param aRowNo
    *            (from 1 - upper - to 9 - lower)
    * @return An array with all missing numbers
@@ -168,7 +183,7 @@ public class Sudoku {
 
   /**
    * Determs all missing numbers in the given column
-   * 
+   *
    * @param aColumnNo
    *            (from 1 - left - to 9 - right)
    * @return An array with all missing numbers
@@ -185,7 +200,7 @@ public class Sudoku {
 
   /**
    * Determs all missing numbers in the given row and square
-   * 
+   *
    * @param aRowNo
    * @param aSquareNo
    * @return Returns all missing numbers in both, row and square
@@ -208,7 +223,7 @@ public class Sudoku {
 
   /**
    * Determs all missing numbers in the given column and square
-   * 
+   *
    * @param aColumnNo
    * @param aSquareNo
    * @return
@@ -235,8 +250,9 @@ public class Sudoku {
    * @return Returns the missing number if possible
    * @throws NotPossibleException
    *             if calculation not possible yet
+   * @throws InternalException
    */
-  public int getMissingNumberOfField(int anX, int aY) throws NotPossibleException {
+  public int getMissingNumberOfField(int anX, int aY) throws NotPossibleException, InternalException {
     int[] tmpColumnNumbers = getMissingNumbersInColumn(anX);
     int[] tmpRowNumbers = getMissingNumbersInRow(aY);
 
@@ -250,7 +266,7 @@ public class Sudoku {
 
   /**
    * Determs the row for the missing number in the given square
-   * 
+   *
    * @param aSquareNo
    * @param aNumber
    * @return int - the y coordinate of the row
@@ -330,7 +346,7 @@ public class Sudoku {
 
   /**
    * Determs the column for the missing number in the given square
-   * 
+   *
    * @param aSquareNo
    * @param aNumber
    * @return int - the x coordinate of the column
@@ -408,7 +424,7 @@ public class Sudoku {
 
   /**
    * Locates a number inside a square if it is already set
-   * 
+   *
    * @param aSquareNo
    * @param aNumber
    * @return int[] - the x and y coordinates of the number

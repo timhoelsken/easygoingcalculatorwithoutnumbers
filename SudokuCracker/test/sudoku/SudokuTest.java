@@ -6,7 +6,9 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import exceptions.NotPossibleException;
+import sudoku.exceptions.InternalException;
+import sudoku.exceptions.NotPossibleException;
+
 
 /**
  *
@@ -27,9 +29,10 @@ public class SudokuTest {
 
   /**
    * A test to check if the set value of the top left field is readable
+   * @throws InternalException
    */
   @Test
-  public void getFirstFieldsValue() {
+  public void getFirstFieldsValue() throws InternalException {
     aSudoku.setValue(1, 1, 1);
     assertEquals(1, aSudoku.getValue(1, 1));
   }
@@ -45,9 +48,10 @@ public class SudokuTest {
   /**
    * A test to check if the set values of the top left field and the next right
    * field are readable
+   * @throws InternalException
    */
   @Test
-  public void getTwoValuesOfTwoFields() {
+  public void getTwoValuesOfTwoFields() throws InternalException {
     aSudoku.setValue(1, 1, 1);
     aSudoku.setValue(2, 1, 2);
     assertEquals(1, aSudoku.getValue(1, 1));
@@ -71,10 +75,24 @@ public class SudokuTest {
   }
 
   /**
+   * Wants to get an internal exception because the value that should be set is
+   * not right. It is in the setted row yet.
+   * @throws InternalException
+   */
+  @Test(expected = InternalException.class)
+  public void avoidWrongValueSettingRegardingRow() throws InternalException {
+    // prepare sudoku
+    aSudoku.setValue(1, 2, 4);
+    // evoke exception
+    aSudoku.setValue(1, 8, 4);
+  }
+
+  /**
    * Wants all missing numbers of square 1
+   * @throws InternalException
    */
   @Test
-  public void getMissingNumbersOfUpperLeftSquare() {
+  public void getMissingNumbersOfUpperLeftSquare() throws InternalException {
     int[] expectedArray = { 2, 3, 4, 5, 6, 7, 8, 9 };
     aSudoku.setValue(1, 1, 1);
     assertArrayEquals(expectedArray, aSudoku.getMissingNumbersInSquare(1));
@@ -82,9 +100,10 @@ public class SudokuTest {
 
   /**
    * Wants all missing numbers of square 3
+   * @throws InternalException
    */
   @Test
-  public void getMissingNumbersOfUpperRightSquareWithOtherNumbersInSquareTwoExisting() {
+  public void getMissingNumbersOfUpperRightSquareWithOtherNumbersInSquareTwoExisting() throws InternalException {
     int[] expectedArray = { 2, 3, 4, 5, 6, 7, 8, 9 };
     aSudoku.setValue(1, 9, 3);
     aSudoku.setValue(2, 1, 1);
@@ -93,9 +112,10 @@ public class SudokuTest {
 
   /**
    * Wants all missing numbers of square 5
+   * @throws InternalException
    */
   @Test
-  public void getMissingNumbersOfCenterSquareWithOtherNumbersAround() {
+  public void getMissingNumbersOfCenterSquareWithOtherNumbersAround() throws InternalException {
     int[] expectedArray = { 1, 2, 3, 4, 6, 7, 8, 9 };
     aSudoku.setValue(5, 5, 5);
     aSudoku.setValue(1, 2, 2);
@@ -111,9 +131,10 @@ public class SudokuTest {
 
   /**
    * Wants all missing numbers of square 5
+   * @throws InternalException
    */
   @Test
-  public void getMissingNumbersOfMiddleSquare() {
+  public void getMissingNumbersOfMiddleSquare() throws InternalException {
     int[] expectedArray = { 2, 3, 4, 5, 6, 7, 8, 9 };
     aSudoku.setValue(1, 5, 5);
     assertArrayEquals(expectedArray, aSudoku.getMissingNumbersInSquare(5));
@@ -121,9 +142,10 @@ public class SudokuTest {
 
   /**
    * Wants all missing numbers of square 9
+   * @throws InternalException
    */
   @Test
-  public void getMissingNumbersOfLowerRightSquare() {
+  public void getMissingNumbersOfLowerRightSquare() throws InternalException {
     int[] expectedArray = { 2, 3, 4, 5, 6, 7, 8, 9 };
     aSudoku.setValue(1, 9, 9);
     assertArrayEquals(expectedArray, aSudoku.getMissingNumbersInSquare(9));
@@ -131,9 +153,10 @@ public class SudokuTest {
 
   /**
    * Wants all missing numbers of square 1 (none in this case)
+   * @throws InternalException
    */
   @Test
-  public void noNumberMissingInUpperLeftSquare() {
+  public void noNumberMissingInUpperLeftSquare() throws InternalException {
     aSudoku.setValue(1, 1, 1);
     aSudoku.setValue(2, 2, 1);
     aSudoku.setValue(3, 3, 1);
@@ -148,9 +171,10 @@ public class SudokuTest {
 
   /**
    * Wants all missing numbers of row 1
+   * @throws InternalException
    */
   @Test
-  public void getMissingNumbersOfFirstRow() {
+  public void getMissingNumbersOfFirstRow() throws InternalException {
     int[] expectedArray = { 2, 3, 4, 5, 6, 7, 8, 9 };
     aSudoku.setValue(1, 1, 1);
     assertArrayEquals(expectedArray, aSudoku.getMissingNumbersInRow(1));
@@ -158,9 +182,10 @@ public class SudokuTest {
 
   /**
    * Wants all missing numbers of row 5
+   * @throws InternalException
    */
   @Test
-  public void getMissingNumbersOfMiddleRow() {
+  public void getMissingNumbersOfMiddleRow() throws InternalException {
     int[] expectedArray = { 2, 3, 4, 5, 6, 7, 8, 9 };
     aSudoku.setValue(1, 1, 5);
     assertArrayEquals(expectedArray, aSudoku.getMissingNumbersInRow(5));
@@ -168,9 +193,10 @@ public class SudokuTest {
 
   /**
    * Wants all missing numbers of row 9
+   * @throws InternalException
    */
   @Test
-  public void getMissingNumbersOfLastRow() {
+  public void getMissingNumbersOfLastRow() throws InternalException {
     int[] expectedArray = { 2, 3, 4, 5, 6, 7, 8, 9 };
     aSudoku.setValue(1, 1, 9);
     assertArrayEquals(expectedArray, aSudoku.getMissingNumbersInRow(9));
@@ -178,9 +204,10 @@ public class SudokuTest {
 
   /**
    * Wants all missing numbers of row 1 (none in this case)
+   * @throws InternalException
    */
   @Test
-  public void noNumberMissingInFirstRow() {
+  public void noNumberMissingInFirstRow() throws InternalException {
     aSudoku.setValue(1, 1, 1);
     aSudoku.setValue(2, 2, 1);
     aSudoku.setValue(3, 3, 1);
@@ -195,9 +222,10 @@ public class SudokuTest {
 
   /**
    * Wants all missing numbers of column 1
+   * @throws InternalException
    */
   @Test
-  public void getMissingNumbersOfFirstColumn() {
+  public void getMissingNumbersOfFirstColumn() throws InternalException {
     int[] expectedArray = { 2, 3, 4, 5, 6, 7, 8, 9 };
     aSudoku.setValue(1, 1, 1);
     assertArrayEquals(expectedArray, aSudoku.getMissingNumbersInColumn(1));
@@ -205,9 +233,10 @@ public class SudokuTest {
 
   /**
    * Wants all missing numbers of column 5
+   * @throws InternalException
    */
   @Test
-  public void getMissingNumbersOfMiddleColumn() {
+  public void getMissingNumbersOfMiddleColumn() throws InternalException {
     int[] expectedArray = { 2, 3, 4, 5, 6, 7, 8, 9 };
     aSudoku.setValue(1, 5, 1);
     assertArrayEquals(expectedArray, aSudoku.getMissingNumbersInColumn(5));
@@ -215,9 +244,10 @@ public class SudokuTest {
 
   /**
    * Wants all missing numbers of column 9
+   * @throws InternalException
    */
   @Test
-  public void getMissingNumbersOfLastColumn() {
+  public void getMissingNumbersOfLastColumn() throws InternalException {
     int[] expectedArray = { 2, 3, 4, 5, 6, 7, 8, 9 };
     aSudoku.setValue(1, 9, 1);
     assertArrayEquals(expectedArray, aSudoku.getMissingNumbersInColumn(9));
@@ -225,9 +255,10 @@ public class SudokuTest {
 
   /**
    * Wants all missing numbers of column 1 (none in this case)
+   * @throws InternalException
    */
   @Test
-  public void noNumberMissingInFirstColumn() {
+  public void noNumberMissingInFirstColumn() throws InternalException {
     aSudoku.setValue(1, 1, 1);
     aSudoku.setValue(2, 1, 2);
     aSudoku.setValue(3, 1, 3);
@@ -242,9 +273,10 @@ public class SudokuTest {
 
   /**
    * Wants all numbers that are missing in row 1 and square 2
+   * @throws InternalException
    */
   @Test
-  public void getMissingNumbersOfFirstRowAndMiddleUpperSquare() {
+  public void getMissingNumbersOfFirstRowAndMiddleUpperSquare() throws InternalException {
     int[] expectedArray = { 3, 5, 7 };
     // values in row only
     aSudoku.setValue(1, 2, 1);
@@ -260,9 +292,10 @@ public class SudokuTest {
 
   /**
    * Wants all numbers that are missing in column 1 and square 4
+   * @throws InternalException
    */
   @Test
-  public void getMissingNumbersOfFirstColumnAndMiddleLeftSquare() {
+  public void getMissingNumbersOfFirstColumnAndMiddleLeftSquare() throws InternalException {
     int[] expectedArray = { 3, 5, 7 };
     // values in row only
     aSudoku.setValue(1, 1, 2);
@@ -281,9 +314,10 @@ public class SudokuTest {
    * that this number is the field's value after calculation
    *
    * @throws NotPossibleException
+   * @throws InternalException
    */
   @Test
-  public void getMissingNumberOfField() throws NotPossibleException {
+  public void getMissingNumberOfField() throws NotPossibleException, InternalException {
     // middle row
     aSudoku.setValue(1, 1, 5);
     aSudoku.setValue(2, 2, 5);
@@ -307,41 +341,44 @@ public class SudokuTest {
   }
 
   /**
-   * Determs the row of the missing number in a square.
-   * Two other numbers must be set in the neighbour squares
-   * 
-   * @throws NotPossibleException 
+   * Determs the row of the missing number in a square. Two other numbers must
+   * be set in the neighbour squares
+   *
+   * @throws NotPossibleException
+   * @throws InternalException
    */
   @Test
-  public void getRowWhereNumberMustBeInSquare2() throws NotPossibleException {
+  public void getRowWhereNumberMustBeInSquare2() throws NotPossibleException, InternalException {
     aSudoku.setValue(3, 1, 1);
     aSudoku.setValue(3, 9, 3);
 
     assertEquals(2, aSudoku.getRowOfMissingNumber(2, 3));
   }
-  
+
   /**
-   * Determs the row of the missing number in a square.
-   * Two other numbers must be set in the neighbour squares
-   * 
-   * @throws NotPossibleException 
+   * Determs the row of the missing number in a square. Two other numbers must
+   * be set in the neighbour squares
+   *
+   * @throws NotPossibleException
+   * @throws InternalException
    */
   @Test
-  public void getRowWhereNumberMustBeInSquare4() throws NotPossibleException {
+  public void getRowWhereNumberMustBeInSquare4() throws NotPossibleException, InternalException {
     aSudoku.setValue(3, 5, 5);
     aSudoku.setValue(3, 9, 4);
 
     assertEquals(6, aSudoku.getRowOfMissingNumber(4, 3));
   }
-  
+
   /**
-   * Determs the row of the missing number in a square.
-   * Two other numbers must be set in the neighbour squares
-   * 
-   * @throws NotPossibleException 
+   * Determs the row of the missing number in a square. Two other numbers must
+   * be set in the neighbour squares
+   *
+   * @throws NotPossibleException
+   * @throws InternalException
    */
   @Test
-  public void getRowWhereNumberMustBeInSquare9() throws NotPossibleException {
+  public void getRowWhereNumberMustBeInSquare9() throws NotPossibleException, InternalException {
     aSudoku.setValue(3, 5, 8);
     aSudoku.setValue(3, 2, 9);
 
@@ -349,54 +386,58 @@ public class SudokuTest {
   }
 
   /**
-   * Determs the row of the missing number in a square.
-   * Two other numbers must be set in the neighbour squares
-   * 
-   * @throws NotPossibleException 
+   * Determs the row of the missing number in a square. Two other numbers must
+   * be set in the neighbour squares
+   *
+   * @throws NotPossibleException
+   * @throws InternalException
    */
   @Test(expected = NotPossibleException.class)
-  public void getExceptionWhileGetRowWhereNumberMustBe() throws NotPossibleException {
+  public void getExceptionWhileGetRowWhereNumberMustBe() throws NotPossibleException, InternalException {
     aSudoku.setValue(3, 9, 3);
 
     assertEquals(2, aSudoku.getRowOfMissingNumber(2, 3));
   }
 
   /**
-   * Determs the column of the missing number in a square.
-   * Two other numbers must be set in the neighbour squares
-   * 
-   * @throws NotPossibleException 
+   * Determs the column of the missing number in a square. Two other numbers
+   * must be set in the neighbour squares
+   *
+   * @throws NotPossibleException
+   * @throws InternalException
    */
   @Test
-  public void getColumnWhereNumberMustBeInSquare5() throws NotPossibleException {
+  public void getColumnWhereNumberMustBeInSquare5() throws NotPossibleException, InternalException {
     aSudoku.setValue(4, 5, 1);
     aSudoku.setValue(4, 6, 9);
 
     assertEquals(4, aSudoku.getColumnOfMissingNumber(5, 4));
   }
-  
+
   /**
-   * Determs the column of the missing number in a square.
-   * Two other numbers must be set in the neighbour squares
-   * 
-   * @throws NotPossibleException 
+   * Determs the column of the missing number in a square. Two other numbers
+   * must be set in the neighbour squares
+   *
+   * @throws NotPossibleException
+   * @throws InternalException
    */
   @Test
-  public void getColumnWhereNumberMustBeInSquare3() throws NotPossibleException {
+  public void getColumnWhereNumberMustBeInSquare3() throws NotPossibleException, InternalException {
     aSudoku.setValue(4, 8, 5);
     aSudoku.setValue(4, 9, 7);
 
     assertEquals(7, aSudoku.getColumnOfMissingNumber(3, 4));
   }
-  
+
   /**
-   * Determs the column of the missing number in a square.
-   * Two other numbers must be set in the neighbour squares
-   * 
-   * @throws NotPossibleException 
+   * Determs the column of the missing number in a square. Two other numbers
+   * must be set in the neighbour squares
+   *
+   * @throws NotPossibleException
+   * @throws InternalException
    */
   @Test
-  public void getColumnWhereNumberMustBeInSquare7() throws NotPossibleException {
+  public void getColumnWhereNumberMustBeInSquare7() throws NotPossibleException, InternalException {
     aSudoku.setValue(4, 1, 3);
     aSudoku.setValue(4, 3, 6);
 
@@ -404,13 +445,14 @@ public class SudokuTest {
   }
 
   /**
-   * Determs the column of the missing number in a square.
-   * Two other numbers must be set in the neighbour squares
-   * 
-   * @throws NotPossibleException 
+   * Determs the column of the missing number in a square. Two other numbers
+   * must be set in the neighbour squares
+   *
+   * @throws NotPossibleException
+   * @throws InternalException
    */
   @Test(expected = NotPossibleException.class)
-  public void getExceptionWhileGetColumnWhereNumberMustBe() throws NotPossibleException {
+  public void getExceptionWhileGetColumnWhereNumberMustBe() throws NotPossibleException, InternalException {
     aSudoku.setValue(4, 5, 1);
 
     aSudoku.getColumnOfMissingNumber(5, 4);
@@ -418,11 +460,12 @@ public class SudokuTest {
 
   /**
    * Determs the coordinates of a number in a square
-   * 
-   * @throws NotPossibleException 
+   *
+   * @throws NotPossibleException
+   * @throws InternalException
    */
   @Test
-  public void findNumberInSquare() throws NotPossibleException {
+  public void findNumberInSquare() throws NotPossibleException, InternalException {
     int[] expectedArray = { 2, 2 };
     aSudoku.setValue(1, 2, 2);
     int[] tmpResult = aSudoku.locateNumberInSquare(1, 1);
@@ -431,9 +474,10 @@ public class SudokuTest {
   }
 
   /**
-   * Determs the coordinates of a number in a square (number does not exist in square)
-   * 
-   * @throws NotPossibleException 
+   * Determs the coordinates of a number in a square (number does not exist in
+   * square)
+   *
+   * @throws NotPossibleException
    */
   @Test(expected = NotPossibleException.class)
   public void getExceptionFindingNumberInSquare() throws NotPossibleException {
@@ -444,9 +488,10 @@ public class SudokuTest {
    * Wants the number of the specified field (not easy possible)
    *
    * @throws NotPossibleException
+   * @throws InternalException
    */
   @Test(expected = NotPossibleException.class)
-  public void getExceptionWhileWantingMissingNumberOfField() throws NotPossibleException {
+  public void getExceptionWhileWantingMissingNumberOfField() throws NotPossibleException, InternalException {
     aSudoku.getMissingNumberOfField(5, 5);
   }
 

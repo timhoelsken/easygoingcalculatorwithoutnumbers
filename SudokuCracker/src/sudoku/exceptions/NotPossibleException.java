@@ -1,7 +1,7 @@
 /**
  *
  */
-package exceptions;
+package sudoku.exceptions;
 
 /**
  * @author Tobe

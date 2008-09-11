@@ -927,9 +927,13 @@ public class Sudoku {
     for (int i = 0; i < aSudoku.length; i++) {
       for (int j = 0; j < aSudoku[i].length; j++) {
         tmpAllFields.add(getValue(j + 1, i + 1));
-        System.out.print(getValue(j + 1, i + 1) + " ");
+        System.out.print(getValue(j + 1, i + 1));
+        if ((j+1)%3==0)
+        System.out.print(" ");
       }
-      System.out.println("\n");
+      System.out.print("\n");
+      if ((i+1)%3==0)
+      System.out.print("\n");
     }
     return makeIntegerArrayListAnArray(tmpAllFields);
   }

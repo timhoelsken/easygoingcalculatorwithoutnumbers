@@ -5,12 +5,13 @@ package sudoku.exceptions;
 
 /**
  * @author Tobias
- *
+ * 
  */
 public class SetException extends Throwable {
 
   /**
    * message constructor
+   * 
    * @param aString
    */
   public SetException(String aString) {

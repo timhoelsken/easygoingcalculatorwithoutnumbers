@@ -9,6 +9,7 @@ import sudoku.exceptions.SetException;
 
 /**
  * Basic functional tests of the Sudoku
+ * 
  * @author Tobias
  */
 public class Basics {
@@ -16,7 +17,7 @@ public class Basics {
   private Sudoku sudoku;
 
   /**
-   * Produces an empty Sudoku instance for all tests
+   * Produces an empty Sudoku instance for all tests.
    */
   @Before
   public void initialiseSudoku() {
@@ -25,7 +26,7 @@ public class Basics {
 
   /**
    * A once set value should be remembered.
-   *
+   * 
    * @throws SetException
    */
   @Test
@@ -37,8 +38,8 @@ public class Basics {
   }
 
   /**
-   * All fields of the Sudoku should be remembered
-   *
+   * All fields of the Sudoku should be remembered.
+   * 
    * @throws SetException
    */
   @Test
@@ -209,7 +210,7 @@ public class Basics {
 
   /**
    * A once set field should not be set again
-   *
+   * 
    * @throws SetException
    */
   @Test(expected = SetException.class)

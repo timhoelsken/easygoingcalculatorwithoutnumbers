@@ -6,6 +6,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * Class to run all tests of the project
+ * 
  * @author Tobias
  */
 @RunWith(Suite.class)

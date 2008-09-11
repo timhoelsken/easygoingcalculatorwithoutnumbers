@@ -6,9 +6,9 @@ import sudoku.exceptions.InternalException;
 import sudoku.exceptions.NotPossibleException;
 
 /**
- * 
+ *
  * @authors Timbo & Tobe
- * 
+ *
  */
 public class Sudoku {
 
@@ -56,7 +56,7 @@ public class Sudoku {
   /**
    * Sets the given value on the field with the coordinates x and y and checks
    * the correctness of the set action before
-   * 
+   *
    * @param anX
    * @param aY
    * @param aValue
@@ -84,7 +84,7 @@ public class Sudoku {
 
   /**
    * Indicates the square to the given coordinates
-   * 
+   *
    * @param anX
    * @param aY
    * @return int - Number of the square
@@ -166,7 +166,7 @@ public class Sudoku {
   }
 
   /**
-   * 
+   *
    * @param aSquareNo
    * @return The top left and bottom right coordinates of the given Square,
    *         where 0 is X and 1 is Y of top left, 2 is X and 3 is Y of bottom
@@ -239,7 +239,7 @@ public class Sudoku {
 
   /**
    * Determs all missing numbers in the given square
-   * 
+   *
    * @param aSquareNo
    *            (from 1 - upper left - to 9 - lower right)
    * @return Returns an array with all missing numbers
@@ -260,7 +260,7 @@ public class Sudoku {
 
   /**
    * Determs all missing numbers in the given row
-   * 
+   *
    * @param aRowNo
    *            (from 1 - upper - to 9 - lower)
    * @return An array with all missing numbers
@@ -277,7 +277,7 @@ public class Sudoku {
 
   /**
    * Determs all missing numbers in the given column
-   * 
+   *
    * @param aColumnNo
    *            (from 1 - left - to 9 - right)
    * @return An array with all missing numbers
@@ -294,7 +294,7 @@ public class Sudoku {
 
   /**
    * Determs all missing numbers in the given row and square
-   * 
+   *
    * @param aRowNo
    * @param aSquareNo
    * @return Returns all missing numbers in both, row and square
@@ -317,7 +317,7 @@ public class Sudoku {
 
   /**
    * Determs all missing numbers in the given column and square
-   * 
+   *
    * @param aColumnNo
    * @param aSquareNo
    * @return
@@ -361,7 +361,7 @@ public class Sudoku {
   /**
    * Determs the row for the missing number in the given square Does a
    * combination check with the two neighboured squares
-   * 
+   *
    * @param aSquareNo
    * @param aNumber
    * @return int - the y coordinate of the row
@@ -428,7 +428,7 @@ public class Sudoku {
   /**
    * Determs the column for the missing number in the given square Does a
    * combination check with the two neighboured squares
-   * 
+   *
    * @param aSquareNo
    * @param aNumber
    * @return int - the x coordinate of the column
@@ -492,7 +492,7 @@ public class Sudoku {
 
   /**
    * Locates a number inside a square if it is already set
-   * 
+   *
    * @param aSquareNo
    * @param aNumber
    * @return int[] - the x and y coordinates of the number
@@ -520,7 +520,7 @@ public class Sudoku {
 
   /**
    * The solve function
-   * 
+   *
    * @return the solved Sudoku
    */
   public int[] solve() {
@@ -533,29 +533,50 @@ public class Sudoku {
         try {
           // +++ Look if there is only one number in the row missing+++
           hasNumberFound = setValueForFieldInRow(j + 1, i + 1);
-
-          // +++ Look if there is only one number in the row missing+++
+          if (hasNumberFound) {
+            System.out.println("1");
+            getAllFields();
+          }
+          // +++ Look if there is only one number in the column missing+++
           hasNumberFound = setValueForFieldInColumn(j + 1, i + 1);
-
+          if (hasNumberFound) {
+            System.out.println("2");
+            getAllFields();
+          }
           // +++ Look if there is only one number in the square missing+++
           hasNumberFound = setValueForFieldInSquare(j + 1, i + 1);
-
+          if (hasNumberFound) {
+            System.out.println("3");
+            getAllFields();
+          }
           // +++ Look if there is a row entry combination for a number and it is
           // definite
           hasNumberFound = setValueForSingleFieldInRowCombination(j + 1, i + 1);
-
+          if (hasNumberFound) {
+            System.out.println("4");
+            getAllFields();
+          }
           // +++ +++ Look if there is a row entry combination for a number and
           // there are two possibilities
           hasNumberFound = setValueForDoubleFieldInRowCombination(j + 1, i + 1);
-
+          if (hasNumberFound) {
+            System.out.println("5");
+            getAllFields();
+          }
           // +++ Look if there is a row entry combination for a number and it is
           // definite
           hasNumberFound = setValueForSingleFieldInColumnCombination(j + 1, i + 1);
-
+          if (hasNumberFound) {
+            System.out.println("6");
+            getAllFields();
+          }
           // +++ +++ Look if there is a row entry combination for a number and
           // there are two possibilities
           hasNumberFound = setValueForDoubleFieldInColumnCombination(j + 1, i + 1);
-
+          if (hasNumberFound) {
+            System.out.println("7");
+            getAllFields();
+          }
         } catch (InternalException e) {
 
         }
@@ -577,7 +598,7 @@ public class Sudoku {
    * 2, 5, 8) when there are two fields empty in the identified column, another
    * check with the rows will be done to identify if one of the fields is
    * definite
-   * 
+   *
    * @param anX
    * @param aY
    * @return true if number could be set
@@ -660,7 +681,7 @@ public class Sudoku {
    * Looks if there is a Column-Combination in three neighboured squares (i.e.
    * 2, 5, 8) when there is only one field empty in the identified column! The
    * number can be set then
-   * 
+   *
    * @param anX
    * @param aY
    * @return true if number could be set
@@ -743,7 +764,7 @@ public class Sudoku {
    * Looks if there is a Row-Combination in three neighboured squares (i.e. 4,
    * 5, 6) when there are two fields empty in the identified row, another check
    * with the columns will be done to identify if one of the fields is definite
-   * 
+   *
    * @param anX
    * @param aY
    * @return true if number could be set
@@ -824,7 +845,7 @@ public class Sudoku {
    * Looks if there is a Row-Combination in three neighboured squares (i.e. 4,
    * 5, 6) when there is only one field empty in the identified row! The number
    * can be set then
-   * 
+   *
    * @param anX
    * @param aY
    * @return true if number could be set
@@ -904,7 +925,7 @@ public class Sudoku {
   /**
    * If there is only one field left in a square, the number is calculated and
    * then set
-   * 
+   *
    * @param anX
    * @param aY
    * @return true if a number could be set
@@ -928,7 +949,7 @@ public class Sudoku {
   /**
    * If there is only one field left in a column, the number is calculated and
    * then set
-   * 
+   *
    * @param anX
    * @param aY
    * @return true if a number could be set
@@ -950,7 +971,7 @@ public class Sudoku {
   /**
    * If there is only one field left in a row, the number is calculated and
    * then set
-   * 
+   *
    * @param anX
    * @param aY
    * @return true if a number could be set
@@ -971,7 +992,7 @@ public class Sudoku {
 
   /**
    * Paints the sudoku with zeros
-   * 
+   *
    * @return int[] the sudoku
    */
   private int[] getAllFields() {
@@ -993,7 +1014,7 @@ public class Sudoku {
 
   /**
    * checks if the number is already in the row
-   * 
+   *
    * @param aNumber
    * @param aY
    * @return true if number is already in row
@@ -1012,7 +1033,7 @@ public class Sudoku {
 
   /**
    * checks if the number is already in the row
-   * 
+   *
    * @param aNumber
    * @param anX
    * @return true, if number is already in row

@@ -629,7 +629,7 @@ public class SudokuTest {
   public void getExceptionWhileWantingMissingNumberOfField() throws NotPossibleException, InternalException {
     aSudoku.getMissingNumberOfField(5, 5);
   }
-  
+
   /**
    * Wants to set a number depending on the rows values
    *
@@ -638,10 +638,10 @@ public class SudokuTest {
    */
   @Test
   public void setNumberInRowNone() throws NotPossibleException, InternalException {
-        
+
     assertFalse(aSudoku.setValueForFieldInRow(1, 1));
   }
-  
+
   /**
    * Wants to set a number depending on the rows values
    *
@@ -651,10 +651,10 @@ public class SudokuTest {
   @Test
   public void setNumberInRowOne() throws NotPossibleException, InternalException {
     aSudoku.setValue(2, 2, 1);
-    
+
     assertFalse(aSudoku.setValueForFieldInRow(1, 1));
   }
-  
+
   /**
    * Wants to set a number depending on the rows values
    *
@@ -665,7 +665,7 @@ public class SudokuTest {
   public void setNumberInRowTwo() throws NotPossibleException, InternalException {
     aSudoku.setValue(2, 2, 1);
     aSudoku.setValue(3, 3, 1);
-    
+
     assertFalse(aSudoku.setValueForFieldInRow(1, 1));
   }
 
@@ -680,10 +680,10 @@ public class SudokuTest {
     aSudoku.setValue(2, 2, 1);
     aSudoku.setValue(3, 3, 1);
     aSudoku.setValue(4, 4, 1);
-    
+
     assertFalse(aSudoku.setValueForFieldInRow(1, 1));
   }
-  
+
   /**
    * Wants to set a number depending on the rows values
    *
@@ -696,10 +696,10 @@ public class SudokuTest {
     aSudoku.setValue(3, 3, 1);
     aSudoku.setValue(4, 4, 1);
     aSudoku.setValue(5, 5, 1);
-    
+
     assertFalse(aSudoku.setValueForFieldInRow(1, 1));
   }
-  
+
   /**
    * Wants to set a number depending on the rows values
    *
@@ -713,10 +713,10 @@ public class SudokuTest {
     aSudoku.setValue(4, 4, 1);
     aSudoku.setValue(5, 5, 1);
     aSudoku.setValue(6, 6, 1);
-    
+
     assertFalse(aSudoku.setValueForFieldInRow(1, 1));
   }
-  
+
   /**
    * Wants to set a number depending on the rows values
    *
@@ -731,10 +731,10 @@ public class SudokuTest {
     aSudoku.setValue(5, 5, 1);
     aSudoku.setValue(6, 6, 1);
     aSudoku.setValue(7, 7, 1);
-    
+
     assertFalse(aSudoku.setValueForFieldInRow(1, 1));
   }
-  
+
   /**
    * Wants to set a number depending on the rows values
    *
@@ -750,10 +750,10 @@ public class SudokuTest {
     aSudoku.setValue(6, 6, 1);
     aSudoku.setValue(7, 7, 1);
     aSudoku.setValue(8, 8, 1);
-    
+
     assertFalse(aSudoku.setValueForFieldInRow(1, 1));
   }
-  
+
   /**
    * Wants to set a number depending on the rows values
    *
@@ -770,10 +770,10 @@ public class SudokuTest {
     aSudoku.setValue(7, 7, 1);
     aSudoku.setValue(8, 8, 1);
     aSudoku.setValue(9, 9, 1);
-    
+
     assertTrue(aSudoku.setValueForFieldInRow(1, 1));
   }
-  
+
   /**
    * Wants to set a number depending on the column values
    *
@@ -782,10 +782,10 @@ public class SudokuTest {
    */
   @Test
   public void setNumberInColumnNone() throws NotPossibleException, InternalException {
-        
+
     assertFalse(aSudoku.setValueForFieldInColumn(1, 1));
   }
-  
+
   /**
    * Wants to set a number depending on the column values
    *
@@ -794,11 +794,11 @@ public class SudokuTest {
    */
   @Test
   public void setNumberInColumnOne() throws NotPossibleException, InternalException {
-        
+
     aSudoku.setValue(2, 1, 2);
     assertFalse(aSudoku.setValueForFieldInColumn(1, 1));
   }
-  
+
   /**
    * Wants to set a number depending on the column values
    *
@@ -807,12 +807,12 @@ public class SudokuTest {
    */
   @Test
   public void setNumberInColumnTwo() throws NotPossibleException, InternalException {
-    
+
     aSudoku.setValue(2, 1, 2);
     aSudoku.setValue(3, 1, 3);
     assertFalse(aSudoku.setValueForFieldInColumn(1, 1));
   }
-  
+
   /**
    * Wants to set a number depending on the column values
    *
@@ -821,13 +821,13 @@ public class SudokuTest {
    */
   @Test
   public void setNumberInColumnThree() throws NotPossibleException, InternalException {
-        
+
     aSudoku.setValue(2, 1, 2);
     aSudoku.setValue(3, 1, 3);
     aSudoku.setValue(4, 1, 4);
     assertFalse(aSudoku.setValueForFieldInColumn(1, 1));
   }
-  
+
   /**
    * Wants to set a number depending on the column values
    *
@@ -836,14 +836,14 @@ public class SudokuTest {
    */
   @Test
   public void setNumberInColumnFour() throws NotPossibleException, InternalException {
-        
+
     aSudoku.setValue(2, 1, 2);
     aSudoku.setValue(3, 1, 3);
     aSudoku.setValue(4, 1, 4);
     aSudoku.setValue(5, 1, 5);
     assertFalse(aSudoku.setValueForFieldInColumn(1, 1));
   }
-  
+
   /**
    * Wants to set a number depending on the column values
    *
@@ -852,7 +852,7 @@ public class SudokuTest {
    */
   @Test
   public void setNumberInColumnFife() throws NotPossibleException, InternalException {
-        
+
     aSudoku.setValue(2, 1, 2);
     aSudoku.setValue(3, 1, 3);
     aSudoku.setValue(4, 1, 4);
@@ -860,7 +860,7 @@ public class SudokuTest {
     aSudoku.setValue(6, 1, 6);
     assertFalse(aSudoku.setValueForFieldInColumn(1, 1));
   }
-  
+
   /**
    * Wants to set a number depending on the column values
    *
@@ -869,7 +869,7 @@ public class SudokuTest {
    */
   @Test
   public void setNumberInColumnSix() throws NotPossibleException, InternalException {
-        
+
     aSudoku.setValue(2, 1, 2);
     aSudoku.setValue(3, 1, 3);
     aSudoku.setValue(4, 1, 4);
@@ -878,7 +878,7 @@ public class SudokuTest {
     aSudoku.setValue(7, 1, 7);
     assertFalse(aSudoku.setValueForFieldInColumn(1, 1));
   }
-  
+
   /**
    * Wants to set a number depending on the column values
    *
@@ -887,7 +887,7 @@ public class SudokuTest {
    */
   @Test
   public void setNumberInColumnSeven() throws NotPossibleException, InternalException {
-        
+
     aSudoku.setValue(2, 1, 2);
     aSudoku.setValue(3, 1, 3);
     aSudoku.setValue(4, 1, 4);
@@ -897,7 +897,7 @@ public class SudokuTest {
     aSudoku.setValue(8, 1, 8);
     assertFalse(aSudoku.setValueForFieldInColumn(1, 1));
   }
-  
+
   /**
    * Wants to set a number depending on the column values
    *
@@ -906,7 +906,7 @@ public class SudokuTest {
    */
   @Test
   public void setNumberInColumnEight() throws NotPossibleException, InternalException {
-        
+
     aSudoku.setValue(2, 1, 2);
     aSudoku.setValue(3, 1, 3);
     aSudoku.setValue(4, 1, 4);
@@ -917,7 +917,7 @@ public class SudokuTest {
     aSudoku.setValue(9, 1, 9);
     assertTrue(aSudoku.setValueForFieldInColumn(1, 1));
   }
-  
+
   /**
    * Wants to set a number depending on the square values
    *
@@ -926,10 +926,10 @@ public class SudokuTest {
    */
   @Test
   public void setNumberInSquareNone() throws NotPossibleException, InternalException {
-        
+
     assertFalse(aSudoku.setValueForFieldInSquare(5, 5));
   }
-  
+
   /**
    * Wants to set a number depending on the square values
    *
@@ -938,12 +938,12 @@ public class SudokuTest {
    */
   @Test
   public void setNumberInSquareOne() throws NotPossibleException, InternalException {
-        
+
     aSudoku.setValue(1, 4, 4);
-    
+
     assertFalse(aSudoku.setValueForFieldInSquare(5, 5));
   }
-  
+
   /**
    * Wants to set a number depending on the square values
    *
@@ -952,13 +952,13 @@ public class SudokuTest {
    */
   @Test
   public void setNumberInSquareTwo() throws NotPossibleException, InternalException {
-        
+
     aSudoku.setValue(1, 4, 4);
     aSudoku.setValue(2, 5, 4);
-    
+
     assertFalse(aSudoku.setValueForFieldInSquare(5, 5));
   }
-  
+
   /**
    * Wants to set a number depending on the square values
    *
@@ -967,15 +967,15 @@ public class SudokuTest {
    */
   @Test
   public void setNumberInSquareThree() throws NotPossibleException, InternalException {
-        
+
     aSudoku.setValue(1, 4, 4);
     aSudoku.setValue(2, 5, 4);
     aSudoku.setValue(3, 6, 4);
-    
-    
+
+
     assertFalse(aSudoku.setValueForFieldInSquare(5, 5));
   }
-  
+
   /**
    * Wants to set a number depending on the square values
    *
@@ -984,16 +984,16 @@ public class SudokuTest {
    */
   @Test
   public void setNumberInSquareFour() throws NotPossibleException, InternalException {
-        
+
     aSudoku.setValue(1, 4, 4);
     aSudoku.setValue(2, 5, 4);
     aSudoku.setValue(3, 6, 4);
     aSudoku.setValue(4, 4, 5);
-    
-    
+
+
     assertFalse(aSudoku.setValueForFieldInSquare(5, 5));
   }
-  
+
   /**
    * Wants to set a number depending on the square values
    *
@@ -1002,17 +1002,17 @@ public class SudokuTest {
    */
   @Test
   public void setNumberInSquareFife() throws NotPossibleException, InternalException {
-        
+
     aSudoku.setValue(1, 4, 4);
     aSudoku.setValue(2, 5, 4);
     aSudoku.setValue(3, 6, 4);
     aSudoku.setValue(4, 4, 5);
     aSudoku.setValue(6, 6, 5);
-    
-    
+
+
     assertFalse(aSudoku.setValueForFieldInSquare(5, 5));
   }
-  
+
   /**
    * Wants to set a number depending on the square values
    *
@@ -1021,18 +1021,18 @@ public class SudokuTest {
    */
   @Test
   public void setNumberInSquareSix() throws NotPossibleException, InternalException {
-        
+
     aSudoku.setValue(1, 4, 4);
     aSudoku.setValue(2, 5, 4);
     aSudoku.setValue(3, 6, 4);
     aSudoku.setValue(4, 4, 5);
     aSudoku.setValue(6, 6, 5);
     aSudoku.setValue(7, 4, 6);
-    
-    
+
+
     assertFalse(aSudoku.setValueForFieldInSquare(5, 5));
   }
-  
+
   /**
    * Wants to set a number depending on the square values
    *
@@ -1041,7 +1041,7 @@ public class SudokuTest {
    */
   @Test
   public void setNumberInSquareSeven() throws NotPossibleException, InternalException {
-        
+
     aSudoku.setValue(1, 4, 4);
     aSudoku.setValue(2, 5, 4);
     aSudoku.setValue(3, 6, 4);
@@ -1049,11 +1049,11 @@ public class SudokuTest {
     aSudoku.setValue(6, 6, 5);
     aSudoku.setValue(7, 4, 6);
     aSudoku.setValue(8, 5, 6);
-    
-    
+
+
     assertFalse(aSudoku.setValueForFieldInSquare(5, 5));
   }
-  
+
   /**
    * Wants to set a number depending on the square values
    *
@@ -1062,7 +1062,7 @@ public class SudokuTest {
    */
   @Test
   public void setNumberInSquareEight() throws NotPossibleException, InternalException {
-        
+
     aSudoku.setValue(1, 4, 4);
     aSudoku.setValue(2, 5, 4);
     aSudoku.setValue(3, 6, 4);
@@ -1071,11 +1071,11 @@ public class SudokuTest {
     aSudoku.setValue(7, 4, 6);
     aSudoku.setValue(8, 5, 6);
     aSudoku.setValue(9, 6, 6);
-    
-    
+
+
     assertTrue(aSudoku.setValueForFieldInSquare(5, 5));
   }
-  
+
   /**
    * Wants to set a number depending on the row combination
    *
@@ -1084,15 +1084,15 @@ public class SudokuTest {
    */
   @Test
   public void setNumberWithSingleRowCombination() throws NotPossibleException, InternalException {
-        
+
     aSudoku.setValue(5, 1, 4);
     aSudoku.setValue(5, 9, 6);
     aSudoku.setValue(3, 4, 5);
     aSudoku.setValue(4, 6, 5);
-        
+
     assertTrue(aSudoku.setValueForSingleFieldInRowCombination(5, 5));
   }
-  
+
   /**
    * Wants to set a number depending on the row combination
    *
@@ -1101,14 +1101,14 @@ public class SudokuTest {
    */
   @Test
   public void setNumberWithSingleRowCombinationNotPossible() throws NotPossibleException, InternalException {
-        
+
     aSudoku.setValue(5, 1, 4);
     aSudoku.setValue(5, 9, 6);
     aSudoku.setValue(3, 4, 5);
-        
+
     assertFalse(aSudoku.setValueForSingleFieldInRowCombination(5, 5));
   }
-  
+
   /**
    * Wants to set a number depending on the row combination
    *
@@ -1117,14 +1117,33 @@ public class SudokuTest {
    */
   @Test
   public void setNumberWithSingleRowCombinationAlsoNotPossible() throws NotPossibleException, InternalException {
-        
+
     aSudoku.setValue(5, 1, 4);
     aSudoku.setValue(5, 9, 6);
     aSudoku.setValue(4, 6, 5);
-        
+
     assertFalse(aSudoku.setValueForSingleFieldInRowCombination(5, 5));
   }
-  
+
+  /**
+   * Wants to show a made mistake xD
+   *
+   * @throws NotPossibleException
+   * @throws InternalException
+   */
+  @Test
+  public void newTest() throws NotPossibleException, InternalException {
+
+    aSudoku.setValue(3, 1, 1);
+    aSudoku.setValue(3, 2, 7);
+    aSudoku.setValue(3, 6, 8);
+    aSudoku.setValue(3, 8, 9);
+    aSudoku.setValue(4, 8, 2);
+    aSudoku.setValue(5, 9, 2);
+
+    assertFalse(aSudoku.setValueForSingleFieldInRowCombination(7, 2));
+  }
+
   /**
    * Wants to set a number depending on the row combination
    * (does not fill 5,5 but 4,5!)
@@ -1134,50 +1153,50 @@ public class SudokuTest {
    */
   @Test
   public void setNumberWithDoubleRowCombination() throws NotPossibleException, InternalException {
-        
+
     aSudoku.setValue(5, 1, 4);
     aSudoku.setValue(5, 9, 6);
     aSudoku.setValue(4, 6, 5);
     aSudoku.setValue(5, 5, 3);
-        
+
     assertTrue(aSudoku.setValueForDoubleFieldInRowCombination(5, 5));
   }
-  
+
   /**
    * Wants to set a number depending on the row combination
-   * 
+   *
    *
    * @throws NotPossibleException
    * @throws InternalException
    */
   @Test
   public void setNumberWithDoubleRowCombinationAnotherOne() throws NotPossibleException, InternalException {
-        
+
     aSudoku.setValue(5, 1, 4);
     aSudoku.setValue(5, 9, 6);
     aSudoku.setValue(4, 6, 5);
     aSudoku.setValue(5, 4, 3);
-        
+
     assertTrue(aSudoku.setValueForDoubleFieldInRowCombination(5, 5));
   }
-  
+
   /**
    * Wants to set a number depending on the row combination
-   * 
+   *
    *
    * @throws NotPossibleException
    * @throws InternalException
    */
   @Test
   public void setNumberWithDoubleRowCombinationNotPossible() throws NotPossibleException, InternalException {
-        
+
     aSudoku.setValue(5, 1, 4);
     aSudoku.setValue(5, 9, 6);
     aSudoku.setValue(4, 6, 5);
-            
+
     assertFalse(aSudoku.setValueForDoubleFieldInRowCombination(5, 5));
   }
-  
+
   /**
    * Wants to set a number depending on the column combination
    *
@@ -1186,15 +1205,15 @@ public class SudokuTest {
    */
   @Test
   public void setNumberWithSingleColumnCombination() throws NotPossibleException, InternalException {
-        
+
     aSudoku.setValue(5, 4, 1);
     aSudoku.setValue(5, 6, 9);
     aSudoku.setValue(3, 5, 4);
     aSudoku.setValue(4, 5, 6);
-        
+
     assertTrue(aSudoku.setValueForSingleFieldInColumnCombination(5, 5));
   }
-  
+
   /**
    * Wants to set a number depending on the column combination
    *
@@ -1203,49 +1222,49 @@ public class SudokuTest {
    */
   @Test
   public void setNumberWithSingleColumnCombinationNotPossible() throws NotPossibleException, InternalException {
-        
+
     aSudoku.setValue(5, 4, 1);
     aSudoku.setValue(5, 6, 9);
     aSudoku.setValue(3, 5, 4);
-    
-        
+
+
     assertFalse(aSudoku.setValueForSingleFieldInColumnCombination(5, 5));
   }
-  
+
   /**
    * Wants to set a number depending on the column combination
-   * 
+   *
    *
    * @throws NotPossibleException
    * @throws InternalException
    */
   @Test
   public void setNumberWithDoubleColumnCombination() throws NotPossibleException, InternalException {
-        
+
     aSudoku.setValue(5, 4, 1);
     aSudoku.setValue(5, 6, 9);
     aSudoku.setValue(3, 5, 4);
     aSudoku.setValue(5, 8, 6);
-        
+
     assertTrue(aSudoku.setValueForDoubleFieldInColumnCombination(5, 5));
   }
-  
+
   /**
    * Wants to set a number depending on the column combination
-   * 
+   *
    *
    * @throws NotPossibleException
    * @throws InternalException
    */
   @Test
   public void setNumberWithDoubleColumnCombinationNotPossible() throws NotPossibleException, InternalException {
-        
+
     aSudoku.setValue(5, 4, 1);
     aSudoku.setValue(5, 6, 9);
     aSudoku.setValue(3, 5, 4);
-            
+
     assertFalse(aSudoku.setValueForDoubleFieldInColumnCombination(5, 5));
   }
-  
+
   //TODO Die letzten 4 Methoden sind noch nicht ausgereift... da gibts bestimmt noch zuviele Fehler drin
 }

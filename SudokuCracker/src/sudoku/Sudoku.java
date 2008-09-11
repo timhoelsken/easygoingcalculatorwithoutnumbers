@@ -537,6 +537,14 @@ public class Sudoku {
           // there are two possibilities
           hasNumberFound = setValueForDoubleFieldInRowCombination(j + 1, i + 1);
 
+          // +++ Look if there is a row entry combination for a number and it is
+          // definite
+          hasNumberFound = setValueForSingleFieldInColumnCombination(j + 1, i + 1);
+
+          // +++ +++ Look if there is a row entry combination for a number and
+          // there are two possibilities
+          hasNumberFound = setValueForDoubleFieldInColumnCombination(j + 1, i + 1);
+
         } catch (InternalException e) {
 
         }
@@ -702,6 +710,83 @@ public class Sudoku {
     } // i loop
 
     return getAllFields();
+  }
+
+  public boolean setValueForDoubleFieldInColumnCombination(int aI, int aI2) {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  public boolean setValueForSingleFieldInColumnCombination(int anX, int aY) {
+    int[] tmpMissingNumbers;
+    if (getValue(anX, aY) == 0) {
+      int tmpSearchedSquare = getSquareNumber(anX, aY);
+      tmpMissingNumbers = getMissingNumbersInSquare(tmpSearchedSquare);
+
+      // check each missing number
+      for (int k = 0; k < tmpMissingNumbers.length; k++) {
+
+        try {
+          getColumnOfMissingNumber(tmpSearchedSquare, tmpMissingNumbers[k]);
+        } catch (NotPossibleException e) {
+        }
+
+        // get the Y coordinates of the square
+        int[] tmpCoordinatesOfSquare = getSquareCoordinates(tmpSearchedSquare);
+
+        // IDs to identify the Row-Situation
+        int tmpEmptyFieldId = 3; // 0, 1, 2 used for single empty fields
+        // from left to right in the square, 3 is empty
+
+        // first field, empty? ==> ID=0
+        if (getValue(anX, tmpCoordinatesOfSquare[1]) == 0) {
+          tmpEmptyFieldId = 0;
+        }
+
+        if (getValue(anX, tmpCoordinatesOfSquare[1] + 1) == 0) {
+          // first field is not empty? ==> ID=1
+          if (tmpEmptyFieldId == 3) {
+            tmpEmptyFieldId = 1;
+          }
+          // first field is already empty? ==> ID=3, two empty fields
+          else {
+            tmpEmptyFieldId = 3;
+          }
+        }
+        if (getValue(anX, tmpCoordinatesOfSquare[2]) == 0) {
+
+          // none of the fields before is empty? ==> ID=2
+          if (tmpEmptyFieldId == 3) {
+            tmpEmptyFieldId = 2;
+          }
+          // one of the fields before is empty
+          else {
+            tmpEmptyFieldId = 3;
+          }
+        }
+
+        // if theres only one empty field, the missing number can be set
+        // there! Wohey! :)
+        if (tmpEmptyFieldId != 3) {
+          try {
+
+            if (tmpEmptyFieldId == 0 && tmpCoordinatesOfSquare[1] == aY) {
+              setValue(tmpMissingNumbers[k], anX, aY);
+              return true;
+            } else if (tmpEmptyFieldId == 1 && tmpCoordinatesOfSquare[1] + 1 == aY) {
+              setValue(tmpMissingNumbers[k], anX, aY);
+              return true;
+            } else {
+              setValue(tmpMissingNumbers[k], anX, aY);
+              return true;
+            }
+          } catch (InternalException ie) {
+
+          }
+        }
+      }
+    }
+    return false;
   }
 
   /**

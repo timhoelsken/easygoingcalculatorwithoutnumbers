@@ -1177,4 +1177,38 @@ public class SudokuTest {
             
     assertFalse(aSudoku.setValueForDoubleFieldInRowCombination(5, 5));
   }
+  
+  /**
+   * Wants to set a number depending on the column combination
+   *
+   * @throws NotPossibleException
+   * @throws InternalException
+   */
+  @Test
+  public void setNumberWithSingleColumnCombination() throws NotPossibleException, InternalException {
+        
+    aSudoku.setValue(5, 4, 1);
+    aSudoku.setValue(5, 6, 9);
+    aSudoku.setValue(3, 5, 4);
+    aSudoku.setValue(4, 5, 6);
+        
+    assertTrue(aSudoku.setValueForSingleFieldInColumnCombination(5, 5));
+  }
+  
+  /**
+   * Wants to set a number depending on the column combination
+   *
+   * @throws NotPossibleException
+   * @throws InternalException
+   */
+  @Test
+  public void setNumberWithSingleColumnCombinationNotPossible() throws NotPossibleException, InternalException {
+        
+    aSudoku.setValue(5, 4, 1);
+    aSudoku.setValue(5, 6, 9);
+    aSudoku.setValue(3, 5, 4);
+    
+        
+    assertFalse(aSudoku.setValueForSingleFieldInColumnCombination(5, 5));
+  }
 }

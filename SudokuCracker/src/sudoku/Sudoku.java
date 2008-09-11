@@ -83,10 +83,11 @@ public class Sudoku {
   }
 
   /**
+   * Indicates the square to the given coordinates
    * 
    * @param anX
    * @param aY
-   * @return
+   * @return int - Number of the square
    */
   private int getSquareNumber(int anX, int aY) {
     int tmpSquareNo = 0;
@@ -164,6 +165,13 @@ public class Sudoku {
     return aSudoku[aY - 1][anX - 1];
   }
 
+  /**
+   * 
+   * @param aSquareNo
+   * @return The top left and bottom right coordinates of the given Square,
+   *         where 0 is X and 1 is Y of top left, 2 is X and 3 is Y of bottom
+   *         right
+   */
   private int[] getSquareCoordinates(int aSquareNo) {
     int tmpLowerRightX = 0;
     int tmpUpperLeftX = 0;
@@ -351,7 +359,8 @@ public class Sudoku {
   }
 
   /**
-   * Determs the row for the missing number in the given square
+   * Determs the row for the missing number in the given square Does a
+   * combination check with the two neighboured squares
    * 
    * @param aSquareNo
    * @param aNumber
@@ -417,7 +426,8 @@ public class Sudoku {
   }
 
   /**
-   * Determs the column for the missing number in the given square
+   * Determs the column for the missing number in the given square Does a
+   * combination check with the two neighboured squares
    * 
    * @param aSquareNo
    * @param aNumber
@@ -509,8 +519,9 @@ public class Sudoku {
   }
 
   /**
+   * The solve function
    * 
-   * @return
+   * @return the solved Sudoku
    */
   public int[] solve() {
 
@@ -562,26 +573,35 @@ public class Sudoku {
   }
 
   /**
+   * Looks if there is a Column-Combination in three neighboured squares (i.e.
+   * 2, 5, 8) when there are two fields empty in the identified column, another
+   * check with the rows will be done to identify if one of the fields is
+   * definite
    * 
    * @param anX
    * @param aY
-   * @return
+   * @return true if number could be set
    */
   public boolean setValueForDoubleFieldInColumnCombination(int anX, int aY) {
+    // all missing numbers of the field
     int[] tmpMissingNumbers;
+
     if (getValue(anX, aY) == 0) {
+
       int tmpSearchedSquare = getSquareNumber(anX, aY);
       tmpMissingNumbers = getMissingNumbersInSquare(tmpSearchedSquare);
 
       // check each missing number
       for (int k = 0; k < tmpMissingNumbers.length; k++) {
         try {
+          // this is only to check if the topic number is found in the neighbour
+          // squares! REALLY NECESSARY
           getColumnOfMissingNumber(tmpSearchedSquare, tmpMissingNumbers[k]);
           // the Y coordinates of the square
           int[] tmpCoordinatesOfSquare = getSquareCoordinates(tmpSearchedSquare);
 
+          // identify location of the other two squares
           int tmpYOfRowOne, tmpYOfRowTwo;
-
           if (aY - tmpCoordinatesOfSquare[1] == 0) {
             tmpYOfRowOne = aY + 1;
             tmpYOfRowTwo = aY + 2;
@@ -593,8 +613,11 @@ public class Sudoku {
             tmpYOfRowTwo = aY - 2;
           }
 
+          // if both other fields are empty, stop it!
           if (getValue(anX, tmpYOfRowOne) == 0 && getValue(anX, tmpYOfRowTwo) == 0) {
             return false;
+            // cause we just want to fill the field we check right now, the
+            // following two big else if clauses are made
           } else if (getValue(anX, tmpYOfRowOne) == 0) {
             if (isNumberInRow(tmpMissingNumbers[k], tmpYOfRowOne)) {
               try {
@@ -624,6 +647,7 @@ public class Sudoku {
               }
             }
           }
+          // can't place it, so let it be
         } catch (NotPossibleException e) {
           // do nothing
         }
@@ -633,10 +657,13 @@ public class Sudoku {
   }
 
   /**
+   * Looks if there is a Column-Combination in three neighboured squares (i.e.
+   * 2, 5, 8) when there is only one field empty in the identified column! The
+   * number can be set then
    * 
    * @param anX
    * @param aY
-   * @return
+   * @return true if number could be set
    */
   public boolean setValueForSingleFieldInColumnCombination(int anX, int aY) {
     int[] tmpMissingNumbers;
@@ -648,6 +675,8 @@ public class Sudoku {
       for (int k = 0; k < tmpMissingNumbers.length; k++) {
 
         try {
+          // this is only to check if the topic number is found in the neighbour
+          // squares! REALLY NECESSARY
           getColumnOfMissingNumber(tmpSearchedSquare, tmpMissingNumbers[k]);
         } catch (NotPossibleException e) {
         }
@@ -711,10 +740,13 @@ public class Sudoku {
   }
 
   /**
+   * Looks if there is a Row-Combination in three neighboured squares (i.e. 4,
+   * 5, 6) when there are two fields empty in the identified row, another check
+   * with the columns will be done to identify if one of the fields is definite
    * 
    * @param anX
    * @param aY
-   * @return
+   * @return true if number could be set
    */
   public boolean setValueForDoubleFieldInRowCombination(int anX, int aY) {
     int[] tmpMissingNumbers;
@@ -725,10 +757,13 @@ public class Sudoku {
       // check each missing number
       for (int k = 0; k < tmpMissingNumbers.length; k++) {
         try {
+          // this is only to check if the topic number is found in the neighbour
+          // squares! REALLY NECESSARY
           getRowOfMissingNumber(tmpSearchedSquare, tmpMissingNumbers[k]);
           // the X coordinates of the square
           int[] tmpCoordinatesOfSquare = getSquareCoordinates(tmpSearchedSquare);
 
+          // locate the neighbour squares
           int tmpXOfColumnOne, tmpXOfColumnTwo;
 
           if (anX - tmpCoordinatesOfSquare[0] == 0) {
@@ -742,8 +777,11 @@ public class Sudoku {
             tmpXOfColumnTwo = anX - 2;
           }
 
+          // if both fields are empty, stop!
           if (getValue(tmpXOfColumnOne, aY) == 0 && getValue(tmpXOfColumnTwo, aY) == 0) {
             return false;
+            // Cause we just want to fill the topic field, the following big
+            // else if clauses are made
           } else if (getValue(tmpXOfColumnOne, aY) == 0) {
             if (isNumberInColumn(tmpMissingNumbers[k], tmpXOfColumnOne)) {
               try {
@@ -773,6 +811,7 @@ public class Sudoku {
               }
             }
           }
+          // number can't be set
         } catch (NotPossibleException e) {
           // do nothing
         }
@@ -782,10 +821,13 @@ public class Sudoku {
   }
 
   /**
+   * Looks if there is a Row-Combination in three neighboured squares (i.e. 4,
+   * 5, 6) when there is only one field empty in the identified row! The number
+   * can be set then
    * 
    * @param anX
    * @param aY
-   * @return
+   * @return true if number could be set
    */
   public boolean setValueForSingleFieldInRowCombination(int anX, int aY) {
     int[] tmpMissingNumbers;
@@ -860,10 +902,12 @@ public class Sudoku {
   }
 
   /**
+   * If there is only one field left in a square, the number is calculated and
+   * then set
    * 
    * @param anX
    * @param aY
-   * @return
+   * @return true if a number could be set
    * @throws InternalException
    */
   public boolean setValueForFieldInSquare(int anX, int aY) throws InternalException {
@@ -882,10 +926,12 @@ public class Sudoku {
   }
 
   /**
+   * If there is only one field left in a column, the number is calculated and
+   * then set
    * 
    * @param anX
    * @param aY
-   * @return
+   * @return true if a number could be set
    * @throws InternalException
    */
   public boolean setValueForFieldInColumn(int anX, int aY) throws InternalException {
@@ -902,10 +948,12 @@ public class Sudoku {
   }
 
   /**
+   * If there is only one field left in a row, the number is calculated and
+   * then set
    * 
    * @param anX
    * @param aY
-   * @return
+   * @return true if a number could be set
    * @throws InternalException
    */
   public boolean setValueForFieldInRow(int anX, int aY) throws InternalException {
@@ -921,6 +969,11 @@ public class Sudoku {
     return false;
   }
 
+  /**
+   * Paints the sudoku with zeros
+   * 
+   * @return int[] the sudoku
+   */
   private int[] getAllFields() {
     ArrayList<Integer> tmpAllFields = new ArrayList<Integer>();
 
@@ -928,16 +981,23 @@ public class Sudoku {
       for (int j = 0; j < aSudoku[i].length; j++) {
         tmpAllFields.add(getValue(j + 1, i + 1));
         System.out.print(getValue(j + 1, i + 1));
-        if ((j+1)%3==0)
-        System.out.print(" ");
+        if ((j + 1) % 3 == 0)
+          System.out.print(" ");
       }
       System.out.print("\n");
-      if ((i+1)%3==0)
-      System.out.print("\n");
+      if ((i + 1) % 3 == 0)
+        System.out.print("\n");
     }
     return makeIntegerArrayListAnArray(tmpAllFields);
   }
 
+  /**
+   * checks if the number is already in the row
+   * 
+   * @param aNumber
+   * @param aY
+   * @return true if number is already in row
+   */
   private boolean isNumberInRow(int aNumber, int aY) {
 
     int[] tmpMissingNumbers = getMissingNumbersInRow(aY);
@@ -950,6 +1010,13 @@ public class Sudoku {
     return true;
   }
 
+  /**
+   * checks if the number is already in the row
+   * 
+   * @param aNumber
+   * @param anX
+   * @return true, if number is already in row
+   */
   private boolean isNumberInColumn(int aNumber, int anX) {
 
     int[] tmpMissingNumbers = getMissingNumbersInColumn(anX);

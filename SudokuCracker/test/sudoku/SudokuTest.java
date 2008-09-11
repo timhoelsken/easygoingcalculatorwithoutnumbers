@@ -1246,4 +1246,6 @@ public class SudokuTest {
             
     assertFalse(aSudoku.setValueForDoubleFieldInColumnCombination(5, 5));
   }
+  
+  //TODO Die letzten 4 Methoden sind noch nicht ausgereift... da gibts bestimmt noch zuviele Fehler drin
 }

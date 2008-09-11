@@ -6,9 +6,9 @@ import sudoku.exceptions.InternalException;
 import sudoku.exceptions.NotPossibleException;
 
 /**
- *
+ * 
  * @authors Timbo & Tobe
- *
+ * 
  */
 public class Sudoku {
 
@@ -56,7 +56,7 @@ public class Sudoku {
   /**
    * Sets the given value on the field with the coordinates x and y and checks
    * the correctness of the set action before
-   *
+   * 
    * @param anX
    * @param aY
    * @param aValue
@@ -72,6 +72,23 @@ public class Sudoku {
     if (!checkIfValueIsInArray(aValue, tmpColumnNumbers)) {
       throw new InternalException("Value set not allowed. Value already in column.");
     }
+
+    int tmpSquareNo = getSquareNumber(anX, aY);
+    int[] tmpSquareNumbers = getMissingNumbersInSquare(tmpSquareNo);
+    if (!checkIfValueIsInArray(aValue, tmpSquareNumbers)) {
+      throw new InternalException("Value set not allowed. Value already in square.");
+    }
+
+    aSudoku[aY - 1][anX - 1] = aValue;
+  }
+
+  /**
+   * 
+   * @param anX
+   * @param aY
+   * @return
+   */
+  private int getSquareNumber(int anX, int aY) {
     int tmpSquareNo = 0;
     switch (anX) {
       case 1:
@@ -134,12 +151,8 @@ public class Sudoku {
             tmpSquareNo = 9;
         }
     }
-    int[] tmpSquareNumbers = getMissingNumbersInSquare(tmpSquareNo);
-    if (!checkIfValueIsInArray(aValue, tmpSquareNumbers)) {
-      throw new InternalException("Value set not allowed. Value already in square.");
-    }
 
-    aSudoku[aY - 1][anX - 1] = aValue;
+    return tmpSquareNo;
   }
 
   /**
@@ -218,7 +231,7 @@ public class Sudoku {
 
   /**
    * Determs all missing numbers in the given square
-   *
+   * 
    * @param aSquareNo
    *            (from 1 - upper left - to 9 - lower right)
    * @return Returns an array with all missing numbers
@@ -239,7 +252,7 @@ public class Sudoku {
 
   /**
    * Determs all missing numbers in the given row
-   *
+   * 
    * @param aRowNo
    *            (from 1 - upper - to 9 - lower)
    * @return An array with all missing numbers
@@ -256,7 +269,7 @@ public class Sudoku {
 
   /**
    * Determs all missing numbers in the given column
-   *
+   * 
    * @param aColumnNo
    *            (from 1 - left - to 9 - right)
    * @return An array with all missing numbers
@@ -273,7 +286,7 @@ public class Sudoku {
 
   /**
    * Determs all missing numbers in the given row and square
-   *
+   * 
    * @param aRowNo
    * @param aSquareNo
    * @return Returns all missing numbers in both, row and square
@@ -296,7 +309,7 @@ public class Sudoku {
 
   /**
    * Determs all missing numbers in the given column and square
-   *
+   * 
    * @param aColumnNo
    * @param aSquareNo
    * @return
@@ -339,7 +352,7 @@ public class Sudoku {
 
   /**
    * Determs the row for the missing number in the given square
-   *
+   * 
    * @param aSquareNo
    * @param aNumber
    * @return int - the y coordinate of the row
@@ -382,24 +395,10 @@ public class Sudoku {
     tmpSquareRows.add(tmpCoordinatesOfSquare[3]);
 
     // look for the row in the first neighbour containing the number
-    tmpCoordinatesOfSquare = getSquareCoordinates(aSquareNo + tmpSquareNeighbourOne);
-    for (int y = tmpCoordinatesOfSquare[1]; y <= tmpCoordinatesOfSquare[3]; y++) {
-      for (int x = tmpCoordinatesOfSquare[0]; x <= tmpCoordinatesOfSquare[2]; x++) {
-        if (aNumber == getValue(x, y)) {
-          tmpOtherRows.add(y);
-        }
-      }
-    }
+    tmpOtherRows.add(locateNumberInSquare(aSquareNo + tmpSquareNeighbourOne, aNumber)[1]);
 
     // look for the row in the second neighbour containing the number
-    tmpCoordinatesOfSquare = getSquareCoordinates(aSquareNo + tmpSquareNeighbourTwo);
-    for (int y = tmpCoordinatesOfSquare[1]; y <= tmpCoordinatesOfSquare[3]; y++) {
-      for (int x = tmpCoordinatesOfSquare[0]; x <= tmpCoordinatesOfSquare[2]; x++) {
-        if (aNumber == getValue(x, y)) {
-          tmpOtherRows.add(y);
-        }
-      }
-    }
+    tmpOtherRows.add(locateNumberInSquare(aSquareNo + tmpSquareNeighbourTwo, aNumber)[1]);
 
     // if two numbers were found everythings alright, else it is not possible to
     // determ => exception
@@ -419,7 +418,7 @@ public class Sudoku {
 
   /**
    * Determs the column for the missing number in the given square
-   *
+   * 
    * @param aSquareNo
    * @param aNumber
    * @return int - the x coordinate of the column
@@ -461,24 +460,10 @@ public class Sudoku {
     tmpSquareColumns.add(tmpCoordinatesOfSquare[2]);
 
     // look for the column in the first neighbour containing the number
-    tmpCoordinatesOfSquare = getSquareCoordinates(aSquareNo + tmpSquareNeighbourOne);
-    for (int y = tmpCoordinatesOfSquare[1]; y <= tmpCoordinatesOfSquare[3]; y++) {
-      for (int x = tmpCoordinatesOfSquare[0]; x <= tmpCoordinatesOfSquare[2]; x++) {
-        if (aNumber == getValue(x, y)) {
-          tmpOtherColumns.add(x);
-        }
-      }
-    }
+    tmpOtherColumns.add(locateNumberInSquare(aSquareNo + tmpSquareNeighbourOne, aNumber)[0]);
 
     // look for the column in the second neighbour containing the number
-    tmpCoordinatesOfSquare = getSquareCoordinates(aSquareNo + tmpSquareNeighbourTwo);
-    for (int y = tmpCoordinatesOfSquare[1]; y <= tmpCoordinatesOfSquare[3]; y++) {
-      for (int x = tmpCoordinatesOfSquare[0]; x <= tmpCoordinatesOfSquare[2]; x++) {
-        if (aNumber == getValue(x, y)) {
-          tmpOtherColumns.add(x);
-        }
-      }
-    }
+    tmpOtherColumns.add(locateNumberInSquare(aSquareNo + tmpSquareNeighbourTwo, aNumber)[0]);
 
     // if two numbers were found everythings alright, else it is not possible to
     // determ => exception
@@ -497,13 +482,13 @@ public class Sudoku {
 
   /**
    * Locates a number inside a square if it is already set
-   *
+   * 
    * @param aSquareNo
    * @param aNumber
    * @return int[] - the x and y coordinates of the number
    * @throws NotPossibleException
    */
-  public int[] locateNumberInSquare(int aSquareNo, int aNumber) throws NotPossibleException {
+  private int[] locateNumberInSquare(int aSquareNo, int aNumber) throws NotPossibleException {
     int[] tmpCoordinatesOfNumber = { 0, 0 };
 
     int[] tmpCoordinatesOfSquare = getSquareCoordinates(aSquareNo);
@@ -522,4 +507,449 @@ public class Sudoku {
     }
     return tmpCoordinatesOfNumber;
   }
+
+  /**
+   * 
+   * @return
+   */
+  public int[] solve() {
+
+    boolean hasNumberFound = false;
+
+    for (int i = 0; i < aSudoku.length; i++) {
+      for (int j = 0; j < aSudoku[i].length; j++) {
+        int[] tmpMissingNumbers;
+        try {
+          // +++ Look if there is only one number in the row missing+++
+          hasNumberFound = setValueForFieldInRow(j + 1, i + 1);
+
+          // +++ Look if there is only one number in the row missing+++
+          hasNumberFound = setValueForFieldInColumn(j + 1, i + 1);
+
+          // +++ Look if there is only one number in the square missing+++
+          hasNumberFound = setValueForFieldInSquare(j + 1, i + 1);
+
+          // +++ Look if there is a row entry combination for a number and it is
+          // definite
+          hasNumberFound = setValueForSingleFieldInRowCombination(j + 1, i + 1);
+
+          // +++ +++ Look if there is a row entry combination for a number and
+          // there are two possibilities
+          hasNumberFound = setValueForDoubleFieldInRowCombination(j + 1, i + 1);
+
+        } catch (InternalException e) {
+
+        }
+
+        // +++ first try! => can be made correctly according to
+        // setValueForSingleFieldInRowCombination and
+        // setValueForDoubleFieldInRowCombination!!
+
+        // // look for columns
+        // if (getValue(j + 1, i + 1) == 0) {
+        // int tmpSearchedSquare = getSquareNumber(j + 1, i + 1);
+        // tmpMissingNumbers = getMissingNumbersInSquare(tmpSearchedSquare);
+        //
+        // // check each missing number
+        // for (int k = 0; k < tmpMissingNumbers.length; k++) {
+        // try {
+        // // determ the column where the number is missing and get the X
+        // // coordinates of the square
+        // int tmpXCoordinateOfColumn =
+        // getColumnOfMissingNumber(tmpSearchedSquare, tmpMissingNumbers[k]);
+        // int[] tmpCoordinatesOfSquare =
+        // getSquareCoordinates(tmpSearchedSquare);
+        //
+        // // IDs to identify the column-situation
+        // int tmpEmptyFieldId = 3; // 0, 1, 2 used for single empty fields
+        // // from top to bottom in the square, 3
+        // // is empty
+        // // +++ 4 is first and second field empty, 5 is second and third
+        // // field empty, 6 is first and third empty
+        //
+        // int tmpNumberOfEmptyFields = 0;
+        //
+        // // first field, empty? ==> ID=0, one empty field
+        // if (getValue(tmpXCoordinateOfColumn, tmpCoordinatesOfSquare[1]) == 0)
+        // {
+        // tmpEmptyFieldId = 0;
+        // tmpNumberOfEmptyFields = 1;
+        // }
+        //
+        // if (getValue(tmpXCoordinateOfColumn, tmpCoordinatesOfSquare[1] + 1)
+        // == 0) {
+        // // first field is not empty? ==> ID=1, one empty field
+        // if (tmpNumberOfEmptyFields == 0) {
+        // tmpEmptyFieldId = 1;
+        // tmpNumberOfEmptyFields = 1;
+        // }
+        // // first field is also empty? ==> ID=4, two empty fields
+        // else {
+        // tmpEmptyFieldId = 4;
+        // tmpNumberOfEmptyFields = 2;
+        // }
+        // }
+        // if (getValue(tmpXCoordinateOfColumn, tmpCoordinatesOfSquare[3]) == 0)
+        // {
+        //
+        // // none of the fields before is empty? ==> ID=2, one empty field
+        // if (tmpNumberOfEmptyFields == 0) {
+        // tmpEmptyFieldId = 2;
+        // tmpNumberOfEmptyFields = 1;
+        // }
+        // // one of the fields before is empty
+        // else if (tmpNumberOfEmptyFields == 1) {
+        // // first one? ==> ID=6
+        // if (tmpEmptyFieldId == 1) {
+        // tmpEmptyFieldId = 6;
+        // }
+        // // second one? ==> ID=5
+        // else {
+        // tmpEmptyFieldId = 5;
+        // }
+        // // now there are two empty fields
+        // tmpNumberOfEmptyFields = 2;
+        // } else {
+        // // all three fields empty? ==> ID=3, three empty fields
+        // tmpEmptyFieldId = 3;
+        // tmpNumberOfEmptyFields = 3;
+        // }
+        // }
+        //
+        // // if theres only one empty field, the missing number can be set
+        // // there! Wohey! :)
+        // if (tmpNumberOfEmptyFields == 1) {
+        // try {
+        //
+        // if (tmpEmptyFieldId == 0) {
+        // setValue(tmpMissingNumbers[k], tmpXCoordinateOfColumn,
+        // tmpCoordinatesOfSquare[1]);
+        // hasNumberFound = true;
+        // } else if (tmpEmptyFieldId == 1) {
+        // setValue(tmpMissingNumbers[k], tmpXCoordinateOfColumn,
+        // tmpCoordinatesOfSquare[1] + 1);
+        // hasNumberFound = true;
+        // } else {
+        // setValue(tmpMissingNumbers[k], tmpXCoordinateOfColumn,
+        // tmpCoordinatesOfSquare[2]);
+        // hasNumberFound = true;
+        // }
+        // } catch (InternalException ie) {
+        //
+        // }
+        // }
+        // // if there are two empty fields, we have to check the columns,
+        // // maybe we can set a number anyway
+        // else if (tmpNumberOfEmptyFields == 2) {
+        // try {
+        //
+        // // depending on IDs, the fields are checked. If there is a
+        // // number in one row, it has to be set in the other one
+        // if (tmpEmptyFieldId == 4) {
+        // if (isNumberInRow(tmpMissingNumbers[k], tmpCoordinatesOfSquare[1])) {
+        // setValue(tmpMissingNumbers[k], tmpXCoordinateOfColumn,
+        // tmpCoordinatesOfSquare[1] + 1);
+        // hasNumberFound = true;
+        // } else if (isNumberInRow(tmpMissingNumbers[k],
+        // tmpCoordinatesOfSquare[1] + 1)) {
+        // setValue(tmpMissingNumbers[k], tmpXCoordinateOfColumn,
+        // tmpCoordinatesOfSquare[1]);
+        // hasNumberFound = true;
+        // }
+        // } else if (tmpEmptyFieldId == 5) {
+        // if (isNumberInRow(tmpMissingNumbers[k], tmpCoordinatesOfSquare[1] +
+        // 1)) {
+        // setValue(tmpMissingNumbers[k], tmpXCoordinateOfColumn,
+        // tmpCoordinatesOfSquare[3]);
+        // hasNumberFound = true;
+        // } else if (isNumberInRow(tmpMissingNumbers[k],
+        // tmpCoordinatesOfSquare[3])) {
+        // setValue(tmpMissingNumbers[k], tmpXCoordinateOfColumn,
+        // tmpCoordinatesOfSquare[1] + 1);
+        // hasNumberFound = true;
+        // }
+        // } else {// 6
+        // if (!isNumberInRow(tmpMissingNumbers[k], tmpCoordinatesOfSquare[1]))
+        // {
+        // setValue(tmpMissingNumbers[k], tmpXCoordinateOfColumn,
+        // tmpCoordinatesOfSquare[3]);
+        // hasNumberFound = true;
+        // } else if (!isNumberInRow(tmpMissingNumbers[k],
+        // tmpCoordinatesOfSquare[3])) {
+        // setValue(tmpMissingNumbers[k], tmpXCoordinateOfColumn,
+        // tmpCoordinatesOfSquare[1]);
+        // hasNumberFound = true;
+        // }
+        // }
+        // } catch (InternalException ie) {
+        //
+        // }
+        //
+        // }
+        // } catch (NotPossibleException npe) {
+        //
+        // }
+        // }
+        // }
+
+        // repeat solving the sudoku until no value could be set!
+        if (hasNumberFound && (i == 8 && j == 8)) {
+          hasNumberFound = false;
+          i = 1;
+          j = 1;
+        }
+      } // j loop
+    } // i loop
+
+    return getAllFields();
+  }
+
+  /**
+   * 
+   * @param anX
+   * @param aY
+   * @return
+   */
+  public boolean setValueForDoubleFieldInRowCombination(int anX, int aY) {
+    int[] tmpMissingNumbers;
+    if (getValue(anX, aY) == 0) {
+      int tmpSearchedSquare = getSquareNumber(anX, aY);
+      tmpMissingNumbers = getMissingNumbersInSquare(tmpSearchedSquare);
+
+      // check each missing number
+      for (int k = 0; k < tmpMissingNumbers.length; k++) {
+        try {
+          getRowOfMissingNumber(tmpSearchedSquare, tmpMissingNumbers[k]);
+          // the X coordinates of the square
+          int[] tmpCoordinatesOfSquare = getSquareCoordinates(tmpSearchedSquare);
+
+          int tmpXOfColumnOne, tmpXOfColumnTwo;
+
+          if (anX - tmpCoordinatesOfSquare[0] == 0) {
+            tmpXOfColumnOne = anX + 1;
+            tmpXOfColumnTwo = anX + 2;
+          } else if (anX - tmpCoordinatesOfSquare[0] == 1) {
+            tmpXOfColumnOne = anX - 1;
+            tmpXOfColumnTwo = anX + 1;
+          } else {
+            tmpXOfColumnOne = anX - 1;
+            tmpXOfColumnTwo = anX - 2;
+          }
+
+          if (getValue(tmpXOfColumnOne, aY) == 0 && getValue(tmpXOfColumnTwo, aY) == 0) {
+            return false;
+          } else if (getValue(tmpXOfColumnOne, aY) == 0) {
+            if (isNumberInColumn(tmpMissingNumbers[k], tmpXOfColumnOne)) {
+              try {
+                setValue(tmpMissingNumbers[k], anX, aY);
+                return true;
+              } catch (InternalException e) {
+              }
+            } else if (isNumberInColumn(tmpMissingNumbers[k], anX)) {
+              try {
+                setValue(tmpMissingNumbers[k], tmpXOfColumnOne, aY);
+                return true;
+              } catch (InternalException e) {
+              }
+            }
+          } else if (getValue(tmpXOfColumnTwo, aY) == 0) {
+            if (isNumberInColumn(tmpMissingNumbers[k], tmpXOfColumnTwo)) {
+              try {
+                setValue(tmpMissingNumbers[k], anX, aY);
+                return true;
+              } catch (InternalException e) {
+              }
+            } else if (isNumberInColumn(tmpMissingNumbers[k], anX)) {
+              try {
+                setValue(tmpMissingNumbers[k], tmpXOfColumnTwo, aY);
+                return true;
+              } catch (InternalException e) {
+              }
+            }
+          }
+        } catch (NotPossibleException e) {
+          // do nothing
+        }
+      }
+    }
+    return false;
+  }
+
+  /**
+   * 
+   * @param anX
+   * @param aY
+   * @return
+   */
+  public boolean setValueForSingleFieldInRowCombination(int anX, int aY) {
+    int[] tmpMissingNumbers;
+    if (getValue(anX, aY) == 0) {
+      int tmpSearchedSquare = getSquareNumber(anX, aY);
+      tmpMissingNumbers = getMissingNumbersInSquare(tmpSearchedSquare);
+
+      // check each missing number
+      for (int k = 0; k < tmpMissingNumbers.length; k++) {
+
+        try {
+          getRowOfMissingNumber(tmpSearchedSquare, tmpMissingNumbers[k]);
+        } catch (NotPossibleException e) {
+        }
+
+        // get the X coordinates of the square
+        int[] tmpCoordinatesOfSquare = getSquareCoordinates(tmpSearchedSquare);
+
+        // IDs to identify the Row-Situation
+        int tmpEmptyFieldId = 3; // 0, 1, 2 used for single empty fields
+        // from left to right in the square, 3 is empty
+
+        // first field, empty? ==> ID=0
+        if (getValue(tmpCoordinatesOfSquare[0], aY) == 0) {
+          tmpEmptyFieldId = 0;
+        }
+
+        if (getValue(tmpCoordinatesOfSquare[0] + 1, aY) == 0) {
+          // first field is not empty? ==> ID=1
+          if (tmpEmptyFieldId == 3) {
+            tmpEmptyFieldId = 1;
+          }
+          // first field is already empty? ==> ID=3, two empty fields
+          else {
+            tmpEmptyFieldId = 3;
+          }
+        }
+        if (getValue(tmpCoordinatesOfSquare[2], aY) == 0) {
+
+          // none of the fields before is empty? ==> ID=2
+          if (tmpEmptyFieldId == 3) {
+            tmpEmptyFieldId = 2;
+          }
+          // one of the fields before is empty
+          else {
+            tmpEmptyFieldId = 3;
+          }
+        }
+
+        // if theres only one empty field, the missing number can be set
+        // there! Wohey! :)
+        if (tmpEmptyFieldId != 3) {
+          try {
+
+            if (tmpEmptyFieldId == 0 && tmpCoordinatesOfSquare[0] == anX) {
+              setValue(tmpMissingNumbers[k], anX, aY);
+              return true;
+            } else if (tmpEmptyFieldId == 1 && tmpCoordinatesOfSquare[0] + 1 == anX) {
+              setValue(tmpMissingNumbers[k], anX, aY);
+              return true;
+            } else {
+              setValue(tmpMissingNumbers[k], anX, aY);
+              return true;
+            }
+          } catch (InternalException ie) {
+
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  /**
+   * 
+   * @param anX
+   * @param aY
+   * @return
+   * @throws InternalException
+   */
+  public boolean setValueForFieldInSquare(int anX, int aY) throws InternalException {
+    int[] tmpMissingNumbers;
+    if (getValue(anX, aY) == 0) {
+
+      int tmpSquareNo = getSquareNumber(anX, aY);
+      tmpMissingNumbers = getMissingNumbersInSquare(tmpSquareNo);
+
+      if (tmpMissingNumbers.length == 1) {
+        setValue(tmpMissingNumbers[0], anX, aY);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * 
+   * @param anX
+   * @param aY
+   * @return
+   * @throws InternalException
+   */
+  public boolean setValueForFieldInColumn(int anX, int aY) throws InternalException {
+    int[] tmpMissingNumbers;
+    if (getValue(anX, aY) == 0) {
+
+      tmpMissingNumbers = getMissingNumbersInColumn(anX);
+      if (tmpMissingNumbers.length == 1) {
+        setValue(tmpMissingNumbers[0], anX, aY);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * 
+   * @param anX
+   * @param aY
+   * @return
+   * @throws InternalException
+   */
+  public boolean setValueForFieldInRow(int anX, int aY) throws InternalException {
+    int[] tmpMissingNumbers;
+    if (getValue(anX, aY) == 0) {
+
+      tmpMissingNumbers = getMissingNumbersInRow(aY);
+      if (tmpMissingNumbers.length == 1) {
+        setValue(tmpMissingNumbers[0], anX, aY);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private int[] getAllFields() {
+    ArrayList<Integer> tmpAllFields = new ArrayList<Integer>();
+
+    for (int i = 0; i < aSudoku.length; i++) {
+      for (int j = 0; j < aSudoku[i].length; j++) {
+        tmpAllFields.add(getValue(j + 1, i + 1));
+        System.out.print(getValue(j + 1, i + 1) + " ");
+      }
+      System.out.println("\n");
+    }
+    return makeIntegerArrayListAnArray(tmpAllFields);
+  }
+
+  private boolean isNumberInRow(int aNumber, int aY) {
+
+    int[] tmpMissingNumbers = getMissingNumbersInRow(aY);
+
+    for (int i = 0; i < tmpMissingNumbers.length; i++) {
+      if (tmpMissingNumbers[i] == aNumber)
+        return false;
+    }
+
+    return true;
+  }
+
+  private boolean isNumberInColumn(int aNumber, int anX) {
+
+    int[] tmpMissingNumbers = getMissingNumbersInColumn(anX);
+
+    for (int i = 0; i < tmpMissingNumbers.length; i++) {
+      if (tmpMissingNumbers[i] == aNumber)
+        return false;
+    }
+
+    return true;
+  }
+
 }

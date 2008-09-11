@@ -12,6 +12,6 @@ import org.junit.runners.Suite.SuiteClasses;
  * Class to run all tests of the project
  */
 @RunWith(Suite.class)
-@SuiteClasses({SudokuTest.class})
+@SuiteClasses({SudokuTest.class, SudokuIntegrationTest.class})
 public class AllTests {
 }

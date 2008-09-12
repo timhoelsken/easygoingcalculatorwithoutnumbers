@@ -6,7 +6,6 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import sudoku.exceptions.SetException;
@@ -539,17 +538,16 @@ public class SudokuBasics {
    * @throws SetException
    */
   @Test
-  @Ignore("first square coordinates must be available")
-  public void showNumbersOfFullSquare() throws SetException {
-    sudoku.set(1, 1, 1);
-    sudoku.set(2, 2, 1);
-    sudoku.set(3, 3, 1);
-    sudoku.set(4, 1, 2);
-    sudoku.set(5, 2, 2);
-    sudoku.set(6, 3, 2);
-    sudoku.set(7, 1, 3);
-    sudoku.set(8, 2, 3);
-    sudoku.set(9, 3, 3);
+  public void showNumbersOfFullSquareFive() throws SetException {
+    sudoku.set(1, 4, 4);
+    sudoku.set(2, 5, 4);
+    sudoku.set(3, 6, 4);
+    sudoku.set(4, 4, 5);
+    sudoku.set(5, 5, 5);
+    sudoku.set(6, 6, 5);
+    sudoku.set(7, 4, 6);
+    sudoku.set(8, 5, 6);
+    sudoku.set(9, 6, 6);
     ArrayList<Integer> tmpExpectedList = new ArrayList<Integer>();
     tmpExpectedList.add(1);
     tmpExpectedList.add(2);
@@ -560,6 +558,66 @@ public class SudokuBasics {
     tmpExpectedList.add(7);
     tmpExpectedList.add(8);
     tmpExpectedList.add(9);
-    assertEquals(tmpExpectedList, sudoku.getSquareNumbers(1));
+    assertEquals(tmpExpectedList, sudoku.getSquareNumbers(5));
+  }
+
+  /**
+   * All numbers of a square should be investigable
+   * @throws SetException
+   */
+  @Test
+  public void showNumbersOfHalfFilledSquareFive() throws SetException {
+    sudoku.set(1, 4, 4);
+    sudoku.set(3, 6, 4);
+    sudoku.set(4, 4, 5);
+    sudoku.set(6, 6, 5);
+    sudoku.set(7, 4, 6);
+    sudoku.set(9, 6, 6);
+    ArrayList<Integer> tmpExpectedList = new ArrayList<Integer>();
+    tmpExpectedList.add(1);
+    tmpExpectedList.add(3);
+    tmpExpectedList.add(4);
+    tmpExpectedList.add(6);
+    tmpExpectedList.add(7);
+    tmpExpectedList.add(9);
+    assertEquals(tmpExpectedList, sudoku.getSquareNumbers(5));
+  }
+
+  /**
+   * All numbers of a square should be investigable
+   * @throws SetException
+   */
+  @Test
+  public void showNumbersOfEmptySquareFive() throws SetException {
+    ArrayList<Integer> tmpExpectedList = new ArrayList<Integer>();
+    assertEquals(tmpExpectedList, sudoku.getSquareNumbers(5));
+  }
+
+  /**
+   * All numbers of a square should be investigable
+   * @throws SetException
+   */
+  @Test
+  public void showNumbersOfSemiFilledSquareFiveInFullSudoku() throws SetException {
+    // square five
+    sudoku.set(3, 4, 4);
+    sudoku.set(6, 5, 5);
+    sudoku.set(9, 6, 6);
+
+    // other values
+    sudoku.set(1, 2, 2);
+    sudoku.set(2, 5, 2);
+    sudoku.set(4, 8, 2);
+    sudoku.set(5, 2, 5);
+    sudoku.set(7, 8, 5);
+    sudoku.set(4, 2, 8);
+    sudoku.set(2, 5, 8);
+    sudoku.set(1, 8, 8);
+
+    ArrayList<Integer> tmpExpectedList = new ArrayList<Integer>();
+    tmpExpectedList.add(3);
+    tmpExpectedList.add(6);
+    tmpExpectedList.add(9);
+    assertEquals(tmpExpectedList, sudoku.getSquareNumbers(5));
   }
 }

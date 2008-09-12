@@ -112,7 +112,7 @@ public class Sudoku {
     ArrayList<Integer> tmpRowNumbers = new ArrayList<Integer>();
     for (int i = 1; i <= DIMENSION; i++) {
       int tmpValue = get(i, y);
-      if (tmpValue != 0){
+      if (tmpValue != 0) {
         tmpRowNumbers.add(tmpValue);
       }
     }
@@ -127,7 +127,7 @@ public class Sudoku {
     ArrayList<Integer> tmpColumnNumbers = new ArrayList<Integer>();
     for (int i = 1; i <= DIMENSION; i++) {
       int tmpValue = get(x, i);
-      if (tmpValue != 0){
+      if (tmpValue != 0) {
         tmpColumnNumbers.add(tmpValue);
       }
     }
@@ -139,6 +139,34 @@ public class Sudoku {
    * @return All numbers in square aSquareNo
    */
   public ArrayList<Integer> getSquareNumbers(int aSquareNo) {
-    return null;
+    Square tmpSquare = Square.getSquare(aSquareNo);
+    ArrayList<Integer> tmpSquareNumbers = new ArrayList<Integer>();
+    for (int i = tmpSquare.getXUpLeft(); i <= tmpSquare.getXDownRight(); i++) {
+      for (int j = tmpSquare.getYUpLeft(); j <= tmpSquare.getYDownRight(); j++) {
+        int tmpValue = get(j, i);
+        if (tmpValue != 0) {
+          tmpSquareNumbers.add(tmpValue);
+        }
+      }
+    }
+    return tmpSquareNumbers;
+  }
+
+  /**
+   * Paints the current Sudoku
+   */
+  public void paint() {
+    for (int i = 1; i <= DIMENSION; i++) {
+      for (int j = 1; j <= DIMENSION; j++) {
+        int tmpValue = get(j, i);
+        System.out.print(tmpValue);
+        if (j%3 ==0) {
+          System.out.print(" ");
+        }
+      }
+      System.out.println("");
+    }
+    System.out.println("___________");
+    System.out.println("");
   }
 }

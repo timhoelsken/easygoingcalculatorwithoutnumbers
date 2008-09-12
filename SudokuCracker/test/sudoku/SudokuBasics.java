@@ -619,6 +619,5 @@ public class SudokuBasics {
     tmpExpectedList.add(6);
     tmpExpectedList.add(9);
     assertEquals(tmpExpectedList, sudoku.getSquareNumbers(5));
-    TestUtil.paint(sudoku);
   }
 }

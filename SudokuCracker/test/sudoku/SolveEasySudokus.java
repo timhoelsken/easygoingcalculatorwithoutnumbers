@@ -22,7 +22,7 @@ public class SolveEasySudokus {
   }
 
   /**
-   * Aa "very easy" sudoku
+   * A "very easy" sudoku
    * 
    * @throws InternalException
    */

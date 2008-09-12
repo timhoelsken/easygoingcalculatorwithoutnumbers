@@ -9,6 +9,6 @@ import org.junit.runners.Suite.SuiteClasses;
  * @author Tobias
  */
 @RunWith(Suite.class)
-@SuiteClasses( { Basics.class, SquareTest.class, SolveEasySudokus.class })
+@SuiteClasses( { SudokuBasics.class, SquareTest.class, SolveEasySudokus.class })
 public class AllTests {
 }

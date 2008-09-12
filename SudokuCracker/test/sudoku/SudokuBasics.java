@@ -16,7 +16,7 @@ import sudoku.exceptions.SetException;
  *
  * @author Tobias
  */
-public class Basics {
+public class SudokuBasics {
 
   private Sudoku sudoku;
 

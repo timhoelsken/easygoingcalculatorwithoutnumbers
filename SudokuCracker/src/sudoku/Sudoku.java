@@ -10,7 +10,7 @@ import sudoku.exceptions.SetException;
 
 /**
  * The Sudoku Class :P
- *
+ * 
  * @author Tobias
  */
 public class Sudoku {
@@ -31,7 +31,7 @@ public class Sudoku {
 
   /**
    * Sets aValue on the field (x|y)
-   *
+   * 
    * @param aValue
    * @param x
    * @param y

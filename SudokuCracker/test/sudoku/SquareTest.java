@@ -6,7 +6,7 @@ import org.junit.Test;
 
 /**
  * @author Tobias
- *
+ * 
  */
 public class SquareTest {
 
@@ -29,7 +29,7 @@ public class SquareTest {
   /**
    * Square numbers are from 1 to 9
    */
-  @Test (expected=IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void avoidWrongSquareGetting1() {
     Square.getSquare(0);
   }
@@ -37,7 +37,7 @@ public class SquareTest {
   /**
    * Square numbers are from 1 to 9
    */
-  @Test (expected=IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void avoidWrongSquareGetting2() {
     Square.getSquare(10);
   }

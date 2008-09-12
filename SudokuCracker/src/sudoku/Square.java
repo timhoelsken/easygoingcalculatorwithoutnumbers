@@ -2,7 +2,7 @@ package sudoku;
 
 /**
  * @author Tobias
- *
+ * 
  */
 public class Square {
   private final int number;

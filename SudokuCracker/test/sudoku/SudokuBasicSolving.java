@@ -6,7 +6,7 @@ import org.junit.Test;
 
 /**
  * @author Tobias
- *
+ * 
  */
 public class SudokuBasicSolving {
 
@@ -24,7 +24,7 @@ public class SudokuBasicSolving {
    * Tests something regarding the solving
    */
   @Test
-  @Ignore ("test not yet implemented")
+  @Ignore("test not yet implemented")
   public void newTest() {
     sudoku.toString();
   }

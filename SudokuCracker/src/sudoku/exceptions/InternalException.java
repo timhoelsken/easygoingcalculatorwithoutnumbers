@@ -5,7 +5,7 @@ package sudoku.exceptions;
 
 /**
  * @author Tobias
- *
+ * 
  */
 public class InternalException extends Error {
 

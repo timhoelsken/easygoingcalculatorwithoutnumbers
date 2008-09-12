@@ -7,31 +7,33 @@ import sudoku.exceptions.SetException;
 
 /**
  * The Sudoku Class :P
- * 
+ *
  * @author Tobias
  */
 public class Sudoku {
 
-  int[] value;
+  private static final int DIMENSION = 9;
+
+  int[][] value;
 
   /**
    * Standard constructor
    */
   public Sudoku() {
-    value = new int[2];
+    value = new int[DIMENSION][DIMENSION];
   }
 
   /**
    * Sets aValue on the field (x|y)
-   * 
+   *
    * @param aValue
    * @param x
    * @param y
    * @throws SetException
    */
   public void set(int aValue, int x, int y) throws SetException {
-    if (0 == value[y - 1]) {
-      value[y - 1] = aValue;
+    if (value[y - 1][x - 1] == 0 && 0 < aValue && aValue <= DIMENSION) {
+      value[y - 1][x - 1] = aValue;
     } else {
       throw new SetException("Setting " + aValue + " on (" + x + "|" + y + ") not allowed.");
     }
@@ -39,12 +41,12 @@ public class Sudoku {
 
   /**
    * Returns value of field (x|y)
-   * 
+   *
    * @param x
    * @param y
    * @return
    */
   public int get(int x, int y) {
-    return value[y - 1];
+    return value[y - 1][x - 1];
   }
 }

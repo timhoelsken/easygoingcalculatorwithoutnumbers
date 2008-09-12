@@ -473,4 +473,67 @@ public class Basics {
     ArrayList<Integer> tmpExpectedList = new ArrayList<Integer>();
     assertEquals(tmpExpectedList, sudoku.getRowNumbers(1));
   }
+
+  /**
+   * All numbers of a column should be investigable
+   *
+   * @throws SetException
+   */
+  @Test
+  public void showNumbersOfFullColumn() throws SetException {
+    sudoku.set(1, 1, 1);
+    sudoku.set(2, 1, 2);
+    sudoku.set(3, 1, 3);
+    sudoku.set(4, 1, 4);
+    sudoku.set(5, 1, 5);
+    sudoku.set(6, 1, 6);
+    sudoku.set(7, 1, 7);
+    sudoku.set(8, 1, 8);
+    sudoku.set(9, 1, 9);
+    ArrayList<Integer> tmpExpectedList = new ArrayList<Integer>();
+    tmpExpectedList.add(1);
+    tmpExpectedList.add(2);
+    tmpExpectedList.add(3);
+    tmpExpectedList.add(4);
+    tmpExpectedList.add(5);
+    tmpExpectedList.add(6);
+    tmpExpectedList.add(7);
+    tmpExpectedList.add(8);
+    tmpExpectedList.add(9);
+    assertEquals(tmpExpectedList, sudoku.getColumnNumbers(1));
+  }
+
+  /**
+   * All numbers of a column should be investigable
+   *
+   * @throws SetException
+   */
+  @Test
+  public void showNumbersOfHalfFilledColumn() throws SetException {
+    sudoku.set(1, 1, 1);
+    sudoku.set(3, 1, 3);
+    sudoku.set(4, 1, 4);
+    sudoku.set(6, 1, 6);
+    sudoku.set(7, 1, 7);
+    sudoku.set(9, 1, 9);
+    ArrayList<Integer> tmpExpectedList = new ArrayList<Integer>();
+    tmpExpectedList.add(1);
+    tmpExpectedList.add(3);
+    tmpExpectedList.add(4);
+    tmpExpectedList.add(6);
+    tmpExpectedList.add(7);
+    tmpExpectedList.add(9);
+    assertEquals(tmpExpectedList, sudoku.getColumnNumbers(1));
+  }
+
+  /**
+   * All numbers of a column should be investigable
+   *
+   * @throws SetException
+   */
+  @Test
+  public void showNumbersOfEmptyColumn() throws SetException {
+    ArrayList<Integer> tmpExpectedList = new ArrayList<Integer>();
+    assertEquals(tmpExpectedList, sudoku.getColumnNumbers(1));
+  }
 }

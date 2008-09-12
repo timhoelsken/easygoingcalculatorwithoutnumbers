@@ -103,7 +103,7 @@ public class Sudoku {
 
   /**
    * @param y
-   * @return All numbers in the row
+   * @return All numbers in row y
    */
   public ArrayList<Integer> getRowNumbers(int y) {
     ArrayList<Integer> tmpRowNumbers = new ArrayList<Integer>();
@@ -114,5 +114,20 @@ public class Sudoku {
       }
     }
     return tmpRowNumbers;
+  }
+
+  /**
+   * @param x
+   * @return All numbers in column x
+   */
+  public ArrayList<Integer> getColumnNumbers(int x) {
+    ArrayList<Integer> tmpColumnNumbers = new ArrayList<Integer>();
+    for (int i = 1; i <= DIMENSION; i++) {
+      int tmpValue = get(x, i);
+      if (tmpValue != 0){
+        tmpColumnNumbers.add(tmpValue);
+      }
+    }
+    return tmpColumnNumbers;
   }
 }

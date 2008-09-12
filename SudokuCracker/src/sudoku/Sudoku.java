@@ -15,7 +15,10 @@ import sudoku.exceptions.SetException;
  */
 public class Sudoku {
 
-  private static final int DIMENSION = 9;
+  /**
+   * The dimension of the Sudoku (x*x)
+   */
+  public static final int DIMENSION = 9;
 
   int[][] value;
 
@@ -150,23 +153,5 @@ public class Sudoku {
       }
     }
     return tmpSquareNumbers;
-  }
-
-  /**
-   * Paints the current Sudoku
-   */
-  public void paint() {
-    for (int i = 1; i <= DIMENSION; i++) {
-      for (int j = 1; j <= DIMENSION; j++) {
-        int tmpValue = get(j, i);
-        System.out.print(tmpValue);
-        if (j%3 ==0) {
-          System.out.print(" ");
-        }
-      }
-      System.out.println("");
-    }
-    System.out.println("___________");
-    System.out.println("");
   }
 }

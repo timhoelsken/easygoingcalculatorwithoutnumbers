@@ -598,7 +598,7 @@ public class SudokuBasics {
    * @throws SetException
    */
   @Test
-  public void showNumbersOfSemiFilledSquareFiveInFullSudoku() throws SetException {
+  public void showNumbersOfSemiFilledSquareFiveInSemiFilledSudoku() throws SetException {
     // square five
     sudoku.set(3, 4, 4);
     sudoku.set(6, 5, 5);
@@ -619,5 +619,6 @@ public class SudokuBasics {
     tmpExpectedList.add(6);
     tmpExpectedList.add(9);
     assertEquals(tmpExpectedList, sudoku.getSquareNumbers(5));
+    TestUtil.paint(sudoku);
   }
 }

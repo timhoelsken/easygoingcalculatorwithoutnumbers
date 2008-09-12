@@ -5,6 +5,7 @@ package sudoku;
 
 import java.util.ArrayList;
 
+import sudoku.exceptions.InternalException;
 import sudoku.exceptions.SetException;
 
 /**
@@ -54,7 +55,7 @@ public class Sudoku {
    * @param y
    * @return Returns the possible square numbers for the row with index y
    */
-  public int[] getPossibleSquaresForRow(int y) {
+  public int[] getPossibleSquareNumbersForRow(int y) {
     if (y < 1 || y > DIMENSION) {
       throw new IllegalArgumentException("Row index " + y + " does not exist.");
     }
@@ -70,7 +71,7 @@ public class Sudoku {
    * @param x
    * @return Returns the possible square numbers for the column with index x
    */
-  public int[] getPossibleSquaresForColumn(int x) {
+  public int[] getPossibleSquareNumbersForColumn(int x) {
     if (x < 1 || x > DIMENSION) {
       throw new IllegalArgumentException("Column index " + x + " does not exist.");
     }
@@ -86,19 +87,21 @@ public class Sudoku {
    * @param x
    * @param y
    * @return Returns the square number belonging to the field (x|y)
+   * @throws InternalException
    */
-  public int getSquareNumber(int x, int y) {
-    int[] tmpPossColumnSquares = getPossibleSquaresForColumn(x);
-    int[] tmpPossRowSquares = getPossibleSquaresForRow(y);
+  public Square getSquare(int x, int y) throws InternalException {
+    int[] tmpPossColumnSquares = getPossibleSquareNumbersForColumn(x);
+    int[] tmpPossRowSquares = getPossibleSquareNumbersForRow(y);
     for (int i = 0; i < tmpPossColumnSquares.length; i++) {
       for (int j = 0; j < tmpPossRowSquares.length; j++) {
         if (tmpPossColumnSquares[i] == tmpPossRowSquares[j]) {
-          return tmpPossColumnSquares[i];
+          int tmpSearchedSquare = tmpPossColumnSquares[i];
+          return Square.getSquare(tmpSearchedSquare);
         }
       }
     }
     // should not happen
-    return 0;
+    throw new InternalException();
   }
 
   /**
@@ -129,5 +132,13 @@ public class Sudoku {
       }
     }
     return tmpColumnNumbers;
+  }
+
+  /**
+   * @param aSquareNo
+   * @return All numbers in square aSquareNo
+   */
+  public ArrayList<Integer> getSquareNumbers(int aSquareNo) {
+    return null;
   }
 }

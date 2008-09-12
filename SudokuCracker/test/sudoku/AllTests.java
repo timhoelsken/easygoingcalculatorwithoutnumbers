@@ -6,9 +6,10 @@ import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * Class to run all tests of the project
+ *
  * @author Tobias
  */
 @RunWith(Suite.class)
-@SuiteClasses( { SudokuBasics.class, SquareTest.class, SolveEasySudokus.class })
+@SuiteClasses( { SudokuBasics.class, SquareTest.class, SudokuBasicSolving.class, SolveEasySudokus.class })
 public class AllTests {
 }

@@ -48,13 +48,13 @@ public class SudokuBasics {
   @Test
   public void setCornerFields() throws SetException {
     sudoku.set(1, 1, 1);
-    sudoku.set(9, 1, 9);
-    sudoku.set(1, 9, 1);
-    sudoku.set(9, 9, 9);
+    sudoku.set(2, 1, 9);
+    sudoku.set(3, 9, 1);
+    sudoku.set(4, 9, 9);
     assertEquals(1, sudoku.get(1, 1));
-    assertEquals(9, sudoku.get(1, 9));
-    assertEquals(1, sudoku.get(9, 1));
-    assertEquals(9, sudoku.get(9, 9));
+    assertEquals(2, sudoku.get(1, 9));
+    assertEquals(3, sudoku.get(9, 1));
+    assertEquals(4, sudoku.get(9, 9));
   }
 
   /**
@@ -558,7 +558,8 @@ public class SudokuBasics {
     tmpExpectedList.add(7);
     tmpExpectedList.add(8);
     tmpExpectedList.add(9);
-    assertEquals(tmpExpectedList, sudoku.getSquareNumbers(5));
+    Square tmpSquare = Square.getSquare(5);
+    assertEquals(tmpExpectedList, sudoku.getSquareNumbers(tmpSquare));
   }
 
   /**
@@ -580,7 +581,8 @@ public class SudokuBasics {
     tmpExpectedList.add(6);
     tmpExpectedList.add(7);
     tmpExpectedList.add(9);
-    assertEquals(tmpExpectedList, sudoku.getSquareNumbers(5));
+    Square tmpSquare = Square.getSquare(5);
+    assertEquals(tmpExpectedList, sudoku.getSquareNumbers(tmpSquare));
   }
 
   /**
@@ -590,7 +592,8 @@ public class SudokuBasics {
   @Test
   public void showNumbersOfEmptySquareFive() throws SetException {
     ArrayList<Integer> tmpExpectedList = new ArrayList<Integer>();
-    assertEquals(tmpExpectedList, sudoku.getSquareNumbers(5));
+    Square tmpSquare = Square.getSquare(5);
+    assertEquals(tmpExpectedList, sudoku.getSquareNumbers(tmpSquare));
   }
 
   /**
@@ -610,14 +613,45 @@ public class SudokuBasics {
     sudoku.set(4, 8, 2);
     sudoku.set(5, 2, 5);
     sudoku.set(7, 8, 5);
-    sudoku.set(4, 2, 8);
-    sudoku.set(2, 5, 8);
+    sudoku.set(8, 2, 8);
+    sudoku.set(9, 5, 8);
     sudoku.set(1, 8, 8);
 
     ArrayList<Integer> tmpExpectedList = new ArrayList<Integer>();
     tmpExpectedList.add(3);
     tmpExpectedList.add(6);
     tmpExpectedList.add(9);
-    assertEquals(tmpExpectedList, sudoku.getSquareNumbers(5));
+    Square tmpSquare = Square.getSquare(5);
+    assertEquals(tmpExpectedList, sudoku.getSquareNumbers(tmpSquare));
+  }
+
+  /**
+   * Do not allow two times the same value in one column
+   * @throws SetException
+   */
+  @Test (expected=SetException.class)
+  public void avoidWrongCalculatedValueSetsRegardingColumn() throws SetException {
+    sudoku.set(1, 5, 1);
+    sudoku.set(1, 5, 9);
+  }
+
+  /**
+   * Do not allow two times the same value in one row
+   * @throws SetException
+   */
+  @Test (expected=SetException.class)
+  public void avoidWrongCalculatedValueSetsRegardingRow() throws SetException {
+    sudoku.set(1, 1, 5);
+    sudoku.set(1, 9, 5);
+  }
+
+  /**
+   * Do not allow two times the same value in one square
+   * @throws SetException
+   */
+  @Test (expected=SetException.class)
+  public void avoidWrongCalculatedValueSetsRegardingSquare() throws SetException {
+    sudoku.set(1, 4, 4);
+    sudoku.set(1, 6, 6);
   }
 }

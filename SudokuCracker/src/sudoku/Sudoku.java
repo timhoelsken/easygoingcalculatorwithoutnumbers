@@ -39,9 +39,26 @@ public class Sudoku {
    */
   public void set(int aValue, int x, int y) throws SetException {
     if (value[y - 1][x - 1] == 0 && 0 < aValue && aValue <= DIMENSION) {
+      checkSet(aValue, x, y);
       value[y - 1][x - 1] = aValue;
     } else {
       throw new SetException("Setting " + aValue + " on (" + x + "|" + y + ") not allowed.");
+    }
+  }
+
+  private void checkSet(int aValue, int x, int y) throws SetException {
+    ArrayList<Integer> tmpNumbers = getColumnNumbers(x);
+    if (tmpNumbers.contains(aValue)) {
+      throw new SetException("Number " + aValue + " already existent in column " + x);
+    }
+    tmpNumbers = getRowNumbers(y);
+    if (tmpNumbers.contains(aValue)) {
+      throw new SetException("Number " + aValue + " already existent in row " + y);
+    }
+    Square tmpSquare = getSquare(x, y);
+    tmpNumbers = getSquareNumbers(tmpSquare);
+    if (tmpNumbers.contains(aValue)) {
+      throw new SetException("Number " + aValue + " already existent in square " + tmpSquare.getNumber());
     }
   }
 
@@ -138,14 +155,13 @@ public class Sudoku {
   }
 
   /**
-   * @param aSquareNo
+   * @param aSquare
    * @return All numbers in square aSquareNo
    */
-  public ArrayList<Integer> getSquareNumbers(int aSquareNo) {
-    Square tmpSquare = Square.getSquare(aSquareNo);
+  public ArrayList<Integer> getSquareNumbers(Square aSquare) {
     ArrayList<Integer> tmpSquareNumbers = new ArrayList<Integer>();
-    for (int i = tmpSquare.getXUpLeft(); i <= tmpSquare.getXDownRight(); i++) {
-      for (int j = tmpSquare.getYUpLeft(); j <= tmpSquare.getYDownRight(); j++) {
+    for (int i = aSquare.getXUpLeft(); i <= aSquare.getXDownRight(); i++) {
+      for (int j = aSquare.getYUpLeft(); j <= aSquare.getYDownRight(); j++) {
         int tmpValue = get(j, i);
         if (tmpValue != 0) {
           tmpSquareNumbers.add(tmpValue);

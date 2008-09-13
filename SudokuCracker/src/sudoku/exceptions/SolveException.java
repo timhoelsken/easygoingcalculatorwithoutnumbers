@@ -5,7 +5,7 @@ package sudoku.exceptions;
 
 /**
  * Exception if a solving method cannot get a result
- *
+ * 
  * @author Tobias
  */
 public class SolveException extends Throwable {
@@ -19,7 +19,7 @@ public class SolveException extends Throwable {
 
   /**
    * Message constructor
-   *
+   * 
    * @param aMessage
    */
   public SolveException(String aMessage) {

@@ -10,7 +10,7 @@ import sudoku.exceptions.SolveException;
 
 /**
  * Easy solving algorithms tests
- *
+ * 
  * @author Tobias
  */
 public class SudokuBasicSolving {
@@ -27,7 +27,7 @@ public class SudokuBasicSolving {
 
   /**
    * If there is only one free field in the row, it is easy to solve
-   *
+   * 
    * @throws SetException
    * @throws SolveException
    */
@@ -47,7 +47,7 @@ public class SudokuBasicSolving {
 
   /**
    * If there is only one free field in the row, it is easy to solve
-   *
+   * 
    * @throws SetException
    * @throws SolveException
    */
@@ -68,7 +68,7 @@ public class SudokuBasicSolving {
   /**
    * If there is only one free field in the row, it is easy to solve. If it is
    * not, the call of the solve method fails
-   *
+   * 
    * @throws SetException
    * @throws SolveException
    */
@@ -82,7 +82,7 @@ public class SudokuBasicSolving {
 
   /**
    * If there is only one free field in the column, it is easy to solve
-   *
+   * 
    * @throws SetException
    * @throws SolveException
    */
@@ -102,7 +102,7 @@ public class SudokuBasicSolving {
 
   /**
    * If there is only one free field in the column, it is easy to solve
-   *
+   * 
    * @throws SetException
    * @throws SolveException
    */
@@ -123,7 +123,7 @@ public class SudokuBasicSolving {
   /**
    * If there is only one free field in the column, it is easy to solve. If it
    * is not, the call of the solve method fails
-   *
+   * 
    * @throws SetException
    * @throws SolveException
    */
@@ -137,7 +137,7 @@ public class SudokuBasicSolving {
 
   /**
    * If there is only one free field in the square, it is easy to solve
-   *
+   * 
    * @throws SetException
    * @throws SolveException
    */
@@ -157,7 +157,7 @@ public class SudokuBasicSolving {
 
   /**
    * If there is only one free field in the square, it is easy to solve
-   *
+   * 
    * @throws SetException
    * @throws SolveException
    */
@@ -178,7 +178,7 @@ public class SudokuBasicSolving {
   /**
    * If there is only one free field in the square, it is easy to solve. If it
    * is not, the call of the solve method fails
-   *
+   * 
    * @throws SetException
    * @throws SolveException
    */
@@ -193,7 +193,7 @@ public class SudokuBasicSolving {
   /**
    * If you can combine a row and a column to a full set of numbers instead of
    * one value, the value is clear to set
-   *
+   * 
    * @throws SetException
    * @throws SolveException
    */
@@ -214,7 +214,7 @@ public class SudokuBasicSolving {
   /**
    * If you can combine a row and a column to a full set of numbers instead of
    * one value, the value is clear to set
-   *
+   * 
    * @throws SetException
    * @throws SolveException
    */
@@ -235,7 +235,7 @@ public class SudokuBasicSolving {
   /**
    * If you can combine a row and a column to a full set of numbers instead of
    * one value, the value is clear to set
-   *
+   * 
    * @throws SetException
    * @throws SolveException
    */
@@ -265,11 +265,11 @@ public class SudokuBasicSolving {
   /**
    * If you can combine a row and a column to a full set of numbers instead of
    * one value, the value is clear to set. If not, it is not :P
-   *
+   * 
    * @throws SetException
    * @throws SolveException
    */
-  @Test (expected=SolveException.class)
+  @Test(expected = SolveException.class)
   public void solveExactLastFieldRowColumnCombinationNotPossible() throws SetException, SolveException {
     sudoku.addLastMissingNumberInRowAndColumn(1, 1);
   }

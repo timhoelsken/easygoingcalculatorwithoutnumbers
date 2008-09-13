@@ -11,7 +11,7 @@ import sudoku.exceptions.SolveException;
 
 /**
  * The Sudoku Class :P
- *
+ * 
  * @author Tobias
  */
 public class Sudoku {
@@ -32,7 +32,7 @@ public class Sudoku {
 
   /**
    * Sets aValue on the field (x|y)
-   *
+   * 
    * @param aValue
    * @param x
    * @param y
@@ -187,7 +187,7 @@ public class Sudoku {
 
   /**
    * If there is only field (x|y) missing in row y, it is set here
-   *
+   * 
    * @param x
    * @param y
    * @throws SetException
@@ -204,7 +204,7 @@ public class Sudoku {
 
   /**
    * If there is only field (x|y) missing in column x, it is set here
-   *
+   * 
    * @param x
    * @param y
    * @throws SetException
@@ -221,7 +221,7 @@ public class Sudoku {
 
   /**
    * If there is only field (x|y) missing in square z, it is set here
-   *
+   * 
    * @param x
    * @param y
    * @throws SolveException
@@ -239,7 +239,7 @@ public class Sudoku {
 
   /**
    * If the field (x|y) can be filled regarding column x and row y, it is done
-   *
+   * 
    * @param x
    * @param y
    * @throws SetException
@@ -263,9 +263,9 @@ public class Sudoku {
 
   /**
    * The solve method :)
-   *
+   * 
    * @return Returns the solved Sudoku
-   *
+   * 
    * @throws SetException
    */
   public int[] solve() throws SetException {
@@ -279,22 +279,22 @@ public class Sudoku {
             try {
               addLastMissingNumberInColumn(x, y);
               doAgain = true;
-            } catch (SolveException e) {
-            }
-            try {
-              addLastMissingNumberInRow(x, y);
-              doAgain = true;
-            } catch (SolveException e) {
-            }
-            try {
-              addLastMissingNumberInSquare(x, y);
-              doAgain = true;
-            } catch (SolveException e) {
-            }
-            try {
-              addLastMissingNumberInRowAndColumn(x, y);
-              doAgain = true;
-            } catch (SolveException e) {
+            } catch (SolveException e1) {
+              try {
+                addLastMissingNumberInRow(x, y);
+                doAgain = true;
+              } catch (SolveException e2) {
+                try {
+                  addLastMissingNumberInSquare(x, y);
+                  doAgain = true;
+                } catch (SolveException e3) {
+                  try {
+                    addLastMissingNumberInRowAndColumn(x, y);
+                    doAgain = true;
+                  } catch (SolveException e4) {
+                  }
+                }
+              }
             }
           }
         }

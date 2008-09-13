@@ -10,7 +10,7 @@ import sudoku.exceptions.SetException;
 
 /**
  * Easy complete Sudoku tests
- *
+ * 
  * @author Tim
  */
 public class SolveEasySudokus {
@@ -27,9 +27,9 @@ public class SolveEasySudokus {
 
   /**
    * A "very easy" sudoku
-   *
+   * 
    * @throws SetException
-   *
+   * 
    * @throws InternalException
    */
   @Test

@@ -238,7 +238,7 @@ public class Sudoku {
   }
 
   /**
-   * If t he field (x|y) can be filled regarding column x and row y, it is done
+   * If the field (x|y) can be filled regarding column x and row y, it is done
    *
    * @param x
    * @param y

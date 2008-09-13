@@ -11,7 +11,7 @@ import sudoku.exceptions.SolveException;
 
 /**
  * The Sudoku Class :P
- * 
+ *
  * @author Tobias
  */
 public class Sudoku {
@@ -31,8 +31,62 @@ public class Sudoku {
   }
 
   /**
+   * The solve method :)
+   *
+   * @return Returns the solved Sudoku
+   *
+   * @throws SetException
+   */
+  public int[] solve() throws SetException {
+    boolean doAgain = true;
+    while (doAgain) {
+      doAgain = false;
+      for (int y = 1; y <= DIMENSION; y++) {
+        for (int x = 1; x <= DIMENSION; x++) {
+          int tmpValue = get(x, y);
+          if (tmpValue == 0) {
+            try {
+              addLastMissingNumberInColumn(x, y);
+              doAgain = true;
+            } catch (SolveException e1) {
+              try {
+                addLastMissingNumberInRow(x, y);
+                doAgain = true;
+              } catch (SolveException e2) {
+                try {
+                  addLastMissingNumberInSquare(x, y);
+                  doAgain = true;
+                } catch (SolveException e3) {
+                  try {
+                    addLastMissingNumberInRowAndColumn(x, y);
+                    doAgain = true;
+                  } catch (SolveException e4) {
+                    try {
+                      addLastMissingNumberInRowAndSquare(x, y);
+                    } catch (SolveException e5) {
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    int[] tmpSolvedSudoku = new int[81];
+    int tmpPosition = 0;
+    for (int y = 1; y <= DIMENSION; y++) {
+      for (int x = 1; x <= DIMENSION; x++) {
+        tmpSolvedSudoku[tmpPosition++] = get(x, y);
+      }
+    }
+    TestUtil.paint(this);
+    return tmpSolvedSudoku;
+  }
+
+  /**
    * Sets aValue on the field (x|y)
-   * 
+   *
    * @param aValue
    * @param x
    * @param y
@@ -187,7 +241,7 @@ public class Sudoku {
 
   /**
    * If there is only field (x|y) missing in row y, it is set here
-   * 
+   *
    * @param x
    * @param y
    * @throws SetException
@@ -204,7 +258,7 @@ public class Sudoku {
 
   /**
    * If there is only field (x|y) missing in column x, it is set here
-   * 
+   *
    * @param x
    * @param y
    * @throws SetException
@@ -221,7 +275,7 @@ public class Sudoku {
 
   /**
    * If there is only field (x|y) missing in square z, it is set here
-   * 
+   *
    * @param x
    * @param y
    * @throws SolveException
@@ -239,7 +293,7 @@ public class Sudoku {
 
   /**
    * If the field (x|y) can be filled regarding column x and row y, it is done
-   * 
+   *
    * @param x
    * @param y
    * @throws SetException
@@ -262,52 +316,52 @@ public class Sudoku {
   }
 
   /**
-   * The solve method :)
-   * 
-   * @return Returns the solved Sudoku
-   * 
+   * If the field (x|y) can be filled regarding square z and row y, it is done
+   *
+   * @param x
+   * @param y
    * @throws SetException
+   * @throws SolveException
    */
-  public int[] solve() throws SetException {
-    boolean doAgain = true;
-    while (doAgain) {
-      doAgain = false;
-      for (int y = 1; y <= DIMENSION; y++) {
-        for (int x = 1; x <= DIMENSION; x++) {
-          int tmpValue = get(x, y);
-          if (tmpValue == 0) {
-            try {
-              addLastMissingNumberInColumn(x, y);
-              doAgain = true;
-            } catch (SolveException e1) {
-              try {
-                addLastMissingNumberInRow(x, y);
-                doAgain = true;
-              } catch (SolveException e2) {
-                try {
-                  addLastMissingNumberInSquare(x, y);
-                  doAgain = true;
-                } catch (SolveException e3) {
-                  try {
-                    addLastMissingNumberInRowAndColumn(x, y);
-                    doAgain = true;
-                  } catch (SolveException e4) {
-                  }
-                }
-              }
-            }
-          }
-        }
+  public void addLastMissingNumberInRowAndSquare(int x, int y) throws SetException, SolveException {
+    Square z = getSquare(x, y);
+    ArrayList<Integer> tmpNumbers = getSquareNumbers(z);
+    ArrayList<Integer> tmpRowNumbers = getRowNumbers(y);
+    for (Integer tmpRowNumber : tmpRowNumbers) {
+      if (!tmpNumbers.contains(tmpRowNumber)) {
+        tmpNumbers.add(tmpRowNumber);
       }
     }
-    int[] tmpSolvedSudoku = new int[81];
-    int tmpPosition = 0;
-    for (int y = 1; y <= DIMENSION; y++) {
-      for (int x = 1; x <= DIMENSION; x++) {
-        tmpSolvedSudoku[tmpPosition++] = get(x, y);
+    try {
+      setIfValueIsLastMissingValue(tmpNumbers, x, y);
+    } catch (InternalException e) {
+      throw new SolveException("More than one field is missing to determine field (" + x + "|" + y
+          + ") regarding row and square");
+    }
+  }
+
+  /**
+   * If the field (x|y) can be filled regarding square z and column x, it is done
+   *
+   * @param x
+   * @param y
+   * @throws SetException
+   * @throws SolveException
+   */
+  public void addLastMissingNumberInColumnAndSquare(int x, int y) throws SetException, SolveException {
+    Square z = getSquare(x, y);
+    ArrayList<Integer> tmpNumbers = getSquareNumbers(z);
+    ArrayList<Integer> tmpColumnNumbers = getColumnNumbers(x);
+    for (Integer tmpColumnNumber : tmpColumnNumbers) {
+      if (!tmpNumbers.contains(tmpColumnNumber)) {
+        tmpNumbers.add(tmpColumnNumber);
       }
     }
-    TestUtil.paint(this);
-    return tmpSolvedSudoku;
+    try {
+      setIfValueIsLastMissingValue(tmpNumbers, x, y);
+    } catch (InternalException e) {
+      throw new SolveException("More than one field is missing to determine field (" + x + "|" + y
+          + ") regarding column and square");
+    }
   }
 }

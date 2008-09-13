@@ -10,7 +10,7 @@ import sudoku.exceptions.SolveException;
 
 /**
  * Easy solving algorithms tests
- * 
+ *
  * @author Tobias
  */
 public class SudokuBasicSolving {
@@ -27,7 +27,7 @@ public class SudokuBasicSolving {
 
   /**
    * If there is only one free field in the row, it is easy to solve
-   * 
+   *
    * @throws SetException
    * @throws SolveException
    */
@@ -47,7 +47,7 @@ public class SudokuBasicSolving {
 
   /**
    * If there is only one free field in the row, it is easy to solve
-   * 
+   *
    * @throws SetException
    * @throws SolveException
    */
@@ -68,7 +68,7 @@ public class SudokuBasicSolving {
   /**
    * If there is only one free field in the row, it is easy to solve. If it is
    * not, the call of the solve method fails
-   * 
+   *
    * @throws SetException
    * @throws SolveException
    */
@@ -82,7 +82,7 @@ public class SudokuBasicSolving {
 
   /**
    * If there is only one free field in the column, it is easy to solve
-   * 
+   *
    * @throws SetException
    * @throws SolveException
    */
@@ -102,7 +102,7 @@ public class SudokuBasicSolving {
 
   /**
    * If there is only one free field in the column, it is easy to solve
-   * 
+   *
    * @throws SetException
    * @throws SolveException
    */
@@ -123,7 +123,7 @@ public class SudokuBasicSolving {
   /**
    * If there is only one free field in the column, it is easy to solve. If it
    * is not, the call of the solve method fails
-   * 
+   *
    * @throws SetException
    * @throws SolveException
    */
@@ -137,7 +137,7 @@ public class SudokuBasicSolving {
 
   /**
    * If there is only one free field in the square, it is easy to solve
-   * 
+   *
    * @throws SetException
    * @throws SolveException
    */
@@ -157,7 +157,7 @@ public class SudokuBasicSolving {
 
   /**
    * If there is only one free field in the square, it is easy to solve
-   * 
+   *
    * @throws SetException
    * @throws SolveException
    */
@@ -178,7 +178,7 @@ public class SudokuBasicSolving {
   /**
    * If there is only one free field in the square, it is easy to solve. If it
    * is not, the call of the solve method fails
-   * 
+   *
    * @throws SetException
    * @throws SolveException
    */
@@ -193,7 +193,7 @@ public class SudokuBasicSolving {
   /**
    * If you can combine a row and a column to a full set of numbers instead of
    * one value, the value is clear to set
-   * 
+   *
    * @throws SetException
    * @throws SolveException
    */
@@ -214,7 +214,7 @@ public class SudokuBasicSolving {
   /**
    * If you can combine a row and a column to a full set of numbers instead of
    * one value, the value is clear to set
-   * 
+   *
    * @throws SetException
    * @throws SolveException
    */
@@ -235,7 +235,7 @@ public class SudokuBasicSolving {
   /**
    * If you can combine a row and a column to a full set of numbers instead of
    * one value, the value is clear to set
-   * 
+   *
    * @throws SetException
    * @throws SolveException
    */
@@ -265,12 +265,182 @@ public class SudokuBasicSolving {
   /**
    * If you can combine a row and a column to a full set of numbers instead of
    * one value, the value is clear to set. If not, it is not :P
-   * 
+   *
    * @throws SetException
    * @throws SolveException
    */
   @Test(expected = SolveException.class)
   public void solveExactLastFieldRowColumnCombinationNotPossible() throws SetException, SolveException {
     sudoku.addLastMissingNumberInRowAndColumn(1, 1);
+  }
+
+  /**
+   * If you can combine a row and a square to a full set of numbers instead of
+   * one value, the value is clear to set
+   *
+   * @throws SetException
+   * @throws SolveException
+   */
+  @Test
+  public void solveExactLastFieldRowSquareCombinationWith1() throws SetException, SolveException {
+    sudoku.set(5, 1, 1);
+    sudoku.set(4, 4, 1);
+    sudoku.set(6, 6, 1);
+    sudoku.set(9, 9, 1);
+
+    sudoku.set(2, 4, 2);
+    sudoku.set(3, 6, 2);
+    sudoku.set(7, 4, 3);
+    sudoku.set(8, 6, 3);
+
+    sudoku.addLastMissingNumberInRowAndSquare(5, 1);
+    assertEquals(1, sudoku.get(5, 1));
+  }
+
+  /**
+   * If you can combine a row and a square to a full set of numbers instead of
+   * one value, the value is clear to set
+   *
+   * @throws SetException
+   * @throws SolveException
+   */
+  @Test
+  public void solveExactLastFieldRowSquareCombinationWith9() throws SetException, SolveException {
+    sudoku.set(5, 1, 1);
+    sudoku.set(4, 4, 1);
+    sudoku.set(6, 6, 1);
+    sudoku.set(1, 9, 1);
+
+    sudoku.set(2, 4, 2);
+    sudoku.set(3, 6, 2);
+    sudoku.set(7, 4, 3);
+    sudoku.set(8, 6, 3);
+
+    sudoku.addLastMissingNumberInRowAndSquare(5, 1);
+    assertEquals(9, sudoku.get(5, 1));
+  }
+
+  /**
+   * If you can combine a row and a square to a full set of numbers instead of
+   * one value, the value is clear to set
+   *
+   * @throws SetException
+   * @throws SolveException
+   */
+  @Test
+  public void solveExactLastFieldRowSquareCombinationSameValues() throws SetException, SolveException {
+    sudoku.set(5, 1, 1);
+    sudoku.set(2, 2, 1);
+    sudoku.set(3, 3, 1);
+    sudoku.set(4, 4, 1);
+    sudoku.set(6, 6, 1);
+    sudoku.set(7, 7, 1);
+    sudoku.set(8, 8, 1);
+    sudoku.set(1, 9, 1);
+
+    sudoku.set(2, 4, 2);
+    sudoku.set(3, 6, 2);
+    sudoku.set(7, 4, 3);
+    sudoku.set(8, 6, 3);
+
+    sudoku.addLastMissingNumberInRowAndSquare(5, 1);
+    assertEquals(9, sudoku.get(5, 1));
+  }
+
+  /**
+   * If you can combine a row and a square to a full set of numbers instead of
+   * one value, the value is clear to set. If not, it is not :P
+   *
+   * @throws SetException
+   * @throws SolveException
+   */
+  @Test (expected=SolveException.class)
+  public void solveExactLastFieldRowSquareCombinationNotPossible() throws SetException, SolveException {
+    sudoku.addLastMissingNumberInRowAndSquare(5, 1);
+  }
+
+  /**
+   * If you can combine a row and a square to a full set of numbers instead of
+   * one value, the value is clear to set
+   *
+   * @throws SetException
+   * @throws SolveException
+   */
+  @Test
+  public void solveExactLastFieldColumnSquareCombinationWith1() throws SetException, SolveException {
+    sudoku.set(5, 1, 1);
+    sudoku.set(4, 1, 4);
+    sudoku.set(6, 1, 6);
+    sudoku.set(9, 1, 9);
+
+    sudoku.set(2, 2, 4);
+    sudoku.set(3, 2, 6);
+    sudoku.set(7, 3, 4);
+    sudoku.set(8, 3, 6);
+
+    sudoku.addLastMissingNumberInColumnAndSquare(1, 5);
+    assertEquals(1, sudoku.get(1, 5));
+  }
+
+  /**
+   * If you can combine a column and a square to a full set of numbers instead of
+   * one value, the value is clear to set
+   *
+   * @throws SetException
+   * @throws SolveException
+   */
+  @Test
+  public void solveExactLastFieldColumnSquareCombinationWith9() throws SetException, SolveException {
+    sudoku.set(5, 1, 1);
+    sudoku.set(4, 1, 4);
+    sudoku.set(6, 1, 6);
+    sudoku.set(1, 1, 9);
+
+    sudoku.set(2, 2, 4);
+    sudoku.set(3, 2, 6);
+    sudoku.set(7, 3, 4);
+    sudoku.set(8, 3, 6);
+
+    sudoku.addLastMissingNumberInColumnAndSquare(1, 5);
+    assertEquals(9, sudoku.get(1, 5));
+  }
+
+  /**
+   * If you can combine a column and a square to a full set of numbers instead of
+   * one value, the value is clear to set
+   *
+   * @throws SetException
+   * @throws SolveException
+   */
+  @Test
+  public void solveExactLastFieldColumnSquareCombinationSameValues() throws SetException, SolveException {
+    sudoku.set(5, 1, 1);
+    sudoku.set(2, 1, 2);
+    sudoku.set(3, 1, 3);
+    sudoku.set(4, 1, 4);
+    sudoku.set(6, 1, 6);
+    sudoku.set(7, 1, 7);
+    sudoku.set(8, 1, 8);
+    sudoku.set(1, 1, 9);
+
+    sudoku.set(2, 2, 4);
+    sudoku.set(3, 2, 6);
+    sudoku.set(7, 3, 4);
+    sudoku.set(8, 3, 6);
+
+    sudoku.addLastMissingNumberInColumnAndSquare(1, 5);
+    assertEquals(9, sudoku.get(1, 5));
+  }
+
+  /**
+   * If you can combine a column and a square to a full set of numbers instead of
+   * one value, the value is clear to set. If not, it is not :P
+   *
+   * @throws SetException
+   * @throws SolveException
+   */
+  @Test (expected=SolveException.class)
+  public void solveExactLastFieldColumnSquareCombinationNotPossible() throws SetException, SolveException {
+    sudoku.addLastMissingNumberInColumnAndSquare(1, 5);
   }
 }

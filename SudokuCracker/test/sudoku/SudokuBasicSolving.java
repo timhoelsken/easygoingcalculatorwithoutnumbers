@@ -9,8 +9,9 @@ import sudoku.exceptions.SetException;
 import sudoku.exceptions.SolveException;
 
 /**
- * @author Tobias
+ * Easy solving algorithms tests
  *
+ * @author Tobias
  */
 public class SudokuBasicSolving {
 

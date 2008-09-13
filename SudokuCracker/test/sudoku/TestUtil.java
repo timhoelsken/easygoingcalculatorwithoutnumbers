@@ -1,17 +1,15 @@
-/**
- *
- */
 package sudoku;
 
 /**
+ * Helperclass for test activities
+ *
  * @author Tobias
- * 
  */
 public class TestUtil {
 
   /**
    * Paints aSudoku on console
-   * 
+   *
    * @param aSudoku
    */
   public static void paint(Sudoku aSudoku) {

@@ -5,8 +5,9 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 /**
+ * Square configuration tests
+ *
  * @author Tobias
- * 
  */
 public class SquareTest {
 

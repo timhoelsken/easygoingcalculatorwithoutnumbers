@@ -64,6 +64,10 @@ public class Sudoku {
                     try {
                       addLastMissingNumberInRowAndSquare(x, y);
                     } catch (SolveException e5) {
+                      try {
+                        addLastMissingNumberInColumnAndSquare(x, y);
+                      } catch (SolveException e6) {
+                      }
                     }
                   }
                 }

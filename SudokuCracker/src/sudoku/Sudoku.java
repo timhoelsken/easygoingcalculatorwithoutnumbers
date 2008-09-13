@@ -7,10 +7,11 @@ import java.util.ArrayList;
 
 import sudoku.exceptions.InternalException;
 import sudoku.exceptions.SetException;
+import sudoku.exceptions.SolveException;
 
 /**
  * The Sudoku Class :P
- * 
+ *
  * @author Tobias
  */
 public class Sudoku {
@@ -31,7 +32,7 @@ public class Sudoku {
 
   /**
    * Sets aValue on the field (x|y)
-   * 
+   *
    * @param aValue
    * @param x
    * @param y
@@ -169,5 +170,69 @@ public class Sudoku {
       }
     }
     return tmpSquareNumbers;
+  }
+
+  private void setIfValueIsLastMissingValue(ArrayList<Integer> aValueList, int x, int y) throws SetException, SolveException {
+    if (aValueList.size() == DIMENSION - 1){
+      for (int i = 1; i <= DIMENSION; i++) {
+        if (!aValueList.contains(i)) {
+          set(i, x, y);
+          return;
+        }
+      }
+    }
+    throw new SolveException();
+  }
+
+  /**
+   * If there is only field (x|y) missing in row y, it is set here
+   *
+   * @param x
+   * @param y
+   * @throws SetException
+   * @throws SolveException
+   */
+  public void addLastMissingNumberInRow(int x, int y) throws SetException, SolveException {
+    ArrayList<Integer> tmpRowNumbers = getRowNumbers(y);
+    try {
+      setIfValueIsLastMissingValue(tmpRowNumbers, x, y);
+    } catch (SolveException e) {
+      throw new SolveException("More than one field is missing in row " + y);
+    }
+  }
+
+  /**
+   * If there is only field (x|y) missing in column x, it is set here
+   *
+   * @param x
+   * @param y
+   * @throws SetException
+   * @throws SolveException
+   */
+  public void addLastMissingNumberInColumn(int x, int y) throws SetException, SolveException {
+    ArrayList<Integer> tmpColumnNumbers = getColumnNumbers(x);
+    try {
+      setIfValueIsLastMissingValue(tmpColumnNumbers, x, y);
+    } catch (SolveException e) {
+      throw new SolveException("More than one field is missing in column " + x);
+    }
+  }
+
+  /**
+   * If there is only field (x|y) missing in square z, it is set here
+   *
+   * @param x
+   * @param y
+   * @throws SolveException
+   * @throws SetException
+   */
+  public void addLastMissingNumberInSquare(int x, int y) throws SetException, SolveException {
+    Square z = getSquare(x, y);
+    ArrayList<Integer> tmpSquareNumbers = getSquareNumbers(z);
+    try {
+      setIfValueIsLastMissingValue(tmpSquareNumbers, x, y);
+    } catch (SolveException e) {
+      throw new SolveException("More than one field is missing in square " + z.getNumber());
+    }
   }
 }

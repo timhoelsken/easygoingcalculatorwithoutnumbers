@@ -1,21 +1,19 @@
-/**
- *
- */
 package sudoku.exceptions;
 
 /**
+ * Exception for wrong set requests
+ *
  * @author Tobias
- * 
  */
 public class SetException extends Throwable {
 
   /**
-   * message constructor
-   * 
-   * @param aString
+   * Message constructor
+   *
+   * @param aMessage
    */
-  public SetException(String aString) {
-    super(aString);
+  public SetException(String aMessage) {
+    super(aMessage);
   }
 
   /**

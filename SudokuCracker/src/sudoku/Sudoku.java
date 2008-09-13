@@ -172,8 +172,9 @@ public class Sudoku {
     return tmpSquareNumbers;
   }
 
-  private void setIfValueIsLastMissingValue(ArrayList<Integer> aValueList, int x, int y) throws SetException, SolveException {
-    if (aValueList.size() == DIMENSION - 1){
+  private void setIfValueIsLastMissingValue(ArrayList<Integer> aValueList, int x, int y) throws SetException,
+      InternalException {
+    if (aValueList.size() == DIMENSION - 1) {
       for (int i = 1; i <= DIMENSION; i++) {
         if (!aValueList.contains(i)) {
           set(i, x, y);
@@ -181,7 +182,7 @@ public class Sudoku {
         }
       }
     }
-    throw new SolveException();
+    throw new InternalException();
   }
 
   /**
@@ -196,7 +197,7 @@ public class Sudoku {
     ArrayList<Integer> tmpRowNumbers = getRowNumbers(y);
     try {
       setIfValueIsLastMissingValue(tmpRowNumbers, x, y);
-    } catch (SolveException e) {
+    } catch (InternalException e) {
       throw new SolveException("More than one field is missing in row " + y);
     }
   }
@@ -213,7 +214,7 @@ public class Sudoku {
     ArrayList<Integer> tmpColumnNumbers = getColumnNumbers(x);
     try {
       setIfValueIsLastMissingValue(tmpColumnNumbers, x, y);
-    } catch (SolveException e) {
+    } catch (InternalException e) {
       throw new SolveException("More than one field is missing in column " + x);
     }
   }
@@ -231,8 +232,27 @@ public class Sudoku {
     ArrayList<Integer> tmpSquareNumbers = getSquareNumbers(z);
     try {
       setIfValueIsLastMissingValue(tmpSquareNumbers, x, y);
-    } catch (SolveException e) {
+    } catch (InternalException e) {
       throw new SolveException("More than one field is missing in square " + z.getNumber());
+    }
+  }
+
+  /**
+   * If t he field (x|y) can be filled regarding column x and row y, it is done
+   *
+   * @param x
+   * @param y
+   * @throws SetException
+   * @throws SolveException
+   */
+  public void addLastMissingNumberInRowAndColumn(int x, int y) throws SetException, SolveException {
+    ArrayList<Integer> tmpNumbers = getRowNumbers(y);
+    tmpNumbers.addAll(getColumnNumbers(x));
+    try {
+      setIfValueIsLastMissingValue(tmpNumbers, x, y);
+    } catch (InternalException e) {
+      throw new SolveException("More than one field is missing to determine field (" + x + "|" + y
+          + ") regarding row and column");
     }
   }
 }

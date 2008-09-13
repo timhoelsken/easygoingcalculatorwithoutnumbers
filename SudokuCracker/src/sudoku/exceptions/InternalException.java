@@ -4,7 +4,8 @@
 package sudoku.exceptions;
 
 /**
- * Error for deep internal things, important for development
+ * Error for deep internal things, important for development or for inner
+ * algorithms. Normally not given to the user. Catch and map it!
  *
  * @author Tobias
  */

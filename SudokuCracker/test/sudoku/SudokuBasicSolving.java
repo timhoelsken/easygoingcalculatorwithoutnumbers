@@ -189,4 +189,58 @@ public class SudokuBasicSolving {
     sudoku.set(3, 1, 3);
     sudoku.addLastMissingNumberInSquare(2, 1);
   }
+
+  /**
+   * If you can combine a row and a column to a full set of numbers instead of
+   * one value, the value is clear to set
+   *
+   * @throws SetException
+   * @throws SolveException
+   */
+  @Test
+  public void solveExactLastFieldRowColumnCombinationWith1() throws SetException, SolveException {
+    sudoku.set(2, 2, 1);
+    sudoku.set(3, 3, 1);
+    sudoku.set(4, 4, 1);
+    sudoku.set(5, 5, 1);
+    sudoku.set(6, 1, 2);
+    sudoku.set(7, 1, 3);
+    sudoku.set(8, 1, 4);
+    sudoku.set(9, 1, 5);
+    sudoku.addLastMissingNumberInRowAndColumn(1, 1);
+    assertEquals(1, sudoku.get(1, 1));
+  }
+
+  /**
+   * If you can combine a row and a column to a full set of numbers instead of
+   * one value, the value is clear to set
+   *
+   * @throws SetException
+   * @throws SolveException
+   */
+  @Test
+  public void solveExactLastFieldRowColumnCombinationWith9() throws SetException, SolveException {
+    sudoku.set(1, 2, 1);
+    sudoku.set(2, 3, 1);
+    sudoku.set(3, 4, 1);
+    sudoku.set(4, 5, 1);
+    sudoku.set(5, 1, 2);
+    sudoku.set(6, 1, 3);
+    sudoku.set(7, 1, 4);
+    sudoku.set(8, 1, 5);
+    sudoku.addLastMissingNumberInRowAndColumn(1, 1);
+    assertEquals(9, sudoku.get(1, 1));
+  }
+
+  /**
+   * If you can combine a row and a column to a full set of numbers instead of
+   * one value, the value is clear to set. If not, it is not :P
+   *
+   * @throws SetException
+   * @throws SolveException
+   */
+  @Test (expected=SolveException.class)
+  public void solveExactLastFieldRowColumnCombinationNotPossible() throws SetException, SolveException {
+    sudoku.addLastMissingNumberInRowAndColumn(1, 1);
+  }
 }

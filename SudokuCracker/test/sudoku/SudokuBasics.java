@@ -12,7 +12,7 @@ import sudoku.exceptions.SetException;
 
 /**
  * Basic functional tests of the Sudoku
- * 
+ *
  * @author Tobias
  */
 public class SudokuBasics {
@@ -29,7 +29,7 @@ public class SudokuBasics {
 
   /**
    * A once set value should be remembered.
-   * 
+   *
    * @throws SetException
    */
   @Test
@@ -42,7 +42,7 @@ public class SudokuBasics {
 
   /**
    * All corner fields of the Sudoku should be remembered.
-   * 
+   *
    * @throws SetException
    */
   @Test
@@ -59,7 +59,7 @@ public class SudokuBasics {
 
   /**
    * A value set beyond the Sudoku is not allowed.
-   * 
+   *
    * @throws SetException
    */
   @Test(expected = IndexOutOfBoundsException.class)
@@ -69,7 +69,7 @@ public class SudokuBasics {
 
   /**
    * A value set beyond the Sudoku is not allowed.
-   * 
+   *
    * @throws SetException
    */
   @Test(expected = IndexOutOfBoundsException.class)
@@ -79,7 +79,7 @@ public class SudokuBasics {
 
   /**
    * A value set beyond the Sudoku is not allowed.
-   * 
+   *
    * @throws SetException
    */
   @Test(expected = IndexOutOfBoundsException.class)
@@ -89,7 +89,7 @@ public class SudokuBasics {
 
   /**
    * A value set beyond the Sudoku is not allowed.
-   * 
+   *
    * @throws SetException
    */
   @Test(expected = IndexOutOfBoundsException.class)
@@ -99,7 +99,7 @@ public class SudokuBasics {
 
   /**
    * A once set field should not be set again
-   * 
+   *
    * @throws SetException
    */
   @Test(expected = SetException.class)
@@ -110,7 +110,7 @@ public class SudokuBasics {
 
   /**
    * A value has to be at least 1
-   * 
+   *
    * @throws SetException
    */
   @Test(expected = SetException.class)
@@ -120,7 +120,7 @@ public class SudokuBasics {
 
   /**
    * A value has to be maximally 9 (dimension of the Sudoku)
-   * 
+   *
    * @throws SetException
    */
   @Test(expected = SetException.class)
@@ -131,7 +131,7 @@ public class SudokuBasics {
   /**
    * For each row there are three possible squares a field of that row could
    * belong to
-   * 
+   *
    * @throws SetException
    */
   @Test
@@ -142,7 +142,7 @@ public class SudokuBasics {
   /**
    * For each row there are three possible squares a field of that row could
    * belong to
-   * 
+   *
    * @throws SetException
    */
   @Test
@@ -153,7 +153,7 @@ public class SudokuBasics {
   /**
    * For each row there are three possible squares a field of that row could
    * belong to
-   * 
+   *
    * @throws SetException
    */
   @Test
@@ -164,7 +164,7 @@ public class SudokuBasics {
   /**
    * For each row there are three possible squares a field of that row could
    * belong to
-   * 
+   *
    * @throws SetException
    */
   @Test
@@ -175,7 +175,7 @@ public class SudokuBasics {
   /**
    * For each row there are three possible squares a field of that row could
    * belong to
-   * 
+   *
    * @throws SetException
    */
   @Test
@@ -186,7 +186,7 @@ public class SudokuBasics {
   /**
    * For each row there are three possible squares a field of that row could
    * belong to
-   * 
+   *
    * @throws SetException
    */
   @Test
@@ -413,7 +413,7 @@ public class SudokuBasics {
 
   /**
    * All numbers of a row should be investigable
-   * 
+   *
    * @throws SetException
    */
   @Test
@@ -442,7 +442,7 @@ public class SudokuBasics {
 
   /**
    * All numbers of a row should be investigable
-   * 
+   *
    * @throws SetException
    */
   @Test
@@ -474,7 +474,7 @@ public class SudokuBasics {
 
   /**
    * All numbers of a column should be investigable
-   * 
+   *
    * @throws SetException
    */
   @Test
@@ -503,7 +503,7 @@ public class SudokuBasics {
 
   /**
    * All numbers of a column should be investigable
-   * 
+   *
    * @throws SetException
    */
   @Test
@@ -535,7 +535,7 @@ public class SudokuBasics {
 
   /**
    * All numbers of a square should be investigable
-   * 
+   *
    * @throws SetException
    */
   @Test
@@ -565,7 +565,7 @@ public class SudokuBasics {
 
   /**
    * All numbers of a square should be investigable
-   * 
+   *
    * @throws SetException
    */
   @Test
@@ -589,7 +589,7 @@ public class SudokuBasics {
 
   /**
    * All numbers of a square should be investigable
-   * 
+   *
    * @throws SetException
    */
   @Test
@@ -601,7 +601,100 @@ public class SudokuBasics {
 
   /**
    * All numbers of a square should be investigable
-   * 
+   *
+   * @throws SetException
+   */
+  @Test
+  public void showNumbersOfEmptySquareFiveInFullSudoku() throws SetException {
+    sudoku.set(1, 1, 1);
+    sudoku.set(2, 2, 1);
+    sudoku.set(3, 3, 1);
+    sudoku.set(4, 4, 1);
+    sudoku.set(5, 5, 1);
+    sudoku.set(6, 6, 1);
+    sudoku.set(7, 7, 1);
+    sudoku.set(8, 8, 1);
+    sudoku.set(9, 9, 1);
+
+    sudoku.set(4, 1, 2);
+    sudoku.set(5, 2, 2);
+    sudoku.set(6, 3, 2);
+    sudoku.set(7, 4, 2);
+    sudoku.set(8, 5, 2);
+    sudoku.set(9, 6, 2);
+    sudoku.set(1, 7, 2);
+    sudoku.set(2, 8, 2);
+    sudoku.set(3, 9, 2);
+
+    sudoku.set(7, 1, 3);
+    sudoku.set(8, 2, 3);
+    sudoku.set(9, 3, 3);
+    sudoku.set(1, 4, 3);
+    sudoku.set(2, 5, 3);
+    sudoku.set(3, 6, 3);
+    sudoku.set(4, 7, 3);
+    sudoku.set(5, 8, 3);
+    sudoku.set(6, 9, 3);
+
+    sudoku.set(2, 1, 4);
+    sudoku.set(3, 2, 4);
+    sudoku.set(4, 3, 4);
+    sudoku.set(8, 7, 4);
+    sudoku.set(9, 8, 4);
+    sudoku.set(1, 9, 4);
+
+    sudoku.set(5, 1, 5);
+    sudoku.set(6, 2, 5);
+    sudoku.set(7, 3, 5);
+    sudoku.set(2, 7, 5);
+    sudoku.set(3, 8, 5);
+    sudoku.set(4, 9, 5);
+
+    sudoku.set(8, 1, 6);
+    sudoku.set(9, 2, 6);
+    sudoku.set(1, 3, 6);
+    sudoku.set(5, 7, 6);
+    sudoku.set(6, 8, 6);
+    sudoku.set(7, 9, 6);
+
+    sudoku.set(3, 1, 7);
+    sudoku.set(4, 2, 7);
+    sudoku.set(5, 3, 7);
+    sudoku.set(6, 4, 7);
+    sudoku.set(7, 5, 7);
+    sudoku.set(8, 6, 7);
+    sudoku.set(9, 7, 7);
+    sudoku.set(1, 8, 7);
+    sudoku.set(2, 9, 7);
+
+    sudoku.set(6, 1, 8);
+    sudoku.set(7, 2, 8);
+    sudoku.set(8, 3, 8);
+    sudoku.set(9, 4, 8);
+    sudoku.set(1, 5, 8);
+    sudoku.set(2, 6, 8);
+    sudoku.set(3, 7, 8);
+    sudoku.set(4, 8, 8);
+    sudoku.set(5, 9, 8);
+
+    sudoku.set(9, 1, 9);
+    sudoku.set(1, 2, 9);
+    sudoku.set(2, 3, 9);
+    sudoku.set(3, 4, 9);
+    sudoku.set(4, 5, 9);
+    sudoku.set(5, 6, 9);
+    sudoku.set(6, 7, 9);
+    sudoku.set(7, 8, 9);
+    sudoku.set(8, 9, 9);
+
+    ArrayList<Integer> tmpExpectedList = new ArrayList<Integer>();
+    Square tmpSquare = Square.getSquare(5);
+    assertEquals(tmpExpectedList, sudoku.getSquareNumbers(tmpSquare));
+  }
+
+  /**
+   * All numbers of a square should be investigable
+   *
    * @throws SetException
    */
   @Test
@@ -631,7 +724,7 @@ public class SudokuBasics {
 
   /**
    * Do not allow two times the same value in one column
-   * 
+   *
    * @throws SetException
    */
   @Test(expected = SetException.class)
@@ -642,7 +735,7 @@ public class SudokuBasics {
 
   /**
    * Do not allow two times the same value in one row
-   * 
+   *
    * @throws SetException
    */
   @Test(expected = SetException.class)
@@ -653,7 +746,7 @@ public class SudokuBasics {
 
   /**
    * Do not allow two times the same value in one square
-   * 
+   *
    * @throws SetException
    */
   @Test(expected = SetException.class)

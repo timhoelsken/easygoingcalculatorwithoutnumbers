@@ -21,13 +21,13 @@ public class Sudoku {
    */
   public static final int DIMENSION = 9;
 
-  int[][] value;
+  private int[][] values;
 
   /**
    * Standard constructor
    */
   public Sudoku() {
-    value = new int[DIMENSION][DIMENSION];
+    values = new int[DIMENSION][DIMENSION];
   }
 
   /**
@@ -39,9 +39,9 @@ public class Sudoku {
    * @throws SetException
    */
   public void set(int aValue, int x, int y) throws SetException {
-    if (value[y - 1][x - 1] == 0 && 0 < aValue && aValue <= DIMENSION) {
+    if (values[y - 1][x - 1] == 0 && 0 < aValue && aValue <= DIMENSION) {
       checkSet(aValue, x, y);
-      value[y - 1][x - 1] = aValue;
+      values[y - 1][x - 1] = aValue;
     } else {
       throw new SetException("Setting " + aValue + " on (" + x + "|" + y + ") not allowed.");
     }
@@ -69,7 +69,7 @@ public class Sudoku {
    * @return Returns value of field (x|y)
    */
   public int get(int x, int y) {
-    return value[y - 1][x - 1];
+    return values[y - 1][x - 1];
   }
 
   /**
@@ -161,9 +161,9 @@ public class Sudoku {
    */
   public ArrayList<Integer> getSquareNumbers(Square aSquare) {
     ArrayList<Integer> tmpSquareNumbers = new ArrayList<Integer>();
-    for (int i = aSquare.getXUpLeft(); i <= aSquare.getXDownRight(); i++) {
-      for (int j = aSquare.getYUpLeft(); j <= aSquare.getYDownRight(); j++) {
-        int tmpValue = get(j, i);
+    for (int y = aSquare.getYUpLeft(); y <= aSquare.getYDownRight(); y++) {
+      for (int x = aSquare.getXUpLeft(); x <= aSquare.getXDownRight(); x++) {
+        int tmpValue = get(x, y);
         if (tmpValue != 0) {
           tmpSquareNumbers.add(tmpValue);
         }
@@ -247,12 +247,67 @@ public class Sudoku {
    */
   public void addLastMissingNumberInRowAndColumn(int x, int y) throws SetException, SolveException {
     ArrayList<Integer> tmpNumbers = getRowNumbers(y);
-    tmpNumbers.addAll(getColumnNumbers(x));
+    ArrayList<Integer> tmpColumnNumbers = getColumnNumbers(x);
+    for (Integer tmpColumnNumber : tmpColumnNumbers) {
+      if (!tmpNumbers.contains(tmpColumnNumber)) {
+        tmpNumbers.add(tmpColumnNumber);
+      }
+    }
     try {
       setIfValueIsLastMissingValue(tmpNumbers, x, y);
     } catch (InternalException e) {
       throw new SolveException("More than one field is missing to determine field (" + x + "|" + y
           + ") regarding row and column");
     }
+  }
+
+  /**
+   * The solve method :)
+   *
+   * @return Returns the solved Sudoku
+   *
+   * @throws SetException
+   */
+  public int[] solve() throws SetException {
+    boolean doAgain = true;
+    while (doAgain) {
+      doAgain = false;
+      for (int y = 1; y <= DIMENSION; y++) {
+        for (int x = 1; x <= DIMENSION; x++) {
+          int tmpValue = get(x, y);
+          if (tmpValue == 0) {
+            try {
+              addLastMissingNumberInColumn(x, y);
+              doAgain = true;
+            } catch (SolveException e) {
+            }
+            try {
+              addLastMissingNumberInRow(x, y);
+              doAgain = true;
+            } catch (SolveException e) {
+            }
+            try {
+              addLastMissingNumberInSquare(x, y);
+              doAgain = true;
+            } catch (SolveException e) {
+            }
+            try {
+              addLastMissingNumberInRowAndColumn(x, y);
+              doAgain = true;
+            } catch (SolveException e) {
+            }
+          }
+        }
+      }
+    }
+    int[] tmpSolvedSudoku = new int[81];
+    int tmpPosition = 0;
+    for (int y = 1; y <= DIMENSION; y++) {
+      for (int x = 1; x <= DIMENSION; x++) {
+        tmpSolvedSudoku[tmpPosition++] = get(x, y);
+      }
+    }
+    TestUtil.paint(this);
+    return tmpSolvedSudoku;
   }
 }

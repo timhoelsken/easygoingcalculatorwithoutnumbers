@@ -409,4 +409,68 @@ public class Sudoku {
           + ") regarding column and square");
     }
   }
+
+  /**
+   * 
+   * @param x
+   * @param y
+   * @throws SetException 
+   */
+  public void addMissingNumberWithColumnCombination(int x, int y) throws SetException {
+    Square tmpSquare = getSquare(x,y);
+    
+    
+    Set<Integer> tmpMissingNumbers = new HashSet<Integer>(getPossibleSquareNumbersForColumn(x));
+    
+    //get both other columns
+    int tmpOtherColumnOne, tmpOtherColumnTwo;
+    if (x - tmpSquare.getXUpLeft() == 0){
+      tmpOtherColumnOne = x+1;
+      tmpOtherColumnTwo = x+2;
+    }
+    else if (x - tmpSquare.getXUpLeft() == 1){
+      tmpOtherColumnOne = x-1;
+      tmpOtherColumnTwo = x+1;
+    }
+    else{
+      tmpOtherColumnOne = x-1;
+      tmpOtherColumnTwo = x-2;
+    }
+    
+    //check both other fields
+    int tmpOtherFieldOne, tmpOtherFieldTwo;
+    if (y-tmpSquare.getYUpLeft() ==0){
+      tmpOtherFieldOne = y+1;
+      tmpOtherFieldTwo = y+2;
+    }
+    else if(y-tmpSquare.getYUpLeft() ==1){
+      tmpOtherFieldOne = y-1;
+      tmpOtherFieldTwo = y+1;
+    }
+    else{
+      tmpOtherFieldOne = y-1;
+      tmpOtherFieldTwo = y-2;
+    }
+    
+    //check if other fields are empty
+    int tmpEmptyFields = 0;
+    if (get(x,tmpOtherFieldOne)==0){
+      tmpEmptyFields++;
+    }
+    if (get(x, tmpOtherFieldTwo)==0){
+      tmpEmptyFields++;
+    }
+      
+    // Algorithm for only one empty field in the column
+    if (tmpEmptyFields==0){
+      
+      for (Iterator<Integer> tmpIterator = tmpMissingNumbers.iterator();tmpIterator.hasNext();){
+        int tmpItem = tmpIterator.next();
+        if (getColumnNumbers(tmpOtherColumnOne).contains(tmpItem) && getColumnNumbers(tmpOtherColumnTwo).contains(tmpItem)){
+          set(tmpItem,x,y);
+        }
+      }
+    }
+    
+  }
 }

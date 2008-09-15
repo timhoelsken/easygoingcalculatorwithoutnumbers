@@ -39,8 +39,8 @@ public class SudokuAdvancedSolving {
     sudoku.set(6, 2, 6);
 
     // TBD by Tim => grade AFK
-    sudoku.addMissingNumberColumnCombination(2, 5);
-    assertEquals(1, sudoku.get(1, 1));
+    sudoku.addMissingNumberWithColumnCombination(2, 5);
+    assertEquals(7, sudoku.get(2, 5));
   }
 
 }

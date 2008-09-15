@@ -1,9 +1,9 @@
 package sudoku;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -136,7 +136,11 @@ public class SudokuBasics {
    */
   @Test
   public void determineSquarePossiblitiesForRowOne() {
-    assertArrayEquals(new int[] { 1, 2, 3 }, sudoku.getPossibleSquareNumbersForRow(1));
+    Set<Integer> tmpExpectedSet = new HashSet<Integer>();
+    tmpExpectedSet.add(1);
+    tmpExpectedSet.add(2);
+    tmpExpectedSet.add(3);
+    assertEquals(tmpExpectedSet, sudoku.getPossibleSquareNumbersForRow(1));
   }
 
   /**
@@ -147,7 +151,11 @@ public class SudokuBasics {
    */
   @Test
   public void determineSquarePossiblitiesForRowThree() {
-    assertArrayEquals(new int[] { 1, 2, 3 }, sudoku.getPossibleSquareNumbersForRow(3));
+    Set<Integer> tmpExpectedSet = new HashSet<Integer>();
+    tmpExpectedSet.add(1);
+    tmpExpectedSet.add(2);
+    tmpExpectedSet.add(3);
+    assertEquals(tmpExpectedSet, sudoku.getPossibleSquareNumbersForRow(3));
   }
 
   /**
@@ -158,7 +166,11 @@ public class SudokuBasics {
    */
   @Test
   public void determineSquarePossiblitiesForRowFour() {
-    assertArrayEquals(new int[] { 4, 5, 6 }, sudoku.getPossibleSquareNumbersForRow(4));
+    Set<Integer> tmpExpectedSet = new HashSet<Integer>();
+    tmpExpectedSet.add(4);
+    tmpExpectedSet.add(5);
+    tmpExpectedSet.add(6);
+    assertEquals(tmpExpectedSet, sudoku.getPossibleSquareNumbersForRow(4));
   }
 
   /**
@@ -169,7 +181,11 @@ public class SudokuBasics {
    */
   @Test
   public void determineSquarePossiblitiesForRowSix() {
-    assertArrayEquals(new int[] { 4, 5, 6 }, sudoku.getPossibleSquareNumbersForRow(6));
+    Set<Integer> tmpExpectedSet = new HashSet<Integer>();
+    tmpExpectedSet.add(4);
+    tmpExpectedSet.add(5);
+    tmpExpectedSet.add(6);
+    assertEquals(tmpExpectedSet, sudoku.getPossibleSquareNumbersForRow(6));
   }
 
   /**
@@ -180,7 +196,11 @@ public class SudokuBasics {
    */
   @Test
   public void determineSquarePossiblitiesForRowSeven() {
-    assertArrayEquals(new int[] { 7, 8, 9 }, sudoku.getPossibleSquareNumbersForRow(7));
+    Set<Integer> tmpExpectedSet = new HashSet<Integer>();
+    tmpExpectedSet.add(7);
+    tmpExpectedSet.add(8);
+    tmpExpectedSet.add(9);
+    assertEquals(tmpExpectedSet, sudoku.getPossibleSquareNumbersForRow(7));
   }
 
   /**
@@ -191,7 +211,11 @@ public class SudokuBasics {
    */
   @Test
   public void determineSquarePossiblitiesForRowNine() {
-    assertArrayEquals(new int[] { 7, 8, 9 }, sudoku.getPossibleSquareNumbersForRow(9));
+    Set<Integer> tmpExpectedSet = new HashSet<Integer>();
+    tmpExpectedSet.add(7);
+    tmpExpectedSet.add(8);
+    tmpExpectedSet.add(9);
+    assertEquals(tmpExpectedSet, sudoku.getPossibleSquareNumbersForRow(9));
   }
 
   /**
@@ -232,7 +256,11 @@ public class SudokuBasics {
    */
   @Test
   public void determineSquarePossiblitiesForColumnOne() {
-    assertArrayEquals(new int[] { 1, 4, 7 }, sudoku.getPossibleSquareNumbersForColumn(1));
+    Set<Integer> tmpExpectedSet = new HashSet<Integer>();
+    tmpExpectedSet.add(1);
+    tmpExpectedSet.add(4);
+    tmpExpectedSet.add(7);
+    assertEquals(tmpExpectedSet, sudoku.getPossibleSquareNumbersForColumn(1));
   }
 
   /**
@@ -241,7 +269,11 @@ public class SudokuBasics {
    */
   @Test
   public void determineSquarePossiblitiesForColumnThree() {
-    assertArrayEquals(new int[] { 1, 4, 7 }, sudoku.getPossibleSquareNumbersForColumn(3));
+    Set<Integer> tmpExpectedSet = new HashSet<Integer>();
+    tmpExpectedSet.add(1);
+    tmpExpectedSet.add(4);
+    tmpExpectedSet.add(7);
+    assertEquals(tmpExpectedSet, sudoku.getPossibleSquareNumbersForColumn(3));
   }
 
   /**
@@ -250,7 +282,11 @@ public class SudokuBasics {
    */
   @Test
   public void determineSquarePossiblitiesForColumnFour() {
-    assertArrayEquals(new int[] { 2, 5, 8 }, sudoku.getPossibleSquareNumbersForColumn(4));
+    Set<Integer> tmpExpectedSet = new HashSet<Integer>();
+    tmpExpectedSet.add(2);
+    tmpExpectedSet.add(5);
+    tmpExpectedSet.add(8);
+    assertEquals(tmpExpectedSet, sudoku.getPossibleSquareNumbersForColumn(4));
   }
 
   /**
@@ -259,7 +295,11 @@ public class SudokuBasics {
    */
   @Test
   public void determineSquarePossiblitiesForColumnSix() {
-    assertArrayEquals(new int[] { 2, 5, 8 }, sudoku.getPossibleSquareNumbersForColumn(6));
+    Set<Integer> tmpExpectedSet = new HashSet<Integer>();
+    tmpExpectedSet.add(2);
+    tmpExpectedSet.add(5);
+    tmpExpectedSet.add(8);
+    assertEquals(tmpExpectedSet, sudoku.getPossibleSquareNumbersForColumn(6));
   }
 
   /**
@@ -268,7 +308,11 @@ public class SudokuBasics {
    */
   @Test
   public void determineSquarePossiblitiesForColumnSeven() {
-    assertArrayEquals(new int[] { 3, 6, 9 }, sudoku.getPossibleSquareNumbersForColumn(7));
+    Set<Integer> tmpExpectedSet = new HashSet<Integer>();
+    tmpExpectedSet.add(3);
+    tmpExpectedSet.add(6);
+    tmpExpectedSet.add(9);
+    assertEquals(tmpExpectedSet, sudoku.getPossibleSquareNumbersForColumn(7));
   }
 
   /**
@@ -277,7 +321,11 @@ public class SudokuBasics {
    */
   @Test
   public void determineSquarePossiblitiesForColumnNine() {
-    assertArrayEquals(new int[] { 3, 6, 9 }, sudoku.getPossibleSquareNumbersForColumn(9));
+    Set<Integer> tmpExpectedSet = new HashSet<Integer>();
+    tmpExpectedSet.add(3);
+    tmpExpectedSet.add(6);
+    tmpExpectedSet.add(9);
+    assertEquals(tmpExpectedSet, sudoku.getPossibleSquareNumbersForColumn(9));
   }
 
   /**
@@ -427,17 +475,18 @@ public class SudokuBasics {
     sudoku.set(7, 7, 1);
     sudoku.set(8, 8, 1);
     sudoku.set(9, 9, 1);
-    ArrayList<Integer> tmpExpectedList = new ArrayList<Integer>();
-    tmpExpectedList.add(1);
-    tmpExpectedList.add(2);
-    tmpExpectedList.add(3);
-    tmpExpectedList.add(4);
-    tmpExpectedList.add(5);
-    tmpExpectedList.add(6);
-    tmpExpectedList.add(7);
-    tmpExpectedList.add(8);
-    tmpExpectedList.add(9);
-    assertEquals(tmpExpectedList, sudoku.getRowNumbers(1));
+    Set<Integer> tmpExpectedSet = new HashSet<Integer>();
+    tmpExpectedSet.add(1);
+    tmpExpectedSet.add(2);
+    tmpExpectedSet.add(3);
+    tmpExpectedSet.add(4);
+    tmpExpectedSet.add(5);
+    tmpExpectedSet.add(6);
+    tmpExpectedSet.add(7);
+    tmpExpectedSet.add(8);
+    tmpExpectedSet.add(9);
+    
+    assertEquals(tmpExpectedSet, sudoku.getRowNumbers(1));
   }
 
   /**
@@ -453,14 +502,14 @@ public class SudokuBasics {
     sudoku.set(6, 6, 1);
     sudoku.set(7, 7, 1);
     sudoku.set(9, 9, 1);
-    ArrayList<Integer> tmpExpectedList = new ArrayList<Integer>();
-    tmpExpectedList.add(1);
-    tmpExpectedList.add(3);
-    tmpExpectedList.add(4);
-    tmpExpectedList.add(6);
-    tmpExpectedList.add(7);
-    tmpExpectedList.add(9);
-    assertEquals(tmpExpectedList, sudoku.getRowNumbers(1));
+    Set<Integer> tmpExpectedSet = new HashSet<Integer>();
+    tmpExpectedSet.add(1);
+    tmpExpectedSet.add(3);
+    tmpExpectedSet.add(4);
+    tmpExpectedSet.add(6);
+    tmpExpectedSet.add(7);
+    tmpExpectedSet.add(9);
+    assertEquals(tmpExpectedSet, sudoku.getRowNumbers(1));
   }
 
   /**
@@ -468,8 +517,8 @@ public class SudokuBasics {
    */
   @Test
   public void showNumbersOfEmptyRow() {
-    ArrayList<Integer> tmpExpectedList = new ArrayList<Integer>();
-    assertEquals(tmpExpectedList, sudoku.getRowNumbers(1));
+    Set<Integer> tmpExpectedSet = new HashSet<Integer>();
+    assertEquals(tmpExpectedSet, sudoku.getRowNumbers(1));
   }
 
   /**
@@ -488,17 +537,17 @@ public class SudokuBasics {
     sudoku.set(7, 1, 7);
     sudoku.set(8, 1, 8);
     sudoku.set(9, 1, 9);
-    ArrayList<Integer> tmpExpectedList = new ArrayList<Integer>();
-    tmpExpectedList.add(1);
-    tmpExpectedList.add(2);
-    tmpExpectedList.add(3);
-    tmpExpectedList.add(4);
-    tmpExpectedList.add(5);
-    tmpExpectedList.add(6);
-    tmpExpectedList.add(7);
-    tmpExpectedList.add(8);
-    tmpExpectedList.add(9);
-    assertEquals(tmpExpectedList, sudoku.getColumnNumbers(1));
+    Set<Integer> tmpExpectedSet = new HashSet<Integer>();
+    tmpExpectedSet.add(1);
+    tmpExpectedSet.add(2);
+    tmpExpectedSet.add(3);
+    tmpExpectedSet.add(4);
+    tmpExpectedSet.add(5);
+    tmpExpectedSet.add(6);
+    tmpExpectedSet.add(7);
+    tmpExpectedSet.add(8);
+    tmpExpectedSet.add(9);
+    assertEquals(tmpExpectedSet, sudoku.getColumnNumbers(1));
   }
 
   /**
@@ -514,14 +563,14 @@ public class SudokuBasics {
     sudoku.set(6, 1, 6);
     sudoku.set(7, 1, 7);
     sudoku.set(9, 1, 9);
-    ArrayList<Integer> tmpExpectedList = new ArrayList<Integer>();
-    tmpExpectedList.add(1);
-    tmpExpectedList.add(3);
-    tmpExpectedList.add(4);
-    tmpExpectedList.add(6);
-    tmpExpectedList.add(7);
-    tmpExpectedList.add(9);
-    assertEquals(tmpExpectedList, sudoku.getColumnNumbers(1));
+    Set<Integer> tmpExpectedSet = new HashSet<Integer>();
+    tmpExpectedSet.add(1);
+    tmpExpectedSet.add(3);
+    tmpExpectedSet.add(4);
+    tmpExpectedSet.add(6);
+    tmpExpectedSet.add(7);
+    tmpExpectedSet.add(9);
+    assertEquals(tmpExpectedSet, sudoku.getColumnNumbers(1));
   }
 
   /**
@@ -529,8 +578,8 @@ public class SudokuBasics {
    */
   @Test
   public void showNumbersOfEmptyColumn() {
-    ArrayList<Integer> tmpExpectedList = new ArrayList<Integer>();
-    assertEquals(tmpExpectedList, sudoku.getColumnNumbers(1));
+    Set<Integer> tmpExpectedSet = new HashSet<Integer>();
+    assertEquals(tmpExpectedSet, sudoku.getColumnNumbers(1));
   }
 
   /**
@@ -549,18 +598,18 @@ public class SudokuBasics {
     sudoku.set(7, 4, 6);
     sudoku.set(8, 5, 6);
     sudoku.set(9, 6, 6);
-    ArrayList<Integer> tmpExpectedList = new ArrayList<Integer>();
-    tmpExpectedList.add(1);
-    tmpExpectedList.add(2);
-    tmpExpectedList.add(3);
-    tmpExpectedList.add(4);
-    tmpExpectedList.add(5);
-    tmpExpectedList.add(6);
-    tmpExpectedList.add(7);
-    tmpExpectedList.add(8);
-    tmpExpectedList.add(9);
+    Set<Integer> tmpExpectedSet = new HashSet<Integer>();
+    tmpExpectedSet.add(1);
+    tmpExpectedSet.add(2);
+    tmpExpectedSet.add(3);
+    tmpExpectedSet.add(4);
+    tmpExpectedSet.add(5);
+    tmpExpectedSet.add(6);
+    tmpExpectedSet.add(7);
+    tmpExpectedSet.add(8);
+    tmpExpectedSet.add(9);
     Square tmpSquare = Square.getSquare(5);
-    assertEquals(tmpExpectedList, sudoku.getSquareNumbers(tmpSquare));
+    assertEquals(tmpExpectedSet, sudoku.getSquareNumbers(tmpSquare));
   }
 
   /**
@@ -576,15 +625,15 @@ public class SudokuBasics {
     sudoku.set(6, 6, 5);
     sudoku.set(7, 4, 6);
     sudoku.set(9, 6, 6);
-    ArrayList<Integer> tmpExpectedList = new ArrayList<Integer>();
-    tmpExpectedList.add(1);
-    tmpExpectedList.add(3);
-    tmpExpectedList.add(4);
-    tmpExpectedList.add(6);
-    tmpExpectedList.add(7);
-    tmpExpectedList.add(9);
+    Set<Integer> tmpExpectedSet = new HashSet<Integer>();
+    tmpExpectedSet.add(1);
+    tmpExpectedSet.add(3);
+    tmpExpectedSet.add(4);
+    tmpExpectedSet.add(6);
+    tmpExpectedSet.add(7);
+    tmpExpectedSet.add(9);
     Square tmpSquare = Square.getSquare(5);
-    assertEquals(tmpExpectedList, sudoku.getSquareNumbers(tmpSquare));
+    assertEquals(tmpExpectedSet, sudoku.getSquareNumbers(tmpSquare));
   }
 
   /**
@@ -594,9 +643,9 @@ public class SudokuBasics {
    */
   @Test
   public void showNumbersOfEmptySquareFive() throws SetException {
-    ArrayList<Integer> tmpExpectedList = new ArrayList<Integer>();
+    Set<Integer> tmpExpectedSet = new HashSet<Integer>();
     Square tmpSquare = Square.getSquare(5);
-    assertEquals(tmpExpectedList, sudoku.getSquareNumbers(tmpSquare));
+    assertEquals(tmpExpectedSet, sudoku.getSquareNumbers(tmpSquare));
   }
 
   /**
@@ -687,9 +736,9 @@ public class SudokuBasics {
     sudoku.set(7, 8, 9);
     sudoku.set(8, 9, 9);
 
-    ArrayList<Integer> tmpExpectedList = new ArrayList<Integer>();
+    Set<Integer> tmpExpectedSet = new HashSet<Integer>();
     Square tmpSquare = Square.getSquare(5);
-    assertEquals(tmpExpectedList, sudoku.getSquareNumbers(tmpSquare));
+    assertEquals(tmpExpectedSet, sudoku.getSquareNumbers(tmpSquare));
   }
 
   /**
@@ -714,12 +763,12 @@ public class SudokuBasics {
     sudoku.set(9, 5, 8);
     sudoku.set(1, 8, 8);
 
-    ArrayList<Integer> tmpExpectedList = new ArrayList<Integer>();
-    tmpExpectedList.add(3);
-    tmpExpectedList.add(6);
-    tmpExpectedList.add(9);
+    Set<Integer> tmpExpectedSet = new HashSet<Integer>();
+    tmpExpectedSet.add(3);
+    tmpExpectedSet.add(6);
+    tmpExpectedSet.add(9);
     Square tmpSquare = Square.getSquare(5);
-    assertEquals(tmpExpectedList, sudoku.getSquareNumbers(tmpSquare));
+    assertEquals(tmpExpectedSet, sudoku.getSquareNumbers(tmpSquare));
   }
 
   /**

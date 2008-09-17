@@ -182,6 +182,36 @@ public class SudokuAdvancedSolving {
     sudoku.addMissingNumberWithColumnCombination(3, 6);
     assertEquals(0, sudoku.get(3, 6));
   }
+  
+  /**
+   * If there is one free field in the Column-Combination, it is maybe solvable
+   * This one is not
+   * 
+   * @throws SetException
+   * @throws SolveException
+   */
+  @Test
+  public void solveSingleFieldOfColumnTen() throws SetException, SolveException {
+    sudoku.set(4, 1, 2);
+    sudoku.set(6, 2, 2);
+    sudoku.set(2, 3, 2);
+    sudoku.set(1, 1, 3);
+    sudoku.set(8, 2, 3);
+    sudoku.set(9, 3, 3);
+    sudoku.set(6, 1, 4);
+    sudoku.set(7, 3, 4);
+    sudoku.set(2, 1, 5);
+    sudoku.set(8, 3, 5);
+    sudoku.set(4, 2, 6);
+    sudoku.set(9, 2, 7);
+    sudoku.set(2, 2, 8);
+    sudoku.set(3, 2, 9);
+    sudoku.set(4, 3, 9);
+
+
+    sudoku.addMissingNumberWithColumnCombination(1, 6);
+    assertEquals(9, sudoku.get(1, 6));
+  }
 
   /**
    * If there are two free fields in the Column-Combination, it is maybe
@@ -815,14 +845,14 @@ public class SudokuAdvancedSolving {
     sudoku.set(2, 4, 5);
     sudoku.set(3, 4, 6);
     sudoku.set(7, 6, 4);
-    
+
     sudoku.set(9, 5, 2);
     sudoku.set(9, 8, 5);
 
     sudoku.addMissingNumberInSquareWithRowColumnCross(6, 6);
     assertEquals(9, sudoku.get(6, 6));
   }
-  
+
   /**
    * If a row and a column (containing the same number) cross a square so that
    * there is only one field left, the number has to be set there
@@ -832,19 +862,19 @@ public class SudokuAdvancedSolving {
    * @throws SetException
    * @throws SolveException
    */
-  @Test (expected = SolveException.class)
+  @Test(expected = SolveException.class)
   public void solveRowColumnCrossInSquareTwo() throws SetException, SolveException {
     sudoku.set(1, 4, 4);
     sudoku.set(2, 4, 5);
     sudoku.set(3, 4, 6);
     sudoku.set(7, 6, 4);
-    
+
     sudoku.set(9, 5, 2);
     sudoku.set(9, 8, 5);
 
     sudoku.addMissingNumberInSquareWithRowColumnCross(6, 5);
   }
-  
+
   /**
    * If a row and a column (containing the same number) cross a square so that
    * there is only one field left, the number has to be set there
@@ -858,14 +888,14 @@ public class SudokuAdvancedSolving {
     sudoku.set(2, 4, 5);
     sudoku.set(3, 4, 6);
     sudoku.set(7, 6, 6);
-    
+
     sudoku.set(9, 5, 2);
     sudoku.set(9, 8, 5);
 
     sudoku.addMissingNumberInSquareWithRowColumnCross(6, 4);
     assertEquals(9, sudoku.get(6, 4));
   }
-  
+
   /**
    * If a row and a column (containing the same number) cross a square so that
    * there is only one field left, the number has to be set there
@@ -879,14 +909,14 @@ public class SudokuAdvancedSolving {
     sudoku.set(2, 4, 5);
     sudoku.set(3, 4, 6);
     sudoku.set(7, 6, 6);
-    
+
     sudoku.set(9, 5, 2);
     sudoku.set(9, 8, 4);
 
     sudoku.addMissingNumberInSquareWithRowColumnCross(6, 5);
     assertEquals(9, sudoku.get(6, 5));
   }
-  
+
   /**
    * If a row and a column (containing the same number) cross a square so that
    * there is only one field left, the number has to be set there
@@ -900,14 +930,14 @@ public class SudokuAdvancedSolving {
     sudoku.set(2, 4, 5);
     sudoku.set(3, 4, 6);
     sudoku.set(7, 6, 5);
-    
+
     sudoku.set(9, 5, 2);
     sudoku.set(9, 8, 4);
 
     sudoku.addMissingNumberInSquareWithRowColumnCross(6, 6);
     assertEquals(9, sudoku.get(6, 6));
   }
-  
+
   /**
    * If a row and a column (containing the same number) cross a square so that
    * there is only one field left, the number has to be set there
@@ -921,14 +951,14 @@ public class SudokuAdvancedSolving {
     sudoku.set(2, 5, 5);
     sudoku.set(3, 5, 6);
     sudoku.set(7, 6, 5);
-    
+
     sudoku.set(9, 4, 2);
     sudoku.set(9, 8, 4);
 
     sudoku.addMissingNumberInSquareWithRowColumnCross(6, 6);
     assertEquals(9, sudoku.get(6, 6));
   }
-  
+
   /**
    * If a row and a column (containing the same number) cross a square so that
    * there is only one field left, the number has to be set there
@@ -942,14 +972,14 @@ public class SudokuAdvancedSolving {
     sudoku.set(2, 5, 5);
     sudoku.set(3, 5, 6);
     sudoku.set(7, 6, 4);
-    
+
     sudoku.set(9, 4, 2);
     sudoku.set(9, 8, 6);
 
     sudoku.addMissingNumberInSquareWithRowColumnCross(6, 5);
     assertEquals(9, sudoku.get(6, 5));
   }
-  
+
   /**
    * If a row and a column (containing the same number) cross a square so that
    * there is only one field left, the number has to be set there
@@ -963,14 +993,14 @@ public class SudokuAdvancedSolving {
     sudoku.set(2, 6, 5);
     sudoku.set(3, 6, 6);
     sudoku.set(7, 5, 4);
-    
+
     sudoku.set(9, 4, 2);
     sudoku.set(9, 8, 6);
 
     sudoku.addMissingNumberInSquareWithRowColumnCross(5, 5);
     assertEquals(9, sudoku.get(5, 5));
   }
-  
+
   /**
    * If a row and a column (containing the same number) cross a square so that
    * there is only one field left, the number has to be set there
@@ -984,14 +1014,14 @@ public class SudokuAdvancedSolving {
     sudoku.set(2, 5, 4);
     sudoku.set(3, 6, 4);
     sudoku.set(7, 5, 6);
-    
+
     sudoku.set(9, 4, 2);
     sudoku.set(9, 8, 5);
 
     sudoku.addMissingNumberInSquareWithRowColumnCross(6, 6);
     assertEquals(9, sudoku.get(6, 6));
   }
-  
+
   /**
    * If a row and a column (containing the same number) cross a square so that
    * there is only one field left, the number has to be set there
@@ -1005,14 +1035,14 @@ public class SudokuAdvancedSolving {
     sudoku.set(2, 5, 4);
     sudoku.set(3, 6, 4);
     sudoku.set(7, 5, 5);
-    
+
     sudoku.set(9, 6, 2);
     sudoku.set(9, 8, 6);
 
     sudoku.addMissingNumberInSquareWithRowColumnCross(4, 5);
     assertEquals(9, sudoku.get(4, 5));
   }
-  
+
   /**
    * If a row and a column (containing the same number) cross a square so that
    * there is only one field left, the number has to be set there
@@ -1026,14 +1056,14 @@ public class SudokuAdvancedSolving {
     sudoku.set(2, 5, 4);
     sudoku.set(3, 6, 4);
     sudoku.set(7, 4, 5);
-   
+
     sudoku.set(9, 6, 2);
     sudoku.set(9, 8, 6);
 
     sudoku.addMissingNumberInSquareWithRowColumnCross(5, 5);
     assertEquals(9, sudoku.get(5, 5));
   }
-  
+
   /**
    * Get all missing numbers of a field, regarding row, column and square!
    * 
@@ -1046,7 +1076,7 @@ public class SudokuAdvancedSolving {
     sudoku.set(2, 3, 3);
     sudoku.set(3, 1, 4);
     sudoku.set(4, 4, 1);
-   
+
     Set<Integer> tmpExpectedSet = new HashSet<Integer>();
     tmpExpectedSet.add(5);
     tmpExpectedSet.add(6);
@@ -1056,7 +1086,7 @@ public class SudokuAdvancedSolving {
 
     assertEquals(tmpExpectedSet, sudoku.getAllPossibleMissingNumbers(1, 1));
   }
-  
+
   /**
    * Get all missing numbers of a field, regarding row, column and square!
    * 
@@ -1065,19 +1095,17 @@ public class SudokuAdvancedSolving {
    */
   @Test
   public void getAllPossibleMissingNumbersTwo() throws SetException, SolveException {
-    sudoku.set(1, 1, 3);    
-    
-    
+    sudoku.set(1, 1, 3);
+
     sudoku.set(4, 4, 3);
     sudoku.set(5, 5, 3);
-    
+
     sudoku.set(7, 7, 3);
-    
+
     sudoku.set(9, 9, 3);
-   
-    
+
     sudoku.set(8, 3, 8);
-    
+
     Set<Integer> tmpExpectedSet = new HashSet<Integer>();
     tmpExpectedSet.add(2);
     tmpExpectedSet.add(3);
@@ -1085,7 +1113,7 @@ public class SudokuAdvancedSolving {
 
     assertEquals(tmpExpectedSet, sudoku.getAllPossibleMissingNumbers(3, 3));
   }
-  
+
   /**
    * Get all existing numbers of a field, regarding row, column and square!
    * 
@@ -1098,7 +1126,7 @@ public class SudokuAdvancedSolving {
     sudoku.set(2, 3, 3);
     sudoku.set(3, 1, 4);
     sudoku.set(4, 4, 1);
-   
+
     Set<Integer> tmpExpectedSet = new HashSet<Integer>();
     tmpExpectedSet.add(1);
     tmpExpectedSet.add(2);
@@ -1107,7 +1135,7 @@ public class SudokuAdvancedSolving {
 
     assertEquals(tmpExpectedSet, sudoku.getAllExistingNumbers(1, 1));
   }
-  
+
   /**
    * Get all existing numbers of a field, regarding row, column and square!
    * 
@@ -1116,19 +1144,17 @@ public class SudokuAdvancedSolving {
    */
   @Test
   public void getAllExistingNumbersTwo() throws SetException, SolveException {
-    sudoku.set(1, 1, 3);    
-    
-    
+    sudoku.set(1, 1, 3);
+
     sudoku.set(4, 4, 3);
     sudoku.set(5, 5, 3);
-    
+
     sudoku.set(7, 7, 3);
-    
+
     sudoku.set(9, 9, 3);
-   
-    
+
     sudoku.set(8, 3, 8);
-    
+
     Set<Integer> tmpExpectedSet = new HashSet<Integer>();
     tmpExpectedSet.add(1);
     tmpExpectedSet.add(4);
@@ -1138,9 +1164,10 @@ public class SudokuAdvancedSolving {
     tmpExpectedSet.add(9);
     assertEquals(tmpExpectedSet, sudoku.getAllExistingNumbers(3, 3));
   }
-  
+
   /**
-   * Get all missing numbers of two fields in a row, regarding also column and square!
+   * Get all missing numbers of two fields in a row, regarding also column and
+   * square!
    * 
    * @throws SetException
    * @throws SolveException
@@ -1149,23 +1176,24 @@ public class SudokuAdvancedSolving {
   public void getAllMissingNumbersInARowWithTwoEmptyFields() throws SetException, SolveException {
     sudoku.set(1, 1, 3);
     sudoku.set(2, 2, 3);
-    
+
     sudoku.set(4, 4, 3);
     sudoku.set(5, 5, 3);
     sudoku.set(6, 6, 3);
     sudoku.set(7, 7, 3);
-    
+
     sudoku.set(9, 9, 3);
-   
+
     Set<Integer> tmpExpectedSet = new HashSet<Integer>();
     tmpExpectedSet.add(3);
     tmpExpectedSet.add(8);
 
     assertEquals(tmpExpectedSet, sudoku.getAllMissingNumbersInCombinationOfARow(3));
   }
-  
+
   /**
-   * Get all missing numbers of three fields in a row, regarding also column and square!
+   * Get all missing numbers of three fields in a row, regarding also column and
+   * square!
    * 
    * @throws SetException
    * @throws SolveException
@@ -1174,14 +1202,14 @@ public class SudokuAdvancedSolving {
   public void getAllMissingNumbersInARowWithThreeEmptyFields() throws SetException, SolveException {
     sudoku.set(1, 1, 3);
     sudoku.set(2, 2, 3);
-    
+
     sudoku.set(4, 4, 3);
     sudoku.set(5, 5, 3);
-    
+
     sudoku.set(7, 7, 3);
-    
+
     sudoku.set(9, 9, 3);
-      
+
     Set<Integer> tmpExpectedSet = new HashSet<Integer>();
     tmpExpectedSet.add(3);
     tmpExpectedSet.add(6);
@@ -1189,9 +1217,10 @@ public class SudokuAdvancedSolving {
 
     assertEquals(tmpExpectedSet, sudoku.getAllMissingNumbersInCombinationOfARow(3));
   }
-  
+
   /**
-   * Get all missing numbers of four fields in a row, regarding also column and square!
+   * Get all missing numbers of four fields in a row, regarding also column and
+   * square!
    * 
    * @throws SetException
    * @throws SolveException
@@ -1199,15 +1228,14 @@ public class SudokuAdvancedSolving {
   @Test
   public void getAllMissingNumbersInARowWithFourEmptyFields() throws SetException, SolveException {
     sudoku.set(1, 1, 3);
-    
-    
+
     sudoku.set(4, 4, 3);
     sudoku.set(5, 5, 3);
-    
+
     sudoku.set(7, 7, 3);
-    
+
     sudoku.set(9, 9, 3);
-      
+
     Set<Integer> tmpExpectedSet = new HashSet<Integer>();
     tmpExpectedSet.add(2);
     tmpExpectedSet.add(3);
@@ -1216,27 +1244,28 @@ public class SudokuAdvancedSolving {
 
     assertEquals(tmpExpectedSet, sudoku.getAllMissingNumbersInCombinationOfARow(3));
   }
-  
+
   /**
-   * Get all missing numbers of four fields in a row, regarding also column and square!
+   * Get all missing numbers of four fields in a row, regarding also column and
+   * square!
    * 
    * @throws SetException
    * @throws SolveException
    */
   @Test
-  public void getAllMissingNumbersInARowWithFourEmptyFieldsWithAnotherNumberOne() throws SetException, SolveException {
+  public void getAllMissingNumbersInARowWithFourEmptyFieldsWithAnotherNumberOne() throws SetException,
+      SolveException {
     sudoku.set(1, 1, 3);
-    
-    
+
     sudoku.set(4, 4, 3);
     sudoku.set(5, 5, 3);
-    
+
     sudoku.set(7, 7, 3);
-    
+
     sudoku.set(9, 9, 3);
-   
+
     sudoku.set(8, 3, 8);
-    
+
     Set<Integer> tmpExpectedSet = new HashSet<Integer>();
     tmpExpectedSet.add(2);
     tmpExpectedSet.add(3);
@@ -1244,15 +1273,17 @@ public class SudokuAdvancedSolving {
 
     assertEquals(tmpExpectedSet, sudoku.getAllMissingNumbersInCombinationOfARow(3));
   }
-  
+
   /**
-   * Get all missing numbers of four fields in a row, regarding also column and square!
+   * Get all missing numbers of four fields in a row, regarding also column and
+   * square!
    * 
    * @throws SetException
    * @throws SolveException
    */
   @Test
-  public void getAllMissingNumbersInARowWithFourEmptyFieldsWithAnotherNumberTwo() throws SetException, SolveException {
+  public void getAllMissingNumbersInARowWithFourEmptyFieldsWithAnotherNumberTwo() throws SetException,
+      SolveException {
     sudoku.set(9, 5, 1);
     sudoku.set(4, 1, 2);
     sudoku.set(2, 3, 2);
@@ -1271,24 +1302,73 @@ public class SudokuAdvancedSolving {
     sudoku.set(6, 4, 5);
     sudoku.set(3, 6, 5);
     sudoku.set(1, 9, 5);
-    
+
     Set<Integer> tmpExpectedSet = new HashSet<Integer>();
     tmpExpectedSet.add(3);
     tmpExpectedSet.add(4);
 
     assertEquals(tmpExpectedSet, sudoku.getAllMissingNumbersInCombinationOfARow(3));
   }
-  
+
   /**
-   * Get all missing numbers of multiple fields in a row, regarding also column and square!
-   * With help of "just easy" sudoku
+   * Get all missing numbers of multiple fields in a row, regarding also column
+   * and square! With help of "just easy" sudoku
+   * 
+   * @throws SetException
+   * @throws SolveException
+   */
+  @Test(expected = SolveException.class)
+  public void solveRowWithMultipleMissingFieldsOne() throws SetException, SolveException {
+    sudoku.set(9, 5, 1);
+    sudoku.set(8, 7, 1);
+    sudoku.set(6, 8, 1);
+    sudoku.set(4, 1, 2);
+    sudoku.set(2, 3, 2);
+    sudoku.set(5, 4, 2);
+    sudoku.set(8, 6, 2);
+    sudoku.set(1, 1, 3);
+    sudoku.set(8, 2, 3);
+    sudoku.set(9, 3, 3);
+    sudoku.set(7, 6, 3);
+    sudoku.set(2, 7, 3);
+    sudoku.set(5, 8, 3);
+    sudoku.set(7, 3, 4);
+    sudoku.set(2, 5, 4);
+    sudoku.set(3, 8, 4);
+    sudoku.set(2, 1, 5);
+    sudoku.set(6, 4, 5);
+    sudoku.set(3, 6, 5);
+    sudoku.set(1, 9, 5);
+    sudoku.set(4, 2, 6);
+    sudoku.set(7, 4, 6);
+    sudoku.set(8, 5, 6);
+    sudoku.set(6, 7, 6);
+    sudoku.set(2, 8, 6);
+    sudoku.set(9, 2, 7);
+    sudoku.set(8, 4, 7);
+    sudoku.set(3, 7, 7);
+    sudoku.set(4, 8, 7);
+    sudoku.set(2, 9, 7);
+    sudoku.set(2, 2, 8);
+    sudoku.set(4, 6, 8);
+    sudoku.set(5, 7, 8);
+    sudoku.set(9, 9, 8);
+    sudoku.set(3, 2, 9);
+    sudoku.set(4, 3, 9);
+    sudoku.set(7, 5, 9);
+
+    sudoku.addMissingRowNumberInMultipleMissingFields(1, 1);
+  }
+
+  /**
+   * Get all missing numbers of multiple fields in a row, regarding also column
+   * and square! With help of "just easy" sudoku
    * 
    * @throws SetException
    * @throws SolveException
    */
   @Test
-  
-  public void solveRowWithMultipleMissingFieldsOne() throws SetException, SolveException {
+  public void solveRowWithMultipleMissingFieldsTwo() throws SetException, SolveException {
     sudoku.set(9, 5, 1);
     sudoku.set(8, 7, 1);
     sudoku.set(6, 8, 1);
@@ -1329,5 +1409,268 @@ public class SudokuAdvancedSolving {
 
     sudoku.addMissingRowNumberInMultipleMissingFields(5, 3);
     assertEquals(6, sudoku.get(5, 3));
+  }
+
+  /**
+   * If there are 4 fields missing in a square and three empty fields are in a
+   * row, the fourth field may be solvable
+   * 
+   * @throws SetException
+   * @throws SolveException
+   */
+  @Test
+  public void solveNumberInSquareWithRowCombinationOne() throws SetException, SolveException {
+    
+    sudoku.set(3, 7, 7);
+    sudoku.set(4, 8, 7);
+    sudoku.set(2, 9, 7);
+    sudoku.set(5, 7, 8);
+    sudoku.set(9, 9, 8);
+    sudoku.set(7, 5, 9);
+
+    
+    sudoku.addMissingNumberInSquareWithHelpOfRow(8, 8);
+    assertEquals(7, sudoku.get(8, 8));
+  }
+  
+  /**
+   * If there are 4 fields missing in a square and three empty fields are in a
+   * row, the fourth field may be solvable
+   * 
+   * @throws SetException
+   * @throws SolveException
+   */
+  @Test
+  public void solveNumberInSquareWithRowCombinationTwo() throws SetException, SolveException {
+    
+    sudoku.set(3, 7, 7);
+    sudoku.set(4, 8, 8);
+    sudoku.set(2, 9, 7);
+    sudoku.set(5, 7, 8);
+    sudoku.set(9, 9, 8);
+    sudoku.set(7, 5, 9);
+
+    
+    sudoku.addMissingNumberInSquareWithHelpOfRow(8, 7);
+    assertEquals(7, sudoku.get(8, 7));
+  }
+  
+  /**
+   * If there are 4 fields missing in a square and three empty fields are in a
+   * row, the fourth field may be solvable
+   * 
+   * @throws SetException
+   * @throws SolveException
+   */
+  @Test (expected = SolveException.class)
+  public void solveNumberInSquareWithRowCombinationThree() throws SetException, SolveException {
+    
+    sudoku.set(3, 7, 7);
+    sudoku.set(4, 8, 8);
+    sudoku.set(2, 9, 7);
+    sudoku.set(5, 7, 8);
+    sudoku.set(9, 9, 8);
+    sudoku.set(7, 5, 9);
+
+    
+    sudoku.addMissingNumberInSquareWithHelpOfRow(8, 9);
+  }
+  
+  /**
+   * If there are 4 fields missing in a square and three empty fields are in a
+   * row, the fourth field may be solvable
+   * 
+   * @throws SetException
+   * @throws SolveException
+   */
+  @Test
+  public void solveNumberInSquareWithRowCombinationFour() throws SetException, SolveException {
+    
+    sudoku.set(3, 8, 7);
+    sudoku.set(4, 8, 8);
+    sudoku.set(2, 9, 7);
+    sudoku.set(5, 7, 8);
+    sudoku.set(9, 9, 8);
+    sudoku.set(7, 5, 9);
+
+    
+    sudoku.addMissingNumberInSquareWithHelpOfRow(7, 7);
+    assertEquals(7, sudoku.get(7, 7));
+  }
+  
+  /**
+   * If there are 4 fields missing in a square and three empty fields are in a
+   * row, the fourth field may be solvable
+   * 
+   * @throws SetException
+   * @throws SolveException
+   */
+  @Test
+  public void solveNumberInSquareWithRowCombinationFife() throws SetException, SolveException {
+    
+    sudoku.set(4, 7, 8);
+    sudoku.set(9, 9, 8);
+    sudoku.set(5, 7, 9);
+    sudoku.set(2, 9, 9);
+    sudoku.set(3, 8, 9);
+    sudoku.set(7, 5, 7);
+
+    
+    sudoku.addMissingNumberInSquareWithHelpOfRow(8, 8);
+    assertEquals(7, sudoku.get(8, 8));
+  }
+  
+  /**
+   * If there are 4 fields missing in a square and three empty fields are in a
+   * row, the fourth field may be solvable
+   * 
+   * @throws SetException
+   * @throws SolveException
+   */
+  @Test
+  public void solveNumberInSquareWithRowCombinationSix() throws SetException, SolveException {
+    
+    sudoku.set(4, 7, 7);
+    sudoku.set(9, 9, 7);
+    sudoku.set(5, 7, 9);
+    sudoku.set(2, 9, 9);
+    sudoku.set(3, 8, 9);
+    sudoku.set(7, 5, 8);
+
+    
+    sudoku.addMissingNumberInSquareWithHelpOfRow(8, 7);
+    assertEquals(7, sudoku.get(8, 7));
+  }
+  
+  /**
+   * If there are 4 fields missing in a square and three empty fields are in a
+   * column, the fourth field may be solvable
+   * 
+   * @throws SetException
+   * @throws SolveException
+   */
+  @Test
+  public void solveNumberInSquareWithColumnCombinationOne() throws SetException, SolveException {
+    
+    sudoku.set(3, 1, 4);
+    sudoku.set(4, 1, 5);
+    sudoku.set(2, 1, 6);
+    sudoku.set(5, 2, 4);
+    sudoku.set(9, 2, 6);
+    sudoku.set(7, 3, 3);
+
+    
+    sudoku.addMissingNumberInSquareWithHelpOfColumn(2, 5);
+    assertEquals(7, sudoku.get(2, 5));
+  }
+  
+  /**
+   * If there are 4 fields missing in a square and three empty fields are in a
+   * column, the fourth field may be solvable
+   * 
+   * @throws SetException
+   * @throws SolveException
+   */
+  @Test
+  public void solveNumberInSquareWithColumnCombinationTwo() throws SetException, SolveException {
+    
+    sudoku.set(3, 1, 4);
+    sudoku.set(4, 1, 5);
+    sudoku.set(2, 1, 6);
+    sudoku.set(5, 2, 5);
+    sudoku.set(9, 2, 6);
+    sudoku.set(7, 3, 3);
+
+    
+    sudoku.addMissingNumberInSquareWithHelpOfColumn(2, 4);
+    assertEquals(7, sudoku.get(2, 4));
+  }
+  
+  /**
+   * If there are 4 fields missing in a square and three empty fields are in a
+   * column, the fourth field may be solvable
+   * 
+   * @throws SetException
+   * @throws SolveException
+   */
+  @Test
+  public void solveNumberInSquareWithColumnCombinationThree() throws SetException, SolveException {
+    
+    sudoku.set(3, 2, 4);
+    sudoku.set(4, 2, 5);
+    sudoku.set(2, 2, 6);
+    sudoku.set(5, 1, 5);
+    sudoku.set(9, 1, 6);
+    sudoku.set(7, 3, 3);
+
+    
+    sudoku.addMissingNumberInSquareWithHelpOfColumn(1, 4);
+    assertEquals(7, sudoku.get(1, 4));
+  }
+  
+  /**
+   * If there are 4 fields missing in a square and three empty fields are in a
+   * column, the fourth field may be solvable
+   * 
+   * @throws SetException
+   * @throws SolveException
+   */
+  @Test
+  public void solveNumberInSquareWithColumnCombinationFour() throws SetException, SolveException {
+    
+    sudoku.set(3, 2, 4);
+    sudoku.set(4, 2, 5);
+    sudoku.set(2, 2, 6);
+    sudoku.set(5, 1, 5);
+    sudoku.set(9, 1, 4);
+    sudoku.set(7, 3, 3);
+
+    
+    sudoku.addMissingNumberInSquareWithHelpOfColumn(1, 6);
+    assertEquals(7, sudoku.get(1, 6));
+  }
+  
+  /**
+   * If there are 4 fields missing in a square and three empty fields are in a
+   * column, the fourth field may be solvable
+   * 
+   * @throws SetException
+   * @throws SolveException
+   */
+  @Test (expected = SolveException.class)
+  public void solveNumberInSquareWithColumnCombinationFife() throws SetException, SolveException {
+    
+    sudoku.set(3, 2, 4);
+    sudoku.set(4, 2, 5);
+    sudoku.set(2, 2, 6);
+    
+    sudoku.set(9, 1, 4);
+    sudoku.set(7, 3, 3);
+
+    
+    sudoku.addMissingNumberInSquareWithHelpOfColumn(1, 6);
+    assertEquals(7, sudoku.get(1, 6));
+  }
+  
+  /**
+   * If there are 4 fields missing in a square and three empty fields are in a
+   * column, the fourth field may be solvable
+   * 
+   * @throws SetException
+   * @throws SolveException
+   */
+  @Test (expected = SolveException.class)
+  public void solveNumberInSquareWithColumnCombinationSix() throws SetException, SolveException {
+    
+    sudoku.set(3, 2, 4);
+    sudoku.set(4, 2, 5);
+    sudoku.set(2, 2, 6);
+    sudoku.set(5, 1, 5);
+    sudoku.set(9, 1, 4);
+    
+
+    
+    sudoku.addMissingNumberInSquareWithHelpOfColumn(1, 6);
+    assertEquals(7, sudoku.get(1, 6));
   }
 }

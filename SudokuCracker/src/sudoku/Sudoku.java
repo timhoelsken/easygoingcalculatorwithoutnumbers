@@ -90,18 +90,19 @@ public class Sudoku {
                               addMissingNumberInSquareWithRowColumnCross(x, y);
                               doAgain = true;
                             } catch (SolveException e9) {
-                              /**
-                               * STARTS A LOOP... WHY EVER!!! TODO: Test? which
-                               * one? =>solveRowWithMultipleMissingFieldsOne in
-                               * AdvancedSolving represents the sudoku so far
-                               * without this method!
-                               */
-                              // try {
-                              // addMissingRowNumberInMultipleMissingFields(x,
-                              // y);
-                              // doAgain = true;
-                              // } catch (SolveException e10) {
-                              // }
+                              try {
+                                addMissingRowNumberInMultipleMissingFields(x, y);
+                                doAgain = true;
+                              } catch (SolveException e10) {
+                                /**
+                                 * Method does not work right => write better tests :(
+                                 */
+                                // try {
+                                // addMissingNumberInSquareWithHelpOfRow(x, y);
+                                // doAgain = true;
+                                // } catch (SolveException e11) {
+                                // }
+                              }
                             }
                           }
                         }
@@ -288,14 +289,17 @@ public class Sudoku {
     return tmpSquareNumbers;
   }
 
-  private void setIfValueIsLastMissingValue(Set<Integer> aValueList, int x, int y) throws SetException,
-      InternalException {
+  private void setIfValueIsLastMissingValue(Set<Integer> aValueList, int x, int y) throws InternalException {
     Set<Integer> tmpAllNumbers = new HashSet<Integer>(NUMBERS);
 
     tmpAllNumbers.removeAll(aValueList);
 
     if (tmpAllNumbers.size() == 1) {
-      set((Integer) tmpAllNumbers.toArray()[0], x, y);
+      try {
+        set((Integer) tmpAllNumbers.toArray()[0], x, y);
+      } catch (SetException e) {
+        throw new InternalException();
+      }
     } else {
       throw new InternalException();
     }
@@ -494,7 +498,8 @@ public class Sudoku {
       for (Iterator<Integer> tmpIterator = tmpMissingNumbers.iterator(); tmpIterator.hasNext();) {
         int tmpItem = tmpIterator.next();
         if (getColumnNumbers(tmpOtherColumnOne).contains(tmpItem)
-            && getColumnNumbers(tmpOtherColumnTwo).contains(tmpItem)) {
+            && getColumnNumbers(tmpOtherColumnTwo).contains(tmpItem)
+            && !getSquareNumbers(tmpSquare).contains(tmpItem)) {
           try {
             set(tmpItem, x, y);
             return;
@@ -617,7 +622,8 @@ public class Sudoku {
 
       for (Iterator<Integer> tmpIterator = tmpMissingNumbers.iterator(); tmpIterator.hasNext();) {
         int tmpItem = tmpIterator.next();
-        if (getRowNumbers(tmpOtherRowOne).contains(tmpItem) && getRowNumbers(tmpOtherRowTwo).contains(tmpItem)) {
+        if (getRowNumbers(tmpOtherRowOne).contains(tmpItem) && getRowNumbers(tmpOtherRowTwo).contains(tmpItem)
+            && !getSquareNumbers(tmpSquare).contains(tmpItem)) {
           try {
             set(tmpItem, x, y);
             return;
@@ -1106,7 +1112,145 @@ public class Sudoku {
         }
       }
     }
-
+    throw new SolveException("Not able to determ value in a row with multiple missing fields.");
   }
 
+  // === not tested well enough => see solve method when adding this method
+  /**
+   * 
+   * Tries to determ a missing number in a square. In case there are 4 fields
+   * and three of them build an empty row whithin a square, the row may
+   * contain a number that is missing in the square so that it can be surely set
+   * on the fourth field
+   * 
+   * @param x
+   * @param y
+   * @throws SolveException
+   */
+  public void addMissingNumberInSquareWithHelpOfRow(int x, int y) throws SolveException {
+    Square tmpSquare = getSquare(x, y);
+    int tmpHelpingRow = 0;
+    Set<Integer> tmpMissingNumbers = new HashSet<Integer>(getMissingSquareNumbers(tmpSquare));
+
+    if (get(tmpSquare.getXUpLeft(), y) == 0 && tmpSquare.getXUpLeft() != x) {
+      throw new SolveException("Missing Number cannot be determt by a single row");
+    }
+    if (get(tmpSquare.getXUpLeft() + 1, y) == 0 && tmpSquare.getXUpLeft() + 1 != x) {
+      throw new SolveException("Missing Number cannot be determt by a single row");
+    }
+    if (get(tmpSquare.getXUpLeft() + 2, y) == 0 && tmpSquare.getXUpLeft() + 2 != x) {
+      throw new SolveException("Missing Number cannot be determt by a single row");
+    }
+
+    if (get(tmpSquare.getXUpLeft(), tmpSquare.getYUpLeft()) == 0 && tmpSquare.getYUpLeft() != y) {
+      if (get(tmpSquare.getXUpLeft() + 1, tmpSquare.getYUpLeft()) == 0
+          && get(tmpSquare.getXUpLeft() + 2, tmpSquare.getYUpLeft()) == 0) {
+        tmpHelpingRow = tmpSquare.getYUpLeft();
+      } else {
+        throw new SolveException("Missing Number cannot be determt by a single row");
+      }
+    } else if (get(tmpSquare.getXUpLeft(), tmpSquare.getYUpLeft() + 1) == 0 && tmpSquare.getYUpLeft() + 1 != y) {
+      if (get(tmpSquare.getXUpLeft() + 1, tmpSquare.getYUpLeft() + 1) == 0
+          && get(tmpSquare.getXUpLeft() + 2, tmpSquare.getYUpLeft() + 1) == 0) {
+        tmpHelpingRow = tmpSquare.getYUpLeft() + 1;
+      } else {
+        throw new SolveException("Missing Number cannot be determt by a single row");
+      }
+    } else if (get(tmpSquare.getXUpLeft(), tmpSquare.getYUpLeft() + 2) == 0 && tmpSquare.getYUpLeft() + 2 != y) {
+      if (get(tmpSquare.getXUpLeft() + 1, tmpSquare.getYUpLeft() + 2) == 0
+          && get(tmpSquare.getXUpLeft() + 2, tmpSquare.getYUpLeft() + 2) == 0) {
+        tmpHelpingRow = tmpSquare.getYUpLeft() + 2;
+      } else {
+        throw new SolveException("Missing Number cannot be determt by a single row");
+      }
+    }
+
+    if (tmpHelpingRow == 0) {
+      throw new SolveException("Missing Number cannot be determt by a single row");
+    }
+
+    Set<Integer> tmpMissingNumbersInRow = new HashSet<Integer>(getMissingRowNumbers(tmpHelpingRow));
+
+    tmpMissingNumbers.removeAll(tmpMissingNumbersInRow);
+
+    if (tmpMissingNumbers.size() == 1) {
+      try {
+        set((Integer) tmpMissingNumbers.toArray()[0], x, y);
+        return;
+      } catch (SetException e) {
+        throw new SolveException("Missing Number cannot be determt by a single row");
+      }
+    }
+    throw new SolveException("Missing Number cannot be determt by a single row");
+  }
+
+  // === This Method bases on "addMissingNumberInSquareWithHelpOfRow"
+  // since that mthod is not tested good enough, the following also does not
+  // work correctly! ===
+  /**
+   * Tries to determ a missing number in a square. In case there are 4 fields
+   * and three of them build an empty column whithin a square, the column may
+   * contain a number that is missing in the square so that it can be surely set
+   * on the fourth field
+   * 
+   * @param x
+   * @param y
+   * @throws SolveException
+   */
+  public void addMissingNumberInSquareWithHelpOfColumn(int x, int y) throws SolveException {
+    Square tmpSquare = getSquare(x, y);
+    int tmpHelpingColumn = 0;
+    Set<Integer> tmpMissingNumbers = new HashSet<Integer>(getMissingSquareNumbers(tmpSquare));
+
+    if (get(x, tmpSquare.getYUpLeft()) == 0 && tmpSquare.getYUpLeft() != y) {
+      throw new SolveException("Missing Number cannot be determt by a single column");
+    }
+    if (get(x, tmpSquare.getYUpLeft() + 1) == 0 && tmpSquare.getYUpLeft() + 1 != y) {
+      throw new SolveException("Missing Number cannot be determt by a single column");
+    }
+    if (get(x, tmpSquare.getYUpLeft() + 2) == 0 && tmpSquare.getYUpLeft() + 2 != y) {
+      throw new SolveException("Missing Number cannot be determt by a single column");
+    }
+
+    if (get(tmpSquare.getXUpLeft(), tmpSquare.getYUpLeft()) == 0 && tmpSquare.getXUpLeft() != x) {
+      if (get(tmpSquare.getXUpLeft(), tmpSquare.getYUpLeft() + 1) == 0
+          && get(tmpSquare.getXUpLeft(), tmpSquare.getYUpLeft() + 2) == 0) {
+        tmpHelpingColumn = tmpSquare.getXUpLeft();
+      } else {
+        throw new SolveException("Missing Number cannot be determt by a single column");
+      }
+    } else if (get(tmpSquare.getXUpLeft() + 1, tmpSquare.getYUpLeft()) == 0 && tmpSquare.getXUpLeft() + 1 != x) {
+      if (get(tmpSquare.getXUpLeft() + 1, tmpSquare.getYUpLeft() + 1) == 0
+          && get(tmpSquare.getXUpLeft() + 1, tmpSquare.getYUpLeft() + 2) == 0) {
+        tmpHelpingColumn = tmpSquare.getXUpLeft() + 1;
+      } else {
+        throw new SolveException("Missing Number cannot be determt by a single column");
+      }
+    } else if (get(tmpSquare.getXUpLeft() + 2, tmpSquare.getYUpLeft()) == 0 && tmpSquare.getXUpLeft() + 2 != x) {
+      if (get(tmpSquare.getXUpLeft() + 2, tmpSquare.getYUpLeft() + 1) == 0
+          && get(tmpSquare.getXUpLeft() + 2, tmpSquare.getYUpLeft() + 2) == 0) {
+        tmpHelpingColumn = tmpSquare.getXUpLeft() + 2;
+      } else {
+        throw new SolveException("Missing Number cannot be determt by a single column");
+      }
+    }
+
+    if (tmpHelpingColumn == 0) {
+      throw new SolveException("Missing Number cannot be determt by a single column");
+    }
+
+    Set<Integer> tmpMissingNumbersInColumn = new HashSet<Integer>(getMissingColumnNumbers(tmpHelpingColumn));
+
+    tmpMissingNumbers.removeAll(tmpMissingNumbersInColumn);
+
+    if (tmpMissingNumbers.size() == 1) {
+      try {
+        set((Integer) tmpMissingNumbers.toArray()[0], x, y);
+        return;
+      } catch (SetException e) {
+        throw new SolveException("Missing Number cannot be determt by a single column");
+      }
+    }
+    throw new SolveException("Missing Number cannot be determt by a single column");
+  }
 }

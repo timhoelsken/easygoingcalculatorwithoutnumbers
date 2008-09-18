@@ -48,7 +48,9 @@ public class Sudoku {
    */
   public int[] solve() throws SetException {
     boolean doAgain = true;
+    int counter = 0;
     while (doAgain) {
+      counter++;
       doAgain = false;
       for (int y = 1; y <= DIMENSION; y++) {
         for (int x = 1; x <= DIMENSION; x++) {
@@ -94,14 +96,16 @@ public class Sudoku {
                                 addMissingRowNumberInMultipleMissingFields(x, y);
                                 doAgain = true;
                               } catch (SolveException e10) {
-                                /**
-                                 * Method does not work right => write better tests :(
-                                 */
-                                // try {
-                                // addMissingNumberInSquareWithHelpOfRow(x, y);
-                                // doAgain = true;
-                                // } catch (SolveException e11) {
-                                // }
+                                try {
+                                  addMissingNumberInSquareWithHelpOfRow(x, y);
+                                  doAgain = true;
+                                } catch (SolveException e11) {
+                                  try {
+                                    addMissingNumberInSquareWithHelpOfColumn(x, y);
+                                    doAgain = true;
+                                  } catch (SolveException e12) {
+                                  }
+                                }
                               }
                             }
                           }
@@ -1069,28 +1073,45 @@ public class Sudoku {
 
   /**
    * Identifies the numbers that are missing in ALL empty fields of that row,
-   * regarding row, column and square
+   * regarding row, column and square. This means that it can return one or more
+   * numbers that each are determable.
    * 
+   * @param aMissingNumbersSet
    * @param y
-   * @return A Set of all missing numbers, regarding row, column and square
+   * @return A Set of all determable missing numbers, regarding row, column and
+   *         square
    */
-  public Set<Integer> getAllMissingNumbersInCombinationOfARow(int y) {
+  public Set<Integer> getAllMissingDetermableNumbersInCombinationOfARow(Set<Integer> aMissingNumbersSet, int y) {
 
-    Set<Integer> tmpMissingNumbers = new HashSet<Integer>(NUMBERS);
-    for (int x = 1; x < DIMENSION + 1; x++) {
-      if (get(x, y) == 0) {
-        tmpMissingNumbers.removeAll(getAllExistingNumbers(x, y));
+    Set<Integer> tmpReturningMissingNumbers = new HashSet<Integer>();
+
+    for (Iterator<Integer> tmpIterator = aMissingNumbersSet.iterator(); tmpIterator.hasNext();) {
+      int tmpItem = tmpIterator.next();
+      int tmpNumberFoundCounter = 0;
+      int tmpEmptyFieldCounter = 0;
+      // Set<Integer> tmpMissingNumbers = new HashSet<Integer>(NUMBERS);
+      for (int x = 1; x < DIMENSION + 1; x++) {
+        if (get(x, y) == 0) {
+          tmpEmptyFieldCounter++;
+          if (getAllExistingNumbers(x, y).contains(tmpItem)) {
+            tmpNumberFoundCounter++;
+          }
+        }
+      }
+      if (tmpEmptyFieldCounter - tmpNumberFoundCounter == 1) {
+        tmpReturningMissingNumbers.add(tmpItem);
       }
     }
-    return tmpMissingNumbers;
+    return tmpReturningMissingNumbers;
   }
 
   /**
    * Identifies the numbers that are missing in ALL empty fields of that row,
    * regarding row, column and square. All numbers minus the set of the row
-   * numbers, minus the set of the numbers from the method
-   * "getAllMissingNumbersInCombinationOfARow" can determ a missing number if
-   * the resulting set only contains a single number
+   * numbers is given to the method
+   * "getAllMissingDetermableNumbersInCombinationOfARow". This method can
+   * identify the missing number of the field if the resulting set of the method
+   * only contains a single number
    * 
    * @param x
    * @param y
@@ -1100,8 +1121,8 @@ public class Sudoku {
 
     Set<Integer> tmpMissingNumbers = new HashSet<Integer>(NUMBERS);
     tmpMissingNumbers.removeAll(getRowNumbers(y));
-    tmpMissingNumbers.removeAll(getAllMissingNumbersInCombinationOfARow(y));
 
+    tmpMissingNumbers = getAllMissingDetermableNumbersInCombinationOfARow(tmpMissingNumbers, y);
     if (tmpMissingNumbers.size() == 1) {
       if (get(x, y) == 0) {
         try {
@@ -1115,13 +1136,12 @@ public class Sudoku {
     throw new SolveException("Not able to determ value in a row with multiple missing fields.");
   }
 
-  // === not tested well enough => see solve method when adding this method
   /**
    * 
    * Tries to determ a missing number in a square. In case there are 4 fields
-   * and three of them build an empty row whithin a square, the row may
-   * contain a number that is missing in the square so that it can be surely set
-   * on the fourth field
+   * and three of them build an empty row whithin a square, the row may contain
+   * a number that is missing in the square so that it can be surely set on the
+   * fourth field
    * 
    * @param x
    * @param y
@@ -1132,6 +1152,14 @@ public class Sudoku {
     int tmpHelpingRow = 0;
     Set<Integer> tmpMissingNumbers = new HashSet<Integer>(getMissingSquareNumbers(tmpSquare));
 
+    // simple check if there are 5 numbers set in the square, otherwise this
+    // method will go nuts
+    if (tmpMissingNumbers.size() != 4) {
+      throw new SolveException("Missing Number cannot be determt by a single row");
+    }
+
+    // check if in the row where the number is searched only one field is empty
+    // => this is necessary
     if (get(tmpSquare.getXUpLeft(), y) == 0 && tmpSquare.getXUpLeft() != x) {
       throw new SolveException("Missing Number cannot be determt by a single row");
     }
@@ -1142,6 +1170,7 @@ public class Sudoku {
       throw new SolveException("Missing Number cannot be determt by a single row");
     }
 
+    // identify the row where all three fields are empty
     if (get(tmpSquare.getXUpLeft(), tmpSquare.getYUpLeft()) == 0 && tmpSquare.getYUpLeft() != y) {
       if (get(tmpSquare.getXUpLeft() + 1, tmpSquare.getYUpLeft()) == 0
           && get(tmpSquare.getXUpLeft() + 2, tmpSquare.getYUpLeft()) == 0) {
@@ -1184,9 +1213,6 @@ public class Sudoku {
     throw new SolveException("Missing Number cannot be determt by a single row");
   }
 
-  // === This Method bases on "addMissingNumberInSquareWithHelpOfRow"
-  // since that mthod is not tested good enough, the following also does not
-  // work correctly! ===
   /**
    * Tries to determ a missing number in a square. In case there are 4 fields
    * and three of them build an empty column whithin a square, the column may
@@ -1202,6 +1228,15 @@ public class Sudoku {
     int tmpHelpingColumn = 0;
     Set<Integer> tmpMissingNumbers = new HashSet<Integer>(getMissingSquareNumbers(tmpSquare));
 
+    // simple check if there are 5 numbers set in the square, otherwise this
+    // method will go nuts
+    if (tmpMissingNumbers.size() != 4) {
+      throw new SolveException("Missing Number cannot be determt by a single row");
+    }
+
+    // check if in the coulmn where the number is searched only one field is
+    // empty
+    // => this is necessary
     if (get(x, tmpSquare.getYUpLeft()) == 0 && tmpSquare.getYUpLeft() != y) {
       throw new SolveException("Missing Number cannot be determt by a single column");
     }
@@ -1212,6 +1247,7 @@ public class Sudoku {
       throw new SolveException("Missing Number cannot be determt by a single column");
     }
 
+    // identify the column where all three fields are empty
     if (get(tmpSquare.getXUpLeft(), tmpSquare.getYUpLeft()) == 0 && tmpSquare.getXUpLeft() != x) {
       if (get(tmpSquare.getXUpLeft(), tmpSquare.getYUpLeft() + 1) == 0
           && get(tmpSquare.getXUpLeft(), tmpSquare.getYUpLeft() + 2) == 0) {
@@ -1252,5 +1288,31 @@ public class Sudoku {
       }
     }
     throw new SolveException("Missing Number cannot be determt by a single column");
+  }
+
+  /**
+   * 
+   * @param x
+   * @param y
+   */
+  public void theNextSolvingMethod(int x, int y) {
+    /**
+     * 000 390 062 
+     * 609 020 700 
+     * 000 006 009
+     * 
+     * 486 730 105 
+     * 003 000 408 
+     * 005 048 637
+     * 
+     * 500 200 000 
+     * 004 073 951 
+     * 300 051 000
+     * 
+     * On 6/1 the number 7 has to be set => columns 4 and 5 contain a 7, row 2
+     * also
+     * 
+     * the following missing number is the number two on position 7/9... I guess this is another method
+     */
   }
 }

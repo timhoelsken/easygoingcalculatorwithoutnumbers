@@ -3,6 +3,7 @@
  */
 package sudoku;
 
+import java.awt.Color;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -10,6 +11,7 @@ import java.util.Set;
 import sudoku.exceptions.InternalException;
 import sudoku.exceptions.SetException;
 import sudoku.exceptions.SolveException;
+import sudoku.userinterface.swing.FrameSudoku;
 
 /**
  * The Sudoku Class :P
@@ -48,9 +50,7 @@ public class Sudoku {
    */
   public int[] solve() throws SetException {
     boolean doAgain = true;
-    int counter = 0;
     while (doAgain) {
-      counter++;
       doAgain = false;
       for (int y = 1; y <= DIMENSION; y++) {
         for (int x = 1; x <= DIMENSION; x++) {
@@ -1297,22 +1297,140 @@ public class Sudoku {
    */
   public void theNextSolvingMethod(int x, int y) {
     /**
-     * 000 390 062 
-     * 609 020 700 
-     * 000 006 009
+     * 000 390 062 609 020 700 000 006 009
      * 
-     * 486 730 105 
-     * 003 000 408 
-     * 005 048 637
+     * 486 730 105 003 000 408 005 048 637
      * 
-     * 500 200 000 
-     * 004 073 951 
-     * 300 051 000
+     * 500 200 000 004 073 951 300 051 000
      * 
      * On 6/1 the number 7 has to be set => columns 4 and 5 contain a 7, row 2
      * also
      * 
-     * the following missing number is the number two on position 7/9... I guess this is another method
+     * the following missing number is the number two on position 7/9... I guess
+     * this is another method
      */
   }
+
+  /**
+   * 
+   * @return the dimension of the sudoku
+   */
+  public int getDimension() {
+    return DIMENSION;
+  }
+
+  /**
+   * 
+   * @return 
+   * @throws SetException
+   */
+  public boolean solveInFrame() throws SetException {
+    boolean doAgain = true;
+      for (int y = 1; y <= DIMENSION; y++) {
+        for (int x = 1; x <= DIMENSION; x++) {
+          int tmpValue = get(x, y);
+          if (tmpValue == 0) {
+            try {
+              addLastMissingNumberInColumn(x, y);
+              doAgain = true;
+              FrameSudoku.labelArray[x - 1][y - 1].setForeground(Color.RED);
+              FrameSudoku.labelArray[x - 1][y - 1].setText(" " + get(x, y) + " ");
+              return doAgain;
+            } catch (SolveException e1) {
+              try {
+                addLastMissingNumberInRow(x, y);
+                doAgain = true;
+                FrameSudoku.labelArray[x - 1][y - 1].setForeground(Color.RED);
+                FrameSudoku.labelArray[x - 1][y - 1].setText(" " + get(x, y) + " ");
+                return doAgain;
+              } catch (SolveException e2) {
+                try {
+                  addLastMissingNumberInSquare(x, y);
+                  doAgain = true;
+                  FrameSudoku.labelArray[x - 1][y - 1].setForeground(Color.RED);
+                  FrameSudoku.labelArray[x - 1][y - 1].setText(" " + get(x, y) + " ");
+                  return doAgain;
+                } catch (SolveException e3) {
+                  try {
+                    addLastMissingNumberInRowAndColumn(x, y);
+                    doAgain = true;
+                    FrameSudoku.labelArray[x - 1][y - 1].setForeground(Color.RED);
+                    FrameSudoku.labelArray[x - 1][y - 1].setText(" " + get(x, y) + " ");
+                    return doAgain;
+                  } catch (SolveException e4) {
+                    try {
+                      addLastMissingNumberInRowAndSquare(x, y);
+                      doAgain = true;
+                      FrameSudoku.labelArray[x - 1][y - 1].setForeground(Color.RED);
+                      FrameSudoku.labelArray[x - 1][y - 1].setText(" " + get(x, y) + " ");
+                      return doAgain;
+                    } catch (SolveException e5) {
+                      try {
+                        addLastMissingNumberInColumnAndSquare(x, y);
+                        doAgain = true;
+                        FrameSudoku.labelArray[x - 1][y - 1].setForeground(Color.RED);
+                        FrameSudoku.labelArray[x - 1][y - 1].setText(" " + get(x, y) + " ");
+                        return doAgain;
+                      } catch (SolveException e6) {
+                        try {
+                          addMissingNumberWithColumnCombination(x, y);
+                          doAgain = true;
+                          FrameSudoku.labelArray[x - 1][y - 1].setForeground(Color.RED);
+                          FrameSudoku.labelArray[x - 1][y - 1].setText(" " + get(x, y) + " ");
+                          return doAgain;
+                        } catch (SolveException e7) {
+                          try {
+                            addMissingNumberWithRowCombination(x, y);
+                            doAgain = true;
+                            FrameSudoku.labelArray[x - 1][y - 1].setForeground(Color.RED);
+                            FrameSudoku.labelArray[x - 1][y - 1].setText(" " + get(x, y) + " ");
+                            return doAgain;
+                          } catch (SolveException e8) {
+                            try {
+                              addMissingNumberInSquareWithRowColumnCross(x, y);
+                              doAgain = true;
+                              FrameSudoku.labelArray[x - 1][y - 1].setForeground(Color.RED);
+                              FrameSudoku.labelArray[x - 1][y - 1].setText(" " + get(x, y) + " ");
+                              return doAgain;
+                            } catch (SolveException e9) {
+                              try {
+                                addMissingRowNumberInMultipleMissingFields(x, y);
+                                doAgain = true;
+                                FrameSudoku.labelArray[x - 1][y - 1].setForeground(Color.RED);
+                                FrameSudoku.labelArray[x - 1][y - 1].setText(" " + get(x, y) + " ");
+                                return doAgain;
+                              } catch (SolveException e10) {
+                                try {
+                                  addMissingNumberInSquareWithHelpOfRow(x, y);
+                                  doAgain = true;
+                                  FrameSudoku.labelArray[x - 1][y - 1].setForeground(Color.RED);
+                                  FrameSudoku.labelArray[x - 1][y - 1].setText(" " + get(x, y) + " ");
+                                  return doAgain;
+                                } catch (SolveException e11) {
+                                  try {
+                                    addMissingNumberInSquareWithHelpOfColumn(x, y);
+                                    doAgain = true;
+                                    FrameSudoku.labelArray[x - 1][y - 1].setForeground(Color.RED);
+                                    FrameSudoku.labelArray[x - 1][y - 1].setText(" " + get(x, y) + " ");
+                                    return doAgain;
+                                  } catch (SolveException e12) {
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      return false;
+    }
+
+
 }

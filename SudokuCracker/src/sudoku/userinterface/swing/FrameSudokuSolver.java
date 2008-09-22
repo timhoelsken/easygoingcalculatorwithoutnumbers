@@ -4,20 +4,20 @@ import sudoku.Sudoku;
 import sudoku.exceptions.SetException;
 
 /**
- * 
+ *
  * @author Tim
  *
  */
 public class FrameSudokuSolver extends Thread{
 
 //defines the speed of "loading"
-  private static int DELAY = 500;
+  private static int DELAY = 100;
 
 private Sudoku sudoku = new Sudoku();
 
   /**
    * The constructor
-   * 
+   *
    * @param aSudoku
    */
   public FrameSudokuSolver(Sudoku aSudoku) {
@@ -27,6 +27,7 @@ private Sudoku sudoku = new Sudoku();
   /**
    * starts the "loading"
    */
+  @Override
   public void run() {
 
     // is called by start() !!!

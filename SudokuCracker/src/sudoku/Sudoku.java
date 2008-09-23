@@ -1432,5 +1432,21 @@ public class Sudoku {
       return false;
     }
 
+  /**
+   * 
+   * @param aValue
+   * @param x
+   * @param y
+   * @throws SetException 
+   */
+  public void setInFrame(int aValue, int x, int y) throws SetException {
+    if (0 <= aValue && aValue <= DIMENSION) {
+      values[y - 1][x - 1] = aValue;
+    } else {
+      throw new SetException("Setting " + aValue + " on (" + x + "|" + y + ") not allowed.");
+    }
+    
+  }
+
 
 }

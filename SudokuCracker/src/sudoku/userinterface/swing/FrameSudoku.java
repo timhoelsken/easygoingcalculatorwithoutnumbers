@@ -3,8 +3,10 @@ package sudoku.userinterface.swing;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -27,19 +29,28 @@ public class FrameSudoku extends JFrame {
    */
   private static final long serialVersionUID = 1L;
 
-  // private Image sudokuIcon;
+  private Image sudokuIcon;
 
   private JPanel panelLeft;
   private JPanel panelRight = new JPanel(new GridLayout(3, 1));
+
+  private Sudoku sudoku = new Sudoku();
+  private AddSudokuDialog dialogAddSudoku = new AddSudokuDialog(this, sudoku);
 
   /**
    * 
    */
   public static JLabel[][] labelArray;
 
-  private static JButton solveButton = new JButton("solve!");
+  /**
+   * 
+   */
+  public static JButton solveButton = new JButton("solve!");
 
-  private Sudoku sudoku = new Sudoku();
+  /**
+   * 
+   */
+  public static JButton changeButton = new JButton("change Sudoku");
 
   /**
    * the constructor of a FrameCalculator
@@ -51,16 +62,16 @@ public class FrameSudoku extends JFrame {
     super("Sudoku Cracker 1.0");
 
     // set Icon
-    // ClassLoader tmpClassLoader = this.getClass().getClassLoader();
-    // URL tmpUrl = tmpClassLoader.getResource("SudokuIcon.jpg");
-    // sudokuIcon = getToolkit().getImage(tmpUrl);
-    // setIconImage(sudokuIcon);
+    ClassLoader tmpClassLoader = this.getClass().getClassLoader();
+    URL tmpUrl = tmpClassLoader.getResource("SudokuIcon.jpg");
+    sudokuIcon = getToolkit().getImage(tmpUrl);
+    setIconImage(sudokuIcon);
 
     // define frame
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     getContentPane().setLayout(new GridLayout(1, 2));
 
-    if (sudoku.getDimension()!=9) {
+    if (sudoku.getDimension() != 9) {
       throw new Exception("Size of sudoku is not a usable number");
     }
     panelLeft = new JPanel(new GridLayout(sudoku.getDimension(), sudoku.getDimension()));
@@ -69,11 +80,12 @@ public class FrameSudoku extends JFrame {
 
     panelLeft.setBorder(BorderFactory.createLineBorder(Color.black));
 
-    insertSudoku();
+    insertStandardSudoku();
 
     add(panelLeft);
 
     panelRight.add(solveButton);
+    panelRight.add(changeButton);
     add(panelRight);
 
     // add listeners for solving
@@ -82,9 +94,18 @@ public class FrameSudoku extends JFrame {
 
         FrameSudokuSolver tmpFrameSudokuSolver = new FrameSudokuSolver(sudoku);
         solveButton.setEnabled(false);
+        changeButton.setEnabled(false);
         tmpFrameSudokuSolver.start();
 
         // solveButton.setEnabled(true);
+      }
+    });
+
+    changeButton.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent ae) {
+
+        dialogAddSudoku.load();
+
       }
     });
 
@@ -98,7 +119,7 @@ public class FrameSudoku extends JFrame {
     setLocation(tmpX, tmpY);
   }
 
-  private void insertSudoku() {
+  private void insertStandardSudoku() {
     try {
 
       sudoku.set(3, 1, 1);
@@ -138,22 +159,30 @@ public class FrameSudoku extends JFrame {
       sudoku.set(9, 3, 9);
       sudoku.set(3, 8, 9);
       sudoku.set(4, 9, 9);
-
-      for (int y = 0; y < sudoku.getDimension(); y++) {
-        for (int x = 0; x < sudoku.getDimension(); x++) {
-          labelArray[x][y] = new JLabel("   ");
-          if (sudoku.get(x + 1, y + 1) != 0) {
-            labelArray[x][y].setText(" " + sudoku.get(x + 1, y + 1) + " ");
-          }
-          labelArray[x][y].setBorder(BorderFactory.createLineBorder(Color.black));
-          panelLeft.add(labelArray[x][y]);
-        }
-      }
-
     } catch (SetException e) {
       System.out.println("ERROR!!!\n");
       e.getMessage();
     }
+    insertSudoku();
+  }
 
+  /**
+   * 
+   */
+  public void insertSudoku() {
+
+    panelLeft.removeAll();
+    for (int y = 0; y < sudoku.getDimension(); y++) {
+      for (int x = 0; x < sudoku.getDimension(); x++) {
+        labelArray[x][y] = new JLabel("   ");
+        if (sudoku.get(x + 1, y + 1) != 0) {
+          labelArray[x][y].setText(" " + sudoku.get(x + 1, y + 1) + " ");
+        }
+        labelArray[x][y].setBorder(BorderFactory.createLineBorder(Color.black));
+        panelLeft.add(labelArray[x][y]);
+      }
+    }
+
+    pack();
   }
 }

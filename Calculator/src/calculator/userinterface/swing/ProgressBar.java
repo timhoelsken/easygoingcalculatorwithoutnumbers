@@ -15,7 +15,7 @@ public class ProgressBar extends Thread {
 
   /**
    * The constructor
-   * 
+   *
    * @param aParentFrame
    */
   public ProgressBar(FrameCalculator aParentFrame) {
@@ -25,6 +25,7 @@ public class ProgressBar extends Thread {
   /**
    * starts the "loading"
    */
+  @Override
   public void run() {
 
     // is called by start() !!!

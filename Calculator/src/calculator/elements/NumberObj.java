@@ -14,7 +14,7 @@ public class NumberObj extends Operand {
 
   /**
    * constructor
-   * 
+   *
    * @param aValue
    */
   public NumberObj(Double aValue) {
@@ -24,6 +24,7 @@ public class NumberObj extends Operand {
   /**
    * @see java.lang.Object#toString()
    */
+  @Override
   public String toString() {
     return Double.toString(value);
   }

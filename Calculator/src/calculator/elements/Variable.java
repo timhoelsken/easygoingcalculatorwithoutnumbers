@@ -15,7 +15,7 @@ public class Variable extends Operand {
 
   /**
    * constructor
-   * 
+   *
    * @param aValue
    */
   public Variable(char aValue) {
@@ -24,9 +24,10 @@ public class Variable extends Operand {
 
   /**
    * gives the value of the variable
-   * 
+   *
    * @see java.lang.Object#toString()
    */
+  @Override
   public String toString() {
     return Character.toString(value);
   }

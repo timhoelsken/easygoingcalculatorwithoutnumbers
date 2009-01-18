@@ -21,6 +21,7 @@ public class Flam extends Thread {
   /**
    * runs the audio player
    */
+  @Override
   public void run() {
     flamAudio.play();
     try {

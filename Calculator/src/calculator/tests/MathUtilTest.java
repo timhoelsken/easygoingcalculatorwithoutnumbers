@@ -16,6 +16,7 @@ public class MathUtilTest extends TestCase {
   /**
    * All things that should happen before each test in this class.
    */
+  @Override
   protected void setUp() {
     // nothing yet
   }
@@ -23,6 +24,7 @@ public class MathUtilTest extends TestCase {
   /**
    * All things that should happen after each test in this class.
    */
+  @Override
   protected void tearDown() {
     // nothing yet
   }
@@ -94,7 +96,7 @@ public class MathUtilTest extends TestCase {
 
   /**
    * Start the MathUtilTest here.
-   * 
+   *
    * @param args
    */
   public static void main(String[] args) {

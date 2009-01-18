@@ -36,9 +36,10 @@ public class SplashScreen extends JWindow implements Runnable {
 
   /**
    * shows us the splashscreen
-   * 
+   *
    * @param g
    */
+  @Override
   public void paint(Graphics g) {
 
     // load image

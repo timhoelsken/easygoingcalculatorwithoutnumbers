@@ -2,7 +2,6 @@ package calculator.userinterface.swing;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dialog;
 import java.awt.Point;
 
 import javax.swing.JButton;
@@ -26,13 +25,13 @@ public class ManualDialog extends JDialog {
 
   /**
    * The constructor
-   * 
+   *
    * @param aParentFrame
    */
   public ManualDialog(JFrame aParentFrame) {
 
     // define dialog window
-    super(aParentFrame, "Help", Dialog.ModalityType.DOCUMENT_MODAL);
+    super(aParentFrame, "Help", true);
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     getContentPane().setLayout(new BorderLayout(10, 10));
   }

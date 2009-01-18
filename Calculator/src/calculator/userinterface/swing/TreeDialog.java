@@ -2,7 +2,6 @@ package calculator.userinterface.swing;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dialog;
 import java.awt.Font;
 import java.awt.Point;
 
@@ -27,13 +26,13 @@ public class TreeDialog extends JDialog {
 
   /**
    * The Constructor
-   * 
+   *
    * @param aParentFrame
    */
   public TreeDialog(FrameCalculator aParentFrame) {
 
     // define dialog window
-    super(aParentFrame, "Tree", Dialog.ModalityType.DOCUMENT_MODAL);
+    super(aParentFrame, "Tree", true);
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     getContentPane().setLayout(new BorderLayout(10, 10));
 
@@ -43,7 +42,7 @@ public class TreeDialog extends JDialog {
 
   /**
    * Paints the tree in the dialog
-   * 
+   *
    * @param aParentFrame
    */
   public void paintTree(FrameCalculator aParentFrame) {

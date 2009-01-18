@@ -1,7 +1,6 @@
 package calculator.userinterface.swing;
 
 import java.awt.BorderLayout;
-import java.awt.Dialog;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -44,13 +43,13 @@ public class VariableDialog extends JDialog {
 
   /**
    * The constructor
-   * 
+   *
    * @param aParentFrame
    */
   public VariableDialog(FrameCalculator aParentFrame) {
 
     // define modal dialog
-    super(aParentFrame, "Variable Input", Dialog.ModalityType.DOCUMENT_MODAL);
+    super(aParentFrame, "Variable Input", true);
     getContentPane().setLayout(new BorderLayout(10, 10));
     ActionListenerUtil.putFrameDialogCloseListener(this);
 
@@ -102,7 +101,7 @@ public class VariableDialog extends JDialog {
 
   /**
    * dynamically place the variable inputs on the dialog
-   * 
+   *
    * @param aListOfVariables
    */
   public void load() {
@@ -193,7 +192,7 @@ public class VariableDialog extends JDialog {
   }
 
   /**
-   * 
+   *
    * @return the FrameCalculator
    */
   public FrameCalculator getParentFrame() {
